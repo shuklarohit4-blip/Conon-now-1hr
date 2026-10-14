@@ -1,0 +1,57 @@
+Act as a Principal Frontend Architect and Data Engineer fixing critical visual failures in a production app. Many items (materials and machines) are showing broken images or empty boxes due to deprecated, hallucinated, or temporary URLs. Broken images are unacceptable.
+
+You MUST completely overhaul the data structures and image rendering logic to guarantee 100% visual integrity. Follow these rules without deviation:
+
+MODULE 1: THE ULTIMATE VISUAL DICTIONARY (Bulletproof URLs)
+Update the internal data arrays (Categories, Products, and RentalFleet) to use ONLY these hyper-reliable, high-resolution static Unsplash URLs that accurately represent the materials and machines. Do NOT use source.unsplash.com keywords.
+
+Inject these specific URLs into your data mapping:
+
+[CEMENT]: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80"
+[STEEL/TMT BARS]: "https://images.unsplash.com/photo-1533628635777-112b2239b1c7?auto=format&fit=crop&w=600&q=80"
+[BRICKS/EETA]: "https://images.unsplash.com/photo-1590059129598-14470b8c6e26?auto=format&fit=crop&w=600&q=80"
+[SAND/MORANG]: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80"
+[HARDWARE/TOOLS]: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=80"
+
+[JCB/BACKHOE]: "https://images.unsplash.com/photo-1579626002157-897f25974415?auto=format&fit=crop&w=600&q=80"
+[EXCAVATOR/POCLAIN]: "https://images.unsplash.com/photo-1541888087817-4eb52f4ba5dc?auto=format&fit=crop&w=600&q=80"
+[CONCRETE MIXER]: "https://images.unsplash.com/photo-1581147036324-c108420e6c27?auto=format&fit=crop&w=600&q=80"
+[VIBRATOR]: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80"
+[HYDRA CRANE]: "https://images.unsplash.com/photo-1584464491033-d95b54630a91?auto=format&fit=crop&w=600&q=80"
+[DG SET/GENERATOR]: "https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?auto=format&fit=crop&w=600&q=80"
+
+MODULE 2: THE CONON BRANDED FALLBACK UI (Error Handling)
+If a primary image fails to load or the URL is empty, you must NOT show a broken image icon. You must use a clean, dynamic placeholder using `lucide-react` or `https://placehold.co`.
+
+Implement this strict `<CononImage>` component wrapper for ALL images in the app:
+```jsx
+import React, { useState } from 'react';
+import { PackageSearch } from 'lucide-react'; // Or use placeholder service
+
+const CononImage = ({ src, alt, className }) => {
+  const [imgSrc, setImgSrc] = useState(src || '[https://placehold.co/600x400/f1f5f9/475569?text=Conon](https://placehold.co/600x400/f1f5f9/475569?text=Conon)');
+  const [hasError, setHasError] = useState(false);
+
+  const fallbackUrl = `https://placehold.co/600x400/f1f5f9/475569?font=montserrat&text=${alt?.replace(/\s+/g, '+') || 'Material'}`;
+
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      {src && !hasError ? (
+        <img
+          src={imgSrc}
+          alt={alt}
+          className="w-full h-full object-cover transition-opacity duration-300"
+          onError={() => {
+            setImgSrc(fallbackUrl);
+            setHasError(true);
+          }}
+        />
+      ) : (
+        <div className="w-full h-full bg-slate-100 flex flex-col items-center justify-center p-4 border border-slate-200 rounded-xl">
+            <PackageSearch className="text-slate-400 mb-1" size={32} />
+            <span className="text-[10px] text-slate-500 font-medium text-center line-clamp-2">{alt || 'Material'}</span>
+        </div>
+      )}
+    </div>
+  );
+};

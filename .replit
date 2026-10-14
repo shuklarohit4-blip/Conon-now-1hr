@@ -1,0 +1,60 @@
+modules = ["nodejs-24", "python-3.11", "postgresql-16"]
+
+[[artifacts]]
+id = "artifacts/api-server"
+
+[[artifacts]]
+id = "artifacts/mockup-sandbox"
+
+[deployment]
+router = "application"
+deploymentTarget = "autoscale"
+
+[deployment.postBuild]
+args = ["pnpm", "store", "prune"]
+env = { "CI" = "true" }
+
+[workflows]
+runButton = "Project"
+
+[agent]
+stack = "PNPM_WORKSPACE"
+expertMode = true
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
+
+[nix]
+channel = "stable-25_05"
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
+
+[[ports]]
+localPort = 8081
+externalPort = 8081
+
+[[ports]]
+localPort = 18093
+externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+JWT_SECRET = "b7f608b1eba75a5433d1e121d58f8bd1cdebd34d4769e29cc5b6aa81de26d25e759c3a67dba2c93310271d2c8733468d"
+FIREBASE_WEB_API_KEY = "AIzaSyAjNknMqmVm-JAW6fKJP4IZmwaJwUxm764"
+VITE_FIREBASE_API_KEY = "AIzaSyAjNknMqmVm-JAW6fKJP4IZmwaJwUxm764"
+VITE_FIREBASE_APP_ID = "1:610178226747:web:9cd4670aeeec540186da1e"
+VITE_FIREBASE_AUTH_DOMAIN = "conon-app-edff3.firebaseapp.com"
+VITE_FIREBASE_MESSAGING_SENDER_ID = "610178226747"
+VITE_FIREBASE_PROJECT_ID = "conon-app-edff3"
+VITE_FIREBASE_STORAGE_BUCKET = "conon-app-edff3.firebasestorage.app"
+
+[userenv.development]
+
+[userenv.production]
+
+[objectStorage]
+defaultBucketID = "replit-objstore-a6fbd338-5b8d-4027-939d-a52796effe1a"

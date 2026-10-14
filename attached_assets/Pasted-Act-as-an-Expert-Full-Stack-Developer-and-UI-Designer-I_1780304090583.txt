@@ -1,0 +1,31 @@
+Act as an Expert Full-Stack Developer and UI Designer. I need to build a comprehensive "B2B Khata (Ledger) & Payment Management System" for my construction material delivery startup, "Conon". This module will manage credit accounts, part-payments, and outstanding balances for regular contractors and individual clients.
+
+Please build the UI and backend logic (using React/Next.js or React Native) for the following core features:
+
+1. Khata Master Dashboard:
+   - Display a high-level summary card: "Total Outstanding in Market", "Total Collected Today", and "Total Active Accounts".
+   - Render a searchable list of clients with dummy data to visualize the layout (e.g., "Vipin Shukla - Contractor", "Saroj Shukla - Builder", "Manshi Mam - Individual Project").
+   - For each client in the list, display their 'Approved Credit Limit' and 'Current Outstanding Balance' (Use red text for high outstanding amounts and green for settled/advance amounts).
+
+2. Detailed Ledger View (Individual Account):
+   - When a user clicks on a client, open their detailed ledger.
+   - Display a chronological statement/table of transactions.
+   - Distinctly separate Debits and Credits:
+     * DEBIT (Red/Orange): Material purchases (e.g., "Order #1204 - 50 Bags Cement + TMT Bars - ₹32,000").
+     * CREDIT (Green): Payments received (e.g., "Part Payment Received - ₹15,000").
+   - Show a running, auto-calculated "Net Balance" after every transaction.
+
+3. "Record Payment" Interface:
+   - A clean, secure modal/bottom sheet to log incoming payments from clients.
+   - Input fields needed:
+     * Amount Received.
+     * Payment Mode Dropdown (Cash, UPI, Cheque, RTGS/NEFT).
+     * Transaction Reference ID / Cheque Number.
+     * Payment Date.
+     * File Upload field (to attach a screenshot of the UPI payment or a photo of the Cheque).
+
+4. Action Buttons & Utilities:
+   - "Send WhatsApp Reminder" button: Create a placeholder function that would theoretically generate a message like "Dear [Name], your current outstanding balance with Conon is ₹[Amount]."
+   - "Download Statement" button: Create a placeholder function to export the filtered ledger as a professional PDF.
+
+Make the interface highly trustworthy, accounting-grade (like Tally or modern Fintech apps), and ensure all currency values are formatted in INR (₹) with commas. The UI should be responsive and easy to use for field agents on mobile devices.

@@ -1,0 +1,28 @@
+Act as an Expert Mobile Developer and UX Designer. I need to add a new major section to the "Conon" app called "Conon Build" – an end-to-end turnkey house construction and planning module.
+
+Please build the UI components and logic for the following 4 features:
+
+1. Turnkey Construction Packages (Card Layout):
+   Create a sleek, horizontal scrolling section displaying 4 distinct construction packages:
+   - "Silver / Basic" (Standard materials, basic 2D floor plan).
+   - "Gold / Standard" (Premium materials, standard electrical/plumbing).
+   - "Platinum / Premium" (High-end finishes, complete 3D layout videos, dedicated site engineer).
+   - "Luxury / Mansion" (Custom architecture, smart home integrations, ideal for large G+2 structures).
+   - Add a "Book Free Consultation" CTA at the bottom of each card.
+
+2. The "Start to Finish" Construction Journey:
+   - Create a vertical, interactive timeline/stepper component titled "How We Build Your Dream Home".
+   - Steps to include: 1. Architecture & Approvals -> 2. Excavation & Foundation -> 3. Superstructure (Brickwork & RCC) -> 4. Plastering & MEP (Mechanical, Electrical, Plumbing) -> 5. Interiors & Finishing -> 6. Final Handover.
+   - Use clean construction icons for each step.
+
+3. AI-Powered Cost Estimator:
+   - Build a smart form with inputs for: City (Set default to Lucknow), Plot Area (sq ft), Number of Floors (e.g., G+2), and Preferred Package.
+   - Example state logic: If a user enters a 6,100 sq ft built-up area and selects "Premium", generate a dynamic Estimated Total Cost.
+   - Display the result using a visual Donut Chart breaking down the cost into: Material (60%), Labour (25%), and Architecture/Design (15%).
+
+4. Smart Material Calculator (Integrated with E-commerce):
+   - A utility tool where users can select a category (Slab, Brickwork, Plaster) and input dimensions.
+   - Output the exact quantities required using standard civil engineering thumb rules (e.g., number of Cement Bags, tons of TMT Steel, count of Bricks, and cubic feet of Sand/Aggregate).
+   - CRITICAL FEATURE: Add a highly visible button below the results saying -> "Add all to Conon Cart for 1-Hour Delivery".
+
+Make the design highly trustworthy, modern, and perfectly aligned with a premium construction firm's branding. Use dummy data for the pricing so I can visualize the layout.

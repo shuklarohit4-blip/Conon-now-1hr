@@ -1,0 +1,28 @@
+kind = "slides"
+previewPath = "/conon-pitch/"
+title = "CONON Investor Pitch Deck"
+description = "16-slide Series A investor pitch deck for CONON — India's on-demand construction materials delivery platform. Covers problem, solution, market size, traction, financials, and the funding ask."
+version = "1.0.0"
+id = "artifacts/conon-pitch"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/conon-pitch/" ]
+localPort = 19144
+
+[services.development]
+run = "pnpm --filter @workspace/conon-pitch run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/conon-pitch", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/conon-pitch/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19144"
+BASE_PATH = "/conon-pitch/"

@@ -1,0 +1,147 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  User, ShieldCheck, Store, HardHat, 
+  ShoppingCart, Truck, Calculator, Search, 
+  Plus, LogOut, Bell, CheckCircle, Clock, 
+  BarChart3, CreditCard, Camera, ChevronRight,
+  TrendingUp, PackageCheck, Map
+} from 'lucide-react';
+
+const App = () => {
+  const [role, setRole] = useState(null); // 'customer', 'vendor', 'admin'
+  const [view, setView] = useState('login');
+  const [cart, setCart] = useState([]);
+
+  // --- 1. SMART LOGISTICS CALCULATOR ---
+  const truckCapacity = 100; // units
+  const currentLoad = cart.length * 15; // weight simulation
+  const loadPercentage = Math.min((currentLoad / truckCapacity) * 100, 100);
+
+  // --- 2. CREDIT LEDGER DATA (SIMULATED) ---
+  const ledger = [
+    { date: '22 Mar', amount: 45000, type: 'Due', item: 'TMT Steel' },
+    { date: '18 Mar', amount: 12000, type: 'Paid', item: 'Cement' },
+  ];
+
+  // --- COMPONENT: LOGIN ---
+  const LoginPortal = () => (
+    <div className="flex-1 flex flex-col p-8 justify-center bg-slate-50 animate-in fade-in">
+      <div className="text-center mb-12">
+        <div className="inline-block p-4 bg-blue-900 rounded-[2rem] mb-4 shadow-2xl shadow-blue-900/40">
+           <Truck size={40} className="text-amber-400" />
+        </div>
+        <h1 className="text-4xl font-black italic text-blue-900 tracking-tighter uppercase">CONON</h1>
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Infrabuilt Limited</p>
+      </div>
+      
+      <div className="space-y-4">
+        {[
+          { id: 'customer', name: 'Contractor / Owner', icon: <HardHat />, color: 'blue' },
+          { id: 'vendor', name: 'Authorized Vendor', icon: <Store />, color: 'emerald' },
+          { id: 'admin', name: 'HQ Command', icon: <ShieldCheck />, color: 'slate' }
+        ].map(r => (
+          <button key={r.id} onClick={() => { setRole(r.id); setView('dashboard'); }} 
+            className="w-full bg-white p-6 rounded-[2.5rem] flex items-center gap-6 border-2 border-transparent hover:border-blue-500 shadow-sm transition-all active:scale-95">
+            <div className={`bg-${r.color}-600 p-3 rounded-2xl text-white shadow-lg`}>{r.icon}</div>
+            <span className="font-black text-slate-800 text-sm uppercase italic">{r.name}</span>
+            <ArrowRight size={18} className="ml-auto text-slate-300" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
+  // --- COMPONENT: CUSTOMER DASHBOARD (WITH SMART FEATURES) ---
+  const CustomerPortal = () => (
+    <div className="flex-1 flex flex-col overflow-hidden bg-white animate-in slide-in-from-right">
+      <div className="p-6 pt-10 bg-blue-900 text-white rounded-b-[3rem]">
+        <div className="flex justify-between items-center mb-6">
+           <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-black">JS</div>
+              <div>
+                 <p className="text-[8px] font-bold opacity-60 uppercase">Welcome back,</p>
+                 <p className="text-sm font-black italic">John Sharma</p>
+              </div>
+           </div>
+           <Bell size={20} className="text-amber-400" />
+        </div>
+        
+        {/* CREDIT SCORE CARD */}
+        <div className="bg-white/10 p-4 rounded-3xl border border-white/10 flex justify-between items-center">
+           <div>
+              <p className="text-[9px] font-black uppercase opacity-60">Available Credit</p>
+              <p className="text-xl font-black italic">₹2,45,000</p>
+           </div>
+           <CreditCard size={24} className="text-amber-400 opacity-50" />
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-6 space-y-8 no-scrollbar">
+        {/* LOGISTICS TRACKER */}
+        <div className="bg-slate-50 p-5 rounded-[2.5rem] border border-slate-100">
+           <div className="flex justify-between items-center mb-3">
+              <h3 className="text-[10px] font-black uppercase text-slate-400 italic">Truck Load Optimizer</h3>
+              <span className="text-[10px] font-black text-blue-600">{loadPercentage}% Full</span>
+           </div>
+           <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div className="h-full bg-blue-600 transition-all duration-1000" style={{ width: `${loadPercentage}%` }}></div>
+           </div>
+           <p className="text-[8px] font-bold text-slate-400 mt-2 uppercase">Tip: Add 40 more items to save ₹500 on delivery!</p>
+        </div>
+
+        {/* FEED: SITE PROGRESS */}
+        <div>
+           <h3 className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-4 italic">Recent Deliveries</h3>
+           <div className="bg-white border rounded-[2rem] p-4 flex gap-4 items-center shadow-sm">
+              <div className="w-16 h-16 bg-slate-100 rounded-2xl overflow-hidden">
+                 <img src="https://images.unsplash.com/photo-1590059132718-2665b70f8ee0?w=100" className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1">
+                 <p className="text-[10px] font-black text-blue-600 uppercase">Sector 45 - Site</p>
+                 <p className="text-xs font-bold text-slate-800">5000 Bricks Unloaded</p>
+                 <p className="text-[8px] text-slate-400 mt-1">Today, 10:30 AM • Verified by Supervisor</p>
+              </div>
+              <Camera size={18} className="text-slate-300" />
+           </div>
+        </div>
+
+        {/* QUICK CATEGORIES */}
+        <div className="grid grid-cols-4 gap-2">
+           {['Cement', 'Steel', 'Bricks', 'Sand'].map(i => (
+             <button key={i} className="flex flex-col items-center gap-2 group" onClick={() => setCart([...cart, i])}>
+                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-2xl group-active:scale-90 transition">📦</div>
+                <span className="text-[8px] font-black uppercase text-slate-500">{i}</span>
+             </button>
+           ))}
+        </div>
+      </div>
+
+      {/* FOOTER NAV */}
+      <div className="h-24 bg-white border-t flex items-center justify-around px-8 pb-4">
+         <div className="text-blue-900 flex flex-col items-center gap-1"><LayoutDashboard size={20}/><span className="text-[7px] font-black uppercase">Home</span></div>
+         <div className="text-slate-300 flex flex-col items-center gap-1"><TrendingUp size={20}/><span className="text-[7px] font-black uppercase">Mandi</span></div>
+         <div className="w-14 h-14 bg-blue-900 rounded-2xl -mt-10 border-4 border-white shadow-xl flex items-center justify-center text-white"><Plus size={24}/></div>
+         <div className="text-slate-300 flex flex-col items-center gap-1"><Map size={20}/><span className="text-[7px] font-black uppercase">Track</span></div>
+         <button onClick={() => setView('login')} className="text-slate-300 flex flex-col items-center gap-1"><User size={20}/><span className="text-[7px] font-black uppercase">Profile</span></button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-slate-200 p-2 font-sans">
+      <div className="w-full max-w-[420px] h-[880px] bg-white rounded-[60px] shadow-2xl overflow-hidden relative border-[14px] border-slate-900 flex flex-col">
+        {view === 'login' ? <LoginPortal /> : (
+          <>
+            {role === 'customer' && <CustomerPortal />}
+            {role === 'vendor' && <div className="p-20 text-center font-black">VENDOR INTERFACE READY<br/><button onClick={() => setView('login')} className="mt-4 p-2 bg-slate-100 rounded-xl">Back</button></div>}
+            {role === 'admin' && <div className="p-20 text-center font-black">ADMIN HQ READY<br/><button onClick={() => setView('login')} className="mt-4 p-2 bg-slate-100 rounded-xl">Back</button></div>}
+          </>
+        )}
+      </div>
+      <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
+    </div>
+  );
+};
+
+export default App;
+

@@ -1,0 +1,47 @@
+Act as a Principal UI/UX Architect for a Billion-Dollar Quick-Commerce Startup. I need you to completely overhaul the frontend UI of the "Conon App" to identically match the structural logic, padding, and component architecture of "Blinkit", tailored for 60-minute Construction Material delivery.
+
+Execute this total redesign by implementing the following 6 strict UI Modules:
+
+MODULE 1: THE APP SHELL & BOTTOM NAVIGATION
+- Replace any generic navigation with a fixed iOS-style Bottom Tab Bar (fixed bottom-0 w-full bg-white border-t border-slate-100 pb-safe pt-2).
+- Tabs: Home, Categories, Khata, Profile. Use thin lucide-react icons. Active tab gets a subtle dark highlight.
+- Floating Cart (CRITICAL): Create a sticky green "View Cart" pill component that floats exactly above the bottom tab bar showing "View cart (X Items)".
+
+MODULE 2: THE SPLIT-SCREEN CATEGORY PAGE
+- When navigating to Categories, use a Split-Screen Layout:
+  * Left Sidebar (25% width): Vertically scrollable list of category icons. Highlight the active category.
+  * Right Container (75% width): Vertically scrollable grid of products for the selected category.
+
+MODULE 3: HIGH-CONVERSION PRODUCT CARDS
+- Style the <ProductCard>:
+  * Top Left: Blue badge "15% OFF".
+  * Image: Square, centered.
+  * Title & Specs: 2 lines max title. Pill tags below (e.g., [50 kg Bag]).
+  * Action Button: Outline button "ADD" (Green text/border, white bg).
+- INTERACTION (CRITICAL): Clicking the image or title area of the card MUST open the Product Details Bottom Sheet (Module 4). Clicking the "ADD" button should strictly update the cart without opening the sheet.
+
+MODULE 4: THE PRODUCT DETAILS BOTTOM SHEET (NEW)
+- Build a <ProductDetailModal> component that slides up from the bottom (using framer-motion) when a product card is clicked.
+- UI Structure of the Modal:
+  * Top Header: A subtle drag handle and a prominent 'X' close button on the top right.
+  * Hero Image: A massive, edge-to-edge high-resolution image container (aspect-square or aspect-4/3) with a light grey background (bg-slate-50).
+  * Core Info: Large bold Title, Brand Name, and the Pricing Row (Discounted Price + Strikethrough MRP + Discount %).
+  * Technical Specifications Block: Create a clean, grid-based list for specs (e.g., "Weight: 50kg", "Grade: OPC 43", "Material: Mild Steel", "Usage: Foundation").
+  * Sticky Footer: Inside this modal, lock a sticky footer at the bottom with a large, full-width solid green "Add to Cart" button. 
+
+MODULE 5: THE HOME DASHBOARD
+- Sticky white Search Bar with a microphone icon.
+- Horizontal scrollable icon pills (All, Heavy Materials, Finishing).
+- Horizontally scrolling promo banners.
+- Sections like "Stores in spotlight" and "Frequently bought" with horizontal product rows.
+
+MODULE 6: THE CHECKOUT EXPERIENCE
+- Light grey background (bg-slate-50).
+- Delivery Instructions Row (e.g., "Call Site Supervisor", "Unload at Gate 2").
+- Sticky Footer: 
+  * Left Side (30%): "PAY USING" dropdown.
+  * Right Side (70%): Massive solid green button showing the Total Amount and "Place Order ▶️".
+
+STRICT DESIGN RULES:
+- Use Tailwind CSS exclusively. Ensure the modal backdrop applies a dark blur (backdrop-blur-sm bg-black/40) to the background when open.
+- Make the UI snappy, native-feeling, and information-dense.

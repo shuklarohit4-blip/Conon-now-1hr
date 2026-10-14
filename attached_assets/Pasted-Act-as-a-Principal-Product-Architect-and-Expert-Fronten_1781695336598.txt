@@ -1,0 +1,27 @@
+Act as a Principal Product Architect and Expert Frontend Engineer. I need to exponentially expand the "Conon" application by introducing two highly profitable, industry-first business verticals. 
+
+Please build fully interactive, modern UI components with mock state management (using React Context or local state) for the following two new major sections:
+
+1. "Conon Heavy Rentals" (Machinery & Equipment on Rent):
+   - Layout: Create a sleek "Rental Dashboard" accessible from the main navigation.
+   - Categories: Add horizontal filter tabs for "Earthmoving" (JCBs, Excavators), "Transport" (Tractors, Dumpers), and "Light Tools" (Concrete Mixers, Vibrators, Scaffolding).
+   - Card UI: Each machine card must display a high-quality realistic image, Machine Model Name, and an availability badge (e.g., "🟢 Available in 2 Hours").
+   - Dynamic Booking Modal: When a machine is clicked, open a booking sheet with pricing toggles: "Per Hour (₹800)", "Per Shift - 8 Hrs (₹5,500)", or "Per Week".
+   - Value-Add Option: Add a working toggle switch: "Require Certified Operator/Driver (+₹600/shift)".
+   - Action: A prominent "Book Machine" button that triggers a success toast notification and updates the cart/ledger.
+
+2. "Conon Smart Builder Kits" (Stage-Wise Construction Packages):
+   - Layout: A highly visual, vertical timeline or accordion interface representing the chronological stages of building a house (e.g., optimized for a standard 1,000 sq ft area).
+   - Kit Stages to Implement:
+     * Stage 1: "Foundation & Plinth Kit"
+     * Stage 2: "Superstructure (Brickwork) Kit"
+     * Stage 3: "Slab Casting & Roofing Kit"
+     * Stage 4: "Plaster & Finishing Kit"
+   - Detailed Kit View (The "What's Inside" Section): When a user expands a kit, display a transparent, grid-style breakdown of the exact materials included. 
+     * Example for Stage 1: "150 Bags Premium Cement, 3 Tons 12mm TMT Steel, 400 Cu.Ft. Coarse Sand, Anti-termite Chemical."
+   - Pricing & Action: Show a bundled, discounted price at the bottom (e.g., "Total Kit Value: ₹2,15,000"). Include a massive, action-oriented button: "Add Entire Kit to Cart" and a secondary button "Finance via Conon Khata".
+
+Technical & Design Requirements:
+- Use a premium, enterprise-grade aesthetic. The layout should look as clean as modern fintech apps (like Stripe or Cred) but tailored for heavy industry.
+- Ensure ALL buttons are interactive. Clicking "Add Entire Kit to Cart" MUST trigger a global state update or a prominent success Toast notification (e.g., "Foundation Kit added successfully!").
+- Integrate these sections seamlessly into the existing app structure without breaking current routing.

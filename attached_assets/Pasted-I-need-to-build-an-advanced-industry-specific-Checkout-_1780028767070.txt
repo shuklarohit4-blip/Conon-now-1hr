@@ -1,0 +1,31 @@
+I need to build an advanced, industry-specific Checkout and Payment UI for "Conon", a 1-hour construction material delivery app. Since order values are high and logistics involve heavy materials, the UI must build extreme trust and cater to both individual home-builders and regular contractors.
+
+Please build the following advanced checkout flow:
+
+1. Dynamic Bill Breakdown (Construction Specific):
+   - Item Total.
+   - Delivery & Logistics Fee (Calculate dynamically based on weight/truck type).
+   - Add a toggle for "Include Unloading/Labour Service" (adds an extra fee if the user wants our team to unload the materials at the site).
+   - GST (Show CGST/SGST breakdown).
+   - Grand Total.
+
+2. Business & Tax Details:
+   - Add a collapsible section: "Buying for Business?". If checked, show an input field for "GSTIN Number" and "Company Name" to generate a B2B tax invoice.
+
+3. Flexible Payment Options (High-Ticket Sizes):
+   - Option 1: "Pay Full Amount" (UPI, Cards, Net Banking).
+   - Option 2: "Pay 20% Token Advance" (Pay a small amount now to dispatch the truck, pay the rest via Cash/UPI on delivery).
+   - Option 3: "Conon Business Credit / Khata" (A wallet or ledger system for verified contractors to buy on credit).
+
+4. Urgency & Delivery Promise UI:
+   - Add a live banner at the top of the checkout: "Order within [14:59] minutes to get your delivery in exactly 1 hour." (Include a ticking countdown timer).
+
+5. Payment Processing & Micro-interactions:
+   - Implement smooth state transitions (Loading -> Processing -> Success).
+   - Add haptic feedback (if supported by the framework) when the user taps the "Pay" button.
+   - On the Success Screen, show an animated truck leaving a warehouse, the Order ID, and a clear "Track Truck Live" button.
+
+6. Security Badges:
+   - Include visual trust elements: SSL secure connection badge, "Verified Materials", and "100% Refund on Transit Damage" icons near the payment button.
+
+Make the UI modern, robust, and highly responsive. Use clean typography to ensure large numbers (prices) are easily readable.

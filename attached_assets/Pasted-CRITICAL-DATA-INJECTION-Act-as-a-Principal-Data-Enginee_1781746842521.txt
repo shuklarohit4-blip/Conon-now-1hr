@@ -1,0 +1,65 @@
+CRITICAL DATA INJECTION: Act as a Principal Data Engineer and UI Architect. I need to massively expand the "Machines on Rent" section in the Conon App to reflect a full-scale heavy equipment fleet. 
+
+MODULE 1: THE FLEET DATA JSON
+Locate your `rentalEquipment` mock data array. REPLACE it entirely with the following JSON array. This contains highly accurate Indian market rental rates, minimum booking constraints, and reliable image URLs:
+
+[
+  {
+    "id": "r1", "name": "JCB Backhoe Loader 3DX", "category": "Earthmoving",
+    "rate": "₹1,200 / Hour", "minBooking": "Min. 4 Hours",
+    "specs": "Includes operator. Ideal for excavation & loading.",
+    "image": "https://images.unsplash.com/photo-1579626002157-897f25974415?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "r2", "name": "Hydraulic Excavator (Poclain)", "category": "Earthmoving",
+    "rate": "₹1,800 / Hour", "minBooking": "Min. 8 Hours",
+    "specs": "Chain-mounted, for heavy deep excavation.",
+    "image": "https://images.unsplash.com/photo-1541888087817-4eb52f4ba5dc?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "r3", "name": "Concrete Mixer (1-Bag)", "category": "Concrete",
+    "rate": "₹800 / Day", "minBooking": "Min. 1 Day",
+    "specs": "Diesel engine, heavy-duty mixing drum.",
+    "image": "https://images.unsplash.com/photo-1581147036324-c108420e6c27?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "r4", "name": "Concrete Needle Vibrator", "category": "Concrete",
+    "rate": "₹350 / Day", "minBooking": "Min. 1 Day",
+    "specs": "High-frequency compaction with 2m nozzle.",
+    "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "r5", "name": "Earth Rammer / Compactor", "category": "Compaction",
+    "rate": "₹900 / Day", "minBooking": "Min. 1 Day",
+    "specs": "Petrol-driven, perfect for plinth/soil compaction.",
+    "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "r6", "name": "Hydra Crane (14 Ton)", "category": "Material Handling",
+    "rate": "₹1,200 / Hour", "minBooking": "Min. 4 Hours",
+    "specs": "Mobile crane for TMT and heavy material shifting.",
+    "image": "https://images.unsplash.com/photo-1584464491033-d95b54630a91?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "r7", "name": "Air Compressor (50L)", "category": "Support Equipment",
+    "rate": "₹800 / Day", "minBooking": "Min. 1 Day",
+    "specs": "8 Bar pressure, for painting & pneumatic tools.",
+    "image": "https://images.unsplash.com/photo-1590958932646-6469dbfce39f?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "r8", "name": "DG Set (62.5 kVA)", "category": "Support Equipment",
+    "rate": "₹2,000 / Day", "minBooking": "Min. 1 Day",
+    "specs": "Silent Diesel Generator for site power backup.",
+    "image": "https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?auto=format&fit=crop&w=600&q=80"
+  }
+]
+
+MODULE 2: RENTAL UI RENDERING STRICT RULES
+- Build a dedicated `EquipmentRentalSlider` component to map through this array.
+- Theme: The cards MUST have an industrial dark theme (`bg-slate-900 text-white`). Do NOT use standard white e-commerce cards.
+- Image Styling: Use `aspect-video` and `object-cover` so the heavy machines look cinematic and wide.
+- Price Display: The `rate` MUST be highly visible in a glowing neon color (e.g., `<span className="text-green-400 font-bold text-lg">{machine.rate}</span>`).
+- Meta Tags: Display the `minBooking` and `category` as small, subtle pill badges (`bg-slate-800 text-slate-300 text-xs px-2 py-1 rounded`).
+- Action Button: The button MUST be full-width, styled in construction yellow (`bg-yellow-500 hover:bg-yellow-600 text-black font-semibold`), and labeled exactly as: "📅 Request Booking".
+
+Place this entire section directly below the main "Shop by Category" grid. Make it look like a premium fleet management dashboard.

@@ -1,0 +1,22 @@
+Act as an expert Full-Stack Engineer. Completely refactor this entire repository workspace to make it 100% compatible for local machine development (specifically for VS Code on macOS) without relying on Replit infrastructure, environment overlays, or cloud secrets. Execute the following structural changes immediately:
+
+1. FRONTEND VITE CONFIGURATION (vite.config.ts):
+   - Completely remove all @replit/ plugins (@replit/vite-plugin-runtime-error-modal, @replit/vite-plugin-cartographer, @replit/vite-plugin-dev-banner). Use only standard @vitejs/plugin-react and @tailwindcss/vite.
+   - Remove the strict check for process.env.PORT that causes the frontend dev server to crash locally. Default the Vite dev server safely to port 5173.
+   - Set `server.fs.strict: false` to ensure the local frontend server can access and serve images from the project's asset folder. Fix the `@assets` path alias so it correctly resolves to the real location of `attached_assets` relative to the src folder.
+   - Configure a clean development proxy under the `server` block: route all `/api` requests to `http://localhost:5001`. (We are using port 5001 for the backend to avoid the default macOS AirPlay conflict on port 5000).
+
+2. BACKEND API SERVER (api-server/src/index.ts & database configs):
+   - Refactor the entry file to stop throwing hard exceptions or crashing when `process.env.PORT` or `process.env.DATABASE_URL` are missing in the terminal environment.
+   - Configure the backend to automatically fall back to Port 5001 for local development.
+   - Correctly integrate `dotenv` at the absolute top of the server entry point so it reliably reads connection strings from a local `.env` file placed inside the `api-server` directory.
+
+3. AUTHENTICATION REFACTOR (src/pages/Login.tsx):
+   - Completely strip out any remaining legacy MSG91 scripts, token extractors, loaders, or hardcoded error handling methods ("OTP login isn't configured yet").
+   - Ensure the Firebase Phone Authentication workflow is cleanly implemented using standard invisible `RecaptchaVerifier` and `signInWithPhoneNumber`.
+   - Ensure that `<div id="recaptcha-container"></div>` is hard-coded and properly rendered in the component's JSX layout, preventing any "Cannot read properties of null (reading 'style')" errors during hot-reloads.
+   - Maintain 100% of the original premium UI/UX design, including Framer Motion animations, layouts, and cards for the Builder, Vendor, and Admin portals.
+
+4. CLEANUP AND CODE VALIDATION:
+   - Audit and fix all trailing brackets, unclosed tags, or missing curly braces `}` across `vite.config.ts` and `Login.tsx`.
+   - Ensure that running `pnpm install` followed by `pnpm run dev` handles the environment variables gracefully out-of-the-box.

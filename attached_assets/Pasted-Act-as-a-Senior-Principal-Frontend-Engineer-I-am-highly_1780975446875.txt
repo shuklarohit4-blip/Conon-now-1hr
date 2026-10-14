@@ -1,0 +1,29 @@
+Act as a Senior Principal Frontend Engineer. I am highly disappointed because the previous Vendor and Admin panels you generated were just "dead" UI shells. The buttons did not work, the tabs did not switch, and there was no state management.
+
+I need you to REWRITE the Vendor Panel and make it 100% MODERN, FULLY FUNCTIONAL, and INTERACTIVE. You MUST implement the following architectural rules:
+
+1. Mandatory Global State (React Context API):
+   - Create a `VendorContext.js` file.
+   - Initialize a global state with dummy arrays for `orders` (with statuses: 'new', 'packing', 'ready'), `inventory` (with 'inStock' booleans and prices), and `ledger` (payout history).
+   - Wrap the entire app in this Context Provider so data persists across all tabs.
+
+2. Functional Navigation & Routing:
+   - Implement actual functional routing (using React Router or a strict activeTab state) between: Dashboard, Live Orders, Inventory, and Khata.
+   - Clicking a sidebar or bottom-nav item MUST change the screen immediately.
+
+3. Live Order Flow (Working Buttons):
+   - In the "Live Orders" tab, when the vendor clicks "Accept Order" on a 'new' order, you MUST update the Context State to change its status to 'packing'. The UI must instantly move that exact order card from the 'New' column to the 'Packing' column.
+   - Add a working "Mark Ready for Pickup" button that moves it to the final stage.
+
+4. Interactive Inventory Management:
+   - In the "Inventory" tab, the "In Stock / Out of Stock" toggle MUST update the global state. When toggled off, visually gray out the item.
+   - Add a working "Update Price" input field and a "Save" button. Clicking "Save" must update the item's price in the state and show the new price instantly.
+
+5. Universal Action Feedback (Toasts):
+   - Install and integrate a toast notification library (like `react-hot-toast` or `sonner`).
+   - EVERY SINGLE BUTTON CLICK in the app (Login, Accept Order, Save Price, Request Payout) MUST trigger a visible success or error Toast notification. NO SILENT FAILURES.
+
+6. Admin Simulation (Payouts):
+   - In the "Khata/Payments" tab, when "Request Payout" is clicked, deduct the amount from the available balance in the state, add a new row to the transaction history table labeled "Pending Admin Approval", and show a success toast.
+
+Make the UI modern, clean, and highly responsive. Do not give me placeholder `onClick={() => {}}` functions. Write the actual logic to manipulate the arrays and objects in the state.

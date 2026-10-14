@@ -1,0 +1,17 @@
+packages:
+  "framer-motion": "For stunning layout animations, page transitions, and the splash screen"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility function to efficiently merge Tailwind CSS classes"
+  "date-fns": "For formatting delivery times and service booking dates"
+
+images:
+  - path: "artifacts/conon/public/images/hero-bg.png"
+    description: "Dark moody construction site at night with glowing amber lights, architectural wireframe overlays, industrial tech aesthetic, realistic but highly stylized"
+    aspect_ratio: "16:9"
+  - path: "artifacts/conon/public/images/conon-logo.png"
+    description: "Minimalist bold industrial construction tech logo mark. Bright glowing amber/orange color. Dark transparent background. Futuristic typography style."
+    aspect_ratio: "1:1"
+
+notes:
+  - "The app uses React Query hooks generated in @workspace/api-client-react for data fetching."
+  - "Mobile-first layout optimized for max-width 480px on desktop to simulate a mobile app experience."

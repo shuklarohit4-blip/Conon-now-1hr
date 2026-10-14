@@ -1,0 +1,40 @@
+Act as a Lead Computational Architect and Principal Generative AI Engineer. I need to build the "Conon Arch-Genius Engine"—an advanced, procedural 2D floor plan generator for the Conon App, completely discarding basic CSS grids. This must generate an authentic, mathematically sound architectural blueprint.
+
+You must build a highly sophisticated React + D3.js (or advanced SVG manipulation) module implementing the following:
+
+MODULE 1: The Parametric Constraints (Architectural Inputs)
+- Build a sleek, professional CAD-style input panel.
+- Inputs must include:
+  * Plot Size (X & Y dimensions in Feet/Meters).
+  * Road Width & Setback Rules (Front, Rear, Side margins).
+  * True North Alignment (0-360 Degrees for Vastu orientation).
+  * Structural System: Dropdown (RCC Framed Structure vs. Load Bearing).
+  * FAR (Floor Area Ratio) constraints.
+
+MODULE 2: The "Vastu Purusha Mandala" Processing Algorithm
+- Do NOT use a simple loading spinner. Create an immersive, 4-second algorithm visualization.
+- Overlay a 3x3 Vastu Grid on the screen and highlight zones dynamically with text logs:
+  * "Mapping Water Element (Ishanya/North-East) for Underground Tank & Porch..."
+  * "Locating Fire Element (Agneya/South-East) for Kitchen..."
+  * "Securing Earth Element (Nairutya/South-West) for Master Bedroom..."
+  * "Calculating Column Spans (Max 5m limit) around the Brahmasthan (Center)..."
+
+MODULE 3: Procedural SVG Blueprint Renderer (The Core Engine)
+- Do NOT use static images or basic div blocks. Generate a procedural Top-Down Floor Plan using SVG/Canvas.
+- Implement strict Architectural Drafting Standards:
+  * Exterior Walls: Render as thick, dark lines representing 230mm (9-inch) brickwork.
+  * Interior Walls: Render as thin lines representing 115mm (4.5-inch) partition walls.
+  * Structural Grid: Auto-generate a column grid system (A, B, C / 1, 2, 3) with solid black squares for RCC columns.
+  * Fenestration: Draw standard architectural symbols for Door Swings (arcs) and Windows (parallel lines).
+  * Hatching: Add light diagonal hatching for wet areas (Bathrooms).
+  * Scale & Dimensions: Auto-generate dimension lines with actual calculated measurements (e.g., 12' x 14').
+
+MODULE 4: The BOQ & Builder Integration (Monetization)
+- Below the generated SVG blueprint, automatically calculate an abstract Bill of Quantities (BOQ).
+- Display dynamic data based on the generated area: "Estimated M25 Grade Concrete Volume: X Cu.m", "Estimated Fe550 TMT Steel: Y Metric Tons".
+- Action Buttons (Enterprise Level):
+  1. "Export CAD / High-Res PDF"
+  2. "Request Structural Load-Bearing Analysis"
+  3. "Order Full Builder Kit for this Design (₹X Lakhs)" - Lock this to a seamless checkout flow.
+
+STRICT INSTRUCTIONS: The aesthetic must mimic professional software like AutoCAD or Revit. Use a Dark Navy/Blueprint background (#001A33) with Cyan/White linework. The underlying code must demonstrate actual spatial zoning logic, not just random block placement.

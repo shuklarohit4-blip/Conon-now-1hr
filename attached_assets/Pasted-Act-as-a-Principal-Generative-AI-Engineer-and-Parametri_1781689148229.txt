@@ -1,0 +1,39 @@
+Act as a Principal Generative AI Engineer and Parametric Architect. I want to build a completely disruptive feature for the Conon App called "Conon Smart-Draft AI". This feature allows a user to input their plot details and instantly receive an auto-generated 2D floor plan layout. 
+
+Standard UI forms are not enough. You MUST build an interactive, dynamic 2D rendering engine.
+
+Please implement the following modules using React, Tailwind CSS, and standard DOM elements (or SVG/CSS Grids for the blueprint):
+
+1. The "Requirement Gatherer" (Input UI):
+   - Build a highly premium, futuristic input form.
+   - Inputs: 
+     * Plot Dimensions: Length & Width (in Sq Ft).
+     * Plot Facing: Dropdown (East, West, North, South) - Label it "For Vastu Compliance".
+     * Requirement: Dropdown (1BHK, 2BHK, 3BHK Mansion).
+     * Car Parking: Boolean Toggle.
+   - Action Button: A glowing button titled "Generate 2D Blueprint via AI".
+
+2. The "Illusion of AI" Processing State (CRITICAL FOR UX):
+   - When the button is clicked, DO NOT show a simple spinner.
+   - Show a full-screen dark mode overlay with tech-style calculating text changing every 800ms:
+     * "Calculating Vastu Logic for East Facing..."
+     * "Optimizing structural load-bearing walls..."
+     * "Allocating 12x14 Master Bedroom spatial grid..."
+     * "Rendering Blueprint..."
+   - After 3.5 seconds, reveal the output.
+
+3. The Parametric 2D Blueprint Generator (The Magic):
+   - DO NOT use a static placeholder image for the floor plan.
+   - Create a dynamic BlueprintRenderer component using CSS CSS-Grid or SVG.
+   - Based on a dummy 30x50 (1500 sq ft) plot logic, visually render a Top-Down 2D Floor Plan layout on the screen.
+   - Create distinct box areas representing rooms (e.g., Master Bed, Kitchen, Hall, Parking). 
+   - Style the blueprint to look like a real AutoCAD drawing: Navy Blue background, thin white/cyan lines, and white text labels with square footage (e.g., "Living Area: 16x20").
+
+4. The Action Center (Monetization Loop):
+   - Below the generated blueprint, display an estimated summary: "Total Built-up Area: 1200 Sq Ft".
+   - Include 3 massive Action Buttons:
+     * "Download 2D Map (PDF)"
+     * "Convert to 3D Walkthrough Video (Premium)"
+     * "Order Builder Kit for this Map (₹14.5 Lakhs)" - This ties back to our Builder Kits section.
+
+Ensure the styling uses absolute precision. The blueprint rendering should scale responsively on mobile screens. Use high-contrast architectural colors (Blueprint Blue #003366 and White).

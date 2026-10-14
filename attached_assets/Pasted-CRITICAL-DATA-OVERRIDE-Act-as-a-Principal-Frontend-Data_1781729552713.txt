@@ -1,0 +1,26 @@
+CRITICAL DATA OVERRIDE: Act as a Principal Frontend Data Architect. The application is currently showing broken images, blank spaces, or failing to load visual assets because of deprecated APIs (like source.unsplash.com) or overly strict fallbacks.
+
+You MUST completely replace the dynamic random image generation with a robust, hardcoded data model that guarantees 100% visual rendering. Follow these strict rules:
+
+MODULE 1: THE BULLETPROOF IMAGE DICTIONARY
+Delete any existing random image fetchers and inject this exact mapping into your data arrays (Categories & Products). Use these highly reliable, static URLs that represent construction materials accurately:
+
+For Categories/Products, apply these exact `image` URLs:
+- Cement: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80" (Masonry/Cement look)
+- TMT Steel/Bars: "https://images.unsplash.com/photo-1533628635777-112b2239b1c7?auto=format&fit=crop&w=600&q=80" (Steel/Industrial)
+- Eeta (Bricks): "https://images.unsplash.com/photo-1584288410294-1a92e42bc56b?auto=format&fit=crop&w=600&q=80" (Red Bricks)
+- Morang/Sand/Aggregate: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" (Gravel/Texture)
+- Hardware/Tools: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=80" (Construction Tools)
+- Paint/Waterproofing: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=600&q=80" (Paint/Colors)
+
+MODULE 2: THE "NEVER-BREAK" FALLBACK UI
+If a product does not match the above list, DO NOT leave the image source blank or broken. You MUST use a dynamic placeholder service that generates a clean text-based image card.
+- Set the default image fallback to: `https://placehold.co/600x400/f1f5f9/475569?font=montserrat&text=Conon+Material`
+- Update the `<img>` tags to include an `onError` handler in React to instantly swap to the placeholder if a network request fails:
+  ```jsx
+  <img 
+    src={product.image || '[https://placehold.co/600x400/f1f5f9/475569?text=Conon](https://placehold.co/600x400/f1f5f9/475569?text=Conon)'} 
+    alt={product.name} 
+    onError={(e) => { e.target.src = '[https://placehold.co/600x400/f1f5f9/475569?text=Item+Unavailable](https://placehold.co/600x400/f1f5f9/475569?text=Item+Unavailable)'; }}
+    className="w-full h-full object-cover"
+  />

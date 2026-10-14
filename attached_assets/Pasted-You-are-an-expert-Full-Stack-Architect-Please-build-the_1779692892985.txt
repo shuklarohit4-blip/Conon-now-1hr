@@ -1,0 +1,36 @@
+You are an expert Full-Stack Architect. Please build the "Master Admin Dashboard" for CONON Infrabuilt, a B2B 1-hour construction material delivery startup. 
+
+This panel is the central control tower for the CEO to monitor the entire ecosystem. 
+Tech Stack: React, Node.js, Express, SQLite, and Tailwind CSS (Color Theme: Safety Yellow #FBBF24, Dark Gray #1F2937, Clean White #FFFFFF). The layout should be desktop-first but fully responsive, featuring a left-side navigation sidebar.
+
+Please implement the following core modules:
+
+1. God-Eye Dashboard (Overview)
+- Top Cards: Total Daily Revenue, Active Orders (with live count), Pending 'Conon Khata' Recoveries, and SLA Breaches (Deliveries taking > 60 mins).
+- A Live Map widget (using Leaflet.js or mock UI) showing active delivery trucks and vendor locations across the city.
+
+2. Order & Logistics Management
+- A real-time data table of all orders with columns: Order ID, Contractor Name, Site Location, Status (Pending, Loading, Out for Delivery, Delivered).
+- Visual SLA Timer: A countdown timer for each active order (15 mins for Vendor Loading, 60 mins for Final Delivery). Turn the timer Red if SLA is breached.
+- Flag indicator if the order includes a "Malba (Scrap) Pick-up" request.
+
+3. 'Conon Khata' (Credit & Finance) Manager
+- A dedicated ledger interface to manage Contractor Credit Limits.
+- View total outstanding dues per contractor.
+- One-click button to "Generate Weekly PDF Invoice" for a contractor.
+- Input field to record payments received and update the available Khata limit.
+
+4. Catalog & "Live Mandi Rates" Controller
+- A simple form to bulk-update daily wholesale prices for Cement, TMT Bars, and Aggregates (which instantly updates the frontend Ticker).
+- Inventory table to toggle products "In Stock" or "Out of Stock".
+- Section to manage "Equipment Rentals" (add/edit machinery, daily rental price).
+
+5. User & Vendor Access Control
+- Tables to view and approve/ban registered users (Contractors, Vendors, Delivery Drivers).
+- Input fields to assign specific loading zones/pincodes to vendors.
+
+Execution Plan:
+1. Setup the SQLite schema with tables for users, orders, products, and khata_ledgers.
+2. Build REST APIs for CRUD operations on these tables.
+3. Build the React UI with a persistent sidebar and dashboard routing.
+4. Ensure data tables have search and filter capabilities (e.g., filter orders by "Delayed").

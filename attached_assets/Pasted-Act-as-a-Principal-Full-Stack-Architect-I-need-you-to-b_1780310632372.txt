@@ -1,0 +1,33 @@
+Act as a Principal Full-Stack Architect. I need you to build a comprehensive, production-ready, and fully functional Admin Panel for "Conon" – a hybrid startup handling both 1-hour construction material delivery and turnkey home construction. 
+
+The stack should be modern (e.g., Next.js/React with Tailwind CSS, using a robust data-table library). Please implement the following deeply integrated modules:
+
+1. Master Command Center (Dashboard):
+   - Top Header: Display a clean greeting "Welcome, ROHIIT SHUKLA (Super Admin)" with a numerology-aligned branding touch.
+   - Core Metrics Grid: Live 1-Hour Deliveries (active map counter), Active Turnkey Projects, Total Outstanding Khata (Ledger), and Today's Revenue.
+   - Display a mini-map widget focused on the Lucknow, UP territory showing active fleet pins.
+
+2. Conon Build - Project Management Module:
+   - A Kanban-style board or detailed table to track end-to-end home construction projects.
+   - Project milestones should include: Architecture, 3D Layout Video Approval, Foundation, Superstructure, and Handover.
+   - Populate with realistic dummy data to visualize the UI: 
+     * "Project: G+2 Mansion (6,100 sq ft) | Client: Manshi mam | Status: 3D Layout Video Pending"
+     * "Project: Commercial Renovation | Status: Material Dispatched"
+
+3. Advanced B2B Khata & Associate Ledger:
+   - A highly secure-looking financial module for managing contractor credit limits and part-payments.
+   - Include specific UI states for different user types. Populate dummy rows such as:
+     * "Vipin Shukla (Associate) - Outstanding: ₹45,000 | Limit: ₹1L"
+     * "Saroj Shukla (Associate) - Outstanding: ₹0 (Cleared)"
+   - Add a quick action button next to each name: "Send WhatsApp Payment Link".
+
+4. Financial Compliance & Scheme Reporting:
+   - A "Reports" tab dedicated to automated accounting.
+   - Include standard generation options: GST-compliant B2B Invoices, Monthly P&L, and E-Way Bill logs.
+   - Add a specialized export button labeled "Download DPR (Detailed Project Report) Format" that generates a clean PDF projection of expenses and revenue, optimized for state startup loan submissions like the Mukhyamantri Yuva Swarozgar Yojana.
+
+5. Live Fleet & Dynamic Inventory Manager:
+   - A split view: One half showing live truck routing, the other half showing critical inventory alerts (e.g., "TMT Steel - Low Stock").
+   - Quick-toggle switches to enable/disable "Dynamic Pricing" based on real-time market fluctuations.
+
+Ensure the entire application uses a strict, professional color palette suitable for an infrastructure enterprise. The UI must be fully responsive, feature a dark/light mode toggle, and include smooth page transitions.

@@ -1,0 +1,36 @@
+Act as a Principal Full-Stack Architect and UX/UI Master. I need you to build the ultimate, zero-friction "Vendor Command Center" for the Conon Infrabuilt app. This app is for local hardware and cement shop owners. It MUST be 100% functional on the frontend using React Context API for state management. NO DEAD BUTTONS. NO EMPTY FUNCTIONS. 
+
+Please build this comprehensive React/Tailwind application with the following interconnected modules:
+
+MODULE 1: Global State & Omni-Language (The Core)
+- Wrap the app in a VendorContext holding arrays for: liveOrders, masterInventory, and walletBalance.
+- Install a Toast notification library (like react-hot-toast or sonner). EVERY single button click must trigger a Success/Error Toast.
+- Implement a functional top-right toggle for "English | हिंदी" that changes the UI text (e.g., "Accept Order" <-> "Order Manzoor Karein").
+
+MODULE 2: 10-Second Onboarding (Frictionless)
+- Replace traditional email/password with a massive "Enter Mobile Number" screen.
+- Simulate "Login via WhatsApp OTP".
+- Add a "1-Scan KYC" button: Simulate an OCR scanning animation for 2 seconds, auto-fill dummy GST/Aadhar details, and show a green "Verified" badge. On success, navigate to the Dashboard.
+
+MODULE 3: Live Order Hub (WebSockets Simulation)
+- Build a Kanban-style board for Orders: "New Requests" -> "Packing" -> "Ready for Pickup".
+- Provide working action buttons on order cards: Clicking "Accept Order" MUST instantly move the card to the 'Packing' column in the UI via state update.
+- Simulate a WebSocket event: Add a "Test New Order" floating button. Clicking it should trigger an audio beep/ringtone, show a Toast "🔔 New Order Arrived!", and auto-add a new order card to the 'New Requests' column.
+
+MODULE 4: "Zero-Typing" Inventory & AI Munshi
+- Do not make vendors type product names. Display a "Global Master Catalog" (e.g., Ultratech Cement, TMT Steel, Morang).
+- Next to each item, add a massive toggle switch "In Stock (ON/OFF)" and a quick numeric input for "Today's Price". Toggling must update the state and show a Toast.
+- AI Munshi Voice Simulation: Add a glowing Mic icon. Clicking it shows a listening waveform: "Set Red Bricks out of stock." Auto-toggle the bricks item to 'Off' in the state.
+
+MODULE 5: 1-Click Payouts (Instant Khata Wallet)
+- Design a high-trust, green-themed Financial Dashboard displaying: "Total Available Balance: ₹45,500".
+- Add a massive button: "⚡ Instant UPI / Bank Withdrawal".
+- Functional Flow: When clicked, open a confirmation bottom-sheet. On confirm, show a full-screen success confetti animation, trigger a Toast ("₹45,500 transferred to HDFC"), and update the wallet balance state to ₹0.
+
+MODULE 6: Smart Vendor Insights
+- Add a dynamic banner at the top of the dashboard simulating AI business tips: "🔥 High Demand Alert: TMT Steel orders are surging in your area! Stock up now."
+
+EXECUTION RULES:
+- Use absolute premium styling: Large tap targets for mobile, clean white backgrounds, high-contrast text, and Conon's primary brand colors.
+- Ensure seamless routing between Dashboard, Orders, Inventory, and Ledger tabs without page reloads.
+- Deliver a production-ready UI where I can click from Login -> Accept Order -> Update Inventory -> Withdraw Money without a single broken interaction.

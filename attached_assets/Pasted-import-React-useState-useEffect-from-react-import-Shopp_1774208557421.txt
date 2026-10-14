@@ -1,0 +1,211 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  ShoppingCart, Truck, MapPin, Calculator, Search, 
+  Plus, HardHat, Package, Home, Info, X, 
+  TrendingUp, Mic, Camera, ShieldCheck, 
+  CheckCircle2, Bell, Menu
+} from 'lucide-react';
+
+const BRAND = {
+  name: "CONON",
+  tagline: "INFRABUILT LIMITED",
+  colors: { primary: "#1b4366", secondary: "#5c92b1", accent: "#f59e0b" }
+};
+
+const App = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showAR, setShowAR] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [priceData, setPriceData] = useState({ steel: 68240, cement: 392, bricks: 9.10 });
+
+  // Simulate Live Market Ticker Updates
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPriceData(prev => ({
+        steel: prev.steel + (Math.random() > 0.5 ? 20 : -20),
+        cement: prev.cement + (Math.random() > 0.5 ? 1 : -1),
+        bricks: prev.bricks + (Math.random() > 0.5 ? 0.05 : -0.05)
+      }));
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-slate-100 p-2 font-sans text-slate-900">
+      <div className="w-full max-w-[420px] h-[880px] bg-white rounded-[60px] shadow-2xl overflow-hidden relative border-[14px] border-slate-900 flex flex-col">
+        
+        {/* 1. LIVE MARKET TICKER */}
+        <div className="bg-slate-900 text-white py-2 flex overflow-hidden border-b border-white/5">
+          <div className="flex animate-marquee items-center gap-10 text-[9px] font-black uppercase tracking-widest italic whitespace-nowrap">
+            <span className="flex items-center gap-1"><TrendingUp size={10} className="text-emerald-400"/> TATA TISCON: ₹{priceData.steel} <span className="text-emerald-400">↑</span></span>
+            <span className="flex items-center gap-1 text-slate-400 border-l border-white/10 pl-6">ULTRATECH: ₹{priceData.cement} <span className="text-rose-400">↓</span></span>
+            <span className="flex items-center gap-1"><TrendingUp size={10} className="text-emerald-400"/> BRICKS (A-GRADE): ₹{priceData.bricks.toFixed(2)} <span className="text-emerald-400">↑</span></span>
+          </div>
+        </div>
+
+        {/* 2. PREMIUM HEADER */}
+        <div className="p-6 pb-4">
+          <div className="flex justify-between items-center mb-6">
+            <Menu size={24} className="text-slate-400" />
+            <div className="text-center">
+              <h1 className="text-2xl font-black italic tracking-tighter text-blue-900">{BRAND.name}</h1>
+              <p className="text-[7px] font-black tracking-[0.3em] uppercase text-blue-400">Prime Infrastructure</p>
+            </div>
+            <div className="flex gap-2">
+              <div className="bg-slate-100 p-3 rounded-2xl relative">
+                <Bell size={20} className="text-slate-600" />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
+              </div>
+            </div>
+          </div>
+
+          {/* SMART TOOLS BAR */}
+          <div className="grid grid-cols-2 gap-3">
+             <button 
+               onClick={() => setShowAR(true)}
+               className="bg-blue-50 border-2 border-blue-100 p-4 rounded-[32px] flex items-center gap-3 active:scale-95 transition"
+             >
+                <div className="bg-blue-600 p-2.5 rounded-xl text-white shadow-lg shadow-blue-600/20"><Camera size={18}/></div>
+                <div className="text-left">
+                   <p className="text-[10px] font-black text-blue-900 uppercase">AR Measure</p>
+                   <p className="text-[8px] font-bold text-blue-400 tracking-tighter">Scan Your Wall</p>
+                </div>
+             </button>
+             <button 
+               onMouseDown={() => setIsRecording(true)}
+               onMouseUp={() => setIsRecording(false)}
+               className={`${isRecording ? 'bg-rose-500 shadow-rose-200' : 'bg-slate-900 shadow-slate-200'} p-4 rounded-[32px] flex items-center gap-3 shadow-xl active:scale-95 transition-all`}
+             >
+                <div className={`p-2.5 rounded-xl ${isRecording ? 'bg-white text-rose-500 scale-110' : 'bg-white/10 text-white'} transition-all`}><Mic size={18}/></div>
+                <div className="text-left">
+                   <p className={`text-[10px] font-black uppercase ${isRecording ? 'text-white' : 'text-white'}`}>{isRecording ? 'Listening' : 'Voice Order'}</p>
+                   <p className="text-[8px] font-bold text-white/50 tracking-tighter italic">Tap & Hold</p>
+                </div>
+             </button>
+          </div>
+        </div>
+
+        {/* 3. MAIN PRODUCT FEED */}
+        <div className="flex-1 overflow-y-auto px-6 pb-28 no-scrollbar">
+          
+          {/* SEARCH BAR */}
+          <div className="relative mb-6">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={18}/>
+            <input 
+              type="text" 
+              placeholder="Search 'Sariya', 'Cement', 'Eent'..."
+              className="w-full bg-slate-50 border border-slate-100 py-4 pl-12 pr-4 rounded-[25px] text-xs font-bold focus:outline-none focus:ring-4 focus:ring-blue-500/10 transition"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          {/* QUALITY PROMISE BANNER */}
+          <div className="bg-gradient-to-br from-blue-900 to-indigo-900 p-6 rounded-[40px] mb-8 relative shadow-2xl overflow-hidden">
+             <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3">
+                   <ShieldCheck size={16} className="text-amber-400" />
+                   <span className="text-[8px] font-black text-amber-400 tracking-[0.2em] uppercase">ISI Certified Labs</span>
+                </div>
+                <h2 className="text-white text-xl font-black italic leading-none">ZERO DUST <br/>PROMISE.</h2>
+                <p className="text-blue-200/70 text-[9px] font-bold mt-2 uppercase tracking-tighter italic">Verified Material Only</p>
+             </div>
+             <CheckCircle2 size={120} className="absolute -right-8 -bottom-8 text-white/5 rotate-12" />
+          </div>
+
+          {/* PRODUCT CARDS */}
+          <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2 italic">Recommended Materials</h3>
+          
+          <div className="space-y-4">
+             {[
+               { name: 'UltraTech OPC 53', type: 'Cement', price: priceData.cement, status: 'Fast Delivery', img: '📦' },
+               { name: 'TATA Tiscon 12mm', type: 'Steel', price: priceData.steel, status: 'Best Price', img: '🏗️' },
+               { name: 'A-Grade Red Bricks', type: 'Bricks', price: priceData.bricks.toFixed(2), status: 'Limited Stock', img: '🧱' }
+             ].map((item, i) => (
+               <div key={i} className="bg-white border border-slate-50 rounded-[35px] p-5 shadow-sm flex items-center justify-between group hover:border-blue-200 transition">
+                  <div className="flex items-center gap-4">
+                     <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                        {item.img}
+                     </div>
+                     <div>
+                        <p className="text-[8px] font-black text-blue-500 uppercase">{item.type}</p>
+                        <h4 className="font-bold text-slate-800 text-sm leading-tight">{item.name}</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                           <span className="text-blue-900 font-black text-sm italic">₹{item.price.toLocaleString()}</span>
+                           <span className="text-[8px] font-black text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded-full uppercase">{item.status}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <button className="bg-slate-900 text-white p-3 rounded-2xl active:scale-90 transition">
+                     <Plus size={20} />
+                  </button>
+               </div>
+             ))}
+          </div>
+        </div>
+
+        {/* 4. AR MEASUREMENT OVERLAY */}
+        {showAR && (
+          <div className="absolute inset-0 bg-slate-900/95 z-[100] p-8 flex flex-col animate-in slide-in-from-bottom duration-500">
+             <div className="flex justify-between items-center mb-8">
+                <div>
+                   <h2 className="text-white font-black italic text-lg leading-tight uppercase">AR Scan Mode</h2>
+                   <p className="text-slate-400 text-[10px] font-bold">CALCULATING AREA IN REAL-TIME</p>
+                </div>
+                <button onClick={() => setShowAR(false)} className="bg-white/10 p-3 rounded-full text-white"><X size={24}/></button>
+             </div>
+             
+             <div className="flex-1 rounded-[40px] border-2 border-dashed border-white/20 relative overflow-hidden bg-black flex items-center justify-center">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503387762-592dea58ef4e?w=800')] opacity-50 bg-cover bg-center grayscale"></div>
+                {/* Laser Line Effect */}
+                <div className="absolute w-full h-0.5 bg-amber-400/50 shadow-[0_0_15px_rgba(251,191,36,0.8)] animate-bounce-slow"></div>
+                <div className="relative z-10 text-center">
+                   <div className="w-20 h-20 border-4 border-amber-400 border-t-transparent rounded-full mx-auto mb-4 animate-spin"></div>
+                   <p className="text-white font-black tracking-widest text-[10px] uppercase">Analyzing Surface...</p>
+                </div>
+             </div>
+
+             <div className="mt-8 bg-white p-6 rounded-[35px] shadow-2xl">
+                <div className="flex justify-between items-center mb-2">
+                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Wall Area</p>
+                   <p className="text-blue-900 font-black italic text-xl">145 SQ.FT</p>
+                </div>
+                <p className="text-[9px] text-slate-400 font-bold mb-6">ESTIMATED: 1,450 Bricks | 4 Bags Cement</p>
+                <button className="w-full bg-blue-900 text-white py-4 rounded-[20px] font-black text-[12px] uppercase tracking-widest shadow-xl shadow-blue-900/20">Add Estimated Mix to Cart</button>
+             </div>
+          </div>
+        )}
+
+        {/* 5. NAVIGATION BAR */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t h-24 flex items-center justify-around px-8 pb-6 z-20">
+          <div className="flex flex-col items-center gap-1 text-blue-900 transition-all">
+             <Home size={24} strokeWidth={3} /><span className="text-[8px] font-black uppercase tracking-tighter">Shop</span>
+          </div>
+          <div className="flex flex-col items-center gap-1 text-slate-300">
+             <Calculator size={24} /><span className="text-[8px] font-black uppercase tracking-tighter">Calc</span>
+          </div>
+          <div className="w-16 h-16 bg-blue-900 rounded-[22px] -mt-12 border-[6px] border-white shadow-2xl flex items-center justify-center text-white active:scale-95 transition-all">
+             <Package size={28} />
+          </div>
+          <div className="flex flex-col items-center gap-1 text-slate-300">
+             <Truck size={24} /><span className="text-[8px] font-black uppercase tracking-tighter">Track</span>
+          </div>
+          <div className="flex flex-col items-center gap-1 text-slate-300">
+             <HardHat size={24} /><span className="text-[8px] font-black uppercase tracking-tighter">Experts</span>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes marquee { 0% { transform: translateX(50%); } 100% { transform: translateX(-150%); } }
+        .animate-marquee { animation: marquee 15s linear infinite; }
+        .animate-bounce-slow { animation: bounce-scan 3s infinite ease-in-out; }
+        @keyframes bounce-scan { 0%, 100% { top: 10%; } 50% { top: 90%; } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+      `}</style>
+    </div>
+  );
+};
+
+export default App;
+

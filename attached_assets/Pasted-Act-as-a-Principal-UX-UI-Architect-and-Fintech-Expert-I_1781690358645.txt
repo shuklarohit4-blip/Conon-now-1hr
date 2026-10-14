@@ -1,0 +1,29 @@
+Act as a Principal UX/UI Architect and Fintech Expert. I need to build the ultimate, zero-friction "Vendor Partner App" for Conon Infrabuilt. The target users are local hardware/cement shop owners who need extreme simplicity, large tap targets, and instant gratification. 
+
+Please build this fully functional React/Tailwind frontend module with state management, ensuring NO dead buttons and a highly premium but simple UI:
+
+MODULE 1: 10-Second Onboarding & WhatsApp Auth
+- Replace email/password with a massive "Enter Mobile Number" screen.
+- Simulate "Login via WhatsApp OTP" (which is faster and more trusted than SMS).
+- One-Scan KYC: For verification, add a "Snap GST/Aadhar" button. When clicked, simulate an OCR (Optical Character Recognition) processing animation for 2 seconds, and auto-fill the vendor's dummy details. Show a green "KYC Verified Instantly" badge.
+
+MODULE 2: "Zero-Typing" Inventory Management
+- Vendors hate typing product names. Create a "Global Master Catalog" view.
+- Show predefined visual categories: [Ultratech Cement], [Tata Tiscon TMT], [Morang/Sand].
+- Under each, simply provide a massive functional toggle switch: "I Sell This (ON/OFF)" and a numeric input for "Today's Price".
+- Voice Update Simulation: Add a floating mic icon saying "Update Stock via Voice". Clicking it shows a waveform simulating: "Set Red Bricks out of stock." The UI must instantly toggle the bricks to 'Out of Stock' via state.
+
+MODULE 3: 1-Click Payouts (The "Instant Khata" Wallet)
+- Design a high-trust, green-themed Financial Dashboard.
+- Show a massive, bold balance: "Total Available: ₹45,500".
+- Below it, a single massive button: "⚡ Instant UPI / Bank Withdrawal".
+- Functional Flow: When clicked, open a bottom-sheet confirming the linked bank account. On confirming, show a full-screen success animation (like GPay/Cred confetti) with a toast: "₹45,500 transferred to your HDFC account". Update the balance state to ₹0.
+
+MODULE 4: Smart Vendor Insights (The "Hook")
+- Add a small, smart alert section at the top of the dashboard to help them earn more.
+- Implement dummy dynamic alerts like: "🔥 High Demand Alert: TMT Steel orders are surging in your area right now!" or "💡 Tip: Lower your Cement price by ₹5 to match nearby competitors and get 3x more orders today."
+
+UI STRICT RULES:
+- The entire app MUST have a functional English/Hindi toggle in the header. (e.g., "Withdrawal" -> "Paisa Nikalein").
+- Use extremely large buttons, clean white backgrounds, and solid Conon brand colors. 
+- Implement local state using React Context so the login, inventory toggles, and withdrawal balance updates are fully interactive without refreshing

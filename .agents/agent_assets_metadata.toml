@@ -1,0 +1,1039 @@
+uploads = []
+
+[[generated]]
+id = "pUljE7M3eaJ7l2_yRVxI2"
+uri = "file://artifacts/conon/public/categories/cement.png"
+type = "image"
+title = "cement category"
+
+[[generated]]
+id = "I0Khzjipwr-NuZT62eOWj"
+uri = "file://artifacts/conon/public/categories/tiling.png"
+type = "image"
+title = "tiling category"
+
+[[generated]]
+id = "g5icIExKDHLk3q7RqJ0HQ"
+uri = "file://artifacts/conon/public/categories/painting.png"
+type = "image"
+title = "painting category"
+
+[[generated]]
+id = "rQogoLbFu1DzCjiZMG5un"
+uri = "file://artifacts/conon/public/categories/waterproofing.png"
+type = "image"
+title = "waterproofing category"
+
+[[generated]]
+id = "ALh4FwYQHP0qLKZK-qsWx"
+uri = "file://artifacts/conon/public/categories/plywood.png"
+type = "image"
+title = "plywood category"
+
+[[generated]]
+id = "sKSaHb3hAN5z8kYxI_iAh"
+uri = "file://artifacts/conon/public/categories/fevicol.png"
+type = "image"
+title = "fevicol category"
+
+[[generated]]
+id = "wJZWoDK_sCKaIE_7V7MLS"
+uri = "file://artifacts/conon/public/categories/wires.png"
+type = "image"
+title = "wires category"
+
+[[generated]]
+id = "LHdHZGI56TagAB9ovsgJA"
+uri = "file://artifacts/conon/public/categories/switches.png"
+type = "image"
+title = "switches category"
+
+[[generated]]
+id = "VFwB09c4QE9yVvBcCYbkw"
+uri = "file://artifacts/conon/public/categories/hinges.png"
+type = "image"
+title = "hinges category"
+
+[[generated]]
+id = "2maLWTCnz7kv6Y7ZYsY9C"
+uri = "file://artifacts/conon/public/categories/kitchen-systems.png"
+type = "image"
+title = "kitchen-systems category"
+
+[[generated]]
+id = "rlru2xxRFPDFPQvZ_7JUY"
+uri = "file://artifacts/conon/public/categories/wardrobe.png"
+type = "image"
+title = "wardrobe category"
+
+[[generated]]
+id = "LF86R4f_wdSGNogAIVWEA"
+uri = "file://artifacts/conon/public/categories/door-locks.png"
+type = "image"
+title = "door-locks category"
+
+[[generated]]
+id = "QfIr8wJaHAkIWuuMysslr"
+uri = "file://artifacts/conon/public/categories/conduits.png"
+type = "image"
+title = "conduits category"
+
+[[generated]]
+id = "PCO7n3iNwuuMIdooDeGgX"
+uri = "file://artifacts/conon/public/categories/sanitary.png"
+type = "image"
+title = "sanitary category"
+
+[[generated]]
+id = "Mt9fnxRvYrItjRN2LOe8y"
+uri = "file://artifacts/conon/public/categories/lighting.png"
+type = "image"
+title = "lighting category"
+
+[[generated]]
+id = "BfmdBTQBbtet_Bzycbb5e"
+uri = "file://artifacts/conon/public/categories/cpvc.png"
+type = "image"
+title = "cpvc category"
+
+[[generated]]
+id = "oJkjmD5rHHKUATKPLW5ES"
+uri = "file://artifacts/conon/public/categories/kitchen.png"
+type = "image"
+title = "kitchen category"
+
+[[generated]]
+id = "a_hur1BCyjN35-O5Y5IS6"
+uri = "file://artifacts/conon/public/categories/general.png"
+type = "image"
+title = "general category"
+
+[[generated]]
+id = "EdbdYf2OS0ZlVrFmy9JQq"
+uri = "file://artifacts/conon/public/categories/steel-bar.png"
+type = "image"
+title = "steel-bar category"
+
+[[generated]]
+id = "qcfK8vkGbmZe4hMoRxdIf"
+uri = "file://artifacts/conon/public/categories/eeta.png"
+type = "image"
+title = "eeta category"
+
+[[generated]]
+id = "7OVpzop5vviETaQ71HZyN"
+uri = "file://artifacts/conon/public/categories/morang.png"
+type = "image"
+title = "morang category"
+
+[[generated]]
+id = "b_5j0EHz7iZvg7Yt_jXmh"
+uri = "file://artifacts/conon/public/categories/home-essentials.png"
+type = "image"
+title = "home-essentials category"
+
+[[generated]]
+id = "Qa6m1Szz3QBQxeSjJdcqD"
+uri = "file://attached_assets/conon_gen/cement-bag.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "W1j5h4FnbJAOeazJWTvJk"
+uri = "file://attached_assets/conon_gen/white-cement.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "v3csNjcynTi_f5xOziEl1"
+uri = "file://attached_assets/conon_gen/door.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Nq81Y2Qd7-BNHfpHxMz6v"
+uri = "file://attached_assets/conon_gen/earthing.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "_ne3nrSMFaSbtKeSLDHtm"
+uri = "file://attached_assets/conon_gen/gloves.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "go2WMmQfynqwJwk3Iq8ys"
+uri = "file://attached_assets/conon_gen/helmet.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "kZ0MMOF-tWinJFpshboZG"
+uri = "file://attached_assets/conon_gen/kitchen-basket.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "mWLV-6aVJtQY8oouJcjIo"
+uri = "file://attached_assets/conon_gen/marble.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "x0pL4vXTcotOJumHCfGdy"
+uri = "file://attached_assets/conon_gen/mcb.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "yZ1sqfTYWSVtUfEe-I_yI"
+uri = "file://attached_assets/conon_gen/pipe.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "nJ2XhdXaHVr1hmaAnn782"
+uri = "file://attached_assets/conon_gen/pipe-fittings.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "TZIRFqyHUNSC8AEmdo4EZ"
+uri = "file://attached_assets/conon_gen/plywood.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "3z2FjAXCiFMrIlY9VgoDO"
+uri = "file://attached_assets/conon_gen/pop.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "0PcnZnFLWPM4cCmHSvZWx"
+uri = "file://attached_assets/conon_gen/primer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "52ukmfHwhH6s66a95w4Ki"
+uri = "file://attached_assets/conon_gen/putty.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "2uAlL5ugi_PqCwpU54rAh"
+uri = "file://attached_assets/conon_gen/sand.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "JGeZaHc3KBYjCsLk2LbLS"
+uri = "file://attached_assets/conon_gen/switch.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "6unHnS854cmS-Lyz6T5K9"
+uri = "file://attached_assets/conon_gen/tank.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Xo0UMZCw46lnflbWXJsek"
+uri = "file://attached_assets/conon_gen/tile-adhesive.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xS-k5kNEt6JQAIPuv4qkA"
+uri = "file://attached_assets/conon_gen/tile-tools.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "5zQZh-IRan0IFtCh0HO24"
+uri = "file://attached_assets/conon_gen/waterproofing.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "qTV95qRf3bnuZsv5ssiVS"
+uri = "file://attached_assets/conon_gen/window.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Ex_ao4Ii-NxNJxnVnA004"
+uri = "file://attached_assets/conon_gen/conduit.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "lePQBMxjuDvkgQggAte-z"
+uri = "file://attached_assets/conon_gen/scaffolding.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "OcNhg4XNXrCmT7AW6LIVf"
+uri = "file://attached_assets/conon_gen/paint-bucket.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "G5bXEFe4OaOTSSXSitSM8"
+uri = "file://attached_assets/conon_gen/paint-gloss.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "1lkkp_4COW9C8AgexAnon"
+uri = "file://attached_assets/conon_gen/distemper.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "7-tEd99cGKMpyEHMmO6uC"
+uri = "file://attached_assets/conon_gen/texture-paint.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "vFppgYY7C7opGHbMFDj9e"
+uri = "file://attached_assets/conon_gen/wood-finish.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "5n-QTxluOmUFJH3hJXwas"
+uri = "file://attached_assets/conon_gen/safety-shoes.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "J4-EsguW56-GGOGGb7PWU"
+uri = "file://attached_assets/conon_gen/door-lock.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "VyGPnnDH61GUzZ4iiaRWC"
+uri = "file://attached_assets/conon_gen/mask.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "c03pyrKu7gCYvh4A7vobk"
+uri = "file://attached_assets/brands/acc-cement.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "6HtsdUP-7gJHWKlcrFvv1"
+uri = "file://attached_assets/brands/ambuja-cement.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "7sJp18rjjk5yGPzpNAXAf"
+uri = "file://attached_assets/brands/shree-cement.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "QVAVSGIGFl9yPx-VWfmqC"
+uri = "file://attached_assets/brands/legrand-switch.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ZRMdK8QXTu7YCQsUd4s7E"
+uri = "file://attached_assets/brands/astral-pipe.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "IQE0DDEkAqeoYZG14Xa80"
+uri = "file://attached_assets/brands/jaquar-faucet.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "56PLO58-AWK2kx3t7asG4"
+uri = "file://attached_assets/brands/hindware-ewc.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "iNSCuQEpGh0wcUIAeIh9E"
+uri = "file://attached_assets/brands/asianpaints-bucket.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "8Udr1psL8TXncbCMJajHw"
+uri = "file://attached_assets/brands/berger-bucket.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "GVfgWlQvYnRVYqe2v-CVN"
+uri = "file://attached_assets/brands/nerolac-bucket.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "k7rkL2ea7AgZ4jEF6cA0i"
+uri = "file://attached_assets/brands/dulux-bucket.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "t4Dwnqu1l7SPsSse0Qtco"
+uri = "file://attached_assets/brands/drfixit-bucket.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "TIptqrwhf5WNBSrKRCxid"
+uri = "file://attached_assets/brands/birlawhite-putty.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "dM8me5OFjvyCwFyyS3IXJ"
+uri = "file://attached_assets/brands/kajaria-tile.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "4X0ru3jxlSvl_CyslmLWa"
+uri = "file://attached_assets/brands/somany-tile.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "iw4FcvZFWvYFttvHWJrhs"
+uri = "file://attached_assets/brands/roff-adhesive.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "30Jk33wxGVAxzNTaNazxn"
+uri = "file://attached_assets/brands/fevicol-drum.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "cxb_o_IqKDpi-KBmKnu7e"
+uri = "file://attached_assets/brands/hettich-hinge.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "7_pe7YjJEj8kQKegbiVv5"
+uri = "file://attached_assets/brands/godrej-lock.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "DhkAeuzyzfQVaKxZ38Gmn"
+uri = "file://attached_assets/brands/karam-helmet.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "q1jnGfSiZdeL3K17-n-FC"
+uri = "file://attached_assets/brands/bosch-drill.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "bNO5QxrIO7ah0zdp9l2lf"
+uri = "file://attached_assets/brands/makita-drill.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Yrq-RDS20fe6biDHrIHDD"
+uri = "file://attached_assets/brands/dewalt-grinder.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "YZcwdsOrKAk6tQP-TzdUA"
+uri = "file://attached_assets/brands/stanley-tape.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "cp7szqB3muWSWbRV1aZtx"
+uri = "file://attached_assets/brands/centuryply-ply.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "VFXWoZcT9a83B4fwvZi_F"
+uri = "file://attached_assets/brands/greenply-ply.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "vwEHpOOp2Q0kSu5460QsY"
+uri = "file://attached_assets/brands/actiontesa-mdf.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "hsYI40MxBChklGKh9b9zG"
+uri = "file://attached_assets/brands/gyproc-board.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "a7QhqRV-M9dUZAkThPeWt"
+uri = "file://attached_assets/brands/dalmia-cement.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "qXssgP0cNUu18-tg05KPi"
+uri = "file://attached_assets/brands/polycab-wire.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "pLWNdgss53uDbSN1iv_s9"
+uri = "file://artifacts/conon/public/rentals/jcb-backhoe.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Kf3gZgO0ORO7YHpHhlPIC"
+uri = "file://artifacts/conon/public/rentals/excavator.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "L9Sg9zP9vMIEMeLCG_KJs"
+uri = "file://artifacts/conon/public/rentals/concrete-mixer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "dzQVu7bVXUqXxqj_Ue-Bu"
+uri = "file://artifacts/conon/public/rentals/needle-vibrator.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "4SbGHshO_lszWYWiggL0a"
+uri = "file://artifacts/conon/public/rentals/earth-rammer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "46B0zIKaGjxB70Cx0jlh-"
+uri = "file://artifacts/conon/public/rentals/hydra-crane.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "FtnNFpoKeU0-k6TYwl5Jc"
+uri = "file://artifacts/conon/public/rentals/air-compressor.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "XwBRMWli38OdkShqGAqjw"
+uri = "file://artifacts/conon/public/rentals/dg-set.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Ko7ZXH4VZ7ib64vUban93"
+uri = "file://attached_assets/generated_images/marble-stone/black-galaxy.png"
+type = "image"
+title = "black galaxy granite"
+
+[[generated]]
+id = "phg7AStfC7cJ4HffOcfUE"
+uri = "file://attached_assets/generated_images/marble-stone/tan-brown.png"
+type = "image"
+title = "tan brown granite"
+
+[[generated]]
+id = "0HEDuyZP_KP7DjNHHWHJT"
+uri = "file://attached_assets/generated_images/marble-stone/steel-grey.png"
+type = "image"
+title = "steel grey granite"
+
+[[generated]]
+id = "-_ih3q0dYctZ4to2XxalY"
+uri = "file://attached_assets/generated_images/marble-stone/kashmir-white.png"
+type = "image"
+title = "kashmir white granite"
+
+[[generated]]
+id = "_d5yd9mvx1rNIN6D5lIgZ"
+uri = "file://attached_assets/generated_images/marble-stone/kota-blue.png"
+type = "image"
+title = "kota blue stone"
+
+[[generated]]
+id = "jz6xsthuJGxTYqzhxu6rZ"
+uri = "file://attached_assets/generated_images/marble-stone/kota-brown.png"
+type = "image"
+title = "kota brown stone"
+
+[[generated]]
+id = "AAIAYC2LO7ZUpoxnUXkMy"
+uri = "file://attached_assets/generated_images/marble-stone/dholpur-beige.png"
+type = "image"
+title = "dholpur beige sandstone"
+
+[[generated]]
+id = "pJqxHbWG8TVO10owVdblV"
+uri = "file://attached_assets/generated_images/marble-stone/mint-sandstone.png"
+type = "image"
+title = "mint sandstone"
+
+[[generated]]
+id = "co0Lmupq3Xaj0sUUvT1Ng"
+uri = "file://attached_assets/generated_images/marble-stone/makrana-white.png"
+type = "image"
+title = "makrana white marble"
+
+[[generated]]
+id = "y6ZODlioyKpIdbSvPQijZ"
+uri = "file://attached_assets/generated_images/marble-stone/makrana-albeta.png"
+type = "image"
+title = "makrana albeta marble"
+
+[[generated]]
+id = "cWyuI4EDVrFIZUIdT2rYI"
+uri = "file://attached_assets/generated_images/marble-stone/makrana-kumari.png"
+type = "image"
+title = "makrana kumari marble"
+
+[[generated]]
+id = "nkY06IDJ-plw3Z31sHWGL"
+uri = "file://attached_assets/generated_images/marble-stone/statuario.png"
+type = "image"
+title = "statuario italian marble"
+
+[[generated]]
+id = "nyadr2lm_9kyVSC0kLFJq"
+uri = "file://attached_assets/generated_images/marble-stone/carrara.png"
+type = "image"
+title = "carrara marble"
+
+[[generated]]
+id = "810t-YeKz0b5QByo7nPGU"
+uri = "file://attached_assets/generated_images/marble-stone/botticino.png"
+type = "image"
+title = "botticino beige marble"
+
+[[generated]]
+id = "Z-pYquRxNw-cMvk0E5W0j"
+uri = "file://attached_assets/generated_images/marble-stone/morwad-white.png"
+type = "image"
+title = "morwad white marble"
+
+[[generated]]
+id = "trqLPusmIgkUmvGmKjPfy"
+uri = "file://attached_assets/generated_images/marble-stone/onyx.png"
+type = "image"
+title = "onyx marble"
+
+[[generated]]
+id = "pNI3klKDWVGFRFRe-qhLI"
+uri = "file://attached_assets/generated_images/products/mseal-epoxy.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "bbSGKFwh7kS0QnI_kOaKA"
+uri = "file://attached_assets/generated_images/products/instant-glue.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "6R7ZPDmdGrj3uqOaC_rX3"
+uri = "file://attached_assets/generated_images/products/ebco-fitting.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "0l5HpebnkLSbBjxfdZLZk"
+uri = "file://attached_assets/generated_images/products/dorset-handle.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "RDayJ1_TuHTjcNkVXYfhP"
+uri = "file://attached_assets/generated_images/products/stanley-hinge.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "spmBk8CmsuA0wCksVnSd9"
+uri = "file://attached_assets/generated_images/products/laminate-sheet.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "cnt_p2Vpcq95hm_xEElOv"
+uri = "file://attached_assets/generated_images/products/indigo-bucket.png"
+type = "image"
+title = "generated_image"
+
+[[outputs]]
+id = "UD_2BkwOxQppRLB0kbvoR"
+uri = "file://attached_assets/stock_images/cement-bag.jpg"
+type = "image"
+title = "grey cement bag sack 50kg construction material"
+
+[[outputs]]
+id = "vp3hnew1WuZiASamSTTsV"
+uri = "file://attached_assets/stock_images/white-cement.jpg"
+type = "image"
+title = "white cement powder bag construction"
+
+[[outputs]]
+id = "PjrneUopGCef0SuR3Q67l"
+uri = "file://attached_assets/stock_images/tmt-bars.jpg"
+type = "image"
+title = "TMT steel reinforcement bars rebar bundle construction"
+
+[[outputs]]
+id = "YkneSWTbYuNssUEtcjrLE"
+uri = "file://attached_assets/stock_images/binding-wire.jpg"
+type = "image"
+title = "steel binding wire coil roll"
+
+[[outputs]]
+id = "q0hj4uYxSyVjYIugti7P3"
+uri = "file://attached_assets/stock_images/sand.jpg"
+type = "image"
+title = "construction river sand pile heap"
+
+[[outputs]]
+id = "BWriQBATDldIYTWqESwbT"
+uri = "file://attached_assets/stock_images/aggregate.jpg"
+type = "image"
+title = "crushed stone gravel aggregate pile construction"
+
+[[outputs]]
+id = "V7dKi5hzds-bJUTV3VkaA"
+uri = "file://attached_assets/stock_images/red-brick.jpg"
+type = "image"
+title = "red clay bricks stack pile"
+
+[[outputs]]
+id = "IHR6Q4cdnBm0uElQ1I94q"
+uri = "file://attached_assets/stock_images/aac-block.jpg"
+type = "image"
+title = "AAC autoclaved aerated concrete blocks grey"
+
+[[outputs]]
+id = "FJ_mtzZvmLGjXhj9lySVj"
+uri = "file://attached_assets/stock_images/wire.jpg"
+type = "image"
+title = "electrical copper wire cable spool roll"
+
+[[outputs]]
+id = "HrcMnqRtZjBkqxAt46HMp"
+uri = "file://attached_assets/stock_images/switch.jpg"
+type = "image"
+title = "modular electrical white switch socket board"
+
+[[outputs]]
+id = "WimMQacApoXZnOQPoiGB1"
+uri = "file://attached_assets/stock_images/mcb.jpg"
+type = "image"
+title = "MCB miniature circuit breaker distribution board electrical"
+
+[[outputs]]
+id = "o-eoAHS4QeDCiV7sJkL7q"
+uri = "file://attached_assets/stock_images/fan.jpg"
+type = "image"
+title = "ceiling fan white modern"
+
+[[outputs]]
+id = "4iF0n60MPhSSUI1sW_c9T"
+uri = "file://attached_assets/stock_images/light.jpg"
+type = "image"
+title = "LED ceiling light panel downlight"
+
+[[outputs]]
+id = "kuWeBl73BS9kKCK-o5sFO"
+uri = "file://attached_assets/stock_images/conduit.jpg"
+type = "image"
+title = "PVC electrical conduit pipe grey"
+
+[[outputs]]
+id = "FuEZY0yI3Q3mccvJ-8f_n"
+uri = "file://attached_assets/stock_images/earthing.jpg"
+type = "image"
+title = "copper earthing plate electrical grounding"
+
+[[outputs]]
+id = "xJXebviafxCaNritCaeBD"
+uri = "file://attached_assets/stock_images/pipe.jpg"
+type = "image"
+title = "CPVC PVC plumbing pipes stack"
+
+[[outputs]]
+id = "4nFP6FTMa8W0uE7dLL6YQ"
+uri = "file://attached_assets/stock_images/cp-fitting.jpg"
+type = "image"
+title = "chrome bathroom tap faucet fitting"
+
+[[outputs]]
+id = "znqNcdQmw6wfuWMj0l4PD"
+uri = "file://attached_assets/stock_images/toilet.jpg"
+type = "image"
+title = "white ceramic toilet commode bathroom"
+
+[[outputs]]
+id = "txtM1rHaMT2i28RJprePX"
+uri = "file://attached_assets/stock_images/basin.jpg"
+type = "image"
+title = "white ceramic wash basin sink bathroom"
+
+[[outputs]]
+id = "4EmUH8FPkUj_32wrZ0C1_"
+uri = "file://attached_assets/stock_images/tank.jpg"
+type = "image"
+title = "plastic overhead water storage tank"
+
+[[outputs]]
+id = "aoGj20wKtnden_XmNNEWL"
+uri = "file://attached_assets/stock_images/pump.jpg"
+type = "image"
+title = "water pump motor electric"
+
+[[outputs]]
+id = "ICCePpwLkoAZtinZYdoSn"
+uri = "file://attached_assets/stock_images/valve.jpg"
+type = "image"
+title = "brass plumbing valve fitting"
+
+[[outputs]]
+id = "2FvMhWbagQsNzIpEUI7X-"
+uri = "file://attached_assets/stock_images/paint-bucket.jpg"
+type = "image"
+title = "paint bucket can colorful"
+
+[[outputs]]
+id = "3TKSVg3OGf5CJM-7or7GT"
+uri = "file://attached_assets/stock_images/primer.jpg"
+type = "image"
+title = "wall primer paint can white"
+
+[[outputs]]
+id = "_ZBrmBnw8RIm1aRvT0UZi"
+uri = "file://attached_assets/stock_images/floor-tile.jpg"
+type = "image"
+title = "ceramic floor tiles stack samples"
+
+[[outputs]]
+id = "xjWC-WpXU291zR-72zGwb"
+uri = "file://attached_assets/stock_images/marble.jpg"
+type = "image"
+title = "white marble slab polished"
+
+[[outputs]]
+id = "zKnKqaKVCFJGk1APErBla"
+uri = "file://attached_assets/stock_images/tile-adhesive.jpg"
+type = "image"
+title = "tile adhesive cement bag"
+
+[[outputs]]
+id = "O60d8W9eFL0vn9EbloXP2"
+uri = "file://attached_assets/stock_images/putty.jpg"
+type = "image"
+title = "wall putty bag white powder construction"
+
+[[outputs]]
+id = "S3RWgUMyXyX3xRwOEfrLw"
+uri = "file://attached_assets/stock_images/pop.jpg"
+type = "image"
+title = "gypsum plaster of paris board white"
+
+[[outputs]]
+id = "YHIOiTAW2kbAWaSyWekuZ"
+uri = "file://attached_assets/stock_images/door.jpg"
+type = "image"
+title = "wooden flush door interior"
+
+[[outputs]]
+id = "k_Ik1qLl5qcZfYmNikMpC"
+uri = "file://attached_assets/stock_images/window.jpg"
+type = "image"
+title = "aluminium upvc window glass"
+
+[[outputs]]
+id = "-NlJKq3i4Ho9ueDGM0TeU"
+uri = "file://attached_assets/stock_images/waterproofing.jpg"
+type = "image"
+title = "waterproofing coating bucket construction chemical"
+
+[[outputs]]
+id = "6RYl1V0GuMCDvdrXVbfXO"
+uri = "file://attached_assets/stock_images/adhesive.jpg"
+type = "image"
+title = "construction adhesive glue tube"
+
+[[outputs]]
+id = "TcfB7Vh-SFcvqN_Ee92_B"
+uri = "file://attached_assets/stock_images/nails.jpg"
+type = "image"
+title = "iron nails pile metal"
+
+[[outputs]]
+id = "WFMX8HYxvXzye4YR7yCzv"
+uri = "file://attached_assets/stock_images/door-hardware.jpg"
+type = "image"
+title = "door hinges handles lock hardware metal"
+
+[[outputs]]
+id = "6F7apxnO3oPoT-flb21E8"
+uri = "file://attached_assets/stock_images/helmet.jpg"
+type = "image"
+title = "construction safety helmet hard hat yellow"
+
+[[outputs]]
+id = "S_hfeVMvTAOTwGu_-2xwn"
+uri = "file://attached_assets/stock_images/gloves.jpg"
+type = "image"
+title = "construction safety work gloves"
+
+[[outputs]]
+id = "Ilyw8Q_kzRFa5yxw-k3lg"
+uri = "file://attached_assets/stock_images/safety-shoes.jpg"
+type = "image"
+title = "safety shoes steel toe boots industrial"
+
+[[outputs]]
+id = "Am8RT_Iv244nIWynzC1e8"
+uri = "file://attached_assets/stock_images/drill.jpg"
+type = "image"
+title = "electric power drill machine handheld"
+
+[[outputs]]
+id = "HbW8aM66eqPv1bvfqR-5u"
+uri = "file://attached_assets/stock_images/grinder.jpg"
+type = "image"
+title = "angle grinder power tool"
+
+[[outputs]]
+id = "XC7a_WrU9u4aUP8fF5VMp"
+uri = "file://attached_assets/stock_images/measuring-tape.jpg"
+type = "image"
+title = "steel measuring tape construction"
+
+[[outputs]]
+id = "3X49JEbvrgjyN__lpO2hf"
+uri = "file://attached_assets/stock_images/drill-bits.jpg"
+type = "image"
+title = "drill bits set metal"
+
+[[outputs]]
+id = "_5sco9BpmB5IYvG9qHZpg"
+uri = "file://attached_assets/stock_images/scaffolding.jpg"
+type = "image"
+title = "metal scaffolding construction site"
+
+[[outputs]]
+id = "ixns3cdVBLRXJcThbfaVm"
+uri = "file://attached_assets/stock_images/plywood.jpg"
+type = "image"
+title = "plywood sheets stack wood boards"
+
+[[outputs]]
+id = "rJ1fYUsRo2I93OqG8juqs"
+uri = "file://attached_assets/stock_images/mdf.jpg"
+type = "image"
+title = "MDF wood board sheet brown"
+
+[[outputs]]
+id = "QD8pTiUkgoHMimC9YefLl"
+uri = "file://attached_assets/stock_images/pipe-fittings.jpg"
+type = "image"
+title = "PVC CPVC pipe fittings elbow tee coupler plumbing"
+
+[[outputs]]
+id = "SbudODqw1SBmfNTQYQPce"
+uri = "file://attached_assets/stock_images/paint-roller.jpg"
+type = "image"
+title = "paint roller brush painting tools"
+
+[[outputs]]
+id = "V0AHAEftmMQLo1F8Ak-aA"
+uri = "file://attached_assets/stock_images/tile-tools.jpg"
+type = "image"
+title = "tile spacers notched trowel tiling tools"
+
+[[outputs]]
+id = "tnDk8iD8JPTmp3gXFPWEn"
+uri = "file://attached_assets/stock_images/tile-cleaner.jpg"
+type = "image"
+title = "cleaning liquid bottle spray household chemical"
+
+[[outputs]]
+id = "f6-RBB1XA9bwzFowHlAOg"
+uri = "file://attached_assets/stock_images/drawer-channel.jpg"
+type = "image"
+title = "telescopic drawer slide channel furniture hardware"
+
+[[outputs]]
+id = "bPezYu5u0tRKYg3GQXN7u"
+uri = "file://attached_assets/stock_images/kitchen-basket.jpg"
+type = "image"
+title = "stainless steel modular kitchen wire basket organizer"
+
+[[outputs]]
+id = "Jfw6hQnFRRB5JGDz9KCSA"
+uri = "file://attached_assets/stock_images/safety-harness.jpg"
+type = "image"
+title = "construction safety full body harness fall protection"
+
+[[outputs]]
+id = "C9JcmYOz4F5z8_OJQuPJf"
+uri = "file://attached_assets/stock_images/safety-vest.jpg"
+type = "image"
+title = "reflective safety vest high visibility"
+
+[[outputs]]
+id = "Ia4tSVdSk7EP0CDRq9ajO"
+uri = "file://attached_assets/stock_images/safety-net.jpg"
+type = "image"
+title = "construction safety net green mesh"
+
+[[outputs]]
+id = "D-daSIaHJMt9115MDsdoC"
+uri = "file://attached_assets/stock_images/safety-goggles.jpg"
+type = "image"
+title = "safety goggles glasses protective eyewear"
+
+[[outputs]]
+id = "6WzYBmae6pAGqlAwI1waa"
+uri = "file://attached_assets/stock_images/hand-tools.jpg"
+type = "image"
+title = "hand tools hammer screwdriver pliers wrench set"
+
+[[outputs]]
+id = "HMwMfa3bFBWE3PPJflWOY"
+uri = "file://attached_assets/stock_images/saw.jpg"
+type = "image"
+title = "hand saw hacksaw cutting tool"
+
+[[outputs]]
+id = "Uwn-uSeUy3sbIrhgydZ6_"
+uri = "file://.local/outputs/CONON-Investor-Pitch-Deck.pdf"
+type = "pdf"
+title = "CONON Investor Pitch Deck.pdf"

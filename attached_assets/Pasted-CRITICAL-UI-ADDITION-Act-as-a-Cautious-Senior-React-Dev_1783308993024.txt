@@ -1,0 +1,67 @@
+CRITICAL UI ADDITION: Act as a Cautious Senior React Developer. DO NOT rewrite my main application file or change existing layouts. Your ONLY task is to create a new Promo Carousel component and safely inject it. 
+
+Follow these 3 exact steps flawlessly:
+
+STEP 1: CREATE A NEW COMPONENT
+Create a new file named `PromoCarousel.jsx` (or `.tsx`). Paste this crash-proof code into it. It uses Tailwind CSS scroll-snapping for a smooth, app-like horizontal swipe experience without requiring external heavy slider libraries:
+
+```jsx
+import React from 'react';
+
+export default function PromoCarousel() {
+  const promos = [
+    {
+      id: 1,
+      title: "Monsoon Proofing",
+      subtitle: "20% OFF on Dr. Fixit & Pidilite",
+      bg: "bg-gradient-to-r from-blue-600 to-cyan-500",
+      button: "Shop Waterproofing"
+    },
+    {
+      id: 2,
+      title: "Tata Tiscon 550D",
+      subtitle: "Direct to Site in 60 Minutes",
+      bg: "bg-gradient-to-r from-orange-500 to-red-500",
+      button: "View Steel Prices"
+    },
+    {
+      id: 3,
+      title: "Bulk Cement Offer",
+      subtitle: "Lowest prices on 50+ Bags",
+      bg: "bg-gradient-to-r from-slate-800 to-slate-600",
+      button: "Order Bulk"
+    }
+  ];
+
+  return (
+    <div className="w-full py-4 bg-slate-50">
+      <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar px-4 gap-4 pb-2">
+        {promos.map((promo) => (
+          <div 
+            key={promo.id} 
+            className={`flex-shrink-0 w-[85%] sm:w-[300px] h-[140px] rounded-2xl p-5 flex flex-col justify-between snap-center text-white shadow-md relative overflow-hidden ${promo.bg}`}
+          >
+            {/* Background Pattern Overlay */}
+            <div className="absolute right-[-20px] top-[-20px] w-24 h-24 bg-white opacity-10 rounded-full blur-xl"></div>
+            
+            <div className="relative z-10">
+              <h3 className="font-extrabold text-xl mb-1">{promo.title}</h3>
+              <p className="text-sm font-medium opacity-90">{promo.subtitle}</p>
+            </div>
+            
+            <button className="relative z-10 bg-white text-slate-900 text-xs font-bold px-4 py-2 rounded-full w-max shadow-sm hover:scale-105 transition-transform">
+              {promo.button}
+            </button>
+          </div>
+        ))}
+      </div>
+      
+      {/* Pagination Dots (Visual only) */}
+      <div className="flex justify-center gap-1.5 mt-2">
+        <div className="w-4 h-1.5 bg-slate-800 rounded-full"></div>
+        <div className="w-1.5 h-1.5 bg-slate-300 rounded-full"></div>
+        <div className="w-1.5 h-1.5 bg-slate-300 rounded-full"></div>
+      </div>
+    </div>
+  );
+}

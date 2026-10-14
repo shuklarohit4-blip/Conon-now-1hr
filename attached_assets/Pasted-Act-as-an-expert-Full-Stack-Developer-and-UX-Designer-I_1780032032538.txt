@@ -1,0 +1,32 @@
+Act as an expert Full-Stack Developer and UX Designer. I need you to build a comprehensive, high-performance Admin Panel Dashboard for my startup, "Conon" – a 1-hour construction material delivery platform.
+
+The UI must be highly professional, data-dense but clean (similar to Stripe or Vercel dashboards), and optimized for desktop viewing. Please build the following core modules:
+
+1. Command Center (Live Dashboard):
+   - A top-level overview showing real-time metrics: Active Orders, Trucks in Transit, Today's Revenue, and Average Delivery Time (critical for our 1-hour promise).
+   - A live "Action Needed" alert box for delayed orders or low inventory.
+
+2. Live Dispatch & Fleet Management:
+   - A split-screen UI: On the left, a list of active orders with their status (Picking, Loaded, In-Transit). On the right, a map interface (placeholder) tracking our delivery vehicles (Loaders, Pickups).
+   - Quick assign buttons to manually route a specific order to an available driver.
+
+3. Heavy Inventory & Dynamic Pricing Manager:
+   - A specialized inventory table capable of handling construction units (e.g., Tons, Cubic Feet, Bags, Pieces).
+   - A "Dynamic Pricing" column that allows the admin to quickly update prices for volatile materials like Cement or TMT Bars with a single click.
+   - Low-stock visual warnings (red highlighting).
+
+4. B2B & Khata (Ledger) Management:
+   - A dedicated section for "Contractors & Builders".
+   - View each contractor's profile, total credit limit, outstanding balance (Khata), and payment history.
+   - A button to generate and download GST-compliant B2B invoices.
+
+5. Order Details & Labour Tracking:
+   - A detailed view of individual orders that clearly shows the material breakdown, delivery fee based on weight, and whether "Unloading/Labour Service" was requested by the user.
+
+Technical & UI Requirements:
+- Use a modern tech stack (e.g., React/Next.js with Tailwind CSS or Shadcn UI).
+- Implement a collapsible sidebar for navigation.
+- Include a "Dark Mode" toggle.
+- Use smooth data-table components with built-in sorting, filtering (by date/status), and pagination.
+
+Start by generating the overall layout shell and the "Command Center" dashboard first.

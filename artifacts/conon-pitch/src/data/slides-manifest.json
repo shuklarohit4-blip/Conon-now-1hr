@@ -1,0 +1,130 @@
+[
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000001",
+    "position": 1,
+    "title": "Cover",
+    "description": "Title slide — Construction. Delivered in 60 Minutes. Series A pitch.",
+    "filepath": "src/pages/slides/Slide01Cover.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000002",
+    "position": 2,
+    "title": "The Problem",
+    "description": "The $180B problem — undigitized construction materials last mile in India.",
+    "filepath": "src/pages/slides/Slide02Problem.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000003",
+    "position": 3,
+    "title": "The Solution",
+    "description": "Introducing CONON — on-demand delivery of construction materials in 60 minutes.",
+    "filepath": "src/pages/slides/Slide03Solution.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000004",
+    "position": 4,
+    "title": "How It Works",
+    "description": "3 steps: Order, Confirm, Deliver. KYC and payment details.",
+    "filepath": "src/pages/slides/Slide04HowItWorks.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000005",
+    "position": 5,
+    "title": "Market Opportunity",
+    "description": "TAM $154B / SAM $37B / SOM $2.2B — 0-to-1 category creation.",
+    "filepath": "src/pages/slides/Slide05Market.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000006",
+    "position": 6,
+    "title": "Business Model",
+    "description": "4 revenue streams: Take Rate, CONON Pro, Supplier SaaS, Logistics-as-a-Service.",
+    "filepath": "src/pages/slides/Slide06BusinessModel.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000007",
+    "position": 7,
+    "title": "Traction",
+    "description": "₹4.2 Cr GMV, 620+ contractors, 214 suppliers, NPS 71.",
+    "filepath": "src/pages/slides/Slide07Traction.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000008",
+    "position": 8,
+    "title": "GMV Growth",
+    "description": "Month 1–9 GMV chart: ₹8L to ₹1.1Cr, 3.2× growth.",
+    "filepath": "src/pages/slides/Slide08GrowthChart.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000009",
+    "position": 9,
+    "title": "Competitive Landscape",
+    "description": "Comparison table — no scaled on-demand player exists in India.",
+    "filepath": "src/pages/slides/Slide09Competitive.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000010",
+    "position": 10,
+    "title": "Go-to-Market",
+    "description": "3 phases: 3 cities → 12 cities + dark stores → 40 cities + GCC.",
+    "filepath": "src/pages/slides/Slide10GTM.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000011",
+    "position": 11,
+    "title": "Technology",
+    "description": "Mobile-first PWA, real-time inventory, AI forecasting, Khata credit.",
+    "filepath": "src/pages/slides/Slide11Technology.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000012",
+    "position": 12,
+    "title": "Unit Economics",
+    "description": "Per-order breakdown: 67% contribution margin, 33× LTV:CAC, <1 month payback.",
+    "filepath": "src/pages/slides/Slide12UnitEconomics.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000013",
+    "position": 13,
+    "title": "The Team",
+    "description": "28-person team, 40+ combined years, backed by Delhi Angels and IAN.",
+    "filepath": "src/pages/slides/Slide13Team.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000014",
+    "position": 14,
+    "title": "Financial Projections",
+    "description": "FY26 ₹28 Cr GMV → FY27 ₹180 Cr → FY28 ₹720 Cr GMV.",
+    "filepath": "src/pages/slides/Slide14Financials.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000015",
+    "position": 15,
+    "title": "The Ask",
+    "description": "₹25 Crore Series A — use of funds breakdown.",
+    "filepath": "src/pages/slides/Slide15Ask.tsx",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c0n0n001-0001-0001-0001-000000000016",
+    "position": 16,
+    "title": "Why Now",
+    "description": "Why CONON, why now — PM Gati Shakti, 72M workers, UPI/ONDC, quick commerce.",
+    "filepath": "src/pages/slides/Slide16WhyNow.tsx",
+    "speakerNotes": ""
+  }
+]

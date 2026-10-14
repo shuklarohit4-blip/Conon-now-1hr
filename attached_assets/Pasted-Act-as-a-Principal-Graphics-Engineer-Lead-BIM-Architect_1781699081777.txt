@@ -1,0 +1,39 @@
+Act as a Principal Graphics Engineer, Lead BIM Architect, and Generative AI Wizard. I demand a completely magical, jaw-dropping "Conon Smart-Build 3D Engine". Flat 2D SVGs are completely unacceptable. You MUST build an interactive, browser-based 3D holographic rendering engine using `React Three Fiber` (Three.js) and Tailwind CSS.
+
+This is a disruptive Deep-Tech architecture module. Execute the following flawlessly:
+
+MODULE 1: Geo-Spatial Context (The Magic Input)
+- Replace basic dimension inputs with a "Geo-Pin & Plot Scanner".
+- UI: A glowing, futuristic search bar.
+- Default Simulation State: User enters "Shaheed Path, Lucknow". 
+- Action: Show a hyper-tech "Satellite Data Fetching" overlay. Display logs: 
+  * "Extracting Topography & Soil Data..."
+  * "Calculating Solar Path (Sun trajectory for UP region)..."
+  * "Analyzing local municipal setbacks..."
+
+MODULE 2: The "Vastu-Solar" Matrix (The Illusion of Deep Intelligence)
+- Before showing the building, render an interactive 3D Grid on the screen.
+- Simulate an "Environmental Stress Test".
+- Show a glowing yellow orb (representing the Sun) moving across the 3D grid in an arc (East to West).
+- Display dynamic text: "Aligning Master Bedroom to Nairutya (South-West) to block harsh afternoon heat... Placing Kitchen in Agneya (South-East) for morning UV purification."
+
+MODULE 3: Instant 3D BIM Generation (The Jaw-Dropper)
+- Render an interactive, rotatable 3D Wireframe of the house (G+1 or G+2 structure) using `React Three Fiber`.
+- The user MUST be able to click, drag, and rotate the 3D model 360 degrees.
+- Use a "Glass-Morph" or "Holographic Blue/Cyan" material for the walls so the user can see inside the house.
+- Add clickable hotspots on the 3D model (e.g., clicking a pillar pops up a label: "RCC Column - M25 Grade Concrete").
+
+MODULE 4: The Conon Auto-Procurement Node (Business Magic)
+- Beside the floating 3D model, create a glass-morphic real-time "Material Radar" panel.
+- As the 3D house is built on screen, the UI dynamically calculates and fetches "Live Local Inventory".
+- Simulation UI: 
+  * "Detecting nearest Conon Smart-Warehouse..."
+  * "🔥 450 Bags of Ultratech Cement locked at VIP Road Godown."
+  * "🔥 2 Metric Tons of Tata Tiscon TMT reserved."
+- Add a massive, pulsing "Deploy Conon Fleet & Start Construction (₹18.5 L)" button. 
+- Initialize context as Master Admin "ROHIIT SHUKLA" to ensure seamless integration with the Khata Ledger checkout flow.
+
+AESTHETICS & UX:
+- The background must be a deep space/dark navy gradient (like a Tony Stark Iron Man interface).
+- Animations must be buttery smooth (60fps). Use `framer-motion` for UI panels entering the screen.
+- Absolutely NO dead states. The transition from "Input" to "Solar Simulation" to "3D Hologram" must feel like pure magic.

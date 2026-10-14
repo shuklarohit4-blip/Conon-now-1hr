@@ -1,0 +1,25 @@
+1. TMT Bars (Thermo-Mechanically Treated)
+These are the gold standard for modern construction. They undergo a specialized heat treatment process (quenching and tempering) that creates a hard outer core and a soft inner core.  
+• Specifications: Commonly available in grades Fe415, Fe500, Fe550, and Fe600. (The number represents the yield strength in N/mm^2).  
+• Best For: All residential and commercial buildings, bridges, and high-rise structures.  
+• Key Feature: Excellent ductility, high weldability, and superior earthquake resistance.  
+2. TMX Bars (Thermex)
+TMX is an advanced version of TMT bars, often referred to as "new generation" bars. They are processed using German Thermex technology.  
+• Specifications: Similar to TMT but with a more refined grain structure and higher heat resistance.
+• Best For: Critical infrastructure in fire-prone zones or areas with extreme temperatures.  
+• Key Feature: Higher thermal stability (maintains strength even at 600°C).
+3. HSD Bars (High Strength Deformed)
+These bars are cold-twisted, which increases their strength but can introduce internal stresses.  
+• Specifications: Usually found in grades like Fe415.  
+• Best For: General reinforcement in smaller structures.
+• Key Feature: The ribs (deformations) on the surface provide a better bond with concrete compared to smooth bars.  
+4. Corrosion Resistant Steel (CRS)
+Also known as Epoxy-Coated or Galvanized Rebar, these are treated to withstand harsh environments.
+• Specifications: Often TMT bars treated with a fusion-bonded epoxy coating or chrome/copper additives in the alloy.  
+• Best For: Coastal areas, marine structures, and bridges over saltwater.
+• Key Feature: Prevents rust from expanding inside the concrete, which is the leading cause of structural "spalling."
+5. Mild Steel Plain Bars
+Unlike the others, these have a smooth surface without ribs or lugs.
+• Specifications: Grade Fe250.
+• Best For: Small-scale projects, dowels in expansion joints, or stirrups (though TMT is now preferred for stirrups too).
+• Key Feature: Highly ductile and easy to cut/bend, but has a weaker bond with concrete.

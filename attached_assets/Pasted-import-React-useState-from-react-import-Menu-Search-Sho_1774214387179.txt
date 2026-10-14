@@ -1,0 +1,212 @@
+import React, { useState } from 'react';
+import { 
+  Menu, Search, ShoppingBag, MapPin, 
+  ChevronDown, Truck, Plus, LayoutGrid, 
+  Palette, MessageSquare, User, PieChart, 
+  Gift, Users, ArrowUpRight, CheckCircle, 
+  Tag, Percent, Wallet, Info, X
+} from 'lucide-react';
+
+const BRAND = {
+  name: "CONON",
+  tagline: "INFRABUILT LIMITED",
+  colors: { primary: "#1b4366", accent: "#f59e0b", success: "#10b981" }
+};
+
+const App = () => {
+  const [activeTab, setActiveTab] = useState('shop'); 
+  const [showReferral, setShowReferral] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [view, setView] = useState('retail'); // 'retail' or 'wholesale'
+
+  // Pricing Logic
+  const retailPrice = 395;
+  const wholesalePrice = 372;
+  const bulkThreshold = 50;
+  const currentPrice = quantity >= bulkThreshold ? wholesalePrice : retailPrice;
+  const total = quantity * currentPrice;
+  const savings = quantity * (retailPrice - wholesalePrice);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-slate-200 p-2 font-sans text-slate-900">
+      <div className="w-full max-w-[420px] h-[900px] bg-white rounded-[60px] shadow-2xl overflow-hidden relative border-[14px] border-slate-900 flex flex-col">
+        
+        {/* HEADER */}
+        <div className="px-6 pt-12 pb-6 bg-white border-b border-slate-50">
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex items-center gap-2">
+              <div className="bg-blue-900 text-white p-2 rounded-xl"><Tag size={20}/></div>
+              <h1 className="font-black italic text-xl tracking-tighter text-blue-900 leading-none">CONON</h1>
+            </div>
+            <div className="flex gap-3">
+              <button onClick={() => setShowReferral(true)} className="bg-amber-50 text-amber-600 p-2.5 rounded-xl relative border border-amber-100 animate-pulse">
+                <Gift size={20} />
+              </button>
+              <div className="bg-blue-900 p-2.5 rounded-xl text-white relative shadow-lg">
+                <ShoppingBag size={20} />
+                <span className="absolute -top-1 -right-1 bg-amber-400 text-blue-900 text-[8px] font-black w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">1</span>
+              </div>
+            </div>
+          </div>
+
+          {/* BULK TOGGLE SYSTEM */}
+          <div className="bg-slate-100 p-1 rounded-2xl flex border border-slate-200 shadow-inner">
+            <button 
+              onClick={() => setView('retail')}
+              className={`flex-1 py-2 rounded-xl text-[10px] font-black uppercase transition flex items-center justify-center gap-2 ${view === 'retail' ? 'bg-white text-blue-900 shadow-sm' : 'text-slate-400'}`}
+            >
+              Retail
+            </button>
+            <button 
+              onClick={() => setView('wholesale')}
+              className={`flex-1 py-2 rounded-xl text-[10px] font-black uppercase transition flex items-center justify-center gap-2 ${view === 'wholesale' ? 'bg-white text-blue-900 shadow-sm' : 'text-slate-400'}`}
+            >
+              <Percent size={12} /> Wholesale (Bulk)
+            </button>
+          </div>
+        </div>
+
+        {/* CONTENT */}
+        <div className="flex-1 overflow-y-auto no-scrollbar pb-24 bg-slate-50/30">
+          <div className="p-6 space-y-6">
+            
+            {/* BULK DISCOUNT CARD */}
+            <div className="bg-white rounded-[40px] p-6 shadow-sm border border-slate-100">
+               <div className="flex justify-between items-start mb-6">
+                  <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-4xl shadow-inner">📦</div>
+                  <div className="text-right">
+                     <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest bg-blue-50 px-2 py-1 rounded-full">Cement (OPC 53)</span>
+                     <h2 className="text-lg font-black text-slate-800 mt-1">UltraTech Premium</h2>
+                     <p className="text-2xl font-black italic text-blue-900 mt-1">₹{currentPrice}<span className="text-[10px] not-italic text-slate-400 font-bold ml-1">/ Bag</span></p>
+                  </div>
+               </div>
+
+               {/* QUANTITY SLIDER */}
+               <div className="space-y-4 mb-6">
+                  <div className="flex justify-between items-center text-[10px] font-black uppercase italic">
+                     <span className="text-slate-400">Select Quantity</span>
+                     <span className={quantity >= bulkThreshold ? 'text-emerald-500' : 'text-blue-500'}>
+                        {quantity} Bags
+                     </span>
+                  </div>
+                  <input 
+                    type="range" 
+                    min="1" 
+                    max="500" 
+                    value={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value))}
+                    className="w-full h-2 bg-slate-100 rounded-full appearance-none cursor-pointer accent-blue-900"
+                  />
+                  
+                  {/* UNLOCK PROGRESS */}
+                  {quantity < bulkThreshold ? (
+                    <div className="bg-blue-50 p-3 rounded-2xl flex items-center gap-3">
+                       <Info size={14} className="text-blue-600" />
+                       <p className="text-[9px] font-bold text-blue-700 uppercase">
+                          Add {bulkThreshold - quantity} more bags to unlock <span className="font-black italic">Wholesale Price (₹372)</span>
+                       </p>
+                    </div>
+                  ) : (
+                    <div className="bg-emerald-50 p-3 rounded-2xl flex items-center gap-3 border border-emerald-100">
+                       <CheckCircle size={14} className="text-emerald-600" />
+                       <p className="text-[9px] font-black text-emerald-700 uppercase italic leading-none">
+                          Wholesale Pricing Unlocked!<br/>
+                          <span className="text-[7px] font-bold opacity-70">Total Savings: ₹{savings.toLocaleString()}</span>
+                       </p>
+                    </div>
+                  )}
+               </div>
+
+               <button className="w-full bg-blue-900 text-white py-4 rounded-[25px] font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2">
+                  Add to Project Cart <ArrowUpRight size={16}/>
+               </button>
+            </div>
+
+            {/* WALLET & REWARDS PREVIEW */}
+            <div className="bg-slate-900 rounded-[40px] p-6 text-white relative overflow-hidden">
+               <div className="relative z-10 flex justify-between items-center">
+                  <div>
+                     <p className="text-[9px] font-black text-amber-400 uppercase tracking-[0.2em] mb-1">CONON Gold Wallet</p>
+                     <h3 className="text-2xl font-black italic">₹1,250</h3>
+                     <button className="mt-3 text-[9px] font-black uppercase text-white/60 border-b border-white/20 pb-0.5">View Transaction History</button>
+                  </div>
+                  <Wallet size={48} className="text-white/10" />
+               </div>
+               <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-amber-400/10 rounded-full blur-2xl"></div>
+            </div>
+
+            {/* REFERRAL PROMO BOX */}
+            <div className="bg-emerald-50 border-2 border-emerald-100 rounded-[40px] p-6 flex items-center justify-between">
+               <div className="flex-1">
+                  <h4 className="font-black text-emerald-900 text-sm italic mb-1 uppercase">Build with Neighbors</h4>
+                  <p className="text-[9px] font-bold text-emerald-700 uppercase leading-none opacity-80">Refer a site near you and get ₹2000 Credit on their first order.</p>
+               </div>
+               <button onClick={() => setShowReferral(true)} className="bg-emerald-600 text-white p-3 rounded-2xl shadow-lg shadow-emerald-600/20">
+                  <Users size={20} />
+               </button>
+            </div>
+
+          </div>
+        </div>
+
+        {/* REFERRAL OVERLAY (MODAL) */}
+        {showReferral && (
+          <div className="absolute inset-0 bg-slate-900/95 z-[100] flex flex-col p-8 animate-in fade-in zoom-in duration-300">
+             <div className="flex justify-between items-center mb-10 text-white">
+                <h2 className="text-xl font-black italic uppercase tracking-widest">Refer & Earn</h2>
+                <button onClick={() => setShowReferral(false)} className="p-2 bg-white/10 rounded-full"><X size={20}/></button>
+             </div>
+             
+             <div className="flex-1 flex flex-col items-center justify-center text-center">
+                <div className="w-24 h-24 bg-amber-400 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(245,158,11,0.4)] mb-8">
+                   <Gift size={40} className="text-blue-900" />
+                </div>
+                <h3 className="text-white text-2xl font-black italic leading-none mb-4">REFER A SITE, <br/>GET REWARDED.</h3>
+                <p className="text-slate-400 text-xs font-bold uppercase leading-relaxed mb-10">
+                   When your neighbor starts construction using your link, we credit ₹2000 to your CONON Gold Wallet.
+                </p>
+
+                <div className="w-full bg-white/5 border border-white/10 p-6 rounded-[35px]">
+                   <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-3">Your Unique Code</p>
+                   <div className="flex gap-2">
+                      <div className="flex-1 bg-white text-blue-900 p-4 rounded-2xl font-black text-xl tracking-widest shadow-inner">
+                         CONON500
+                      </div>
+                      <button className="bg-blue-600 text-white px-6 rounded-2xl font-black text-[10px] uppercase">Copy</button>
+                   </div>
+                </div>
+             </div>
+
+             <button className="w-full bg-amber-400 text-blue-900 py-5 rounded-[25px] font-black text-sm uppercase tracking-widest shadow-2xl shadow-amber-400/30">
+                Share Link via WhatsApp
+             </button>
+          </div>
+        )}
+
+        {/* BOTTOM NAVIGATION */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-white/95 backdrop-blur-md border-t border-slate-50 flex items-center justify-around px-8 pb-6 z-20">
+          <div onClick={() => setActiveTab('shop')} className={`flex flex-col items-center gap-1 ${activeTab === 'shop' ? 'text-blue-900' : 'text-slate-300'}`}>
+             <LayoutGrid size={24} strokeWidth={activeTab === 'shop' ? 3 : 2} /><span className="text-[8px] font-black uppercase">Home</span>
+          </div>
+          <div className="flex flex-col items-center gap-1 text-slate-300">
+             <Palette size={24} /><span className="text-[8px] font-black uppercase">Design</span>
+          </div>
+          <div className="w-16 h-16 bg-blue-900 rounded-[22px] -mt-12 border-[6px] border-white shadow-2xl flex items-center justify-center text-white">
+             <Plus size={28} />
+          </div>
+          <div onClick={() => setActiveTab('rewards')} className={`flex flex-col items-center gap-1 ${activeTab === 'rewards' ? 'text-blue-900' : 'text-slate-300'}`}>
+             <Gift size={24} strokeWidth={activeTab === 'rewards' ? 3 : 2} /><span className="text-[8px] font-black uppercase">Rewards</span>
+          </div>
+          <div className="flex flex-col items-center text-slate-300">
+             <User size={24} /><span className="text-[8px] font-black uppercase">Account</span>
+          </div>
+        </div>
+      </div>
+
+      <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
+    </div>
+  );
+};
+
+export default App;
+

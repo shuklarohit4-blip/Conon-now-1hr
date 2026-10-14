@@ -1,0 +1,29 @@
+CRITICAL SYSTEM COMPILATION: Act as a Principal Full-Stack Architect and QA Lead. We have injected multiple features and data structures into this app. I now need you to perform a complete codebase sweep, resolve all hidden bugs, fix broken layouts, and compile the final production-ready frontend for the Conon App.
+
+Execute this Master Checklist flawlessly without removing any existing valid features:
+
+MODULE 1: STRUCTURAL INTEGRITY & Z-INDEX (The Layout Lock)
+- Sweep the main layout file (App/Home). 
+- ENFORCE the top navigation header to be strictly fixed: `<header className="fixed top-0 left-0 w-full z-[9999] bg-white shadow-md pt-safe pb-2">`.
+- ENFORCE the invisible spacer block immediately below the header: `<div className="h-[100px] w-full invisible pointer-events-none"></div>` to prevent any content from overlapping or hiding under the header.
+
+MODULE 2: VISUAL ASSET ENFORCEMENT (Zero Broken Images)
+- Scan all `<img>` tags across Categories, Product Feeds, and Rental Machines.
+- Verify that NO `source.unsplash.com` URLs exist. 
+- Ensure the `<CononImage>` fallback component (with `lucide-react` icons or `placehold.co`) is actively wrapping every single product and category image. If an image link is empty or fails, it MUST gracefully show the branded placeholder, never a broken icon.
+
+MODULE 3: COMPONENT HIERARCHY & FLOW
+- Enforce the strict vertical rendering order on the Home Dashboard:
+  1. Fixed Header (with Search/Location).
+  2. "Shop by Category" Grid (Must include 'TMT Steel' and 'Sand/Morang').
+  3. "Heavy Machines on Rent" Section (Dark theme, aspect-video images, 'Book for Rent' buttons).
+  4. AI Action Buttons (Voice Order / AR Scan).
+  5. General Product Feed (Tata Tiscon, Cement, etc.).
+- Ensure there is consistent vertical spacing (`gap-8` or `my-8`) between these distinct sections.
+
+MODULE 4: STATE MANAGEMENT & CONSOLE ERRORS
+- Check the React states (`useState`, `useEffect`). Ensure no infinite re-rendering loops are happening.
+- Ensure buttons like "Add to Cart" or "Book for Rent" have active `onClick` handlers that update the state or show a success Toast (e.g., "Added to Cart" or "Order Sent to Master Admin ROHIIT SHUKLA") instead of being dead components.
+- Check mobile responsiveness: Ensure horizontal scrolling lists (like Categories or Rentals) use `overflow-x-auto hide-scrollbar` so they swipe smoothly on touch screens.
+
+Clean up any unused imports, format the code, and output the ultimate, bug-free, premium version of the application.

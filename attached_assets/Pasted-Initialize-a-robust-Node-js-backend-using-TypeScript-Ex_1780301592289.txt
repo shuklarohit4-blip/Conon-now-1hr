@@ -1,0 +1,28 @@
+Initialize a robust Node.js backend using TypeScript, Express, and Prisma ORM with PostgreSQL for "Conon", a 1-hour construction material delivery platform.
+
+Please execute the following steps:
+
+1. Project Setup & Architecture:
+   - Initialize a Node.js project.
+   - Install and configure TypeScript, Express.js, and Socket.io.
+   - Set up Prisma ORM and configure it to connect to a PostgreSQL database.
+   - Create a clean, modular folder structure (e.g., /src/controllers, /src/routes, /src/services, /src/prisma).
+
+2. Database Schema Design (schema.prisma):
+   Create the following core models:
+   - `User`: Include fields for authentication and roles (Enum: CUSTOMER, CONTRACTOR, DRIVER, ADMIN).
+   - `Material`: Fields for name, description, `unitType` (e.g., Tons, Bags, SqFt), `basePrice`, and a boolean for `dynamicPricingEnabled`.
+   - `Order`: Fields for `orderStatus` (Enum: PENDING, LOADED, IN_TRANSIT, DELIVERED), total amounts, `deliveryFee`, `labourFee`, `isB2B` flag, and `gstNumber`.
+   - `KhataLedger`: Specifically for B2B contractors, tracking `contractorId`, `creditLimit`, and `outstandingBalance`.
+
+3. Core API Implementation:
+   - Set up essential middleware: CORS, Helmet (for security), and a centralized error handler.
+   - Create a robust API endpoint `POST /api/orders/checkout`: This route should receive an array of materials, calculate the final bill (including dynamic delivery and labour/unloading fees), and create the order transaction safely in the database.
+
+4. Real-Time Tracking Engine (Socket.io):
+   - Attach Socket.io to the Express server.
+   - Implement a secure WebSocket connection.
+   - Create a namespace or event listener `driver-location-update` where the delivery vehicle sends live GPS coordinates.
+   - Create an event emitter `live-truck-tracking` to broadcast those coordinates to the customer waiting for their 1-hour delivery.
+
+Please generate the `schema.prisma` file, the main `server.ts` entry point, and the order controller logic to kickstart this backend.

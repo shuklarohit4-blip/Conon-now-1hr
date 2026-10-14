@@ -1,0 +1,31 @@
+Act as a Principal Mobile UX Architect and Fleet Logistics Expert. I need you to build the "Conon Fleet - Driver Partner App". The target users are truck and mini-truck (Tata Ace) drivers in India. The UI must be highly visible under sunlight, use extremely large tap targets, and require zero typing. 
+
+You MUST build this fully functional React/Tailwind frontend module with Context API state management. NO dead buttons are allowed.
+
+Please implement the following modules seamlessly:
+
+MODULE 1: Global State & "Hindi-First" Localization
+- Wrap the app in a DriverContext holding state for dutyStatus (online/offline), activeTrip (null or trip object), and walletEarnings.
+- Implement a permanent toggle for "English | हिंदी" at the top. Default it to Hindi style (e.g., "Start Trip" -> "Yatra Shuru Karein").
+- Install a Toast notification library. Every action must have a visual and simulated audio feedback (Success/Error).
+
+MODULE 2: The "Duty & Dispatch" Dashboard
+- Create a massive, glowing Toggle Button covering the top half of the screen: "Go Online" (Red when offline, Green when online).
+- When Online, show a radar/pulsing animation simulating "Waiting for orders...".
+- WebSockets Simulation: Add a floating "Test Dispatch" button. Clicking it MUST trigger a loud, full-screen overlay (Uber-style) flashing "🚨 New Delivery Request: 50 Bags Cement. Earn: ₹450". Add a massive swipe-to-accept slider or a huge "ACCEPT" button.
+
+MODULE 3: The 3-Step Trip Execution Flow
+Once an order is accepted, switch the UI to "Active Trip" mode with 3 sequential steps:
+1. Pickup State: Show warehouse map location and a massive button: "Navigate to Pickup". Once clicked, reveal a "Scan QR to Load Material" button. Clicking it simulates scanning and moves to Step 2.
+2. Transit State: Show customer site map location. Provide a big "Navigate to Site" button. Below it, a button: "Arrived at Location".
+3. Drop & Proof of Delivery (PoD): This is CRITICAL. To complete the trip, the driver must click "Upload Unloaded Material Photo" (simulate a camera modal) AND "Enter Customer OTP". Only when these are done, show a "Complete Trip" button.
+
+MODULE 4: Instant Earnings Wallet (Kamai)
+- Once the trip is completed, instantly route the user to a success screen with falling confetti.
+- Display "Trip Successful! ₹450 added to your wallet."
+- Build the "My Kamai" (Earnings) tab showing today's total. Include a "Withdraw to Bank" button that instantly zeroes out the balance and shows a success toast.
+
+UI STRICT RULES:
+- Typography must be bold and large (Minimum 18px for standard text, 24px for actionable text).
+- Use distinct color coding: Green for success/proceed, Red for offline/danger, Yellow for warnings.
+- The flow from "Going Online" -> "Accepting Order" -> "Uploading PoD" -> "Getting Paid" MUST work flawlessly using React State without any page reloads.

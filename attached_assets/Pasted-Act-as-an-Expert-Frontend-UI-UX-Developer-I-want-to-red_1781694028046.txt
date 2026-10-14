@@ -1,0 +1,32 @@
+Act as an Expert Frontend UI/UX Developer. I want to redesign the product listing feed in the "Conon" app to exactly replicate the highly converting, mobile-first layout seen in top e-commerce apps like Amazon (as referenced in my provided images).
+
+Please create a `ProductFeed` and a reusable `ProductCard` component using React/Tailwind CSS with the following strict visual hierarchy:
+
+1. Product Image & Overlays:
+   - Full-width, high-quality product image container (aspect ratio similar to 4:3 or 1:1).
+   - Bottom-left corner of the image: Add a small, circular icon for "AR / 3D View" (like the cube icon in the reference).
+   - Below the image, add a clickable small text link: "+2 other sizes/grades" (e.g., for different cement grades or steel thickness).
+
+2. Tags & Product Title:
+   - Add a subtle text tag above the title: "Sponsored" or "Conon Assured" (in light gray).
+   - The Product Title must be large, using a clean sans-serif font, spanning 2-3 lines. (Mock text: "UltraTech Premium Cement 50kg Bag, Weather Plus, Waterproofing, Solid Build").
+   - Below the title, add a Material Tag like a small badge (e.g., [ Cement ] or [ TMT Steel ]).
+
+3. Ratings & Reviews:
+   - Show a star rating system (e.g., 4.5 out of 5 stars in yellow/orange) followed by the total review count in brackets: "4.5 ⭐⭐⭐⭐ (991)".
+
+4. Pricing & Offers (CRITICAL):
+   - Huge, bold text for the current selling price: "₹380".
+   - Right next to it, smaller grey text with a strikethrough for the MRP: "M.R.P: ₹450".
+   - Next to MRP, show the discount percentage in dark grey: "(15% off)".
+   - Below the price, add a Bank/Khata Offer line with a green background highlight: "[Buy for ₹360] with Conon Khata or HDFC Bank".
+
+5. Delivery ETA & Services:
+   - Add bold text for fast delivery: "FREE delivery as soon as **Today, 2:00 PM (1-Hour)**".
+   - Add a subtle sub-text for additional services: "Service: Free Unloading / Labour".
+
+6. Action Buttons:
+   - Add a massive, full-width, brightly colored button: "Add to cart" (use a vibrant yellow or Conon's primary brand color). Ensure it has rounded corners and a slight shadow.
+   - For items with variations, replace it with a white button with a black border: "See options".
+
+Please build this component and map it to an array of dummy construction materials so I can see the exact layout. Ensure the spacing, font weights, and layout perfectly match a premium mobile shopping experience.

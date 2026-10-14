@@ -1,0 +1,184 @@
+import React, { useState } from 'react';
+import { 
+  User, ShieldCheck, Store, HardHat, 
+  ArrowRight, Smartphone, Lock, LayoutDashboard,
+  Package, Truck, PieChart, LogOut, Bell, 
+  Upload, FileText, CheckCircle, Clock, AlertCircle, X,
+  Plus, Minus, Edit3, Eye, EyeOff, Search, Settings
+} from 'lucide-react';
+
+// --- INITIAL INVENTORY DATA ---
+const INITIAL_CATEGORIES = [
+  { id: 1, name: 'Cement', img: '📦', bg: '#f0f9ff', price: 385, active: true },
+  { id: 2, name: 'Tiling', img: '🧱', bg: '#fdf2f8', price: 45, active: true },
+  { id: 3, name: 'Painting', img: '🎨', bg: '#f0fdf4', price: 4500, active: true },
+  { id: 4, name: 'Water Proofing', img: '💧', bg: '#fff7ed', price: 1200, active: false },
+  { id: 5, name: 'Plywood & MDF', img: '🪵', bg: '#fef2f2', price: 85, active: true },
+  { id: 6, name: 'Fevicol', img: '🧪', bg: '#f5f3ff', price: 210, active: true },
+  { id: 7, name: 'Wires', img: '🔌', bg: '#ecfdf5', price: 1450, active: true },
+  { id: 8, name: 'Switches', img: '🔘', bg: '#fff1f2', price: 95, active: true },
+];
+
+const App = () => {
+  const [userRole, setUserRole] = useState(null); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isVerified, setIsVerified] = useState('approved'); // Simulated state
+  const [inventory, setInventory] = useState(INITIAL_CATEGORIES);
+  const [editingItem, setEditingItem] = useState(null);
+
+  // --- ACTIONS ---
+  const toggleStatus = (id) => {
+    setInventory(prev => prev.map(item => 
+      item.id === id ? { ...item, active: !item.active } : item
+    ));
+  };
+
+  const updatePrice = (id, newPrice) => {
+    setInventory(prev => prev.map(item => 
+      item.id === id ? { ...item, price: parseInt(newPrice) || 0 } : item
+    ));
+    setEditingItem(null);
+  };
+
+  // --- LOGIN VIEW ---
+  const LoginView = () => (
+    <div className="flex-1 flex flex-col p-8 justify-center animate-in fade-in duration-500 bg-slate-50">
+      <div className="text-center mb-10">
+        <h1 className="text-4xl font-black italic text-blue-900 tracking-tighter">CONON</h1>
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Construction Ecosystem</p>
+      </div>
+      <div className="space-y-4">
+        {[
+          { id: 'customer', title: 'Builder Portal', icon: <HardHat />, color: 'bg-blue-600' },
+          { id: 'vendor', title: 'Vendor Portal', icon: <Store />, color: 'bg-emerald-600' },
+          { id: 'admin', title: 'Admin Command', icon: <ShieldCheck />, color: 'bg-slate-900' }
+        ].map((role) => (
+          <button key={role.id} onClick={() => { setUserRole(role.id); setIsLoggedIn(true); }}
+            className="w-full bg-white border-2 border-slate-100 p-6 rounded-[30px] flex items-center gap-5 hover:border-blue-500 transition-all shadow-sm active:scale-95 text-left">
+            <div className={`${role.color} text-white p-3 rounded-2xl shadow-lg`}>{role.icon}</div>
+            <div><h3 className="font-black text-slate-800 text-sm uppercase">{role.title}</h3></div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
+  // --- VENDOR INVENTORY EDITOR ---
+  const VendorDashboard = () => (
+    <div className="flex-1 flex flex-col animate-in slide-in-from-right duration-300">
+      {/* Header */}
+      <div className="p-6 bg-emerald-700 text-white rounded-b-[45px] shadow-xl">
+        <div className="flex justify-between items-center mb-6 pt-4">
+           <div>
+              <h2 className="font-black italic text-xl">My Store</h2>
+              <p className="text-[10px] font-bold opacity-70 uppercase tracking-widest">Sharma Hardware & Bricks</p>
+           </div>
+           <button onClick={() => setIsLoggedIn(false)} className="p-2 bg-white/10 rounded-full"><LogOut size={18}/></button>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+           <div className="bg-white/10 p-4 rounded-3xl backdrop-blur-sm border border-white/5">
+              <p className="text-[9px] font-black opacity-60 uppercase">Today's Orders</p>
+              <p className="text-xl font-black">24</p>
+           </div>
+           <div className="bg-white/10 p-4 rounded-3xl backdrop-blur-sm border border-white/5">
+              <p className="text-[9px] font-black opacity-60 uppercase">Today's Revenue</p>
+              <p className="text-xl font-black">₹84k</p>
+           </div>
+        </div>
+      </div>
+
+      {/* Inventory Management Area */}
+      <div className="flex-1 overflow-y-auto px-5 py-6 no-scrollbar">
+        <div className="flex justify-between items-center mb-6 px-1">
+           <h3 className="font-black text-[11px] text-slate-400 uppercase tracking-widest italic">Inventory Status</h3>
+           <div className="bg-slate-100 p-2 rounded-xl text-slate-500"><Settings size={16}/></div>
+        </div>
+
+        <div className="grid grid-cols-4 gap-x-2 gap-y-8">
+          {inventory.map((item) => (
+            <div key={item.id} className="relative flex flex-col items-center">
+              {/* Category Card */}
+              <div 
+                className={`w-20 h-20 rounded-2xl flex items-center justify-center shadow-sm border-2 transition-all relative ${item.active ? 'border-emerald-100' : 'border-slate-100 opacity-40 grayscale'}`}
+                style={{ backgroundColor: item.bg }}
+              >
+                <span className="text-3xl">{item.img}</span>
+                {/* Status Indicator */}
+                <div className={`absolute -top-1 -right-1 w-5 h-5 rounded-full border-2 border-white flex items-center justify-center ${item.active ? 'bg-emerald-500' : 'bg-slate-400'}`}>
+                   {item.active ? <CheckCircle size={10} className="text-white"/> : <X size={10} className="text-white"/>}
+                </div>
+              </div>
+
+              {/* Label & Price Control */}
+              <div className="text-center mt-2 w-full">
+                <p className="text-[9px] font-black text-slate-700 leading-tight uppercase tracking-tighter truncate">{item.name}</p>
+                <p className="text-[10px] font-black text-emerald-600 mt-0.5 italic">₹{item.price}</p>
+              </div>
+
+              {/* Action Buttons Overlay (on tap/hover simulation) */}
+              <div className="flex gap-1 mt-2">
+                 <button onClick={() => setEditingItem(item)} className="p-1.5 bg-slate-100 rounded-lg text-slate-500 hover:bg-emerald-50 hover:text-emerald-600"><Edit3 size={12}/></button>
+                 <button onClick={() => toggleStatus(item.id)} className={`p-1.5 rounded-lg ${item.active ? 'bg-rose-50 text-rose-500' : 'bg-emerald-50 text-emerald-600'}`}>
+                    {item.active ? <EyeOff size={12}/> : <Eye size={12}/>}
+                 </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Actions */}
+      <div className="p-6">
+         <button className="w-full bg-slate-900 text-white py-4 rounded-3xl font-black text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-3">
+            <Plus size={18}/> Add New Product
+         </button>
+      </div>
+
+      {/* PRICE EDITOR MODAL */}
+      {editingItem && (
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-end justify-center animate-in slide-in-from-bottom">
+           <div className="bg-white w-full rounded-t-[50px] p-8 pb-12">
+              <div className="flex justify-between items-center mb-6">
+                 <h4 className="font-black text-slate-800 italic uppercase">Update {editingItem.name} Price</h4>
+                 <button onClick={() => setEditingItem(null)} className="p-2 bg-slate-100 rounded-full"><X size={20}/></button>
+              </div>
+              <div className="flex items-center gap-4 bg-slate-50 p-6 rounded-3xl border border-slate-100 mb-8">
+                 <span className="text-2xl font-black text-slate-400">₹</span>
+                 <input 
+                   autoFocus
+                   type="number" 
+                   defaultValue={editingItem.price} 
+                   id="new-price-input"
+                   className="flex-1 bg-transparent text-4xl font-black italic outline-none text-emerald-600"
+                 />
+              </div>
+              <button 
+                onClick={() => updatePrice(editingItem.id, document.getElementById('new-price-input').value)}
+                className="w-full bg-emerald-600 text-white py-5 rounded-[25px] font-black text-sm uppercase tracking-widest shadow-2xl shadow-emerald-600/30"
+              >
+                Save New Price
+              </button>
+           </div>
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-slate-200 p-2 font-sans overflow-hidden">
+      <div className="w-full max-w-[420px] h-[880px] bg-white rounded-[60px] shadow-2xl overflow-hidden relative border-[12px] border-slate-900 flex flex-col">
+        {!isLoggedIn ? <LoginView /> : (
+          <>
+            {userRole === 'vendor' && <VendorDashboard />}
+            {userRole === 'customer' && <div className="p-20 text-center font-black">CUSTOMER PORTAL<br/><button onClick={()=>setIsLoggedIn(false)} className="mt-4 p-2 bg-slate-100 rounded-xl">Back</button></div>}
+            {userRole === 'admin' && <div className="p-20 text-center font-black">ADMIN PORTAL<br/><button onClick={()=>setIsLoggedIn(false)} className="mt-4 p-2 bg-slate-100 rounded-xl">Back</button></div>}
+          </>
+        )}
+      </div>
+      <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
+    </div>
+  );
+};
+
+export default App;
+

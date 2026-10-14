@@ -1,0 +1,40 @@
+Act as a Staff Frontend Architect and Lead UI/UX Engineer. I need to replace the basic product modal with an elite, full-screen Amazon-style Product Detail View for the Conon App. The implementation must be 100% bug-free and mathematically precise. 
+
+Follow this strict architectural blueprint:
+
+MODULE 1: THE RE-ENGINEERED DATA MODEL (Multiple Static Images)
+You MUST overwrite the existing `mockProducts` array. Every product object must strictly follow this enhanced structure with hardcoded, highly reliable static image URLs (no more broken random placeholders). Inject this model:
+```javascript
+const mockProducts = [
+  {
+    id: "p1",
+    name: "UltraTech Premium OPC 53 Grade Cement",
+    brand: "UltraTech Cement",
+    category: "Cement",
+    price: 410,
+    mrp: 490,
+    discount: "16% OFF",
+    unit: "50 kg bag",
+    deliveryTime: "60 mins",
+    // 3 Distinct high-res construction images representing the item context
+    images: [
+      "[https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80)",
+      "[https://images.unsplash.com/photo-1590059129598-14470b8c6e26?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1590059129598-14470b8c6e26?auto=format&fit=crop&w=600&q=80)",
+      "[https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80)"
+    ],
+    features: [
+      "IS 12269 Certified OPC 53 Grade",
+      "High early compressive strength for slabs & pillars",
+      "Optimal setting time with low water-cement ratio requirement"
+    ],
+    specifications: {
+      "Weight": "50 KG",
+      "Grade": "OPC 53 Grade",
+      "Type": "Ordinary Portland Cement",
+      "Best For": "Raft Foundations, Columns, Beams, and Heavy Slabs",
+      "Manufacturer": "UltraTech Cement Ltd."
+    },
+    description: "UltraTech OPC 53 is a high-strength concrete specialist cement designed specifically for structural load-bearing components like high-rise pillars, slabs, and heavy foundations. Engineered for rapid curing and maximum structural integrity under extreme load conditions in the UP/Lucknow region."
+  }
+  // Apply this exact rich schema structure with relevant text/images to all other items (TMT Steel, Sand, etc.)
+];

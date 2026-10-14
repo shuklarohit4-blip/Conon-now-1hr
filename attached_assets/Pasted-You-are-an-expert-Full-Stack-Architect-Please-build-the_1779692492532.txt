@@ -1,0 +1,36 @@
+You are an expert Full-Stack Architect. Please build the "Ultimate Master Admin Dashboard" for CONON Infrabuilt, a B2B 1-hour construction material delivery startup. 
+
+Tech Stack: React, Node.js, Express, SQLite, Tailwind CSS (Safety Yellow #FBBF24, Dark Gray #1F2937, Clean White), Recharts (for data visualization), and a CSV export library (like json2csv or react-csv). 
+The layout should be a highly professional, desktop-optimized dashboard with a persistent left sidebar.
+
+Implement the following comprehensive modules:
+
+1. God-Eye Dashboard & Analytics
+- Metric Cards: Total Daily Revenue, Active Orders, SLA Breaches, and Total Outstanding Khata Credit.
+- Visual Charts: Use Recharts to create a 7-day bar chart of "Orders Completed" and a line chart of "Daily Revenue".
+- Live Fleet Map: A map widget (Leaflet.js) showing mock real-time coordinates of delivery vehicles.
+
+2. Order Operations & WhatsApp Hooks
+- Live Order Table: Columns for Order ID, Site Name, Items, Status, and SLA countdown timer.
+- SLA Alerts: Rows turn visually red if the 15-min vendor loading or 60-min delivery SLA is breached.
+- "Malba Hatao" Badge: Highlight orders requesting scrap pickup.
+- WhatsApp Action Button: Add a "Send WhatsApp Update" mock button next to orders to trigger delivery notifications to the contractor.
+
+3. 'Conon Khata' (Finance) & CA Export
+- Ledger View: Track total credit limit, utilized amount, and pending dues per contractor.
+- Record Payments: A modal to enter received payments (Cash/UPI/RTGS) to clear balances.
+- 1-Click GST/CSV Export: A button to "Export Monthly Sales Report" that generates a CSV file containing all completed orders, tax amounts, and transaction dates for CA compliance.
+
+4. Fleet & Driver Payouts (New)
+- Driver Ledger: Track 'Per-Trip' earnings for local tractor/loader drivers.
+- Settle Payouts: A feature to mark driver weekly payments as "Cleared".
+
+5. Catalog & Live "Mandi" Rates
+- Rate Controller: A quick-edit form to instantly update wholesale prices of Cement, TMT Steel, and Sand (syncs with the user app ticker).
+- Inventory & Rentals: Toggles for marking items Out-of-Stock and a section to manage heavy equipment daily rentals.
+
+Execution Plan:
+1. Expand the SQLite schema to handle billing, driver payouts, and historical ledger entries.
+2. Build robust backend APIs, including the CSV generation route.
+3. Construct the React frontend with Recharts for data visualization.
+4. Ensure the UI feels like a premium SaaS product with clean padding, sharp contrasts, and intuitive table filtering.

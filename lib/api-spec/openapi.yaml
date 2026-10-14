@@ -1,0 +1,839 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: CONON Infrabuilt API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: materials
+    description: Construction materials by stage
+  - name: cart
+    description: Cart management
+  - name: services
+    description: Service bookings
+  - name: mandi
+    description: Real-time mandi prices
+  - name: orders
+    description: Orders and delivery
+  - name: Auth
+    description: Browser and mobile authentication endpoints.
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /materials:
+    get:
+      operationId: getMaterials
+      tags: [materials]
+      summary: Get materials filtered by construction stage
+      parameters:
+        - name: stage
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [foundation, walls, roofing, finishing, miscellaneous, all]
+      responses:
+        "200":
+          description: List of materials
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Material"
+
+  /cart:
+    get:
+      operationId: getCart
+      tags: [cart]
+      summary: Get cart items grouped by category
+      responses:
+        "200":
+          description: Cart with items grouped by category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+    post:
+      operationId: addToCart
+      tags: [cart]
+      summary: Add item to cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddToCartRequest"
+      responses:
+        "200":
+          description: Updated cart
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+
+  /cart/{itemId}:
+    delete:
+      operationId: removeFromCart
+      tags: [cart]
+      summary: Remove item from cart
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Updated cart
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+    patch:
+      operationId: updateCartItem
+      tags: [cart]
+      summary: Update cart item quantity
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCartItemRequest"
+      responses:
+        "200":
+          description: Updated cart
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+
+  /services:
+    get:
+      operationId: getServices
+      tags: [services]
+      summary: Get available services
+      responses:
+        "200":
+          description: List of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Service"
+    post:
+      operationId: bookService
+      tags: [services]
+      summary: Book a service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookServiceRequest"
+      responses:
+        "200":
+          description: Service booking confirmation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceBooking"
+
+  /mandi/prices:
+    get:
+      operationId: getMandiPrices
+      tags: [mandi]
+      summary: Get live mandi prices for raw materials
+      responses:
+        "200":
+          description: Current mandi prices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MandiPrice"
+
+  /orders:
+    get:
+      operationId: getOrders
+      tags: [orders]
+      summary: Get all orders
+      responses:
+        "200":
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+    post:
+      operationId: placeOrder
+      tags: [orders]
+      summary: Place an order from cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlaceOrderRequest"
+      responses:
+        "200":
+          description: Order confirmation with delivery tracking
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  /orders/checkout:
+    post:
+      operationId: checkoutOrder
+      tags: [orders]
+      summary: Calculate the final itemized bill and place an order directly from a list of materials
+      description: >
+        Server-authoritative checkout. Accepts a list of materials, computes the
+        bill (subtotal, dynamic delivery fee, labour/unloading fee, and GST for
+        B2B invoices), and creates the order. For B2B orders with a contractorId,
+        the order is charged against the contractor's Khata credit ledger inside a
+        single database transaction and is rejected if it exceeds available credit.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutRequest"
+      responses:
+        "200":
+          description: Order confirmation with itemized bill and delivery tracking
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutResponse"
+        "402":
+          description: B2B order exceeds the contractor's available Khata credit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreditExceededError"
+
+  /auth/user:
+    get:
+      tags: [Auth]
+      operationId: getCurrentAuthUser
+      summary: Get the currently authenticated user
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+        - $ref: '#/components/parameters/SessionCookie'
+      responses:
+        '200':
+          description: Auth status resolved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthUserEnvelope'
+  /login:
+    get:
+      tags: [Auth]
+      operationId: beginBrowserLogin
+      summary: Start the browser OIDC login flow
+      parameters:
+        - name: returnTo
+          in: query
+          required: false
+          description: Relative path to redirect to after login (must start with `/`). Defaults to `/`.
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect to the OIDC authorization endpoint.
+  /callback:
+    get:
+      tags: [Auth]
+      operationId: handleBrowserLoginCallback
+      summary: Complete the browser OIDC login flow
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: iss
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uri
+      responses:
+        '302':
+          description: Redirect to the `returnTo` path on success (defaults to `/`) or `/api/login` on failure.
+  /logout:
+    get:
+      tags: [Auth]
+      operationId: logoutBrowserSession
+      summary: Clear the session and begin OIDC logout
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+        - $ref: '#/components/parameters/SessionCookie'
+      responses:
+        '302':
+          description: Redirect to the OIDC provider logout URL.
+  /mobile-auth/token-exchange:
+    post:
+      tags: [Auth]
+      operationId: exchangeMobileAuthorizationCode
+      summary: Exchange a mobile OIDC code for a session token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MobileTokenExchangeRequest'
+      responses:
+        '200':
+          description: Session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileTokenExchangeSuccess'
+        '400':
+          description: Missing or invalid required fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          description: Token did not contain usable claims.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Token exchange failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /mobile-auth/logout:
+    post:
+      tags: [Auth]
+      operationId: logoutMobileSession
+      summary: Delete a mobile session token
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+      responses:
+        '200':
+          description: Logout processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogoutSuccess'
+
+components:
+  parameters:
+    AuthorizationSessionHeader:
+      name: Authorization
+      in: header
+      required: false
+      description: Opaque session token — `Bearer <sid>`.
+      schema:
+        type: string
+    SessionCookie:
+      name: sid
+      in: cookie
+      required: false
+      description: Browser session cookie.
+      schema:
+        type: string
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required: [status]
+
+    Material:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+          enum: [cement, steel, bricks, sand, aggregate, tiles, paint, plumbing, electrical, finishing, shuttering, hardware, safety, tools, wood]
+        stage:
+          type: string
+          enum: [foundation, walls, roofing, finishing, all]
+        price:
+          type: number
+        unit:
+          type: string
+        description:
+          type: string
+        inStock:
+          type: boolean
+        imageUrl:
+          type: string
+        vendor:
+          type: string
+        deliveryTime:
+          type: integer
+          description: Estimated delivery in minutes
+      required: [id, name, category, stage, price, unit, inStock, vendor, deliveryTime]
+
+    CartItem:
+      type: object
+      properties:
+        id:
+          type: string
+        materialId:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        price:
+          type: number
+        unit:
+          type: string
+        quantity:
+          type: number
+        vendor:
+          type: string
+        total:
+          type: number
+      required: [id, materialId, name, category, price, unit, quantity, vendor, total]
+
+    CartCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        vendor:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartItem"
+        subtotal:
+          type: number
+        deliveryTime:
+          type: integer
+      required: [category, vendor, items, subtotal, deliveryTime]
+
+    Cart:
+      type: object
+      properties:
+        id:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartCategory"
+        totalItems:
+          type: integer
+        grandTotal:
+          type: number
+      required: [id, categories, totalItems, grandTotal]
+
+    AddToCartRequest:
+      type: object
+      properties:
+        materialId:
+          type: string
+          minLength: 1
+          maxLength: 200
+        quantity:
+          type: number
+          exclusiveMinimum: 0
+          maximum: 10000
+        name:
+          type: string
+          maxLength: 200
+          description: Optional product display name. ONLY honored for virtual material ids that don't exist in the materials table. Real DB materials always use the authoritative DB name.
+        price:
+          type: number
+          exclusiveMinimum: 0
+          maximum: 10000000
+          description: Optional product unit price. ONLY honored for virtual material ids; ignored when the materialId resolves to a real DB row (which always wins to prevent price tampering).
+        unit:
+          type: string
+          maxLength: 50
+          description: Optional product unit (bag/kg/piece/etc). Only honored for virtual ids.
+        vendor:
+          type: string
+          maxLength: 200
+          description: Optional vendor/brand name. Only honored for virtual ids.
+        category:
+          type: string
+          maxLength: 50
+          description: Optional category override. Only honored for virtual ids.
+      required: [materialId, quantity]
+
+    UpdateCartItemRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+          minimum: 0
+          maximum: 10000
+      required: [quantity]
+
+    Service:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [foreman, plumber, electrician, fitter, daily_labor]
+        name:
+          type: string
+        description:
+          type: string
+        ratePerDay:
+          type: number
+        available:
+          type: boolean
+        rating:
+          type: number
+        experience:
+          type: integer
+      required: [id, type, name, description, ratePerDay, available, rating, experience]
+
+    BookServiceRequest:
+      type: object
+      properties:
+        serviceId:
+          type: string
+        date:
+          type: string
+          format: date
+        days:
+          type: integer
+        notes:
+          type: string
+      required: [serviceId, date, days]
+
+    ServiceBooking:
+      type: object
+      properties:
+        id:
+          type: string
+        serviceId:
+          type: string
+        serviceName:
+          type: string
+        date:
+          type: string
+        days:
+          type: integer
+        total:
+          type: number
+        status:
+          type: string
+          enum: [confirmed, pending, cancelled]
+      required: [id, serviceId, serviceName, date, days, total, status]
+
+    MandiPrice:
+      type: object
+      properties:
+        material:
+          type: string
+        unit:
+          type: string
+        currentPrice:
+          type: number
+        previousPrice:
+          type: number
+        change:
+          type: number
+        changePercent:
+          type: number
+        trend:
+          type: string
+          enum: [up, down, stable]
+        lastUpdated:
+          type: string
+      required: [material, unit, currentPrice, previousPrice, change, changePercent, trend, lastUpdated]
+
+    PlaceOrderRequest:
+      type: object
+      properties:
+        categoryFilter:
+          type: string
+          description: Optional - filter to only place order for a specific category
+        deliveryAddress:
+          type: string
+        phoneNumber:
+          type: string
+      required: [deliveryAddress, phoneNumber]
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartItem"
+        category:
+          type: string
+        vendor:
+          type: string
+        subtotal:
+          type: number
+        deliveryFee:
+          type: number
+        labourFee:
+          type: number
+        gstAmount:
+          type: number
+        total:
+          type: number
+        isB2B:
+          type: boolean
+        gstNumber:
+          type: string
+        status:
+          type: string
+          enum: [placed, confirmed, dispatched, delivered, cancelled, pending, loaded, in_transit]
+        deliveryAddress:
+          type: string
+        estimatedDelivery:
+          type: string
+        deliveryCountdownMinutes:
+          type: integer
+        placedAt:
+          type: string
+      required: [id, items, total, status, deliveryAddress, estimatedDelivery, deliveryCountdownMinutes, placedAt]
+
+    CheckoutItemInput:
+      type: object
+      properties:
+        materialId:
+          type: string
+          minLength: 1
+          maxLength: 200
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        category:
+          type: string
+          maxLength: 50
+        price:
+          type: number
+          exclusiveMinimum: 0
+          maximum: 10000000
+        unit:
+          type: string
+          maxLength: 50
+        quantity:
+          type: number
+          exclusiveMinimum: 0
+          maximum: 100000
+        vendor:
+          type: string
+          maxLength: 200
+      required: [materialId, name, category, price, unit, quantity, vendor]
+
+    CheckoutRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/CheckoutItemInput"
+        deliveryAddress:
+          type: string
+          minLength: 1
+        phoneNumber:
+          type: string
+          maxLength: 20
+        distanceKm:
+          type: number
+          minimum: 0
+          maximum: 500
+          description: Distance to the delivery site in km, used for the dynamic delivery fee
+        isB2B:
+          type: boolean
+          description: Business (contractor) order with GST invoice and Khata credit
+        gstNumber:
+          type: string
+          maxLength: 20
+          description: GSTIN for the B2B invoice
+        contractorId:
+          type: string
+          maxLength: 50
+          description: Contractor id used to charge the B2B order against the Khata credit ledger
+      required: [items, deliveryAddress]
+
+    BillBreakdown:
+      type: object
+      properties:
+        subtotal:
+          type: number
+        deliveryFee:
+          type: number
+        labourFee:
+          type: number
+        gstAmount:
+          type: number
+        total:
+          type: number
+      required: [subtotal, deliveryFee, labourFee, gstAmount, total]
+
+    KhataStatus:
+      type: object
+      properties:
+        contractorId:
+          type: string
+        creditLimit:
+          type: number
+        outstandingBalance:
+          type: number
+        availableCredit:
+          type: number
+      required: [contractorId, creditLimit, outstandingBalance, availableCredit]
+
+    CheckoutResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartItem"
+        category:
+          type: string
+        vendor:
+          type: string
+        bill:
+          $ref: "#/components/schemas/BillBreakdown"
+        total:
+          type: number
+        status:
+          type: string
+          enum: [pending, loaded, in_transit, delivered, placed, confirmed, dispatched, cancelled]
+        isB2B:
+          type: boolean
+        gstNumber:
+          type: string
+        deliveryAddress:
+          type: string
+        estimatedDelivery:
+          type: string
+        deliveryCountdownMinutes:
+          type: integer
+        placedAt:
+          type: string
+        khata:
+          $ref: "#/components/schemas/KhataStatus"
+      required: [id, items, bill, total, status, isB2B, deliveryAddress, estimatedDelivery, deliveryCountdownMinutes, placedAt]
+
+    CreditExceededError:
+      type: object
+      properties:
+        error:
+          type: string
+        availableCredit:
+          type: number
+        requiredAmount:
+          type: number
+      required: [error, availableCredit, requiredAmount]
+
+    AuthUser:
+      type: object
+      required: [id, email, firstName, lastName, profileImageUrl]
+      properties:
+        id:
+          type: string
+        email:
+          type: [string, 'null']
+          format: email
+        firstName:
+          type: [string, 'null']
+        lastName:
+          type: [string, 'null']
+        profileImageUrl:
+          type: [string, 'null']
+    AuthUserEnvelope:
+      type: object
+      required: [user]
+      properties:
+        user:
+          oneOf:
+            - $ref: '#/components/schemas/AuthUser'
+            - type: 'null'
+    MobileTokenExchangeRequest:
+      type: object
+      required: [code, code_verifier, redirect_uri, state]
+      properties:
+        code:
+          type: string
+          minLength: 1
+        code_verifier:
+          type: string
+          minLength: 1
+        redirect_uri:
+          type: string
+          minLength: 1
+          format: uri
+        state:
+          type: string
+          minLength: 1
+        nonce:
+          type: string
+          minLength: 1
+    MobileTokenExchangeSuccess:
+      type: object
+      required: [token]
+      properties:
+        token:
+          type: string
+    LogoutSuccess:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
+          const: true
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string

@@ -1,0 +1,43 @@
+CRITICAL FEATURE EXPANSION: Act as a Principal UX Architect and Equipment Manager. The current "Machine on Rent" section is basic and lacks inventory. You MUST overhaul this section to look like a premium, heavy-duty Equipment Fleet Management system.
+
+Execute the following 3 Modules flawlessly:
+
+MODULE 1: THE HEAVY INVENTORY DATA (Strict URLs & Pricing)
+Create a dedicated `rentalEquipment` JSON array. Inject these specific machines with realistic Indian daily rental rates and high-quality industrial images:
+
+1. Concrete Mixer Machine (1 Bag Capacity)
+   - Image: "https://images.unsplash.com/photo-1581147036324-c108420e6c27?auto=format&fit=crop&w=600&q=80"
+   - Rate: "₹800 / Day"
+   - Specs: "Heavy duty, Diesel Engine, 1-bag mixing."
+2. Concrete Needle Vibrator
+   - Image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80"
+   - Rate: "₹350 / Day"
+   - Specs: "Includes 2m nozzle, high-frequency compaction."
+3. Air Compressor (Painting & Cleaning)
+   - Image: "https://images.unsplash.com/photo-1590958932646-6469dbfce39f?auto=format&fit=crop&w=600&q=80"
+   - Rate: "₹600 / Day"
+   - Specs: "Portable, 50L tank, 8 Bar pressure."
+4. Earth Rammer / Compactor
+   - Image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80" 
+   - Rate: "₹900 / Day"
+   - Specs: "Petrol engine, perfect for soil/base compaction."
+5. JCB Backhoe Loader (Premium Booking)
+   - Image: "https://images.unsplash.com/photo-1579626002157-897f25974415?auto=format&fit=crop&w=600&q=80"
+   - Rate: "₹1,200 / Hour"
+   - Specs: "Includes operator. Min 4 hours booking."
+
+MODULE 2: THE "PREMIUM RENTAL" UI COMPONENT
+Do NOT use the standard product card for rentals. Create a distinct `<RentalEquipmentCarousel>` or Grid component:
+- Background: A subtle dark or industrial slate section (e.g., `bg-slate-900 text-white`) to make the yellow/orange machines pop out.
+- Card Design: 
+  * `aspect-video` for the image (wider look for machines).
+  * A bright yellow badge at the top right of the image: "⚡ Ready to Dispatch".
+  * Bold typography for the pricing: e.g., `<span className="text-xl font-bold text-green-400">₹800</span><span className="text-sm text-slate-400">/day</span>`
+- Action Button: Do NOT say "Add to Cart". Use a wide, glowing blue or yellow button titled: "📅 Book for Rent" or "Check Availability".
+
+MODULE 3: PLACEMENT & UX
+- Place this entire "Equipments on Rent" block strategically between the "Shop by Category" grid and the "Top Picks/Product Feed".
+- Add a bold section title: "Heavy Machines on Rent 🚜" with a sub-text: "Well-maintained equipment delivered to your site in 2 hours."
+- Ensure fallbacks use the previously defined `<Package>` icon logic if any URL fails to load.
+
+Execute this code to make the rental section look highly professional, distinct, and instantly clickable.

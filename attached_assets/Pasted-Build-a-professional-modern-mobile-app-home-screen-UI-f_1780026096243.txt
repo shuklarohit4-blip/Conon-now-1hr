@@ -1,0 +1,34 @@
+Build a professional, modern mobile app home screen UI for "Conon" that exactly replicates the visual hierarchy and design elements of the structure shown in image_0.png.
+
+Header Section (Neon Green Area):
+- At the top left, display "Conon in 30 minutes" (or a realistic time) in dark font.
+- Below it, place an address dropdown selector showing "HOME - Shakti Nagar" with a small dropdown arrow.
+- At the top right, place the profile icon and wallet balance section (e.g., "₹0") exactly as seen in image_0.png.
+
+Search Bar & Categories:
+- Insert a large, rounded search bar in the middle of the green section.
+- The search placeholder text must read: "Search 'cement', 'bricks', 'tools'". Keep the magnifying glass on the left and microphone icon on the right.
+- Below the search bar, place the horizontal scrolling category icons. Replace the original categories with construction-specific icons but maintain the style. For example: 'All' (highlighted in orange), 'Material' (building block icon), 'Tools' (wrench icon), 'Electrical' (plug icon), 'Paint' (paint bucket icon). Add more as needed (e.g., Bathroom, Lighting).
+
+Main Promotional Banner (Blue-Green Area):
+- Replace the haircare products with a professional composition of high-end construction materials: a set of Dulux Trade paint cans, a heavy-duty power drill, and sleek copper bathroom fittings on the podiums.
+- The large headline text should read: "Conon: Perfected for Indian Projects" or "Build with Conon, Get the Best Materials. Quality, upgraded!".
+- Below it, keep the "Shop now" button in the same black box style.
+
+Special Offer Bar:
+- Below the main banner, place a solid green bar with text similar to: "Shop for ₹50,000 & above, get an extra ₹5,000 OFF".
+
+"Frequently bought" Section:
+- Create a heading for "Frequently bought" and maintain the horizontal card layout.
+- The cards should show product bundles. For example: Card 1 - Icon of a Hammer & Chisel set with "+10 more" label and "Hammer & Chisel" text below. Card 2 - Icon of a Paint Roller & Brush set with "+15 more" label and "Paint Roller & Brush" text below.
+- Keep the rounded "See all materials >" button below these cards with small sample icons as in image_0.png.
+
+"Featured this week" Section:
+- Create a heading for "Featured this week".
+- Arrange three cards (Cement Specials, Power Tool Deals, Electrical fittings) with the "Featured" tag. Place a relevant, blurred image and bold text on each. The first card should be bright (e.g., Maggi yellow in original, maybe a prominent tool color).
+
+Bottom Navigation Bar:
+- Replicate the exact design of the bottom floating menu with a light-blue glow.
+- The center orange glowing icon should be 'Home' (house icon).
+- The other icons should be 'Order Again' (bag icon), 'Categories' (grid icon), 'Services' (gear icon), and a floating purple button on the far right with 'Tools >' text.
+- Maintain the semi-transparent background over a blurred layer, ensuring clean transitions.

@@ -1,0 +1,33 @@
+Act as a Senior Full-Stack Engineer. I am ready to connect my functional React frontend (Vendor & Admin Panels) to my real Node.js/PostgreSQL backend. We must replace the dummy hardcoded data with real API calls.
+
+Please execute the following integration steps carefully:
+
+1. API Client & Authentication Setup:
+   - Install `axios`.
+   - Create an `api.js` or `axiosInstance.js` utility file.
+   - Configure the base URL to point to my Node.js backend.
+   - Set up an interceptor to automatically attach the JWT token (from LocalStorage/Context) to the `Authorization` header for all requests.
+
+2. Replace Dummy State with Real Data Fetching (GET):
+   - Update the `VendorContext` or use `useEffect` hooks in the main components.
+   - Fetch the "Live Orders" list from `GET /api/orders?status=active`.
+   - Fetch the "Inventory" list from `GET /api/inventory`.
+   - Fetch the "Khata/Ledger" balance from `GET /api/ledger/balance`.
+   - IMPORTANT: Implement a Global Loading State. Show a clean, centered loading spinner on the screen while the initial data is being fetched.
+
+3. Connect Action Buttons to Real APIs (POST/PUT):
+   - Update the "Accept Order" button: When clicked, send a request to `PUT /api/orders/:orderId/status` with payload `{ status: 'packing' }`. ONLY move the order card to the next column in the UI if the API returns a 200 OK success response.
+   - Update the "Save Price" button in Inventory: Send a request to `PUT /api/inventory/:itemId` with the new price.
+   - Update the "Request Payout" button: Send a `POST /api/payouts/request` to the backend.
+
+4. Error Handling & Toast Notifications:
+   - Wrap all API calls in `try...catch` blocks.
+   - If an API call succeeds, show a success Toast (e.g., "Order Accepted successfully") and update the local state.
+   - If an API call fails, catch the error message from the backend and show an Error Toast (e.g., "Network Error" or "Failed to update price") and DO NOT update the UI state.
+
+5. Real-Time WebSocket Connection (Socket.io-client):
+   - Install `socket.io-client` on the frontend.
+   - Connect it to the backend server. 
+   - Listen for the `new-order-received` event. When a customer places a new order, the Vendor Panel should instantly show a Toast "🔔 New Order Arrived!" and automatically add the new order to the 'New Requests' column without refreshing the page.
+
+Make sure the code is production-ready, clean, and handles loading/error states gracefully so the user is never left wondering if a button click worked.

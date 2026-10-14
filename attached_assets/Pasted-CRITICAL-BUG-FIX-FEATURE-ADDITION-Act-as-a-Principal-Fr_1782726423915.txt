@@ -1,0 +1,28 @@
+CRITICAL BUG FIX & FEATURE ADDITION: Act as a Principal Frontend Engineer. In the current UI, clicking on a product item (e.g., in the UltraTech Cement list) does not open a detailed view or enlarge the image. 
+
+You MUST implement a smooth, full-screen (or large bottom-sheet) Product Detail View using the following exact logic:
+
+MODULE 1: STATE MANAGEMENT & CLICK SEPARATION
+- In the component rendering the product list, introduce a state: `const [selectedProduct, setSelectedProduct] = useState(null);`
+- Wrap the product's Image and Text container inside a clickable element: `<div onClick={() => setSelectedProduct(product)} className="flex-1 flex gap-3 cursor-pointer"> ... </div>`.
+- CRITICAL FIX: On the "+ Add" button, you MUST add `onClick={(e) => { e.stopPropagation(); handleAddToCart(product); }}`. This ensures adding to the cart does not accidentally open the product details.
+
+MODULE 2: THE PRODUCT DETAIL MODAL (UI/UX)
+- Create a new component `<ProductDetailModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />`.
+- Use `framer-motion` to slide this modal up smoothly from the bottom.
+- Layout Structure:
+  1. The Hero Image: The very top of the modal MUST be a massive, edge-to-edge image container (`w-full aspect-square bg-slate-50 p-6 flex items-center justify-center relative`).
+  2. Floating Close Button: Place an absolute 'X' icon button at the top-right corner of the image container to close the modal.
+  3. Core Info: Below the image, render the Product Title in extra-large bold text, followed by the Price (Discounted + MRP) and Tag (e.g., "50 kg bag").
+  4. The Details Section: Add a bold heading "Product Description & Specifications". Below it, render the `product.description`. 
+
+MODULE 3: DATA ENRICHMENT (Prevent Empty States)
+- Scan the mock data arrays. Ensure every single product has a `description` field. 
+- Example for Cement: `description: "Premium quality Ordinary Portland Cement (OPC). High early strength and durability. Ideal for all structural applications, foundations, columns, and heavy-duty concrete work."`
+- If a product lacks a description, render a fallback paragraph explaining that it is a premium, quality-checked material delivered by Conon.
+
+MODULE 4: THE STICKY "ADD TO CART" FOOTER
+- Inside the `<ProductDetailModal>`, attach a fixed sticky footer at the very bottom.
+- This footer must contain a massive, full-width solid green button: "Add to Cart - ₹[Price]".
+
+Execute this flawless implementation. The final result should feel exactly like tapping a product on Zepto or Blinkit, revealing a high-resolution view and dense information.
