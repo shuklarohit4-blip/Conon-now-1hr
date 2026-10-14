@@ -51,3 +51,5 @@ Thumbs.db
 .cache/
 .local/
 .config/replit/.semgrep/semgrep_rules.json
+.vercel
+.env*
