@@ -1,11 +1,5 @@
 import { Router, type IRouter } from "express";
-import {
-  db,
-  ordersTable,
-  mandiPricesTable,
-  vendorPayoutsTable,
-} from "@workspace/db";
-import { desc, eq } from "drizzle-orm";
+import { collection, decimal, decimalToNumber } from "@workspace/db";
 import { requireAdmin } from "../middleware/adminAuth";
 
 const router: IRouter = Router();
@@ -19,7 +13,7 @@ router.use("/admin", requireAdmin);
 /* ── Analytics ──────────────────────────────────────────────── */
 router.get("/admin/analytics", async (_req, res) => {
   try {
-    const orders = await db.select().from(ordersTable).orderBy(desc(ordersTable.placedAt));
+    const orders = await collection("orders").find().sort({ placedAt: -1 }).toArray();
     const now = Date.now();
     const todayStart = new Date(); todayStart.setHours(0, 0, 0, 0);
     const todayOrders = orders.filter(o => new Date(o.placedAt) >= todayStart);
@@ -28,7 +22,7 @@ router.get("/admin/analytics", async (_req, res) => {
       const eta = new Date(o.estimatedDelivery).getTime();
       return eta < now && o.status !== "delivered";
     });
-    const dailyRevenue = todayOrders.reduce((s, o) => s + parseFloat(o.total), 0);
+    const dailyRevenue = todayOrders.reduce((s, o) => s + decimalToNumber(o.total), 0);
     const sevenDays = Array.from({ length: 7 }).map((_, i) => {
       const d = new Date(); d.setDate(d.getDate() - (6 - i));
       const dayStart = new Date(d); dayStart.setHours(0, 0, 0, 0);
@@ -40,7 +34,7 @@ router.get("/admin/analytics", async (_req, res) => {
       return {
         date: d.toLocaleDateString("en-IN", { weekday: "short" }),
         orders: dayOrders.length,
-        revenue: Math.round(dayOrders.reduce((s, o) => s + parseFloat(o.total), 0)),
+        revenue: Math.round(dayOrders.reduce((s, o) => s + decimalToNumber(o.total), 0)),
       };
     });
     res.json({
@@ -58,7 +52,7 @@ router.get("/admin/analytics", async (_req, res) => {
 /* ── All Orders ─────────────────────────────────────────────── */
 router.get("/admin/orders", async (_req, res) => {
   try {
-    const orders = await db.select().from(ordersTable).orderBy(desc(ordersTable.placedAt));
+    const orders = await collection("orders").find().sort({ placedAt: -1 }).toArray();
     const now = Date.now();
     const result = orders.map(o => {
       const etaMs = new Date(o.estimatedDelivery).getTime();
@@ -70,7 +64,7 @@ router.get("/admin/orders", async (_req, res) => {
         site: o.deliveryAddress?.split(",")[0]?.trim() ?? "Site",
         items: items.map((i: any) => i.name).join(", ") || o.category || "Materials",
         category: o.category ?? "", vendor: o.vendor ?? "",
-        total: parseFloat(o.total), status: o.status,
+        total: decimalToNumber(o.total), status: o.status,
         deliveryAddress: o.deliveryAddress, phone: o.phoneNumber ?? "",
         minsLeft, slaBreached,
         malba: o.category === "aggregate" || items.some((i: any) => i.name?.toLowerCase().includes("malba")),
@@ -95,10 +89,10 @@ router.get("/admin/orders", async (_req, res) => {
 /* ── CSV Export ─────────────────────────────────────────────── */
 router.get("/admin/export/csv", async (_req, res) => {
   try {
-    const orders = await db.select().from(ordersTable).orderBy(desc(ordersTable.placedAt));
+    const orders = await collection("orders").find().sort({ placedAt: -1 }).toArray();
     const headers = ["Order ID","Date","Site Address","Category","Vendor","Total (Rs)","GST 18% (Rs)","Status","ETA"];
     const rows = orders.map(o => {
-      const total = parseFloat(o.total);
+      const total = decimalToNumber(o.total);
       const gst = +(total * 0.18).toFixed(2);
       return [o.externalId, new Date(o.placedAt).toLocaleDateString("en-IN"),
         `"${o.deliveryAddress.replace(/"/g,"'")}"`, o.category ?? "", o.vendor ?? "",
@@ -117,8 +111,18 @@ router.get("/admin/export/csv", async (_req, res) => {
 /* ── Mandi Prices ────────────────────────────────────────────── */
 router.get("/admin/mandi", async (_req, res) => {
   try {
-    const prices = await db.select().from(mandiPricesTable);
-    res.json(prices);
+    const prices = await collection("mandiPrices").find().toArray();
+    res.json(prices.map((price) => ({
+      id: price.id,
+      material: price.material,
+      unit: price.unit,
+      currentPrice: price.currentPrice.toString(),
+      previousPrice: price.previousPrice.toString(),
+      change: price.change.toString(),
+      changePercent: price.changePercent.toString(),
+      trend: price.trend,
+      lastUpdated: price.lastUpdated,
+    })));
   } catch {
     res.status(500).json({ error: "Failed to fetch mandi prices" });
   }
@@ -129,18 +133,17 @@ router.patch("/admin/mandi/:material", async (req, res) => {
     const { material } = req.params;
     const { price } = req.body as { price: number };
     if (!price || isNaN(price)) { res.status(400).json({ error: "Valid price required" }); return; }
-    const { eq } = await import("drizzle-orm");
-    const existing = await db.select().from(mandiPricesTable).where(eq(mandiPricesTable.material, material)).limit(1);
-    if (!existing[0]) { res.status(404).json({ error: "Material not found" }); return; }
-    const prev = parseFloat(existing[0].currentPrice);
+    const existing = await collection("mandiPrices").findOne({ material });
+    if (!existing) { res.status(404).json({ error: "Material not found" }); return; }
+    const prev = decimalToNumber(existing.currentPrice);
     const change = +(price - prev).toFixed(2);
     const changePercent = +((change / prev) * 100).toFixed(2);
-    await db.update(mandiPricesTable).set({
-      previousPrice: prev.toString(), currentPrice: price.toString(),
-      change: change.toString(), changePercent: changePercent.toString(),
+    await collection("mandiPrices").updateOne({ material }, { $set: {
+      previousPrice: decimal(prev), currentPrice: decimal(price),
+      change: decimal(change), changePercent: decimal(changePercent),
       trend: change > 0 ? "up" : change < 0 ? "down" : "stable",
       lastUpdated: new Date(),
-    }).where(eq(mandiPricesTable.material, material));
+    } });
     res.json({ success: true, material, newPrice: price });
   } catch {
     res.status(500).json({ error: "Failed to update price" });
@@ -636,15 +639,12 @@ router.patch("/admin/users/:id/pincode", (req, res) => {
 /* ── Vendor payouts ─────────────────────────────────────────── */
 
 router.get("/admin/payouts", async (_req, res) => {
-  const rows = await db
-    .select()
-    .from(vendorPayoutsTable)
-    .orderBy(desc(vendorPayoutsTable.requestedAt));
+  const rows = await collection("vendorPayouts").find().sort({ requestedAt: -1 }).toArray();
   res.json(
     rows.map((p) => ({
       id: p.externalId,
       vendorStore: p.vendorStore,
-      amount: parseFloat(p.amount),
+      amount: decimalToNumber(p.amount),
       status: p.status,
       requestedAt: p.requestedAt,
       approvedAt: p.approvedAt,
@@ -653,11 +653,8 @@ router.get("/admin/payouts", async (_req, res) => {
 });
 
 router.post("/admin/payouts/:id/approve", async (req, res) => {
-  const [current] = await db
-    .select()
-    .from(vendorPayoutsTable)
-    .where(eq(vendorPayoutsTable.externalId, req.params.id))
-    .limit(1);
+  const payouts = collection("vendorPayouts");
+  const current = await payouts.findOne({ externalId: req.params.id });
 
   if (!current) {
     res.status(404).json({ error: "Payout request not found." });
@@ -668,16 +665,20 @@ router.post("/admin/payouts/:id/approve", async (req, res) => {
     return;
   }
 
-  const [updated] = await db
-    .update(vendorPayoutsTable)
-    .set({ status: "approved", approvedAt: new Date() })
-    .where(eq(vendorPayoutsTable.externalId, req.params.id))
-    .returning();
+  const updated = await payouts.findOneAndUpdate(
+    { externalId: req.params.id, status: "pending" },
+    { $set: { status: "approved", approvedAt: new Date() } },
+    { returnDocument: "after" },
+  );
+  if (!updated) {
+    res.status(409).json({ error: "Payout already approved." });
+    return;
+  }
 
   res.json({
     id: updated.externalId,
     vendorStore: updated.vendorStore,
-    amount: parseFloat(updated.amount),
+    amount: decimalToNumber(updated.amount),
     status: updated.status,
     requestedAt: updated.requestedAt,
     approvedAt: updated.approvedAt,

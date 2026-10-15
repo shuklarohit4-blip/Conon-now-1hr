@@ -1,5 +1,7 @@
 # Render Backend Deployment Design
 
+> **Superseded:** This initial design proposed Render PostgreSQL. The approved [MongoDB Atlas migration design](2026-10-15-mongodb-atlas-migration-design.md) replaces that database plan; use the current [Render deployment guide](../../render-deployment.md) and `render.yaml` for setup.
+
 **Date:** 2026-10-15  
 **Status:** Approved direction; awaiting user review before implementation
 

@@ -1,11 +1,13 @@
 import { Router, type IRouter } from "express";
 import {
-  db,
-  materialsTable,
-  ordersTable,
-  vendorPayoutsTable,
+  centsToDecimal,
+  collection,
+  decimal,
+  decimalToNumber,
+  moneyToCents,
+  nextId,
 } from "@workspace/db";
-import { eq, and, desc } from "drizzle-orm";
+import type { MaterialDocument, OrderDocument } from "@workspace/db";
 import { randomUUID, createHash } from "crypto";
 import { requireVendor } from "../middleware/vendorAuth";
 import { emitNewOrder } from "../socket";
@@ -42,23 +44,32 @@ const MASTER_CATALOG: {
    requests can't create duplicates. Returns the freshly inserted rows. */
 async function seedVendorCatalog(vendorStore: string) {
   const slug = createHash("sha1").update(vendorStore).digest("hex").slice(0, 10);
-  const rows = MASTER_CATALOG.map((c) => ({
+  const rows = await Promise.all(MASTER_CATALOG.map(async (c) => ({
+    id: await nextId("materials"),
     externalId: `v-${slug}-${c.key}`,
     name: c.name,
     category: c.category,
     stage: c.stage,
-    price: c.price.toFixed(2),
+    price: decimal(c.price),
     unit: c.unit,
     inStock: true,
     imageUrl: "",
     vendor: vendorStore,
-  }));
-  await db.insert(materialsTable).values(rows).onConflictDoNothing();
-  return db
-    .select()
-    .from(materialsTable)
-    .where(eq(materialsTable.vendor, vendorStore))
-    .orderBy(materialsTable.name);
+    deliveryTime: 60,
+    dynamicPricingEnabled: false,
+  })));
+  try {
+    await collection("materials").bulkWrite(rows.map((row) => ({
+      updateOne: {
+        filter: { externalId: row.externalId },
+        update: { $setOnInsert: row },
+        upsert: true,
+      },
+    })));
+  } catch (error) {
+    if ((error as { code?: number }).code !== 11000) throw error;
+  }
+  return collection("materials").find({ vendor: vendorStore }).sort({ name: 1 }).toArray();
 }
 
 // Every route in this file requires a valid vendor JWT and is scoped to the
@@ -98,11 +109,11 @@ function relativeTime(from: Date): string {
   return `${days}d ago`;
 }
 
-function mapInventory(m: typeof materialsTable.$inferSelect) {
+function mapInventory(m: MaterialDocument) {
   return {
     id: m.externalId,
     name: m.name,
-    price: parseFloat(m.price),
+    price: decimalToNumber(m.price),
     inStock: m.inStock,
     unit: m.unit,
     category: m.category,
@@ -113,11 +124,7 @@ function mapInventory(m: typeof materialsTable.$inferSelect) {
 /* ════════════════════════ Inventory ════════════════════════════ */
 
 router.get("/vendor/inventory", async (req, res) => {
-  let items = await db
-    .select()
-    .from(materialsTable)
-    .where(eq(materialsTable.vendor, req.vendorStore!))
-    .orderBy(materialsTable.name);
+  let items = await collection("materials").find({ vendor: req.vendorStore! }).sort({ name: 1 }).toArray();
 
   // First-time vendor: seed the global master catalog so they always have a
   // ready-to-manage inventory instead of a blank screen.
@@ -130,7 +137,7 @@ router.get("/vendor/inventory", async (req, res) => {
 
 router.put("/vendor/inventory/:id", async (req, res) => {
   const externalId = req.params.id;
-  const set: { price?: string; inStock?: boolean } = {};
+  const set: { price?: ReturnType<typeof decimal>; inStock?: boolean } = {};
 
   if (req.body?.price !== undefined) {
     const price = Number(req.body.price);
@@ -138,7 +145,7 @@ router.put("/vendor/inventory/:id", async (req, res) => {
       res.status(400).json({ error: "Enter a valid price." });
       return;
     }
-    set.price = price.toFixed(2);
+    set.price = decimal(price);
   }
   if (req.body?.inStock !== undefined) {
     set.inStock = Boolean(req.body.inStock);
@@ -148,16 +155,11 @@ router.put("/vendor/inventory/:id", async (req, res) => {
     return;
   }
 
-  const [updated] = await db
-    .update(materialsTable)
-    .set(set)
-    .where(
-      and(
-        eq(materialsTable.externalId, externalId),
-        eq(materialsTable.vendor, req.vendorStore!),
-      ),
-    )
-    .returning();
+  const updated = await collection("materials").findOneAndUpdate(
+    { externalId, vendor: req.vendorStore! },
+    { $set: set },
+    { returnDocument: "after" },
+  );
 
   if (!updated) {
     res.status(404).json({ error: "Product not found in your store." });
@@ -200,20 +202,21 @@ router.post("/vendor/products", async (req, res) => {
     return;
   }
 
-  const [created] = await db
-    .insert(materialsTable)
-    .values({
+  const created: MaterialDocument = {
+      id: await nextId("materials"),
       externalId: randomUUID(),
       name,
       category,
       stage,
-      price: price.toFixed(2),
+      price: decimal(price),
       unit,
       inStock: true,
       imageUrl,
       vendor: req.vendorStore!,
-    })
-    .returning();
+      deliveryTime: 60,
+      dynamicPricingEnabled: false,
+    };
+  await collection("materials").insertOne(created);
 
   res.status(201).json(mapInventory(created));
 });
@@ -221,11 +224,7 @@ router.post("/vendor/products", async (req, res) => {
 /* ════════════════════════ Orders ═══════════════════════════════ */
 
 router.get("/vendor/orders", async (req, res) => {
-  const rows = await db
-    .select()
-    .from(ordersTable)
-    .where(eq(ordersTable.vendor, req.vendorStore!))
-    .orderBy(desc(ordersTable.placedAt));
+  const rows = await collection("orders").find({ vendor: req.vendorStore! }).sort({ placedAt: -1 }).toArray();
 
   const onlyActive = req.query.status === "active";
 
@@ -247,7 +246,7 @@ router.get("/vendor/orders", async (req, res) => {
         buyer: o.phoneNumber ? `+91 ${o.phoneNumber}` : "CONON Customer",
         items: itemText,
         time: relativeTime(o.placedAt),
-        value: parseFloat(o.total),
+        value: decimalToNumber(o.total),
         status: stage,
       };
     })
@@ -275,16 +274,10 @@ router.put("/vendor/orders/:id/status", async (req, res) => {
     return;
   }
 
-  const [current] = await db
-    .select()
-    .from(ordersTable)
-    .where(
-      and(
-        eq(ordersTable.externalId, externalId),
-        eq(ordersTable.vendor, req.vendorStore!),
-      ),
-    )
-    .limit(1);
+  const current = await collection("orders").findOne({
+    externalId,
+    vendor: req.vendorStore!,
+  });
 
   if (!current) {
     res.status(404).json({ error: "Order not found in your store." });
@@ -295,11 +288,15 @@ router.put("/vendor/orders/:id/status", async (req, res) => {
     return;
   }
 
-  const [updated] = await db
-    .update(ordersTable)
-    .set({ status: nextDb })
-    .where(eq(ordersTable.externalId, externalId))
-    .returning();
+  const updated = await collection("orders").findOneAndUpdate(
+    { externalId, vendor: req.vendorStore!, status: { $in: requiredFrom } },
+    { $set: { status: nextDb } },
+    { returnDocument: "after" },
+  );
+  if (!updated) {
+    res.status(409).json({ error: "Order is not in a state that allows this." });
+    return;
+  }
 
   res.json({ id: updated.externalId, status: toStage(updated.status) });
 });
@@ -330,10 +327,7 @@ function randomPhone(): string {
 router.post("/vendor/orders/simulate", async (req, res) => {
   const store = req.vendorStore!;
 
-  const catalog = await db
-    .select()
-    .from(materialsTable)
-    .where(eq(materialsTable.vendor, store));
+  const catalog = await collection("materials").find({ vendor: store }).toArray();
 
   const inStock = catalog.filter((m) => m.inStock);
   const pool = inStock.length > 0 ? inStock : catalog;
@@ -345,7 +339,7 @@ router.post("/vendor/orders/simulate", async (req, res) => {
     const count = Math.min(pool.length, Math.random() > 0.5 ? 2 : 1);
     orderItems = shuffled.slice(0, count).map((m) => ({
       name: m.name,
-      price: parseFloat(m.price),
+      price: decimalToNumber(m.price),
       unit: m.unit,
       quantity: Math.floor(Math.random() * 8) + 1,
     }));
@@ -360,19 +354,36 @@ router.post("/vendor/orders/simulate", async (req, res) => {
   const phone = randomPhone();
   const buyerName = SIM_BUYERS[Math.floor(Math.random() * SIM_BUYERS.length)];
 
-  await db.insert(ordersTable).values({
+  const order: OrderDocument = {
+    id: await nextId("orders"),
     externalId,
     sessionId: `sim:${externalId}`,
-    items: orderItems.map((i) => ({ ...i, total: i.price * i.quantity })),
+    items: orderItems.map((i) => ({
+      id: randomUUID(),
+      name: i.name,
+      category: pool[0]?.category ?? "General",
+      price: decimal(i.price),
+      unit: i.unit,
+      quantity: decimal(i.quantity),
+      vendor: store,
+      total: decimal(i.price * i.quantity),
+    })),
     category: pool[0]?.category ?? "General",
     vendor: store,
-    subtotal: total.toFixed(2),
-    total: total.toFixed(2),
+    subtotal: decimal(total),
+    deliveryFee: decimal(0),
+    labourFee: decimal(0),
+    gstAmount: decimal(0),
+    total: decimal(total),
+    isB2B: false,
+    gstNumber: null,
     status: "placed",
     deliveryAddress: "CONON Demo Site — Sector 5, Industrial Area",
     phoneNumber: phone,
     estimatedDelivery: new Date(Date.now() + 60 * 60 * 1000),
-  });
+    placedAt: new Date(),
+  };
+  await collection("orders").insertOne(order);
 
   const payload = {
     id: externalId,
@@ -405,68 +416,89 @@ const SEED_EARNINGS: {
 ];
 
 async function seedVendorEarnings(store: string) {
-  const existing = await db
-    .select({ id: ordersTable.id })
-    .from(ordersTable)
-    .where(eq(ordersTable.vendor, store))
-    .limit(1);
-  if (existing.length > 0) return;
+  const existing = await collection("orders").findOne({ vendor: store });
+  if (existing) return;
 
   // Deterministic per-store externalIds so concurrent first-time wallet loads
   // can't double-seed: the unique index + onConflictDoNothing dedupes them even
   // when both requests pass the existence check above.
   const slug = createHash("sha1").update(store).digest("hex").slice(0, 10);
   const now = Date.now();
-  const rows = SEED_EARNINGS.map((o, i) => {
+  const rows = await Promise.all(SEED_EARNINGS.map(async (o, i) => {
     const placedAt = new Date(now - o.daysAgo * 24 * 60 * 60 * 1000);
     return {
+      id: await nextId("orders"),
       externalId: `seed-${slug}-${i}`,
       sessionId: `seed:${store}`,
-      items: o.items.map((it) => ({ ...it, total: it.price * it.quantity })),
+      items: o.items.map((it) => ({
+        id: randomUUID(),
+        name: it.name,
+        category: "General",
+        price: decimal(it.price),
+        unit: it.unit,
+        quantity: decimal(it.quantity),
+        vendor: store,
+        total: decimal(it.price * it.quantity),
+      })),
       category: "General",
       vendor: store,
-      subtotal: o.total.toFixed(2),
-      total: o.total.toFixed(2),
+      subtotal: decimal(o.total),
+      deliveryFee: decimal(0),
+      labourFee: decimal(0),
+      gstAmount: decimal(0),
+      total: decimal(o.total),
+      isB2B: false,
+      gstNumber: null,
       status: "delivered",
       deliveryAddress: "CONON Demo Site — Sector 5, Industrial Area",
       phoneNumber: randomPhone(),
       estimatedDelivery: placedAt,
       placedAt,
     };
-  });
-  await db.insert(ordersTable).values(rows).onConflictDoNothing();
+  }));
+  try {
+    await collection("orders").bulkWrite(rows.map((row) => ({
+      updateOne: {
+        filter: { externalId: row.externalId },
+        update: { $setOnInsert: row },
+        upsert: true,
+      },
+    })));
+  } catch (error) {
+    if ((error as { code?: number }).code !== 11000) throw error;
+  }
 }
 
 async function computeWallet(store: string) {
-  const orders = await db
-    .select({ total: ordersTable.total, status: ordersTable.status })
-    .from(ordersTable)
-    .where(eq(ordersTable.vendor, store));
+  const orders = await collection("orders").find(
+    { vendor: store },
+    { projection: { total: 1, status: 1 } },
+  ).toArray();
 
   // Earnings are realized once an order is ready for pickup or delivered.
-  const totalEarned = orders
+  const totalEarnedCents = orders
     .filter((o) => o.status === "ready" || o.status === "delivered")
-    .reduce((s, o) => s + parseFloat(o.total), 0);
+    .reduce((sum, order) => sum + moneyToCents(order.total), 0n);
 
-  const payouts = await db
-    .select()
-    .from(vendorPayoutsTable)
-    .where(eq(vendorPayoutsTable.vendorStore, store))
-    .orderBy(desc(vendorPayoutsTable.requestedAt));
+  const payouts = await collection("vendorPayouts").find({ vendorStore: store })
+    .sort({ requestedAt: -1 }).toArray();
 
-  let pendingPayouts = 0;
-  let withdrawn = 0; // pending + approved both reduce available balance
+  let pendingPayoutsCents = 0n;
+  let withdrawnCents = 0n; // pending + approved both reduce available balance
   for (const p of payouts) {
-    const amt = parseFloat(p.amount);
+    const amtCents = moneyToCents(p.amount);
     if (p.status === "pending") {
-      pendingPayouts += amt;
-      withdrawn += amt;
+      pendingPayoutsCents += amtCents;
+      withdrawnCents += amtCents;
     } else if (p.status === "approved") {
-      withdrawn += amt;
+      withdrawnCents += amtCents;
     }
   }
 
-  const balance = Math.max(0, Math.round((totalEarned - withdrawn) * 100) / 100);
+  const balanceCents = totalEarnedCents > withdrawnCents ? totalEarnedCents - withdrawnCents : 0n;
+  const totalEarned = decimalToNumber(centsToDecimal(totalEarnedCents));
+  const pendingPayouts = decimalToNumber(centsToDecimal(pendingPayoutsCents));
+  const balance = decimalToNumber(centsToDecimal(balanceCents));
 
   const ledger = payouts.map((p) => ({
     id: p.externalId,
@@ -476,7 +508,7 @@ async function computeWallet(store: string) {
       year: "numeric",
     }),
     label: "Payout Request",
-    amount: parseFloat(p.amount),
+    amount: decimalToNumber(p.amount),
     type: "payout" as const,
     status:
       p.status === "approved"
@@ -486,8 +518,8 @@ async function computeWallet(store: string) {
 
   return {
     balance,
-    totalEarned: Math.round(totalEarned * 100) / 100,
-    pendingPayouts: Math.round(pendingPayouts * 100) / 100,
+    totalEarned,
+    pendingPayouts,
     ledger,
   };
 }
@@ -506,18 +538,23 @@ router.post("/vendor/payouts/request", async (req, res) => {
 
   const store = req.vendorStore!;
   const wallet = await computeWallet(store);
-  if (amount > wallet.balance) {
+  const requestedCents = moneyToCents(amount);
+  const balanceCents = moneyToCents(wallet.balance);
+  if (requestedCents > balanceCents) {
     res
       .status(400)
       .json({ error: "Amount exceeds available balance.", reason: "insufficient" });
     return;
   }
 
-  await db.insert(vendorPayoutsTable).values({
+  await collection("vendorPayouts").insertOne({
+    id: await nextId("vendorPayouts"),
     externalId: randomUUID(),
     vendorStore: store,
-    amount: amount.toFixed(2),
+    amount: decimal(amount),
     status: "pending",
+    requestedAt: new Date(),
+    approvedAt: null,
   });
 
   res.status(201).json(await computeWallet(store));

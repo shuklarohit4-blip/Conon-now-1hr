@@ -1,6 +1,5 @@
 import { Router, type IRouter } from "express";
-import { db, materialsTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { collection, decimalToNumber } from "@workspace/db";
 import { GetMaterialsQueryParams } from "@workspace/api-zod";
 
 const router: IRouter = Router();
@@ -26,12 +25,9 @@ router.get("/materials", async (req, res) => {
 
   let materials;
   if (query.stage && query.stage !== "all") {
-    materials = await db
-      .select()
-      .from(materialsTable)
-      .where(eq(materialsTable.stage, query.stage));
+    materials = await collection("materials").find({ stage: query.stage }).toArray();
   } else {
-    materials = await db.select().from(materialsTable);
+    materials = await collection("materials").find().toArray();
   }
 
   res.json(
@@ -40,7 +36,7 @@ router.get("/materials", async (req, res) => {
       name: m.name,
       category: m.category,
       stage: m.stage,
-      price: parseFloat(m.price),
+      price: decimalToNumber(m.price),
       unit: m.unit,
       description: m.description ?? "",
       inStock: m.inStock,

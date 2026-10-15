@@ -6,7 +6,7 @@ import {
   ExchangeMobileAuthorizationCodeResponse,
   LogoutMobileSessionResponse,
 } from "@workspace/api-zod";
-import { db, authUsersTable } from "@workspace/db";
+import { collection } from "@workspace/db";
 import {
   clearSession,
   getOidcConfig,
@@ -68,17 +68,16 @@ async function upsertUser(claims: Record<string, unknown>) {
       | null,
   };
 
-  const [user] = await db
-    .insert(authUsersTable)
-    .values(userData)
-    .onConflictDoUpdate({
-      target: authUsersTable.id,
-      set: {
-        ...userData,
-        updatedAt: new Date(),
-      },
-    })
-    .returning();
+  const now = new Date();
+  const user = await collection("authUsers").findOneAndUpdate(
+    { id: userData.id },
+    {
+      $set: { ...userData, updatedAt: now },
+      $setOnInsert: { createdAt: now },
+    },
+    { upsert: true, returnDocument: "after" },
+  );
+  if (!user) throw new Error("Could not persist authenticated user");
   return user;
 }
 
@@ -172,10 +171,10 @@ router.get("/callback", async (req: Request, res: Response) => {
   const sessionData: SessionData = {
     user: {
       id: dbUser.id,
-      email: dbUser.email,
-      firstName: dbUser.firstName,
-      lastName: dbUser.lastName,
-      profileImageUrl: dbUser.profileImageUrl,
+      email: dbUser.email ?? null,
+      firstName: dbUser.firstName ?? null,
+      lastName: dbUser.lastName ?? null,
+      profileImageUrl: dbUser.profileImageUrl ?? null,
     },
     access_token: tokens.access_token,
     refresh_token: tokens.refresh_token,
@@ -242,10 +241,10 @@ router.post(
       const sessionData: SessionData = {
         user: {
           id: dbUser.id,
-          email: dbUser.email,
-          firstName: dbUser.firstName,
-          lastName: dbUser.lastName,
-          profileImageUrl: dbUser.profileImageUrl,
+          email: dbUser.email ?? null,
+          firstName: dbUser.firstName ?? null,
+          lastName: dbUser.lastName ?? null,
+          profileImageUrl: dbUser.profileImageUrl ?? null,
         },
         access_token: tokens.access_token,
         refresh_token: tokens.refresh_token,

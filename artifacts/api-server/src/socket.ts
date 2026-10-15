@@ -1,7 +1,6 @@
 import type { Server as HttpServer } from "http";
 import { Server, type Socket } from "socket.io";
-import { db, ordersTable, usersTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { collection } from "@workspace/db";
 import { logger } from "./lib/logger";
 import { verifyJwt } from "./lib/jwt";
 
@@ -84,12 +83,10 @@ async function authorize(socket: Socket, orderId: string): Promise<boolean> {
 
   let order: { sessionId: string } | undefined;
   try {
-    const rows = await db
-      .select({ sessionId: ordersTable.sessionId })
-      .from(ordersTable)
-      .where(eq(ordersTable.externalId, orderId))
-      .limit(1);
-    order = rows[0];
+    order = await collection("orders").findOne(
+      { externalId: orderId },
+      { projection: { _id: 0, sessionId: 1 } },
+    ) ?? undefined;
   } catch (err) {
     logger.error({ err, orderId }, "socket authorize: order lookup failed");
     return false;
@@ -166,12 +163,10 @@ export function initSocket(httpServer: HttpServer): Server {
       const userId = Number(payload.sub);
       if (!Number.isFinite(userId)) return;
       try {
-        const rows = await db
-          .select({ vendorStore: usersTable.vendorStore, role: usersTable.role })
-          .from(usersTable)
-          .where(eq(usersTable.id, userId))
-          .limit(1);
-        const user = rows[0];
+        const user = await collection("users").findOne(
+          { id: userId },
+          { projection: { _id: 0, vendorStore: 1, role: 1 } },
+        );
         if (user?.role === "vendor" && user.vendorStore) {
           const state = stateOf(socket);
           if (state.vendorStore && state.vendorStore !== user.vendorStore) {

@@ -1,6 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { db, usersTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { repositories } from "@workspace/db";
 import { verifyJwt } from "../lib/jwt";
 
 /**
@@ -35,11 +34,7 @@ export async function requireVendor(
     return;
   }
 
-  const [user] = await db
-    .select()
-    .from(usersTable)
-    .where(eq(usersTable.id, userId))
-    .limit(1);
+  const user = await repositories.users.findById(userId);
 
   if (!user || user.role !== "vendor" || !user.vendorStore) {
     res.status(403).json({ error: "This account is not a registered vendor." });

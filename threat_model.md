@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-CONON Infrabuilt is a pnpm-monorepo construction marketplace with a React + Vite frontend in `artifacts/conon`, an Express 5 API in `artifacts/api-server`, and a PostgreSQL database accessed through Drizzle in `lib/db`. Users can browse materials, manage carts, place orders, and book services. The deployed production scope is the web frontend, API server, generated shared client/schema packages, and the database layer.
+CONON Infrabuilt is a pnpm-monorepo construction marketplace with a React + Vite frontend in `artifacts/conon`, an Express 5 API in `artifacts/api-server`, and a MongoDB Atlas database accessed through the official Node.js driver in `lib/db`. Users can browse materials, manage carts, place orders, and book services. The deployed production scope is the web frontend, API server, generated shared client/schema packages, and the database layer.
 
 Production-scope assumptions for this scan:
 - `artifacts/mockup-sandbox` is dev-only and not deployed to production.
@@ -15,12 +15,12 @@ Production-scope assumptions for this scan:
 - **Cart state and checkout integrity** — cart contents and quantities determine what gets purchased and charged. Cross-user modification can cause fraud or unintended purchases.
 - **Service bookings** — service selections, booking dates, notes, and totals in `service_bookings` have business and user impact if abused or altered.
 - **Operational/vendor data surfaced by the app** — vendor inventory, disputes, payouts, and delivery status become sensitive once connected to real operations.
-- **Application secrets and database credentials** — `DATABASE_URL`, API keys, JWT signing keys, and any other backend secrets must stay out of tracked source/config files and be loaded from the deployment secret store.
+- **Application secrets and database credentials** — `MONGODB_URI`, API keys, JWT signing keys, and any other backend secrets must stay out of tracked source/config files and be loaded from the deployment secret store.
 
 ## Trust Boundaries
 
 - **Browser to API** — all frontend requests to `/api/*` cross from an untrusted client into the backend. Every read/write endpoint must treat the caller as untrusted and enforce authentication, authorization, and input validation.
-- **API to PostgreSQL** — the Express server has broad database access via Drizzle. Any broken access control or injection at the API layer can expose or alter all tenant/user data.
+- **API to MongoDB Atlas** — the Express server has broad database access via its Atlas database user. Any broken access control or injection at the API layer can expose or alter all tenant/user data; limit the Atlas user to the application database and restrict network access to known service egress addresses where practical.
 - **Public versus authenticated application surfaces** — browsing materials may be public, but carts, orders, service bookings, vendor tools, and admin views require explicit server-side ownership or privilege enforcement if they represent real user data.
 - **Production versus dev/demo surfaces** — `artifacts/mockup-sandbox`, generated previews, and attached assets are normally out of scope unless they become reachable from the deployed app. Demo-only UI behavior inside the production frontend still matters when it gates production routes or data.
 - **Server to external services** — the frontend performs client-side geolocation and reverse-geocoding calls to OpenStreetMap; fallback product imagery hot-links Unsplash URLs. These are lower-risk than the core API/data boundary but still represent data leaving the platform.

@@ -1,7 +1,6 @@
 import crypto from "crypto";
 import { Router, type IRouter, type Request, type Response } from "express";
-import { db, usersTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { collection, nextId } from "@workspace/db";
 import { signJwt } from "../lib/jwt";
 import { verifyMsg91AccessToken } from "../lib/msg91";
 
@@ -72,10 +71,7 @@ router.post("/auth/msg91-verify", async (req: Request, res: Response) => {
 
   // Find the user keyed by phone number (may not exist yet).
   const externalId = `phone:${phone}`;
-  let [user] = await db
-    .select()
-    .from(usersTable)
-    .where(eq(usersTable.phone, phone));
+  let user = await collection("users").findOne({ phone });
 
   // For vendor signups, resolve the store this account will be scoped to and
   // enforce GLOBAL uniqueness. `vendorStore` is the authorization key for
@@ -88,11 +84,10 @@ router.post("/auth/msg91-verify", async (req: Request, res: Response) => {
     const currentStore = user?.vendorStore ?? "";
     vendorStoreToAssign = currentStore || storeName || `Store ${phone}`;
     if (vendorStoreToAssign !== currentStore) {
-      const owners = await db
-        .select()
-        .from(usersTable)
-        .where(eq(usersTable.vendorStore, vendorStoreToAssign));
-      const conflict = owners.find((u) => u.id !== (user?.id ?? -1));
+      const conflict = await collection("users").findOne({
+        vendorStore: vendorStoreToAssign,
+        ...(user ? { id: { $ne: user.id } } : {}),
+      });
       if (conflict) {
         res.status(409).json({
           error: "This store name is already registered. Please choose another.",
@@ -104,44 +99,51 @@ router.post("/auth/msg91-verify", async (req: Request, res: Response) => {
 
   if (!user) {
     try {
-      [user] = await db
-        .insert(usersTable)
-        .values({
+      const now = new Date();
+      await collection("users").insertOne({
+          id: await nextId("users"),
           externalId,
           name: ownerName || (wantsVendor ? "CONON Vendor" : "CONON User"),
           phone,
           role: wantsVendor ? "vendor" : "customer",
           vendorStore: wantsVendor ? vendorStoreToAssign : null,
-        })
-        .onConflictDoNothing()
-        .returning();
+          createdAt: now,
+        });
+      user = await collection("users").findOne({ phone });
     } catch {
-      // Unique index on vendor_store rejected a concurrent store claim.
-      res.status(409).json({
-        error: "This store name is already registered. Please choose another.",
-      });
-      return;
+      // A concurrent phone signup may have won; only report a store conflict
+      // when the phone still has no account.
+      user = await collection("users").findOne({ phone });
+      if (!user) {
+        res.status(409).json({
+          error: "This store name is already registered. Please choose another.",
+        });
+        return;
+      }
     }
-    if (!user) {
-      [user] = await db
-        .select()
-        .from(usersTable)
-        .where(eq(usersTable.phone, phone));
-    }
+  }
+
+  if (!user) {
+    res.status(409).json({ error: "Could not create user account." });
+    return;
   }
 
   // Promote an existing account to vendor (or backfill its store) on demand.
   if (wantsVendor && (user.role !== "vendor" || !user.vendorStore)) {
     try {
-      [user] = await db
-        .update(usersTable)
-        .set({
+      user = await collection("users").findOneAndUpdate(
+        { id: user.id },
+        { $set: {
           role: "vendor",
           vendorStore: user.vendorStore || vendorStoreToAssign,
           ...(ownerName ? { name: ownerName } : {}),
-        })
-        .where(eq(usersTable.id, user.id))
-        .returning();
+        } },
+        { returnDocument: "after" },
+      );
+      if (!user) {
+        res.status(409).json({ error: "Could not update vendor account." });
+        return;
+      }
     } catch {
       // Unique index on vendor_store rejected a concurrent store claim.
       res.status(409).json({
@@ -232,18 +234,17 @@ router.post("/auth/firebase-verify", async (req: Request, res: Response) => {
     typeof req.body?.name === "string" ? req.body.name.trim() : "";
 
   const externalId = `firebase:${phone}`;
-  let [user] = await db.select().from(usersTable).where(eq(usersTable.phone, phone));
+  let user = await collection("users").findOne({ phone });
 
   let vendorStoreToAssign = "";
   if (wantsVendor) {
     const currentStore = user?.vendorStore ?? "";
     vendorStoreToAssign = currentStore || storeName || `Store ${phone}`;
     if (vendorStoreToAssign !== currentStore) {
-      const owners = await db
-        .select()
-        .from(usersTable)
-        .where(eq(usersTable.vendorStore, vendorStoreToAssign));
-      const conflict = owners.find((u) => u.id !== (user?.id ?? -1));
+      const conflict = await collection("users").findOne({
+        vendorStore: vendorStoreToAssign,
+        ...(user ? { id: { $ne: user.id } } : {}),
+      });
       if (conflict) {
         res.status(409).json({ error: "This store name is already registered. Please choose another." });
         return;
@@ -253,37 +254,46 @@ router.post("/auth/firebase-verify", async (req: Request, res: Response) => {
 
   if (!user) {
     try {
-      [user] = await db
-        .insert(usersTable)
-        .values({
+      const now = new Date();
+      await collection("users").insertOne({
+          id: await nextId("users"),
           externalId,
           name: ownerName || (wantsVendor ? "CONON Vendor" : "CONON User"),
           phone,
           role: wantsVendor ? "vendor" : "customer",
           vendorStore: wantsVendor ? vendorStoreToAssign : null,
-        })
-        .onConflictDoNothing()
-        .returning();
+          createdAt: now,
+        });
+      user = await collection("users").findOne({ phone });
     } catch {
-      res.status(409).json({ error: "This store name is already registered. Please choose another." });
-      return;
+      user = await collection("users").findOne({ phone });
+      if (!user) {
+        res.status(409).json({ error: "This store name is already registered. Please choose another." });
+        return;
+      }
     }
-    if (!user) {
-      [user] = await db.select().from(usersTable).where(eq(usersTable.phone, phone));
-    }
+  }
+
+  if (!user) {
+    res.status(409).json({ error: "Could not create user account." });
+    return;
   }
 
   if (wantsVendor && (user.role !== "vendor" || !user.vendorStore)) {
     try {
-      [user] = await db
-        .update(usersTable)
-        .set({
+      user = await collection("users").findOneAndUpdate(
+        { id: user.id },
+        { $set: {
           role: "vendor",
           vendorStore: user.vendorStore || vendorStoreToAssign,
           ...(ownerName ? { name: ownerName } : {}),
-        })
-        .where(eq(usersTable.id, user.id))
-        .returning();
+        } },
+        { returnDocument: "after" },
+      );
+      if (!user) {
+        res.status(409).json({ error: "Could not update vendor account." });
+        return;
+      }
     } catch {
       res.status(409).json({ error: "This store name is already registered. Please choose another." });
       return;

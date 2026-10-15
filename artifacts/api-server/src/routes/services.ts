@@ -1,13 +1,19 @@
 import { Router, type IRouter } from "express";
-import { db, servicesTable, serviceBookingsTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import {
+  centsToDecimal,
+  collection,
+  decimal,
+  decimalToNumber,
+  moneyToCents,
+  nextId,
+} from "@workspace/db";
 import { BookServiceBody } from "@workspace/api-zod";
 import { randomUUID } from "crypto";
 
 const router: IRouter = Router();
 
 router.get("/services", async (_req, res) => {
-  const services = await db.select().from(servicesTable);
+  const services = await collection("services").find().toArray();
 
   res.json(
     services.map((s) => ({
@@ -15,9 +21,9 @@ router.get("/services", async (_req, res) => {
       type: s.type,
       name: s.name,
       description: s.description,
-      ratePerDay: parseFloat(s.ratePerDay),
+      ratePerDay: decimalToNumber(s.ratePerDay),
       available: s.available,
-      rating: parseFloat(s.rating ?? "4.5"),
+      rating: decimalToNumber(s.rating ?? decimal("4.5")),
       experience: s.experience,
     }))
   );
@@ -26,36 +32,32 @@ router.get("/services", async (_req, res) => {
 router.post("/services", async (req, res) => {
   const body = BookServiceBody.parse(req.body);
 
-  const service = await db
-    .select()
-    .from(servicesTable)
-    .where(eq(servicesTable.externalId, body.serviceId))
-    .limit(1);
+  const service = await collection("services").findOne({ externalId: body.serviceId });
 
-  if (!service[0]) {
+  if (!service) {
     res.status(404).json({ error: "Service not found" });
     return;
   }
 
-  const svc = service[0];
-  const total = parseFloat(svc.ratePerDay) * body.days;
+  const svc = service;
+  const total = centsToDecimal(moneyToCents(svc.ratePerDay) * BigInt(body.days));
 
   const d = body.date;
   const bookingDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
-  const [booking] = await db
-    .insert(serviceBookingsTable)
-    .values({
+  const booking = {
+      id: await nextId("serviceBookings"),
       externalId: randomUUID(),
       serviceId: body.serviceId,
       serviceName: svc.name,
       bookingDate,
       days: body.days,
-      total: total.toString(),
+      total,
       status: "confirmed",
       notes: body.notes ?? null,
-    })
-    .returning();
+      createdAt: new Date(),
+    };
+  await collection("serviceBookings").insertOne(booking);
 
   res.json({
     id: booking.externalId,
@@ -63,7 +65,7 @@ router.post("/services", async (req, res) => {
     serviceName: booking.serviceName,
     date: booking.bookingDate,
     days: booking.days,
-    total: parseFloat(booking.total),
+    total: decimalToNumber(booking.total),
     status: booking.status,
   });
 });

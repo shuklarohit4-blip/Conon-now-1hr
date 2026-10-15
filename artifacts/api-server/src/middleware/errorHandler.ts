@@ -19,24 +19,17 @@ export class CreditExceededError extends Error {
 function isDatabaseConnectionError(error: unknown): boolean {
   const visited = new Set<unknown>();
   const pending: unknown[] = [error];
-  const connectionErrorCodes = new Set([
-    "08000",
-    "08001",
-    "08003",
-    "08004",
-    "08006",
-    "28P01",
-    "28000",
-    "3D000",
-  ]);
   const connectionErrorMessages = [
-    "no postgresql connection config found",
+    "mongodb_uri is not configured",
+    "mongodb connection string is not specified",
+    "mongoserverselectionerror",
+    "mongonetworkerror",
+    "authentication failed",
     "econnrefused",
     "enotfound",
     "etimedout",
-    "password authentication failed",
-    "client password must be a string",
-    "sasl",
+    "server selection timed out",
+    "getaddrinfo",
   ];
 
   while (pending.length > 0) {
@@ -58,10 +51,9 @@ function isDatabaseConnectionError(error: unknown): boolean {
       cause?: unknown;
       code?: unknown;
       message?: unknown;
+      name?: unknown;
     };
-    if (typeof details.code === "string" && connectionErrorCodes.has(details.code)) {
-      return true;
-    }
+    if (typeof details.name === "string" && /Mongo(Network|ServerSelection|Parse)Error/.test(details.name)) return true;
     if (typeof details.message === "string") {
       pending.push(details.message);
     }
@@ -88,7 +80,7 @@ export function errorHandler(
     res.status(503).json({
       error: "Database unavailable",
       details:
-        "Set DATABASE_URL or PGHOST/PGUSER/PGDATABASE (and optionally PGPASSWORD) to a working PostgreSQL instance.",
+        "Configure MONGODB_URI with a reachable MongoDB Atlas connection string.",
     });
     return;
   }

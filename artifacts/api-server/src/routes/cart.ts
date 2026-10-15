@@ -1,75 +1,82 @@
 import { Router, type IRouter } from "express";
-import { db, cartsTable, cartItemsTable, materialsTable } from "@workspace/db";
-import { eq, and } from "drizzle-orm";
+import {
+  centsToDecimal,
+  collection,
+  decimal,
+  decimalToNumber,
+  multiplyMoneyCents,
+  nextId,
+} from "@workspace/db";
 import { AddToCartBody, UpdateCartItemBody } from "@workspace/api-zod";
 import { randomUUID } from "crypto";
 
 const router: IRouter = Router();
+const MAX_CART_ITEMS = 100;
 
 async function getOrCreateCart(sessionId: string) {
-  let cart = await db
-    .select()
-    .from(cartsTable)
-    .where(eq(cartsTable.sessionId, sessionId))
-    .limit(1);
+  let cart = await collection("carts").findOne({ sessionId });
+  if (cart) return cart;
 
-  if (!cart[0]) {
-    const [newCart] = await db
-      .insert(cartsTable)
-      .values({ sessionId })
-      .returning();
-    cart = [newCart];
+  try {
+    const newCart = {
+      id: await nextId("carts"),
+      sessionId,
+      createdAt: new Date(),
+      items: [],
+    };
+    await collection("carts").insertOne(newCart);
+    cart = await collection("carts").findOne({ sessionId });
+  } catch (error) {
+    if ((error as { code?: number }).code !== 11000) throw error;
+    cart = await collection("carts").findOne({ sessionId });
   }
-
-  return cart[0];
+  if (!cart) throw new Error("Could not initialize cart");
+  return cart;
 }
 
 async function buildCartResponse(cartId: number) {
-  const items = await db
-    .select()
-    .from(cartItemsTable)
-    .where(eq(cartItemsTable.cartId, cartId));
-
+  const cart = await collection("carts").findOne({ id: cartId });
+  const items = cart?.items ?? [];
   const categoryMap = new Map<string, typeof items>();
   for (const item of items) {
-    if (!categoryMap.has(item.category)) {
-      categoryMap.set(item.category, []);
-    }
-    categoryMap.get(item.category)!.push(item);
+    const group = categoryMap.get(item.category) ?? [];
+    group.push(item);
+    categoryMap.set(item.category, group);
   }
 
   const categories = Array.from(categoryMap.entries()).map(([category, catItems]) => {
-    const subtotal = catItems.reduce(
-      (sum, i) => sum + parseFloat(i.price) * parseFloat(i.quantity),
-      0
+    const subtotalCents = catItems.reduce(
+      (sum, item) => sum + multiplyMoneyCents(item.price, item.quantity),
+      0n,
     );
     return {
       category,
       vendor: catItems[0].vendor,
-      items: catItems.map((i) => ({
-        id: i.externalId,
-        materialId: i.materialId,
-        name: i.name,
-        category: i.category,
-        price: parseFloat(i.price),
-        unit: i.unit,
-        quantity: parseFloat(i.quantity),
-        vendor: i.vendor,
-        total: parseFloat(i.price) * parseFloat(i.quantity),
+      items: catItems.map((item) => ({
+        id: item.externalId,
+        materialId: item.materialId,
+        name: item.name,
+        category: item.category,
+        price: decimalToNumber(item.price),
+        unit: item.unit,
+        quantity: decimalToNumber(item.quantity),
+        vendor: item.vendor,
+        total: Number(centsToDecimal(multiplyMoneyCents(item.price, item.quantity)).toString()),
       })),
-      subtotal,
+      subtotal: Number(centsToDecimal(subtotalCents).toString()),
       deliveryTime: 60,
     };
   });
 
-  const grandTotal = categories.reduce((sum, c) => sum + c.subtotal, 0);
-  const totalItems = items.length;
-
+  const grandTotalCents = categories.reduce(
+    (sum, category) => sum + BigInt(Math.round(category.subtotal * 100)),
+    0n,
+  );
   return {
     id: `cart-${cartId}`,
     categories,
-    totalItems,
-    grandTotal,
+    totalItems: items.length,
+    grandTotal: Number(centsToDecimal(grandTotalCents).toString()),
   };
 }
 
@@ -81,109 +88,85 @@ router.get("/cart", async (req, res) => {
 router.post("/cart", async (req, res) => {
   const body = AddToCartBody.parse(req.body);
   const cart = await getOrCreateCart(req.sessionId);
+  const material = await collection("materials").findOne({ externalId: body.materialId });
 
-  // Look up the DB material when one exists. Branded catalog items
-  // (virtual IDs not in the DB) won't match — that's OK as long as the
-  // client supplies inline name/price/unit/etc.
-  const material = await db
-    .select()
-    .from(materialsTable)
-    .where(eq(materialsTable.externalId, body.materialId))
-    .limit(1);
-
-  const mat = material[0];
-
-  // SECURITY: when the materialId resolves to a real DB row, the DB is the
-  // authoritative source of name/price/unit/vendor/category. Client overrides
-  // are IGNORED to prevent price tampering. Inline overrides are only honored
-  // for virtual ids (e.g. "brand-...") that don't exist in the materials table.
-  const name     = mat?.name     ?? body.name;
-  const category = mat?.category ?? body.category;
-  const unit     = mat?.unit     ?? body.unit;
-  const vendor   = mat?.vendor   ?? body.vendor;
-  const price    = mat?.price    ?? (body.price != null ? body.price.toString() : undefined);
-
-  if (!name || !category || !unit || !vendor || price == null) {
-    res.status(400).json({
-      error: "Material not found and no inline product details provided",
-    });
+  // Persisted catalog values are authoritative; inline data is only accepted
+  // for virtual products that are not present in the materials collection.
+  const name = material?.name ?? body.name;
+  const category = material?.category ?? body.category;
+  const unit = material?.unit ?? body.unit;
+  const vendor = material?.vendor ?? body.vendor;
+  const price = material?.price ?? (body.price != null ? decimal(body.price) : undefined);
+  if (!name || !category || !unit || !vendor || !price) {
+    res.status(400).json({ error: "Material not found and no inline product details provided" });
     return;
   }
 
-  const existing = await db
-    .select()
-    .from(cartItemsTable)
-    .where(
-      and(
-        eq(cartItemsTable.cartId, cart.id),
-        eq(cartItemsTable.materialId, body.materialId)
-      )
-    )
-    .limit(1);
-
-  if (existing[0]) {
-    const newQty = parseFloat(existing[0].quantity) + body.quantity;
-    await db
-      .update(cartItemsTable)
-      .set({ quantity: newQty.toString() })
-      .where(eq(cartItemsTable.id, existing[0].id));
+  const existing = cart.items.find((item) => item.materialId === body.materialId);
+  if (existing) {
+    await collection("carts").updateOne(
+      { id: cart.id },
+      { $inc: { "items.$[item].quantity": decimal(body.quantity) } },
+      { arrayFilters: [{ "item.externalId": existing.externalId }] },
+    );
   } else {
-    await db.insert(cartItemsTable).values({
+    const newItem = {
+      id: await nextId("cartItems"),
       externalId: randomUUID(),
-      cartId: cart.id,
       materialId: body.materialId,
       name,
       category,
       price,
       unit,
-      quantity: body.quantity.toString(),
+      quantity: decimal(body.quantity),
       vendor,
-    });
+    };
+    const inserted = await collection("carts").updateOne(
+      {
+        id: cart.id,
+        items: { $not: { $elemMatch: { materialId: body.materialId } } },
+        $expr: { $lt: [{ $size: { $ifNull: ["$items", []] } }, MAX_CART_ITEMS] },
+      },
+      { $push: { items: newItem } } as any,
+    );
+    if (inserted.modifiedCount === 0) {
+      const updated = await collection("carts").updateOne(
+        { id: cart.id, "items.materialId": body.materialId },
+        { $inc: { "items.$.quantity": decimal(body.quantity) } },
+      );
+      if (updated.modifiedCount === 0) {
+        res.status(400).json({ error: "Cart item limit reached." });
+        return;
+      }
+    }
   }
-
   res.json(await buildCartResponse(cart.id));
 });
 
 router.delete("/cart/:itemId", async (req, res) => {
   const cart = await getOrCreateCart(req.sessionId);
-
-  await db
-    .delete(cartItemsTable)
-    .where(
-      and(
-        eq(cartItemsTable.externalId, req.params.itemId),
-        eq(cartItemsTable.cartId, cart.id)
-      )
-    );
-
+  await collection("carts").updateOne(
+    { id: cart.id },
+    { $pull: { items: { externalId: req.params.itemId } } } as any,
+  );
   res.json(await buildCartResponse(cart.id));
 });
 
 router.patch("/cart/:itemId", async (req, res) => {
   const body = UpdateCartItemBody.parse(req.body);
   const cart = await getOrCreateCart(req.sessionId);
-
   if (body.quantity <= 0) {
-    await db
-      .delete(cartItemsTable)
-      .where(
-        and(
-          eq(cartItemsTable.externalId, req.params.itemId),
-          eq(cartItemsTable.cartId, cart.id)
-        )
-      );
+    await collection("carts").updateOne(
+      { id: cart.id },
+      { $pull: { items: { externalId: req.params.itemId } } } as any,
+    );
   } else {
-    await db
-      .update(cartItemsTable)
-      .set({ quantity: body.quantity.toString() })
-      .where(
-        and(
-          eq(cartItemsTable.externalId, req.params.itemId),
-          eq(cartItemsTable.cartId, cart.id)
-        )
-      );
+    await collection("carts").updateOne(
+      { id: cart.id },
+      { $set: { "items.$[item].quantity": decimal(body.quantity) } },
+      { arrayFilters: [{ "item.externalId": req.params.itemId }] },
+    );
   }
-
   res.json(await buildCartResponse(cart.id));
 });
 
