@@ -11,7 +11,7 @@ export function sessionMiddleware(req: Request, res: Response, next: NextFunctio
     sessionId = randomUUID();
     res.cookie(COOKIE_NAME, sessionId, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       secure: process.env.NODE_ENV === "production",
       maxAge: COOKIE_MAX_AGE,
       path: "/",

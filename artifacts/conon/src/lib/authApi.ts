@@ -1,12 +1,14 @@
 /**
  * Client helpers for the auth endpoints exposed by the api-server.
- * The api-server is reverse-proxied under the app base path at `${BASE_URL}api/*`.
+ * The API origin can be set to the Render service for production.
  *
  * Phone login uses Firebase Phone Auth: the client verifies the OTP with Firebase,
  * then sends the resulting ID token here for server-side validation and JWT issuance.
  */
 
-const API = import.meta.env.BASE_URL; // always ends with "/"
+import { API_ORIGIN } from "./apiBase";
+
+const API = `${API_ORIGIN}/api`;
 
 export const JWT_STORAGE_KEY = "conon_jwt";
 
@@ -41,7 +43,7 @@ export async function verifyMsg91(
   opts?: Msg91VerifyOptions,
 ): Promise<VerifyOtpResult> {
   try {
-    const r = await fetch(`${API}api/auth/msg91-verify`, {
+    const r = await fetch(`${API}/auth/msg91-verify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -84,7 +86,7 @@ export async function verifyFirebaseIdToken(
   opts?: FirebaseVerifyOptions,
 ): Promise<VerifyOtpResult> {
   try {
-    const r = await fetch(`${API}api/auth/firebase-verify`, {
+    const r = await fetch(`${API}/auth/firebase-verify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -108,7 +110,7 @@ export async function adminLogin(
   password: string,
 ): Promise<AdminLoginResult> {
   try {
-    const r = await fetch(`${API}api/auth/admin-login`, {
+    const r = await fetch(`${API}/auth/admin-login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

@@ -1,18 +1,17 @@
 import { io, type Socket } from "socket.io-client";
+import { API_ORIGIN } from "./apiBase";
 
 /**
  * Shared Socket.io client for CONON real-time features.
  *
- * The API server mounts Socket.io at `/api/socket.io` so the Replit path-router
- * proxies it to the API service (only `/api/*` is routed there). We therefore
- * connect to the *same origin* the app is served from — this also means no CORS
- * negotiation is needed.
+ * The API server mounts Socket.IO at `/api/socket.io`; use the same configurable
+ * API origin as REST so Render and the Vercel frontend can run separately.
  */
 let socket: Socket | null = null;
 
 export function getSocket(): Socket {
   if (!socket) {
-    socket = io(window.location.origin, {
+    socket = io(API_ORIGIN, {
       path: "/api/socket.io",
       transports: ["websocket", "polling"],
       withCredentials: true,

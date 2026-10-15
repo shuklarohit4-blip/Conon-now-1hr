@@ -15,6 +15,7 @@ import { useLocation } from "wouter";
 import { useUser } from "@/context/UserContext";
 import { toast } from "sonner";
 import { JWT_STORAGE_KEY } from "@/lib/authApi";
+import { apiUrl as resolveApiUrl } from "@/lib/apiBase";
 
 /* ── Brand tokens ───────────────────────────────────────────── */
 const Y  = "#FBBF24";   // Safety Yellow
@@ -54,11 +55,8 @@ interface AppUser {
   joinedAt: string; ordersCount: number; rating: number;
 }
 
-/* ── Fetch helper ──────────────────────────────────────────────
-   The api-server is reverse-proxied under the app base path at `${BASE_URL}api/*`.
-   Build every URL from BASE_URL so admin calls work under non-root deployments
-   (a bare "/api/..." escapes the artifact's path-router proxy and 404s). */
-const apiUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+/* ── Fetch helper ────────────────────────────────────────────── */
+const apiUrl = resolveApiUrl;
 
 async function api<T>(path: string, opts?: RequestInit): Promise<T> {
   const token = localStorage.getItem(JWT_STORAGE_KEY);

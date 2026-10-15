@@ -5,11 +5,12 @@
  * These helpers call our own api-server proxy endpoints, which attach the key and
  * forward to Google. The browser never sees the key.
  *
- * The api-server is reverse-proxied under the app base path at `${BASE_URL}api/*`.
+ * The API origin can be set to the Render service for production.
  */
 import type { LatLng } from "@/lib/realtime";
+import { API_ORIGIN } from "./apiBase";
 
-const API = import.meta.env.BASE_URL; // ends with "/"
+const API = `${API_ORIGIN}/api`;
 
 export interface PlacePrediction {
   description: string;
@@ -52,7 +53,7 @@ export async function fetchAutocomplete(
   signal?: AbortSignal,
 ): Promise<PlacePrediction[]> {
   const url =
-    `${API}api/maps/places/autocomplete` +
+    `${API}/maps/places/autocomplete` +
     `?input=${encodeURIComponent(input)}` +
     `&sessiontoken=${encodeURIComponent(sessionToken)}`;
   const r = await fetch(url, { credentials: "include", signal });
@@ -66,7 +67,7 @@ export async function fetchPlaceDetails(
   sessionToken: string,
 ): Promise<PlaceDetails> {
   const url =
-    `${API}api/maps/places/details` +
+    `${API}/maps/places/details` +
     `?place_id=${encodeURIComponent(placeId)}` +
     `&sessiontoken=${encodeURIComponent(sessionToken)}`;
   const r = await fetch(url, { credentials: "include" });
@@ -81,7 +82,7 @@ export async function fetchDirections(
   const o = `${origin.lat},${origin.lng}`;
   const d = `${destination.lat},${destination.lng}`;
   const url =
-    `${API}api/maps/directions` +
+    `${API}/maps/directions` +
     `?origin=${encodeURIComponent(o)}` +
     `&destination=${encodeURIComponent(d)}`;
   const r = await fetch(url, { credentials: "include" });

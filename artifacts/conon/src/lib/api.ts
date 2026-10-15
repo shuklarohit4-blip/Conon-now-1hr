@@ -1,17 +1,19 @@
 import axios, { AxiosError } from "axios";
 import { JWT_STORAGE_KEY } from "./authApi";
 import { beginLoading, endLoading } from "./loading";
+import { API_ORIGIN } from "./apiBase";
 
 /**
  * Shared axios client for the CONON api-server.
  *
- * The api-server is reverse-proxied under the app base path at `${BASE_URL}api`.
+ * The API origin can be set to the Render service for production. When unset,
+ * local/Replit deployments continue to use the app's own origin.
  * Every request carries the vendor JWT (when present) as a Bearer token and the
  * anonymous session cookie (withCredentials). The global loading bar is driven
  * by the request/response interceptors.
  */
 export const api = axios.create({
-  baseURL: `${import.meta.env.BASE_URL}api`,
+  baseURL: API_ORIGIN,
   withCredentials: true,
 });
 

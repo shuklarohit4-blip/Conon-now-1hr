@@ -43,10 +43,6 @@ app.use(
         callback(null, true);
         return;
       }
-      if (allowedOrigins.length === 0) {
-        callback(null, origin);
-        return;
-      }
       if (allowedOrigins.includes(origin)) {
         callback(null, origin);
       } else {
