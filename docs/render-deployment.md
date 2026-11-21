@@ -29,7 +29,7 @@ Add these in Render only for features that are enabled; never put their values i
 - `FIREBASE_WEB_API_KEY` for Firebase token verification.
 - `GOOGLE_MAPS_API_KEY` for server-side Maps proxy routes.
 - `ADMIN_EMAIL` and `ADMIN_PASSWORD` for the production admin login.
-- `REPL_ID` only if Replit OIDC login is configured for the Render callback URL. A valid Replit OIDC client registration must allow the external Render URL.
+- `REPL_ID` only if OIDC login is configured for the Render callback URL. A valid OIDC client registration must allow the external Render URL.
 
 `MONGODB_URI` is a secret entered in Render; `MONGODB_DATABASE`, `JWT_SECRET`, `NODE_ENV`, and `ALLOWED_ORIGINS` are configured by the Blueprint.
 

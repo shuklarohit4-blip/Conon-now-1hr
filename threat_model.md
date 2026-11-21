@@ -6,7 +6,7 @@ CONON Infrabuilt is a pnpm-monorepo construction marketplace with a React + Vite
 
 Production-scope assumptions for this scan:
 - `artifacts/mockup-sandbox` is dev-only and not deployed to production.
-- Replit deployment terminates TLS for client↔server traffic.
+- Production deployment terminates TLS for client↔server traffic via reverse proxy.
 - `NODE_ENV` is `production` in deployed environments.
 
 ## Assets

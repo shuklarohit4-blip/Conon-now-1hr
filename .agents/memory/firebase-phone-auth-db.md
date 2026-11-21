@@ -22,5 +22,5 @@ After `confirmResult.confirm(otp)`, the client calls `auth.currentUser.getIdToke
 
 ## Firebase console setup required
 1. Authentication → Sign-in method → Phone → Enable
-2. Add the Replit dev domain to "Authorized domains"
+2. Add your development and production domain to "Authorized domains"
 3. Get the Web API Key from Project Settings → General

@@ -4,7 +4,7 @@ import { type Request, type Response } from "express";
 import { collection } from "@workspace/db";
 import type { AuthUser } from "@workspace/api-zod";
 
-export const ISSUER_URL = process.env.ISSUER_URL ?? "https://replit.com/oidc";
+export const ISSUER_URL = process.env.ISSUER_URL ?? "https://auth.conon.in/oidc";
 export const SESSION_COOKIE = "sid";
 export const SESSION_TTL = 7 * 24 * 60 * 60 * 1000;
 

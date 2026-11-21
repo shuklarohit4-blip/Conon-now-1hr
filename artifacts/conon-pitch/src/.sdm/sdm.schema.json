@@ -6,7 +6,7 @@
       "type": "string"
     },
     "format": {
-      "const": "replit.sdm",
+      "const": "conon.sdm",
       "type": "string"
     },
     "version": {

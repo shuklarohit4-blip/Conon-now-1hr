@@ -13,7 +13,7 @@ Deploy the existing Express API in `artifacts/api-server` to Render, provide a m
 
 Use a Render Blueprint (`render.yaml`) at the monorepo root to declare one Node web service and one PostgreSQL database. Build from the repository root so pnpm workspace dependencies resolve; build the API with the existing `@workspace/api-server` script and start its compiled entrypoint. Configure Render's health check to call `/api/healthz`.
 
-The Blueprint will link the database URL to the API service and set non-secret runtime configuration. Secret credentials will be supplied through Render's dashboard, never committed to the repository. Required server configuration includes `JWT_SECRET`, `ALLOWED_ORIGINS`, and the platform-provided `DATABASE_URL`. Integration credentials such as `MSG91_AUTH_KEY`, `GOOGLE_MAPS_API_KEY`, `FIREBASE_WEB_API_KEY`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `REPL_ID` will be treated as optional until the corresponding feature is enabled. The existing Replit OIDC login remains conditional on a working Replit client registration and external callback URL.
+The Blueprint will link the database URL to the API service and set non-secret runtime configuration. Secret credentials will be supplied through Render's dashboard, never committed to the repository. Required server configuration includes `JWT_SECRET`, `ALLOWED_ORIGINS`, and the platform-provided `DATABASE_URL`. Integration credentials such as `MSG91_AUTH_KEY`, `GOOGLE_MAPS_API_KEY`, `FIREBASE_WEB_API_KEY`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `REPL_ID` will be treated as optional until the corresponding feature is enabled. The existing OIDC login remains conditional on a working client registration and external callback URL.
 
 ## Frontend/API integration
 

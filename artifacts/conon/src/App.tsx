@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
-import { useAuth } from "@workspace/replit-auth-web";
+import { useAuth } from "@workspace/auth-web";
 import { UIProvider } from "@/context/UIContext";
 import { UserProvider, useUser } from "@/context/UserContext";
 import { LocationProvider } from "@/context/LocationContext";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "@/components/Layout";
 import { useUser } from "@/context/UserContext";
-import { useAuth } from "@workspace/replit-auth-web";
+import { useAuth } from "@workspace/auth-web";
 import { useLocation, Link } from "wouter";
 import {
   User, Settings, Bell, Shield, ChevronRight,

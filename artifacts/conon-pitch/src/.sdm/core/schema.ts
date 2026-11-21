@@ -1,7 +1,7 @@
 import { Type, type Static } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 
-export const SDM_FORMAT = 'replit.sdm';
+export const SDM_FORMAT = 'conon.sdm';
 export const SDM_VERSION = 1;
 export const SDM_SLIDE_WIDTH = 1920;
 export const SDM_SLIDE_HEIGHT = 1080;

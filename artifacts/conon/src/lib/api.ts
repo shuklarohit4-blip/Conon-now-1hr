@@ -7,7 +7,7 @@ import { API_ORIGIN } from "./apiBase";
  * Shared axios client for the CONON api-server.
  *
  * The API origin can be set to the Render service for production. When unset,
- * local/Replit deployments continue to use the app's own origin.
+ * local development and deployments continue to use the app's own origin.
  * Every request carries the vendor JWT (when present) as a Bearer token and the
  * anonymous session cookie (withCredentials). The global loading bar is driven
  * by the request/response interceptors.

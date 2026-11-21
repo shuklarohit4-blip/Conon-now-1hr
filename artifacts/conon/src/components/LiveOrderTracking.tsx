@@ -9,7 +9,8 @@ import {
 import { Link } from "wouter";
 import {
   ChevronLeft, Phone, MapPin, Star, Navigation,
-  CheckCircle2, Package, Truck, Radio, AlertTriangle, Play, Square,
+  CheckCircle2, Package, Truck, Radio, Play, Square,
+  Plus, Minus, RotateCcw, Info,
 } from "lucide-react";
 import { useTruckTracking, distanceMeters } from "@/hooks/useTruckTracking";
 import { startDriverSimulation, type DriverSimulator } from "@/lib/driverSimulator";
@@ -53,7 +54,7 @@ const MAP_OPTIONS: google.maps.MapOptions = {
   backgroundColor: "#eef2ea",
 };
 
-/* SVG pin factory for origin / destination markers. */
+/* SVG pin factory for origin / destination markers (Google Maps). */
 function pinIcon(glyph: "warehouse" | "site"): google.maps.Icon | undefined {
   if (typeof google === "undefined") return undefined;
   const color = glyph === "warehouse" ? "#1d4ed8" : GREEN;
@@ -143,7 +144,7 @@ function Stepper({ current }: { current: StepIndex }) {
             </div>
             <span
               className="mt-1.5 text-[9px] font-bold text-center leading-tight"
-              style={{ color: done || active ? GREEN_DARK : "#9ca3af" }}
+              style={{ color: active ? "#111827" : done ? GREEN : "#9ca3af" }}
             >
               {label}
             </span>
@@ -154,12 +155,340 @@ function Stepper({ current }: { current: StepIndex }) {
   );
 }
 
+/* ── Web Mercator math for fallback OpenStreetMap viewer ───── */
+function latLngToWorldPixel(lat: number, lng: number, zoom: number) {
+  const scale = 256 * Math.pow(2, zoom);
+  const x = ((lng + 180) / 360) * scale;
+  const sinLat = Math.sin((lat * Math.PI) / 180);
+  const clampedSin = Math.max(-0.9999, Math.min(0.9999, sinLat));
+  const y = (0.5 - Math.log((1 + clampedSin) / (1 - clampedSin)) / (4 * Math.PI)) * scale;
+  return { x, y };
+}
+
+function worldPixelToLatLng(x: number, y: number, zoom: number): LatLng {
+  const scale = 256 * Math.pow(2, zoom);
+  const lng = (x / scale) * 360 - 180;
+  const n = Math.PI - (2 * Math.PI * y) / scale;
+  const lat = (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+  return { lat, lng };
+}
+
+function generateRoadPath(origin: LatLng, dest: LatLng): LatLng[] {
+  const points: LatLng[] = [];
+  const steps = 14;
+  const dLat = dest.lat - origin.lat;
+  const dLng = dest.lng - origin.lng;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const curve = Math.sin(t * Math.PI) * 0.0035;
+    points.push({
+      lat: origin.lat + dLat * t + curve,
+      lng: origin.lng + dLng * t - curve * 0.45,
+    });
+  }
+  return points;
+}
+
+/* ── Fallback Live Map (OpenStreetMap & Vector overlay) ────── */
+function FallbackMap({
+  origin,
+  destination,
+  routePath,
+  truckPos,
+  bearing,
+}: {
+  origin: LatLng & { label: string };
+  destination: LatLng & { label: string };
+  routePath: LatLng[];
+  truckPos: LatLng;
+  bearing: number;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ width: 800, height: 600 });
+  const [zoom, setZoom] = useState(14);
+  const [center, setCenter] = useState<LatLng>(() => ({
+    lat: (origin.lat + destination.lat) / 2,
+    lng: (origin.lng + destination.lng) / 2,
+  }));
+  const isDraggingRef = useRef(false);
+  const dragStartRef = useRef({ x: 0, y: 0, centerWorld: { x: 0, y: 0 } });
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        setSize({
+          width: containerRef.current.clientWidth || window.innerWidth,
+          height: containerRef.current.clientHeight || window.innerHeight,
+        });
+      }
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const centerPixel = useMemo(
+    () => latLngToWorldPixel(center.lat, center.lng, zoom),
+    [center.lat, center.lng, zoom],
+  );
+
+  const toScreen = useCallback(
+    (lat: number, lng: number) => {
+      const p = latLngToWorldPixel(lat, lng, zoom);
+      return {
+        x: size.width / 2 + (p.x - centerPixel.x),
+        y: size.height / 2 + (p.y - centerPixel.y),
+      };
+    },
+    [centerPixel, size.width, size.height, zoom],
+  );
+
+  const tiles = useMemo(() => {
+    const numTiles = 1 << zoom;
+    const minTx = Math.floor((centerPixel.x - size.width / 2) / 256) - 1;
+    const maxTx = Math.floor((centerPixel.x + size.width / 2) / 256) + 1;
+    const minTy = Math.floor((centerPixel.y - size.height / 2) / 256) - 1;
+    const maxTy = Math.floor((centerPixel.y + size.height / 2) / 256) + 1;
+
+    const list: { key: string; url: string; left: number; top: number }[] = [];
+    for (let ty = Math.max(0, minTy); ty <= Math.min(numTiles - 1, maxTy); ty++) {
+      for (let tx = minTx; tx <= maxTx; tx++) {
+        const wrappedTx = ((tx % numTiles) + numTiles) % numTiles;
+        const left = tx * 256 - (centerPixel.x - size.width / 2);
+        const top = ty * 256 - (centerPixel.y - size.height / 2);
+        list.push({
+          key: `${zoom}-${tx}-${ty}`,
+          url: `https://tile.openstreetmap.org/${zoom}/${wrappedTx}/${ty}.png`,
+          left,
+          top,
+        });
+      }
+    }
+    return list;
+  }, [centerPixel, size.width, size.height, zoom]);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    isDraggingRef.current = true;
+    dragStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      centerWorld: { ...centerPixel },
+    };
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDraggingRef.current) return;
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+    const newWorldX = dragStartRef.current.centerWorld.x - dx;
+    const newWorldY = dragStartRef.current.centerWorld.y - dy;
+    setCenter(worldPixelToLatLng(newWorldX, newWorldY, zoom));
+  };
+
+  const handlePointerUp = () => {
+    isDraggingRef.current = false;
+  };
+
+  const originScreen = toScreen(origin.lat, origin.lng);
+  const destScreen = toScreen(destination.lat, destination.lng);
+  const truckScreen = toScreen(truckPos.lat, truckPos.lng);
+
+  const polylinePoints = routePath
+    .map((pt) => {
+      const s = toScreen(pt.lat, pt.lng);
+      return `${s.x.toFixed(1)},${s.y.toFixed(1)}`;
+    })
+    .join(" ");
+
+  return (
+    <div
+      ref={containerRef}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      className="relative w-full h-full overflow-hidden select-none cursor-grab active:cursor-grabbing bg-[#eef2ea]"
+    >
+      {/* OSM Tiles Layer */}
+      <div className="absolute inset-0 pointer-events-none">
+        {tiles.map((t) => (
+          <img
+            key={t.key}
+            src={t.url}
+            alt=""
+            loading="lazy"
+            className="absolute w-[256px] h-[256px] opacity-90 transition-opacity duration-300"
+            style={{ left: t.left, top: t.top }}
+          />
+        ))}
+      </div>
+
+      {/* Route SVG Polyline */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        {polylinePoints && (
+          <>
+            <polyline
+              points={polylinePoints}
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeOpacity="0.9"
+            />
+            <polyline
+              points={polylinePoints}
+              fill="none"
+              stroke={GREEN}
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeOpacity="1"
+            />
+          </>
+        )}
+      </svg>
+
+      {/* Origin Marker */}
+      <div
+        className="absolute pointer-events-none flex flex-col items-center"
+        style={{
+          left: originScreen.x,
+          top: originScreen.y,
+          transform: "translate(-50%, -100%)",
+        }}
+      >
+        <span className="bg-blue-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-md mb-1 whitespace-nowrap">
+          Warehouse
+        </span>
+        <svg width="28" height="34" viewBox="0 0 28 34">
+          <path
+            d="M14 0C6.8 0 1 5.8 1 13c0 9 13 21 13 21s13-12 13-21C27 5.8 21.2 0 14 0z"
+            fill="#1d4ed8"
+            stroke="#fff"
+            strokeWidth="2"
+          />
+          <path
+            d="M11 19v-6h4v6M9 19v-8l5-3 5 3v8"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+
+      {/* Destination Marker */}
+      <div
+        className="absolute pointer-events-none flex flex-col items-center"
+        style={{
+          left: destScreen.x,
+          top: destScreen.y,
+          transform: "translate(-50%, -100%)",
+        }}
+      >
+        <span className="bg-emerald-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-md mb-1 whitespace-nowrap">
+          Your Site
+        </span>
+        <svg width="28" height="34" viewBox="0 0 28 34">
+          <path
+            d="M14 0C6.8 0 1 5.8 1 13c0 9 13 21 13 21s13-12 13-21C27 5.8 21.2 0 14 0z"
+            fill={GREEN}
+            stroke="#fff"
+            strokeWidth="2"
+          />
+          <circle cx="14" cy="11" r="2.4" fill="#fff" />
+          <path d="M14 7v8" stroke="#fff" strokeWidth="1.6" />
+        </svg>
+      </div>
+
+      {/* Truck Marker with bearing rotation and pulsing green radar */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          left: truckScreen.x,
+          top: truckScreen.y,
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <div className="w-[54px] h-[54px] relative">
+          <span
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: "rgba(42,122,59,0.22)",
+              animation: "conon-pulse 1.8s ease-out infinite",
+            }}
+          />
+          <div
+            className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-out"
+            style={{
+              transform: `rotate(${bearing}deg)`,
+              filter: "drop-shadow(0 3px 5px rgba(0,0,0,0.35))",
+            }}
+          >
+            <svg width="34" height="34" viewBox="0 0 44 44">
+              <rect x="14" y="11" width="16" height="25" rx="3.5" fill={GREEN_DARK} />
+              <rect x="15.5" y="4" width="13" height="10" rx="3" fill={GREEN} />
+              <rect x="17.5" y="5.5" width="9" height="4.5" rx="1.5" fill="#cfe9d6" />
+              <rect x="10.5" y="15" width="3.5" height="7" rx="1.75" fill="#1f2937" />
+              <rect x="30" y="15" width="3.5" height="7" rx="1.75" fill="#1f2937" />
+              <rect x="10.5" y="26" width="3.5" height="7" rx="1.75" fill="#1f2937" />
+              <rect x="30" y="26" width="3.5" height="7" rx="1.75" fill="#1f2937" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Map Zoom & Reset Controls */}
+      <div className="absolute right-4 top-20 z-10 flex flex-col gap-1.5 shadow-lg rounded-2xl bg-white/95 backdrop-blur-sm p-1">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setZoom((z) => Math.min(18, z + 1));
+          }}
+          className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-700 hover:bg-gray-100 font-bold active:scale-95 transition-transform"
+          title="Zoom in"
+        >
+          <Plus className="w-4 h-4" />
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setZoom((z) => Math.max(11, z - 1));
+          }}
+          className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-700 hover:bg-gray-100 font-bold active:scale-95 transition-transform"
+          title="Zoom out"
+        >
+          <Minus className="w-4 h-4" />
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setCenter({
+              lat: (origin.lat + destination.lat) / 2,
+              lng: (origin.lng + destination.lng) / 2,
+            });
+            setZoom(14);
+          }}
+          className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-700 hover:bg-gray-100 font-bold active:scale-95 transition-transform"
+          title="Reset View"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /* ── main component ──────────────────────────────────────────── */
 export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
+  const hasKey = Boolean(API_KEY && API_KEY.trim().length > 0);
   const { isLoaded, loadError } = useJsApiLoader({
     id: "conon-google-maps",
-    googleMapsApiKey: API_KEY ?? "",
+    googleMapsApiKey: hasKey ? API_KEY! : "",
   });
+
+  const canUseGoogle = hasKey && isLoaded && !loadError;
 
   const { position, target, bearing, connected, lastUpdateAt } = useTruckTracking(order.id);
 
@@ -187,55 +516,70 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
     [order.origin, order.destination],
   );
 
-  // Fetch the precise driving route from the secure server-side Directions
-  // proxy. The Google Maps key stays on the server — never in the browser.
+  // Fetch the driving route from server Directions proxy, with smooth curve fallback.
   useEffect(() => {
     let cancelled = false;
     fetchDirections(order.origin, order.destination)
       .then((res) => {
         if (cancelled) return;
-        setRoutePath(res.path.length ? res.path : [order.origin, order.destination]);
+        if (res.path && res.path.length > 1) {
+          setRoutePath(res.path);
+        } else {
+          setRoutePath(generateRoadPath(order.origin, order.destination));
+        }
       })
       .catch(() => {
-        // Fall back to a straight segment if Directions is unavailable.
-        if (!cancelled) setRoutePath([order.origin, order.destination]);
+        if (cancelled) return;
+        setRoutePath(generateRoadPath(order.origin, order.destination));
       });
     return () => {
       cancelled = true;
     };
   }, [order.origin, order.destination]);
 
-  // Live ETA + distance remaining via the Distance Matrix API (throttled).
+  // Live ETA + distance remaining (works with DistanceMatrix if available, or real-time geometric fallback).
   useEffect(() => {
-    if (!isLoaded || !target) return;
+    const toDestMeters = distanceMeters(truckTarget, order.destination);
+    const speedMps = 8.33; // ~30 km/h average city transit speed
+    const calculatedMins = Math.max(1, Math.round(toDestMeters / (speedMps * 60)));
+    const calculatedDist =
+      toDestMeters >= 1000
+        ? `${(toDestMeters / 1000).toFixed(1)} km`
+        : `${Math.round(toDestMeters)} m`;
+
+    setEta({ text: `${calculatedMins} min${calculatedMins === 1 ? "" : "s"}`, mins: calculatedMins });
+    setDistRemaining(calculatedDist);
+
+    if (!canUseGoogle || !target) return;
     const now = Date.now();
-    if (now - lastEtaCallRef.current < 3000) return;
+    if (now - lastEtaCallRef.current < 4000) return;
     lastEtaCallRef.current = now;
 
-    const svc = new google.maps.DistanceMatrixService();
-    svc.getDistanceMatrix(
-      {
-        origins: [truckTarget],
-        destinations: [order.destination],
-        travelMode: google.maps.TravelMode.DRIVING,
-      },
-      (res, status) => {
-        const el = res?.rows?.[0]?.elements?.[0];
-        if (status === "OK" && el && el.status === "OK") {
-          setEta({ text: el.duration.text, mins: Math.round(el.duration.value / 60) });
-          setDistRemaining(el.distance.text);
-        }
-      },
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoaded, target]);
+    if (typeof google !== "undefined" && google.maps?.DistanceMatrixService) {
+      const svc = new google.maps.DistanceMatrixService();
+      svc.getDistanceMatrix(
+        {
+          origins: [truckTarget],
+          destinations: [order.destination],
+          travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (res, status) => {
+          const el = res?.rows?.[0]?.elements?.[0];
+          if (status === "OK" && el && el.status === "OK") {
+            setEta({ text: el.duration.text, mins: Math.round(el.duration.value / 60) });
+            setDistRemaining(el.distance.text);
+          }
+        },
+      );
+    }
+  }, [canUseGoogle, target, truckTarget, order.destination]);
 
-  // Keep the truck comfortably in view as it moves.
+  // Keep the truck in view on Google Maps as it moves.
   useEffect(() => {
     if (mapRef.current && position) mapRef.current.panTo(position);
   }, [position]);
 
-  // Derive the stepper stage from proximity (server sends coords, not status).
+  // Derive the stepper stage from proximity.
   const step: StepIndex = useMemo(() => {
     if (!target) return 0; // not moving yet → Order Placed
     const toDest = distanceMeters(truckTarget, order.destination);
@@ -243,8 +587,7 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
     if (toDest < 120) return 3; // Reached
     if (toOrigin < 250) return 1; // Loaded (still at warehouse)
     return 2; // On the Way
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target, order.origin, order.destination]);
+  }, [target, order.origin, order.destination, truckTarget]);
 
   const toggleSim = () => {
     if (simRunning) {
@@ -264,40 +607,12 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
 
   const stale = lastUpdateAt != null && Date.now() - lastUpdateAt > 15000;
 
-  /* ── missing API key fallback ──────────────────────────────── */
-  if (!API_KEY) {
-    return (
-      <div className="fixed inset-0 bg-gray-50 flex flex-col items-center justify-center px-8 text-center">
-        <AlertTriangle className="w-12 h-12 text-amber-500 mb-4" />
-        <h2 className="text-lg font-black text-gray-900 mb-2">Google Maps key required</h2>
-        <p className="text-sm text-gray-500 max-w-xs leading-relaxed">
-          Add a <code className="font-mono text-xs">VITE_GOOGLE_MAPS_API_KEY</code> with the
-          Maps JavaScript, Directions and Distance Matrix APIs enabled to see the live map.
-        </p>
-        <Link href="/home">
-          <button className="mt-6 px-6 py-2.5 rounded-2xl text-white font-black text-sm" style={{ background: GREEN }}>
-            Back to Home
-          </button>
-        </Link>
-      </div>
-    );
-  }
-
-  if (loadError) {
-    return (
-      <div className="fixed inset-0 flex flex-col items-center justify-center px-8 text-center">
-        <AlertTriangle className="w-12 h-12 text-red-500 mb-4" />
-        <p className="text-sm text-gray-600">Failed to load Google Maps. Check the API key restrictions.</p>
-      </div>
-    );
-  }
-
   return (
     <div className="fixed inset-0 bg-gray-200">
       <style>{`@keyframes conon-pulse{0%{transform:scale(0.6);opacity:0.9}100%{transform:scale(1.6);opacity:0}}`}</style>
 
-      {/* ── Map ─────────────────────────────────────────────── */}
-      {isLoaded ? (
+      {/* ── Map (Google Maps if configured, or Fallback OpenStreetMap viewer) ── */}
+      {canUseGoogle ? (
         <GoogleMap
           mapContainerStyle={{ width: "100%", height: "100%" }}
           center={order.origin}
@@ -316,13 +631,31 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
           <TruckMarker position={truckPos} bearing={bearing} />
         </GoogleMap>
       ) : (
-        <div className="w-full h-full flex items-center justify-center text-gray-500 text-sm">Loading map…</div>
+        <FallbackMap
+          origin={order.origin}
+          destination={order.destination}
+          routePath={routePath}
+          truckPos={truckPos}
+          bearing={bearing}
+        />
+      )}
+
+      {/* ── Top Info Banner (when running on OpenStreetMap) ── */}
+      {!canUseGoogle && (
+        <div className="absolute top-16 inset-x-0 mx-auto max-w-sm px-4 z-10 pointer-events-none">
+          <div className="bg-emerald-800/90 backdrop-blur-md text-white rounded-2xl px-3.5 py-1.5 shadow-md flex items-center justify-between text-[11px] font-bold pointer-events-auto">
+            <div className="flex items-center gap-1.5 truncate">
+              <Info className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+              <span className="truncate">OpenStreetMap Live Mode · Add <code className="font-mono text-[10px] text-amber-200">VITE_GOOGLE_MAPS_API_KEY</code> for Google Maps</span>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ── Floating header ─────────────────────────────────── */}
-      <div className="absolute top-0 inset-x-0 p-4 flex items-center gap-3 pointer-events-none">
+      <div className="absolute top-0 inset-x-0 p-4 flex items-center gap-3 pointer-events-none z-20">
         <Link href="/home">
-          <button className="pointer-events-auto w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+          <button className="pointer-events-auto w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center active:scale-95 transition-transform">
             <ChevronLeft className="w-5 h-5 text-gray-700" />
           </button>
         </Link>
@@ -346,7 +679,7 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
         <button
           onClick={toggleSim}
           disabled={routePath.length < 2}
-          className="absolute left-4 bottom-[19rem] z-10 flex items-center gap-2 px-3 py-2 rounded-xl text-white text-xs font-black shadow-lg disabled:opacity-40"
+          className="absolute left-4 bottom-[19rem] z-20 flex items-center gap-2 px-3.5 py-2 rounded-xl text-white text-xs font-black shadow-lg disabled:opacity-40 active:scale-95 transition-transform"
           style={{ background: simRunning ? "#b91c1c" : "#1f2937" }}
         >
           {simRunning ? <Square className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -355,7 +688,7 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
       )}
 
       {/* ── Bottom sheet ────────────────────────────────────── */}
-      <div className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl px-5 pt-3 pb-6">
+      <div className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl px-5 pt-3 pb-6 z-20">
         <div className="w-10 h-1.5 bg-gray-200 rounded-full mx-auto mb-4" />
 
         {/* ETA + distance */}
@@ -406,7 +739,7 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
           </div>
           <a
             href={`tel:${order.driver.phone}`}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-white text-sm font-black shrink-0"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-white text-sm font-black shrink-0 active:scale-95 transition-transform"
             style={{ background: GREEN }}
           >
             <Phone className="w-4 h-4" /> Call

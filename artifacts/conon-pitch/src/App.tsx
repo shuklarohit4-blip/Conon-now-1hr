@@ -25,7 +25,7 @@ function getSlideIndex(pathname: string): number {
 }
 
 const PARENT_OWNS_NAVIGATION =
-  new URLSearchParams(window.location.search).get('replitNav') === 'parent' ||
+  new URLSearchParams(window.location.search).get('deckNav') === 'parent' ||
   window.parent !== window.parent.parent;
 
 function SlideEditor() {

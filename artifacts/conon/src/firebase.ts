@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 
 /**
  * Firebase config is injected via Vite build-time env vars (VITE_ prefix).
- * Set these in Replit Secrets (or a local .env file for VS Code dev).
+ * Set these in your .env file or environment variables.
  *
  * Required secrets:
  *   VITE_FIREBASE_API_KEY
@@ -31,7 +31,7 @@ if (import.meta.env.DEV) {
     console.warn(
       "[CONON] Firebase: missing env vars →",
       missing.join(", "),
-      "\nSet them in Replit Secrets (or .env locally) and restart.",
+      "\nSet them in .env locally or deployment environment and restart.",
     );
   }
 }

@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { MandiTicker } from "./MandiTicker";
 import { useUI } from "@/context/UIContext";
 import { useGetCart } from "@workspace/api-client-react";
-import { useAuth } from "@workspace/replit-auth-web";
+import { useAuth } from "@workspace/auth-web";
 import { useUser } from "@/context/UserContext";
 import { CartSheet } from "./CartSheet";
 import { useDeliveryLocation } from "@/context/LocationContext";

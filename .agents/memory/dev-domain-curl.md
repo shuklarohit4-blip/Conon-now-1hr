@@ -3,7 +3,7 @@ name: Testing backend artifacts locally
 description: Why curl to the dev domain fails and how to test the api-server directly
 ---
 
-The Replit dev domain ($REPLIT_DEV_DOMAIN) is served through an mTLS proxy, so
+The development domain proxy is served through an mTLS proxy, so
 plain `curl` to it returns HTTP 000 / empty — it is NOT a sign the server is down.
 
 **How to apply:** To test the Express `api-server` from the shell, curl its
