@@ -35,6 +35,12 @@ import SmartDraftAI          from "./pages/SmartDraftAI";
 import { ArchGenius }        from "./pages/ArchGenius";
 import { SmartBuild3D }      from "./pages/SmartBuild3D";
 import { Contact }           from "./pages/Contact";
+import { ProductDetail }     from "./pages/ProductDetail";
+import { PrivacyPolicy }     from "./pages/PrivacyPolicy";
+import { Terms }             from "./pages/Terms";
+import { RefundPolicy }      from "./pages/RefundPolicy";
+import { ShippingPolicy }    from "./pages/ShippingPolicy";
+import { DeleteAccount }     from "./pages/DeleteAccount";
 import NotFound              from "./pages/not-found";
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,7 +83,32 @@ function Router() {
       <Route path="/collections/kitchen-sinks-faucets" component={Categories} />
       <Route path="/collections/interior-emulsions" component={Categories} />
       <Route path="/collections/painting" component={Categories} />
+      <Route path="/collections/cameras" component={Categories} />
+      <Route path="/collections/cctv-networking" component={Categories} />
+      <Route path="/collections/cctv" component={Categories} />
+      <Route path="/collections/tile-adhesives" component={Categories} />
+      <Route path="/collections/tile-stone-installation" component={Categories} />
+      <Route path="/collections/ceiling-panel-lights" component={Categories} />
+      <Route path="/collections/lighting" component={Categories} />
+      <Route path="/collections/shoes-gloves" component={Categories} />
+      <Route path="/collections/safety-workwear" component={Categories} />
+      <Route path="/collections/safety" component={Categories} />
+      <Route path="/collections/cpvc-pipes-hardware" component={Categories} />
+      <Route path="/collections/cpvc-plumbing-tanks" component={Categories} />
+      <Route path="/collections/plumbing" component={Categories} />
+      <Route path="/collections/complete-sanitary-sets" component={Categories} />
+      <Route path="/collections/wc-concealed-cisterns" component={Categories} />
+      <Route path="/collections/concealed-systems" component={Categories} />
+      <Route path="/collections/wash-basins-faucets-1" component={Categories} />
+      <Route path="/collections/wash-basins-taps" component={Categories} />
+      <Route path="/collections/mixers-diverters-shower" component={Categories} />
+      <Route path="/collections/bathroom-fittings-accessories" component={Categories} />
+      <Route path="/collections/urinals" component={Categories} />
+      <Route path="/collections/sanitary-bath-fittings" component={Categories} />
+      <Route path="/collections/sanitary" component={Categories} />
       <Route path="/collections/:slug" component={Categories} />
+      <Route path="/product/:slug" component={ProductDetail} />
+      <Route path="/products/:slug" component={ProductDetail} />
       <Route path="/services"component={Services}        />
       <Route path="/orders"  component={Orders}          />
       <Route path="/profile" component={Profile}         />
@@ -100,6 +131,11 @@ function Router() {
       <Route path="/arch-genius" component={ArchGenius}    />
       <Route path="/smart-build" component={SmartBuild3D}  />
       <Route path="/contact"   component={Contact}         />
+      <Route path="/privacy-policy" component={PrivacyPolicy}   />
+      <Route path="/terms"          component={Terms}           />
+      <Route path="/refund-policy"  component={RefundPolicy}    />
+      <Route path="/shipping-policy" component={ShippingPolicy} />
+      <Route path="/delete-account" component={DeleteAccount}   />
       <Route                 component={NotFound}        />
     </Switch>
   );

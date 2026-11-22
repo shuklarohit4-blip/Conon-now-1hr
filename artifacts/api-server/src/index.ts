@@ -7,10 +7,10 @@ import { logger } from "./lib/logger";
 import { initSocket } from "./socket";
 import { closeDatabase, connectDatabase } from "@workspace/db";
 
-// Fall back to 5001 locally (avoids macOS AirPlay conflict on 5000).
-// Environment PORT takes precedence when defined.
+// Fall back to 5000 in dev/local environments.
+// Environment PORT takes precedence when defined (Render assigns this automatically).
 const rawPort = process.env["PORT"];
-const port = rawPort && !Number.isNaN(Number(rawPort)) ? Number(rawPort) : 5001;
+const port = rawPort && !Number.isNaN(Number(rawPort)) ? Number(rawPort) : 5000;
 
 const server = createServer(app);
 initSocket(server);
@@ -66,15 +66,19 @@ async function tryConnectDatabase(): Promise<boolean> {
   }
 }
 
-server.listen(port, () => {
-  logger.info({ port }, "Server listening");
-  // Initiate connection in background so the HTTP server is immediately accessible
-  void tryConnectDatabase().then((connected) => {
-    if (!connected && !retryTimer) {
-      retryTimer = setInterval(() => {
-        void tryConnectDatabase();
-      }, 10000);
-      retryTimer.unref();
-    }
+if (!process.env.NO_SERVER_LISTEN) {
+  server.listen(port, () => {
+    logger.info({ port }, "Server listening");
+    // Initiate connection in background so the HTTP server is immediately accessible
+    void tryConnectDatabase().then((connected) => {
+      if (!connected && !retryTimer) {
+        retryTimer = setInterval(() => {
+          void tryConnectDatabase();
+        }, 10000);
+        retryTimer.unref();
+      }
+    });
   });
-});
+}
+
+export { app, server };

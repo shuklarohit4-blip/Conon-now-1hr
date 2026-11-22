@@ -132,6 +132,32 @@ export interface VendorLoginOptions {
   name?: string;
 }
 
+export interface CustomerLoginOptions {
+  phone?: string;
+  name?: string;
+}
+
+export async function customerLogin(opts?: CustomerLoginOptions): Promise<VerifyOtpResult> {
+  try {
+    const r = await fetch(`${API}/auth/customer-login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        phone: opts?.phone || "9876543210",
+        name: opts?.name || "CONON-NOW User",
+      }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      return { ok: false, error: data.error ?? "Customer login failed." };
+    }
+    return { ok: true, token: data.token, user: data.user };
+  } catch {
+    return { ok: false, error: "Network error. Please check your connection." };
+  }
+}
+
 export async function vendorLogin(opts?: VendorLoginOptions): Promise<VerifyOtpResult> {
   try {
     const r = await fetch(`${API}/auth/vendor-login`, {

@@ -420,12 +420,12 @@ export function LocksCollectionStorefront({ onOpenDetail }: LocksCollectionStore
                           title: p.title,
                           description: `${p.brand} ${p.categoryTag} - ${p.specsPill || ""}`,
                           price: p.price,
-                          originalPrice: p.mrp,
+                          mrp: p.mrp,
                           unit: p.unit,
                           image: p.image,
                           rating: p.rating ?? 4.9,
-                          reviewsCount: 180,
-                          inStock: true,
+                          reviews: 180,
+                          deliveryEta: "Today, in 60 Mins",
                           brand: p.brand,
                           materialTag: "Hardware",
                         };
@@ -493,12 +493,12 @@ export function LocksCollectionStorefront({ onOpenDetail }: LocksCollectionStore
                                 title: p.title,
                                 description: `${p.brand} ${p.categoryTag}`,
                                 price: p.price,
-                                originalPrice: p.mrp,
+                                mrp: p.mrp,
                                 unit: p.unit,
                                 image: p.image,
                                 rating: p.rating ?? 4.9,
-                                reviewsCount: 180,
-                                inStock: true,
+                                reviews: 180,
+                                deliveryEta: "Today, in 60 Mins",
                                 brand: p.brand,
                                 materialTag: "Hardware",
                               };
@@ -553,7 +553,8 @@ export function LocksCollectionStorefront({ onOpenDetail }: LocksCollectionStore
           isOpen={true}
           onClose={() => setQuickDetailProduct(null)}
           onAddToCart={(p, qty) => {
-            for (let i = 0; i < qty; i++) {
+            const count = qty ?? 1;
+            for (let i = 0; i < count; i++) {
               addToCart.mutate({
                 data: {
                   materialId: p.id,

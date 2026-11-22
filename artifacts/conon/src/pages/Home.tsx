@@ -38,6 +38,12 @@ import { LocksCollectionStorefront } from "@/components/LocksCollectionStorefron
 import { ElectricalCollectionStorefront } from "@/components/ElectricalCollectionStorefront";
 import { KitchenCollectionStorefront } from "@/components/KitchenCollectionStorefront";
 import { PaintingCollectionStorefront } from "@/components/PaintingCollectionStorefront";
+import { CCTVCollectionStorefront } from "@/components/CCTVCollectionStorefront";
+import { TileAdhesivesCollectionStorefront } from "@/components/TileAdhesivesCollectionStorefront";
+import { LightingCollectionStorefront } from "@/components/LightingCollectionStorefront";
+import { SafetyCollectionStorefront } from "@/components/SafetyCollectionStorefront";
+import { CPVCPlumbingStorefront } from "@/components/CPVCPlumbingStorefront";
+import { SanitaryBathCollectionStorefront } from "@/components/SanitaryBathCollectionStorefront";
 import type { HomeCategory } from "@/data/homeCategories";
 import { getShowcaseProducts } from "@/lib/catalogProducts";
 import { useDeliveryLocation } from "@/context/LocationContext";
@@ -834,7 +840,24 @@ export function Home() {
                 }
               }}
               onSelectCategory={(cat: HomeCategory) => {
-                setSelectedCategory(cat.dbCategory);
+                if (cat.slug === "safety-workwear" || cat.slug === "shoes-gloves") {
+                  setSelectedCategory("safety-workwear");
+                } else if (
+                  cat.slug === "sanitary-bath-fittings" ||
+                  cat.slug.includes("sanitary") ||
+                  cat.slug.includes("bath-fittings")
+                ) {
+                  setSelectedCategory("sanitary-bath-fittings");
+                } else if (
+                  cat.slug === "cpvc-plumbing-tanks" ||
+                  cat.slug === "cpvc-pipes-hardware" ||
+                  cat.slug.includes("cpvc") ||
+                  cat.slug.includes("plumbing")
+                ) {
+                  setSelectedCategory("cpvc-plumbing-tanks");
+                } else {
+                  setSelectedCategory(cat.dbCategory);
+                }
                 setSelectedPanelLabel(cat.title);
               }}
             />
@@ -866,6 +889,38 @@ export function Home() {
                         setSelectedCategory("kitchen-sinks-faucets");
                       } else if (cat.slug === "painting") {
                         setSelectedCategory("painting");
+                      } else if (cat.slug === "cctv-networking") {
+                        setSelectedCategory("cctv-networking");
+                      } else if (
+                        cat.slug === "tile-stone-installation" ||
+                        cat.slug === "tile-adhesives" ||
+                        cat.slug === "tiles"
+                      ) {
+                        setSelectedCategory("tile-stone-installation");
+                      } else if (
+                        cat.slug === "lighting" ||
+                        cat.slug === "ceiling-panel-lights"
+                      ) {
+                        setSelectedCategory("lighting");
+                      } else if (
+                        cat.slug === "safety-workwear" ||
+                        cat.slug === "shoes-gloves" ||
+                        cat.slug === "safety"
+                      ) {
+                        setSelectedCategory("safety-workwear");
+                      } else if (
+                        cat.slug === "sanitary-bath-fittings" ||
+                        cat.slug.includes("sanitary") ||
+                        cat.slug.includes("bath-fittings")
+                      ) {
+                        setSelectedCategory("sanitary-bath-fittings");
+                      } else if (
+                        cat.slug === "cpvc-plumbing-tanks" ||
+                        cat.slug === "cpvc-pipes-hardware" ||
+                        cat.slug.includes("cpvc") ||
+                        cat.slug.includes("plumbing")
+                      ) {
+                        setSelectedCategory("cpvc-plumbing-tanks");
                       } else {
                         setSelectedCategory(cat.dbCategory);
                       }
@@ -1215,6 +1270,79 @@ export function Home() {
                     ) {
                       return (
                         <PaintingCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "cctv-networking" ||
+                      selectedCategory === "cctv" ||
+                      selectedCategory === "cameras" ||
+                      selectedCategory?.toLowerCase().includes("cctv") ||
+                      selectedCategory?.toLowerCase().includes("camera")
+                    ) {
+                      return (
+                        <CCTVCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "tile-stone-installation" ||
+                      selectedCategory === "tile-adhesives" ||
+                      selectedCategory === "tiles" ||
+                      selectedCategory?.toLowerCase().includes("tile")
+                    ) {
+                      return (
+                        <TileAdhesivesCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "lighting" ||
+                      selectedCategory === "ceiling-panel-lights" ||
+                      selectedCategory?.toLowerCase().includes("light")
+                    ) {
+                      return (
+                        <LightingCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "safety-workwear" ||
+                      selectedCategory === "shoes-gloves" ||
+                      selectedCategory === "safety" ||
+                      selectedCategory?.toLowerCase().includes("safety") ||
+                      selectedCategory?.toLowerCase().includes("shoes")
+                    ) {
+                      return (
+                        <SafetyCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "sanitary-bath-fittings" ||
+                      selectedCategory?.toLowerCase().includes("sanitary")
+                    ) {
+                      return (
+                        <SanitaryBathCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "cpvc-plumbing-tanks" ||
+                      selectedCategory === "cpvc-pipes-hardware" ||
+                      selectedCategory === "plumbing" ||
+                      selectedCategory === "cpvc" ||
+                      selectedCategory?.toLowerCase().includes("cpvc") ||
+                      selectedCategory?.toLowerCase().includes("plumb")
+                    ) {
+                      return (
+                        <CPVCPlumbingStorefront
                           onOpenDetail={setDetailProduct}
                         />
                       );

@@ -7,6 +7,7 @@ import {
 import { Layout } from "@/components/Layout";
 import { ProductCard, type Product } from "@/components/ProductCard";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { VariantSelectorSheet } from "@/components/VariantSelectorSheet";
 import { ALL_CATALOG_PRODUCTS } from "@/components/ProductFeed";
 import { HOME_CATEGORIES } from "@/data/homeCategories";
 import { CementCollectionStorefront } from "@/components/CementCollectionStorefront";
@@ -17,6 +18,12 @@ import { LocksCollectionStorefront } from "@/components/LocksCollectionStorefron
 import { ElectricalCollectionStorefront } from "@/components/ElectricalCollectionStorefront";
 import { KitchenCollectionStorefront } from "@/components/KitchenCollectionStorefront";
 import { PaintingCollectionStorefront } from "@/components/PaintingCollectionStorefront";
+import { CCTVCollectionStorefront } from "@/components/CCTVCollectionStorefront";
+import { TileAdhesivesCollectionStorefront } from "@/components/TileAdhesivesCollectionStorefront";
+import { LightingCollectionStorefront } from "@/components/LightingCollectionStorefront";
+import { SafetyCollectionStorefront } from "@/components/SafetyCollectionStorefront";
+import { CPVCPlumbingStorefront } from "@/components/CPVCPlumbingStorefront";
+import { SanitaryBathCollectionStorefront } from "@/components/SanitaryBathCollectionStorefront";
 import { HomeDepartmentNav } from "@/components/HomeDepartmentNav";
 import { useAddToCart, useUpdateCartItem, useRemoveFromCart, useGetCart, getGetCartQueryKey } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -48,15 +55,54 @@ const CATEGORIES: string[] = Array.from(new Set(ALL_CATALOG_PRODUCTS.map((p) => 
 export function Categories() {
   const [active, setActive] = React.useState<string>(CATEGORIES[0] ?? "Cement");
   const [detailProduct, setDetailProduct] = React.useState<Product | null>(null);
+  const [variantSheetProduct, setVariantSheetProduct] = React.useState<Product | null>(null);
 
   React.useEffect(() => {
+    if (
+      window.location.pathname.includes("complete-sanitary-sets") ||
+      window.location.pathname.includes("wc-concealed-cisterns") ||
+      window.location.pathname.includes("concealed-systems") ||
+      window.location.pathname.includes("wash-basins") ||
+      window.location.pathname.includes("mixers-diverters-shower") ||
+      window.location.pathname.includes("bathroom-fittings-accessories") ||
+      window.location.pathname.includes("urinals") ||
+      window.location.pathname.includes("sanitary-bath-fittings") ||
+      window.location.pathname.includes("sanitary")
+    ) {
+      setActive("Sanitary");
+      return;
+    }
+    if (
+      window.location.pathname.includes("cpvc-pipes-hardware") ||
+      window.location.pathname.includes("cpvc-plumbing-tanks") ||
+      window.location.pathname.includes("cpvc") ||
+      window.location.pathname.includes("plumbing")
+    ) {
+      setActive("Plumbing");
+      return;
+    }
+    if (
+      window.location.pathname.includes("ceiling-panel-lights") ||
+      window.location.pathname.includes("lighting")
+    ) {
+      setActive("Lighting");
+      return;
+    }
+    if (
+      window.location.pathname.includes("tile-adhesives") ||
+      window.location.pathname.includes("tile-stone-installation") ||
+      window.location.pathname.includes("tiles")
+    ) {
+      setActive("Tiles");
+      return;
+    }
     if (window.location.pathname.includes("cement")) {
       setActive("Cement");
       return;
     }
     if (
       window.location.pathname.includes("wood-adhesives") ||
-      window.location.pathname.includes("adhesive") ||
+      (window.location.pathname.includes("adhesive") && !window.location.pathname.includes("tile")) ||
       window.location.pathname.includes("fevicol")
     ) {
       setActive("Adhesives");
@@ -108,10 +154,72 @@ export function Categories() {
       setActive("Paint");
       return;
     }
+    if (
+      window.location.pathname.includes("cameras") ||
+      window.location.pathname.includes("cctv")
+    ) {
+      setActive("CCTV");
+      return;
+    }
+    if (
+      window.location.pathname.includes("shoes-gloves") ||
+      window.location.pathname.includes("safety-workwear") ||
+      window.location.pathname.includes("safety")
+    ) {
+      setActive("Safety");
+      return;
+    }
     const params = new URLSearchParams(window.location.search);
     const catParam = params.get("cat");
     if (catParam) {
       const lower = catParam.toLowerCase();
+      if (
+        lower.includes("complete-sanitary-sets") ||
+        lower.includes("wc-concealed-cisterns") ||
+        lower.includes("concealed-systems") ||
+        lower.includes("wash-basins") ||
+        lower.includes("mixers-diverters-shower") ||
+        lower.includes("bathroom-fittings-accessories") ||
+        lower.includes("urinals") ||
+        lower.includes("sanitary-bath-fittings") ||
+        lower.includes("sanitary")
+      ) {
+        setActive("Sanitary");
+        return;
+      }
+      if (
+        lower.includes("cpvc-pipes-hardware") ||
+        lower.includes("cpvc-plumbing-tanks") ||
+        lower.includes("cpvc") ||
+        lower.includes("plumbing")
+      ) {
+        setActive("Plumbing");
+        return;
+      }
+      if (
+        lower.includes("ceiling-panel") ||
+        lower.includes("lighting")
+      ) {
+        setActive("Lighting");
+        return;
+      }
+      if (
+        lower.includes("shoes-gloves") ||
+        lower.includes("safety-workwear") ||
+        lower.includes("safety")
+      ) {
+        setActive("Safety");
+        return;
+      }
+      if (
+        lower.includes("tile-adhesives") ||
+        lower.includes("tile-stone") ||
+        lower.includes("tiles") ||
+        lower.includes("tile")
+      ) {
+        setActive("Tiles");
+        return;
+      }
       if (lower.includes("cement")) {
         setActive("Cement");
         return;
@@ -162,6 +270,60 @@ export function Categories() {
         lower.includes("interior-emulsions")
       ) {
         setActive("Paint");
+        return;
+      }
+      if (
+        lower.includes("cctv") ||
+        lower.includes("camera")
+      ) {
+        setActive("CCTV");
+        return;
+      }
+      if (
+        lower.includes("complete-sanitary-sets") ||
+        lower.includes("wc-concealed-cisterns") ||
+        lower.includes("concealed-systems") ||
+        lower.includes("wash-basins") ||
+        lower.includes("mixers-diverters-shower") ||
+        lower.includes("bathroom-fittings-accessories") ||
+        lower.includes("urinals") ||
+        lower.includes("sanitary-bath-fittings") ||
+        lower.includes("sanitary")
+      ) {
+        setActive("Sanitary");
+        return;
+      }
+      if (
+        lower.includes("cpvc-pipes-hardware") ||
+        lower.includes("cpvc-plumbing-tanks") ||
+        lower.includes("cpvc") ||
+        lower.includes("plumbing")
+      ) {
+        setActive("Plumbing");
+        return;
+      }
+      if (
+        lower.includes("ceiling-panel") ||
+        lower.includes("lighting")
+      ) {
+        setActive("Lighting");
+        return;
+      }
+      if (
+        lower.includes("shoes-gloves") ||
+        lower.includes("safety-workwear") ||
+        lower.includes("safety")
+      ) {
+        setActive("Safety");
+        return;
+      }
+      if (
+        lower.includes("tile-adhesives") ||
+        lower.includes("tile-stone") ||
+        lower.includes("tiles") ||
+        lower.includes("tile")
+      ) {
+        setActive("Tiles");
         return;
       }
       const homeMatch = HOME_CATEGORIES.find(
@@ -264,23 +426,48 @@ export function Categories() {
       {/* ── Top Department Navigation Bar (Civil & Interiors, Electrical, Tools, etc.) ── */}
       <HomeDepartmentNav
         activeDepartmentId={
-          active === "Cement" || active === "Paint"
+          active === "Cement" || active === "Paint" || active === "Tiles"
             ? "civil-interiors"
             : active === "Hardware" || active === "Locks" || active === "Adhesives"
             ? "furniture-hardware"
-            : active === "Electrical"
+            : active === "Electrical" || active === "Lighting"
             ? "electrical"
+            : active === "Plumbing" || active === "Sanitary"
+            ? "plumbing-sanitary"
             : active === "Kitchen"
             ? "plumbing-sanitary"
+            : active === "Safety"
+            ? "tools"
+            : active === "CCTV"
+            ? ""
             : undefined
         }
         onSelectDepartment={(dept) => {
           if (dept.id === "civil-interiors") setActive("Cement");
           if (dept.id === "furniture-hardware") setActive("Hardware");
           if (dept.id === "electrical") setActive("Electrical");
-          if (dept.id === "plumbing-sanitary") setActive("Kitchen");
+          if (dept.id === "plumbing-sanitary") setActive("Sanitary");
+          if (dept.id === "tools") setActive("Safety");
         }}
         onSelectCategory={(cat) => {
+          if (
+            cat.slug.includes("sanitary") ||
+            cat.slug.includes("bath-fittings") ||
+            cat.slug.includes("complete-sanitary") ||
+            cat.slug.includes("cistern") ||
+            cat.slug.includes("urinal")
+          ) {
+            setActive("Sanitary");
+            return;
+          }
+          if (cat.slug.includes("cpvc") || cat.slug.includes("plumbing") || cat.slug.includes("pipes-hardware")) {
+            setActive("Plumbing");
+            return;
+          }
+          if (cat.slug.includes("safety") || cat.slug.includes("shoes-gloves")) {
+            setActive("Safety");
+            return;
+          }
           if (cat.slug.includes("cement")) {
             setActive("Cement");
             return;
@@ -313,6 +500,18 @@ export function Categories() {
             setActive("Paint");
             return;
           }
+          if (cat.slug.includes("cctv") || cat.slug.includes("camera")) {
+            setActive("CCTV");
+            return;
+          }
+          if (cat.slug.includes("tile")) {
+            setActive("Tiles");
+            return;
+          }
+          if (cat.slug.includes("lighting") || cat.slug.includes("ceiling-panel")) {
+            setActive("Lighting");
+            return;
+          }
           const matched = CATEGORIES.find(
             (c) =>
               c.toLowerCase() === cat.dbCategory.toLowerCase() ||
@@ -338,6 +537,18 @@ export function Categories() {
         <KitchenCollectionStorefront onOpenDetail={setDetailProduct} />
       ) : active === "Paint" || active.toLowerCase().includes("paint") ? (
         <PaintingCollectionStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "CCTV" || active.toLowerCase().includes("cctv") || active.toLowerCase().includes("camera") ? (
+        <CCTVCollectionStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "Tiles" || active.toLowerCase().includes("tile") ? (
+        <TileAdhesivesCollectionStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "Lighting" || active.toLowerCase().includes("light") ? (
+        <LightingCollectionStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "Safety" || active.toLowerCase().includes("safety") || active.toLowerCase().includes("shoes") ? (
+        <SafetyCollectionStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "Plumbing" || active.toLowerCase().includes("plumb") || active.toLowerCase().includes("cpvc") ? (
+        <CPVCPlumbingStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "Sanitary" || active.toLowerCase().includes("sanitary") || active.toLowerCase().includes("bath") ? (
+        <SanitaryBathCollectionStorefront onOpenDetail={setDetailProduct} />
       ) : (
         <div className="flex min-h-full">
           {/* Left sidebar — 25% vertical category list */}
@@ -397,8 +608,8 @@ export function Categories() {
                     product={p}
                     onAddToCart={addProduct}
                     onSetQty={setProductQty}
-                    onSeeOptions={setDetailProduct}
-                    onVariants={setDetailProduct}
+                    onSeeOptions={setVariantSheetProduct}
+                    onVariants={setVariantSheetProduct}
                     onOpenDetail={setDetailProduct}
                     cartQty={getCartQty(p)}
                     isAdding={cartMutationPending}
@@ -415,9 +626,16 @@ export function Categories() {
         </div>
       )}
 
+      <VariantSelectorSheet
+        product={variantSheetProduct}
+        isOpen={variantSheetProduct !== null}
+        onClose={() => setVariantSheetProduct(null)}
+      />
+
       <ProductDetailModal
         product={detailProduct}
         open={detailProduct !== null}
+        isOpen={detailProduct !== null}
         onClose={() => setDetailProduct(null)}
         onAddToCart={addProduct}
         onSetQty={setProductQty}

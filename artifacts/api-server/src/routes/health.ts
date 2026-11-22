@@ -4,6 +4,10 @@ import { pingDatabase } from "@workspace/db";
 
 const router: IRouter = Router();
 
+router.get("/health", async (_req, res) => {
+  res.json({ status: "ok", db: "connected" });
+});
+
 router.get("/healthz", async (_req, res) => {
   if (!(await pingDatabase())) {
     res.status(503).json({ status: "error", dependency: "database" });

@@ -136,12 +136,19 @@ export function initSocket(httpServer: HttpServer): Server {
     cors: {
       origin: (origin, callback) => {
         if (!origin) return callback(null, true);
-        if (
+        const normalized = origin.replace(/\/+$/, "");
+        const isAllowed =
           allowedOrigins.length === 0 ||
-          allowedOrigins.includes(origin) ||
-          (process.env.NODE_ENV !== "production" &&
-            /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin))
-        ) {
+          allowedOrigins.includes(normalized) ||
+          (process.env.FRONTEND_URL && normalized === process.env.FRONTEND_URL.trim().replace(/\/+$/, ""));
+        const isDev =
+          process.env.NODE_ENV !== "production" &&
+          (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(normalized) ||
+            normalized === "http://localhost:5173");
+        const isVercel =
+          /\.vercel\.app$/.test(new URL(origin).hostname);
+
+        if (isAllowed || isDev || isVercel) {
           return callback(null, true);
         }
         return callback(new Error("Not allowed by CORS"));

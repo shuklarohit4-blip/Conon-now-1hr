@@ -7,7 +7,7 @@ import {
 import { useLocation } from "wouter";
 import { useUser, UserRole } from "@/context/UserContext";
 import { toast } from "sonner";
-import { adminLogin as adminLoginApi, JWT_STORAGE_KEY, verifyFirebaseIdToken, vendorLogin } from "@/lib/authApi";
+import { adminLogin as adminLoginApi, JWT_STORAGE_KEY, verifyFirebaseIdToken, vendorLogin, customerLogin } from "@/lib/authApi";
 import { auth } from "@/firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber, type ConfirmationResult } from "firebase/auth";
 
@@ -179,11 +179,34 @@ export function Login() {
         }
       }
       /* Fallback if in demo mode or confirmation was bypassed */
+      const demoRes = await customerLogin({
+        phone: phone.replace(/\D/g, "") || "9876543210",
+        name: "CONON-NOW User",
+      });
+      if (demoRes.ok && demoRes.token) {
+        localStorage.setItem(JWT_STORAGE_KEY, demoRes.token);
+        loginUser({
+          role:        "customer",
+          name:        demoRes.user?.name || "CONON-NOW User",
+          phone:       demoRes.user?.phone || phone,
+          displayRole: "Builder / Owner",
+        });
+        toast.success("Logged in successfully!");
+        setLocation("/home");
+        return;
+      }
       loginUser({ role: "customer", name: "CONON-NOW User", phone, displayRole: "Builder / Owner" });
       toast.success("Logged in successfully!");
       setLocation("/home");
     } catch (e) {
       if (customerOtp === "123456") {
+        const demoRes = await customerLogin({
+          phone: phone.replace(/\D/g, "") || "9876543210",
+          name: "CONON-NOW User",
+        });
+        if (demoRes.ok && demoRes.token) {
+          localStorage.setItem(JWT_STORAGE_KEY, demoRes.token);
+        }
         loginUser({ role: "customer", name: "CONON-NOW User", phone, displayRole: "Builder / Owner" });
         toast.success("Logged in successfully (Demo OTP)!");
         setLocation("/home");

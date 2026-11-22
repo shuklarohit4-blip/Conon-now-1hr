@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { VariantSelectorSheet } from "@/components/VariantSelectorSheet";
 import type { Product } from "@/components/ProductCard";
 
 export interface ElectricalProduct {
@@ -511,6 +512,7 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
   const [selectedCores, setSelectedCores] = useState("all");
   const [sortBy, setSortBy] = useState("relevance");
   const [quickDetailProduct, setQuickDetailProduct] = useState<Product | null>(null);
+  const [variantProduct, setVariantProduct] = useState<any | null>(null);
 
   const qc = useQueryClient();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
@@ -802,12 +804,12 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
                           title: p.title,
                           description: `${p.brand} ${p.categoryTag} - ${p.specsPill || ""}`,
                           price: p.price,
-                          originalPrice: p.mrp,
+                          mrp: p.mrp,
                           unit: p.unit,
                           image: p.image,
                           rating: p.rating ?? 4.8,
-                          reviewsCount: 140,
-                          inStock: true,
+                          reviews: 140,
+                          deliveryEta: "Today, in 60 Mins",
                           brand: p.brand,
                           materialTag: "Electrical",
                         };
@@ -869,23 +871,10 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
                         {p.optionsCount > 1 ? (
                           <button
                             type="button"
-                            onClick={() => {
-                              const standardProduct: Product = {
-                                id: p.id,
-                                title: p.title,
-                                description: `${p.brand} ${p.categoryTag}`,
-                                price: p.price,
-                                originalPrice: p.mrp,
-                                unit: p.unit,
-                                image: p.image,
-                                rating: p.rating ?? 4.8,
-                                reviewsCount: 140,
-                                inStock: true,
-                                brand: p.brand,
-                                materialTag: "Electrical",
-                              };
-                              if (onOpenDetail) onOpenDetail(standardProduct);
-                              else setQuickDetailProduct(standardProduct);
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              setVariantProduct(p);
                             }}
                             className="w-full text-center py-1.5 px-2 rounded-lg border border-[#16A34A] text-[#16A34A] hover:bg-[#EAF7EE] font-bold text-[12px] transition-colors"
                           >
@@ -928,6 +917,13 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
         </div>
       </div>
 
+      {/* Variant Selector Sheet */}
+      <VariantSelectorSheet
+        product={variantProduct}
+        isOpen={variantProduct !== null}
+        onClose={() => setVariantProduct(null)}
+      />
+
       {/* Quick Detail Modal Fallback */}
       {quickDetailProduct && (
         <ProductDetailModal
@@ -935,7 +931,8 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
           isOpen={true}
           onClose={() => setQuickDetailProduct(null)}
           onAddToCart={(p, qty) => {
-            for (let i = 0; i < qty; i++) {
+            const count = qty ?? 1;
+            for (let i = 0; i < count; i++) {
               addToCart.mutate({
                 data: {
                   materialId: p.id,

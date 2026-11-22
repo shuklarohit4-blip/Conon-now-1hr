@@ -30,10 +30,17 @@ app.use(
   }),
 );
 
-const rawAllowedOrigins = process.env.ALLOWED_ORIGINS ?? "";
+const configuredFrontend = process.env.FRONTEND_URL?.trim();
+const rawAllowedOrigins = [
+  configuredFrontend,
+  process.env.ALLOWED_ORIGINS,
+]
+  .filter(Boolean)
+  .join(",");
+
 const allowedOrigins = rawAllowedOrigins
   .split(",")
-  .map((o) => o.trim())
+  .map((o) => o.trim().replace(/\/+$/, ""))
   .filter(Boolean);
 
 app.use(
@@ -43,12 +50,19 @@ app.use(
         callback(null, true);
         return;
       }
-      if (
+      const normalized = origin.replace(/\/+$/, "");
+      const isAllowed =
         allowedOrigins.length === 0 ||
-        allowedOrigins.includes(origin) ||
-        (process.env.NODE_ENV !== "production" &&
-          /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin))
-      ) {
+        allowedOrigins.includes(normalized) ||
+        (configuredFrontend && normalized === configuredFrontend.replace(/\/+$/, ""));
+      const isDev =
+        process.env.NODE_ENV !== "production" &&
+        (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(normalized) ||
+          normalized === "http://localhost:5173");
+      const isVercel =
+        /\.vercel\.app$/.test(new URL(origin).hostname);
+
+      if (isAllowed || isDev || isVercel) {
         callback(null, origin);
       } else {
         callback(null, false);
@@ -57,6 +71,11 @@ app.use(
     credentials: true,
   }),
 );
+
+// Cloud / Render Health Check route
+app.get(["/health", "/api/health"], (_req, res) => {
+  res.json({ status: "ok", db: "connected" });
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

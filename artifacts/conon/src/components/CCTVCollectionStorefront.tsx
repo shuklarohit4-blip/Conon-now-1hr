@@ -200,13 +200,15 @@ export function CCTVCollectionStorefront({ onOpenDetail }: CCTVCollectionStorefr
 
   const cartItemByKey = useMemo(() => {
     const map = new Map<string, { id: string; quantity: number }>();
-    if (!cart?.items) return map;
-    for (const item of cart.items) {
-      if (item.materialId) {
-        map.set(item.materialId, { id: item.id, quantity: item.quantity });
-      }
-      if (item.name) {
-        map.set(item.name.toLowerCase(), { id: item.id, quantity: item.quantity });
+    if (!cart?.categories) return map;
+    for (const c of cart.categories) {
+      for (const item of c.items ?? []) {
+        if (item.materialId) {
+          map.set(item.materialId, { id: String(item.id), quantity: item.quantity });
+        }
+        if (item.name) {
+          map.set(item.name.toLowerCase(), { id: String(item.id), quantity: item.quantity });
+        }
       }
     }
     return map;
@@ -234,10 +236,10 @@ export function CCTVCollectionStorefront({ onOpenDetail }: CCTVCollectionStorefr
       return;
     }
     if (newQty <= 0) {
-      removeFromCart.mutate({ id: match.id });
+      removeFromCart.mutate({ itemId: match.id });
       toast.info(`Removed ${p.title} from cart`);
     } else {
-      updateCartItem.mutate({ id: match.id, data: { quantity: newQty } });
+      updateCartItem.mutate({ itemId: match.id, data: { quantity: newQty } });
     }
   };
 
@@ -322,12 +324,12 @@ export function CCTVCollectionStorefront({ onOpenDetail }: CCTVCollectionStorefr
                           title: p.title,
                           description: `${p.brand} ${p.model} High Definition Security Camera`,
                           price: p.price,
-                          originalPrice: p.mrp,
+                          mrp: p.mrp,
                           unit: "Piece",
                           image: p.image,
                           rating: 4.8,
-                          reviewsCount: 142,
-                          inStock: true,
+                          reviews: 142,
+                          deliveryEta: "Today, in 60 Mins",
                           brand: p.brand,
                           materialTag: "CCTV & Networking",
                         };
@@ -457,7 +459,8 @@ export function CCTVCollectionStorefront({ onOpenDetail }: CCTVCollectionStorefr
           isOpen={true}
           onClose={() => setQuickDetailProduct(null)}
           onAddToCart={(p, qty) => {
-            for (let i = 0; i < qty; i++) {
+            const count = qty ?? 1;
+            for (let i = 0; i < count; i++) {
               addToCart.mutate({
                 data: {
                   materialId: p.id,

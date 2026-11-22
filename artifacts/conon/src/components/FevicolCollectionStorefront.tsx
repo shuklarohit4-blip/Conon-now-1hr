@@ -515,9 +515,10 @@ export const FevicolCollectionStorefront: React.FC<FevicolCollectionStorefrontPr
     addToCart.mutate(
       {
         data: {
+          materialId: p.id,
           category: p.materialTag,
           name: p.title,
-          unitPrice: p.price,
+          price: p.price,
           unit: p.unit,
           quantity: 1,
         },
@@ -538,7 +539,7 @@ export const FevicolCollectionStorefront: React.FC<FevicolCollectionStorefrontPr
     }
     const itemId = entry.ids[0];
     updateCartItem.mutate({
-      id: itemId,
+      itemId,
       data: { quantity: entry.quantity + 1 },
     });
   };
@@ -549,10 +550,10 @@ export const FevicolCollectionStorefront: React.FC<FevicolCollectionStorefrontPr
     if (!entry || entry.ids.length === 0) return;
     const itemId = entry.ids[0];
     if (entry.quantity <= 1) {
-      removeFromCart.mutate({ id: itemId });
+      removeFromCart.mutate({ itemId });
     } else {
       updateCartItem.mutate({
-        id: itemId,
+        itemId,
         data: { quantity: entry.quantity - 1 },
       });
     }
@@ -575,6 +576,7 @@ export const FevicolCollectionStorefront: React.FC<FevicolCollectionStorefrontPr
     reviews: 1420,
     unit: p.unit,
     vendor: p.brand,
+    deliveryEta: "Today, in 60 Mins",
   });
 
   return (

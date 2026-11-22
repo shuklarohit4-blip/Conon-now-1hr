@@ -480,12 +480,12 @@ export function HingesCollectionStorefront({ onOpenDetail }: HingesCollectionSto
                           title: p.title,
                           description: `${p.brand} ${p.categoryTag} - ${p.specsPill || ""}`,
                           price: p.price,
-                          originalPrice: p.mrp,
+                          mrp: p.mrp,
                           unit: p.unit,
                           image: p.image,
                           rating: p.rating ?? 4.8,
-                          reviewsCount: 120,
-                          inStock: true,
+                          reviews: 120,
+                          deliveryEta: "Today, in 60 Mins",
                           brand: p.brand,
                           materialTag: "Hardware",
                         };
@@ -553,12 +553,12 @@ export function HingesCollectionStorefront({ onOpenDetail }: HingesCollectionSto
                                 title: p.title,
                                 description: `${p.brand} ${p.categoryTag}`,
                                 price: p.price,
-                                originalPrice: p.mrp,
+                                mrp: p.mrp,
                                 unit: p.unit,
                                 image: p.image,
                                 rating: p.rating ?? 4.8,
-                                reviewsCount: 120,
-                                inStock: true,
+                                reviews: 120,
+                                deliveryEta: "Today, in 60 Mins",
                                 brand: p.brand,
                                 materialTag: "Hardware",
                               };
@@ -613,7 +613,8 @@ export function HingesCollectionStorefront({ onOpenDetail }: HingesCollectionSto
           isOpen={true}
           onClose={() => setQuickDetailProduct(null)}
           onAddToCart={(p, qty) => {
-            for (let i = 0; i < qty; i++) {
+            const count = qty ?? 1;
+            for (let i = 0; i < count; i++) {
               addToCart.mutate({
                 data: {
                   materialId: p.id,

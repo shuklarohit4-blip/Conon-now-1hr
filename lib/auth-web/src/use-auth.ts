@@ -18,7 +18,23 @@ export function useAuth(): AuthState {
   useEffect(() => {
     let cancelled = false;
 
-    fetch("/api/auth/user", { credentials: "include" })
+    const token =
+      typeof window !== "undefined"
+        ? localStorage.getItem("conon_jwt") || localStorage.getItem("jwt")
+        : null;
+    const headers: Record<string, string> = {};
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const apiOrigin = (
+      (import.meta as any).env?.VITE_API_URL ||
+      (import.meta as any).env?.VITE_API_BASE_URL ||
+      ""
+    ).replace(/\/+$/, "");
+    const userUrl = `${apiOrigin}/api/auth/user`;
+
+    fetch(userUrl, { credentials: "include", headers })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json() as Promise<{ user: AuthUser | null }>;

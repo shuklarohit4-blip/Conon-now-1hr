@@ -229,8 +229,8 @@ function resetClient(): void {
 
 function getClient(): MongoClient {
   if (!client) {
-    const rawUri = process.env.MONGODB_URI?.trim();
-    if (!rawUri) throw new Error("MONGODB_URI is not configured");
+    const rawUri = (process.env.MONGO_URI || process.env.MONGODB_URI)?.trim();
+    if (!rawUri) throw new Error("MONGO_URI or MONGODB_URI is not configured");
     const uri = sanitizeMongoUri(rawUri);
     client = new MongoClient(uri, {
       serverSelectionTimeoutMS: 5000,
@@ -426,3 +426,9 @@ export const repositories = {
 };
 
 export type { ClientSession };
+
+export { default as mongoose } from "mongoose";
+export * from "./models/Product";
+export * from "./models/Category";
+export * from "./catalogData";
+

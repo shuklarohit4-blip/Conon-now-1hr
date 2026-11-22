@@ -2,6 +2,8 @@
 
 # compiled output
 dist
+dist/
+**/dist/
 tmp
 out-tsc
 *.tsbuildinfo
@@ -10,6 +12,8 @@ out-tsc
 
 # dependencies
 node_modules
+node_modules/
+**/node_modules/
 
 # IDEs and editors
 /.idea
@@ -36,13 +40,24 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+# environment and secrets
 .env
 .env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+**/.env.*
+**/.env.local
 !.env.example
+!**/.env.example
 
 # System Files
 .DS_Store
 Thumbs.db
+test_crop_*.png
+test_icon_*.png
 
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
@@ -51,6 +66,8 @@ Thumbs.db
 .cache/
 .local/
 .vercel
-.env*
 .pnpm-store/
 *.tgz
+
+!.env.example
+!**/.env.example

@@ -30,6 +30,8 @@ export type ProductSpec = { label: string; value: string };
 
 export type Product = {
   id: string;
+  slug?: string;
+  name?: string;
   /** Hero image url (full-width, ~4:3). Optional — falls back to a premium icon block. */
   image?: string;
   /** Tag shown above the title in light grey. */
@@ -72,6 +74,7 @@ export type Product = {
   description?: string;
   /** When true the primary CTA becomes "See options" instead of "Add to cart". */
   hasOptions?: boolean;
+  variants?: Array<{ id: string; label: string; unit: string; price: number; mrp: number; discountPercent: number; stock: number; image?: string }>;
 };
 
 /* ── Star rating row (accurate half-stars via clipped overlay) ───────── */
@@ -290,30 +293,42 @@ export function ProductCard({
               size="lg"
               fullWidth
             />
-            {hasOptions && (
+            {(hasOptions || (product.variants && product.variants.length > 1)) && (
               <button
                 type="button"
-                onClick={(e) => { e.stopPropagation(); onSeeOptions?.(product); }}
-                className="mt-2 w-full flex items-center justify-center gap-1 py-2 rounded-xl bg-white text-slate-700 font-bold text-[13px] border border-slate-200 active:scale-[0.98] transition"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  onSeeOptions?.(product);
+                }}
+                className="mt-2 w-full flex items-center justify-center gap-1 py-2 rounded-xl bg-white text-slate-700 font-bold text-[13px] border border-slate-200 active:scale-[0.98] transition hover:bg-slate-50"
               >
-                See options
+                <span>{product.variants && product.variants.length > 1 ? `${product.variants.length} Options` : "Options"}</span>
                 <ChevronRight className="w-3.5 h-3.5" strokeWidth={2.6} />
               </button>
             )}
           </div>
-        ) : hasOptions ? (
+        ) : (hasOptions || (product.variants && product.variants.length > 1)) ? (
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); onSeeOptions?.(product); }}
-            className="mt-3.5 w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-slate-900 font-black text-[15px] border border-slate-900/80 active:scale-[0.98] transition"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onSeeOptions?.(product);
+            }}
+            className="mt-3.5 w-full flex items-center justify-center gap-1.5 py-3 rounded-xl bg-white text-slate-900 font-black text-[14px] border border-slate-300 hover:border-slate-800 active:scale-[0.98] transition shadow-xs"
           >
-            See options
+            <span>{product.variants && product.variants.length > 1 ? `${product.variants.length} Options` : "Options"}</span>
             <ChevronRight className="w-4 h-4" strokeWidth={2.6} />
           </button>
         ) : (
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); onAddToCart?.(product); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onAddToCart?.(product);
+            }}
             disabled={isAdding}
             className="mt-3.5 w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-white font-black text-[15px] active:scale-[0.98] transition disabled:opacity-60"
             style={{ color: BLINKIT_GREEN, border: `1.5px solid ${BLINKIT_GREEN}` }}

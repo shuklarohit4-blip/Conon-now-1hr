@@ -645,12 +645,12 @@ export function PaintingCollectionStorefront({ onOpenDetail }: PaintingCollectio
                           title: p.title,
                           description: `${p.brand} ${p.categoryTag} - ${p.specsPill || ""}`,
                           price: p.price,
-                          originalPrice: p.mrp || p.price,
+                          mrp: p.mrp || p.price,
                           unit: p.unit,
                           image: p.image,
                           rating: p.rating ?? 4.8,
-                          reviewsCount: 190,
-                          inStock: true,
+                          reviews: 190,
+                          deliveryEta: "Today, in 60 Mins",
                           brand: p.brand,
                           materialTag: "Paint",
                         };
@@ -724,12 +724,12 @@ export function PaintingCollectionStorefront({ onOpenDetail }: PaintingCollectio
                                 title: p.title,
                                 description: `${p.brand} ${p.categoryTag}`,
                                 price: p.price,
-                                originalPrice: p.mrp || p.price,
+                                mrp: p.mrp || p.price,
                                 unit: p.unit,
                                 image: p.image,
                                 rating: p.rating ?? 4.8,
-                                reviewsCount: 190,
-                                inStock: true,
+                                reviews: 190,
+                                deliveryEta: "Today, in 60 Mins",
                                 brand: p.brand,
                                 materialTag: "Paint",
                               };
@@ -784,7 +784,8 @@ export function PaintingCollectionStorefront({ onOpenDetail }: PaintingCollectio
           isOpen={true}
           onClose={() => setQuickDetailProduct(null)}
           onAddToCart={(p, qty) => {
-            for (let i = 0; i < qty; i++) {
+            const count = qty ?? 1;
+            for (let i = 0; i < count; i++) {
               addToCart.mutate({
                 data: {
                   materialId: p.id,

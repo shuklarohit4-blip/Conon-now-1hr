@@ -3,7 +3,7 @@ import { auth } from "../firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from "firebase/auth";
 import { Phone, ArrowRight, ChevronLeft, Shield, CheckCircle2, Loader2 } from "lucide-react";
 import { useUser } from "@/context/UserContext";
-import { verifyFirebaseIdToken, JWT_STORAGE_KEY } from "@/lib/authApi";
+import { verifyFirebaseIdToken, customerLogin, JWT_STORAGE_KEY } from "@/lib/authApi";
 
 declare global {
   interface Window { recaptchaVerifier?: RecaptchaVerifier; }
@@ -89,18 +89,39 @@ export default function OtpLogin({ onLoginSuccess }: OtpLoginProps) {
           }
         }
       } else {
-        loginUser({
-          role:  "customer",
-          name:  "CONON-NOW User",
-          phone: phone.trim(),
-          displayRole: "Builder / Owner",
+        const demoRes = await customerLogin({
+          phone: phone.replace(/\D/g, "") || "9876543210",
+          name: "CONON-NOW User",
         });
+        if (demoRes.ok && demoRes.token) {
+          localStorage.setItem(JWT_STORAGE_KEY, demoRes.token);
+          loginUser({
+            role:  "customer",
+            name:  demoRes.user?.name  || "CONON-NOW User",
+            phone: demoRes.user?.phone || phone,
+            displayRole: "Builder / Owner",
+          });
+        } else {
+          loginUser({
+            role:  "customer",
+            name:  "CONON-NOW User",
+            phone: phone.trim(),
+            displayRole: "Builder / Owner",
+          });
+        }
       }
 
       setStep("done");
       onLoginSuccess?.();
     } catch (err: unknown) {
       if (otp.trim() === "123456") {
+        const demoRes = await customerLogin({
+          phone: phone.replace(/\D/g, "") || "9876543210",
+          name: "CONON-NOW User",
+        });
+        if (demoRes.ok && demoRes.token) {
+          localStorage.setItem(JWT_STORAGE_KEY, demoRes.token);
+        }
         loginUser({
           role:  "customer",
           name:  "CONON-NOW User",

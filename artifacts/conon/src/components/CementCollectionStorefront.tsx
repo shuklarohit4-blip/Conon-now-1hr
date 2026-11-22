@@ -616,6 +616,7 @@ export const CementCollectionStorefront: React.FC<CementCollectionStorefrontProp
     reviews: 1240,
     unit: p.unit,
     vendor: p.brand,
+    deliveryEta: "Today, in 60 Mins",
   });
 
   return (

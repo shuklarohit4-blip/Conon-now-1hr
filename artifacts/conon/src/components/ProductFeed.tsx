@@ -798,8 +798,8 @@ function enrichProduct(p: Product): Product {
   const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
   const asset = manifest[p.title] || manifest[p.title.trim()];
   const finalImage = asset ? `${base}${asset}` : p.image;
-  const gallery = p.images && p.images.length > 0
-    ? [finalImage, ...p.images.slice(1)]
+  const gallery: string[] = p.images && p.images.length > 0
+    ? ([finalImage, ...p.images.slice(1)].filter(Boolean) as string[])
     : finalImage ? [finalImage] : [];
   return {
     ...p,

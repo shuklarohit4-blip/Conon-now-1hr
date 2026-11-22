@@ -16,6 +16,7 @@ import { useGetCart } from "@workspace/api-client-react";
 import { useAuth } from "@workspace/auth-web";
 import { useUser } from "@/context/UserContext";
 import { CartSheet } from "./CartSheet";
+import { Footer } from "./Footer";
 import { useDeliveryLocation } from "@/context/LocationContext";
 import { formatINR } from "@/lib/wallet";
 import { useWallet } from "@/context/WalletContext";
@@ -166,8 +167,8 @@ export function Layout({
             style={{ paddingTop: "env(safe-area-inset-top)" }}
           >
             {/* Top Yellow Notice Bar - exact reference match */}
-            <div className="bg-[#f2b705] text-slate-900 text-xs font-bold py-1.5 px-4 text-center tracking-tight shadow-xs">
-              Open 8 am to 8 pm all days
+            <div className="bg-[#0f1cd1] text-slate-900 text-xs font-bold py-1.5 px-4 text-center tracking-tight shadow-xs">
+              Open 7 am to 8 pm all days
             </div>
 
             {/* Live ticker */}
@@ -292,11 +293,11 @@ export function Layout({
                 className="px-5 pt-8 pb-5"
                 style={{ background: `linear-gradient(135deg, ${BRAND_DARK} 0%, #2563eb 100%)` }}
               >
-                <button onClick={() => setShowMenu(false)} className="absolute top-4 right-4">
+                <button onClick={() => setMenuOpen(false)} className="absolute top-4 right-4">
                   <X className="w-5 h-5 text-white/70" />
                 </button>
                 {loggedIn ? (
-                  <Link href="/profile" onClick={() => setShowMenu(false)}>
+                  <Link href="/profile" onClick={() => setMenuOpen(false)}>
                     <div className="flex items-center gap-3 mb-3 cursor-pointer">
                       {authUser?.profileImageUrl ? (
                         <img
@@ -316,7 +317,7 @@ export function Layout({
                     </div>
                   </Link>
                 ) : (
-                  <Link href="/login" onClick={() => setShowMenu(false)}>
+                  <Link href="/login" onClick={() => setMenuOpen(false)}>
                     <div className="flex items-center gap-3 mb-3 cursor-pointer">
                       <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                         <LogIn className="w-6 h-6 text-white" />
@@ -351,7 +352,7 @@ export function Layout({
                   { icon: Package,       label: "Track Delivery",  href: "/track"     },
                   { icon: User,          label: "My Profile",      href: "/profile"   },
                 ].map(item => (
-                  <Link key={item.label} href={item.href} onClick={() => setShowMenu(false)}>
+                  <Link key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>
                     <div className={`flex items-center gap-3 px-5 py-3.5 cursor-pointer transition-colors ${location === item.href ? "bg-blue-50" : "hover:bg-slate-50"}`}>
                       <item.icon className="w-5 h-5" style={{ color: location === item.href ? BRAND_DARK : "#64748b" }} />
                       <span className="text-sm font-bold" style={{ color: location === item.href ? BRAND_DARK : "#334155" }}>
@@ -382,13 +383,13 @@ export function Layout({
                     </div>
                   );
                   return item.href ? (
-                    <Link key={item.label} href={item.href} onClick={() => setShowMenu(false)}>{inner}</Link>
+                    <Link key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>{inner}</Link>
                   ) : (
                     <button
                       key={item.label}
                       type="button"
                       className="w-full text-left"
-                      onClick={() => { item.action?.(); setShowMenu(false); }}
+                      onClick={() => { item.action?.(); setMenuOpen(false); }}
                     >
                       {inner}
                     </button>
@@ -397,18 +398,43 @@ export function Layout({
 
                 <div className="h-px bg-slate-100 mx-5 my-2" />
 
-                <p className="px-5 py-2 text-[9px] font-black text-slate-400 uppercase tracking-widest">Support</p>
-                {[
-                  { icon: Phone, label: "Call Us: 1800-CONON-NOW" },
-                  { icon: HelpCircle, label: "Help & FAQ" },
-                  { icon: FileText, label: "Terms & Conditions" },
-                  { icon: Settings, label: "Settings" },
-                ].map(item => (
-                  <div key={item.label} className="flex items-center gap-3 px-5 py-3 cursor-pointer hover:bg-slate-50">
-                    <item.icon className="w-4 h-4 text-slate-400" />
-                    <span className="text-[13px] font-semibold text-slate-600">{item.label}</span>
-                  </div>
-                ))}
+                <p className="px-5 py-2 text-[9px] font-black text-slate-400 uppercase tracking-widest">Support & Legal</p>
+                <div className="space-y-0.5">
+                  <a href="tel:05224721924" className="flex items-center gap-3 px-5 py-2.5 cursor-pointer hover:bg-slate-50">
+                    <Phone className="w-4 h-4 text-slate-400" />
+                    <span className="text-[13px] font-semibold text-slate-600">Call Us: 0522-4721924</span>
+                  </a>
+                  <Link href="/terms" onClick={() => setMenuOpen(false)}>
+                    <div className="flex items-center gap-3 px-5 py-2.5 cursor-pointer hover:bg-slate-50">
+                      <FileText className="w-4 h-4 text-slate-400" />
+                      <span className="text-[13px] font-semibold text-slate-600">Terms & Conditions</span>
+                    </div>
+                  </Link>
+                  <Link href="/privacy-policy" onClick={() => setMenuOpen(false)}>
+                    <div className="flex items-center gap-3 px-5 py-2.5 cursor-pointer hover:bg-slate-50">
+                      <Shield className="w-4 h-4 text-slate-400" />
+                      <span className="text-[13px] font-semibold text-slate-600">Privacy Policy</span>
+                    </div>
+                  </Link>
+                  <Link href="/refund-policy" onClick={() => setMenuOpen(false)}>
+                    <div className="flex items-center gap-3 px-5 py-2.5 cursor-pointer hover:bg-slate-50">
+                      <RotateCcw className="w-4 h-4 text-slate-400" />
+                      <span className="text-[13px] font-semibold text-slate-600">Cancellation & Refund</span>
+                    </div>
+                  </Link>
+                  <Link href="/shipping-policy" onClick={() => setMenuOpen(false)}>
+                    <div className="flex items-center gap-3 px-5 py-2.5 cursor-pointer hover:bg-slate-50">
+                      <Truck className="w-4 h-4 text-slate-400" />
+                      <span className="text-[13px] font-semibold text-slate-600">Shipping & Delivery</span>
+                    </div>
+                  </Link>
+                  <Link href="/delete-account" onClick={() => setMenuOpen(false)}>
+                    <div className="flex items-center gap-3 px-5 py-2.5 cursor-pointer hover:bg-slate-50 text-red-500">
+                      <Settings className="w-4 h-4 text-red-400" />
+                      <span className="text-[13px] font-semibold text-red-500">Delete Account</span>
+                    </div>
+                  </Link>
+                </div>
               </div>
 
               <div className="border-t border-slate-100 px-5 py-4">
@@ -421,7 +447,7 @@ export function Layout({
                     <span className="text-[13px] font-bold">Logout</span>
                   </button>
                 ) : (
-                  <Link href="/login" onClick={() => setShowMenu(false)}>
+                  <Link href="/login" onClick={() => setMenuOpen(false)}>
                     <div className="flex items-center gap-2 text-slate-500 cursor-pointer hover:text-blue-600 transition-colors">
                       <LogIn className="w-4 h-4" />
                       <span className="text-[13px] font-bold">Login / Sign up</span>
@@ -434,7 +460,7 @@ export function Layout({
                     alt="CONON-NOW"
                     className="w-5 h-5 object-contain"
                   />
-                  <p className="text-[10px] text-slate-400 font-bold">CONON-NOW · Infrabuilt v2.0</p>
+                  <p className="text-[10px] text-slate-400 font-bold">CONON-NOW · v2.0</p>
                 </div>
               </div>
             </div>
@@ -449,12 +475,15 @@ export function Layout({
         `}</style>
 
         {/* Content */}
-        <main className="flex-1 overflow-y-auto pb-24 bg-white">
-          {children}
+        <main className="flex-1 overflow-y-auto bg-white flex flex-col justify-between">
+          <div className="flex-1 pb-16">
+            {children}
+          </div>
+          <Footer />
         </main>
 
         {/* Floating "View cart" pill — sits above the bottom dock, hidden when
-            the cart is empty or already open (Blinkit-style). */}
+            the cart is empty or already open (-style). */}
         {cart && cart.totalItems > 0 && !isCartOpen && (
           <div className="absolute left-0 right-0 z-30 px-4 pointer-events-none flex justify-center" style={{ bottom: "92px" }}>
             <div className="w-full max-w-md">

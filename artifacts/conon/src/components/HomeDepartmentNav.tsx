@@ -42,7 +42,6 @@ export const HomeDepartmentNav: React.FC<HomeDepartmentNavProps> = ({
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeKeydownListener?.("keydown", handleKeyDown);
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("mousedown", handleClickOutside);
     };

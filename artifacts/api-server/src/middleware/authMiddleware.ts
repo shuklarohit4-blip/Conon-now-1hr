@@ -1,6 +1,7 @@
 import * as oidc from "openid-client";
 import { type Request, type Response, type NextFunction } from "express";
 import type { AuthUser } from "@workspace/api-zod";
+import { verifyJwt } from "../lib/jwt";
 import {
   clearSession,
   getOidcConfig,
@@ -62,26 +63,62 @@ export async function authMiddleware(
     return this.user != null;
   } as Request["isAuthenticated"];
 
+  // 1. Check for platform JWT in Authorization header or conon_jwt cookie
+  const authHeader = req.headers["authorization"];
+  let token = authHeader?.startsWith("Bearer ") ? authHeader.slice(7).trim() : undefined;
+  if (!token) {
+    token = req.cookies?.["conon_jwt"] || req.cookies?.["jwt"];
+  }
+
+  if (token) {
+    const payload = verifyJwt(token);
+    if (payload) {
+      req.user = {
+        id: String(payload.sub),
+        email: (payload as any).email || null,
+        firstName:
+          (payload as any).name ||
+          (payload.role === "vendor"
+            ? "CONON Vendor"
+            : payload.role === "admin"
+            ? "Admin"
+            : "CONON User"),
+        lastName: null,
+        profileImageUrl: null,
+      };
+      (req as any).userRole = payload.role;
+      (req as any).jwtPayload = payload;
+      next();
+      return;
+    }
+  }
+
+  // 2. Check for OIDC session cookie (e.g. Replit or hosted OIDC)
   const sid = getSessionId(req);
   if (!sid) {
     next();
     return;
   }
 
-  const session = await getSession(sid);
-  if (!session?.user?.id) {
-    await clearSession(res, sid);
-    next();
-    return;
+  try {
+    const session = await getSession(sid);
+    if (!session?.user?.id) {
+      await clearSession(res, sid);
+      next();
+      return;
+    }
+
+    const refreshed = await refreshIfExpired(sid, session);
+    if (!refreshed) {
+      await clearSession(res, sid);
+      next();
+      return;
+    }
+
+    req.user = refreshed.user;
+  } catch (err) {
+    // If DB is offline or OIDC is not configured, do not crash the request
   }
 
-  const refreshed = await refreshIfExpired(sid, session);
-  if (!refreshed) {
-    await clearSession(res, sid);
-    next();
-    return;
-  }
-
-  req.user = refreshed.user;
   next();
 }
