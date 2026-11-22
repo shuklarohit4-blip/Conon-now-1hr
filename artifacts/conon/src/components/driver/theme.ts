@@ -1,4 +1,4 @@
-/* Conon Fleet — Driver Partner App brand tokens.
+/* CONON-NOW Fleet — Driver Partner App brand tokens.
    High-contrast, sunlight-readable colors with strict semantic coding:
    green = proceed/success, red = offline/danger, yellow = warning. */
 export const GREEN = "#16a34a";

@@ -5,7 +5,7 @@ import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { sessionMiddleware } from "./middleware/session";
-import { authMiddleware } from "./middlewares/authMiddleware";
+import { authMiddleware } from "./middleware/authMiddleware";
 import { errorHandler } from "./middleware/errorHandler";
 
 const app: Express = express();
@@ -43,7 +43,12 @@ app.use(
         callback(null, true);
         return;
       }
-      if (allowedOrigins.includes(origin)) {
+      if (
+        allowedOrigins.length === 0 ||
+        allowedOrigins.includes(origin) ||
+        (process.env.NODE_ENV !== "production" &&
+          /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin))
+      ) {
         callback(null, origin);
       } else {
         callback(null, false);

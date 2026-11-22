@@ -1,0 +1,29 @@
+{
+  "name": "CONON-NOW — 60-Minute Construction Materials Delivery",
+  "short_name": "CONON-NOW",
+  "description": "Order cement, steel, bricks, sand, paint and building materials with 60-minute site delivery in Lucknow.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1848a0",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/conon-logo-transparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/conon-logo-cropped.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["shopping", "business", "utilities"]
+}

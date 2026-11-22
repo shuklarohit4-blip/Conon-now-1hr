@@ -12,7 +12,7 @@ import { toast } from "sonner";
 const ORDER_ID  = "CON-28471";
 const ORDER_NUM = "#8071668064";
 const DRIVER    = { name: "Rajesh Kumar", initials: "RK", rating: 4.8, trips: "1.2k", phone: "+919876543210" };
-const VENDOR    = { name: "CONON Warehouse — Charbagh", area: "Charbagh, Lucknow" };
+const VENDOR    = { name: "CONON-NOW Warehouse — Charbagh", area: "Charbagh, Lucknow" };
 const TOTAL_AMT = 17750;
 const DELIVERY_ADDR = "Plot 42, Hazratganj, Lucknow — 226001";
 const CONTACT   = "Rohit, 9876XXXX";
@@ -202,15 +202,15 @@ export function DeliveryTracker() {
   };
 
   const handleMessage = () => {
-    const body = encodeURIComponent(`Hi ${DRIVER.name}, regarding my CONON order ${ORDER_ID}.`);
+    const body = encodeURIComponent(`Hi ${DRIVER.name}, regarding my CONON-NOW order ${ORDER_ID}.`);
     window.location.href = `sms:${DRIVER.phone}?body=${body}`;
   };
 
   const handleShare = async () => {
-    const text = `Track my CONON order ${ORDER_ID} — arriving in ${eta} mins!`;
+    const text = `Track my CONON-NOW order ${ORDER_ID} — arriving in ${eta} mins!`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: "CONON Delivery", text });
+        await navigator.share({ title: "CONON-NOW Delivery", text });
       } else {
         await navigator.clipboard.writeText(text);
         toast.success("Tracking details copied to clipboard!");
@@ -442,7 +442,7 @@ export function DeliveryTracker() {
           </button>
           {safetyOpen && (
             <div className="px-4 pb-4 -mt-1 text-[12px] text-gray-600 leading-relaxed space-y-2">
-              <p>• All CONON delivery partners are background-verified and trained in safe material handling.</p>
+              <p>• All CONON-NOW delivery partners are background-verified and trained in safe material handling.</p>
               <p>• Every vehicle is GPS-tracked end to end, and loads are weight-verified at the warehouse before dispatch.</p>
               <p>• Share your live tracking link with family and rate your partner after delivery — your feedback keeps everyone safe.</p>
             </div>

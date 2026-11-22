@@ -13,7 +13,7 @@ import {
   useGetMaterials, useAddToCart, getGetCartQueryKey,
 } from "@workspace/api-client-react";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const GREEN = "#2a7a3b";
 
 /* ── Room types ──────────────────────────────────────────────── */

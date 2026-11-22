@@ -6,7 +6,7 @@ export default function Slide05Market() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '2vh', marginBottom: '3vh', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: '#64748B' }}>
           <span>MARKET OPPORTUNITY</span><span>2026</span>
@@ -62,13 +62,13 @@ export default function Slide05Market() {
             <div style={{ fontSize: '2.8vw', fontWeight: 900, color: '#1E3A5F' }}>0-to-1</div>
             <div style={{ fontSize: '0.85vw', fontWeight: 600, color: '#64748B', textTransform: 'uppercase' }}>Category</div>
           </div>
-          <div style={{ fontSize: '1vw', color: '#475569', lineHeight: 1.5 }}>No scaled on-demand construction materials player exists in India. CONON is creating the category.</div>
+          <div style={{ fontSize: '1vw', color: '#475569', lineHeight: 1.5 }}>No scaled on-demand construction materials player exists in India. CONON-NOW is creating the category.</div>
         </div>
       </div>
 
       {/* Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2E8F0', paddingTop: '1.5vh', marginTop: '2.5vh', fontSize: '0.9vw', color: '#94A3B8', fontWeight: 500, flexShrink: 0 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 5 of 16</span></div>
       </div>
     </div>

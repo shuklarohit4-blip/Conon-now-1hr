@@ -6,7 +6,7 @@ export default function Slide15Ask() {
       <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '2vh' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: '#64748B' }}>
           <span>THE ASK</span><span>2026</span>
@@ -76,7 +76,7 @@ export default function Slide15Ask() {
 
       {/* Footer */}
       <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2E8F0', paddingTop: '1.5vh', fontSize: '0.9vw', color: '#94A3B8', fontWeight: 500 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 15 of 16</span></div>
       </div>
     </div>

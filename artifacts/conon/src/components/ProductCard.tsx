@@ -6,9 +6,9 @@ import {
 } from "lucide-react";
 import { QuantityStepper } from "./QuantityStepper";
 
-/* CONON brand tokens (kept local so the card is fully reusable). */
-const BRAND_DARK = "#1b4366";
-const BLINKIT_GREEN = "#0c831f";
+/* CONON-NOW brand tokens (kept local so the card is fully reusable). */
+const BRAND_DARK = "#1848a0";
+const BLINKIT_GREEN = "#1848a0";
 
 /* Category-relevant fallback icons — used when a product has no reliable
    image, so hardware never shows irrelevant stock photos (e.g. a person). */
@@ -33,7 +33,7 @@ export type Product = {
   /** Hero image url (full-width, ~4:3). Optional — falls back to a premium icon block. */
   image?: string;
   /** Tag shown above the title in light grey. */
-  tag?: "Sponsored" | "Conon Assured" | string;
+  tag?: "Sponsored" | "CONON-NOW Assured" | string;
   /** Material badge under the title, e.g. "Cement", "TMT Steel". */
   materialTag: string;
   /** 2–3 line product title. */
@@ -48,7 +48,7 @@ export type Product = {
   mrp: number;
   /** Optional bank / khata offer price (₹) shown in the green highlight. */
   bankOfferPrice?: number;
-  /** Label for the bank/khata offer, e.g. "Conon Khata or HDFC Bank". */
+  /** Label for the bank/khata offer, e.g. "CONON-NOW Khata or HDFC Bank". */
   bankOfferLabel?: string;
   /** Bold delivery promise, e.g. "Today, 2:00 PM (1-Hour)". */
   deliveryEta: string;
@@ -155,7 +155,7 @@ export function ProductCard({
     >
       {/* 1 ── Product image + overlays (tap → detail sheet) ─────────── */}
       <div
-        className="relative w-full aspect-[4/3] bg-slate-50 cursor-pointer"
+        className="relative w-full aspect-square bg-white flex items-center justify-center p-3 cursor-pointer overflow-hidden border-b border-slate-100"
         role={onOpenDetail ? "button" : undefined}
         onClick={onOpenDetail ? openDetail : undefined}
       >
@@ -165,7 +165,7 @@ export function ProductCard({
             alt={title}
             loading="lazy"
             onError={() => setImgError(true)}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
           /* Premium minimal fallback — soft slate block, category-relevant

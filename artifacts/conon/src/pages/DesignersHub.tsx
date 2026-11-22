@@ -10,7 +10,7 @@ import {
 import { Layout } from "@/components/Layout";
 import { toast } from "sonner";
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const GOLD       = "#b8960c";
 
 /* ────────────────────────────────────────────────────────────────────
@@ -18,7 +18,7 @@ const GOLD       = "#b8960c";
 ──────────────────────────────────────────────────────────────────── */
 
 const PRO_CATEGORIES = [
-  { id: "architect",  icon: Home,    label: "Architects",          sub: "COA Verified",      color: "#1b4366", bg: "#eff6ff" },
+  { id: "architect",  icon: Home,    label: "Architects",          sub: "COA Verified",      color: "#1848a0", bg: "#eff6ff" },
   { id: "interior",   icon: Layers,  label: "Interior",            sub: "IIDA Certified",    color: "#7c3aed", bg: "#f5f3ff" },
   { id: "landscape",  icon: Leaf,    label: "Landscape",           sub: "ILA Members",       color: "#15803d", bg: "#f0fdf4" },
   { id: "vastu",      icon: Compass, label: "Vastu",               sub: "Certified Experts", color: "#b45309", bg: "#fffbeb" },
@@ -156,7 +156,7 @@ const BLUEPRINTS = [
     format: "PDF + DWG",
     sold: 87,
     badge: "Best Seller",
-    badgeColor: "#1b4366",
+    badgeColor: "#1848a0",
   },
   {
     id: "bp2",
@@ -552,11 +552,11 @@ export function DesignersHub() {
         {/* Hero banner */}
         <div
           className="relative rounded-[28px] overflow-hidden mb-5 p-5"
-          style={{ background: "linear-gradient(135deg, #0f172a 0%, #1b4366 60%, #2d6a9f 100%)" }}
+          style={{ background: "linear-gradient(135deg, #0f172a 0%, #1848a0 60%, #2d6a9f 100%)" }}
         >
           <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10"
             style={{ background: "#f59e0b", transform: "translate(30%, -30%)" }} />
-          <p className="text-[8px] font-black text-amber-300 uppercase tracking-[0.2em] mb-1">Professionals on CONON</p>
+          <p className="text-[8px] font-black text-amber-300 uppercase tracking-[0.2em] mb-1">Professionals on CONON-NOW</p>
           <p className="font-display font-black italic text-white text-xl leading-tight mb-1">
             Design &amp; Architecture Hub
           </p>

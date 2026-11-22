@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────────
-   Payment utilities & gateway stubs for CONON checkout.
+   Payment utilities & gateway stubs for CONON-NOW checkout.
 
    The actual gateway (Razorpay / Stripe) is NOT wired yet. The
    `processPayment` function is a placeholder that simulates a real
@@ -10,6 +10,9 @@
    `processPayment` with the gateway's checkout call and keep the
    same return contract.
    ──────────────────────────────────────────────────────────────── */
+
+export const RAZORPAY_KEY_ID =
+  (import.meta.env.VITE_RAZORPAY_KEY_ID as string) || "rzp_test_U2WeWQ1QNhcFm3";
 
 export type PaymentMethod = "upi" | "card" | "netbanking" | "cod" | "khata";
 

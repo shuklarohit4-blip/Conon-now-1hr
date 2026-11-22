@@ -7,7 +7,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 
 type Feature = {
   href: string;
@@ -17,10 +17,10 @@ type Feature = {
   badge?: "NEW" | "HOT";
 };
 
-/* Quick-access shortcuts to every major Conon feature — surfaced at the top
+/* Quick-access shortcuts to every major CONON-NOW feature — surfaced at the top
    of Home so users don't have to scroll to the bottom nav or open the menu. */
 const FEATURES: Feature[] = [
-  { href: "/build",       icon: HardHat,       label: "Builder",      tint: "#1b4366" },
+  { href: "/build",       icon: HardHat,       label: "Builder",      tint: "#1848a0" },
   { href: "/rentals",     icon: Tractor,       label: "Machine Rent", tint: "#b45309", badge: "HOT" },
   { href: "/smart-build", icon: Boxes,         label: "Smart-Build",  tint: "#7c3aed", badge: "NEW" },
   { href: "/estimator",   icon: Calculator,    label: "AI Estimator", tint: "#0e7490" },
@@ -39,7 +39,7 @@ export function FeatureShortcuts() {
     <section className="pt-1">
       <div className="flex items-center justify-between px-5 mb-3">
         <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest italic">
-          Explore Conon
+          Explore CONON-NOW
         </p>
         <span className="text-[9px] font-bold text-slate-300">Swipe →</span>
       </div>

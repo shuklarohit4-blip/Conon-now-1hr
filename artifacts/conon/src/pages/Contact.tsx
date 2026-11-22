@@ -5,7 +5,7 @@ import {
   Truck, Building2, Send, CheckCircle2,
 } from "lucide-react";
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const BRAND_MID  = "#5c92b1";
 const AMBER      = "#f59e0b";
 
@@ -55,7 +55,7 @@ export function Contact() {
       sub: "Reply within minutes",
       tint: "#22c55e",
       action: () => {
-        const txt = encodeURIComponent("Hi CONON, I need help with my order.");
+        const txt = encodeURIComponent("Hi CONON-NOW, I need help with my order.");
         window.open(`https://wa.me/${SUPPORT_WA}?text=${txt}`, "_blank");
       },
     },
@@ -76,7 +76,7 @@ export function Contact() {
             We're here 24×7
           </p>
           <h1 className="font-display font-black text-2xl leading-tight" style={{ color: BRAND_DARK }}>
-            Contact CONON
+            Contact CONON-NOW
           </h1>
           <p className="text-sm text-slate-500 mt-1">
             Stuck on an order, late delivery, or just have a question? Pick the fastest channel below.
@@ -119,7 +119,7 @@ export function Contact() {
           <div className="flex items-start gap-3">
             <Building2 className="w-5 h-5 mt-0.5" />
             <div>
-              <p className="font-black text-sm">CONON Infrabuilt HQ</p>
+              <p className="font-black text-sm">CONON-NOW Infrabuilt HQ</p>
               <p className="text-[12px] text-blue-100 leading-relaxed mt-1">
                 G47, Skyline Plaza 3<br />
                 Sushant Golf City, Ansal API<br />
@@ -227,7 +227,7 @@ export function Contact() {
           <MapPin className="inline w-3 h-3 -mt-0.5" /> Currently serving Lucknow, Uttar Pradesh — 60-min delivery
         </p>
         <p className="text-[10px] text-slate-300 text-center mt-1">
-          Powered by <span style={{ color: AMBER }} className="font-black">CONON</span> Infrabuilt · v2.1
+          Powered by <span style={{ color: AMBER }} className="font-black">CONON-NOW</span> Infrabuilt · v2.1
         </p>
       </div>
     </Layout>

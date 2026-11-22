@@ -50,6 +50,22 @@ export const PROMO_CODES: Record<string, PromoCode> = {
     value: 2000,
     minOrder: 35000,
   },
+  UTSAV5000: {
+    code: "UTSAV5000",
+    label: "₹5,000 OFF",
+    description: "Festival Mahotsav: flat ₹5,000 off on materials above ₹50,000",
+    type: "flat",
+    value: 5000,
+    minOrder: 50000,
+  },
+  SHUBH2026: {
+    code: "SHUBH2026",
+    label: "₹1,500 OFF",
+    description: "Shubh Nirman Utsav: flat ₹1,500 off on orders above ₹15,000",
+    type: "flat",
+    value: 1500,
+    minOrder: 15000,
+  },
 };
 
 export type PromoResult =

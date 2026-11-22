@@ -9,7 +9,7 @@ import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { onImgError } from "@/lib/imgFallback";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const AMBER  = "#f59e0b";
 const GREEN  = "#15803d";
 

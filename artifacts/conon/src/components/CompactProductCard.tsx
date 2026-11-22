@@ -7,8 +7,8 @@ import {
 import { type Product } from "@/components/ProductCard";
 import { QuantityStepper } from "@/components/QuantityStepper";
 
-const BRAND_DARK = "#1b4366";
-const BLINKIT_GREEN = "#0c831f";
+const BRAND_DARK = "#1848a0";
+const BLINKIT_GREEN = "#1848a0";
 
 const MATERIAL_ICONS: Record<string, LucideIcon> = {
   cement: Package,
@@ -84,7 +84,7 @@ export function CompactProductCard({
           type="button"
           onClick={openDetail}
           aria-label={`View ${title}`}
-          className="block w-full aspect-square rounded-xl bg-slate-50 overflow-hidden"
+          className="block w-full aspect-square rounded-xl bg-white border border-slate-100 flex items-center justify-center p-2 overflow-hidden"
         >
           {showImage ? (
             <img
@@ -92,7 +92,7 @@ export function CompactProductCard({
               alt={title}
               loading="lazy"
               onError={() => setImgError(true)}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           ) : (
             <span className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-slate-100 px-2">

@@ -14,8 +14,8 @@ export default function Slide01Cover() {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
-            <div style={{ width: '2.4vw', height: '2.4vw', backgroundColor: '#0D9488', borderRadius: '0.5vw' }} />
-            <div style={{ fontSize: '1.4vw', fontWeight: 700, color: 'white', letterSpacing: '0.05em' }}>CONON</div>
+            <img src={`${base}images/conon-logo.png`} alt="CONON-NOW" style={{ width: '3.2vw', height: '3.2vw', objectFit: 'contain' }} />
+            <div style={{ fontSize: '1.4vw', fontWeight: 800, color: 'white', letterSpacing: '0.05em' }}>CONON-NOW</div>
           </div>
           <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: 'rgba(255,255,255,0.6)' }}>
             <span>INVESTOR PRESENTATION</span>
@@ -66,7 +66,7 @@ export default function Slide01Cover() {
 
         {/* Footer */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1.5vh', fontSize: '0.9vw', color: 'rgba(255,255,255,0.45)' }}>
-          <span>CONON, Inc.</span>
+          <span>CONON-NOW, Inc.</span>
           <span>Confidential &amp; Proprietary · confidential@conon.in</span>
         </div>
       </div>

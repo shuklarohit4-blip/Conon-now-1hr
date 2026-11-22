@@ -16,7 +16,7 @@ import { LanguageToggle } from "@/components/driver/LanguageToggle";
 import { GREEN, RED, type DriverTab } from "@/components/driver/theme";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Conon Fleet — Driver Partner App shell.
+   CONON-NOW Fleet — Driver Partner App shell.
 
    Renders the whole journey inside a phone-sized frame and swaps between:
      • Duty / Kamai tabs (when no trip is active)

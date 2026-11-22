@@ -47,9 +47,10 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Replit
+# Local cache & build artifacts
 .cache/
 .local/
-.config/replit/.semgrep/semgrep_rules.json
 .vercel
 .env*
+.pnpm-store/
+*.tgz

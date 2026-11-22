@@ -18,7 +18,8 @@ import { ProductsTab } from "@/components/vendor/ProductsTab";
 import { InventoryTab } from "@/components/vendor/InventoryTab";
 import { KhataTab } from "@/components/vendor/KhataTab";
 import { GREEN, inr, type VendorTab } from "@/components/vendor/theme";
-import { JWT_STORAGE_KEY } from "@/lib/authApi";
+import { JWT_STORAGE_KEY, vendorLogin } from "@/lib/authApi";
+import { useLocation } from "wouter";
 import { joinVendorRoom, onNewOrder, type IncomingVendorOrder } from "@/lib/realtime";
 
 export function VendorDashboard() {
@@ -32,14 +33,51 @@ export function VendorDashboard() {
 }
 
 function VendorDashboardInner() {
+  const [, setLocation] = useLocation();
   const { t } = useVendorLanguage();
   const { addIncomingOrder, loading, error, refresh } = useVendor();
 
-  const [activeTab, setActiveTab] = useState<VendorTab>("dashboard");
+  const [activeTab, setActiveTab] = useState<VendorTab>(() => {
+    if (typeof window !== "undefined") {
+      const p = new URLSearchParams(window.location.search).get("tab") as VendorTab;
+      if (p && ["dashboard", "orders", "products", "inventory", "khata"].includes(p)) {
+        return p;
+      }
+    }
+    return "dashboard";
+  });
   const [isOnline, setIsOnline] = useState(true);
   const [alertOrder, setAlertOrder] = useState<IncomingVendorOrder | null>(null);
   const [simulating, setSimulating] = useState(false);
+  const [loggingIn, setLoggingIn] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const goToTab = (tab: VendorTab) => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", tab);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
+  const handleQuickDemoAccess = async () => {
+    setLoggingIn(true);
+    try {
+      const res = await vendorLogin();
+      if (res.ok && res.token) {
+        localStorage.setItem(JWT_STORAGE_KEY, res.token);
+        toast.success("Logged in as Demo Supplier Partner!");
+        await refresh();
+      } else {
+        toast.error(res.error || "Login failed");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setLoggingIn(false);
+    }
+  };
   /* Orders we've already announced (chime + toast) — guards against the same
      order arriving via both the optimistic Test-Order path and the socket echo. */
   const announced = useRef<Set<string>>(new Set());
@@ -100,11 +138,9 @@ function VendorDashboardInner() {
     scrollRef.current?.scrollTo({ top: 0, behavior: "auto" });
   }, [activeTab]);
 
-  const goToTab = (tab: VendorTab) => setActiveTab(tab);
-
   return (
-    <div className="min-h-screen bg-slate-50 flex justify-center">
-      <div className="w-full max-w-[480px] bg-slate-50 min-h-screen relative flex flex-col shadow-2xl overflow-hidden">
+    <div className="min-h-screen bg-slate-100 flex justify-center">
+      <div className="w-full max-w-7xl bg-slate-50 min-h-screen relative flex flex-col shadow-2xl overflow-hidden border-x border-slate-200">
         <VendorHeader isOnline={isOnline} setIsOnline={setIsOnline} />
 
         {/* Incoming order alert banner */}
@@ -156,16 +192,36 @@ function VendorDashboardInner() {
               <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{t("loadingStore")}</p>
             </div>
           ) : error ? (
-            <div className="flex flex-col items-center justify-center py-24 gap-3 px-8 text-center">
-              <AlertTriangle className="w-7 h-7 text-amber-500" />
-              <p className="text-[12px] font-bold text-slate-500">{error}</p>
-              <button
-                onClick={() => refresh()}
-                className="mt-2 px-5 py-3 rounded-2xl text-white text-[10px] font-black uppercase tracking-widest"
-                style={{ background: GREEN }}
-              >
-                {t("retry")}
-              </button>
+            <div className="flex flex-col items-center justify-center py-20 gap-3 px-6 text-center">
+              <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-1">
+                <AlertTriangle className="w-7 h-7 text-amber-500" />
+              </div>
+              <h3 className="text-base font-black text-slate-800">Supplier Access Required</h3>
+              <p className="text-[12px] font-semibold text-slate-500 max-w-[320px]">
+                {error}
+              </p>
+              <div className="flex flex-col gap-2.5 w-full max-w-[280px] mt-4">
+                <button
+                  onClick={handleQuickDemoAccess}
+                  disabled={loggingIn}
+                  className="w-full py-3 rounded-2xl text-white text-xs font-black uppercase tracking-wider shadow-lg active:scale-95 transition disabled:opacity-50"
+                  style={{ background: GREEN }}
+                >
+                  {loggingIn ? "Connecting Store..." : "1-Click Demo Supplier Access"}
+                </button>
+                <button
+                  onClick={() => setLocation("/login")}
+                  className="w-full py-3 rounded-2xl bg-white border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 active:scale-95 transition"
+                >
+                  Login / Register Shop
+                </button>
+                <button
+                  onClick={() => refresh()}
+                  className="w-full py-2 text-slate-400 hover:text-slate-600 text-[11px] font-bold"
+                >
+                  {t("retry")}
+                </button>
+              </div>
             </div>
           ) : (
             <AnimatePresence mode="wait">

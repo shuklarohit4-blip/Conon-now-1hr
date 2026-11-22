@@ -10,7 +10,7 @@ import {
   ShoppingCart, Landmark,
 } from "lucide-react";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const AMBER = "#f59e0b";
 const NEON = "#84cc16";
 
@@ -117,7 +117,7 @@ export function BuilderKits() {
           name: `${kit.name} Kit · 1000 sq ft`,
           price: kit.total,
           unit: "Full Kit",
-          vendor: "Conon Smart Kits",
+          vendor: "CONON-NOW Smart Kits",
           category: "kit",
         },
       },
@@ -133,7 +133,7 @@ export function BuilderKits() {
 
   const financeKit = (kit: Stage) => {
     const emi = Math.round(kit.total / 6);
-    toast("Conon Khata · Finance Activated", {
+    toast("CONON-NOW Khata · Finance Activated", {
       description: `${kit.name} Kit on 6-month Khata — approx ${inr(emi)}/month at 0% interest.`,
       icon: <Landmark className="w-4 h-4" style={{ color: BRAND }} />,
     });
@@ -155,7 +155,7 @@ export function BuilderKits() {
           </div>
           <p className="text-sm text-blue-100/90 leading-snug mt-3">
             Every material for your build, bundled by construction stage. Order an entire
-            stage in one tap, lock bulk pricing, and pay with Conon Khata.
+            stage in one tap, lock bulk pricing, and pay with CONON-NOW Khata.
           </p>
           <div className="flex gap-2 mt-4">
             <Trust icon={<Shield className="w-3 h-3" />} label="ISI Materials" />
@@ -274,7 +274,7 @@ export function BuilderKits() {
                               className="w-full mt-2 py-3 rounded-2xl font-black flex items-center justify-center gap-2 active:scale-[0.98] transition border-2"
                               style={{ borderColor: BRAND, color: BRAND }}
                             >
-                              <Landmark className="w-4 h-4" /> Finance via Conon Khata
+                              <Landmark className="w-4 h-4" /> Finance via CONON-NOW Khata
                             </button>
                           </div>
                         </motion.div>

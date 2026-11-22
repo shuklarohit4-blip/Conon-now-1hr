@@ -333,11 +333,11 @@ interface RadarItem {
   txt: string;
 }
 const RADAR_ITEMS: RadarItem[] = [
-  { icon: "📡", txt: "Detecting nearest Conon Smart-Warehouse…" },
+  { icon: "📡", txt: "Detecting nearest CONON-NOW Smart-Warehouse…" },
   { icon: "🔥", txt: "450 Bags UltraTech Cement locked · VIP Road Godown" },
   { icon: "🔥", txt: "2 Metric Tons Tata Tiscon TMT reserved" },
   { icon: "🧱", txt: "18,000 AAC Blocks allocated · JIT dispatch ready" },
-  { icon: "🚛", txt: "3 Conon Fleet trucks on standby (4.2 km)" },
+  { icon: "🚛", txt: "3 CONON-NOW Fleet trucks on standby (4.2 km)" },
 ];
 
 function MaterialRadar({ ready, onReady }: { ready: boolean; onReady: () => void }) {
@@ -508,16 +508,16 @@ export function SmartBuild3D() {
         data: {
           materialId: "smartbuild-gp2-shaheedpath",
           quantity: 1,
-          name: `Conon Smart-Build · G+2 Turnkey · ${place}`,
+          name: `CONON-NOW Smart-Build · G+2 Turnkey · ${place}`,
           price: DEPLOY_PRICE,
           unit: "Turnkey Project",
-          vendor: "Conon Smart-Build",
+          vendor: "CONON-NOW Smart-Build",
           category: "design-kit",
         },
       },
       {
         onSuccess: () => {
-          toast.success("Conon Fleet deployed — construction initialised!", {
+          toast.success("CONON-NOW Fleet deployed — construction initialised!", {
             description: `G+2 turnkey project · ${lakh(DEPLOY_PRICE)} routed to the Khata Ledger.`,
             icon: <Rocket className="w-4 h-4" style={{ color: CYAN }} />,
           });
@@ -689,7 +689,7 @@ export function SmartBuild3D() {
                   className="w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 active:scale-[0.98] transition text-base disabled:opacity-60"
                   style={{ background: `linear-gradient(135deg, ${AMBER} 0%, #f97316 100%)`, color: "#1a0a00", boxShadow: `0 10px 34px -8px ${AMBER}` }}
                 >
-                  <Rocket className="w-5 h-5" /> Deploy Conon Fleet & Start Construction ({lakh(DEPLOY_PRICE)})
+                  <Rocket className="w-5 h-5" /> Deploy CONON-NOW Fleet & Start Construction ({lakh(DEPLOY_PRICE)})
                 </motion.button>
 
                 <div className="grid grid-cols-3 gap-2 pb-2">

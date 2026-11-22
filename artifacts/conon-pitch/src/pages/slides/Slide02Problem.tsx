@@ -6,7 +6,7 @@ export default function Slide02Problem() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '2vh', marginBottom: '3vh', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700, letterSpacing: '0.02em' }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700, letterSpacing: '0.02em' }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: '#64748B' }}>
           <span>THE PROBLEM</span><span>2026</span>
@@ -77,7 +77,7 @@ export default function Slide02Problem() {
 
       {/* Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2E8F0', paddingTop: '1.5vh', marginTop: '2vh', fontSize: '0.9vw', color: '#94A3B8', fontWeight: 500, flexShrink: 0 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 2 of 16</span></div>
       </div>
     </div>

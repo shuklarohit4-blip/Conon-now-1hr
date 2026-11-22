@@ -1,7 +1,7 @@
 import React from "react";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 
-const BLINKIT_GREEN = "#0c831f";
+const BLINKIT_GREEN = "#1848a0";
 
 type Size = "sm" | "md" | "lg";
 

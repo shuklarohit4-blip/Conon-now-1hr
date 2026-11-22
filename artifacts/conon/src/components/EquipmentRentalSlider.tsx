@@ -101,7 +101,7 @@ export function EquipmentRentalSlider() {
           name: `${eq.name} · Rental`,
           price: Math.min(amount, 10_000_000),
           unit: `per ${unit}`,
-          vendor: "Conon Heavy Rentals",
+          vendor: "CONON-NOW Heavy Rentals",
           category: "rental",
         },
       },

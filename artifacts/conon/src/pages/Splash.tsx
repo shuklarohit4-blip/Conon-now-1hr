@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const BRAND_MID  = "#5c92b1";
 const AMBER      = "#f59e0b";
 
@@ -35,39 +35,29 @@ export function Splash() {
         className="relative z-10 flex flex-col items-center"
       >
         <motion.img
-          src={`${import.meta.env.BASE_URL}images/conon-logo-real.png`}
-          alt="CONON Infrabuilt Limited"
-          className="w-40 h-40 object-contain mb-4"
+          src={`${import.meta.env.BASE_URL}images/conon-logo-transparent.png`}
+          alt="CONON-NOW"
+          className="w-48 h-48 object-contain mb-2 drop-shadow-sm"
           initial={{ y: 18 }}
           animate={{ y: 0 }}
           transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
         />
 
-        <motion.h1
-          className="text-3xl font-display font-black italic tracking-tighter"
+        <motion.p
+          className="text-[11px] font-black tracking-[0.25em] uppercase mt-2"
           style={{ color: BRAND_DARK }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          CONON
-        </motion.h1>
-
-        <motion.p
-          className="text-[9px] font-black tracking-[0.3em] uppercase mt-1"
-          style={{ color: BRAND_MID }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          Prime Infrastructure
+          Prime Infrastructure In 60 Minutes
         </motion.p>
 
         <motion.p
-          className="text-xs mt-3 italic text-slate-400"
+          className="text-xs mt-2 italic text-slate-400 font-medium"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.1 }}
+          transition={{ delay: 0.9 }}
         >
           Delivering Trust, Building Dreams.
         </motion.p>

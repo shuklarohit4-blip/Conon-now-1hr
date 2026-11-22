@@ -6,7 +6,7 @@ export default function Slide06BusinessModel() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '2vh', marginBottom: '3vh', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: '#64748B' }}>
           <span>BUSINESS MODEL</span><span>2026</span>
@@ -40,7 +40,7 @@ export default function Slide06BusinessModel() {
               <div style={{ fontSize: '0.85vw', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Subscription</div>
               <div style={{ fontSize: '1.2vw', fontWeight: 800, color: '#0D9488' }}>₹4,999/mo</div>
             </div>
-            <div style={{ fontSize: '1.5vw', fontWeight: 800, marginBottom: '1vh', color: '#1E3A5F' }}>CONON Pro</div>
+            <div style={{ fontSize: '1.5vw', fontWeight: 800, marginBottom: '1vh', color: '#1E3A5F' }}>CONON-NOW Pro</div>
             <div style={{ fontSize: '1vw', color: '#64748B', lineHeight: 1.5 }}>Monthly subscription for contractors — priority delivery, credit line, and bulk pricing. High-margin recurring revenue.</div>
           </div>
           <div style={{ background: 'rgba(13,148,136,0.1)', borderRadius: '0.5vw', padding: '1vh 1.2vw', fontSize: '0.9vw', fontWeight: 600, color: '#0D9488', display: 'inline-block', alignSelf: 'flex-start', marginTop: '1.5vh' }}>High-margin SaaS</div>
@@ -74,7 +74,7 @@ export default function Slide06BusinessModel() {
 
       {/* Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2E8F0', paddingTop: '1.5vh', marginTop: '2.5vh', fontSize: '0.9vw', color: '#94A3B8', fontWeight: 500, flexShrink: 0 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 6 of 16</span></div>
       </div>
     </div>

@@ -463,7 +463,7 @@ function Blueprint({ plan, inp, svgRef }: { plan: Plan; inp: Inputs; svgRef: Rea
         <line x1={PX + plotPxW * 0.42} y1={plan.titleY} x2={PX + plotPxW * 0.42} y2={plan.titleY + TITLE_H} stroke={GRIDLINE} strokeWidth="0.8" />
         <line x1={PX + plotPxW * 0.72} y1={plan.titleY} x2={PX + plotPxW * 0.72} y2={plan.titleY + TITLE_H} stroke={GRIDLINE} strokeWidth="0.8" />
         {/* left cell */}
-        <text x={PX + 14} y={plan.titleY + 24} fill={CYAN} fontSize="14" fontWeight={800} letterSpacing="1">CONON ARCH-GENIUS</text>
+        <text x={PX + 14} y={plan.titleY + 24} fill={CYAN} fontSize="14" fontWeight={800} letterSpacing="1">CONON-NOW ARCH-GENIUS</text>
         <text x={PX + 14} y={plan.titleY + 42} fill={LINE} fontSize="9">Procedural Vastu Floor Plan · Ground Floor</text>
         <text x={PX + 14} y={plan.titleY + 60} fill="rgba(132,204,22,0.8)" fontSize="9">{inp.system === "RCC" ? "RCC FRAMED STRUCTURE" : "LOAD-BEARING STRUCTURE"}</text>
         <text x={PX + 14} y={plan.titleY + 76} fill="rgba(191,230,255,0.55)" fontSize="8">Not for construction · Schematic design intent</text>
@@ -559,7 +559,7 @@ export function ArchGenius() {
           name: `Custom ${inp.plotX}×${inp.plotY} ${inp.unit} Builder Kit · ${boq.floors}F`,
           price: boq.kitTotal,
           unit: "Design Kit",
-          vendor: "Conon Arch-Genius",
+          vendor: "CONON-NOW Arch-Genius",
           category: "design-kit",
         },
       },

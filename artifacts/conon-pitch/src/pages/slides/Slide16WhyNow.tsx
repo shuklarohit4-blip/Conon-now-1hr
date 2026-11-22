@@ -6,7 +6,7 @@ export default function Slide16WhyNow() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.12)', paddingBottom: '2vh', marginBottom: '3.5vh', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700, letterSpacing: '0.02em' }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700, letterSpacing: '0.02em' }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: 'rgba(255,255,255,0.45)' }}>
           <span>WHY NOW</span><span>2026</span>
@@ -16,7 +16,7 @@ export default function Slide16WhyNow() {
       {/* Title */}
       <div style={{ marginBottom: '3.5vh', flexShrink: 0 }}>
         <div style={{ fontSize: '1vw', fontWeight: 600, color: '#5EEAD4', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.8vh' }}>The Moment Is Now</div>
-        <h1 style={{ fontSize: '3.5vw', fontWeight: 900, margin: 0, lineHeight: 1.1, letterSpacing: '-0.02em', textWrap: 'balance' }}>Why Now — Why CONON</h1>
+        <h1 style={{ fontSize: '3.5vw', fontWeight: 900, margin: 0, lineHeight: 1.1, letterSpacing: '-0.02em', textWrap: 'balance' }}>Why Now — Why CONON-NOW</h1>
       </div>
 
       {/* 5 reason cards */}
@@ -64,7 +64,7 @@ export default function Slide16WhyNow() {
       <div style={{ background: '#0D9488', borderRadius: '1vw', padding: '2.8vh 3vw', marginTop: '2.5vh', flexShrink: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '3vw' }}>
         <div>
           <div style={{ fontSize: '1.6vw', fontWeight: 900, lineHeight: 1.3, color: 'white' }}>Join us in building the infrastructure that builds India.</div>
-          <div style={{ fontSize: '1vw', color: 'rgba(255,255,255,0.7)', marginTop: '0.8vh' }}>CONON — the only team combining construction domain depth, logistics, and B2B fintech in one platform.</div>
+          <div style={{ fontSize: '1vw', color: 'rgba(255,255,255,0.7)', marginTop: '0.8vh' }}>CONON-NOW — the only team combining construction domain depth, logistics, and B2B fintech in one platform.</div>
         </div>
         <div style={{ flexShrink: 0, textAlign: 'right' }}>
           <div style={{ fontSize: '1vw', fontWeight: 700, color: 'rgba(255,255,255,0.65)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.4vh' }}>Contact</div>
@@ -75,7 +75,7 @@ export default function Slide16WhyNow() {
 
       {/* Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: '1.5vh', marginTop: '2vh', fontSize: '0.9vw', color: 'rgba(255,255,255,0.35)', fontWeight: 500, flexShrink: 0 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 16 of 16</span></div>
       </div>
     </div>

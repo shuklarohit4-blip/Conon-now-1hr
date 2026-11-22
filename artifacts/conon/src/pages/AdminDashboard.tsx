@@ -276,7 +276,7 @@ function OrdersModule() {
   });
 
   const whatsapp = (o: AdminOrder) => toast.success(`WhatsApp sent to ${o.phone || "contractor"}`, {
-    description: `"Order ${o.shortId} is on the way — ETA ${o.minsLeft}m. — CONON Infrabuilt"`,
+    description: `"Order ${o.shortId} is on the way — ETA ${o.minsLeft}m. — CONON-NOW Infrabuilt"`,
   });
 
   return (
@@ -359,7 +359,7 @@ function OrdersModule() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   MODULE 3 – CONON KHATA
+   MODULE 3 – CONON-NOW KHATA
 ═══════════════════════════════════════════════════════════════ */
 function KhataModule() {
   const [khata, setKhata] = useState<Khata[]>([]);
@@ -1173,7 +1173,7 @@ export function AdminDashboard() {
   const nav: { id: Module; icon: LucideIcon; label: string }[] = [
     { id: "overview", icon: LayoutDashboard, label: "God-Eye"          },
     { id: "orders",   icon: Package,         label: "Orders"            },
-    { id: "khata",    icon: BookOpen,         label: "Conon Khata"      },
+    { id: "khata",    icon: BookOpen,         label: "CONON-NOW Khata"      },
     { id: "fleet",    icon: Truck,            label: "Fleet & Drivers"  },
     { id: "catalog",  icon: Tag,              label: "Catalog & Mandi"  },
     { id: "users",    icon: Users,            label: "Users & Vendors"  },
@@ -1183,7 +1183,7 @@ export function AdminDashboard() {
   const titles: Record<Module, { t: string; s: string }> = {
     overview: { t: "God-Eye Dashboard",         s: "Real-time analytics, charts & live fleet map"     },
     orders:   { t: "Order Operations",           s: "Live orders with SLA countdown tracking"          },
-    khata:    { t: "Conon Khata — Finance",      s: "Contractor credit ledger, payments & PDF invoices"},
+    khata:    { t: "CONON-NOW Khata — Finance",      s: "Contractor credit ledger, payments & PDF invoices"},
     fleet:    { t: "Fleet & Driver Payouts",     s: "Per-trip earnings & weekly payout settlement"     },
     catalog:  { t: "Catalog & Mandi Rates",      s: "Live price controller, inventory & rentals"       },
     users:    { t: "User & Vendor Access Control",s: "Approve, ban, and assign zones to all users"     },
@@ -1200,7 +1200,7 @@ export function AdminDashboard() {
             <ShieldCheck className="w-4 h-4" style={{ color: DK }} />
           </div>
           <div>
-            <p className="text-white font-black text-sm leading-none">CONON Infrabuilt</p>
+            <p className="text-white font-black text-sm leading-none">CONON-NOW Infrabuilt</p>
             <p className="text-[10px] font-bold leading-none mt-0.5" style={{ color: Y }}>Admin Control Room · Full Access</p>
           </div>
         </div>
@@ -1246,7 +1246,7 @@ export function AdminDashboard() {
               <Settings className="w-4 h-4" style={{ color: active === "settings" ? Y : "#4B5563" }} />
               <span className="text-sm font-bold" style={{ color: active === "settings" ? Y : "#6B7280" }}>Settings</span>
             </button>
-            <p className="text-[8px] font-bold px-3 mt-2" style={{ color: "#374151" }}>CONON Infrabuilt v2.0 · 🇮🇳</p>
+            <p className="text-[8px] font-bold px-3 mt-2" style={{ color: "#374151" }}>CONON-NOW Infrabuilt v2.0 · 🇮🇳</p>
           </div>
         </aside>
 

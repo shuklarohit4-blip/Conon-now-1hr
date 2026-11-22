@@ -8,7 +8,7 @@ import {
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const GREEN = "#15803d";
 const RED   = "#dc2626";
 const AMBER = "#b45309";
@@ -32,10 +32,12 @@ interface Summary {
 const PAY_MODES = ["Cash", "UPI", "Cheque", "RTGS/NEFT"] as const;
 type PayMode = typeof PAY_MODES[number];
 
+import { apiUrl } from "@/lib/apiBase";
+
 /* ── Helpers ─────────────────────────────────────────────────── */
-const API = import.meta.env.BASE_URL; // ends with "/"
 async function api<T>(path: string, opts?: RequestInit): Promise<T> {
-  const r = await fetch(`${API}${path}`, { credentials: "include", ...opts });
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const r = await fetch(apiUrl(normalizedPath), { credentials: "include", ...opts });
   if (!r.ok) throw new Error(String(r.status));
   return r.json() as Promise<T>;
 }
@@ -44,7 +46,7 @@ const fmtDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
 
 const TYPE_TINT: Record<KhataClient["type"], string> = {
-  Contractor: "#1b4366", Builder: "#7c3aed", Individual: "#0891b2",
+  Contractor: "#1848a0", Builder: "#7c3aed", Individual: "#0891b2",
 };
 
 /* ════════════════════════════════════════════════════════════════
@@ -244,7 +246,7 @@ function LedgerView({ clientId, onClose, onRecordPayment, refreshKey }: {
   clientId: string;
   onClose: () => void;
   onRecordPayment: (c: KhataClient) => void;
-  refreshKey: unknown;
+  refreshKey?: string | number | KhataClient[] | any;
 }) {
   const [data, setData] = useState<LedgerResponse | null>(null);
   const [loading, setLoading] = useState(true);
@@ -261,14 +263,14 @@ function LedgerView({ clientId, onClose, onRecordPayment, refreshKey }: {
     if (!data) return;
     const due = Math.max(0, data.outstanding);
     const msg =
-      `Dear ${data.name}, your current outstanding balance with CONON Infrabuilt is ₹${due.toLocaleString("en-IN")}. ` +
-      `Kindly arrange the payment at your earliest. Thank you. — Team CONON`;
+      `Dear ${data.name}, your current outstanding balance with CONON-NOW Infrabuilt is ₹${due.toLocaleString("en-IN")}. ` +
+      `Kindly arrange the payment at your earliest. Thank you. — Team CONON-NOW`;
     window.open(`https://wa.me/91${data.phone}?text=${encodeURIComponent(msg)}`, "_blank");
     toast.success(`WhatsApp reminder drafted for ${data.name}`);
   };
 
   const downloadStatement = () => {
-    window.open(`${API}api/admin/khata/${clientId}/statement`, "_blank");
+    window.open(apiUrl(`/api/admin/khata/${clientId}/statement`), "_blank");
     toast.success("Statement opened — use Print to save as PDF");
   };
 

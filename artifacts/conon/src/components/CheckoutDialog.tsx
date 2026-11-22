@@ -27,7 +27,7 @@ import { categoryPhoto, onImgError } from "../lib/imgFallback";
 const GST_RATE  = 0.18;            // 18% standard GST on materials + service
 const SLOT_SECS = 15 * 60;         // 1-hour delivery promise window: 15 min to order
 const GREEN     = "#2a7a3b";
-const BRAND     = "#1b4366";
+const BRAND     = "#1848a0";
 const AMBER     = "#f59e0b";
 
 const fmt = (n: number) => `₹${Math.round(n).toLocaleString("en-IN")}`;
@@ -249,9 +249,9 @@ export function CheckoutDialog({ isOpen, onClose, categoryFilter, total }: Check
             <h1 className="flex-1 text-lg font-black text-gray-900">Checkout</h1>
             <button
               onClick={async () => {
-                const text = "Check out my CONON order — materials delivered in 60 mins!";
+                const text = "Check out my CONON-NOW order — materials delivered in 60 mins!";
                 try {
-                  if (navigator.share) await navigator.share({ title: "CONON Cart", text });
+                  if (navigator.share) await navigator.share({ title: "CONON-NOW Cart", text });
                   else { await navigator.clipboard.writeText(text); toast.success("Cart link copied!"); }
                 } catch { /* dismissed */ }
               }}

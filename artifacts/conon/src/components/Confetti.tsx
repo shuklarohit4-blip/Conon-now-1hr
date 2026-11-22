@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
    Drop it inside a `position: relative` container; it fills the parent and
    never intercepts taps (pointer-events-none). */
 
-const COLORS = ["#2a7a3b", "#f59e0b", "#1b4366", "#22c55e", "#fbbf24", "#3b82f6", "#ef4444"];
+const COLORS = ["#2a7a3b", "#f59e0b", "#1848a0", "#22c55e", "#fbbf24", "#3b82f6", "#ef4444"];
 
 interface ConfettiProps {
   count?: number;

@@ -31,8 +31,8 @@
   --background: 210 40% 98%;
   --foreground: 222 84% 5%;
 
-  /* Primary: Dark Navy Blue #1b4366 */
-  --primary: 210 57% 24%;
+  /* Primary: Royal Cobalt Blue #1848a0 (CONON-NOW Logo) */
+  --primary: 219 74% 36%;
   --primary-foreground: 0 0% 100%;
 
   /* Slate-100 secondary */
@@ -50,7 +50,7 @@
   --destructive-foreground: 0 0% 98%;
 
   --border: 210 31% 91%;
-  --ring: 210 57% 24%;
+  --ring: 219 74% 36%;
 
   --card: 0 0% 100%;
   --card-foreground: 222 84% 5%;

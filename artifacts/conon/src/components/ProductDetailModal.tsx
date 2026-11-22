@@ -5,7 +5,7 @@ import type { Product, ProductSpec } from "./ProductCard";
 import { CononImage } from "./CononImage";
 import { QuantityStepper } from "./QuantityStepper";
 
-const BLINKIT_GREEN = "#0c831f";
+const BLINKIT_GREEN = "#1848a0";
 
 /* Build a sensible spec list when a product doesn't supply explicit specs,
    so the technical block is never empty. */
@@ -162,7 +162,7 @@ export function ProductDetailModal({
               <div className="px-4">
               {/* Core info */}
               <p className="mt-3 text-[12px] font-bold uppercase tracking-wide text-sky-700">
-                {product.brand || product.vendor || "CONON Marketplace"}
+                {product.brand || product.vendor || "CONON-NOW Marketplace"}
               </p>
               <h2 className="mt-0.5 text-[20px] font-black text-slate-900 leading-tight">
                 {product.title}
@@ -224,7 +224,7 @@ export function ProductDetailModal({
               <p className="text-[13px] leading-relaxed text-slate-600">
                 {product.description?.trim()
                   ? product.description
-                  : `${product.title} is a premium, quality-checked material sourced and delivered by CONON. Every batch is inspected for grade, consistency and durability so it performs reliably on site, with free unloading and on-time delivery.`}
+                  : `${product.title} is a premium, quality-checked material sourced and delivered by CONON-NOW. Every batch is inspected for grade, consistency and durability so it performs reliably on site, with free unloading and on-time delivery.`}
               </p>
 
               {/* Features — bullet list */}

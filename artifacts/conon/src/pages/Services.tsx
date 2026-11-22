@@ -6,7 +6,7 @@ import { Star, Briefcase, CheckCircle2, Wrench } from "lucide-react";
 import { useGetServices, useBookService, Service } from "@workspace/api-client-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 
 export function Services() {
   const { data: services, isLoading } = useGetServices();
@@ -19,6 +19,13 @@ export function Services() {
     { id: "fitter", label: "Fitters", desc: "Steel & structural work" },
     { id: "daily_labor", label: "Daily Labor", desc: "Heavy lifting & shifting" },
   ];
+
+  // Map legacy/general backend type names to UI category IDs
+  const normalizeServiceType = (t: string) => {
+    if (t === "labour") return "daily_labor";
+    if (t === "mason") return "foreman";
+    return t;
+  };
 
   return (
     <Layout>
@@ -45,7 +52,7 @@ export function Services() {
         ) : (
           <div className="space-y-10">
             {categories.map(category => {
-              const catServices = services?.filter(s => s.type === category.id) || [];
+              const catServices = services?.filter(s => normalizeServiceType(s.type) === category.id) || [];
               if (catServices.length === 0) return null;
 
               return (

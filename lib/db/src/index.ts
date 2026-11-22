@@ -205,11 +205,37 @@ const COLLECTION_NAMES: Record<keyof CollectionMap, string> = {
 let client: MongoClient | undefined;
 let clientPromise: Promise<MongoClient> | undefined;
 
+function sanitizeMongoUri(raw: string): string {
+  let uri = raw.trim();
+  // Strip accidental angle brackets around password if present (e.g. <password>)
+  uri = uri.replace(/:<([^>]+)>@/, (_match, pass) => `:${encodeURIComponent(pass)}@`);
+  // If the password contains unencoded $ characters, percent-encode them
+  uri = uri.replace(/:([^@/:]+)@/, (_match, credentials) => {
+    if (credentials.includes("$") && !credentials.includes("%24")) {
+      return `:${credentials.replace(/\$/g, "%24")}@`;
+    }
+    return `:${credentials}@`;
+  });
+  return uri;
+}
+
+function resetClient(): void {
+  clientPromise = undefined;
+  if (client) {
+    void client.close().catch(() => {});
+    client = undefined;
+  }
+}
+
 function getClient(): MongoClient {
   if (!client) {
-    const uri = process.env.MONGODB_URI?.trim();
-    if (!uri) throw new Error("MONGODB_URI is not configured");
-    client = new MongoClient(uri, { serverSelectionTimeoutMS: 5000 });
+    const rawUri = process.env.MONGODB_URI?.trim();
+    if (!rawUri) throw new Error("MONGODB_URI is not configured");
+    const uri = sanitizeMongoUri(rawUri);
+    client = new MongoClient(uri, {
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
+    });
   }
   return client;
 }
@@ -225,22 +251,31 @@ export function collection<K extends keyof CollectionMap>(
 }
 
 export async function connectDatabase(): Promise<void> {
-  if (!clientPromise) clientPromise = getClient().connect();
-  await clientPromise;
-  await ensureIndexes();
+  try {
+    if (!clientPromise) clientPromise = getClient().connect();
+    await clientPromise;
+    await ensureIndexes();
+  } catch (err) {
+    resetClient();
+    throw err;
+  }
 }
 
 export async function closeDatabase(): Promise<void> {
-  clientPromise = undefined;
-  if (client) await client.close();
-  client = undefined;
+  resetClient();
 }
 
 export async function withTransaction<T>(
   operation: (session: ClientSession) => Promise<T>,
 ): Promise<T> {
   if (!clientPromise) clientPromise = getClient().connect();
-  const connected = await clientPromise;
+  let connected: MongoClient;
+  try {
+    connected = await clientPromise;
+  } catch (err) {
+    resetClient();
+    throw err;
+  }
   const session = connected.startSession();
   try {
     let result!: T;
@@ -260,6 +295,7 @@ export async function pingDatabase(): Promise<boolean> {
     await getClient().db(getDatabaseName()).command({ ping: 1 });
     return true;
   } catch {
+    resetClient();
     return false;
   }
 }

@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Conon Fleet — Driver Partner localization (Hindi-first).
+   CONON-NOW Fleet — Driver Partner localization (Hindi-first).
 
    Truck and mini-truck drivers in India read practical "Hinglish" far faster
    than formal English. The app therefore defaults to Hindi and exposes a
@@ -76,7 +76,7 @@ export type TKey =
 
 const DICT: Record<Lang, Record<TKey, string>> = {
   en: {
-    appName: "Conon Fleet",
+    appName: "CONON-NOW Fleet",
     driverPartner: "Driver Partner",
     duty: "Duty",
     kamai: "My Kamai",
@@ -139,7 +139,7 @@ const DICT: Record<Lang, Record<TKey, string>> = {
     openMaps: "Open in Maps",
   },
   hi: {
-    appName: "Conon Fleet",
+    appName: "CONON-NOW Fleet",
     driverPartner: "Driver Partner (ड्राइवर पार्टनर)",
     duty: "Duty (ड्यूटी)",
     kamai: "Meri Kamai (मेरी कमाई)",

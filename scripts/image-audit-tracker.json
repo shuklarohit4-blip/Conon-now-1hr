@@ -1,0 +1,5333 @@
+{
+  "generatedAt": "2026-11-21T02:31:39.980Z",
+  "summary": {
+    "totalCategories": 23,
+    "totalSKUs": 642,
+    "categoriesPending": 0,
+    "skusPending": 0
+  },
+  "categories": [
+    {
+      "slug": "cement",
+      "label": "Cement",
+      "dbCategory": "cement",
+      "badge": "Bulk Prices",
+      "targetAsset": "/images/categories/cement.webp",
+      "status": "done"
+    },
+    {
+      "slug": "tiling",
+      "label": "Tiling",
+      "dbCategory": "tiles",
+      "badge": "Bulk Prices",
+      "targetAsset": "/images/categories/tiling.webp",
+      "status": "done"
+    },
+    {
+      "slug": "painting",
+      "label": "Painting",
+      "dbCategory": "paint",
+      "badge": null,
+      "targetAsset": "/images/categories/painting.webp",
+      "status": "done"
+    },
+    {
+      "slug": "waterproofing",
+      "label": "Water Proofing",
+      "dbCategory": "finishing",
+      "badge": null,
+      "targetAsset": "/images/categories/waterproofing.webp",
+      "status": "done"
+    },
+    {
+      "slug": "plywood",
+      "label": "Plywood, MDF & HDHMR",
+      "dbCategory": "wood",
+      "badge": null,
+      "targetAsset": "/images/categories/plywood.webp",
+      "status": "done"
+    },
+    {
+      "slug": "fevicol",
+      "label": "Fevicol",
+      "dbCategory": "adhesives",
+      "badge": null,
+      "targetAsset": "/images/categories/fevicol.webp",
+      "status": "done"
+    },
+    {
+      "slug": "wires",
+      "label": "Wires, MCB & Distribution Boards",
+      "dbCategory": "electrical",
+      "badge": null,
+      "targetAsset": "/images/categories/wires.webp",
+      "status": "done"
+    },
+    {
+      "slug": "kitchen",
+      "label": "Kitchen Sinks & Faucets",
+      "dbCategory": "hardware",
+      "badge": null,
+      "targetAsset": "/images/categories/kitchen.webp",
+      "status": "done"
+    },
+    {
+      "slug": "sanitary",
+      "label": "Sanitary & Bath Fittings",
+      "dbCategory": "plumbing",
+      "badge": null,
+      "targetAsset": "/images/categories/sanitary.webp",
+      "status": "done"
+    },
+    {
+      "slug": "hinges",
+      "label": "Hinges, Channels & Handles",
+      "dbCategory": "hardware",
+      "badge": null,
+      "targetAsset": "/images/categories/hinges.webp",
+      "status": "done"
+    },
+    {
+      "slug": "kitchen-systems",
+      "label": "Kitchen Systems & Accessories",
+      "dbCategory": "hardware",
+      "badge": null,
+      "targetAsset": "/images/categories/kitchen-systems.webp",
+      "status": "done"
+    },
+    {
+      "slug": "wardrobe",
+      "label": "Wardrobe & Bed Fittings",
+      "dbCategory": "hardware",
+      "badge": null,
+      "targetAsset": "/images/categories/wardrobe.webp",
+      "status": "done"
+    },
+    {
+      "slug": "door-locks",
+      "label": "Door Locks & Hardware",
+      "dbCategory": "hardware",
+      "badge": null,
+      "targetAsset": "/images/categories/door-locks.webp",
+      "status": "done"
+    },
+    {
+      "slug": "conduits",
+      "label": "Conduits & GI Boxes",
+      "dbCategory": "electrical",
+      "badge": null,
+      "targetAsset": "/images/categories/conduits.webp",
+      "status": "done"
+    },
+    {
+      "slug": "lighting",
+      "label": "Lighting",
+      "dbCategory": "electrical",
+      "badge": null,
+      "targetAsset": "/images/categories/lighting.webp",
+      "status": "done"
+    },
+    {
+      "slug": "cpvc",
+      "label": "CPVC Pipes & Overhead Tanks",
+      "dbCategory": "plumbing",
+      "badge": null,
+      "targetAsset": "/images/categories/cpvc.webp",
+      "status": "done"
+    },
+    {
+      "slug": "switches",
+      "label": "Switches & Sockets",
+      "dbCategory": "electrical",
+      "badge": null,
+      "targetAsset": "/images/categories/switches.webp",
+      "status": "done"
+    },
+    {
+      "slug": "steel-bar",
+      "label": "Steel Bar (Sariya)",
+      "dbCategory": "steel",
+      "badge": null,
+      "targetAsset": "/images/categories/steel-bar.webp",
+      "status": "done"
+    },
+    {
+      "slug": "eeta",
+      "label": "Eeta (Bricks)",
+      "dbCategory": "bricks",
+      "badge": null,
+      "targetAsset": "/images/categories/eeta.webp",
+      "status": "done"
+    },
+    {
+      "slug": "morang",
+      "label": "Morang (Aggregate)",
+      "dbCategory": "aggregate",
+      "badge": null,
+      "targetAsset": "/images/categories/morang.webp",
+      "status": "done"
+    },
+    {
+      "slug": "marble-stone",
+      "label": "Marble & Stone",
+      "dbCategory": "marble-stone",
+      "badge": null,
+      "targetAsset": "/images/categories/marble-stone.webp",
+      "status": "done"
+    },
+    {
+      "slug": "home-essentials",
+      "label": "Home Essentials",
+      "dbCategory": "hardware",
+      "badge": null,
+      "targetAsset": "/images/categories/home-essentials.webp",
+      "status": "done"
+    },
+    {
+      "slug": "general",
+      "label": "Tools & Equipment",
+      "dbCategory": "tools",
+      "badge": null,
+      "targetAsset": "/images/categories/general.webp",
+      "status": "done"
+    }
+  ],
+  "skus": [
+    {
+      "id": "ultratech-opc-53-grade",
+      "name": "UltraTech OPC 53 Grade",
+      "brand": "UltraTech",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ultratech-opc-53-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-ppc",
+      "name": "UltraTech PPC",
+      "brand": "UltraTech",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ultratech-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-buildmore",
+      "name": "UltraTech Buildmore",
+      "brand": "UltraTech",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ultratech-buildmore.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-super",
+      "name": "UltraTech Super",
+      "brand": "UltraTech",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ultratech-super.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-weatherplus",
+      "name": "UltraTech Weatherplus",
+      "brand": "UltraTech",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ultratech-weatherplus.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-gold-opc-53",
+      "name": "ACC Gold OPC 53",
+      "brand": "ACC",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/acc-gold-opc-53.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-suraksha-ppc",
+      "name": "ACC Suraksha PPC",
+      "brand": "ACC",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/acc-suraksha-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-f2r-fast-to-road",
+      "name": "ACC F2R (Fast to Road)",
+      "brand": "ACC",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/acc-f2r-fast-to-road.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-concrete",
+      "name": "ACC Concrete+",
+      "brand": "ACC",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/acc-concrete.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-gold-water-shield",
+      "name": "ACC Gold Water Shield",
+      "brand": "ACC",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/acc-gold-water-shield.webp",
+      "status": "done"
+    },
+    {
+      "id": "ambuja-plus",
+      "name": "Ambuja Plus",
+      "brand": "Ambuja",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ambuja-plus.webp",
+      "status": "done"
+    },
+    {
+      "id": "ambuja-opc-53",
+      "name": "Ambuja OPC 53",
+      "brand": "Ambuja",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ambuja-opc-53.webp",
+      "status": "done"
+    },
+    {
+      "id": "ambuja-kawach",
+      "name": "Ambuja Kawach",
+      "brand": "Ambuja",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ambuja-kawach.webp",
+      "status": "done"
+    },
+    {
+      "id": "ambuja-cool-walls",
+      "name": "Ambuja Cool Walls",
+      "brand": "Ambuja",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ambuja-cool-walls.webp",
+      "status": "done"
+    },
+    {
+      "id": "shree-jung-rodhak-opc",
+      "name": "Shree Jung Rodhak OPC",
+      "brand": "Shree",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/shree-jung-rodhak-opc.webp",
+      "status": "done"
+    },
+    {
+      "id": "bangur-power",
+      "name": "Bangur Power",
+      "brand": "Shree",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/bangur-power.webp",
+      "status": "done"
+    },
+    {
+      "id": "bangur-premium-opc-53",
+      "name": "Bangur Premium OPC 53",
+      "brand": "Shree",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/bangur-premium-opc-53.webp",
+      "status": "done"
+    },
+    {
+      "id": "shree-ultra-ppc",
+      "name": "Shree Ultra PPC",
+      "brand": "Shree",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/shree-ultra-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "bangur-duraguard",
+      "name": "Bangur Duraguard",
+      "brand": "Shree",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/bangur-duraguard.webp",
+      "status": "done"
+    },
+    {
+      "id": "jk-super-opc-53",
+      "name": "JK Super OPC 53",
+      "brand": "JK Cement",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/jk-super-opc-53.webp",
+      "status": "done"
+    },
+    {
+      "id": "jk-lakshmi-ppc",
+      "name": "JK Lakshmi PPC",
+      "brand": "JK Cement",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/jk-lakshmi-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "jk-lakshmi-sixer",
+      "name": "JK Lakshmi Sixer",
+      "brand": "JK Cement",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/jk-lakshmi-sixer.webp",
+      "status": "done"
+    },
+    {
+      "id": "jk-smartcrete",
+      "name": "JK SmartCrete",
+      "brand": "JK Cement",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/jk-smartcrete.webp",
+      "status": "done"
+    },
+    {
+      "id": "jk-super-strong",
+      "name": "JK Super Strong",
+      "brand": "JK Cement",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/jk-super-strong.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-samrat-opc-53",
+      "name": "Birla Samrat OPC 53",
+      "brand": "Birla",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/birla-samrat-opc-53.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-uttam-ppc",
+      "name": "Birla Uttam PPC",
+      "brand": "Birla",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/birla-uttam-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-a1-premium",
+      "name": "Birla A1 Premium",
+      "brand": "Birla",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/birla-a1-premium.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-samrat-advanced",
+      "name": "Birla Samrat Advanced",
+      "brand": "Birla",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/birla-samrat-advanced.webp",
+      "status": "done"
+    },
+    {
+      "id": "prism-opc-53-grade",
+      "name": "Prism OPC 53 Grade",
+      "brand": "Prism",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/prism-opc-53-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "prism-champion-ppc",
+      "name": "Prism Champion PPC",
+      "brand": "Prism",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/prism-champion-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "prism-pro-cement",
+      "name": "Prism Pro Cement",
+      "brand": "Prism",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/prism-pro-cement.webp",
+      "status": "done"
+    },
+    {
+      "id": "dalmia-dsp-special-opc",
+      "name": "Dalmia DSP Special OPC",
+      "brand": "Dalmia",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/dalmia-dsp-special-opc.webp",
+      "status": "done"
+    },
+    {
+      "id": "dalmia-infracon",
+      "name": "Dalmia Infracon",
+      "brand": "Dalmia",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/dalmia-infracon.webp",
+      "status": "done"
+    },
+    {
+      "id": "dalmia-robox-ppc",
+      "name": "Dalmia RoboX PPC",
+      "brand": "Dalmia",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/dalmia-robox-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "dalmia-konark-ppc",
+      "name": "Dalmia Konark PPC",
+      "brand": "Dalmia",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/dalmia-konark-ppc.webp",
+      "status": "done"
+    },
+    {
+      "id": "mycem-opc-43-grade",
+      "name": "Mycem OPC 43 Grade",
+      "brand": "Mycem",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/mycem-opc-43-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "mycem-opc-53-grade",
+      "name": "Mycem OPC 53 Grade",
+      "brand": "Mycem",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/mycem-opc-53-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "mycem-ppc-standard",
+      "name": "Mycem PPC Standard",
+      "brand": "Mycem",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/mycem-ppc-standard.webp",
+      "status": "done"
+    },
+    {
+      "id": "tata-tiscon-8mm-tmt-fe500d",
+      "name": "Tata Tiscon 8mm TMT Fe500D",
+      "brand": "Tata Tiscon",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/tata-tiscon-8mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "tata-tiscon-10mm-tmt-fe500d",
+      "name": "Tata Tiscon 10mm TMT Fe500D",
+      "brand": "Tata Tiscon",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/tata-tiscon-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "tata-tiscon-12mm-tmt-fe500d",
+      "name": "Tata Tiscon 12mm TMT Fe500D",
+      "brand": "Tata Tiscon",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "tata-tiscon-16mm-tmt-fe550d",
+      "name": "Tata Tiscon 16mm TMT Fe550D",
+      "brand": "Tata Tiscon",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/tata-tiscon-16mm-tmt-fe550d.webp",
+      "status": "done"
+    },
+    {
+      "id": "jindal-panther-8mm-tmt-fe500d",
+      "name": "Jindal Panther 8mm TMT Fe500D",
+      "brand": "Jindal Panther",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/jindal-panther-8mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "jindal-panther-10mm-tmt-fe500d",
+      "name": "Jindal Panther 10mm TMT Fe500D",
+      "brand": "Jindal Panther",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/jindal-panther-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "jindal-panther-12mm-tmt-fe550d",
+      "name": "Jindal Panther 12mm TMT Fe550D",
+      "brand": "Jindal Panther",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/jindal-panther-12mm-tmt-fe550d.webp",
+      "status": "done"
+    },
+    {
+      "id": "jindal-panther-16mm-tmt-fe550d",
+      "name": "Jindal Panther 16mm TMT Fe550D",
+      "brand": "Jindal Panther",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/jindal-panther-16mm-tmt-fe550d.webp",
+      "status": "done"
+    },
+    {
+      "id": "sail-seqr-8mm-tmt-fe500",
+      "name": "SAIL SeQR 8mm TMT Fe500",
+      "brand": "SAIL",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/sail-seqr-8mm-tmt-fe500.webp",
+      "status": "done"
+    },
+    {
+      "id": "sail-seqr-10mm-tmt-fe500d",
+      "name": "SAIL SeQR 10mm TMT Fe500D",
+      "brand": "SAIL",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/sail-seqr-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "sail-seqr-12mm-tmt-fe500d",
+      "name": "SAIL SeQR 12mm TMT Fe500D",
+      "brand": "SAIL",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/sail-seqr-12mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "sail-seqr-16mm-tmt-fe500d",
+      "name": "SAIL SeQR 16mm TMT Fe500D",
+      "brand": "SAIL",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/sail-seqr-16mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "kamdhenu-nxt-8mm-tmt-fe500d",
+      "name": "Kamdhenu NXT 8mm TMT Fe500D",
+      "brand": "Kamdhenu",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/kamdhenu-nxt-8mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "kamdhenu-nxt-10mm-tmt-fe500d",
+      "name": "Kamdhenu NXT 10mm TMT Fe500D",
+      "brand": "Kamdhenu",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/kamdhenu-nxt-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "kamdhenu-nxt-12mm-tmt-fe500d",
+      "name": "Kamdhenu NXT 12mm TMT Fe500D",
+      "brand": "Kamdhenu",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/kamdhenu-nxt-12mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "kamdhenu-16mm-tmt-fe550d",
+      "name": "Kamdhenu 16mm TMT Fe550D",
+      "brand": "Kamdhenu",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/kamdhenu-16mm-tmt-fe550d.webp",
+      "status": "done"
+    },
+    {
+      "id": "rathi-8mm-tmt-fe500d",
+      "name": "Rathi 8mm TMT Fe500D",
+      "brand": "Rathi",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/rathi-8mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "rathi-10mm-tmt-fe500d",
+      "name": "Rathi 10mm TMT Fe500D",
+      "brand": "Rathi",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/rathi-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "rathi-12mm-tmt-fe500d",
+      "name": "Rathi 12mm TMT Fe500D",
+      "brand": "Rathi",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/rathi-12mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "rathi-16mm-tmt-fe500d",
+      "name": "Rathi 16mm TMT Fe500D",
+      "brand": "Rathi",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/rathi-16mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "gallantt-8mm-tmt-fe500d",
+      "name": "Gallantt 8mm TMT Fe500D",
+      "brand": "Gallantt",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/gallantt-8mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "gallantt-10mm-tmt-fe500d",
+      "name": "Gallantt 10mm TMT Fe500D",
+      "brand": "Gallantt",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/gallantt-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "gallantt-12mm-tmt-fe500d",
+      "name": "Gallantt 12mm TMT Fe500D",
+      "brand": "Gallantt",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/gallantt-12mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "gallantt-16mm-tmt-fe550d",
+      "name": "Gallantt 16mm TMT Fe550D",
+      "brand": "Gallantt",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/gallantt-16mm-tmt-fe550d.webp",
+      "status": "done"
+    },
+    {
+      "id": "ankur-8mm-tmt-fe500d",
+      "name": "Ankur 8mm TMT Fe500D",
+      "brand": "Ankur",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/ankur-8mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "ankur-10mm-tmt-fe500d",
+      "name": "Ankur 10mm TMT Fe500D",
+      "brand": "Ankur",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/ankur-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "ankur-12mm-tmt-fe500d",
+      "name": "Ankur 12mm TMT Fe500D",
+      "brand": "Ankur",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/ankur-12mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "ankur-16mm-tmt-fe500",
+      "name": "Ankur 16mm TMT Fe500",
+      "brand": "Ankur",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/ankur-16mm-tmt-fe500.webp",
+      "status": "done"
+    },
+    {
+      "id": "goel-8mm-tmt-fe500",
+      "name": "Goel 8mm TMT Fe500",
+      "brand": "Goel TMT",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/goel-8mm-tmt-fe500.webp",
+      "status": "done"
+    },
+    {
+      "id": "goel-10mm-tmt-fe500d",
+      "name": "Goel 10mm TMT Fe500D",
+      "brand": "Goel TMT",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/goel-10mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "goel-12mm-tmt-fe500d",
+      "name": "Goel 12mm TMT Fe500D",
+      "brand": "Goel TMT",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/goel-12mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "goel-16mm-tmt-fe500d",
+      "name": "Goel 16mm TMT Fe500D",
+      "brand": "Goel TMT",
+      "category": "steel",
+      "targetAsset": "/images/products/steel/goel-16mm-tmt-fe500d.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-m-sand-zone-ii",
+      "name": "ACC M-Sand (Zone II)",
+      "brand": "ACC M-Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/acc-m-sand-zone-ii.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-p-sand-plastering",
+      "name": "ACC P-Sand (Plastering)",
+      "brand": "ACC M-Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/acc-p-sand-plastering.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-m-sand-coarse",
+      "name": "ACC M-Sand (Coarse)",
+      "brand": "ACC M-Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/acc-m-sand-coarse.webp",
+      "status": "done"
+    },
+    {
+      "id": "robo-sand-fine-grade",
+      "name": "Robo Sand Fine Grade",
+      "brand": "Robo Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/robo-sand-fine-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "robo-sand-coarse",
+      "name": "Robo Sand Coarse",
+      "brand": "Robo Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/robo-sand-coarse.webp",
+      "status": "done"
+    },
+    {
+      "id": "robo-p-sand-plastering",
+      "name": "Robo P-Sand Plastering",
+      "brand": "Robo Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/robo-p-sand-plastering.webp",
+      "status": "done"
+    },
+    {
+      "id": "fine-river-sand-zone-iii",
+      "name": "Fine River Sand (Zone III)",
+      "brand": "River Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/fine-river-sand-zone-iii.webp",
+      "status": "done"
+    },
+    {
+      "id": "medium-river-sand",
+      "name": "Medium River Sand",
+      "brand": "River Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/medium-river-sand.webp",
+      "status": "done"
+    },
+    {
+      "id": "coarse-river-sand",
+      "name": "Coarse River Sand",
+      "brand": "River Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/coarse-river-sand.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-m-sand-zone-ii",
+      "name": "UltraTech M-Sand Zone II",
+      "brand": "UltraTech Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/ultratech-m-sand-zone-ii.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-p-sand",
+      "name": "UltraTech P-Sand",
+      "brand": "UltraTech Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/ultratech-p-sand.webp",
+      "status": "done"
+    },
+    {
+      "id": "pit-sand-mortar-grade",
+      "name": "Pit Sand (Mortar Grade)",
+      "brand": "Pit Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/pit-sand-mortar-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "pit-sand-fine",
+      "name": "Pit Sand (Fine)",
+      "brand": "Pit Sand",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/pit-sand-fine.webp",
+      "status": "done"
+    },
+    {
+      "id": "20mm-stone-aggregate",
+      "name": "20mm Stone Aggregate",
+      "brand": "ACC Aggregates",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/20mm-stone-aggregate.webp",
+      "status": "done"
+    },
+    {
+      "id": "10mm-stone-chips",
+      "name": "10mm Stone Chips",
+      "brand": "ACC Aggregates",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/10mm-stone-chips.webp",
+      "status": "done"
+    },
+    {
+      "id": "40mm-aggregate",
+      "name": "40mm Aggregate",
+      "brand": "ACC Aggregates",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/40mm-aggregate.webp",
+      "status": "done"
+    },
+    {
+      "id": "20mm-crusher-gitti",
+      "name": "20mm Crusher Gitti",
+      "brand": "Local Gitti",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/20mm-crusher-gitti.webp",
+      "status": "done"
+    },
+    {
+      "id": "12mm-stone-chips",
+      "name": "12mm Stone Chips",
+      "brand": "Local Gitti",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/12mm-stone-chips.webp",
+      "status": "done"
+    },
+    {
+      "id": "40mm-road-gitti",
+      "name": "40mm Road Gitti",
+      "brand": "Local Gitti",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/40mm-road-gitti.webp",
+      "status": "done"
+    },
+    {
+      "id": "dust-stone-powder",
+      "name": "Dust (Stone Powder)",
+      "brand": "Local Gitti",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/dust-stone-powder.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-20mm-graded",
+      "name": "UltraTech 20mm Graded",
+      "brand": "UltraTech Aggr.",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/ultratech-20mm-graded.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-10mm-chips",
+      "name": "UltraTech 10mm Chips",
+      "brand": "UltraTech Aggr.",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/ultratech-10mm-chips.webp",
+      "status": "done"
+    },
+    {
+      "id": "river-morang-coarse",
+      "name": "River Morang (Coarse)",
+      "brand": "Morang",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/river-morang-coarse.webp",
+      "status": "done"
+    },
+    {
+      "id": "washed-morang",
+      "name": "Washed Morang",
+      "brand": "Morang",
+      "category": "aggregate",
+      "targetAsset": "/images/products/aggregate/washed-morang.webp",
+      "status": "done"
+    },
+    {
+      "id": "fly-ash-brick-standard",
+      "name": "Fly Ash Brick (Standard)",
+      "brand": "Fly Ash Bricks",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/fly-ash-brick-standard.webp",
+      "status": "done"
+    },
+    {
+      "id": "fly-ash-brick-heavy",
+      "name": "Fly Ash Brick (Heavy)",
+      "brand": "Fly Ash Bricks",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/fly-ash-brick-heavy.webp",
+      "status": "done"
+    },
+    {
+      "id": "fly-ash-brick-interlocking",
+      "name": "Fly Ash Brick (Interlocking)",
+      "brand": "Fly Ash Bricks",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/fly-ash-brick-interlocking.webp",
+      "status": "done"
+    },
+    {
+      "id": "first-class-red-brick",
+      "name": "First Class Red Brick",
+      "brand": "Red Clay Brick",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/first-class-red-brick.webp",
+      "status": "done"
+    },
+    {
+      "id": "second-class-red-brick",
+      "name": "Second Class Red Brick",
+      "brand": "Red Clay Brick",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/second-class-red-brick.webp",
+      "status": "done"
+    },
+    {
+      "id": "table-mould-brick",
+      "name": "Table Mould Brick",
+      "brand": "Red Clay Brick",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/table-mould-brick.webp",
+      "status": "done"
+    },
+    {
+      "id": "aac-block-600-200-100mm",
+      "name": "AAC Block 600×200×100mm",
+      "brand": "UltraTech AAC",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/aac-block-600-200-100mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "aac-block-600-200-150mm",
+      "name": "AAC Block 600×200×150mm",
+      "brand": "UltraTech AAC",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/aac-block-600-200-150mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "aac-block-600-200-200mm",
+      "name": "AAC Block 600×200×200mm",
+      "brand": "UltraTech AAC",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/aac-block-600-200-200mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "magicrete-aac-4-inch",
+      "name": "Magicrete AAC 4 inch",
+      "brand": "Magicrete",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/magicrete-aac-4-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "magicrete-aac-6-inch",
+      "name": "Magicrete AAC 6 inch",
+      "brand": "Magicrete",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/magicrete-aac-6-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "magicrete-aac-8-inch",
+      "name": "Magicrete AAC 8 inch",
+      "brand": "Magicrete",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/magicrete-aac-8-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "renacon-aac-100mm",
+      "name": "Renacon AAC 100mm",
+      "brand": "Renacon",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/renacon-aac-100mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "renacon-aac-150mm",
+      "name": "Renacon AAC 150mm",
+      "brand": "Renacon",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/renacon-aac-150mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "renacon-aac-200mm",
+      "name": "Renacon AAC 200mm",
+      "brand": "Renacon",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/renacon-aac-200mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "hollow-block-400-200-200mm",
+      "name": "Hollow Block 400×200×200mm",
+      "brand": "Concrete Block",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/hollow-block-400-200-200mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "solid-block-400-200-200mm",
+      "name": "Solid Block 400×200×200mm",
+      "brand": "Concrete Block",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/solid-block-400-200-200mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "half-block-200-200-200mm",
+      "name": "Half Block 200×200×200mm",
+      "brand": "Concrete Block",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/half-block-200-200-200mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-lifeline-1-0-sq-mm",
+      "name": "Havells Lifeline 1.0 sq mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-lifeline-1-0-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-lifeline-1-5-sq-mm",
+      "name": "Havells Lifeline 1.5 sq mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-lifeline-1-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-lifeline-2-5-sq-mm",
+      "name": "Havells Lifeline 2.5 sq mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-lifeline-2-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-lifeline-4-sq-mm",
+      "name": "Havells Lifeline 4 sq mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-lifeline-4-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-life-shield-6-sq-mm",
+      "name": "Havells Life Shield 6 sq mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-life-shield-6-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-life-shield-10-sq-mm",
+      "name": "Havells Life Shield 10 sq mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-life-shield-10-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-3-core-flat-1-5mm",
+      "name": "Havells 3 Core Flat 1.5mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-3-core-flat-1-5mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-3-core-flat-2-5mm",
+      "name": "Havells 3 Core Flat 2.5mm",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-3-core-flat-2-5mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-mcb-sp-16a-c-type",
+      "name": "Havells MCB SP 16A (C-Type)",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-mcb-sp-16a-c-type.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-mcb-sp-32a-c-type",
+      "name": "Havells MCB SP 32A (C-Type)",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-mcb-sp-32a-c-type.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-mcb-dp-40a",
+      "name": "Havells MCB DP 40A",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-mcb-dp-40a.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-rccb-40a-30ma-dp",
+      "name": "Havells RCCB 40A 30mA DP",
+      "brand": "Havells",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-rccb-40a-30ma-dp.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-maxima-1-0-sq-mm",
+      "name": "Polycab Maxima+ 1.0 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-maxima-1-0-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-maxima-1-5-sq-mm",
+      "name": "Polycab Maxima+ 1.5 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-maxima-1-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-maxima-2-5-sq-mm",
+      "name": "Polycab Maxima+ 2.5 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-maxima-2-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-maxima-4-sq-mm",
+      "name": "Polycab Maxima+ 4 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-maxima-4-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-maxima-6-sq-mm",
+      "name": "Polycab Maxima+ 6 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-maxima-6-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-optima-1-5-sq-mm",
+      "name": "Polycab Optima 1.5 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-optima-1-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-optima-2-5-sq-mm",
+      "name": "Polycab Optima 2.5 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-optima-2-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-optima-4-sq-mm",
+      "name": "Polycab Optima 4 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-optima-4-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-3-core-flat-1-5mm",
+      "name": "Polycab 3 Core Flat 1.5mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-3-core-flat-1-5mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-3-core-flat-2-5mm",
+      "name": "Polycab 3 Core Flat 2.5mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-3-core-flat-2-5mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-frlsh-1-5-sq-mm",
+      "name": "Polycab FRLSH 1.5 sq mm",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-frlsh-1-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-submersible-flat-3c",
+      "name": "Polycab Submersible Flat 3C",
+      "brand": "Polycab",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-submersible-flat-3c.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-fr-1-0-sq-mm",
+      "name": "Finolex FR 1.0 sq mm",
+      "brand": "Finolex",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/finolex-fr-1-0-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-fr-1-5-sq-mm",
+      "name": "Finolex FR 1.5 sq mm",
+      "brand": "Finolex",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/finolex-fr-1-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-fr-2-5-sq-mm",
+      "name": "Finolex FR 2.5 sq mm",
+      "brand": "Finolex",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/finolex-fr-2-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-fr-4-sq-mm",
+      "name": "Finolex FR 4 sq mm",
+      "brand": "Finolex",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/finolex-fr-4-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-fr-6-sq-mm",
+      "name": "Finolex FR 6 sq mm",
+      "brand": "Finolex",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/finolex-fr-6-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-3-core-1-5mm",
+      "name": "Finolex 3 Core 1.5mm",
+      "brand": "Finolex",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/finolex-3-core-1-5mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "rr-kabel-superex-1-5-sq-mm",
+      "name": "RR Kabel Superex 1.5 sq mm",
+      "brand": "RR Kabel",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/rr-kabel-superex-1-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "rr-kabel-superex-2-5-sq-mm",
+      "name": "RR Kabel Superex 2.5 sq mm",
+      "brand": "RR Kabel",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/rr-kabel-superex-2-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "rr-kabel-superex-4-sq-mm",
+      "name": "RR Kabel Superex 4 sq mm",
+      "brand": "RR Kabel",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/rr-kabel-superex-4-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "rr-kabel-superex-6-sq-mm",
+      "name": "RR Kabel Superex 6 sq mm",
+      "brand": "RR Kabel",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/rr-kabel-superex-6-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "rr-kabel-frlsh-1-5-sq-mm",
+      "name": "RR Kabel FRLSH 1.5 sq mm",
+      "brand": "RR Kabel",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/rr-kabel-frlsh-1-5-sq-mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-6a-1-way-switch",
+      "name": "Anchor Roma 6A 1-Way Switch",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-6a-1-way-switch.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-6a-2-way-switch",
+      "name": "Anchor Roma 6A 2-Way Switch",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-6a-2-way-switch.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-16a-switch",
+      "name": "Anchor Roma 16A Switch",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-16a-switch.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-6a-socket-5-pin",
+      "name": "Anchor Roma 6A Socket (5-Pin)",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-6a-socket-5-pin.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-16a-socket-3-pin",
+      "name": "Anchor Roma 16A Socket (3-Pin)",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-16a-socket-3-pin.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-usb-charger-2-1a",
+      "name": "Anchor Roma USB Charger 2.1A",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-usb-charger-2-1a.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-fan-regulator",
+      "name": "Anchor Roma Fan Regulator",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-fan-regulator.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-tv-socket",
+      "name": "Anchor Roma TV Socket",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-tv-socket.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-bell-push",
+      "name": "Anchor Roma Bell Push",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-bell-push.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-modular-plate-2m",
+      "name": "Anchor Modular Plate 2M",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-modular-plate-2m.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-modular-plate-4m",
+      "name": "Anchor Modular Plate 4M",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-modular-plate-4m.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-modular-plate-6m",
+      "name": "Anchor Modular Plate 6M",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-modular-plate-6m.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-modular-plate-8m",
+      "name": "Anchor Modular Plate 8M",
+      "brand": "Anchor Roma",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-modular-plate-8m.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-6a-1-way-switch",
+      "name": "Legrand Myrius 6A 1-Way Switch",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-6a-1-way-switch.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-6a-2-way-switch",
+      "name": "Legrand Myrius 6A 2-Way Switch",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-6a-2-way-switch.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-16a-switch",
+      "name": "Legrand Myrius 16A Switch",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-16a-switch.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-6a-socket-5-pin",
+      "name": "Legrand Myrius 6A Socket (5-Pin)",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-6a-socket-5-pin.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-16a-socket",
+      "name": "Legrand Myrius 16A Socket",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-16a-socket.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-usb-c-charger",
+      "name": "Legrand Myrius USB C Charger",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-usb-c-charger.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-fan-regulator",
+      "name": "Legrand Myrius Fan Regulator",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-fan-regulator.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-plate-2m",
+      "name": "Legrand Myrius Plate 2M",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-plate-2m.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-plate-4m",
+      "name": "Legrand Myrius Plate 4M",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-plate-4m.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-myrius-plate-6m",
+      "name": "Legrand Myrius Plate 6M",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-myrius-plate-6m.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-sp-mcb-16a-c-type",
+      "name": "Legrand SP MCB 16A (C-Type)",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-sp-mcb-16a-c-type.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-sp-mcb-32a-c-type",
+      "name": "Legrand SP MCB 32A (C-Type)",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-sp-mcb-32a-c-type.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-dp-mcb-40a",
+      "name": "Legrand DP MCB 40A",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-dp-mcb-40a.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-rccb-40a-30ma-dp",
+      "name": "Legrand RCCB 40A 30mA DP",
+      "brand": "Legrand Myrius",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-rccb-40a-30ma-dp.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-pvc-conduit-20mm-3m",
+      "name": "VIP PVC Conduit 20mm (3m)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/vip-pvc-conduit-20mm-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-pvc-conduit-25mm-3m",
+      "name": "VIP PVC Conduit 25mm (3m)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/vip-pvc-conduit-25mm-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-pvc-conduit-32mm-3m",
+      "name": "VIP PVC Conduit 32mm (3m)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/vip-pvc-conduit-32mm-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-flexible-conduit-20mm-25m",
+      "name": "VIP Flexible Conduit 20mm (25m)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/vip-flexible-conduit-20mm-25m.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-conduit-bend-20mm",
+      "name": "VIP Conduit Bend 20mm",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/vip-conduit-bend-20mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-conduit-coupler-20mm",
+      "name": "VIP Conduit Coupler 20mm",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/vip-conduit-coupler-20mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-conduit-deep-junction-box",
+      "name": "VIP Conduit Deep Junction Box",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/vip-conduit-deep-junction-box.webp",
+      "status": "done"
+    },
+    {
+      "id": "gi-metal-box-3m-modular",
+      "name": "GI Metal Box 3M (Modular)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/gi-metal-box-3m-modular.webp",
+      "status": "done"
+    },
+    {
+      "id": "gi-metal-box-4m-modular",
+      "name": "GI Metal Box 4M (Modular)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/gi-metal-box-4m-modular.webp",
+      "status": "done"
+    },
+    {
+      "id": "gi-metal-box-6m-modular",
+      "name": "GI Metal Box 6M (Modular)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/gi-metal-box-6m-modular.webp",
+      "status": "done"
+    },
+    {
+      "id": "gi-metal-box-8m-modular",
+      "name": "GI Metal Box 8M (Modular)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/gi-metal-box-8m-modular.webp",
+      "status": "done"
+    },
+    {
+      "id": "gi-metal-box-12m-18m-gang",
+      "name": "GI Metal Box 12M / 18M Gang",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/gi-metal-box-12m-18m-gang.webp",
+      "status": "done"
+    },
+    {
+      "id": "pvc-fan-box-octagonal",
+      "name": "PVC Fan Box (Octagonal)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/pvc-fan-box-octagonal.webp",
+      "status": "done"
+    },
+    {
+      "id": "conduit-clamp-saddle-20mm-50pc",
+      "name": "Conduit Clamp/Saddle 20mm (50pc)",
+      "brand": "VIP / Precision",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/conduit-clamp-saddle-20mm-50pc.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-led-bulb-9w-cool",
+      "name": "Havells LED Bulb 9W (Cool)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-led-bulb-9w-cool.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-led-bulb-12w-warm",
+      "name": "Havells LED Bulb 12W (Warm)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-led-bulb-12w-warm.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-led-bulb-15w-cool",
+      "name": "Havells LED Bulb 15W (Cool)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-led-bulb-15w-cool.webp",
+      "status": "done"
+    },
+    {
+      "id": "philips-led-bulb-9w-b22",
+      "name": "Philips LED Bulb 9W (B22)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/philips-led-bulb-9w-b22.webp",
+      "status": "done"
+    },
+    {
+      "id": "philips-led-bulb-12w-b22",
+      "name": "Philips LED Bulb 12W (B22)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/philips-led-bulb-12w-b22.webp",
+      "status": "done"
+    },
+    {
+      "id": "philips-led-tube-20w-4ft",
+      "name": "Philips LED Tube 20W (4ft)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/philips-led-tube-20w-4ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "wipro-led-panel-12w-round",
+      "name": "Wipro LED Panel 12W (Round)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/wipro-led-panel-12w-round.webp",
+      "status": "done"
+    },
+    {
+      "id": "wipro-led-panel-18w-square",
+      "name": "Wipro LED Panel 18W (Square)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/wipro-led-panel-18w-square.webp",
+      "status": "done"
+    },
+    {
+      "id": "syska-led-downlight-7w",
+      "name": "Syska LED Downlight 7W",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/syska-led-downlight-7w.webp",
+      "status": "done"
+    },
+    {
+      "id": "syska-led-downlight-12w",
+      "name": "Syska LED Downlight 12W",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/syska-led-downlight-12w.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-led-flood-50w",
+      "name": "Havells LED Flood 50W",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-led-flood-50w.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-led-flood-100w",
+      "name": "Havells LED Flood 100W",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-led-flood-100w.webp",
+      "status": "done"
+    },
+    {
+      "id": "led-strip-light-5m-warm",
+      "name": "LED Strip Light 5m (Warm)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/led-strip-light-5m-warm.webp",
+      "status": "done"
+    },
+    {
+      "id": "led-strip-light-5m-rgb",
+      "name": "LED Strip Light 5m (RGB)",
+      "brand": "LED Lighting",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/led-strip-light-5m-rgb.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-spn-db-4-way-mcb",
+      "name": "Havells SPN DB 4-Way (MCB)",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-spn-db-4-way-mcb.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-spn-db-8-way-mcb",
+      "name": "Havells SPN DB 8-Way (MCB)",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-spn-db-8-way-mcb.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-spn-db-12-way-mcb",
+      "name": "Havells SPN DB 12-Way (MCB)",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-spn-db-12-way-mcb.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-tpn-db-4-way-3-phase",
+      "name": "Havells TPN DB 4-Way (3-Phase)",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-tpn-db-4-way-3-phase.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-tpn-db-8-way-3-phase",
+      "name": "Havells TPN DB 8-Way (3-Phase)",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-tpn-db-8-way-3-phase.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-spn-db-8-way",
+      "name": "Legrand SPN DB 8-Way",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-spn-db-8-way.webp",
+      "status": "done"
+    },
+    {
+      "id": "legrand-tpn-db-4-way",
+      "name": "Legrand TPN DB 4-Way",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/legrand-tpn-db-4-way.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-changeover-switch-63a",
+      "name": "Havells Changeover Switch 63A",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-changeover-switch-63a.webp",
+      "status": "done"
+    },
+    {
+      "id": "havells-isolator-dp-40a",
+      "name": "Havells Isolator DP 40A",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/havells-isolator-dp-40a.webp",
+      "status": "done"
+    },
+    {
+      "id": "bus-bar-4-way-copper",
+      "name": "Bus Bar 4-Way (Copper)",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/bus-bar-4-way-copper.webp",
+      "status": "done"
+    },
+    {
+      "id": "earth-bar-copper-8-way",
+      "name": "Earth Bar (Copper) 8-Way",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/earth-bar-copper-8-way.webp",
+      "status": "done"
+    },
+    {
+      "id": "cable-gland-pg-21-pack-10",
+      "name": "Cable Gland PG-21 (Pack 10)",
+      "brand": "Distribution Boards",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/cable-gland-pg-21-pack-10.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-half-inch-inch-3m",
+      "name": "Astral CPVC ½ inch (3m)",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-half-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-three-quarter-inch-inch-3m",
+      "name": "Astral CPVC ¾ inch (3m)",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-three-quarter-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-1-inch-3m",
+      "name": "Astral CPVC 1 inch (3m)",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-1-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-upvc-4-inch-swr-3m",
+      "name": "Astral uPVC 4 inch SWR (3m)",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-upvc-4-inch-swr-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-upvc-3-inch-swr-3m",
+      "name": "Astral uPVC 3 inch SWR (3m)",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-upvc-3-inch-swr-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-elbow-half-inch",
+      "name": "Astral CPVC Elbow ½\"",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-elbow-half-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-tee-half-inch",
+      "name": "Astral CPVC Tee ½\"",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-tee-half-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-mta-half-inch",
+      "name": "Astral CPVC MTA ½\"",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-mta-half-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-fta-half-inch",
+      "name": "Astral CPVC FTA ½\"",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-fta-half-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-valve-half-inch",
+      "name": "Astral CPVC Valve ½\"",
+      "brand": "Astral Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-valve-half-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-cpvc-half-inch-inch-3m",
+      "name": "Ashirvad CPVC ½ inch (3m)",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-cpvc-half-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-cpvc-three-quarter-inch-inch-3m",
+      "name": "Ashirvad CPVC ¾ inch (3m)",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-cpvc-three-quarter-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-cpvc-1-inch-3m",
+      "name": "Ashirvad CPVC 1 inch (3m)",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-cpvc-1-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-upvc-4-inch-swr",
+      "name": "Ashirvad uPVC 4 inch SWR",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-upvc-4-inch-swr.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-cpvc-elbow-half-inch",
+      "name": "Ashirvad CPVC Elbow ½\"",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-cpvc-elbow-half-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-cpvc-tee-half-inch",
+      "name": "Ashirvad CPVC Tee ½\"",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-cpvc-tee-half-inch.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-cpvc-solvent-100ml",
+      "name": "Ashirvad CPVC Solvent 100ml",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-cpvc-solvent-100ml.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-3-layer-tank-500l",
+      "name": "Ashirvad 3-Layer Tank 500L",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-3-layer-tank-500l.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-3-layer-tank-1000l",
+      "name": "Ashirvad 3-Layer Tank 1000L",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-3-layer-tank-1000l.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-3-layer-tank-2000l",
+      "name": "Ashirvad 3-Layer Tank 2000L",
+      "brand": "Ashirvad (Aliaxis)",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-3-layer-tank-2000l.webp",
+      "status": "done"
+    },
+    {
+      "id": "supreme-pvc-4-inch-swr-3m",
+      "name": "Supreme PVC 4 inch SWR (3m)",
+      "brand": "Supreme",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/supreme-pvc-4-inch-swr-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "supreme-pvc-3-inch-swr-3m",
+      "name": "Supreme PVC 3 inch SWR (3m)",
+      "brand": "Supreme",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/supreme-pvc-3-inch-swr-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "supreme-cpvc-half-inch-inch-3m",
+      "name": "Supreme CPVC ½ inch (3m)",
+      "brand": "Supreme",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/supreme-cpvc-half-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "supreme-upvc-2-inch-3m",
+      "name": "Supreme uPVC 2 inch (3m)",
+      "brand": "Supreme",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/supreme-upvc-2-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "supreme-pvc-elbow-4",
+      "name": "Supreme PVC Elbow 4\"",
+      "brand": "Supreme",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/supreme-pvc-elbow-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "supreme-pvc-tee-4",
+      "name": "Supreme PVC Tee 4\"",
+      "brand": "Supreme",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/supreme-pvc-tee-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "prince-cpvc-half-inch-inch-3m",
+      "name": "Prince CPVC ½ inch (3m)",
+      "brand": "Prince Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/prince-cpvc-half-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "prince-cpvc-three-quarter-inch-inch-3m",
+      "name": "Prince CPVC ¾ inch (3m)",
+      "brand": "Prince Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/prince-cpvc-three-quarter-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "prince-swr-4-inch-3m",
+      "name": "Prince SWR 4 inch (3m)",
+      "brand": "Prince Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/prince-swr-4-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "prince-swr-3-inch-3m",
+      "name": "Prince SWR 3 inch (3m)",
+      "brand": "Prince Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/prince-swr-3-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-cpvc-half-inch-inch-3m",
+      "name": "Finolex CPVC ½ inch (3m)",
+      "brand": "Finolex Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/finolex-cpvc-half-inch-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-pvc-4-inch-swr-3m",
+      "name": "Finolex PVC 4 inch SWR (3m)",
+      "brand": "Finolex Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/finolex-pvc-4-inch-swr-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "finolex-upvc-1-inch-3m",
+      "name": "Finolex uPVC 1 inch (3m)",
+      "brand": "Finolex Pipes",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/finolex-upvc-1-inch-3m.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-florentine-prime-basin-mixer",
+      "name": "Jaquar Florentine Prime Basin Mixer",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-florentine-prime-basin-mixer.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-florentine-prime-diverter",
+      "name": "Jaquar Florentine Prime Diverter",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-florentine-prime-diverter.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-florentine-pillar-cock",
+      "name": "Jaquar Florentine Pillar Cock",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-florentine-pillar-cock.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-single-lever-basin-mixer",
+      "name": "Jaquar Single Lever Basin Mixer",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-single-lever-basin-mixer.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-overhead-shower-200mm",
+      "name": "Jaquar Overhead Shower 200mm",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-overhead-shower-200mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-hand-shower-set",
+      "name": "Jaquar Hand Shower Set",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-hand-shower-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-angular-stop-cock",
+      "name": "Jaquar Angular Stop Cock",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-angular-stop-cock.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-bottle-trap-chrome",
+      "name": "Jaquar Bottle Trap (Chrome)",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-bottle-trap-chrome.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-concealed-stop-cock",
+      "name": "Jaquar Concealed Stop Cock",
+      "brand": "Jaquar",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-concealed-stop-cock.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-ewc-combo-s-trap",
+      "name": "Hindware EWC Combo (S-Trap)",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-ewc-combo-s-trap.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-ewc-combo-p-trap",
+      "name": "Hindware EWC Combo (P-Trap)",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-ewc-combo-p-trap.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-wall-hung-ewc",
+      "name": "Hindware Wall Hung EWC",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-wall-hung-ewc.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-counter-top-basin",
+      "name": "Hindware Counter Top Basin",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-counter-top-basin.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-pedestal-wash-basin",
+      "name": "Hindware Pedestal Wash Basin",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-pedestal-wash-basin.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-pillar-cock-chrome",
+      "name": "Hindware Pillar Cock (Chrome)",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-pillar-cock-chrome.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-health-faucet",
+      "name": "Hindware Health Faucet",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-health-faucet.webp",
+      "status": "done"
+    },
+    {
+      "id": "hindware-bottle-trap",
+      "name": "Hindware Bottle Trap",
+      "brand": "Hindware",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/hindware-bottle-trap.webp",
+      "status": "done"
+    },
+    {
+      "id": "ashirvad-cpvc-solvent-250ml",
+      "name": "Ashirvad CPVC Solvent 250ml",
+      "brand": "VIP / Ashirvad Solvent",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/ashirvad-cpvc-solvent-250ml.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-pvc-solvent-100ml",
+      "name": "VIP PVC Solvent 100ml",
+      "brand": "VIP / Ashirvad Solvent",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/vip-pvc-solvent-100ml.webp",
+      "status": "done"
+    },
+    {
+      "id": "vip-pvc-solvent-500ml",
+      "name": "VIP PVC Solvent 500ml",
+      "brand": "VIP / Ashirvad Solvent",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/vip-pvc-solvent-500ml.webp",
+      "status": "done"
+    },
+    {
+      "id": "teflon-tape-half-inch-pack-10",
+      "name": "Teflon Tape ½\" (Pack 10)",
+      "brand": "VIP / Ashirvad Solvent",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/teflon-tape-half-inch-pack-10.webp",
+      "status": "done"
+    },
+    {
+      "id": "teflon-tape-1-pack-5",
+      "name": "Teflon Tape 1\" (Pack 5)",
+      "brand": "VIP / Ashirvad Solvent",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/teflon-tape-1-pack-5.webp",
+      "status": "done"
+    },
+    {
+      "id": "pipe-cutter-pvc-cpvc",
+      "name": "Pipe Cutter (PVC/CPVC)",
+      "brand": "VIP / Ashirvad Solvent",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/pipe-cutter-pvc-cpvc.webp",
+      "status": "done"
+    },
+    {
+      "id": "royale-luxury-emulsion-20l",
+      "name": "Royale Luxury Emulsion 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/royale-luxury-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "royale-shyne-emulsion-20l",
+      "name": "Royale Shyne Emulsion 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/royale-shyne-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "royale-health-shield-10l",
+      "name": "Royale Health Shield 10L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/royale-health-shield-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "apcolite-premium-emulsion-20l",
+      "name": "Apcolite Premium Emulsion 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/apcolite-premium-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "apcolite-premium-gloss-20l",
+      "name": "Apcolite Premium Gloss 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/apcolite-premium-gloss-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "tractor-emulsion-20l",
+      "name": "Tractor Emulsion 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/tractor-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "tractor-shyne-emulsion-20l",
+      "name": "Tractor Shyne Emulsion 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/tractor-shyne-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "tractor-distemper-20kg",
+      "name": "Tractor Distemper 20kg",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/tractor-distemper-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "ace-exterior-emulsion-20l",
+      "name": "Ace Exterior Emulsion 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/ace-exterior-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "ace-interior-emulsion-20l",
+      "name": "Ace Interior Emulsion 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/ace-interior-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "apex-ultima-exterior-20l",
+      "name": "Apex Ultima Exterior 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/apex-ultima-exterior-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "apex-advanced-exterior-20l",
+      "name": "Apex Advanced Exterior 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/apex-advanced-exterior-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "asian-primer-decoprime-20l",
+      "name": "Asian Primer (Decoprime) 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/asian-primer-decoprime-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "asian-cement-primer-20l",
+      "name": "Asian Cement Primer 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/asian-cement-primer-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-damp-proof-20kg",
+      "name": "SmartCare Damp Proof 20kg",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/smartcare-damp-proof-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-damp-block-20l",
+      "name": "SmartCare Damp Block 20L",
+      "brand": "Asian Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/smartcare-damp-block-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "wallcare-putty-40kg",
+      "name": "WallCare Putty 40kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/wallcare-putty-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "wallcare-putty-20kg",
+      "name": "WallCare Putty 20kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/wallcare-putty-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "wallcare-putty-5kg",
+      "name": "WallCare Putty 5kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/wallcare-putty-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "wallseal-waterproof-putty-40kg",
+      "name": "WallSeal Waterproof Putty 40kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/wallseal-waterproof-putty-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "wallseal-waterproof-putty-20kg",
+      "name": "WallSeal Waterproof Putty 20kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/wallseal-waterproof-putty-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-white-cement-50kg",
+      "name": "Birla White Cement 50kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/birla-white-cement-50kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-white-cement-5kg",
+      "name": "Birla White Cement 5kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/birla-white-cement-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "levelplast-gypsum-plaster-25kg",
+      "name": "LevelPlast Gypsum Plaster 25kg",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/levelplast-gypsum-plaster-25kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-textura-texture-finish",
+      "name": "Birla Textura (Texture Finish)",
+      "brand": "Birla White",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/birla-textura-texture-finish.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-silk-glamor-20l",
+      "name": "Berger Silk Glamor 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-silk-glamor-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-silk-emulsion-20l",
+      "name": "Berger Silk Emulsion 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-silk-emulsion-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-easy-clean-20l",
+      "name": "Berger Easy Clean 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-easy-clean-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "weathercoat-all-guard-20l",
+      "name": "WeatherCoat All Guard 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/weathercoat-all-guard-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "weathercoat-long-life-20l",
+      "name": "WeatherCoat Long Life 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/weathercoat-long-life-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "weathercoat-anti-dust-20l",
+      "name": "WeatherCoat Anti-Dust 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/weathercoat-anti-dust-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-bison-distemper-20kg",
+      "name": "Berger Bison Distemper 20kg",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-bison-distemper-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-pu-primer-20l",
+      "name": "Berger PU Primer 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-pu-primer-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-wp-primer-20l",
+      "name": "Berger WP Primer 20L",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-wp-primer-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-walmasta-putty-40kg",
+      "name": "Berger Walmasta Putty 40kg",
+      "brand": "Berger Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-walmasta-putty-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-beauty-smooth-20l",
+      "name": "Nerolac Beauty Smooth 20L",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-beauty-smooth-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-impressions-20l",
+      "name": "Nerolac Impressions 20L",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-impressions-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-beauty-gold-20l",
+      "name": "Nerolac Beauty Gold 20L",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-beauty-gold-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-excel-total-20l",
+      "name": "Nerolac Excel Total 20L",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-excel-total-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-excel-mica-marble-20l",
+      "name": "Nerolac Excel Mica Marble 20L",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-excel-mica-marble-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-suraksha-distemper-20kg",
+      "name": "Nerolac Suraksha Distemper 20kg",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-suraksha-distemper-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-primer-20l",
+      "name": "Nerolac Primer 20L",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-primer-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-putty-n-sure-40kg",
+      "name": "Nerolac Putty (N-Sure) 40kg",
+      "brand": "Nerolac",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-putty-n-sure-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "dulux-velvet-touch-platinum-10l",
+      "name": "Dulux Velvet Touch Platinum 10L",
+      "brand": "Dulux",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dulux-velvet-touch-platinum-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dulux-velvet-touch-10l",
+      "name": "Dulux Velvet Touch 10L",
+      "brand": "Dulux",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dulux-velvet-touch-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dulux-velvet-touch-matt-10l",
+      "name": "Dulux Velvet Touch Matt 10L",
+      "brand": "Dulux",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dulux-velvet-touch-matt-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dulux-weathershield-max-10l",
+      "name": "Dulux Weathershield Max 10L",
+      "brand": "Dulux",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dulux-weathershield-max-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dulux-weathershield-pro-10l",
+      "name": "Dulux Weathershield Pro 10L",
+      "brand": "Dulux",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dulux-weathershield-pro-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dulux-super-cover-10l",
+      "name": "Dulux Super Cover 10L",
+      "brand": "Dulux",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dulux-super-cover-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dulux-primer-10l",
+      "name": "Dulux Primer 10L",
+      "brand": "Dulux",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dulux-primer-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "indigo-lamituff-20l",
+      "name": "Indigo Lamituff 20L",
+      "brand": "Indigo Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/indigo-lamituff-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "indigo-glitter-paint-4l",
+      "name": "Indigo Glitter Paint 4L",
+      "brand": "Indigo Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/indigo-glitter-paint-4l.webp",
+      "status": "done"
+    },
+    {
+      "id": "indigo-metal-coat-4l",
+      "name": "Indigo Metal Coat 4L",
+      "brand": "Indigo Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/indigo-metal-coat-4l.webp",
+      "status": "done"
+    },
+    {
+      "id": "indigo-tile-coat-4l",
+      "name": "Indigo Tile Coat 4L",
+      "brand": "Indigo Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/indigo-tile-coat-4l.webp",
+      "status": "done"
+    },
+    {
+      "id": "indigo-ceiling-coat-10l",
+      "name": "Indigo Ceiling Coat 10L",
+      "brand": "Indigo Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/indigo-ceiling-coat-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "indigo-floor-coat-10l",
+      "name": "Indigo Floor Coat 10L",
+      "brand": "Indigo Paints",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/indigo-floor-coat-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-raincoat-20l",
+      "name": "Dr. Fixit Raincoat 20L",
+      "brand": "Dr. Fixit",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dr-fixit-raincoat-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-newcoat-20kg",
+      "name": "Dr. Fixit Newcoat 20kg",
+      "brand": "Dr. Fixit",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dr-fixit-newcoat-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-pidicrete-urp-1l",
+      "name": "Dr. Fixit Pidicrete URP 1L",
+      "brand": "Dr. Fixit",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dr-fixit-pidicrete-urp-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-dampguard-20kg",
+      "name": "Dr. Fixit Dampguard 20kg",
+      "brand": "Dr. Fixit",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dr-fixit-dampguard-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-krystalline-25kg",
+      "name": "Dr. Fixit Krystalline 25kg",
+      "brand": "Dr. Fixit",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dr-fixit-krystalline-25kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-fastflex-20kg",
+      "name": "Dr. Fixit Fastflex 20kg",
+      "brand": "Dr. Fixit",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/dr-fixit-fastflex-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "asian-royale-play-ragging-10l",
+      "name": "Asian Royale Play Ragging 10L",
+      "brand": "Texture Finishes",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/asian-royale-play-ragging-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "asian-royale-play-safari-10l",
+      "name": "Asian Royale Play Safari 10L",
+      "brand": "Texture Finishes",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/asian-royale-play-safari-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "asian-royale-play-stucco-10l",
+      "name": "Asian Royale Play Stucco 10L",
+      "brand": "Texture Finishes",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/asian-royale-play-stucco-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-silk-illusions-marble",
+      "name": "Berger Silk Illusions Marble",
+      "brand": "Texture Finishes",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-silk-illusions-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "nerolac-excel-mica-marble-10l",
+      "name": "Nerolac Excel Mica Marble 10L",
+      "brand": "Texture Finishes",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/nerolac-excel-mica-marble-10l.webp",
+      "status": "done"
+    },
+    {
+      "id": "agl-stone-texture-25kg",
+      "name": "AGL Stone Texture 25kg",
+      "brand": "Texture Finishes",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/agl-stone-texture-25kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "premium-roller-9-frame",
+      "name": "Premium Roller 9\" + Frame",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/premium-roller-9-frame.webp",
+      "status": "done"
+    },
+    {
+      "id": "mini-roller-4-corners",
+      "name": "Mini Roller 4\" (Corners)",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/mini-roller-4-corners.webp",
+      "status": "done"
+    },
+    {
+      "id": "flat-brush-4-asian-berger",
+      "name": "Flat Brush 4\" (Asian/Berger)",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/flat-brush-4-asian-berger.webp",
+      "status": "done"
+    },
+    {
+      "id": "flat-brush-2-touch-up",
+      "name": "Flat Brush 2\" (Touch-Up)",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/flat-brush-2-touch-up.webp",
+      "status": "done"
+    },
+    {
+      "id": "paint-tray-liner-set",
+      "name": "Paint Tray + Liner Set",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/paint-tray-liner-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "masking-tape-1-20m",
+      "name": "Masking Tape 1\" × 20m",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/masking-tape-1-20m.webp",
+      "status": "done"
+    },
+    {
+      "id": "masking-tape-2-20m",
+      "name": "Masking Tape 2\" × 20m",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/masking-tape-2-20m.webp",
+      "status": "done"
+    },
+    {
+      "id": "sand-paper-pack-60-120-220",
+      "name": "Sand Paper Pack (60/120/220)",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/sand-paper-pack-60-120-220.webp",
+      "status": "done"
+    },
+    {
+      "id": "putty-blade-scraper-6",
+      "name": "Putty Blade / Scraper 6\"",
+      "brand": "Brushes & Rollers",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/putty-blade-scraper-6.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-vitrified-2-2-ft",
+      "name": "Kajaria Vitrified 2×2 ft",
+      "brand": "Kajaria",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-vitrified-2-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-gvt-4-2-ft",
+      "name": "Kajaria GVT 4×2 ft",
+      "brand": "Kajaria",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-gvt-4-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-pgvt-4-2-ft-polished",
+      "name": "Kajaria PGVT 4×2 ft (Polished)",
+      "brand": "Kajaria",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-pgvt-4-2-ft-polished.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-wall-tile-1-1-5-ft",
+      "name": "Kajaria Wall Tile 1×1.5 ft",
+      "brand": "Kajaria",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-wall-tile-1-1-5-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-anti-skid-1-1-ft",
+      "name": "Kajaria Anti-Skid 1×1 ft",
+      "brand": "Kajaria",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-anti-skid-1-1-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-outdoor-parking-1-1-ft",
+      "name": "Kajaria Outdoor/Parking 1×1 ft",
+      "brand": "Kajaria",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-outdoor-parking-1-1-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-step-riser-set",
+      "name": "Kajaria Step & Riser Set",
+      "brand": "Kajaria",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-step-riser-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "somany-durastone-2-2-ft",
+      "name": "Somany Durastone 2×2 ft",
+      "brand": "Somany",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/somany-durastone-2-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "somany-grande-gvt-4-2-ft",
+      "name": "Somany Grande GVT 4×2 ft",
+      "brand": "Somany",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/somany-grande-gvt-4-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "somany-pgvt-marble-look-4-2",
+      "name": "Somany PGVT Marble Look 4×2",
+      "brand": "Somany",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/somany-pgvt-marble-look-4-2.webp",
+      "status": "done"
+    },
+    {
+      "id": "somany-slip-shield-bath-tile",
+      "name": "Somany Slip Shield Bath Tile",
+      "brand": "Somany",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/somany-slip-shield-bath-tile.webp",
+      "status": "done"
+    },
+    {
+      "id": "somany-wall-highlighter",
+      "name": "Somany Wall Highlighter",
+      "brand": "Somany",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/somany-wall-highlighter.webp",
+      "status": "done"
+    },
+    {
+      "id": "orient-bell-gvt-2-2-ft",
+      "name": "Orient Bell GVT 2×2 ft",
+      "brand": "Orient Bell",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/orient-bell-gvt-2-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "orient-bell-pgvt-4-2-ft",
+      "name": "Orient Bell PGVT 4×2 ft",
+      "brand": "Orient Bell",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/orient-bell-pgvt-4-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "orient-bell-wall-tile-1-1-5",
+      "name": "Orient Bell Wall Tile 1×1.5",
+      "brand": "Orient Bell",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/orient-bell-wall-tile-1-1-5.webp",
+      "status": "done"
+    },
+    {
+      "id": "orient-bell-parking-tile-1-1",
+      "name": "Orient Bell Parking Tile 1×1",
+      "brand": "Orient Bell",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/orient-bell-parking-tile-1-1.webp",
+      "status": "done"
+    },
+    {
+      "id": "orient-bell-mosaic-sheet",
+      "name": "Orient Bell Mosaic Sheet",
+      "brand": "Orient Bell",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/orient-bell-mosaic-sheet.webp",
+      "status": "done"
+    },
+    {
+      "id": "nitco-italian-marble-tile-2-4",
+      "name": "Nitco Italian Marble Tile 2×4",
+      "brand": "Nitco",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/nitco-italian-marble-tile-2-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "nitco-vitrified-2-2-ft",
+      "name": "Nitco Vitrified 2×2 ft",
+      "brand": "Nitco",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/nitco-vitrified-2-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "nitco-step-riser-set",
+      "name": "Nitco Step & Riser Set",
+      "brand": "Nitco",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/nitco-step-riser-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "nitco-terrazzo-look-2-2-ft",
+      "name": "Nitco Terrazzo Look 2×2 ft",
+      "brand": "Nitco",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/nitco-terrazzo-look-2-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "johnson-marbonite-2-2-ft",
+      "name": "Johnson Marbonite 2×2 ft",
+      "brand": "H&R Johnson",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/johnson-marbonite-2-2-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "johnson-endura-2-4-ft",
+      "name": "Johnson Endura 2×4 ft",
+      "brand": "H&R Johnson",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/johnson-endura-2-4-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "johnson-porselano-wall",
+      "name": "Johnson Porselano Wall",
+      "brand": "H&R Johnson",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/johnson-porselano-wall.webp",
+      "status": "done"
+    },
+    {
+      "id": "johnson-marbonite-anti-skid",
+      "name": "Johnson Marbonite Anti-Skid",
+      "brand": "H&R Johnson",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/johnson-marbonite-anti-skid.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-t01-nca-non-ceramic-20kg",
+      "name": "Roff T01 NCA (Non-Ceramic) 20kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-t01-nca-non-ceramic-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-t01-nca-40kg",
+      "name": "Roff T01 NCA 40kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-t01-nca-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-t02-nsa-natural-stone-20kg",
+      "name": "Roff T02 NSA (Natural Stone) 20kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-t02-nsa-natural-stone-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-t02-nsa-40kg",
+      "name": "Roff T02 NSA 40kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-t02-nsa-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-rainbow-tile-grout-1kg",
+      "name": "Roff Rainbow (Tile Grout) 1kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-rainbow-tile-grout-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-rainbow-grout-2kg",
+      "name": "Roff Rainbow Grout 2kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-rainbow-grout-2kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-cera-clean-1l",
+      "name": "Roff Cera Clean 1L",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-cera-clean-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-tilefix-ready-mix-5kg",
+      "name": "Roff Tilefix (Ready Mix) 5kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-tilefix-ready-mix-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-hyper-floor-tile-adh-20kg",
+      "name": "Roff Hyper Floor Tile Adh. 20kg",
+      "brand": "Roff (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-hyper-floor-tile-adh-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-305-crete-adh-20kg",
+      "name": "MYK 305 Crete Adh. 20kg",
+      "brand": "MYK Laticrete",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-305-crete-adh-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-315-thin-set-adh-20kg",
+      "name": "MYK 315 Thin-Set Adh. 20kg",
+      "brand": "MYK Laticrete",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-315-thin-set-adh-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-335-super-flex-adh-20kg",
+      "name": "MYK 335 Super Flex Adh. 20kg",
+      "brand": "MYK Laticrete",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-335-super-flex-adh-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-permacolor-grout-5kg",
+      "name": "MYK Permacolor Grout 5kg",
+      "brand": "MYK Laticrete",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-permacolor-grout-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-permacolor-select-2kg",
+      "name": "MYK Permacolor Select 2kg",
+      "brand": "MYK Laticrete",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-permacolor-select-2kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-9235-waterproofing-20l",
+      "name": "MYK 9235 Waterproofing 20L",
+      "brand": "MYK Laticrete",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-9235-waterproofing-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-stonetech-sealer-1l",
+      "name": "MYK Stonetech Sealer 1L",
+      "brand": "MYK Laticrete",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-stonetech-sealer-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-tile-adhesive-t1-20kg",
+      "name": "SmartCare Tile Adhesive T1 20kg",
+      "brand": "Asian SmartCare",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/smartcare-tile-adhesive-t1-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-tile-adhesive-t2-20kg",
+      "name": "SmartCare Tile Adhesive T2 20kg",
+      "brand": "Asian SmartCare",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/smartcare-tile-adhesive-t2-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-tile-adhesive-t3-20kg",
+      "name": "SmartCare Tile Adhesive T3 20kg",
+      "brand": "Asian SmartCare",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/smartcare-tile-adhesive-t3-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-tile-grout-1kg",
+      "name": "SmartCare Tile Grout 1kg",
+      "brand": "Asian SmartCare",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/smartcare-tile-grout-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-tile-grout-2kg",
+      "name": "SmartCare Tile Grout 2kg",
+      "brand": "Asian SmartCare",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/smartcare-tile-grout-2kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "smartcare-epoxy-grout-1kg",
+      "name": "SmartCare Epoxy Grout 1kg",
+      "brand": "Asian SmartCare",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/smartcare-epoxy-grout-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "jsw-block-grip-adhesive-40kg",
+      "name": "JSW Block Grip Adhesive 40kg",
+      "brand": "JSW Block Grip",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/jsw-block-grip-adhesive-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "jsw-block-grip-adhesive-20kg",
+      "name": "JSW Block Grip Adhesive 20kg",
+      "brand": "JSW Block Grip",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/jsw-block-grip-adhesive-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "jsw-tile-fix-adhesive-20kg",
+      "name": "JSW Tile Fix Adhesive 20kg",
+      "brand": "JSW Block Grip",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/jsw-tile-fix-adhesive-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "jsw-tile-fix-premium-20kg",
+      "name": "JSW Tile Fix Premium 20kg",
+      "brand": "JSW Block Grip",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/jsw-tile-fix-premium-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sh-50kg",
+      "name": "Fevicol SH 50kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-sh-50kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sh-20kg",
+      "name": "Fevicol SH 20kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-sh-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sh-5kg",
+      "name": "Fevicol SH 5kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-sh-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-marine-20kg",
+      "name": "Fevicol Marine 20kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-marine-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-marine-5kg",
+      "name": "Fevicol Marine 5kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-marine-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-heatx-5kg-laminate",
+      "name": "Fevicol Heatx 5kg (Laminate)",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-heatx-5kg-laminate.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-speedx-instant-1kg",
+      "name": "Fevicol SpeedX (Instant) 1kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-speedx-instant-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sr-998-rubber-1l",
+      "name": "Fevicol SR-998 (Rubber) 1L",
+      "brand": "Fevicol (Pidilite)",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/fevicol-sr-998-rubber-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "tile-spacer-2mm-pack-200",
+      "name": "Tile Spacer 2mm (Pack 200)",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/tile-spacer-2mm-pack-200.webp",
+      "status": "done"
+    },
+    {
+      "id": "tile-spacer-3mm-pack-200",
+      "name": "Tile Spacer 3mm (Pack 200)",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/tile-spacer-3mm-pack-200.webp",
+      "status": "done"
+    },
+    {
+      "id": "tile-spacer-5mm-pack-100",
+      "name": "Tile Spacer 5mm (Pack 100)",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/tile-spacer-5mm-pack-100.webp",
+      "status": "done"
+    },
+    {
+      "id": "tile-leveling-clip-wedge-100pc",
+      "name": "Tile Leveling Clip + Wedge 100pc",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/tile-leveling-clip-wedge-100pc.webp",
+      "status": "done"
+    },
+    {
+      "id": "notched-trowel-6mm",
+      "name": "Notched Trowel 6mm",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/notched-trowel-6mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "notched-trowel-10mm",
+      "name": "Notched Trowel 10mm",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/notched-trowel-10mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "rubber-grout-float",
+      "name": "Rubber Grout Float",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/rubber-grout-float.webp",
+      "status": "done"
+    },
+    {
+      "id": "manual-tile-cutter-24",
+      "name": "Manual Tile Cutter 24\"",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/manual-tile-cutter-24.webp",
+      "status": "done"
+    },
+    {
+      "id": "tile-hole-saw-bit-set-6pc",
+      "name": "Tile Hole Saw Bit Set (6pc)",
+      "brand": "Spacers & Tools",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/tile-hole-saw-bit-set-6pc.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-cera-clean-5l",
+      "name": "Roff Cera Clean 5L",
+      "brand": "Tile Cleaners",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/roff-cera-clean-5l.webp",
+      "status": "done"
+    },
+    {
+      "id": "pidilite-tile-clean-acid-1l",
+      "name": "Pidilite Tile Clean (Acid) 1L",
+      "brand": "Tile Cleaners",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/pidilite-tile-clean-acid-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "myk-stonetech-cleaner-1l",
+      "name": "MYK Stonetech Cleaner 1L",
+      "brand": "Tile Cleaners",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/myk-stonetech-cleaner-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-tile-stone-sealer-1l",
+      "name": "Dr. Fixit Tile & Stone Sealer 1L",
+      "brand": "Tile Cleaners",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/dr-fixit-tile-stone-sealer-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "hg-tile-protector-1l-imported",
+      "name": "HG Tile Protector 1L (Imported)",
+      "brand": "Tile Cleaners",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/hg-tile-protector-1l-imported.webp",
+      "status": "done"
+    },
+    {
+      "id": "tile-polish-liquid-1l",
+      "name": "Tile Polish Liquid 1L",
+      "brand": "Tile Cleaners",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/tile-polish-liquid-1l.webp",
+      "status": "done"
+    },
+    {
+      "id": "makrana-white-marble",
+      "name": "Makrana White Marble",
+      "brand": "Makrana Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/makrana-white-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "makrana-albeta-marble",
+      "name": "Makrana Albeta Marble",
+      "brand": "Makrana Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/makrana-albeta-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "makrana-kumari-marble",
+      "name": "Makrana Kumari Marble",
+      "brand": "Makrana Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/makrana-kumari-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "statuario-italian-marble",
+      "name": "Statuario Italian Marble",
+      "brand": "Italian Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/statuario-italian-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "carrara-white-marble",
+      "name": "Carrara White Marble",
+      "brand": "Italian Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/carrara-white-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "botticino-beige-marble",
+      "name": "Botticino Beige Marble",
+      "brand": "Italian Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/botticino-beige-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "morwad-white-marble",
+      "name": "Morwad White Marble",
+      "brand": "Indian Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/morwad-white-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "rajnagar-white-marble",
+      "name": "Rajnagar White Marble",
+      "brand": "Indian Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/rajnagar-white-marble.webp",
+      "status": "done"
+    },
+    {
+      "id": "onyx-marble-backlit",
+      "name": "Onyx Marble (Backlit)",
+      "brand": "Indian Marble",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/onyx-marble-backlit.webp",
+      "status": "done"
+    },
+    {
+      "id": "black-galaxy-granite",
+      "name": "Black Galaxy Granite",
+      "brand": "Granite",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/black-galaxy-granite.webp",
+      "status": "done"
+    },
+    {
+      "id": "tan-brown-granite",
+      "name": "Tan Brown Granite",
+      "brand": "Granite",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/tan-brown-granite.webp",
+      "status": "done"
+    },
+    {
+      "id": "steel-grey-granite",
+      "name": "Steel Grey Granite",
+      "brand": "Granite",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/steel-grey-granite.webp",
+      "status": "done"
+    },
+    {
+      "id": "kashmir-white-granite",
+      "name": "Kashmir White Granite",
+      "brand": "Granite",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/kashmir-white-granite.webp",
+      "status": "done"
+    },
+    {
+      "id": "kota-stone-blue",
+      "name": "Kota Stone (Blue)",
+      "brand": "Kota & Sandstone",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/kota-stone-blue.webp",
+      "status": "done"
+    },
+    {
+      "id": "kota-stone-brown",
+      "name": "Kota Stone (Brown)",
+      "brand": "Kota & Sandstone",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/kota-stone-brown.webp",
+      "status": "done"
+    },
+    {
+      "id": "dholpur-beige-sandstone",
+      "name": "Dholpur Beige Sandstone",
+      "brand": "Kota & Sandstone",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/dholpur-beige-sandstone.webp",
+      "status": "done"
+    },
+    {
+      "id": "mint-green-sandstone",
+      "name": "Mint Green Sandstone",
+      "brand": "Kota & Sandstone",
+      "category": "marble-stone",
+      "targetAsset": "/images/products/marble-stone/mint-green-sandstone.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-white-wall-putty-40kg",
+      "name": "Birla White Wall Putty 40kg",
+      "brand": "Birla White",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/birla-white-wall-putty-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-white-levelplast-25kg",
+      "name": "Birla White Levelplast 25kg",
+      "brand": "Birla White",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/birla-white-levelplast-25kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "jk-wall-putty-40kg",
+      "name": "JK Wall Putty 40kg",
+      "brand": "JK Wall Putty",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/jk-wall-putty-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "jk-wall-putty-20kg",
+      "name": "JK Wall Putty 20kg",
+      "brand": "JK Wall Putty",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/jk-wall-putty-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "trucare-acrylic-putty-40kg",
+      "name": "Trucare Acrylic Putty 40kg",
+      "brand": "Asian Trucare",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/trucare-acrylic-putty-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "trucare-wall-primer-20l",
+      "name": "Trucare Wall Primer 20L",
+      "brand": "Asian Trucare",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/trucare-wall-primer-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "trucare-crack-fill-1kg",
+      "name": "Trucare Crack Fill 1kg",
+      "brand": "Asian Trucare",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/trucare-crack-fill-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "m-seal-epoxy-1kg",
+      "name": "M-Seal Epoxy 1kg",
+      "brand": "Pidilite",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/m-seal-epoxy-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-heatx-5kg",
+      "name": "Fevicol Heatx 5kg",
+      "brand": "Pidilite",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/fevicol-heatx-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "topcem-pop-25kg",
+      "name": "Topcem POP 25kg",
+      "brand": "POP / Gypsum",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/topcem-pop-25kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-plaster-25kg-saint-gobain",
+      "name": "Gyproc Plaster 25kg (Saint-Gobain)",
+      "brand": "POP / Gypsum",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/gyproc-plaster-25kg-saint-gobain.webp",
+      "status": "done"
+    },
+    {
+      "id": "local-pop-25kg",
+      "name": "Local POP 25kg",
+      "brand": "POP / Gypsum",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/local-pop-25kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-onsys-soft-close-hinge",
+      "name": "Hettich Onsys Soft Close Hinge",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-onsys-soft-close-hinge.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-onsys-110-hinge",
+      "name": "Hettich Onsys 110° Hinge",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-onsys-110-hinge.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-onsys-165-hinge",
+      "name": "Hettich Onsys 165° Hinge",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-onsys-165-hinge.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-ka-5632-channel-18",
+      "name": "Hettich KA 5632 Channel 18\"",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-ka-5632-channel-18.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-ka-5632-channel-22",
+      "name": "Hettich KA 5632 Channel 22\"",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-ka-5632-channel-22.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-ka-5632-channel-24",
+      "name": "Hettich KA 5632 Channel 24\"",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-ka-5632-channel-24.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-innotech-drawer-500mm",
+      "name": "Hettich InnoTech Drawer 500mm",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-innotech-drawer-500mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-innotech-drawer-600mm",
+      "name": "Hettich InnoTech Drawer 600mm",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-innotech-drawer-600mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-tandem-box-500mm",
+      "name": "Hettich Tandem Box 500mm",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-tandem-box-500mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-tandem-box-600mm",
+      "name": "Hettich Tandem Box 600mm",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-tandem-box-600mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-cabinet-handle-6-ss",
+      "name": "Hettich Cabinet Handle 6\" (SS)",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-cabinet-handle-6-ss.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-cabinet-handle-8-ss",
+      "name": "Hettich Cabinet Handle 8\" (SS)",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-cabinet-handle-8-ss.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-push-to-open",
+      "name": "Hettich Push-to-Open",
+      "brand": "Hettich",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-push-to-open.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-soft-close-hinge-overlay",
+      "name": "Ebco Soft Close Hinge (Overlay)",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-soft-close-hinge-overlay.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-soft-close-hinge-inset",
+      "name": "Ebco Soft Close Hinge (Inset)",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-soft-close-hinge-inset.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-telescopic-channel-18",
+      "name": "Ebco Telescopic Channel 18\"",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-telescopic-channel-18.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-telescopic-channel-20",
+      "name": "Ebco Telescopic Channel 20\"",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-telescopic-channel-20.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-telescopic-channel-24",
+      "name": "Ebco Telescopic Channel 24\"",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-telescopic-channel-24.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-ss-kitchen-basket-plain",
+      "name": "Ebco SS Kitchen Basket (Plain)",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-ss-kitchen-basket-plain.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-ss-kitchen-basket-grain",
+      "name": "Ebco SS Kitchen Basket (Grain)",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-ss-kitchen-basket-grain.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-corner-unit-carousel",
+      "name": "Ebco Corner Unit Carousel",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-corner-unit-carousel.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-tall-unit-pantry-pull-out",
+      "name": "Ebco Tall Unit Pantry Pull-Out",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-tall-unit-pantry-pull-out.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-wardrobe-trouser-pull-out",
+      "name": "Ebco Wardrobe Trouser Pull-Out",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-wardrobe-trouser-pull-out.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-wardrobe-tie-belt-rack",
+      "name": "Ebco Wardrobe Tie/Belt Rack",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-wardrobe-tie-belt-rack.webp",
+      "status": "done"
+    },
+    {
+      "id": "ebco-wardrobe-lift-hanger",
+      "name": "Ebco Wardrobe Lift (Hanger)",
+      "brand": "Ebco",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ebco-wardrobe-lift-hanger.webp",
+      "status": "done"
+    },
+    {
+      "id": "godrej-nav-tal-6-lever-lock",
+      "name": "Godrej Nav-tal 6 Lever Lock",
+      "brand": "Godrej Locks",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/godrej-nav-tal-6-lever-lock.webp",
+      "status": "done"
+    },
+    {
+      "id": "godrej-ultra-xl-deadbolt",
+      "name": "Godrej Ultra XL+ Deadbolt",
+      "brand": "Godrej Locks",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/godrej-ultra-xl-deadbolt.webp",
+      "status": "done"
+    },
+    {
+      "id": "godrej-digi-smart-lock",
+      "name": "Godrej Digi Smart Lock",
+      "brand": "Godrej Locks",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/godrej-digi-smart-lock.webp",
+      "status": "done"
+    },
+    {
+      "id": "godrej-padlock-65mm-brass",
+      "name": "Godrej Padlock 65mm (Brass)",
+      "brand": "Godrej Locks",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/godrej-padlock-65mm-brass.webp",
+      "status": "done"
+    },
+    {
+      "id": "godrej-padlock-50mm-brass",
+      "name": "Godrej Padlock 50mm (Brass)",
+      "brand": "Godrej Locks",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/godrej-padlock-50mm-brass.webp",
+      "status": "done"
+    },
+    {
+      "id": "godrej-night-latch",
+      "name": "Godrej Night Latch",
+      "brand": "Godrej Locks",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/godrej-night-latch.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-lever-handle-ss-matt",
+      "name": "Dorset Lever Handle (SS Matt)",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-lever-handle-ss-matt.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-lever-handle-antique",
+      "name": "Dorset Lever Handle (Antique)",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-lever-handle-antique.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-mortise-lock-body-60mm",
+      "name": "Dorset Mortise Lock Body 60mm",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-mortise-lock-body-60mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-mortise-handle-lock",
+      "name": "Dorset Mortise Handle + Lock",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-mortise-handle-lock.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-door-closer-hydraulic",
+      "name": "Dorset Door Closer (Hydraulic)",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-door-closer-hydraulic.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-tower-bolt-8-ss",
+      "name": "Dorset Tower Bolt 8\" (SS)",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-tower-bolt-8-ss.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-tower-bolt-12-ss",
+      "name": "Dorset Tower Bolt 12\" (SS)",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-tower-bolt-12-ss.webp",
+      "status": "done"
+    },
+    {
+      "id": "dorset-aldrop-10-ss",
+      "name": "Dorset Aldrop 10\" (SS)",
+      "brand": "Dorset",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/dorset-aldrop-10-ss.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-ss-butt-hinge-4-ball",
+      "name": "Stanley SS Butt Hinge 4\" (Ball)",
+      "brand": "Stanley",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/stanley-ss-butt-hinge-4-ball.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-ss-butt-hinge-5",
+      "name": "Stanley SS Butt Hinge 5\"",
+      "brand": "Stanley",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/stanley-ss-butt-hinge-5.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-door-stopper-magnetic",
+      "name": "Stanley Door Stopper (Magnetic)",
+      "brand": "Stanley",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/stanley-door-stopper-magnetic.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-floor-spring-glass",
+      "name": "Stanley Floor Spring (Glass)",
+      "brand": "Stanley",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/stanley-floor-spring-glass.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-patch-fitting-set",
+      "name": "Stanley Patch Fitting Set",
+      "brand": "Stanley",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/stanley-patch-fitting-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "ss-oval-wardrobe-rod-4ft",
+      "name": "SS Oval Wardrobe Rod (4ft)",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ss-oval-wardrobe-rod-4ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "ss-oval-wardrobe-rod-6ft",
+      "name": "SS Oval Wardrobe Rod (6ft)",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/ss-oval-wardrobe-rod-6ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "wardrobe-rod-bracket-pair",
+      "name": "Wardrobe Rod Bracket (Pair)",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/wardrobe-rod-bracket-pair.webp",
+      "status": "done"
+    },
+    {
+      "id": "wardrobe-wire-basket-18",
+      "name": "Wardrobe Wire Basket (18\")",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/wardrobe-wire-basket-18.webp",
+      "status": "done"
+    },
+    {
+      "id": "wardrobe-shoe-rack-pull-out",
+      "name": "Wardrobe Shoe Rack (Pull-Out)",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/wardrobe-shoe-rack-pull-out.webp",
+      "status": "done"
+    },
+    {
+      "id": "wardrobe-mirror-pull-out",
+      "name": "Wardrobe Mirror Pull-Out",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/wardrobe-mirror-pull-out.webp",
+      "status": "done"
+    },
+    {
+      "id": "drawer-lock-small-pack-10",
+      "name": "Drawer Lock (Small) Pack 10",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/drawer-lock-small-pack-10.webp",
+      "status": "done"
+    },
+    {
+      "id": "soft-close-damper-buffer-20pc",
+      "name": "Soft Close Damper Buffer (20pc)",
+      "brand": "Wardrobe Accessories",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/soft-close-damper-buffer-20pc.webp",
+      "status": "done"
+    },
+    {
+      "id": "karam-pn-521-helmet-isi",
+      "name": "Karam PN-521 Helmet (ISI)",
+      "brand": "Karam",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/karam-pn-521-helmet-isi.webp",
+      "status": "done"
+    },
+    {
+      "id": "karam-fs-51-full-harness",
+      "name": "Karam FS-51 Full Harness",
+      "brand": "Karam",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/karam-fs-51-full-harness.webp",
+      "status": "done"
+    },
+    {
+      "id": "karam-hs-61-safety-shoes",
+      "name": "Karam HS-61 Safety Shoes",
+      "brand": "Karam",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/karam-hs-61-safety-shoes.webp",
+      "status": "done"
+    },
+    {
+      "id": "karam-es-01-safety-goggles",
+      "name": "Karam ES-01 Safety Goggles",
+      "brand": "Karam",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/karam-es-01-safety-goggles.webp",
+      "status": "done"
+    },
+    {
+      "id": "karam-dust-mask-pack-50",
+      "name": "Karam Dust Mask (pack 50)",
+      "brand": "Karam",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/karam-dust-mask-pack-50.webp",
+      "status": "done"
+    },
+    {
+      "id": "safari-helmet-white-isi",
+      "name": "Safari Helmet White (ISI)",
+      "brand": "Safari Pro",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/safari-helmet-white-isi.webp",
+      "status": "done"
+    },
+    {
+      "id": "safari-safety-shoes-high",
+      "name": "Safari Safety Shoes (High)",
+      "brand": "Safari Pro",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/safari-safety-shoes-high.webp",
+      "status": "done"
+    },
+    {
+      "id": "safari-hand-gloves-12-pairs",
+      "name": "Safari Hand Gloves (12 pairs)",
+      "brand": "Safari Pro",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/safari-hand-gloves-12-pairs.webp",
+      "status": "done"
+    },
+    {
+      "id": "safari-safety-vest-reflective",
+      "name": "Safari Safety Vest Reflective",
+      "brand": "Safari Pro",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/safari-safety-vest-reflective.webp",
+      "status": "done"
+    },
+    {
+      "id": "udyogi-helmet-with-chin",
+      "name": "Udyogi Helmet with Chin",
+      "brand": "Udyogi",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/udyogi-helmet-with-chin.webp",
+      "status": "done"
+    },
+    {
+      "id": "udyogi-full-body-harness",
+      "name": "Udyogi Full Body Harness",
+      "brand": "Udyogi",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/udyogi-full-body-harness.webp",
+      "status": "done"
+    },
+    {
+      "id": "udyogi-gumboot-pair",
+      "name": "Udyogi Gumboot (pair)",
+      "brand": "Udyogi",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/udyogi-gumboot-pair.webp",
+      "status": "done"
+    },
+    {
+      "id": "udyogi-ear-plug-pack-50",
+      "name": "Udyogi Ear Plug (pack 50)",
+      "brand": "Udyogi",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/udyogi-ear-plug-pack-50.webp",
+      "status": "done"
+    },
+    {
+      "id": "construction-safety-net-green",
+      "name": "Construction Safety Net (Green)",
+      "brand": "Safety Nets",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/construction-safety-net-green.webp",
+      "status": "done"
+    },
+    {
+      "id": "debris-net-blue",
+      "name": "Debris Net (Blue)",
+      "brand": "Safety Nets",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/debris-net-blue.webp",
+      "status": "done"
+    },
+    {
+      "id": "scaffolding-net-black",
+      "name": "Scaffolding Net (Black)",
+      "brand": "Safety Nets",
+      "category": "safety",
+      "targetAsset": "/images/products/safety/scaffolding-net-black.webp",
+      "status": "done"
+    },
+    {
+      "id": "bosch-gsb-550-impact-drill",
+      "name": "Bosch GSB 550 Impact Drill",
+      "brand": "Bosch",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/bosch-gsb-550-impact-drill.webp",
+      "status": "done"
+    },
+    {
+      "id": "bosch-gws-600-angle-grinder",
+      "name": "Bosch GWS 600 Angle Grinder",
+      "brand": "Bosch",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/bosch-gws-600-angle-grinder.webp",
+      "status": "done"
+    },
+    {
+      "id": "bosch-gbh-220-rotary-hammer",
+      "name": "Bosch GBH 220 Rotary Hammer",
+      "brand": "Bosch",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/bosch-gbh-220-rotary-hammer.webp",
+      "status": "done"
+    },
+    {
+      "id": "bosch-gst-650-jigsaw",
+      "name": "Bosch GST 650 Jigsaw",
+      "brand": "Bosch",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/bosch-gst-650-jigsaw.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-measuring-tape-5m",
+      "name": "Stanley Measuring Tape 5m",
+      "brand": "Stanley",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/stanley-measuring-tape-5m.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-spirit-level-24",
+      "name": "Stanley Spirit Level 24\"",
+      "brand": "Stanley",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/stanley-spirit-level-24.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-claw-hammer-570g",
+      "name": "Stanley Claw Hammer 570g",
+      "brand": "Stanley",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/stanley-claw-hammer-570g.webp",
+      "status": "done"
+    },
+    {
+      "id": "stanley-fatmax-screwdriver-set",
+      "name": "Stanley FatMax Screwdriver Set",
+      "brand": "Stanley",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/stanley-fatmax-screwdriver-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "makita-hp1630-impact-drill",
+      "name": "Makita HP1630 Impact Drill",
+      "brand": "Makita",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/makita-hp1630-impact-drill.webp",
+      "status": "done"
+    },
+    {
+      "id": "makita-m9511b-grinder-5",
+      "name": "Makita M9511B Grinder 5\"",
+      "brand": "Makita",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/makita-m9511b-grinder-5.webp",
+      "status": "done"
+    },
+    {
+      "id": "makita-mt-series-planer",
+      "name": "Makita MT Series Planer",
+      "brand": "Makita",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/makita-mt-series-planer.webp",
+      "status": "done"
+    },
+    {
+      "id": "dewalt-dwd024-drill-13mm",
+      "name": "DeWalt DWD024 Drill 13mm",
+      "brand": "DeWalt",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/dewalt-dwd024-drill-13mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "dewalt-dw801-grinder-4",
+      "name": "DeWalt DW801 Grinder 4\"",
+      "brand": "DeWalt",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/dewalt-dw801-grinder-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "dewalt-dwe397-cutter-9",
+      "name": "DeWalt DWE397 Cutter 9\"",
+      "brand": "DeWalt",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/dewalt-dwe397-cutter-9.webp",
+      "status": "done"
+    },
+    {
+      "id": "taparia-plier-combo-set",
+      "name": "Taparia Plier Combo Set",
+      "brand": "Taparia",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/taparia-plier-combo-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "taparia-screwdriver-set-6pc",
+      "name": "Taparia Screwdriver Set 6pc",
+      "brand": "Taparia",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/taparia-screwdriver-set-6pc.webp",
+      "status": "done"
+    },
+    {
+      "id": "taparia-hacksaw-frame-12",
+      "name": "Taparia Hacksaw Frame 12\"",
+      "brand": "Taparia",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/taparia-hacksaw-frame-12.webp",
+      "status": "done"
+    },
+    {
+      "id": "taparia-ring-spanner-set",
+      "name": "Taparia Ring Spanner Set",
+      "brand": "Taparia",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/taparia-ring-spanner-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "centuryply-shuttering-ply-12mm",
+      "name": "CenturyPly Shuttering Ply 12mm",
+      "brand": "CenturyPly",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/centuryply-shuttering-ply-12mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "centuryply-shuttering-ply-18mm",
+      "name": "CenturyPly Shuttering Ply 18mm",
+      "brand": "CenturyPly",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/centuryply-shuttering-ply-18mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "centuryply-marine-ply-19mm",
+      "name": "CenturyPly Marine Ply 19mm",
+      "brand": "CenturyPly",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/centuryply-marine-ply-19mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-shuttering-12mm",
+      "name": "Greenply Shuttering 12mm",
+      "brand": "Greenply",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/greenply-shuttering-12mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-shuttering-18mm",
+      "name": "Greenply Shuttering 18mm",
+      "brand": "Greenply",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/greenply-shuttering-18mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-mr-grade-19mm",
+      "name": "Greenply MR Grade 19mm",
+      "brand": "Greenply",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/greenply-mr-grade-19mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "steel-plate-600-300mm",
+      "name": "Steel Plate 600×300mm",
+      "brand": "Steel Formwork",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/steel-plate-600-300mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "steel-plate-600-600mm",
+      "name": "Steel Plate 600×600mm",
+      "brand": "Steel Formwork",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/steel-plate-600-600mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "channel-plate-1200-300mm",
+      "name": "Channel Plate 1200×300mm",
+      "brand": "Steel Formwork",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/channel-plate-1200-300mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "steel-clamp-set",
+      "name": "Steel Clamp Set",
+      "brand": "Steel Formwork",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/steel-clamp-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "acrow-prop-2-4-3-9m",
+      "name": "Acrow Prop 2.4–3.9m",
+      "brand": "Adjustable Props",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/acrow-prop-2-4-3-9m.webp",
+      "status": "done"
+    },
+    {
+      "id": "acrow-prop-3-0-4-8m",
+      "name": "Acrow Prop 3.0–4.8m",
+      "brand": "Adjustable Props",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/acrow-prop-3-0-4-8m.webp",
+      "status": "done"
+    },
+    {
+      "id": "cup-lock-scaffold-set",
+      "name": "Cup Lock Scaffold Set",
+      "brand": "Adjustable Props",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/cup-lock-scaffold-set.webp",
+      "status": "done"
+    },
+    {
+      "id": "h-frame-scaffold-5ft",
+      "name": "H-Frame Scaffold 5ft",
+      "brand": "Adjustable Props",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/h-frame-scaffold-5ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "fosroc-reebol-20l",
+      "name": "Fosroc Reebol 20L",
+      "brand": "Shuttering Oil",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/fosroc-reebol-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "sika-separol-20l",
+      "name": "Sika Separol 20L",
+      "brand": "Shuttering Oil",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/sika-separol-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "local-shuttering-oil-20l",
+      "name": "Local Shuttering Oil 20L",
+      "brand": "Shuttering Oil",
+      "category": "shuttering",
+      "targetAsset": "/images/products/shuttering/local-shuttering-oil-20l.webp",
+      "status": "done"
+    },
+    {
+      "id": "sainik-bwp-marine-ply-19mm-8-4",
+      "name": "Sainik BWP Marine Ply 19mm (8×4)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/sainik-bwp-marine-ply-19mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "sainik-bwp-marine-ply-12mm-8-4",
+      "name": "Sainik BWP Marine Ply 12mm (8×4)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/sainik-bwp-marine-ply-12mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "sainik-bwp-marine-ply-6mm-8-4",
+      "name": "Sainik BWP Marine Ply 6mm (8×4)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/sainik-bwp-marine-ply-6mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "sainik-mr-grade-ply-19mm-8-4",
+      "name": "Sainik MR Grade Ply 19mm (8×4)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/sainik-mr-grade-ply-19mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "sainik-mr-grade-ply-12mm-8-4",
+      "name": "Sainik MR Grade Ply 12mm (8×4)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/sainik-mr-grade-ply-12mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "century-club-prime-19mm-bwr",
+      "name": "Century Club Prime 19mm (BWR)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/century-club-prime-19mm-bwr.webp",
+      "status": "done"
+    },
+    {
+      "id": "century-architect-ply-19mm",
+      "name": "Century Architect Ply 19mm",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/century-architect-ply-19mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "century-block-board-19mm-8-4",
+      "name": "Century Block Board 19mm (8×4)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/century-block-board-19mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "century-flush-door-7-3-ft",
+      "name": "Century Flush Door (7×3 ft)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/century-flush-door-7-3-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "century-flush-door-7-3-ft-bwp",
+      "name": "Century Flush Door (7×3 ft BWP)",
+      "brand": "Century Sainik",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/century-flush-door-7-3-ft-bwp.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-bwp-marine-19mm-8-4",
+      "name": "Greenply BWP Marine 19mm (8×4)",
+      "brand": "Greenply",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/greenply-bwp-marine-19mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-bwp-marine-12mm-8-4",
+      "name": "Greenply BWP Marine 12mm (8×4)",
+      "brand": "Greenply",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/greenply-bwp-marine-12mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-mr-grade-19mm-8-4",
+      "name": "Greenply MR Grade 19mm (8×4)",
+      "brand": "Greenply",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/greenply-mr-grade-19mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-mr-grade-12mm-8-4",
+      "name": "Greenply MR Grade 12mm (8×4)",
+      "brand": "Greenply",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/greenply-mr-grade-12mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-ecotec-mr-19mm",
+      "name": "Greenply Ecotec MR 19mm",
+      "brand": "Greenply",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/greenply-ecotec-mr-19mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-block-board-19mm",
+      "name": "Greenply Block Board 19mm",
+      "brand": "Greenply",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/greenply-block-board-19mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "greenply-flush-door-7-3-ft",
+      "name": "Greenply Flush Door 7×3 ft",
+      "brand": "Greenply",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/greenply-flush-door-7-3-ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-mdf-18mm-8-4",
+      "name": "Action Tesa MDF 18mm (8×4)",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-mdf-18mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-mdf-12mm-8-4",
+      "name": "Action Tesa MDF 12mm (8×4)",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-mdf-12mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-mdf-8mm-8-4",
+      "name": "Action Tesa MDF 8mm (8×4)",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-mdf-8mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-hdf-6mm-8-4",
+      "name": "Action Tesa HDF 6mm (8×4)",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-hdf-6mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-pre-lam-mdf-18mm",
+      "name": "Action Tesa Pre-Lam MDF 18mm",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-pre-lam-mdf-18mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-pre-lam-mdf-8mm",
+      "name": "Action Tesa Pre-Lam MDF 8mm",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-pre-lam-mdf-8mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-particle-board-18mm",
+      "name": "Action Tesa Particle Board 18mm",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-particle-board-18mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "action-tesa-particle-board-12mm",
+      "name": "Action Tesa Particle Board 12mm",
+      "brand": "Action Tesa",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/action-tesa-particle-board-12mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-regular-board-12-5mm-8-4",
+      "name": "Gyproc Regular Board 12.5mm (8×4)",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-regular-board-12-5mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-regular-board-9-5mm-8-4",
+      "name": "Gyproc Regular Board 9.5mm (8×4)",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-regular-board-9-5mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-moisture-resistant-12-5mm",
+      "name": "Gyproc Moisture Resistant 12.5mm",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-moisture-resistant-12-5mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-fire-line-12-5mm",
+      "name": "Gyproc Fire Line 12.5mm",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-fire-line-12-5mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-xl-board-15mm",
+      "name": "Gyproc XL Board 15mm",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-xl-board-15mm.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-gi-channel-main-runner",
+      "name": "Gyproc GI Channel (Main Runner)",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-gi-channel-main-runner.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-gi-furring-channel",
+      "name": "Gyproc GI Furring Channel",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-gi-furring-channel.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-angle-wall-angle",
+      "name": "Gyproc Angle (Wall Angle)",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-angle-wall-angle.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-jointing-compound-5kg",
+      "name": "Gyproc Jointing Compound 5kg",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-jointing-compound-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "gyproc-jointing-tape-75m",
+      "name": "Gyproc Jointing Tape 75m",
+      "brand": "Saint-Gobain Gyproc",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/gyproc-jointing-tape-75m.webp",
+      "status": "done"
+    },
+    {
+      "id": "alagar-white-pop-powder-25kg",
+      "name": "Alagar White POP Powder 25kg",
+      "brand": "Alagar / POP",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/alagar-white-pop-powder-25kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "alagar-white-pop-powder-40kg",
+      "name": "Alagar White POP Powder 40kg",
+      "brand": "Alagar / POP",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/alagar-white-pop-powder-40kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "super-white-pop-25kg-premium",
+      "name": "Super White POP 25kg (Premium)",
+      "brand": "Alagar / POP",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/super-white-pop-25kg-premium.webp",
+      "status": "done"
+    },
+    {
+      "id": "pop-cornice-mould-plain-8ft",
+      "name": "POP Cornice Mould (Plain) 8ft",
+      "brand": "Alagar / POP",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/pop-cornice-mould-plain-8ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "pop-cornice-mould-design-8ft",
+      "name": "POP Cornice Mould (Design) 8ft",
+      "brand": "Alagar / POP",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/pop-cornice-mould-design-8ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "pop-medallion-round-2ft",
+      "name": "POP Medallion (Round) 2ft",
+      "brand": "Alagar / POP",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/pop-medallion-round-2ft.webp",
+      "status": "done"
+    },
+    {
+      "id": "sunmica-laminate-1mm-8-4",
+      "name": "Sunmica Laminate 1mm (8×4)",
+      "brand": "Laminates",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/sunmica-laminate-1mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "sunmica-laminate-0-8mm-8-4",
+      "name": "Sunmica Laminate 0.8mm (8×4)",
+      "brand": "Laminates",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/sunmica-laminate-0-8mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "merino-laminate-1mm-8-4",
+      "name": "Merino Laminate 1mm (8×4)",
+      "brand": "Laminates",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/merino-laminate-1mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "century-laminate-1mm-8-4",
+      "name": "Century Laminate 1mm (8×4)",
+      "brand": "Laminates",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/century-laminate-1mm-8-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "pvc-edge-band-tape-22mm-50m",
+      "name": "PVC Edge Band Tape 22mm (50m)",
+      "brand": "Laminates",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/pvc-edge-band-tape-22mm-50m.webp",
+      "status": "done"
+    },
+    {
+      "id": "pvc-edge-band-tape-40mm-50m",
+      "name": "PVC Edge Band Tape 40mm (50m)",
+      "brand": "Laminates",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/pvc-edge-band-tape-40mm-50m.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sh-for-laminate-5kg",
+      "name": "Fevicol SH for Laminate 5kg",
+      "brand": "Laminates",
+      "category": "wood",
+      "targetAsset": "/images/products/wood/fevicol-sh-for-laminate-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sh-1kg",
+      "name": "Fevicol SH 1kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevicol-sh-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-heatx-1kg",
+      "name": "Fevicol Heatx 1kg",
+      "brand": "Fevicol (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevicol-heatx-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevikwik-0-5g-pack-of-10",
+      "name": "Fevikwik 0.5g (Pack of 10)",
+      "brand": "SpeedX & Fevikwik",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevikwik-0-5g-pack-of-10.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevikwik-2g-tube",
+      "name": "Fevikwik 2g Tube",
+      "brand": "SpeedX & Fevikwik",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevikwik-2g-tube.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-speedx-100g",
+      "name": "Fevicol SpeedX 100g",
+      "brand": "SpeedX & Fevikwik",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevicol-speedx-100g.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-speedx-1kg",
+      "name": "Fevicol SpeedX 1kg",
+      "brand": "SpeedX & Fevikwik",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevicol-speedx-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sr-505-spray-500ml",
+      "name": "Fevicol SR-505 Spray 500ml",
+      "brand": "SpeedX & Fevikwik",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevicol-sr-505-spray-500ml.webp",
+      "status": "done"
+    },
+    {
+      "id": "m-seal-phataphat-25g",
+      "name": "M-Seal Phataphat 25g",
+      "brand": "M-Seal (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/m-seal-phataphat-25g.webp",
+      "status": "done"
+    },
+    {
+      "id": "m-seal-general-purpose-100g",
+      "name": "M-Seal General Purpose 100g",
+      "brand": "M-Seal (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/m-seal-general-purpose-100g.webp",
+      "status": "done"
+    },
+    {
+      "id": "m-seal-epoxy-compound-1kg",
+      "name": "M-Seal Epoxy Compound 1kg",
+      "brand": "M-Seal (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/m-seal-epoxy-compound-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "m-seal-pv-seal-pvc-100g",
+      "name": "M-Seal PV Seal (PVC) 100g",
+      "brand": "M-Seal (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/m-seal-pv-seal-pvc-100g.webp",
+      "status": "done"
+    },
+    {
+      "id": "araldite-standard-90g",
+      "name": "Araldite Standard 90g",
+      "brand": "Araldite",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/araldite-standard-90g.webp",
+      "status": "done"
+    },
+    {
+      "id": "araldite-rapid-36ml",
+      "name": "Araldite Rapid 36ml",
+      "brand": "Araldite",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/araldite-rapid-36ml.webp",
+      "status": "done"
+    },
+    {
+      "id": "araldite-klear-90g",
+      "name": "Araldite Klear 90g",
+      "brand": "Araldite",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/araldite-klear-90g.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-t01-nca-tile-adhesive-20kg",
+      "name": "Roff T01 NCA Tile Adhesive 20kg",
+      "brand": "Roff (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/roff-t01-nca-tile-adhesive-20kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-tilefix-ready-mix-5kg",
+      "name": "Roff Tilefix Ready Mix 5kg",
+      "brand": "Roff (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/roff-tilefix-ready-mix-5kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "roff-rainbow-grout-1kg",
+      "name": "Roff Rainbow Grout 1kg",
+      "brand": "Roff (Pidilite)",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/roff-rainbow-grout-1kg.webp",
+      "status": "done"
+    },
+    {
+      "id": "ultratech-weatherplus-50kg",
+      "name": "UltraTech Premium Cement 50kg Bag, Weather Plus, Waterproofing, Solid Build",
+      "brand": "CONON-NOW Curated",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/ultratech-premium-cement-50kg-bag-weather-plus-waterproofing-solid-build.webp",
+      "status": "done"
+    },
+    {
+      "id": "tata-tiscon-tmt-12mm",
+      "name": "Tata Tiscon 550SD TMT Steel Bars 12mm, Earthquake Resistant, High Strength",
+      "brand": "CONON-NOW Curated",
+      "category": "tmt-steel",
+      "targetAsset": "/images/products/tmt-steel/tata-tiscon-550sd-tmt-steel-bars-12mm-earthquake-resistant-high-strength.webp",
+      "status": "done"
+    },
+    {
+      "id": "red-clay-bricks-1000",
+      "name": "First-Class Red Clay Bricks, Kiln Fired, Uniform Size — Pack of 1000",
+      "brand": "CONON-NOW Curated",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/first-class-red-clay-bricks-kiln-fired-uniform-size-pack-of-1000.webp",
+      "status": "done"
+    },
+    {
+      "id": "asian-paints-apex-20l",
+      "name": "Asian Paints Apex Weatherproof Exterior Emulsion 20L, Dust & Algae Guard",
+      "brand": "CONON-NOW Curated",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/asian-paints-apex-weatherproof-exterior-emulsion-20l-dust-algae-guard.webp",
+      "status": "done"
+    },
+    {
+      "id": "river-sand-cum",
+      "name": "Screened River Sand (M-Sand Alternative), Silt-Washed, Plaster Grade",
+      "brand": "CONON-NOW Curated",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/screened-river-sand-m-sand-alternative-silt-washed-plaster-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-vitrified-tiles",
+      "name": "Kajaria Vitrified Floor Tiles 600x600mm, Glossy Finish, Anti-Skid — Box of 4",
+      "brand": "CONON-NOW Curated",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/kajaria-vitrified-floor-tiles-600x600mm-glossy-finish-anti-skid-box-of-4.webp",
+      "status": "done"
+    },
+    {
+      "id": "acc-gold-watershield-50kg",
+      "name": "ACC Gold Water Shield 50kg Bag, PPC, Damp-Proof, High Durability",
+      "brand": "CONON-NOW Curated",
+      "category": "cement",
+      "targetAsset": "/images/products/cement/acc-gold-water-shield-50kg-bag-ppc-damp-proof-high-durability.webp",
+      "status": "done"
+    },
+    {
+      "id": "jsw-neosteel-550d-16mm",
+      "name": "JSW Neosteel 550D TMT Steel Bars 16mm, Corrosion Resistant",
+      "brand": "CONON-NOW Curated",
+      "category": "tmt-steel",
+      "targetAsset": "/images/products/tmt-steel/jsw-neosteel-550d-tmt-steel-bars-16mm-corrosion-resistant.webp",
+      "status": "done"
+    },
+    {
+      "id": "fly-ash-bricks-500",
+      "name": "AAC Fly Ash Bricks, Lightweight, Thermal Insulated — Pack of 500",
+      "brand": "CONON-NOW Curated",
+      "category": "bricks",
+      "targetAsset": "/images/products/bricks/aac-fly-ash-bricks-lightweight-thermal-insulated-pack-of-500.webp",
+      "status": "done"
+    },
+    {
+      "id": "berger-weathercoat-20l",
+      "name": "Berger WeatherCoat Anti-Dustt Exterior Emulsion 20L, Long Life",
+      "brand": "CONON-NOW Curated",
+      "category": "paint",
+      "targetAsset": "/images/products/paint/berger-weathercoat-anti-dustt-exterior-emulsion-20l-long-life.webp",
+      "status": "done"
+    },
+    {
+      "id": "manufactured-msand-ton",
+      "name": "Construction M-Sand (Manufactured), Zone-II, Concrete Grade",
+      "brand": "CONON-NOW Curated",
+      "category": "sand",
+      "targetAsset": "/images/products/sand/construction-m-sand-manufactured-zone-ii-concrete-grade.webp",
+      "status": "done"
+    },
+    {
+      "id": "somany-wall-tiles-300x600",
+      "name": "Somany Ceramic Wall Tiles 300x600mm, Glossy, Bathroom Grade — Box of 6",
+      "brand": "CONON-NOW Curated",
+      "category": "tiles",
+      "targetAsset": "/images/products/tiles/somany-ceramic-wall-tiles-300x600mm-glossy-bathroom-grade-box-of-6.webp",
+      "status": "done"
+    },
+    {
+      "id": "hettich-soft-close-hinge",
+      "name": "Hettich Soft-Close Concealed Hinges 35mm Cup, Cabinet & Wardrobe — Pack of 10",
+      "brand": "CONON-NOW Curated",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/hettich-soft-close-concealed-hinges-35mm-cup-cabinet-wardrobe-pack-of-10.webp",
+      "status": "done"
+    },
+    {
+      "id": "polycab-fr-wire-1sqmm",
+      "name": "Polycab FR House Wire 1.5 sq.mm, 90m Coil — BIS Certified, Flame Retardant",
+      "brand": "CONON-NOW Curated",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/polycab-fr-house-wire-1-5-sq-mm-90m-coil-bis-certified-flame-retardant.webp",
+      "status": "done"
+    },
+    {
+      "id": "astral-cpvc-pipe-1inch",
+      "name": "Astral CPVC FlowGuard Gold Pipe 1-Inch, 3m Length — Hot & Cold Water Supply",
+      "brand": "CONON-NOW Curated",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/astral-cpvc-flowguard-gold-pipe-1-inch-3m-length-hot-cold-water-supply.webp",
+      "status": "done"
+    },
+    {
+      "id": "fevicol-sh-50kg",
+      "name": "Fevicol SH 50kg Drum — Synthetic Resin Wood Adhesive, Pidilite",
+      "brand": "CONON-NOW Curated",
+      "category": "adhesives",
+      "targetAsset": "/images/products/adhesives/fevicol-sh-50kg-drum-synthetic-resin-wood-adhesive-pidilite.webp",
+      "status": "done"
+    },
+    {
+      "id": "dr-fixit-pidifin-2k",
+      "name": "Dr. Fixit Pidifin 2K 20kg Kit — 2-Component Waterproofing Coating for Terrace & Bathroom",
+      "brand": "CONON-NOW Curated",
+      "category": "waterproofing",
+      "targetAsset": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit-2-component-waterproofing-coating-for-terrace-bathroom.webp",
+      "status": "done"
+    },
+    {
+      "id": "kajaria-marble-look-tile",
+      "name": "Kajaria Marble-Look GVT Floor Tiles 800×800mm, Anti-Skid, Premium Grade — Box of 3",
+      "brand": "CONON-NOW Curated",
+      "category": "marble---flooring",
+      "targetAsset": "/images/products/marble---flooring/kajaria-marble-look-gvt-floor-tiles-800-800mm-anti-skid-premium-grade-box-of-3.webp",
+      "status": "done"
+    },
+    {
+      "id": "anchor-roma-modular-switch",
+      "name": "Anchor Roma Modular Switch 6A 1-Way, White Polycarbonate — Pack of 10",
+      "brand": "CONON-NOW Curated",
+      "category": "electrical",
+      "targetAsset": "/images/products/electrical/anchor-roma-modular-switch-6a-1-way-white-polycarbonate-pack-of-10.webp",
+      "status": "done"
+    },
+    {
+      "id": "jaquar-alive-basin-mixer",
+      "name": "Jaquar Alive Single Lever Basin Mixer Tap, Chrome Finish, Brass Body",
+      "brand": "CONON-NOW Curated",
+      "category": "plumbing",
+      "targetAsset": "/images/products/plumbing/jaquar-alive-single-lever-basin-mixer-tap-chrome-finish-brass-body.webp",
+      "status": "done"
+    },
+    {
+      "id": "godrej-navtal-brass-lock",
+      "name": "Godrej Nav-Tal 7 Levers Hardened Brass Padlock with 3 Keys, Heavy Duty",
+      "brand": "CONON-NOW Curated",
+      "category": "hardware",
+      "targetAsset": "/images/products/hardware/godrej-nav-tal-7-levers-hardened-brass-padlock-with-3-keys-heavy-duty.webp",
+      "status": "done"
+    },
+    {
+      "id": "birla-white-wallcare-putty-40kg",
+      "name": "Birla White WallCare Waterproof Putty 40kg Bag, Smooth White Finish",
+      "brand": "CONON-NOW Curated",
+      "category": "finishing",
+      "targetAsset": "/images/products/finishing/birla-white-wallcare-waterproof-putty-40kg-bag-smooth-white-finish.webp",
+      "status": "done"
+    },
+    {
+      "id": "bosch-gsb-550-impact-drill",
+      "name": "Bosch GSB 550 Professional Impact Drill Machine 550W with 13mm Chuck",
+      "brand": "CONON-NOW Curated",
+      "category": "tools",
+      "targetAsset": "/images/products/tools/bosch-gsb-550-professional-impact-drill-machine-550w-with-13mm-chuck.webp",
+      "status": "done"
+    },
+    {
+      "id": "makrana-white-marble-slab",
+      "name": "Makrana Pure White Marble Slab 18mm Thickness — Premium Flooring Grade",
+      "brand": "CONON-NOW Curated",
+      "category": "marble---flooring",
+      "targetAsset": "/images/products/marble---flooring/makrana-pure-white-marble-slab-18mm-thickness-premium-flooring-grade.webp",
+      "status": "done"
+    }
+  ]
+}

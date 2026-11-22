@@ -26,18 +26,23 @@ const ROLE_LABEL: Record<string, string> = {
   admin: "Admin",
 };
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const AMBER      = "#f59e0b";
-const NEON       = "#a3e635";
+const LOGO_BLUE  = "#1848a0";
+const LIGHT_BLUE = "#bae6fd";
 
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({
+  children,
+  hideHeader = false,
+}: {
+  children: React.ReactNode;
+  hideHeader?: boolean;
+}) {
   const [location, setLocationPath] = useLocation();
-  const { isCartOpen, setCartOpen } = useUI();
+  const { isCartOpen, setCartOpen, isMenuOpen, setMenuOpen, screenRatio, setScreenRatio } = useUI();
   const { data: cart } = useGetCart();
   const { balance: walletBalance } = useWallet();
-
-  const [showMenu, setShowMenu] = useState(false);
 
   const { role, name, logout } = useUser();
   const { user: authUser, isAuthenticated, logout: authLogout } = useAuth();
@@ -54,7 +59,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const roleLabel = role ? ROLE_LABEL[role] : "Secure account";
 
   const handleLogout = () => {
-    setShowMenu(false);
+    setMenuOpen(false);
     logout();
     if (isAuthenticated) {
       authLogout();
@@ -77,10 +82,77 @@ export function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-100 flex justify-center w-full">
+    <div className="min-h-screen bg-slate-100 flex flex-col items-center justify-start w-full transition-all">
+      {/* ── Screen Ratio Controller Bar (16:9 Widescreen Desktop / 16:9 Frame / 9:16 Mobile) ── */}
+      <div className="w-full bg-slate-900 text-white text-[11px] py-1 px-4 flex items-center justify-between border-b border-slate-800 z-50 shrink-0">
+        <div className="flex items-center gap-2">
+          <span className="font-extrabold text-[#f2b705] tracking-wider uppercase text-[10px]">
+            ⚡ CONON-NOW
+          </span>
+          <span className="text-slate-500 hidden sm:inline">•</span>
+          <span className="text-slate-300 hidden sm:inline text-[10.5px]">
+            {screenRatio === "16:9"
+              ? "16:9 Widescreen Desktop Mode Active"
+              : screenRatio === "frame16:9"
+              ? "16:9 Aspect Frame Active"
+              : "9:16 Mobile Simulator Active"}
+          </span>
+        </div>
+
+        {/* Ratio Mode Switcher */}
+        <div className="flex items-center gap-1 bg-slate-800 p-0.5 rounded-full border border-slate-700">
+          <button
+            type="button"
+            onClick={() => setScreenRatio("16:9")}
+            className={`px-2.5 py-0.5 rounded-full text-[10.5px] font-extrabold transition active:scale-95 flex items-center gap-1 ${
+              screenRatio === "16:9"
+                ? "bg-[#1848a0] text-white shadow-xs"
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+            title="16:9 Widescreen Desktop Mode (Full desktop layout)"
+          >
+            <span>🖥️</span>
+            <span>16:9 Widescreen</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setScreenRatio("frame16:9")}
+            className={`px-2.5 py-0.5 rounded-full text-[10.5px] font-extrabold transition active:scale-95 flex items-center gap-1 ${
+              screenRatio === "frame16:9"
+                ? "bg-[#1848a0] text-white shadow-xs"
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+            title="16:9 Framed Aspect Box (1280x720 aspect-video)"
+          >
+            <span>📺</span>
+            <span>16:9 Frame</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setScreenRatio("mobile")}
+            className={`px-2.5 py-0.5 rounded-full text-[10.5px] font-extrabold transition active:scale-95 flex items-center gap-1 ${
+              screenRatio === "mobile"
+                ? "bg-[#1848a0] text-white shadow-xs"
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+            title="9:16 Mobile Phone Simulator"
+          >
+            <span>📱</span>
+            <span>9:16 Mobile</span>
+          </button>
+        </div>
+      </div>
+
       <div
-        className="w-full max-w-[480px] bg-white min-h-screen relative shadow-2xl flex flex-col"
-        style={{ borderLeft: "1px solid #e2e8f0", borderRight: "1px solid #e2e8f0" }}
+        className={
+          screenRatio === "16:9"
+            ? "w-full max-w-7xl min-w-0 bg-white min-h-[calc(100vh-32px)] relative shadow-2xl flex flex-col overflow-x-hidden border-x border-slate-200 transition-all duration-300"
+            : screenRatio === "frame16:9"
+            ? "w-full max-w-[1280px] aspect-[16/9] min-w-0 bg-white my-4 relative shadow-2xl rounded-2xl flex flex-col overflow-x-hidden overflow-y-auto border-2 border-slate-300 transition-all duration-300"
+            : "w-full sm:max-w-[480px] min-w-0 bg-white min-h-[calc(100vh-32px)] relative sm:shadow-2xl flex flex-col overflow-x-hidden sm:border-x sm:border-slate-200 transition-all duration-300"
+        }
       >
         {/* Pinned top region — live ticker + green delivery header.
             Sticky at top-0 with iOS/Android safe-area padding so the header
@@ -88,109 +160,128 @@ export function Layout({ children }: { children: React.ReactNode }) {
             z-30 keeps it pinned above the scrolling feed but BELOW every
             modal/sheet (cart, drawer, location gate, AR — all z-40+) so those
             overlays correctly cover the header instead of it punching through. */}
-        <div
-          className="sticky top-0 z-30 bg-white"
-          style={{ paddingTop: "env(safe-area-inset-top)" }}
-        >
-          {/* Live ticker */}
-          <MandiTicker />
-
-          {/* Header — neon-green delivery header */}
-          <header
-            className="px-5 pt-3.5 pb-4"
-            style={{
-              background: `linear-gradient(165deg, #c7f24f 0%, ${NEON} 55%, #8fd61f 100%)`,
-              boxShadow: "0 6px 18px -8px rgba(132,204,22,0.55)",
-            }}
+        {!hideHeader && (
+          <div
+            className="sticky top-0 z-30 bg-white"
+            style={{ paddingTop: "env(safe-area-inset-top)" }}
           >
-          {/* Row 1: delivery time + address | wallet + profile */}
-          <div className="flex justify-between items-start">
-            {/* Left — delivery promise + address dropdown */}
-            <button onClick={openLocationSheet} className="flex flex-col items-start text-left group">
-              <div className="flex items-center gap-1.5">
-                <span
-                  className="w-5 h-5 rounded-full flex items-center justify-center"
-                  style={{ background: BRAND_DARK }}
-                >
-                  <Zap className="w-3 h-3 text-amber-300" strokeWidth={3} fill="currentColor" />
-                </span>
-                <h1
-                  className="font-display font-black tracking-tight text-[17px] leading-none"
-                  style={{ color: BRAND_DARK }}
-                >
-                  Conon in 60 minutes
-                </h1>
-              </div>
-              <div className="flex items-center gap-1 mt-1.5 pl-0.5">
-                <MapPin className="w-3.5 h-3.5" style={{ color: BRAND_DARK }} strokeWidth={2.5} />
-                <span className="text-[12px] font-black" style={{ color: BRAND_DARK }}>
-                  HOME
-                </span>
-                <span className="text-[12px] font-bold text-[#2f5d1f] truncate max-w-[150px]">
-                  - {deliveryLoc.area || "Shakti Nagar"}
-                </span>
-                <ChevronDown className="w-3.5 h-3.5" style={{ color: BRAND_DARK }} strokeWidth={2.5} />
-              </div>
-            </button>
-
-            {/* Right — wallet + cart + profile/menu */}
-            <div className="flex items-center gap-2">
-              <Link
-                href="/rewards?tab=wallet"
-                aria-label="Gold Wallet balance"
-                title="CONON Gold Wallet"
-                className="flex items-center gap-1 h-8 px-2.5 rounded-full bg-white/55 backdrop-blur-sm active:scale-90 transition"
-              >
-                <Wallet className="w-4 h-4" style={{ color: BRAND_DARK }} strokeWidth={2.5} />
-                <span className="text-[12px] font-black" style={{ color: BRAND_DARK }}>
-                  ₹{formatINR(walletBalance)}
-                </span>
-              </Link>
-              <button
-                onClick={() => setCartOpen(true)}
-                aria-label="Cart"
-                className="w-9 h-9 rounded-full bg-white/55 backdrop-blur-sm flex items-center justify-center relative active:scale-90 transition"
-              >
-                <ShoppingBag className="w-[18px] h-[18px]" style={{ color: BRAND_DARK }} strokeWidth={2.4} />
-                {cart && cart.totalItems > 0 && (
-                  <span
-                    className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 text-[9px] font-black rounded-full flex items-center justify-center"
-                    style={{ background: BRAND_DARK, color: "#fff" }}
-                  >
-                    {cart.totalItems}
-                  </span>
-                )}
-              </button>
-              {!loggedIn && (
-                <Link
-                  href="/login"
-                  aria-label="Log in"
-                  className="flex items-center gap-1 h-9 px-3 rounded-full text-white active:scale-90 transition"
-                  style={{ background: BRAND_DARK }}
-                >
-                  <LogIn className="w-4 h-4" strokeWidth={2.6} />
-                  <span className="text-[12px] font-black">Login</span>
-                </Link>
-              )}
-              <button
-                onClick={() => setShowMenu(true)}
-                aria-label="Profile & menu"
-                className="w-9 h-9 rounded-full flex items-center justify-center active:scale-90 transition relative"
-                style={{ background: BRAND_DARK }}
-              >
-                <User className="w-[18px] h-[18px] text-white" strokeWidth={2.4} />
-                {loggedIn && (
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" />
-                )}
-              </button>
+            {/* Top Yellow Notice Bar - exact reference match */}
+            <div className="bg-[#f2b705] text-slate-900 text-xs font-bold py-1.5 px-4 text-center tracking-tight shadow-xs">
+              Open 8 am to 8 pm all days
             </div>
+
+            {/* Live ticker */}
+            <MandiTicker />
+
+            {/* Main Navigation Header - Brand Logo on top-left corner */}
+            <header className="px-3.5 sm:px-6 lg:px-8 py-2.5 bg-white border-b border-slate-100 flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
+              {/* Left: Brand Logo (Top Left Corner) + Hamburger Menu + 60 Mins Badge + Deliver To */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                {/* Brand Logo - Top Left Corner */}
+                <Link href="/home" className="flex items-center gap-1.5 shrink-0 group active:scale-95 transition -ml-0.5" aria-label="CONON-NOW Home">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/conon-logo-transparent.png`}
+                    alt="CONON-NOW"
+                    className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+                  />
+                  <div className="flex flex-col leading-none">
+                    <div className="flex items-center gap-1 leading-none">
+                      <span className="text-[15px] sm:text-[17px] font-black text-[#1848a0] tracking-tighter">
+                        CONON
+                      </span>
+                      <span className="bg-[#f2b705] text-slate-900 text-[8.5px] sm:text-[9.5px] font-black px-1.5 py-0.2 rounded-xs uppercase tracking-wider shadow-2xs">
+                        NOW
+                      </span>
+                    </div>
+                    <span className="text-[7.5px] sm:text-[8px] font-bold text-slate-400 tracking-wider uppercase mt-0.5">
+                      Infrabuilt
+                    </span>
+                  </div>
+                </Link>
+
+                <div className="h-6 w-px bg-slate-200 hidden xs:block shrink-0" />
+
+                <button
+                  onClick={() => setMenuOpen(true)}
+                  aria-label="Open navigation menu"
+                  className="p-1 text-slate-800 hover:text-slate-600 active:scale-90 transition rounded-md"
+                >
+                  <Menu className="w-5 sm:w-6 h-5 sm:h-6" strokeWidth={2.4} />
+                </button>
+
+                {/* Green 60 Mins Pill */}
+                <div className="bg-[#15803d] text-white text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded leading-[1.1] flex flex-col items-center justify-center shrink-0 shadow-xs">
+                  <span>60</span>
+                  <span>Mins</span>
+                </div>
+
+                {/* Deliver To dropdown */}
+                <button
+                  onClick={openLocationSheet}
+                  className="flex flex-col text-left active:opacity-80 transition group"
+                  aria-label="Select delivery location"
+                >
+                  <span className="text-[9px] sm:text-[10px] text-slate-400 font-semibold leading-none">Deliver To</span>
+                  <div className="flex items-center gap-0.5 text-xs font-extrabold text-slate-900 leading-tight mt-0.5">
+                    <MapPin className="w-3.5 h-3.5 text-slate-700 shrink-0" strokeWidth={2.4} />
+                    <span className="truncate max-w-[85px]">{pincode || "226010"}</span>
+                    <ChevronDown className="w-3 h-3 text-slate-500 shrink-0 group-hover:translate-y-0.5 transition-transform" strokeWidth={2.4} />
+                  </div>
+                </button>
+              </div>
+
+              {/* Right: Wallet + User Profile + Cart Bag */}
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/rewards?tab=wallet"
+                  aria-label="Gold Wallet"
+                  title="Gold Wallet balance"
+                  className="hidden sm:flex items-center gap-1 h-7 px-2 rounded-full bg-amber-50 border border-amber-200/80 active:scale-95 transition"
+                >
+                  <Wallet className="w-3.5 h-3.5 text-amber-600" strokeWidth={2.5} />
+                  <span className="text-[11px] font-black text-amber-900">
+                    ₹{formatINR(walletBalance)}
+                  </span>
+                </Link>
+                <button
+                  onClick={() => {
+                    if (!loggedIn) {
+                      setLocationPath("/login");
+                    } else {
+                      setMenuOpen(true);
+                    }
+                  }}
+                  aria-label="User profile & account"
+                  className="p-1 text-slate-700 hover:text-slate-900 active:scale-90 transition relative rounded-md"
+                >
+                  <User className="w-[22px] h-[22px]" strokeWidth={2} />
+                  {loggedIn && (
+                    <span className="absolute bottom-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white" />
+                  )}
+                </button>
+                <button
+                  onClick={() => setCartOpen(true)}
+                  aria-label="Shopping bag"
+                  className="p-1 text-slate-700 hover:text-slate-900 active:scale-90 transition relative rounded-md"
+                >
+                  <ShoppingBag className="w-[22px] h-[22px]" strokeWidth={2} />
+                  {cart && cart.totalItems > 0 && (
+                    <span
+                      className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 text-[9px] font-black rounded-full flex items-center justify-center shadow-xs"
+                      style={{ background: "#1848a0", color: "#fff" }}
+                    >
+                      {cart.totalItems}
+                    </span>
+                  )}
+                </button>
+              </div>
+            </header>
           </div>
-          </header>
-        </div>
+        )}
 
         {/* Side Menu Drawer */}
-        {showMenu && (
-          <div className="fixed inset-0 z-50 flex" onClick={() => setShowMenu(false)}>
+        {isMenuOpen && (
+          <div className="fixed inset-0 z-50 flex" onClick={() => setMenuOpen(false)}>
             <div className="absolute inset-0 bg-black/40" />
             <div
               className="relative w-[300px] max-w-[80vw] bg-white h-full flex flex-col shadow-2xl"
@@ -246,7 +337,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <div className="flex-1 overflow-y-auto py-2">
                 {[
                   { icon: Home,          label: "Home",            href: "/home"      },
-                  { icon: HardHat,       label: "Conon Build",     href: "/build"     },
+                  { icon: HardHat,       label: "CONON-NOW Build",     href: "/build"     },
                   { icon: PencilRuler,   label: "Smart-Draft AI",  href: "/smart-draft" },
                   { icon: Compass,       label: "Arch-Genius Engine", href: "/arch-genius" },
                   { icon: Boxes,         label: "Smart-Build 3D",  href: "/smart-build" },
@@ -279,7 +370,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   { icon: Star, label: "Rate & Review", sub: "Your feedback matters",
                     action: () => toast.success("Thanks! Rate & Review is opening soon.") },
                   { icon: Shield, label: "Quality Promise", sub: "ISI certified materials",
-                    action: () => toast.info("Every CONON material is ISI-certified ✓") },
+                    action: () => toast.info("Every CONON-NOW material is ISI-certified ✓") },
                 ].map(item => {
                   const inner = (
                     <div className="flex items-center gap-3 px-5 py-3 cursor-pointer hover:bg-slate-50">
@@ -308,7 +399,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
                 <p className="px-5 py-2 text-[9px] font-black text-slate-400 uppercase tracking-widest">Support</p>
                 {[
-                  { icon: Phone, label: "Call Us: 1800-CONON" },
+                  { icon: Phone, label: "Call Us: 1800-CONON-NOW" },
                   { icon: HelpCircle, label: "Help & FAQ" },
                   { icon: FileText, label: "Terms & Conditions" },
                   { icon: Settings, label: "Settings" },
@@ -337,7 +428,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     </div>
                   </Link>
                 )}
-                <p className="text-[9px] text-slate-300 mt-2 font-bold">CONON Infrabuilt v2.0 · Made in India</p>
+                <div className="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/conon-logo-transparent.png`}
+                    alt="CONON-NOW"
+                    className="w-5 h-5 object-contain"
+                  />
+                  <p className="text-[10px] text-slate-400 font-bold">CONON-NOW · Infrabuilt v2.0</p>
+                </div>
               </div>
             </div>
           </div>
@@ -358,37 +456,39 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/* Floating "View cart" pill — sits above the bottom dock, hidden when
             the cart is empty or already open (Blinkit-style). */}
         {cart && cart.totalItems > 0 && !isCartOpen && (
-          <div className="absolute left-0 right-0 z-30 px-4 pointer-events-none" style={{ bottom: "92px" }}>
-            <button
-              type="button"
-              onClick={() => setCartOpen(true)}
-              className="pointer-events-auto w-full flex items-center justify-between rounded-2xl px-4 py-3 text-white shadow-xl active:scale-[0.98] transition"
-              style={{ background: "#0c831f", boxShadow: "0 10px 24px -6px rgba(12,131,31,0.6)" }}
-            >
-              <span className="flex items-center gap-2.5">
-                <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/20">
-                  <ShoppingBag className="w-[18px] h-[18px]" strokeWidth={2.6} />
-                </span>
-                <span className="flex flex-col items-start leading-tight">
-                  <span className="text-[15px] font-black">View cart</span>
-                  <span className="text-[11px] font-semibold text-white/85">
-                    {cart.totalItems} {cart.totalItems === 1 ? "item" : "items"}
+          <div className="absolute left-0 right-0 z-30 px-4 pointer-events-none flex justify-center" style={{ bottom: "92px" }}>
+            <div className="w-full max-w-md">
+              <button
+                type="button"
+                onClick={() => setCartOpen(true)}
+                className="pointer-events-auto w-full flex items-center justify-between rounded-2xl px-4 py-3 text-white shadow-xl active:scale-[0.98] transition"
+                style={{ background: "#1848a0", boxShadow: "0 10px 24px -6px rgba(24,72,160,0.45)" }}
+              >
+                <span className="flex items-center gap-2.5">
+                  <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/20">
+                    <ShoppingBag className="w-[18px] h-[18px]" strokeWidth={2.6} />
+                  </span>
+                  <span className="flex flex-col items-start leading-tight">
+                    <span className="text-[15px] font-black">View cart</span>
+                    <span className="text-[11px] font-semibold text-white/85">
+                      {cart.totalItems} {cart.totalItems === 1 ? "item" : "items"}
+                    </span>
                   </span>
                 </span>
-              </span>
-              <span className="flex items-center gap-1 text-[15px] font-black">
-                ₹{cart.grandTotal.toLocaleString("en-IN")}
-                <ChevronRight className="w-5 h-5" strokeWidth={2.8} />
-              </span>
-            </button>
+                <span className="flex items-center gap-1 text-[15px] font-black">
+                  ₹{cart.grandTotal.toLocaleString("en-IN")}
+                  <ChevronRight className="w-5 h-5" strokeWidth={2.8} />
+                </span>
+              </button>
+            </div>
           </div>
         )}
 
         {/* Bottom nav — 5-slot enterprise dock with elevated center Home */}
-        <div className="absolute bottom-0 left-0 right-0 z-30 px-3 pb-3 pointer-events-none">
+        <div className="absolute bottom-0 left-0 right-0 z-30 px-3 pb-3 pointer-events-none flex justify-center">
           <nav
-            className="pointer-events-auto rounded-[26px] bg-white/85 backdrop-blur-xl border border-white/60 px-1"
-            style={{ boxShadow: "0 10px 30px -8px rgba(91,146,177,0.45), 0 0 0 1px rgba(132,204,22,0.10)" }}
+            className="pointer-events-auto w-full max-w-md rounded-[26px] bg-white/90 backdrop-blur-xl border border-white/60 px-1 shadow-lg"
+            style={{ boxShadow: "0 10px 30px -8px rgba(24,72,160,0.20), 0 0 0 1px rgba(96,165,250,0.18)" }}
           >
             <div className="flex items-stretch h-[64px]">
               {navItems.map((item, idx) => {

@@ -18,7 +18,7 @@ import {
 } from "../lib/payment";
 import { Confetti } from "./Confetti";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const GREEN = "#2a7a3b";
 const AMBER = "#f59e0b";
 
@@ -245,7 +245,7 @@ export function PaymentSheet({
   const plans: { id: PaymentPlan; label: string; sub: string; icon: React.ReactNode }[] = [
     { id: "full",  label: "Pay Full Amount",          sub: "UPI, Cards, Net Banking",                       icon: <Banknote className="w-4 h-4" /> },
     { id: "token", label: "Pay 20% Token Advance",    sub: "Dispatch the truck now, pay rest on delivery",  icon: <Zap className="w-4 h-4" /> },
-    { id: "khata", label: "Conon Business Credit",    sub: "Buy on Khata · for verified contractors",       icon: <Wallet2 className="w-4 h-4" /> },
+    { id: "khata", label: "CONON-NOW Business Credit",    sub: "Buy on Khata · for verified contractors",       icon: <Wallet2 className="w-4 h-4" /> },
   ];
 
   return (
@@ -753,7 +753,7 @@ function TruckLeavingWarehouse() {
               {[0, 1, 2, 3].map(i => <div key={i} className="h-px bg-gray-300 mx-0.5" />)}
             </div>
           </div>
-          <span className="absolute top-1 left-1/2 -translate-x-1/2 text-[6px] font-black" style={{ color: BRAND }}>CONON</span>
+          <span className="absolute top-1 left-1/2 -translate-x-1/2 text-[6px] font-black" style={{ color: BRAND }}>CONON-NOW</span>
         </div>
       </div>
 

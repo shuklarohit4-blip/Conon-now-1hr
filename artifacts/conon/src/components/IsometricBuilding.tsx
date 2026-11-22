@@ -6,7 +6,7 @@ interface Props {
   onStageSelect: (stage: string) => void;
 }
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const BRAND_MID  = "#5c92b1";
 const AMBER      = "#f59e0b";
 

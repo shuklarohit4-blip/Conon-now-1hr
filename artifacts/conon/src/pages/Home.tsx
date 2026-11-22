@@ -6,6 +6,7 @@ import {
   Zap, Droplets, Paintbrush, Layers, Wrench,
   HardHat, Hammer, Building2, FlaskConical,
   Grid3x3, Shield, Box, Mountain, Rows3, TreePine, Star,
+  Wallet, Percent, Truck,
 } from "lucide-react";
 import { useLocation } from "wouter";
 import type { LucideIcon } from "lucide-react";
@@ -22,7 +23,31 @@ import type { Product, ProductSpec } from "@/components/ProductCard";
 import { EquipmentRentalSlider } from "@/components/EquipmentRentalSlider";
 import PromoCarousel from "@/components/PromoCarousel";
 import { FeatureShortcuts } from "@/components/FeatureShortcuts";
+import { FestivalHeroBanner } from "@/components/FestivalHeroBanner";
+import { HomeHeroBanner } from "@/components/HomeHeroBanner";
+import { HomeRunHeader } from "@/components/HomeRunHeader";
+import { SeamlessHeroHeader } from "@/components/SeamlessHeroHeader";
+import { CategoryShowcaseFeed } from "@/components/CategoryShowcaseFeed";
+import { HomeDepartmentNav } from "@/components/HomeDepartmentNav";
+import { HomeCategoryGrid } from "@/components/HomeCategoryGrid";
+import { CementCollectionStorefront } from "@/components/CementCollectionStorefront";
+import { PlywoodCollectionStorefront } from "@/components/PlywoodCollectionStorefront";
+import { FevicolCollectionStorefront } from "@/components/FevicolCollectionStorefront";
+import { HingesCollectionStorefront } from "@/components/HingesCollectionStorefront";
+import { LocksCollectionStorefront } from "@/components/LocksCollectionStorefront";
+import { ElectricalCollectionStorefront } from "@/components/ElectricalCollectionStorefront";
+import { KitchenCollectionStorefront } from "@/components/KitchenCollectionStorefront";
+import { PaintingCollectionStorefront } from "@/components/PaintingCollectionStorefront";
+import type { HomeCategory } from "@/data/homeCategories";
+import { getShowcaseProducts } from "@/lib/catalogProducts";
+import { useDeliveryLocation } from "@/context/LocationContext";
+import { useWallet } from "@/context/WalletContext";
+import { useUser } from "@/context/UserContext";
+import { useAuth } from "@workspace/auth-web";
+import { useUI } from "@/context/UIContext";
 import { onImgError } from "@/lib/imgFallback";
+import { resolveProductImage as centralResolveProductImage } from "@/lib/productImages";
+import productAssetManifest from "@/lib/productAssetManifest.json";
 import { useGetMaterials, useAddToCart, useUpdateCartItem, useRemoveFromCart, useGetCart, getGetCartQueryKey, GetMaterialsStage } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -148,15 +173,16 @@ import imgStanleyHinge from "@assets/generated_images/products/stanley-hinge.png
 import imgLaminateSheet from "@assets/generated_images/products/laminate-sheet.png";
 import imgIndigoBucket from "@assets/generated_images/products/indigo-bucket.png";
 
-const BRAND_DARK = "#1b4366";
-const BLINKIT_GREEN = "#0c831f";
+const BRAND_DARK = "#1848a0";
+const LOGO_BLUE  = "#1848a0";
+const BLINKIT_GREEN = "#1848a0";
 
 const SPOTLIGHT_STORES: { name: string; tag: string; initials: string; bg: string; rating: string; eta: string }[] = [
-  { name: "UltraTech Store",   tag: "Cement & Concrete", initials: "UT", bg: "linear-gradient(135deg,#1b4366,#2a7a3b)", rating: "4.6", eta: "1 hr" },
+  { name: "UltraTech Store",   tag: "Cement & Concrete", initials: "UT", bg: "linear-gradient(135deg,#1848a0,#2a7a3b)", rating: "4.6", eta: "1 hr" },
   { name: "TATA Steel Depot",  tag: "TMT & Structural",  initials: "TS", bg: "linear-gradient(135deg,#0f172a,#334155)", rating: "4.7", eta: "Today" },
   { name: "Asian Paints Hub",  tag: "Paints & Finishes", initials: "AP", bg: "linear-gradient(135deg,#7c2d12,#f59e0b)", rating: "4.5", eta: "1 hr" },
   { name: "Kajaria Tiles",     tag: "Tiles & Sanitary",  initials: "KT", bg: "linear-gradient(135deg,#0c831f,#15803d)", rating: "4.4", eta: "Today" },
-  { name: "CONON Brick Yard",  tag: "Bricks & Blocks",   initials: "CB", bg: "linear-gradient(135deg,#9a3412,#c8894a)", rating: "4.3", eta: "Tomorrow" },
+  { name: "CONON-NOW Brick Yard",  tag: "Bricks & Blocks",   initials: "CB", bg: "linear-gradient(135deg,#9a3412,#c8894a)", rating: "4.3", eta: "Tomorrow" },
 ];
 const BRAND_MID  = "#5c92b1";
 const AMBER      = "#f59e0b";
@@ -205,8 +231,8 @@ const getCatLabel = (cat: string) =>
    underlying DB category so the panel shows real products from materials
    table. The label/image come from this config; the dbCategory drives
    filtering in MaterialList / BrandCatalog.                            */
-type HomeRunCat = { slug: string; label: string; image: string; dbCategory: string };
-const CAT_LOCAL = (slug: string) => `${import.meta.env.BASE_URL}categories/${slug}.png`;
+type HomeRunCat = { slug: string; label: string; image: string; dbCategory: string; badge?: string };
+const CAT_LOCAL = (slug: string) => `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/categories/${slug}.webp`;
 
 /* Representative product photos stored locally in /public/products/.
    resolveProductImage() maps any product to the right photo by its category
@@ -214,339 +240,43 @@ const CAT_LOCAL = (slug: string) => `${import.meta.env.BASE_URL}categories/${slu
    broken links. */
 const PROD = PROD_IMG;
 function resolveProductImage(category: string, name: string): string {
-  const n = (name || "").toLowerCase();
-  const c = (category || "").toLowerCase();
-  const has = (...ws: string[]) => ws.some((w) => n.includes(w));
-  switch (c) {
-    case "cement":
-      if (has("ultratech")) {
-        if (has("buildmore", "build more"))      return utBuildmore;
-        if (has("weatherplus", "waterplus"))     return utWaterplus;
-        if (has("super"))                        return utSuperOpc;
-        if (has("opc"))                          return utOpc53;
-        if (has("ppc"))                          return utPpc;
-      }
-      if (has("acc")) {
-        if (has("suraksha"))                       return imgAccSuraksha;
-        if (has("water shield"))                   return imgAccGoldWater;
-        if (has("concrete+", "concrete +", "concrete")) return imgAccConcretePlus;
-        if (has("f2r", "fast to road", "rhc"))     return imgAccRhc;
-        if (has("gold opc", "opc"))                return imgAccOpc;
-        return imgAccCement;
-      }
-      if (has("ambuja")) {
-        if (has("kawach"))               return imgAmbujaKawach;
-        if (has("cool walls", "cool"))   return imgAmbujaCoolWalls;
-        if (has("plus", "ppc"))          return imgAmbujaPpc;
-        return imgAmbujaCement;
-      }
-      if (has("shree", "bangur"))      return imgShreeCement;
-      if (has("jk ", "jk super", "j.k", "jaykay", "lakshmi", "sixer", "smartcrete")) {
-        if (has("sixer"))              return imgJkSixerOpc;
-        if (has("smartcrete"))         return imgJkSmartcrete;
-        if (has("lakshmi"))            return imgJkLaxmiPpc;
-        if (has("super opc", "super 53")) return imgJkSuperOpc;
-        return imgJkCement;
-      }
-      if (has("birla", "samrat")) {
-        if (has("uttam"))                return imgBirlaUttam;
-        if (has("a1"))                   return imgBirlaA1;
-        if (has("advanced"))             return imgBirlaAdvPpc;
-        if (has("samrat", "opc"))        return imgBirlaOpc;
-        return imgBirlaCement;
-      }
-      if (has("prism"))                return imgPrismCement;
-      if (has("dalmia")) {
-        if (has("konark"))               return imgDalmiaKonark;
-        if (has("dsp"))                  return imgDalmiaOpc;
-        if (has("infracon"))             return imgDalmiaSrc;
-        return imgDalmiaCement;
-      }
-      if (has("mycem", "my cem")) {
-        if (has("43"))                   return imgMycemOpc43;
-        if (has("53"))                   return imgMycemOpc53;
-        return imgMycemCement;
-      }
-      return PROD(has("white") ? "white-cement" : "cement-bag");
-    case "steel":
-      return PROD(has("binding", "wire", "mesh") ? "binding-wire" : "tmt-bars");
-    case "sand":
-      return PROD("sand");
-    case "aggregate":
-      return PROD("aggregate");
-    case "bricks":
-      if (has("fly ash")) {
-        if (has("interlocking")) return imgFlyAshInterlocking;
-        if (has("heavy"))        return imgFlyAshHeavy;
-        return imgFlyAshStandard;
-      }
-      if (has("magicrete")) {
-        if (has("8 inch", "8inch")) return imgMagicrete8;
-        if (has("6 inch", "6inch")) return imgMagicrete6;
-        if (has("4 inch", "4inch")) return imgMagicrete4;
-        return imgMagicrete6;
-      }
-      if (has("half block"))   return imgHalfBlock;
-      if (has("hollow block")) return imgHollowBlock;
-      if (has("first class"))  return imgFirstClassBrick;
-      if (has("aac", "hollow block", "solid block", "half block", "block")) return PROD("aac-block");
-      return PROD("red-brick");
-    case "electrical":
-      if (has("led", "bulb", "tube", "panel", "downlight", "flood", "strip", "lamp")) return PROD("light");
-      if (has("mcb", "rccb", "rcbo", " db ", "db ", "isolator", "changeover", "distribution", "bus bar", "earth bar", "gland", "spn", "tpn")) return PROD("mcb");
-      if (has("conduit", "metal box", "fan box", "junction", "bend", "coupler", "clamp", "saddle", "gang")) return PROD("conduit");
-      if (has("earth")) return PROD("earthing");
-      if (has("switch", "socket", "plate", "regulator", "usb", "tv socket", "bell push", "data point", "modular")) {
-        if (has("legrand", "myrius")) return imgLegrandSwitch;
-        if (has("anchor", "roma")) return imgAnchorSwitch;
-        return PROD("switch");
-      }
-      if (has("havells")) return imgHavellsWire;
-      if (has("polycab")) return imgPolycabWire;
-      if (has("finolex")) return imgFinolexWire;
-      return PROD("wire");
-    case "plumbing":
-      if (has("ewc", "toilet", "commode", "orissa")) {
-        if (has("hindware")) return imgHindwareEwc;
-        return PROD("toilet");
-      }
-      if (has("mixer", "cock", "faucet", "diverter", "shower", "health faucet")) {
-        if (has("jaquar")) return imgJaquarFaucet;
-        return PROD("cp-fitting");
-      }
-      if (has("counter top basin", "wash basin", "pedestal", "basin")) return PROD("basin");
-      if (has("tank")) return PROD("tank");
-      if (has("pump")) return PROD("pump");
-      if (has("valve", "trap")) return PROD("valve");
-      if (has("elbow", "tee", "mta", "fta", "coupler", "fitting")) return PROD("pipe-fittings");
-      if (has("solvent", "teflon", "tape", "seal")) return PROD("adhesive");
-      if (has("pipe", "cpvc", "upvc", "pvc", "swr", "cutter")) {
-        if (has("astral")) return imgAstralPipe;
-        if (has("ashirvad")) return imgAshirvadPipe;
-        if (has("supreme")) return imgSupremePipe;
-        return PROD("pipe");
-      }
-      if (has("astral")) return imgAstralPipe;
-      if (has("ashirvad")) return imgAshirvadPipe;
-      if (has("supreme")) return imgSupremePipe;
-      return PROD("pipe");
-    case "paint":
-      if (has("white cement")) return PROD("white-cement");
-      if (has("primer", "undercoat", "sealer")) return PROD("primer");
-      if (has("putty")) {
-        if (has("birla", "wallcare")) return imgBirlawhitePutty;
-        return PROD("putty");
-      }
-      if (has("gypsum", "plaster", "levelplast")) return PROD("pop");
-      if (has("damp", "waterproof", "raincoat", "newcoat", "dampguard", "krystalline", "crystalline", "fastflex", "pidicrete")) {
-        if (has("fixit", "dr. fixit", "dr fixit")) return imgDrfixitBucket;
-        return PROD("waterproofing");
-      }
-      if (has("roller", "brush", "tray", "masking tape", "sand paper", "blade", "scraper")) return PROD("paint-roller");
-      if (has("melamine", "pu ", "polish", "varnish", "duco", "wood finish", "wood coat", "lacquer")) return PROD("wood-finish");
-      if (has("gloss", "enamel", "satin", "hi-gloss", "high gloss")) return PROD("paint-gloss");
-      if (has("distemper", "utsav", "tractor acrylic")) return PROD("distemper");
-      if (has("texture", "textured", "royale play", "stucco", "deco")) return PROD("texture-paint");
-      if (has("asian", "royale", "apcolite", "apex", "tractor", "ace ", "premium emulsion", "ultima")) return imgAsianpaintsBucket;
-      if (has("berger", "weathercoat", "silk", "easy clean", "rangoli", "bison")) return imgBergerBucket;
-      if (has("nerolac", "impressions", "beauty", "excel")) return imgNerolacBucket;
-      if (has("dulux", "velvet touch", "weathershield", "promise")) return imgDuluxBucket;
-      if (has("indigo", "lamituff")) return imgIndigoBucket;
-      return PROD("paint-bucket");
-    case "tiles":
-      if (has("fevicol")) return imgFevicolDrum;
-      if (has("waterproof")) return PROD("waterproofing");
-      if (has("spacer", "trowel", "float", "leveling", "clip", "wedge", "hole saw", "tile cutter", "manual tile")) return PROD("tile-tools");
-      if (has("cleaner", "sealer", "protector", "tile polish", "stain remover")) return PROD("tile-cleaner");
-      if (has("adhesive", "adh", "thin-set", "tilefix", "block grip", "tile fix", "crete", "grip")) {
-        if (has("roff")) return imgRoffAdhesive;
-        return PROD("tile-adhesive");
-      }
-      if (has("grout")) {
-        if (has("roff")) return imgRoffAdhesive;
-        return PROD("tile-adhesive");
-      }
-      if (has("nitco")) {
-        if (has("italian", "marble")) return imgNitcoItalian;
-        if (has("terrazzo"))          return imgNitcoTerrazzo;
-        if (has("step", "riser"))     return imgNitcoStep;
-        return imgNitcoVitrified;
-      }
-      if (has("orient")) {
-        if (has("mosaic"))            return imgOrientMosaic;
-        if (has("wall tile"))         return imgOrientWall;
-        if (has("parking"))           return PROD("floor-tile");
-        if (has("pgvt"))              return imgOrientPgvt;
-        return imgOrientGvt;
-      }
-      if (has("kajaria")) {
-        if (has("wall tile"))         return imgKajariaWall;
-        if (has("vitrified"))         return imgKajariaVitrified;
-        if (has("pgvt"))              return imgKajariaPgvt;
-        if (has("gvt"))               return imgKajariaGvt;
-        return imgKajariaTile;
-      }
-      if (has("marble")) return PROD("marble");
-      if (has("somany")) return imgSomanyTile;
-      return PROD("floor-tile");
-    case "marble-stone":
-      // Granite
-      if (has("black galaxy"))               return imgBlackGalaxy;
-      if (has("tan brown"))                  return imgTanBrown;
-      if (has("steel grey", "steel gray"))   return imgSteelGrey;
-      if (has("kashmir white"))              return imgKashmirWhite;
-      // Marble
-      if (has("albeta"))                     return imgMakranaAlbeta;
-      if (has("kumari"))                     return imgMakranaKumari;
-      if (has("makrana"))                    return imgMakranaWhite;
-      if (has("statuario"))                  return imgStatuario;
-      if (has("carrara"))                    return imgCarrara;
-      if (has("botticino"))                  return imgBotticino;
-      if (has("morwad", "rajnagar"))         return imgMorwadWhite;
-      if (has("onyx"))                       return imgOnyx;
-      // Kota & Sandstone
-      if (has("dholpur"))                    return imgDholpurBeige;
-      if (has("mint"))                       return imgMintSandstone;
-      if (has("kota")) {
-        if (has("brown"))                    return imgKotaBrown;
-        return imgKotaBlue;
-      }
-      if (has("sandstone"))                  return imgDholpurBeige;
-      if (has("granite"))                    return imgSteelGrey;
-      return imgMakranaWhite;
-    case "finishing":
-      if (has("white cement")) return PROD("white-cement");
-      if (has("primer")) return PROD("primer");
-      if (has("levelplast")) return imgBirlaLevelplast;
-      if (has("putty")) {
-        if (has("jk")) return imgJkPutty;
-        if (has("trucare", "acrylic")) return imgTrucarePutty;
-        if (has("birla", "wallcare")) return imgBirlaWallPutty;
-        return PROD("putty");
-      }
-      if (has("door")) return PROD("door");
-      if (has("window")) return PROD("window");
-      if (has("waterproof")) return PROD("waterproofing");
-      if (has("pop", "plaster", "gypsum", "cornice", "medallion")) return PROD("pop");
-      if (has("fevicol")) return imgFevicolDrum;
-      if (has("m-seal", "mseal", "m seal", "araldite", "epoxy")) return imgMsealEpoxy;
-      if (has("crack", "sealant", "adhesive")) return PROD("adhesive");
-      return PROD("putty");
-    case "adhesives":
-      if (has("fevikwik", "fevi kwik", "instant", "super glue", "speedx", "speed x")) return imgInstantGlue;
-      if (has("m-seal", "mseal", "m seal", "araldite", "epoxy")) return imgMsealEpoxy;
-      if (has("roff", "tilefix", "tile adhesive")) return imgRoffAdhesive;
-      if (has("fevicol")) return imgFevicolDrum;
-      return imgFevicolDrum;
-    case "hardware":
-      if (has("hinge")) {
-        if (has("hettich")) return imgHettichHinge;
-        if (has("stanley")) return imgStanleyHinge;
-        if (has("ebco")) return imgEbcoFitting;
-        return PROD("door-hardware");
-      }
-      if (has("channel", "drawer", "tandem", "slide", "telescopic")) {
-        if (has("hettich")) return imgHettichHinge;
-        if (has("ebco")) return imgEbcoFitting;
-        return PROD("drawer-channel");
-      }
-      if (has("basket", "carousel", "pull-out", "pull out", "pantry", "shoe rack", "trouser", "tie", "belt", "wardrobe lift", "rod", "bracket", "mirror")) {
-        if (has("ebco")) return imgEbcoFitting;
-        return PROD("kitchen-basket");
-      }
-      if (has("handle", "lever", "aldrop", "tower bolt", "closer", "door stopper", "floor spring", "patch fitting")) {
-        if (has("dorset")) return imgDorsetHandle;
-        if (has("stanley")) return imgStanleyHinge;
-        if (has("hettich")) return imgHettichHinge;
-        return PROD("door-hardware");
-      }
-      if (has("lock", "deadbolt", "latch", "padlock", "cylinder", "mortise", "rim ", "nav-tal", "night latch")) {
-        if (has("godrej")) return imgGodrejLock;
-        if (has("dorset")) return imgDorsetHandle;
-        return PROD("door-lock");
-      }
-      if (has("nail", "screw")) return PROD("nails");
-      if (has("hettich")) return imgHettichHinge;
-      if (has("ebco")) return imgEbcoFitting;
-      if (has("dorset")) return imgDorsetHandle;
-      if (has("stanley")) return imgStanleyHinge;
-      if (has("godrej")) return imgGodrejLock;
-      return PROD("door-hardware");
-    case "safety":
-      if (has("harness")) return PROD("safety-harness");
-      if (has("vest")) return PROD("safety-vest");
-      if (has("net")) return PROD("safety-net");
-      if (has("mask", "respirator")) return PROD("mask");
-      if (has("goggle", "glass", "ear plug", "earplug")) return PROD("safety-goggles");
-      if (has("glove")) return PROD("gloves");
-      if (has("shoe", "boot", "gumboot")) return PROD("safety-shoes");
-      if (has("helmet", "hard hat") && has("karam")) return imgKaramHelmet;
-      if (has("karam")) return imgKaramHelmet;
-      return PROD("helmet");
-    case "tools":
-      if (has("grinder", "cutter")) {
-        if (has("dewalt")) return imgDewaltGrinder;
-        return PROD("grinder");
-      }
-      if (has("jigsaw", "hacksaw", "saw", "planer")) return PROD("saw");
-      if (has("tape")) {
-        if (has("stanley")) return imgStanleyTape;
-        return PROD("measuring-tape");
-      }
-      if (has("bit")) return PROD("drill-bits");
-      if (has("hammer", "screwdriver", "plier", "spanner", "wrench", "level")) return PROD("hand-tools");
-      if (has("bosch")) return imgBoschDrill;
-      if (has("makita")) return imgMakitaDrill;
-      return PROD("drill");
-    case "shuttering":
-      if (has("oil", "reebol", "separol")) return PROD("paint-bucket");
-      if (has("scaffold", "prop", "frame", "cup lock", "clamp", "plate", "channel")) return PROD("scaffolding");
-      if (has("centuryply", "century ply")) return imgCenturyplyPly;
-      if (has("greenply", "green ply")) return imgGreenplyPly;
-      return PROD("plywood");
-    case "wood":
-      if (has("fevicol")) return imgFevicolDrum;
-      if (has("laminate", "sunmica", "merino", "edge band", "edge-band")) return imgLaminateSheet;
-      if (has("door")) return PROD("door");
-      if (has("polish", "melamine", "lacquer", "duco", "varnish", "pu coat")) return PROD("wood-finish");
-      if (has("mdf", "hdf", "particle")) {
-        if (has("action tesa", "actiontesa", "action-tesa")) return imgActiontesaMdf;
-        return PROD("mdf");
-      }
-      if (has("gyproc")) return imgGyprocBoard;
-      if (has("gypsum", "pop", "cornice", "medallion")) return PROD("pop");
-      if (has("jointing", "compound")) return PROD("putty");
-      if (has("greenply", "green ply")) return imgGreenplyPly;
-      if (has("centuryply", "century ply", "century", "sainik")) return imgCenturyplyPly;
-      return PROD("plywood");
-    default:
-      return PROD("cement-bag");
-  }
+  return centralResolveProductImage(category, name);
 }
 const HOMERUN_CATEGORIES: HomeRunCat[] = [
-  { slug: "cement",         label: "Cement",                         image: CAT_LOCAL("cement"),          dbCategory: "cement"     },
-  { slug: "steel-bar",      label: "Steel Bar",                      image: CAT_LOCAL("steel-bar"),       dbCategory: "steel"      },
-  { slug: "eeta",           label: "Eeta (Bricks)",                  image: CAT_LOCAL("eeta"),            dbCategory: "bricks"     },
-  { slug: "morang",         label: "Morang (Aggregate)",             image: CAT_LOCAL("morang"),          dbCategory: "aggregate"  },
-  { slug: "tiling",         label: "Tiling",                         image: CAT_LOCAL("tiling"),          dbCategory: "tiles"      },
-  { slug: "marble-stone",   label: "Marble & Stone",                 image: imgMakranaWhite,              dbCategory: "marble-stone" },
-  { slug: "painting",       label: "Painting",                       image: CAT_LOCAL("painting"),        dbCategory: "paint"      },
-  { slug: "waterproofing",  label: "Water Proofing",                 image: CAT_LOCAL("waterproofing"),   dbCategory: "finishing"  },
-  { slug: "plywood",        label: "Plywood, MDF & HDHMR",           image: CAT_LOCAL("plywood"),         dbCategory: "wood"       },
-  { slug: "fevicol",        label: "Fevicol",                        image: CAT_LOCAL("fevicol"),         dbCategory: "adhesives"  },
-  { slug: "wires",          label: "Wires",                          image: CAT_LOCAL("wires"),           dbCategory: "electrical" },
-  { slug: "switches",       label: "Switches & Sockets",             image: CAT_LOCAL("switches"),        dbCategory: "electrical" },
-  { slug: "hinges",         label: "Hinges, Channels & Handles",     image: CAT_LOCAL("hinges"),          dbCategory: "hardware"   },
-  { slug: "kitchen-systems",label: "Kitchen Systems & Accessories",  image: CAT_LOCAL("kitchen-systems"), dbCategory: "hardware"   },
-  { slug: "wardrobe",       label: "Wardrobe & Bed Fittings",        image: CAT_LOCAL("wardrobe"),        dbCategory: "hardware"   },
-  { slug: "door-locks",     label: "Door Locks & Hardware",          image: CAT_LOCAL("door-locks"),      dbCategory: "hardware"   },
-  { slug: "conduits",       label: "Conduits & GI Boxes",            image: CAT_LOCAL("conduits"),        dbCategory: "electrical" },
-  { slug: "sanitary",       label: "Sanitary & Bath Fittings",       image: CAT_LOCAL("sanitary"),        dbCategory: "plumbing"   },
-  { slug: "lighting",       label: "Lighting",                       image: CAT_LOCAL("lighting"),        dbCategory: "electrical" },
-  { slug: "cpvc",           label: "CPVC Pipes & Overhead Tanks",    image: CAT_LOCAL("cpvc"),            dbCategory: "plumbing"   },
-  { slug: "kitchen",        label: "Kitchen & Appliances",           image: CAT_LOCAL("kitchen"),         dbCategory: "hardware"   },
-  { slug: "home-essentials",label: "Home Essentials",                image: CAT_LOCAL("home-essentials"), dbCategory: "hardware"   },
-  { slug: "general",        label: "Tools",                          image: CAT_LOCAL("general"),         dbCategory: "tools"      },
+  /* Row 1 — matches reference screenshot */
+  { slug: "cement",          label: "Cement",                         image: CAT_LOCAL("cement"),          dbCategory: "cement",       badge: "Bulk Prices" },
+  { slug: "tiling",          label: "Tiling",                         image: CAT_LOCAL("tiling"),          dbCategory: "tiles",        badge: "Bulk Prices" },
+  { slug: "painting",        label: "Painting",                       image: CAT_LOCAL("painting"),        dbCategory: "paint"      },
+  { slug: "waterproofing",   label: "Water Proofing",                 image: CAT_LOCAL("waterproofing"),   dbCategory: "finishing"  },
+
+  /* Row 2 */
+  { slug: "plywood",         label: "Plywood, MDF & HDHMR",           image: CAT_LOCAL("plywood"),         dbCategory: "wood"       },
+  { slug: "fevicol",         label: "Fevicol",                        image: CAT_LOCAL("fevicol"),         dbCategory: "adhesives"  },
+  { slug: "wires",           label: "Wires, MCB & Distribution Boards", image: CAT_LOCAL("wires"),         dbCategory: "electrical" },
+  { slug: "kitchen",         label: "Kitchen Sinks & Faucets",        image: CAT_LOCAL("kitchen"),         dbCategory: "hardware"   },
+
+  /* Row 3 */
+  { slug: "sanitary",        label: "Sanitary & Bath Fittings",       image: CAT_LOCAL("sanitary"),        dbCategory: "plumbing"   },
+  { slug: "hinges",          label: "Hinges, Channels & Handles",     image: CAT_LOCAL("hinges"),          dbCategory: "hardware"   },
+  { slug: "kitchen-systems", label: "Kitchen Systems & Accessories",  image: CAT_LOCAL("kitchen-systems"), dbCategory: "hardware"   },
+  { slug: "wardrobe",        label: "Wardrobe & Bed Fittings",        image: CAT_LOCAL("wardrobe"),        dbCategory: "hardware"   },
+
+  /* Row 4 */
+  { slug: "door-locks",      label: "Door Locks & Hardware",          image: CAT_LOCAL("door-locks"),      dbCategory: "hardware"   },
+  { slug: "conduits",        label: "Conduits & GI Boxes",            image: CAT_LOCAL("conduits"),        dbCategory: "electrical" },
+  { slug: "lighting",        label: "Lighting",                       image: CAT_LOCAL("lighting"),        dbCategory: "electrical" },
+  { slug: "cpvc",            label: "CPVC Pipes & Overhead Tanks",    image: CAT_LOCAL("cpvc"),            dbCategory: "plumbing"   },
+
+  /* Row 5 */
+  { slug: "switches",        label: "Switches & Sockets",             image: CAT_LOCAL("switches"),        dbCategory: "electrical" },
+  { slug: "steel-bar",       label: "Steel Bar (Sariya)",             image: CAT_LOCAL("steel-bar"),       dbCategory: "steel"      },
+  { slug: "eeta",            label: "Eeta (Bricks)",                  image: CAT_LOCAL("eeta"),            dbCategory: "bricks"     },
+  { slug: "morang",          label: "Morang (Aggregate)",             image: CAT_LOCAL("morang"),          dbCategory: "aggregate"  },
+
+  /* Row 6 */
+  { slug: "marble-stone",    label: "Marble & Stone",                 image: CAT_LOCAL("marble-stone"),    dbCategory: "marble-stone" },
+  { slug: "home-essentials", label: "Home Essentials",                image: CAT_LOCAL("home-essentials"), dbCategory: "hardware"   },
+  { slug: "general",         label: "Tools & Equipment",              image: CAT_LOCAL("general"),         dbCategory: "tools"      },
 ];
 
 /* ── Home category chips (horizontal filter bar) ──────────────────── */
@@ -573,7 +303,7 @@ const FREQUENT_BUNDLES = [
 
 const FEATURED_CARDS = [
   { db: "cement",     title: "Cement Specials",   sub: "Up to 18% off OPC/PPC", image: CAT_PHOTO("cement"), tint: "#f59e0b" },
-  { db: "tools",      title: "Power Tool Deals",  sub: "Drills · Grinders · Saws", image: CAT_PHOTO("tools"), tint: "#1b4366" },
+  { db: "tools",      title: "Power Tool Deals",  sub: "Drills · Grinders · Saws", image: CAT_PHOTO("tools"), tint: "#1848a0" },
   { db: "electrical", title: "Electrical Fittings", sub: "Switches · Wires · MCBs", image: CAT_PHOTO("electrical"), tint: "#2a7a3b" },
 ];
 
@@ -741,6 +471,14 @@ function AROverlay({
 /* ── Main Page ────────────────────────────────────────────────────── */
 export function Home() {
   const [, navigate]                    = useLocation();
+  const { setCartOpen, setMenuOpen }    = useUI();
+  const { balance: walletBalance }      = useWallet();
+  const { location: deliveryLoc, openLocationSheet } = useDeliveryLocation();
+  const { role }                        = useUser();
+  const { isAuthenticated }             = useAuth();
+  const loggedIn                        = !!role || isAuthenticated;
+  const pincode                         = deliveryLoc?.pincode || "226010";
+
   const [stage, setStage]               = useState<GetMaterialsStage>("foundation");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPanelLabel, setSelectedPanelLabel] = useState<string | null>(null);
@@ -748,6 +486,7 @@ export function Home() {
   const [showAR, setShowAR]             = useState(false);
   const [showVoiceModal, setShowVoiceModal] = useState(false);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+  const [heroMode, setHeroMode]         = useState<"homerun" | "winter_sale">("homerun");
 
   const { data: materials, isLoading } = useGetMaterials({ stage: stage === "all" ? undefined : stage });
   const qc = useQueryClient();
@@ -823,7 +562,7 @@ export function Home() {
             name: opts.name,
             price,
             unit: opts.unit || "unit",
-            vendor: opts.vendor || "CONON Marketplace",
+            vendor: opts.vendor || "CONON-NOW Marketplace",
             category: opts.category,
           },
         },
@@ -851,7 +590,7 @@ export function Home() {
             name: p.title,
             price: p.price,
             unit: p.unit || "unit",
-            vendor: p.vendor || "CONON Marketplace",
+            vendor: p.vendor || "CONON-NOW Marketplace",
             category: p.materialTag,
           },
         },
@@ -990,86 +729,75 @@ export function Home() {
 
 
   return (
-    <Layout>
+    <Layout hideHeader={true}>
       <div className="relative min-h-full">
-
-        {/* ── Search Bar (sits in the neon-green band) ───────────── */}
-        <div
-          className="sticky top-0 z-20 px-5 pt-3 pb-3"
-          style={{ background: "linear-gradient(180deg, #8fd61f 0%, #d6f88f 70%, #ffffff 100%)" }}
-        >
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-[18px] h-[18px]" strokeWidth={2.4} />
-            <input
-              type="text"
-              placeholder="Search 'cement', 'bricks', 'tools'"
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-              className="w-full bg-white py-3.5 pl-11 pr-12 rounded-[18px] text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-lime-300 shadow-[0_4px_14px_-6px_rgba(27,67,102,0.35)] transition"
+        {/* ── Top Hero Header: HomeRun Style (Default) OR Blinkit Seamless Blue ── */}
+        {heroMode === "homerun" ? (
+          <>
+            <HomeRunHeader
+              searchTerm={searchTerm}
+              onSearchChange={(val) => setSearchTerm(val)}
+              onVoiceClick={() => setShowVoiceModal(true)}
+              pincode={pincode}
+              onOpenLocationSheet={openLocationSheet}
+              walletBalance={walletBalance}
+              cartCount={cart?.totalItems ?? 0}
+              loggedIn={loggedIn}
+              onOpenMenu={() => setMenuOpen(true)}
+              onOpenCart={() => setCartOpen(true)}
+              onSelectCategory={(cat) => setSelectedCategory(cat)}
             />
-            {searchTerm ? (
-              <button
-                onClick={() => setSearchTerm("")}
-                aria-label="Clear search"
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
-              >
-                <X className="w-[18px] h-[18px]" />
-              </button>
-            ) : (
-              <button
-                onClick={() => setShowVoiceModal(true)}
-                aria-label="Voice search"
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center active:scale-90 transition"
-                style={{ background: BRAND_DARK }}
-              >
-                <Mic className="w-[16px] h-[16px] text-amber-300" strokeWidth={2.5} />
-              </button>
-            )}
-          </div>
+            <HomeHeroBanner onSelectCategory={(cat) => setSelectedCategory(cat)} />
+          </>
+        ) : (
+          <SeamlessHeroHeader
+            searchTerm={searchTerm}
+            onSearchChange={(val) => setSearchTerm(val)}
+            onVoiceClick={() => setShowVoiceModal(true)}
+            selectedCategory={selectedCategory}
+            onSelectCategory={(cat) => {
+              setSelectedCategory(cat);
+              if (!cat) setSelectedPanelLabel(null);
+            }}
+            pincode={pincode}
+            onOpenLocationSheet={openLocationSheet}
+            walletBalance={walletBalance}
+            cartCount={cart?.totalItems ?? 0}
+            loggedIn={loggedIn}
+            onOpenMenu={() => setMenuOpen(true)}
+            onOpenCart={() => setCartOpen(true)}
+          />
+        )}
 
-          {/* ── Category chips (horizontal scroll) ──────────────── */}
-          {!isSearching && (
-            <div className="flex gap-2.5 mt-3.5 overflow-x-auto scrollbar-hide -mx-5 px-5 pb-1">
-              {HOME_CHIPS.map(chip => {
-                const active = chip.db === null ? selectedCategory === null : selectedCategory === chip.db;
-                const Icon = chip.icon;
-                return (
-                  <button
-                    key={chip.label}
-                    onClick={() => {
-                      if (chip.db === null) { setSelectedCategory(null); setSelectedPanelLabel(null); }
-                      else { setSelectedCategory(chip.db); setSelectedPanelLabel(chip.label); }
-                    }}
-                    className="flex flex-col items-center gap-1 shrink-0 active:scale-90 transition"
-                  >
-                    <span
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center border transition-all"
-                      style={
-                        active
-                          ? { background: AMBER, borderColor: AMBER, boxShadow: `0 6px 14px -4px ${AMBER}aa` }
-                          : { background: "#ffffff", borderColor: "#e2e8f0" }
-                      }
-                    >
-                      <Icon
-                        className="w-[22px] h-[22px]"
-                        style={{ color: active ? "#fff" : BRAND_DARK }}
-                        strokeWidth={2.2}
-                      />
-                    </span>
-                    <span
-                      className="text-[10px] font-black"
-                      style={{ color: active ? "#b45309" : BRAND_DARK }}
-                    >
-                      {chip.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
+        {/* ── Visual Benchmark Switcher: HomeRun 60-Min vs Blinkit Winter Sale ── */}
+        <div className="flex items-center justify-center gap-2 py-2 px-3 bg-slate-50 border-y border-slate-200/80">
+          <button
+            type="button"
+            onClick={() => setHeroMode("homerun")}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black transition active:scale-95 ${
+              heroMode === "homerun"
+                ? "bg-[#1848a0] text-white shadow-xs"
+                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+            }`}
+          >
+            <span>🚚</span>
+            <span>60-Min Construction Hero (HomeRun)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setHeroMode("winter_sale")}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black transition active:scale-95 ${
+              heroMode === "winter_sale"
+                ? "bg-[#094596] text-white shadow-xs"
+                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+            }`}
+          >
+            <span>❄️</span>
+            <span>Winter Build Sale (Blinkit)</span>
+          </button>
         </div>
 
-        {/* ── Search Results (override everything when searching) ─ */}
+        {/* ── Search Results (override feed when user types in search bar) ─ */}
         <AnimatePresence>
           {isSearching && (
             <motion.div
@@ -1077,9 +805,17 @@ export function Home() {
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               className="px-4 pt-4 pb-28"
             >
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 px-1">
-                {listMaterials?.length ?? 0} results for "{searchTerm}"
-              </p>
+              <div className="flex items-center justify-between mb-3 px-1">
+                <p className="text-[11px] font-black text-slate-500 uppercase tracking-wider">
+                  {listMaterials?.length ?? 0} results for "{searchTerm}"
+                </p>
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="text-xs text-blue-600 font-bold hover:underline"
+                >
+                  Clear
+                </button>
+              </div>
               <MaterialList materials={listMaterials} isLoading={isLoading} addToCart={addToCart} />
             </motion.div>
           )}
@@ -1088,69 +824,102 @@ export function Home() {
         {/* ── Normal (non-search) UI ─────────────────────────────── */}
         {!isSearching && (
           <>
+            {/* ── Clean Top Department Navigation Bar (Civil & Interiors, Electrical, Tools, etc.) ── */}
+            <HomeDepartmentNav
+              activeDepartmentId={selectedCategory ? undefined : "home"}
+              onSelectDepartment={(dept) => {
+                if (dept.id === "home") {
+                  setSelectedCategory(null);
+                  setSelectedPanelLabel(null);
+                }
+              }}
+              onSelectCategory={(cat: HomeCategory) => {
+                setSelectedCategory(cat.dbCategory);
+                setSelectedPanelLabel(cat.title);
+              }}
+            />
+
             {/* Category Grid or Material List */}
             <AnimatePresence mode="wait">
               {!selectedCategory ? (
                 <motion.div
                   key="cat-grid"
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                  className="pt-3 pb-28"
+                  className="pt-0 pb-28"
                 >
-                  {/* ── Explore Conon — quick-access feature shortcuts ──── */}
-                  <FeatureShortcuts />
+                  {/* ── Signature 6-Column x 3-Row Centered Category Directory Grid (HomeRun Spec) ── */}
+                  <HomeCategoryGrid
+                    onSelectCategory={(cat: HomeCategory) => {
+                      if (cat.slug === "cement-civil-works") {
+                        setSelectedCategory("cement");
+                      } else if (cat.slug === "plywood-boards") {
+                        setSelectedCategory("plywood-boards");
+                      } else if (cat.slug === "fevicol-adhesives-sealants") {
+                        setSelectedCategory("fevicol-adhesives-sealants");
+                      } else if (cat.slug === "furniture-wardrobe-bed-hardware") {
+                        setSelectedCategory("furniture-wardrobe-bed-hardware");
+                      } else if (cat.slug === "door-hardware-locks") {
+                        setSelectedCategory("door-hardware-locks");
+                      } else if (cat.slug === "wires-mcb-electrical") {
+                        setSelectedCategory("wires-mcb-electrical");
+                      } else if (cat.slug === "kitchen-sinks-faucets") {
+                        setSelectedCategory("kitchen-sinks-faucets");
+                      } else if (cat.slug === "painting") {
+                        setSelectedCategory("painting");
+                      } else {
+                        setSelectedCategory(cat.dbCategory);
+                      }
+                      setSelectedPanelLabel(cat.title);
+                    }}
+                  />
 
-                  {/* ── Shop By Category — first section in the feed ─────── */}
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3 mt-1 italic px-5">
-                    Shop By Category
-                  </p>
-                  <div className="px-4">
-
-                  <motion.div
-                      className="grid grid-cols-4 gap-x-3 gap-y-6"
-                      initial="hidden" animate="show"
-                      variants={{ show: { transition: { staggerChildren: 0.04 } } }}
-                    >
-                      {HOMERUN_CATEGORIES.map(item => (
-                        <motion.button
-                          key={item.slug}
-                          variants={{ hidden: { opacity: 0, scale: 0.9 }, show: { opacity: 1, scale: 1 } }}
-                          whileTap={{ scale: 0.92 }}
+                  {/* ── Quick Category Filter Chips ── */}
+                  <div className="flex gap-2 mt-4 overflow-x-auto scrollbar-hide px-4 pb-1">
+                    {HOME_CHIPS.map(chip => {
+                      const active = chip.db === null ? selectedCategory === null : selectedCategory === chip.db;
+                      const Icon = chip.icon;
+                      return (
+                        <button
+                          key={chip.label}
                           onClick={() => {
-                            setSelectedCategory(item.dbCategory);
-                            setSelectedPanelLabel(item.label);
+                            if (chip.db === null) { setSelectedCategory(null); setSelectedPanelLabel(null); }
+                            else { setSelectedCategory(chip.db); setSelectedPanelLabel(chip.label); }
                           }}
-                          className="flex flex-col items-center gap-2 active:scale-90 transition-transform"
+                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition active:scale-95 ${
+                            active
+                              ? "bg-[#1848a0] text-white shadow-xs"
+                              : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                          }`}
                         >
-                          <div
-                            className="w-full aspect-square rounded-2xl overflow-hidden relative flex items-center justify-center"
-                            style={{ background: "#eff8fb", border: "1px solid #e0eef3" }}
-                          >
-                            <img
-                              src={item.image}
-                              alt={item.label}
-                              loading="lazy"
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                const t = e.currentTarget;
-                                t.style.display = "none";
-                                const fb = t.nextElementSibling as HTMLElement;
-                                if (fb) fb.style.display = "flex";
-                              }}
-                            />
-                            <span
-                              className="text-3xl leading-none absolute inset-0 items-center justify-center"
-                              style={{ display: "none" }}
-                            >
-                              📦
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-bold text-center text-slate-700 leading-tight px-0.5">
-                            {item.label}
-                          </span>
-                        </motion.button>
-                      ))}
-                    </motion.div>
+                          <Icon className="w-3.5 h-3.5" strokeWidth={2.4} />
+                          <span>{chip.label}</span>
+                        </button>
+                      );
+                    })}
                   </div>
+
+                  {/* ── Category-Wise Product Showcase Feed (Blinkit 3-Column High-Density Grid) ── */}
+                  <div className="mt-5">
+                    <CategoryShowcaseFeed
+                      getProductsForCategory={getShowcaseProducts}
+                      getCartQty={getCartQty}
+                      onAddToCart={addFeedProduct}
+                      onSetCartQty={setProductQty}
+                      onSelectCategory={(cat) => {
+                        setSelectedCategory(cat);
+                        setSelectedPanelLabel(getCatLabel(cat));
+                      }}
+                      onOpenDetail={setDetailProduct}
+                    />
+                  </div>
+
+                  {/* ── Festival / Mega Discount Banner ──── */}
+                  <div className="mt-8">
+                    <FestivalHeroBanner onSelectCategory={(cat) => setSelectedCategory(cat)} />
+                  </div>
+
+                  {/* ── Explore CONON-NOW — quick-access feature shortcuts ──── */}
+                  <FeatureShortcuts />
 
                   {/* Heavy machines on rent — fleet slider, directly below categories */}
                   <EquipmentRentalSlider />
@@ -1221,27 +990,7 @@ export function Home() {
                     </div>
                   </div>
 
-                  {/* Top picks — premium product feed */}
-                  <div className="mt-6">
-                    <div className="flex items-center justify-between px-4 mb-3">
-                      <h3 className="font-display font-black text-[15px]" style={{ color: BRAND_DARK }}>
-                        Top picks for your build
-                      </h3>
-                    </div>
-                    <div className="px-4">
-                      <ProductFeed
-                        products={topPicksProducts}
-                        onAddToCart={addFeedProduct}
-                        onSetQty={setProductQty}
-                        onSeeOptions={setDetailProduct}
-                        onVariants={setDetailProduct}
-                        onArView={() => setShowAR(true)}
-                        onOpenDetail={setDetailProduct}
-                        getCartQty={(p) => getCartQty(p.materialTag, p.title)}
-                        isAdding={cartMutationPending}
-                      />
-                    </div>
-                  </div>
+
 
                   {/* Frequently bought */}
                   <div className="mt-6">
@@ -1340,32 +1089,9 @@ export function Home() {
                     </button>
                   </div>
 
-                  {/* Top picks from your builder category — bottom of feed */}
-                  <div className="mt-8 mb-2">
-                    <div className="flex items-center justify-between px-4 mb-3">
-                      <div className="flex items-center gap-2">
-                        <span className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ background: BRAND_DARK }}>
-                          <Hammer className="w-3.5 h-3.5 text-white" />
-                        </span>
-                        <h3 className="font-display font-black text-[15px]" style={{ color: BRAND_DARK }}>
-                          Top picks from your builder category
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="px-4">
-                      <ProductFeed
-                        products={builderPicksProducts}
-                        onAddToCart={addFeedProduct}
-                        onSetQty={setProductQty}
-                        onSeeOptions={setDetailProduct}
-                        onVariants={setDetailProduct}
-                        onArView={() => setShowAR(true)}
-                        onOpenDetail={setDetailProduct}
-                        getCartQty={(p) => getCartQty(p.materialTag, p.title)}
-                        isAdding={cartMutationPending}
-                      />
-                    </div>
-                  </div>
+
+
+                  <div className="pb-28" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -1397,6 +1123,102 @@ export function Home() {
                   </div>
 
                   {(() => {
+                    if (selectedCategory === "cement") {
+                      return (
+                        <CementCollectionStorefront
+                          onBackToDirectory={() => {
+                            setSelectedCategory(null);
+                            setSelectedPanelLabel(null);
+                          }}
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "plywood-boards" ||
+                      selectedCategory === "wood" ||
+                      selectedCategory?.toLowerCase().includes("plywood")
+                    ) {
+                      return (
+                        <PlywoodCollectionStorefront
+                          onBackToDirectory={() => {
+                            setSelectedCategory(null);
+                            setSelectedPanelLabel(null);
+                          }}
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "fevicol-adhesives-sealants" ||
+                      selectedCategory === "adhesives" ||
+                      selectedCategory?.toLowerCase().includes("fevicol")
+                    ) {
+                      return (
+                        <FevicolCollectionStorefront
+                          onBackToDirectory={() => {
+                            setSelectedCategory(null);
+                            setSelectedPanelLabel(null);
+                          }}
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "furniture-wardrobe-bed-hardware" ||
+                      selectedCategory === "hinges" ||
+                      selectedCategory?.toLowerCase().includes("hinge")
+                    ) {
+                      return (
+                        <HingesCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "door-hardware-locks" ||
+                      selectedCategory === "locks" ||
+                      selectedCategory?.toLowerCase().includes("lock")
+                    ) {
+                      return (
+                        <LocksCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "wires-mcb-electrical" ||
+                      selectedCategory === "electrical" ||
+                      selectedCategory?.toLowerCase().includes("wire")
+                    ) {
+                      return (
+                        <ElectricalCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "kitchen-sinks-faucets" ||
+                      selectedCategory === "sinks" ||
+                      selectedCategory?.toLowerCase().includes("sink")
+                    ) {
+                      return (
+                        <KitchenCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "painting" ||
+                      selectedCategory === "interior-emulsions" ||
+                      selectedCategory?.toLowerCase().includes("paint")
+                    ) {
+                      return (
+                        <PaintingCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
                     const sfProducts = getCategoryProducts(selectedCategory);
                     if (sfProducts.length === 0) {
                       return <MaterialList materials={listMaterials} isLoading={isLoading} addToCart={addToCart} />;
@@ -1562,8 +1384,8 @@ const CEMENT_TYPES = [
     name:     "OPC — Ordinary Portland Cement",
     short:    "OPC",
     tag:      "Most Popular",
-    tagColor: "#1b4366",
-    image:    PROD("cement-bag"),
+    tagColor: "#1848a0",
+    image:    utOpc53,
     grades:   ["Grade 33", "Grade 43", "Grade 53"],
     price:    "₹380–₹420",
     unit:     "per 50 kg bag",
@@ -1575,7 +1397,7 @@ const CEMENT_TYPES = [
     ],
     bestFor:  ["High-rise buildings", "Bridges", "Pavements", "General masonry"],
     keyFeat:  "High strength and fast setting time",
-    featColor:"#1b4366",
+    featColor:"#1848a0",
   },
   {
     id:       "ppc",
@@ -1583,7 +1405,7 @@ const CEMENT_TYPES = [
     short:    "PPC",
     tag:      "Eco-Friendly",
     tagColor: "#15803d",
-    image:    PROD("white-cement"),
+    image:    utPpc,
     grades:   ["IS 1489 Grade"],
     price:    "₹350–₹390",
     unit:     "per 50 kg bag",
@@ -1603,7 +1425,7 @@ const CEMENT_TYPES = [
     short:    "RHC",
     tag:      "Time-Saver",
     tagColor: "#d97706",
-    image:    PROD("cement-bag"),
+    image:    imgAccRhc,
     grades:   ["IS 8041"],
     price:    "₹440–₹490",
     unit:     "per 50 kg bag",
@@ -1623,7 +1445,7 @@ const CEMENT_TYPES = [
     short:    "LHC",
     tag:      "Mass Concrete",
     tagColor: "#0891b2",
-    image:    PROD("cement-bag"),
+    image:    imgBirlaUttam,
     grades:   ["IS 12600"],
     price:    "₹410–₹460",
     unit:     "per 50 kg bag",
@@ -1643,7 +1465,7 @@ const CEMENT_TYPES = [
     short:    "SRC",
     tag:      "Coastal / Soil",
     tagColor: "#7c3aed",
-    image:    PROD("cement-bag"),
+    image:    imgDalmiaSrc,
     grades:   ["IS 12330"],
     price:    "₹420–₹470",
     unit:     "per 50 kg bag",
@@ -1844,7 +1666,7 @@ const STEEL_BRANDS = [
 ];
 
 const TYPE_BADGE: Record<string, string> = {
-  OPC: "#1b4366", PPC: "#15803d", RHC: "#d97706", SRC: "#7c3aed", LHC: "#0891b2",
+  OPC: "#1848a0", PPC: "#15803d", RHC: "#d97706", SRC: "#7c3aed", LHC: "#0891b2",
 };
 
 function BrandLogo({ brand, size = 48 }: { brand: typeof CEMENT_BRANDS[0]; size?: number }) {
@@ -1894,7 +1716,7 @@ function brandVariantToProduct(
       ? `${prod.type} grade — engineered for strength & durability`
       : "Premium grade — engineered for strength & durability",
     `Supplied in ${prod.pack}`,
-    "Delivered in 60 minutes by CONON",
+    "Delivered in 60 minutes by CONON-NOW",
   ];
   return {
     id: slug,
@@ -1916,7 +1738,7 @@ function brandVariantToProduct(
     description:
       `${prod.name} from ${brand.name}. ${prod.type ? prod.type + " grade. " : ""}` +
       `Packed as ${prod.pack} and quality-checked for reliable on-site performance. ` +
-      `Order on CONON for delivery in 60 minutes.`,
+      `Order on CONON-NOW for delivery in 60 minutes.`,
   };
 }
 
@@ -1953,7 +1775,7 @@ function steelTypeToProduct(t: (typeof STEEL_TYPES)[number]): Product {
     materialTag: "steel",
     title: t.name,
     brand: t.short,
-    vendor: "CONON Steel",
+    vendor: "CONON-NOW Steel",
     rating: 4.5,
     reviews: 128,
     price,
@@ -2049,7 +1871,7 @@ function CategoryStorefront({
   }, [category]);
 
   const vendorOptions = React.useMemo(
-    () => Array.from(new Set(products.map((p) => p.vendor || "CONON Marketplace"))),
+    () => Array.from(new Set(products.map((p) => p.vendor || "CONON-NOW Marketplace"))),
     [products],
   );
 
@@ -2061,7 +1883,7 @@ function CategoryStorefront({
       if (onlyDiscount && !(p.mrp > p.price)) return false;
       if (onlyAssured && !(p.tag || "").toLowerCase().includes("assured")) return false;
       if (minRating > 0 && p.rating < minRating) return false;
-      if (vendors.length > 0 && !vendors.includes(p.vendor || "CONON Marketplace")) return false;
+      if (vendors.length > 0 && !vendors.includes(p.vendor || "CONON-NOW Marketplace")) return false;
       if (range && !(p.price >= range.min && p.price <= range.max)) return false;
       return true;
     });
@@ -2100,7 +1922,7 @@ function CategoryStorefront({
               className="shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border text-[12px] font-bold active:scale-95 transition"
               style={
                 c.active
-                  ? { borderColor: BLINKIT_GREEN, background: "#eafaef", color: BLINKIT_GREEN }
+                  ? { borderColor: BLINKIT_GREEN, background: "#eff6ff", color: BLINKIT_GREEN }
                   : { borderColor: "#e2e8f0", background: "#fff", color: "#475569" }
               }
             >
@@ -2165,7 +1987,7 @@ function CategoryStorefront({
                       onClick={() => toggleVendor(v)}
                       className="px-3 py-1.5 rounded-full text-[12px] font-bold border transition active:scale-95"
                       style={on
-                        ? { borderColor: BLINKIT_GREEN, background: "#eafaef", color: BLINKIT_GREEN }
+                        ? { borderColor: BLINKIT_GREEN, background: "#eff6ff", color: BLINKIT_GREEN }
                         : { borderColor: "#e2e8f0", background: "#fff", color: "#475569" }}
                     >
                       {v}
@@ -2183,7 +2005,7 @@ function CategoryStorefront({
                     onClick={() => setOnlyDiscount((v) => !v)}
                     className="px-3 py-1.5 rounded-full text-[12px] font-bold border transition active:scale-95"
                     style={onlyDiscount
-                      ? { borderColor: BLINKIT_GREEN, background: "#eafaef", color: BLINKIT_GREEN }
+                      ? { borderColor: BLINKIT_GREEN, background: "#eff6ff", color: BLINKIT_GREEN }
                       : { borderColor: "#e2e8f0", background: "#fff", color: "#475569" }}
                   >
                     Discounted
@@ -2193,10 +2015,10 @@ function CategoryStorefront({
                     onClick={() => setOnlyAssured((v) => !v)}
                     className="px-3 py-1.5 rounded-full text-[12px] font-bold border transition active:scale-95"
                     style={onlyAssured
-                      ? { borderColor: BLINKIT_GREEN, background: "#eafaef", color: BLINKIT_GREEN }
+                      ? { borderColor: BLINKIT_GREEN, background: "#eff6ff", color: BLINKIT_GREEN }
                       : { borderColor: "#e2e8f0", background: "#fff", color: "#475569" }}
                   >
-                    CONON Assured
+                    CONON-NOW Assured
                   </button>
                 </div>
                 <div className="flex items-center gap-2">
@@ -2208,7 +2030,7 @@ function CategoryStorefront({
                       onClick={() => setMinRating(r)}
                       className="px-2.5 py-1 rounded-lg text-[12px] font-bold border transition active:scale-95"
                       style={minRating === r
-                        ? { borderColor: BLINKIT_GREEN, background: "#eafaef", color: BLINKIT_GREEN }
+                        ? { borderColor: BLINKIT_GREEN, background: "#eff6ff", color: BLINKIT_GREEN }
                         : { borderColor: "#e2e8f0", background: "#fff", color: "#475569" }}
                     >
                       {r === 0 ? "Any" : `${r}★+`}
@@ -2236,7 +2058,7 @@ function CategoryStorefront({
                   aria-pressed={isActive}
                   onClick={() => onSelectCategory(cat)}
                   className="relative w-full flex flex-col items-center gap-1 py-2.5 px-1 transition"
-                  style={{ background: isActive ? "#eafaef" : "transparent" }}
+                  style={{ background: isActive ? "#eff6ff" : "transparent" }}
                 >
                   {isActive && (
                     <span className="absolute left-0 top-1 bottom-1 w-1.5 rounded-r-full" style={{ background: BLINKIT_GREEN }} />
@@ -2244,7 +2066,7 @@ function CategoryStorefront({
                   <span
                     className="flex items-center justify-center w-11 h-11 rounded-2xl transition"
                     style={{
-                      background: isActive ? "#e7f6ea" : "#ffffff",
+                      background: isActive ? "#e0f2fe" : "#ffffff",
                       border: isActive ? `1.5px solid ${BLINKIT_GREEN}` : "1px solid #eef2f6",
                     }}
                   >
@@ -2310,7 +2132,7 @@ function CementCatalog({ onAddProduct, isAdding, getQty, onOpenDetail }: {
       {/* Header banner */}
       <div
         className="p-4 rounded-[24px]"
-        style={{ background: "linear-gradient(135deg, #1b2f5c 0%, #1b4366 100%)" }}
+        style={{ background: "linear-gradient(135deg, #1b2f5c 0%, #1848a0 100%)" }}
       >
         <p className="text-[8px] font-black text-amber-300 uppercase tracking-[0.2em] mb-1">Cement Guide</p>
         <p className="font-display font-black italic text-white text-base leading-tight">
@@ -2569,9 +2391,9 @@ function CementCatalog({ onAddProduct, isAdding, getQty, onOpenDetail }: {
                       onClick={() => onOpenDetail?.(brandVariantToProduct("cement", activeBrand, prod))}
                       aria-label={`View ${prod.name} details`}
                       className="w-12 h-12 rounded-[14px] overflow-hidden shrink-0 bg-white border border-slate-100 relative active:scale-95 transition-transform">
-                      <img src={resolveProductImage("cement", prod.name)} alt={prod.name} loading="lazy" className="w-full h-full object-cover" onError={onImgError} />
+                      <img src={resolveProductImage("cement", prod.name)} alt={prod.name} loading="lazy" className="w-full h-full object-contain p-0.5" onError={onImgError} />
                       <span className="absolute bottom-0 left-0 right-0 text-[6px] font-black text-white text-center py-0.5"
-                        style={{ background: TYPE_BADGE[prod.type] ?? "#1b4366" }}>{prod.type}</span>
+                        style={{ background: TYPE_BADGE[prod.type] ?? "#1848a0" }}>{prod.type}</span>
                     </button>
                     <div className="flex-1 min-w-0">
                       <p className="text-[11px] font-black text-slate-800 leading-tight">{prod.name}</p>
@@ -3684,7 +3506,7 @@ function BrandCatalog({ category, onAddProduct, isAdding, getQty, onOpenDetail }
                       onClick={() => onOpenDetail?.(brandVariantToProduct(category, activeBrand, prod))}
                       aria-label={`View ${prod.name} details`}
                       className="w-12 h-12 rounded-[14px] overflow-hidden shrink-0 bg-white border border-slate-100 active:scale-95 transition-transform">
-                      <img src={resolveProductImage(category, prod.name)} alt={prod.name} loading="lazy" className="w-full h-full object-cover" onError={onImgError} />
+                      <img src={resolveProductImage(category, prod.name)} alt={prod.name} loading="lazy" className="w-full h-full object-contain p-0.5" onError={onImgError} />
                     </button>
                     <div className="flex-1 min-w-0">
                       <p className="text-[11px] font-black text-slate-800 leading-tight">{prod.name}</p>
@@ -3727,7 +3549,7 @@ const STEEL_TYPES = [
     short:    "TMT",
     tag:      "Gold Standard",
     tagColor: "#b45309",
-    image:    PROD("tmt-bars"),
+    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp`,
     grades:   ["Fe415", "Fe500", "Fe550", "Fe600"],
     price:    "₹62–₹74",
     unit:     "per kg",
@@ -3746,8 +3568,8 @@ const STEEL_TYPES = [
     name:     "TMX Bars — Thermex Technology",
     short:    "TMX",
     tag:      "German Tech",
-    tagColor: "#1b4366",
-    image:    PROD("tmt-bars"),
+    tagColor: "#1848a0",
+    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/kamdhenu-nxt-12mm-tmt-fe500d.webp`,
     grades:   ["Fe500", "Fe550", "Fe600"],
     price:    "₹68–₹80",
     unit:     "per kg",
@@ -3759,7 +3581,7 @@ const STEEL_TYPES = [
     ],
     bestFor:  ["Fire-prone zones", "Extreme temperature areas", "Critical infrastructure"],
     keyFeat:  "Maintains full strength at 600°C — ideal for fire-resistant design",
-    featColor:"#1b4366",
+    featColor:"#1848a0",
   },
   {
     id:       "hsd",
@@ -3767,7 +3589,7 @@ const STEEL_TYPES = [
     short:    "HSD",
     tag:      "Cold Twisted",
     tagColor: "#374151",
-    image:    PROD("tmt-bars"),
+    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/jindal-panther-12mm-tmt-fe550d.webp`,
     grades:   ["Fe415"],
     price:    "₹58–₹65",
     unit:     "per kg",
@@ -3787,7 +3609,7 @@ const STEEL_TYPES = [
     short:    "CRS",
     tag:      "Coastal Safe",
     tagColor: "#0891b2",
-    image:    PROD("tmt-bars"),
+    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/jsw-neosteel-12mm-tmt-fe500d.webp`,
     grades:   ["Fe500 CRS", "Epoxy Coated"],
     price:    "₹78–₹95",
     unit:     "per kg",
@@ -3807,7 +3629,7 @@ const STEEL_TYPES = [
     short:    "MS",
     tag:      "Economy",
     tagColor: "#15803d",
-    image:    PROD("tmt-bars"),
+    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/sail-seqr-12mm-tmt-fe500d.webp`,
     grades:   ["Fe250"],
     price:    "₹50–₹58",
     unit:     "per kg",

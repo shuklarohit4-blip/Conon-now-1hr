@@ -12,21 +12,41 @@ import { randomUUID } from "crypto";
 
 const router: IRouter = Router();
 
-router.get("/services", async (_req, res) => {
-  const services = await collection("services").find().toArray();
+const FALLBACK_SERVICES = [
+  { id: "srv-foreman", type: "foreman", name: "Senior Site Foreman (Civil)", description: "Civil engineering supervision & layout planning.", ratePerDay: 1800, available: true, rating: 4.9, experience: 14 },
+  { id: "srv-plumber", type: "plumber", name: "Master Plumber", description: "CPVC/UPVC pipe fitting, sanitaryware installation.", ratePerDay: 1050, available: true, rating: 4.7, experience: 10 },
+  { id: "srv-electrician", type: "electrician", name: "Certified Electrician", description: "Concealed wiring, DB dressing, switchboards.", ratePerDay: 1100, available: true, rating: 4.9, experience: 8 },
+  { id: "srv-fitter", type: "fitter", name: "Bar Bender & Steel Fitter", description: "TMT cutting, bending, rebar mesh & column cages.", ratePerDay: 1150, available: true, rating: 4.8, experience: 11 },
+  { id: "srv-daily-labor", type: "daily_labor", name: "Construction Helper (Beldar)", description: "Material mixing, carrying, and site cleanup.", ratePerDay: 700, available: true, rating: 4.6, experience: 5 },
+];
 
-  res.json(
-    services.map((s) => ({
-      id: s.externalId,
-      type: s.type,
-      name: s.name,
-      description: s.description,
-      ratePerDay: decimalToNumber(s.ratePerDay),
-      available: s.available,
-      rating: decimalToNumber(s.rating ?? decimal("4.5")),
-      experience: s.experience,
-    }))
-  );
+router.get("/services", async (_req, res, next) => {
+  try {
+    const services = await collection("services").find().toArray();
+    if (services.length === 0 && process.env.NODE_ENV !== "production") {
+      res.json(FALLBACK_SERVICES);
+      return;
+    }
+
+    res.json(
+      services.map((s) => ({
+        id: s.externalId,
+        type: s.type,
+        name: s.name,
+        description: s.description,
+        ratePerDay: decimalToNumber(s.ratePerDay),
+        available: s.available,
+        rating: decimalToNumber(s.rating ?? decimal("4.5")),
+        experience: s.experience,
+      }))
+    );
+  } catch (err) {
+    if (process.env.NODE_ENV !== "production") {
+      res.json(FALLBACK_SERVICES);
+      return;
+    }
+    next(err);
+  }
 });
 
 router.post("/services", async (req, res) => {

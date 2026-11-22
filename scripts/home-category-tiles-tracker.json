@@ -1,0 +1,206 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "slug": "cctv-networking",
+      "title": "CCTV & Networking",
+      "department": "Electrical",
+      "targetAsset": "/images/home-categories/cctv-networking.webp",
+      "status": "done",
+      "error": "Input buffer contains unsupported image format",
+      "fileSizeKb": 44.7,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 2,
+      "slug": "cpvc-plumbing-tanks",
+      "title": "CPVC Plumbing & Overhead Tanks",
+      "department": "Plumbing, Sanitary & Bath",
+      "targetAsset": "/images/home-categories/cpvc-plumbing-tanks.webp",
+      "status": "done",
+      "fileSizeKb": 18.8,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 3,
+      "slug": "cement-civil-works",
+      "title": "Cement & Civil Works",
+      "department": "Civil & Interiors",
+      "targetAsset": "/images/home-categories/cement-civil-works.webp",
+      "status": "done",
+      "fileSizeKb": 26.6,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 4,
+      "slug": "plywood-boards",
+      "title": "Plywood & Boards",
+      "department": "Civil & Interiors",
+      "targetAsset": "/images/home-categories/plywood-boards.webp",
+      "status": "done",
+      "fileSizeKb": 16.4,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 5,
+      "slug": "fevicol-adhesives-sealants",
+      "title": "Fevicol, Adhesives & Sealants",
+      "department": "Furniture & Architectural Hardware",
+      "targetAsset": "/images/home-categories/fevicol-adhesives-sealants.webp",
+      "status": "done",
+      "fileSizeKb": 14.9,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 6,
+      "slug": "wires-mcb-electrical",
+      "title": "Wires, MCB & Electrical Supplies",
+      "department": "Electrical",
+      "targetAsset": "/images/home-categories/wires-mcb-electrical.webp",
+      "status": "done",
+      "fileSizeKb": 20.6,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 7,
+      "slug": "kitchen-sinks-faucets",
+      "title": "Kitchen Sinks & Faucets",
+      "department": "Plumbing, Sanitary & Bath",
+      "targetAsset": "/images/home-categories/kitchen-sinks-faucets.webp",
+      "status": "done",
+      "error": "Input buffer contains unsupported image format",
+      "fileSizeKb": 61.4,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 8,
+      "slug": "furniture-wardrobe-bed-hardware",
+      "title": "Furniture, Wardrobe & Bed Hardware",
+      "department": "Furniture & Architectural Hardware",
+      "targetAsset": "/images/home-categories/furniture-wardrobe-bed-hardware.webp",
+      "status": "done",
+      "fileSizeKb": 16.2,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 9,
+      "slug": "modular-kitchen-systems",
+      "title": "Modular Kitchen Systems & Fittings",
+      "department": "Furniture & Architectural Hardware",
+      "targetAsset": "/images/home-categories/modular-kitchen-systems.webp",
+      "status": "done",
+      "error": "Input buffer contains unsupported image format",
+      "fileSizeKb": 78,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 10,
+      "slug": "door-hardware-locks",
+      "title": "Door Hardware & Locks",
+      "department": "Furniture & Architectural Hardware",
+      "targetAsset": "/images/home-categories/door-hardware-locks.webp",
+      "status": "done",
+      "fileSizeKb": 19.2,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 11,
+      "slug": "sanitary-bath-fittings",
+      "title": "Sanitary & Bath Fittings",
+      "department": "Plumbing, Sanitary & Bath",
+      "targetAsset": "/images/home-categories/sanitary-bath-fittings.webp",
+      "status": "done",
+      "fileSizeKb": 11.8,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 12,
+      "slug": "tile-stone-installation",
+      "title": "Tile & Stone Installation",
+      "department": "Civil & Interiors",
+      "targetAsset": "/images/home-categories/tile-stone-installation.webp",
+      "status": "done",
+      "fileSizeKb": 21.4,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 13,
+      "slug": "home-appliances",
+      "title": "Home Appliances",
+      "department": "Electrical",
+      "targetAsset": "/images/home-categories/home-appliances.webp",
+      "status": "done",
+      "error": "Input buffer contains unsupported image format",
+      "fileSizeKb": 34.6,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 14,
+      "slug": "lighting",
+      "title": "Lighting",
+      "department": "Electrical",
+      "targetAsset": "/images/home-categories/lighting.webp",
+      "status": "done",
+      "fileSizeKb": 11.7,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 15,
+      "slug": "painting",
+      "title": "Painting",
+      "department": "Civil & Interiors",
+      "targetAsset": "/images/home-categories/painting.webp",
+      "status": "done",
+      "fileSizeKb": 15,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 16,
+      "slug": "safety-workwear",
+      "title": "Safety & Workwear",
+      "department": "Tools",
+      "targetAsset": "/images/home-categories/safety-workwear.webp",
+      "status": "done",
+      "fileSizeKb": 11.3,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 17,
+      "slug": "tools-hardware",
+      "title": "Tools, Power Tools & General Hardware",
+      "department": "Tools",
+      "targetAsset": "/images/home-categories/tools-hardware.webp",
+      "status": "done",
+      "fileSizeKb": 17,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    },
+    {
+      "id": 18,
+      "slug": "waterproofing-repairing",
+      "title": "Waterproofing & Repairing",
+      "department": "Civil & Interiors",
+      "targetAsset": "/images/home-categories/waterproofing-repairing.webp",
+      "status": "done",
+      "fileSizeKb": 21,
+      "dimensions": "512x512",
+      "hasAlpha": true
+    }
+  ]
+}

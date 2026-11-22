@@ -1,69 +1,92 @@
 import React from "react";
+import productAssetManifest from "@/lib/productAssetManifest.json";
 import { ProductCard, type Product } from "./ProductCard";
-import imgAsianApex20L from "@assets/ai-image-bd4c0997-9b86-4a2a-b506-ab27622c806c_1781772871513.png";
-import imgHavellsWire from "@assets/brands/havells-wire.png";
-import imgPolycabWire from "@assets/brands/polycab-wire.png";
-import imgAstralPipe from "@assets/brands/astral-pipe.png";
-import imgAshirvadPipe from "@assets/brands/ashirvad-pipe.png";
-import imgKajariaTile from "@assets/brands/kajaria-tile.png";
-import imgSomanyTile from "@assets/brands/somany-tile.png";
-import imgHettichHinge from "@assets/brands/hettich-hinge.png";
-
-/* Real local product photo aliases. Some product cards reference gallery names
-   that were intended to match the visual category but the on-disk files use
-   different slugs. Map them to the actual files so category items render 2–3
-   valid photos instead of broken image URLs. */
-const PRODUCT_PHOTO_ALIASES: Record<string, string> = {
-  "electrical-wire": "wire",
-  switchboard: "switch",
-  "mcb-panel": "mcb",
-  "cpvc-pipe": "pipe",
-  "water-pipe": "pipe",
-  "pp-fittings": "pipe-fittings",
-  tiles: "floor-tile",
-  "marble-tile": "marble",
-};
-const PROD = (slug: string) => {
-  const actual = PRODUCT_PHOTO_ALIASES[slug] ?? slug;
-  return `${import.meta.env.BASE_URL}products/${actual}.jpg`;
-};
+import {
+  utWaterplus,
+  utOpc53,
+  utBuildmore,
+  imgAccGoldWater,
+  imgAccCement,
+  imgAccSuraksha,
+  imgAsianpaintsBucket,
+  imgBergerBucket,
+  imgKajariaTile,
+  imgKajariaPgvt,
+  imgKajariaVitrified,
+  imgSomanyTile,
+  imgFlyAshStandard,
+  imgFlyAshHeavy,
+  imgFlyAshInterlocking,
+  imgFirstClassBrick,
+  imgHettichHinge,
+  imgPolycabWire,
+  imgHavellsWire,
+  imgAnchorSwitch,
+  imgAstralPipe,
+  imgAshirvadPipe,
+  imgJaquarFaucet,
+  imgHindwareEwc,
+  imgFevicolDrum,
+  imgDrfixitBucket,
+  imgGodrejLock,
+  imgDorsetHandle,
+  imgBirlawhitePutty,
+  imgJkPutty,
+  imgBoschDrill,
+  imgDewaltGrinder,
+  imgMakranaWhite,
+  imgBlackGalaxy,
+  imgCenturyplyPly,
+  PROD,
+} from "@/lib/productImages";
 
 const CATEGORY_GALLERIES: Record<string, string[]> = {
-  Cement: ["ultratech-weatherplus", "white-cement", "cement-bag"],
-  "TMT Steel": ["tmt-bars", "binding-wire", "nails"],
-  Bricks: ["red-brick", "aac-block", "aggregate"],
-  Paint: [imgAsianApex20L, "paint-bucket", "paint-gloss"],
-  Sand: ["sand", "aggregate", "cement-bag"],
-  Tiles: [imgKajariaTile, "floor-tile", "marble"],
-  Hardware: [imgHettichHinge, "door-hardware", "door-lock"],
-  Electrical: [imgPolycabWire, imgHavellsWire, "mcb"],
-  Plumbing: [imgAstralPipe, imgAshirvadPipe, "pipe"],
-  Adhesives: ["adhesive", "tile-adhesive", "putty"],
-  Waterproofing: ["waterproofing", "putty", "white-cement"],
-  "Marble & Flooring": ["marble", "floor-tile", "tile-cleaner"],
+  Cement: [utWaterplus, utOpc53, imgAccCement],
+  "TMT Steel": [
+    "/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp",
+    "/images/products/steel/jsw-neosteel-16mm-tmt-fe550d.webp",
+    "/images/products/steel/gi-binding-wire-18-gauge-25kg.webp",
+  ],
+  Bricks: [imgFirstClassBrick, imgFlyAshStandard, PROD("aac-block")],
+  Paint: [imgAsianpaintsBucket, imgBergerBucket, PROD("paint-roller")],
+  Sand: [
+    "/images/products/sand/screened-river-sand-cft.webp",
+    "/images/products/sand/plaster-fine-sand-cft.webp",
+    "/images/products/aggregate/gitti-20mm-cft.webp",
+  ],
+  Tiles: [imgKajariaTile, imgKajariaPgvt, imgSomanyTile],
+  Hardware: [imgHettichHinge, imgGodrejLock, imgDorsetHandle],
+  Electrical: [imgPolycabWire, imgHavellsWire, imgAnchorSwitch],
+  Plumbing: [imgAstralPipe, imgJaquarFaucet, imgHindwareEwc],
+  Adhesives: [imgFevicolDrum, PROD("adhesive"), PROD("putty")],
+  Waterproofing: [imgDrfixitBucket, utWaterplus, imgBirlawhitePutty],
+  Finishing: [imgBirlawhitePutty, imgJkPutty, PROD("pop")],
+  Tools: [imgBoschDrill, imgDewaltGrinder, PROD("hand-tools")],
+  Wood: [imgCenturyplyPly, imgFevicolDrum, PROD("plywood")],
+  "Marble & Flooring": [imgKajariaPgvt, imgMakranaWhite, imgBlackGalaxy],
 };
 
 const galleryFor = (category: string, overrides?: string[]) => {
-  const source = overrides && overrides.length > 0 ? overrides : CATEGORY_GALLERIES[category] ?? ["cement-bag"];
+  const source = overrides && overrides.length > 0 ? overrides : CATEGORY_GALLERIES[category] ?? [utWaterplus];
   return source.map((item) => {
     if (item.startsWith("/") || item.startsWith("data:") || item.includes("://")) return item;
     return PROD(item);
   });
 };
 
-/* Dummy construction-materials catalog so the layout is fully visible. */
-export const DUMMY_PRODUCTS: Product[] = [
+/* Primary construction-materials catalog for home feed and categories */
+const RAW_DUMMY_PRODUCTS: Product[] = [
   {
     id: "ultratech-weatherplus-50kg",
-    images: galleryFor("Cement"),
+    images: [utWaterplus, utOpc53, utBuildmore],
     features: [
       "IS 12269 certified OPC 53 grade cement",
       "High early compressive strength for slabs & pillars",
       "Advanced waterproofing for monsoon-resistant builds",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Cement",
-    image: PROD("ultratech-weatherplus"),
+    image: utWaterplus,
     title: "UltraTech Premium Cement 50kg Bag, Weather Plus, Waterproofing, Solid Build",
     description:
       "UltraTech Weather Plus is a premium waterproofing cement engineered for monsoon-resistant, crack-free structures. Its dense particle packing reduces water seepage and delivers high early strength, making it ideal for foundations, columns, slabs and exterior plaster in all weather conditions.",
@@ -72,7 +95,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     price: 380,
     mrp: 450,
     bankOfferPrice: 360,
-    bankOfferLabel: "Conon Khata or HDFC Bank",
+    bankOfferLabel: "CONON-NOW Khata or HDFC Bank",
     deliveryEta: "Today, 2:00 PM (1-Hour)",
     service: "Free Unloading / Labour",
     variantsLabel: "+2 other grades (43 / 53)",
@@ -90,7 +113,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     ],
     tag: "Sponsored",
     materialTag: "TMT Steel",
-    image: PROD("tmt-bars"),
+    image: "/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp",
     title: "Tata Tiscon 550SD TMT Steel Bars 12mm, Earthquake Resistant, High Strength",
     description:
       "Tata Tiscon 550SD TMT bars offer superior ductility and earthquake resistance with a consistent rib pattern for strong concrete bonding. Manufactured to Fe 550D grade, they provide high tensile strength and excellent corrosion resistance for columns, beams and load-bearing RCC work.",
@@ -99,7 +122,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     price: 62000,
     mrp: 71500,
     bankOfferPrice: 60500,
-    bankOfferLabel: "Conon Khata",
+    bankOfferLabel: "CONON-NOW Khata",
     deliveryEta: "Tomorrow, 9:00 AM",
     service: "Free Crane Unloading",
     variantsLabel: "+4 other thicknesses (8–25mm)",
@@ -109,15 +132,15 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
   {
     id: "red-clay-bricks-1000",
-    images: galleryFor("Bricks"),
+    images: [imgFirstClassBrick, PROD("red-brick"), PROD("aggregate")],
     features: [
       "First-class kiln-fired, uniform size",
       "Low water absorption, high compressive strength",
       "Sharp edges for clean, mortar-saving masonry",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Bricks",
-    image: PROD("red-brick"),
+    image: imgFirstClassBrick,
     title: "First-Class Red Clay Bricks, Kiln Fired, Uniform Size — Pack of 1000",
     description:
       "First-class kiln-fired red clay bricks with uniform size, sharp edges and a deep red finish. Low water absorption and high compressive strength make them ideal for durable load-bearing walls, partitions and boundary work with minimal mortar wastage.",
@@ -128,11 +151,11 @@ export const DUMMY_PRODUCTS: Product[] = [
     deliveryEta: "Today, 6:00 PM",
     service: "Free Site Stacking",
     unit: "per 1000",
-    vendor: "CONON Marketplace",
+    vendor: "CONON-NOW Marketplace",
   },
   {
     id: "asian-paints-apex-20l",
-    images: galleryFor("Paint", ["paint-bucket", "paint-roller", "paint-gloss"]),
+    images: [imgAsianpaintsBucket, PROD("paint-bucket"), PROD("paint-roller")],
     features: [
       "Weatherproof exterior emulsion",
       "Dust, algae & fungus resistant",
@@ -140,7 +163,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     ],
     tag: "Sponsored",
     materialTag: "Paint",
-    image: imgAsianApex20L,
+    image: imgAsianpaintsBucket,
     title: "Asian Paints Apex Weatherproof Exterior Emulsion 20L, Dust & Algae Guard",
     description:
       "Asian Paints Apex is a weatherproof exterior emulsion that protects walls against rain, dust and algae for years. It delivers a rich matt finish, excellent colour retention and superior coverage, keeping building exteriors fresh through harsh sun and heavy monsoons.",
@@ -159,15 +182,18 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
   {
     id: "river-sand-cum",
-    images: galleryFor("Sand"),
+    images: [
+      "/images/products/sand/screened-river-sand-m-sand-alternative-silt-washed-plaster-grade.webp",
+      ...galleryFor("Sand"),
+    ],
     features: [
       "Silt-washed, screened plaster grade",
       "Fine rounded grains for a smooth finish",
       "Strong adhesion for crack-free plaster",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Sand",
-    image: PROD("sand"),
+    image: "/images/products/sand/screened-river-sand-m-sand-alternative-silt-washed-plaster-grade.webp",
     title: "Screened River Sand (M-Sand Alternative), Silt-Washed, Plaster Grade",
     description:
       "Screened, silt-washed river sand graded for smooth plastering and masonry. Its fine, well-rounded particles ensure a workable mix, strong adhesion and crack-free finishes — a reliable plaster-grade alternative to M-Sand for walls and ceilings.",
@@ -178,11 +204,11 @@ export const DUMMY_PRODUCTS: Product[] = [
     deliveryEta: "Tomorrow, 8:00 AM",
     service: "Free Tipper Unloading",
     unit: "per ton",
-    vendor: "CONON Marketplace",
+    vendor: "CONON-NOW Marketplace",
   },
   {
     id: "kajaria-vitrified-tiles",
-    images: galleryFor("Tiles"),
+    images: [imgKajariaTile, imgKajariaVitrified, imgKajariaPgvt],
     features: [
       "Glossy, stain-resistant vitrified surface",
       "Anti-skid base for safe flooring",
@@ -190,7 +216,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     ],
     tag: "Sponsored",
     materialTag: "Tiles",
-    image: PROD("floor-tile"),
+    image: imgKajariaTile,
     title: "Kajaria Vitrified Floor Tiles 600x600mm, Glossy Finish, Anti-Skid — Box of 4",
     description:
       "Kajaria 600x600mm vitrified floor tiles combine a glossy, stain-resistant surface with an anti-skid base for safe, low-maintenance flooring. Their high density resists scratches and water absorption, making them ideal for living rooms, lobbies and commercial spaces.",
@@ -199,7 +225,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     price: 1180,
     mrp: 1560,
     bankOfferPrice: 1120,
-    bankOfferLabel: "Conon Khata",
+    bankOfferLabel: "CONON-NOW Khata",
     deliveryEta: "Today, 5:00 PM",
     service: "Free Carry-Up",
     variantsLabel: "+8 other designs",
@@ -209,15 +235,15 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
   {
     id: "acc-gold-watershield-50kg",
-    images: galleryFor("Cement", ["ultratech-weatherplus", "cement-bag", "putty"]),
+    images: [imgAccGoldWater, imgAccCement, imgAccSuraksha],
     features: [
       "Damp-proof PPC, moisture resistant",
       "Smooth workability, superior plaster finish",
       "Resists salt attack for durable walls",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Cement",
-    image: PROD("ultratech-weatherplus"),
+    image: imgAccGoldWater,
     title: "ACC Gold Water Shield 50kg Bag, PPC, Damp-Proof, High Durability",
     description:
       "ACC Gold Water Shield is a damp-proof PPC cement that resists moisture and salt attack for long-lasting, durable structures. Its smooth workability gives a superior plaster finish and reduced cracking, ideal for masonry, plastering and general construction.",
@@ -247,7 +273,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     ],
     tag: "Sponsored",
     materialTag: "TMT Steel",
-    image: PROD("tmt-bars"),
+    image: "/images/products/steel/jsw-neosteel-16mm-tmt-fe550d.webp",
     title: "JSW Neosteel 550D TMT Steel Bars 16mm, Corrosion Resistant",
     description:
       "JSW Neosteel 550D 16mm TMT bars deliver high yield strength with excellent bendability and corrosion resistance. The double-rib design ensures strong concrete grip, making them well suited for columns, beams and heavy structural RCC work.",
@@ -269,15 +295,15 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
   {
     id: "fly-ash-bricks-500",
-    images: galleryFor("Bricks", ["red-brick", "aac-block", "sand"]),
+    images: [imgFlyAshStandard, imgFlyAshHeavy, imgFlyAshInterlocking],
     features: [
       "Lightweight, reduces structural load",
       "Thermally insulated for cooler interiors",
       "Precise size speeds up construction",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Bricks",
-    image: PROD("red-brick"),
+    image: imgFlyAshStandard,
     title: "AAC Fly Ash Bricks, Lightweight, Thermal Insulated — Pack of 500",
     description:
       "AAC fly ash bricks are lightweight, thermally insulated blocks that reduce structural load and keep interiors cooler. Their precise size and smooth surface speed up construction and lower mortar use — ideal for partition and non-load-bearing walls.",
@@ -288,8 +314,8 @@ export const DUMMY_PRODUCTS: Product[] = [
     deliveryEta: "Today, 6:30 PM",
     service: "Free Site Stacking",
     unit: "per 500",
-    vendor: "CONON Marketplace",
-    brand: "CONON",
+    vendor: "CONON-NOW Marketplace",
+    brand: "CONON-NOW",
     specs: [
       { label: "Quantity", value: "500 bricks" },
       { label: "Type", value: "AAC Fly Ash" },
@@ -299,7 +325,7 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
   {
     id: "berger-weathercoat-20l",
-    images: galleryFor("Paint", ["paint-bucket", "paint-roller", "primer"]),
+    images: [imgBergerBucket, PROD("paint-bucket"), PROD("primer")],
     features: [
       "Self-cleaning, dust-resistant finish",
       "Long-life rain & UV protection",
@@ -307,7 +333,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     ],
     tag: "Sponsored",
     materialTag: "Paint",
-    image: imgAsianApex20L,
+    image: imgBergerBucket,
     title: "Berger WeatherCoat Anti-Dustt Exterior Emulsion 20L, Long Life",
     description:
       "Berger WeatherCoat Anti-Dust is a long-life exterior emulsion with a self-cleaning, dust-resistant finish. It withstands rain and UV exposure while retaining colour, keeping building facades clean and vibrant for years.",
@@ -335,9 +361,9 @@ export const DUMMY_PRODUCTS: Product[] = [
       "Angular grains for stronger bonding",
       "Consistent gradation for economical concrete",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Sand",
-    image: PROD("sand"),
+    image: "/images/products/sand/construction-m-sand-manufactured-zone-ii-concrete-grade.webp",
     title: "Construction M-Sand (Manufactured), Zone-II, Concrete Grade",
     description:
       "Manufactured Zone-II M-Sand engineered for concrete and RCC work with consistent grading and zero silt. Its angular particles improve bonding and compressive strength, delivering stronger, more economical concrete than natural sand.",
@@ -348,8 +374,8 @@ export const DUMMY_PRODUCTS: Product[] = [
     deliveryEta: "Tomorrow, 8:30 AM",
     service: "Free Tipper Unloading",
     unit: "per ton",
-    vendor: "CONON Marketplace",
-    brand: "CONON",
+    vendor: "CONON-NOW Marketplace",
+    brand: "CONON-NOW",
     specs: [
       { label: "Quantity", value: "1 ton" },
       { label: "Zone", value: "Zone II" },
@@ -359,7 +385,7 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
   {
     id: "somany-wall-tiles-300x600",
-    images: galleryFor("Tiles", ["floor-tile", "tile-adhesive", "marble"]),
+    images: [imgSomanyTile, imgKajariaVitrified, PROD("floor-tile")],
     features: [
       "Glossy, water-resistant ceramic glaze",
       "Easy to clean, stain-proof surface",
@@ -367,7 +393,7 @@ export const DUMMY_PRODUCTS: Product[] = [
     ],
     tag: "Sponsored",
     materialTag: "Tiles",
-    image: PROD("floor-tile"),
+    image: imgSomanyTile,
     title: "Somany Ceramic Wall Tiles 300x600mm, Glossy, Bathroom Grade — Box of 6",
     description:
       "Somany 300x600mm ceramic wall tiles feature a glossy, water-resistant glaze that's easy to clean and stain-proof. Designed for bathrooms and kitchens, they resist moisture and humidity while adding a bright, modern finish to walls.",
@@ -389,21 +415,19 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
 ];
 
-/* ── Builder Picks — completely different categories from DUMMY_PRODUCTS ──
-   Hardware, Electrical, Plumbing, Adhesives, Waterproofing, Marble/Flooring.
-   Shown in the second home-feed so no category appears twice.            */
-export const BUILDER_PICKS: Product[] = [
+/* ── Builder Picks — Hardware, Electrical, Plumbing, Adhesives, Waterproofing, Marble ── */
+const RAW_BUILDER_PICKS: Product[] = [
   {
     id: "hettich-soft-close-hinge",
-    images: galleryFor("Hardware"),
+    images: [imgHettichHinge, imgGodrejLock, imgDorsetHandle],
     features: [
       "Soft-close dampening — silent, slam-free cabinets",
       "Full overlay & half overlay compatible, 110° opening",
       "Nickel-plated for rust-free, long-lasting performance",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Hardware",
-    image: PROD("door-hardware"),
+    image: imgHettichHinge,
     title: "Hettich Soft-Close Concealed Hinges 35mm Cup, Cabinet & Wardrobe — Pack of 10",
     description:
       "Hettich 35mm soft-close concealed hinges deliver silent, slam-free operation for kitchen cabinets, wardrobes and furniture doors. Nickel-plated steel resists corrosion; the built-in hydraulic damper absorbs the closing impact for smooth, long-lasting use.",
@@ -412,7 +436,7 @@ export const BUILDER_PICKS: Product[] = [
     price: 580,
     mrp: 820,
     bankOfferPrice: 550,
-    bankOfferLabel: "Conon Khata",
+    bankOfferLabel: "CONON-NOW Khata",
     deliveryEta: "Today, 4:00 PM",
     service: "Free Delivery",
     variantsLabel: "+3 variants (full/half/inset overlay)",
@@ -420,23 +444,23 @@ export const BUILDER_PICKS: Product[] = [
     vendor: "Hettich",
     hasOptions: true,
     specs: [
-      { label: "Cup Size",   value: "35mm" },
-      { label: "Opening",    value: "110°" },
-      { label: "Finish",     value: "Nickel Plated" },
-      { label: "Type",       value: "Soft-Close" },
+      { label: "Cup Size", value: "35mm" },
+      { label: "Opening", value: "110°" },
+      { label: "Finish", value: "Nickel Plated" },
+      { label: "Type", value: "Soft-Close" },
     ],
   },
   {
     id: "polycab-fr-wire-1sqmm",
-    images: galleryFor("Electrical"),
+    images: [imgPolycabWire, imgHavellsWire, imgAnchorSwitch],
     features: [
       "FR (Flame Retardant) PVC insulation — BIS IS:694 certified",
       "Oxygen-free electrolytic copper conductor",
       "Safe up to 70°C continuous, ideal for home wiring",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Electrical",
-    image: PROD("electrical-wire"),
+    image: imgPolycabWire,
     title: "Polycab FR House Wire 1.5 sq.mm, 90m Coil — BIS Certified, Flame Retardant",
     description:
       "Polycab FR house wire uses oxygen-free copper with flame-retardant PVC insulation. BIS IS:694 certified for safe residential wiring — light points, fans and socket circuits. 90m coil covers a 2BHK electrical layout end to end.",
@@ -445,7 +469,7 @@ export const BUILDER_PICKS: Product[] = [
     price: 1480,
     mrp: 1900,
     bankOfferPrice: 1410,
-    bankOfferLabel: "Conon Khata or HDFC Bank",
+    bankOfferLabel: "CONON-NOW Khata or HDFC Bank",
     deliveryEta: "Today, 3:30 PM",
     service: "Free Delivery",
     variantsLabel: "+4 sizes (1–6 sq.mm)",
@@ -453,23 +477,23 @@ export const BUILDER_PICKS: Product[] = [
     vendor: "Polycab",
     hasOptions: true,
     specs: [
-      { label: "Size",       value: "1.5 sq.mm" },
-      { label: "Length",     value: "90m coil" },
-      { label: "Type",       value: "FR PVC" },
-      { label: "Standard",   value: "BIS IS:694" },
+      { label: "Size", value: "1.5 sq.mm" },
+      { label: "Length", value: "90m coil" },
+      { label: "Type", value: "FR PVC" },
+      { label: "Standard", value: "BIS IS:694" },
     ],
   },
   {
     id: "astral-cpvc-pipe-1inch",
-    images: galleryFor("Plumbing"),
+    images: [imgAstralPipe, imgAshirvadPipe, imgJaquarFaucet],
     features: [
       "CPVC — handles hot & cold water up to 93°C",
       "Lead-free, food-safe, corrosion & scale resistant",
       "FlowGuard Gold® CPVC for long, leak-free life",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Plumbing",
-    image: PROD("cpvc-pipe"),
+    image: imgAstralPipe,
     title: "Astral CPVC FlowGuard Gold Pipe 1-Inch, 3m Length — Hot & Cold Water Supply",
     description:
       "Astral FlowGuard Gold CPVC pipe is rated for hot water up to 93°C — ideal for kitchen and bathroom plumbing. Lead-free, food-grade material prevents scale and corrosion for a lifespan exceeding 50 years. Approved by WRAS and NSF.",
@@ -484,23 +508,23 @@ export const BUILDER_PICKS: Product[] = [
     vendor: "Astral",
     hasOptions: true,
     specs: [
-      { label: "Diameter",   value: "1 inch" },
-      { label: "Length",     value: "3m" },
-      { label: "Material",   value: "CPVC" },
+      { label: "Diameter", value: "1 inch" },
+      { label: "Length", value: "3m" },
+      { label: "Material", value: "CPVC" },
       { label: "Temp. Rating", value: "Up to 93°C" },
     ],
   },
   {
     id: "fevicol-sh-50kg",
-    images: galleryFor("Adhesives"),
+    images: [imgFevicolDrum, PROD("adhesive"), PROD("putty")],
     features: [
       "D3 grade — strong bond for plywood, MDF, laminates",
       "Solvent-free, non-toxic, water-resistant white glue",
       "Industry #1 — trusted by carpenters across India",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Adhesives",
-    image: PROD("adhesive"),
+    image: imgFevicolDrum,
     title: "Fevicol SH 50kg Drum — Synthetic Resin Wood Adhesive, Pidilite",
     description:
       "Fevicol SH is India's most trusted wood adhesive — a D3-grade synthetic resin glue for bonding plywood, MDF, laminates and decorative veneers. Water-resistant, solvent-free and non-toxic. The 50kg drum is the contractor's choice for site-level joinery and furniture work.",
@@ -509,7 +533,7 @@ export const BUILDER_PICKS: Product[] = [
     price: 6800,
     mrp: 7800,
     bankOfferPrice: 6500,
-    bankOfferLabel: "Conon Khata",
+    bankOfferLabel: "CONON-NOW Khata",
     deliveryEta: "Tomorrow, 9:00 AM",
     service: "Free Unloading",
     variantsLabel: "+4 pack sizes (1–20kg)",
@@ -517,23 +541,23 @@ export const BUILDER_PICKS: Product[] = [
     vendor: "Pidilite",
     hasOptions: true,
     specs: [
-      { label: "Grade",      value: "D3 Synthetic Resin" },
-      { label: "Pack",       value: "50kg drum" },
-      { label: "Bond Type",  value: "Wood / MDF / Laminate" },
-      { label: "Type",       value: "Water Resistant" },
+      { label: "Grade", value: "D3 Synthetic Resin" },
+      { label: "Pack", value: "50kg drum" },
+      { label: "Bond Type", value: "Wood / MDF / Laminate" },
+      { label: "Type", value: "Water Resistant" },
     ],
   },
   {
     id: "dr-fixit-pidifin-2k",
-    images: galleryFor("Waterproofing"),
+    images: [imgDrfixitBucket, utWaterplus, imgBirlawhitePutty],
     features: [
       "2-component polymer-modified cementitious coating",
       "Bridges hairline cracks up to 0.2mm",
       "Certified for terrace, bathroom & basement applications",
     ],
-    tag: "Conon Assured",
+    tag: "CONON-NOW Assured",
     materialTag: "Waterproofing",
-    image: PROD("waterproofing"),
+    image: imgDrfixitBucket,
     title: "Dr. Fixit Pidifin 2K 20kg Kit — 2-Component Waterproofing Coating for Terrace & Bathroom",
     description:
       "Dr. Fixit Pidifin 2K is a two-component, polymer-modified cementitious waterproofing coating. It bridges hairline cracks, bonds strongly to concrete and plaster, and remains elastic to handle thermal movement. Suitable for terraces, bathrooms, water tanks and basements. UV stable, non-toxic.",
@@ -542,7 +566,7 @@ export const BUILDER_PICKS: Product[] = [
     price: 2200,
     mrp: 2800,
     bankOfferPrice: 2100,
-    bankOfferLabel: "Conon Khata",
+    bankOfferLabel: "CONON-NOW Khata",
     deliveryEta: "Today, 4:30 PM",
     service: "Free Delivery",
     variantsLabel: "+2 sizes (5kg / 20kg)",
@@ -550,15 +574,15 @@ export const BUILDER_PICKS: Product[] = [
     vendor: "Dr. Fixit",
     hasOptions: true,
     specs: [
-      { label: "Type",       value: "2-Component Cementitious" },
-      { label: "Coverage",   value: "~12 sq.m / kit" },
+      { label: "Type", value: "2-Component Cementitious" },
+      { label: "Coverage", value: "~12 sq.m / kit" },
       { label: "Application", value: "Terrace / Bath / Tank" },
       { label: "Crack Bridge", value: "Up to 0.2mm" },
     ],
   },
   {
     id: "kajaria-marble-look-tile",
-    images: galleryFor("Marble & Flooring"),
+    images: [imgKajariaPgvt, imgKajariaTile, imgMakranaWhite],
     features: [
       "Marble-look GVT (Glazed Vitrified Tile) — full-body",
       "Double charge pressed, 8–9mm thickness",
@@ -566,7 +590,7 @@ export const BUILDER_PICKS: Product[] = [
     ],
     tag: "Sponsored",
     materialTag: "Marble & Flooring",
-    image: PROD("marble-tile"),
+    image: imgKajariaPgvt,
     title: "Kajaria Marble-Look GVT Floor Tiles 800×800mm, Anti-Skid, Premium Grade — Box of 3",
     description:
       "Kajaria 800×800mm GVT tiles replicate Italian marble veining with full-body glazing for a luxurious, high-gloss floor finish. Double-charge pressed for superior hardness; anti-skid R9 surface for safe, low-maintenance residential and commercial flooring.",
@@ -575,7 +599,7 @@ export const BUILDER_PICKS: Product[] = [
     price: 1650,
     mrp: 2200,
     bankOfferPrice: 1570,
-    bankOfferLabel: "Conon Khata or HDFC Bank",
+    bankOfferLabel: "CONON-NOW Khata or HDFC Bank",
     deliveryEta: "Today, 6:00 PM",
     service: "Free Carry-Up",
     variantsLabel: "+6 marble patterns",
@@ -583,13 +607,212 @@ export const BUILDER_PICKS: Product[] = [
     vendor: "Kajaria",
     hasOptions: true,
     specs: [
-      { label: "Size",       value: "800×800 mm" },
-      { label: "Finish",     value: "High Gloss GVT" },
-      { label: "Thickness",  value: "8–9 mm" },
-      { label: "Anti-Skid",  value: "R9 rated" },
+      { label: "Size", value: "800×800 mm" },
+      { label: "Finish", value: "High Gloss GVT" },
+      { label: "Thickness", value: "8–9 mm" },
+      { label: "Anti-Skid", value: "R9 rated" },
+    ],
+  },
+  {
+    id: "anchor-roma-modular-switch",
+    images: [imgAnchorSwitch, imgPolycabWire, imgHavellsWire],
+    features: [
+      "High quality flame-retardant polycarbonate",
+      "Silver-inlay contacts for long electrical life",
+      "Smooth click mechanism with zero sparking",
+    ],
+    tag: "CONON-NOW Assured",
+    materialTag: "Electrical",
+    image: imgAnchorSwitch,
+    title: "Anchor Roma Modular Switch 6A 1-Way, White Polycarbonate — Pack of 10",
+    description:
+      "Anchor by Panasonic Roma modular switches feature flame-retardant polycarbonate with silver cadmium oxide contacts for durable, spark-free performance. Tested for over 100,000 clicks.",
+    rating: 4.7,
+    reviews: 1420,
+    price: 360,
+    mrp: 480,
+    deliveryEta: "Today, 4:00 PM",
+    service: "Free Delivery",
+    unit: "pack of 10",
+    vendor: "Anchor by Panasonic",
+    specs: [
+      { label: "Rating", value: "6 Amp, 240V" },
+      { label: "Module", value: "1 Module" },
+      { label: "Finish", value: "Glossy White" },
+      { label: "Material", value: "Polycarbonate" },
+    ],
+  },
+  {
+    id: "jaquar-alive-basin-mixer",
+    images: [imgJaquarFaucet, imgHindwareEwc, imgAstralPipe],
+    features: [
+      "Solid forged brass body with chrome finish",
+      "High performance ceramic disc cartridge",
+      "Water-saving aerator for smooth foam flow",
+    ],
+    tag: "Sponsored",
+    materialTag: "Plumbing",
+    image: imgJaquarFaucet,
+    title: "Jaquar Alive Single Lever Basin Mixer Tap, Chrome Finish, Brass Body",
+    description:
+      "Jaquar Alive Single Lever Basin Mixer is engineered from virgin brass with a flawless mirror chrome plating. The high-precision ceramic cartridge guarantees 10 years of leak-free, silky operation.",
+    rating: 4.8,
+    reviews: 865,
+    price: 3450,
+    mrp: 4200,
+    bankOfferPrice: 3250,
+    bankOfferLabel: "CONON-NOW Khata",
+    deliveryEta: "Today, 5:00 PM",
+    service: "Free Delivery",
+    unit: "piece",
+    vendor: "Jaquar",
+    specs: [
+      { label: "Material", value: "Forged Brass" },
+      { label: "Finish", value: "Chrome" },
+      { label: "Type", value: "Single Lever" },
+      { label: "Warranty", value: "10 Years" },
+    ],
+  },
+  {
+    id: "godrej-navtal-brass-lock",
+    images: [imgGodrejLock, imgHettichHinge, imgDorsetHandle],
+    features: [
+      "Solid extruded brass body with hardened steel shackle",
+      "7-lever precision locking mechanism",
+      "Hacksaw-resistant and corrosion proof",
+    ],
+    tag: "CONON-NOW Assured",
+    materialTag: "Hardware",
+    image: imgGodrejLock,
+    title: "Godrej Nav-Tal 7 Levers Hardened Brass Padlock with 3 Keys, Heavy Duty",
+    description:
+      "India's iconic high-security padlock from Godrej. Solid brass construction with hardened boron alloy steel shackle resistant to hacksaws and crowbars. Comes with 3 brass keys.",
+    rating: 4.9,
+    reviews: 4210,
+    price: 490,
+    mrp: 620,
+    deliveryEta: "Today, 3:00 PM",
+    service: "Free Delivery",
+    unit: "piece",
+    vendor: "Godrej",
+    specs: [
+      { label: "Mechanism", value: "7 Brass Levers" },
+      { label: "Shackle", value: "Hardened Steel" },
+      { label: "Keys", value: "3 Keys Included" },
+      { label: "Body", value: "Solid Brass" },
+    ],
+  },
+  {
+    id: "birla-white-wallcare-putty-40kg",
+    images: [imgBirlawhitePutty, imgJkPutty, PROD("putty")],
+    features: [
+      "White cement based polymer modified putty",
+      "Extra HP polymers prevent flaking & seepage",
+      "Smooth, bright white canvas for wall paint",
+    ],
+    tag: "CONON-NOW Assured",
+    materialTag: "Finishing",
+    image: imgBirlawhitePutty,
+    title: "Birla White WallCare Waterproof Putty 40kg Bag, Smooth White Finish",
+    description:
+      "Birla White WallCare Putty is formulated with genuine white cement and German polymers to bond strongly with base plaster. Prevents flaking, fills hairline cracks, and creates a silky smooth base for paint.",
+    rating: 4.7,
+    reviews: 1980,
+    price: 890,
+    mrp: 1050,
+    deliveryEta: "Today, 3:30 PM",
+    service: "Free Unloading",
+    unit: "40kg bag",
+    vendor: "Birla White",
+    specs: [
+      { label: "Pack Size", value: "40 kg" },
+      { label: "Base", value: "White Cement" },
+      { label: "Pot Life", value: "2–2.5 Hours" },
+      { label: "Coverage", value: "~16–18 sq.ft/kg (2 coats)" },
+    ],
+  },
+  {
+    id: "bosch-gsb-550-impact-drill",
+    images: [imgBoschDrill, imgDewaltGrinder, PROD("drill-bits")],
+    features: [
+      "Powerful 550W motor with forward/reverse mode",
+      "13mm keyed chuck for heavy masonry & steel drilling",
+      "Ergonomic compact grip with auxiliary handle & depth gauge",
+    ],
+    tag: "Sponsored",
+    materialTag: "Tools",
+    image: imgBoschDrill,
+    title: "Bosch GSB 550 Professional Impact Drill Machine 550W with 13mm Chuck",
+    description:
+      "The contractor's workhorse drill. 550 Watt robust motor handles masonry, wood and metal effortlessly. Dual-mode rotary and impact action with variable speed trigger.",
+    rating: 4.8,
+    reviews: 3120,
+    price: 2450,
+    mrp: 3200,
+    bankOfferPrice: 2320,
+    bankOfferLabel: "CONON-NOW Khata",
+    deliveryEta: "Today, 4:30 PM",
+    service: "Free Delivery",
+    unit: "kit",
+    vendor: "Bosch",
+    specs: [
+      { label: "Power", value: "550 W" },
+      { label: "Chuck", value: "13 mm Keyed" },
+      { label: "No-load Speed", value: "0–2700 RPM" },
+      { label: "Impact Rate", value: "0–41600 BPM" },
+    ],
+  },
+  {
+    id: "makrana-white-marble-slab",
+    images: [imgMakranaWhite, imgBlackGalaxy, imgKajariaPgvt],
+    features: [
+      "100% natural Makrana white marble slab",
+      "98% calcium carbonate for lifetime crystalline shine",
+      "Zero chemical treatment — natural high cooling floor",
+    ],
+    tag: "CONON-NOW Assured",
+    materialTag: "Marble & Flooring",
+    image: imgMakranaWhite,
+    title: "Makrana Pure White Marble Slab 18mm Thickness — Premium Flooring Grade",
+    description:
+      "Authentic Makrana pure white marble mined from Rajasthan. Renowned worldwide for unmatched longevity, crystalline luster and cool surface temperature throughout hot Indian summers.",
+    rating: 4.9,
+    reviews: 540,
+    price: 185,
+    mrp: 240,
+    deliveryEta: "Tomorrow, 10:00 AM",
+    service: "Free Crane Unloading",
+    unit: "per sq.ft",
+    vendor: "CONON-NOW Natural Stone",
+    specs: [
+      { label: "Thickness", value: "18 mm" },
+      { label: "Origin", value: "Makrana, Rajasthan" },
+      { label: "Finish", value: "Mirror Polishable" },
+      { label: "Grade", value: "First Selection" },
     ],
   },
 ];
+
+const manifest = productAssetManifest as Record<string, string>;
+function enrichProduct(p: Product): Product {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+  const asset = manifest[p.title] || manifest[p.title.trim()];
+  const finalImage = asset ? `${base}${asset}` : p.image;
+  const gallery = p.images && p.images.length > 0
+    ? [finalImage, ...p.images.slice(1)]
+    : finalImage ? [finalImage] : [];
+  return {
+    ...p,
+    image: finalImage,
+    images: gallery,
+  };
+}
+
+export const DUMMY_PRODUCTS: Product[] = RAW_DUMMY_PRODUCTS.map(enrichProduct);
+export const BUILDER_PICKS: Product[] = RAW_BUILDER_PICKS.map(enrichProduct);
+
+/* Combined full catalog containing every authentic product across all categories */
+export const ALL_CATALOG_PRODUCTS: Product[] = [...DUMMY_PRODUCTS, ...BUILDER_PICKS];
 
 export type ProductFeedProps = {
   /** Override the dummy data with real products. */
@@ -628,9 +851,10 @@ export function ProductFeed({
   getCartQty,
   isAdding = false,
 }: ProductFeedProps) {
+  const enriched = React.useMemo(() => products.map(enrichProduct), [products]);
   return (
     <div className="space-y-4">
-      {products.map((p) => (
+      {enriched.map((p) => (
         <ProductCard
           key={p.id}
           product={p}

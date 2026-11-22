@@ -6,7 +6,7 @@ export default function Slide11Technology() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '2vh', marginBottom: '3vh', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: '#64748B' }}>
           <span>TECHNOLOGY</span><span>2026</span>
@@ -56,7 +56,7 @@ export default function Slide11Technology() {
           <div style={{ width: '2.8vw', height: '2.8vw', background: 'rgba(13,148,136,0.3)', borderRadius: '0.6vw', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5vh' }}>
             <div style={{ fontSize: '1.2vw', fontWeight: 800, color: '#5EEAD4' }}>K</div>
           </div>
-          <div style={{ fontSize: '1.1vw', fontWeight: 700, marginBottom: '0.8vh' }}>CONON Khata</div>
+          <div style={{ fontSize: '1.1vw', fontWeight: 700, marginBottom: '0.8vh' }}>CONON-NOW Khata</div>
           <div style={{ fontSize: '0.95vw', color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}>Digital credit ledger for contractors. Buy materials now, pay on project milestone. Embedded B2B fintech.</div>
         </div>
 
@@ -72,7 +72,7 @@ export default function Slide11Technology() {
 
       {/* Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2E8F0', paddingTop: '1.5vh', marginTop: '2.5vh', fontSize: '0.9vw', color: '#94A3B8', fontWeight: 500, flexShrink: 0 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 11 of 16</span></div>
       </div>
     </div>

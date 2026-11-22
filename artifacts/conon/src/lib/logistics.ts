@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────────
-   Construction logistics estimator for CONON checkout.
+   Construction logistics estimator for CONON-NOW checkout.
 
    Estimates the gross shipment weight from the cart, picks the right
    truck tier and computes a dynamic Delivery & Logistics Fee plus an

@@ -14,6 +14,7 @@
     "@tailwindcss/oxide-darwin-arm64": "^4.3.3",
     "lightningcss-darwin-arm64": "^1.33.0",
     "prettier": "^3.8.1",
+    "sharp": "^0.35.5",
     "typescript": "~5.9.2"
   }
 }

@@ -130,11 +130,22 @@ interface DriverLocationPayload {
  */
 export function initSocket(httpServer: HttpServer): Server {
   io = new Server(httpServer, {
-    // Mounted under /api so the Replit path-router proxies it to this service
+    // Mounted under /api so the reverse proxy forwards it to this service
     // (only /api/* is routed here). The browser connects same-origin.
     path: "/api/socket.io",
     cors: {
-      origin: allowedOrigins.length > 0 ? allowedOrigins : false,
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (
+          allowedOrigins.length === 0 ||
+          allowedOrigins.includes(origin) ||
+          (process.env.NODE_ENV !== "production" &&
+            /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin))
+        ) {
+          return callback(null, true);
+        }
+        return callback(new Error("Not allowed by CORS"));
+      },
       credentials: true,
     },
   });

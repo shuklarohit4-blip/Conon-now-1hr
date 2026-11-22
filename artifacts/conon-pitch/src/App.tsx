@@ -286,7 +286,7 @@ function SlideViewer() {
 export default function App() {
   const [location, navigate] = useLocation();
 
-  // DO NOT edit this useEffect - redirects unknown routes to the first slide.
+  // DO NOT edit this useEffect - redirects unmatched routes to the first slide.
   // The "/" and "/allslides" routes are handled separately below.
   useEffect(() => {
     if (

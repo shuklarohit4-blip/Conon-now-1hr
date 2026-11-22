@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const GREEN      = "#15803d";
 const ADMIN_DARK = "#1e1b4b";
 
@@ -255,9 +255,9 @@ export function Profile() {
 
         {/* ── Footer ──────────────────────────────────────────────── */}
         <div className="pt-6 border-t border-slate-100 flex flex-col items-center text-center gap-3">
-          <img src={`${import.meta.env.BASE_URL}images/conon-logo-real.png`} alt="CONON" className="w-16 h-16 object-contain" />
+          <img src={`${import.meta.env.BASE_URL}images/conon-logo-real.png`} alt="CONON-NOW" className="w-16 h-16 object-contain" />
           <div>
-            <p className="text-sm font-black" style={{ color: BRAND_DARK }}>CONON Infrabuilt Limited</p>
+            <p className="text-sm font-black" style={{ color: BRAND_DARK }}>CONON-NOW Infrabuilt Limited</p>
             <p className="text-xs text-slate-400 italic mt-0.5">"Delivering Trust, Building Dreams."</p>
             <p className="text-[10px] text-slate-300 mt-2">v0.1.0 · JIT Logistics Platform</p>
           </div>

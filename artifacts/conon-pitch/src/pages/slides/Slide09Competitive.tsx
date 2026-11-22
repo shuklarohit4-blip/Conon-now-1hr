@@ -6,7 +6,7 @@ export default function Slide09Competitive() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '2vh', marginBottom: '3vh', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: '#64748B' }}>
           <span>COMPETITIVE LANDSCAPE</span><span>2026</span>
@@ -30,12 +30,12 @@ export default function Slide09Competitive() {
           <div style={{ fontSize: '0.9vw', fontWeight: 600, color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', textAlign: 'center' }}>Job Site</div>
         </div>
 
-        {/* CONON row — highlighted */}
+        {/* CONON-NOW row — highlighted */}
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr', padding: '2.2vh 2.5vw', gap: '1vw', background: 'rgba(13,148,136,0.06)', borderBottom: '1px solid rgba(13,148,136,0.2)', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
             <div style={{ width: '2vw', height: '2vw', background: '#0D9488', borderRadius: '0.4vw', flexShrink: 0 }} />
             <div>
-              <div style={{ fontSize: '1.1vw', fontWeight: 700, color: '#0D9488' }}>CONON</div>
+              <div style={{ fontSize: '1.1vw', fontWeight: 700, color: '#0D9488' }}>CONON-NOW</div>
               <div style={{ fontSize: '0.85vw', color: '#64748B' }}>On-demand infra platform</div>
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function Slide09Competitive() {
 
       {/* Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2E8F0', paddingTop: '1.5vh', marginTop: '2.5vh', fontSize: '0.9vw', color: '#94A3B8', fontWeight: 500, flexShrink: 0 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 9 of 16</span></div>
       </div>
     </div>

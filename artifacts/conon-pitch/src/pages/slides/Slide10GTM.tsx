@@ -6,7 +6,7 @@ export default function Slide10GTM() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '2vh', marginBottom: '3vh', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
           <div style={{ width: '2vw', height: '2vw', backgroundColor: '#0D9488', borderRadius: '0.4vw' }} />
-          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON</div>
+          <div style={{ fontSize: '1.2vw', fontWeight: 700 }}>CONON-NOW</div>
         </div>
         <div style={{ display: 'flex', gap: '2vw', fontSize: '1vw', fontWeight: 500, color: '#64748B' }}>
           <span>GO-TO-MARKET</span><span>2026</span>
@@ -37,7 +37,7 @@ export default function Slide10GTM() {
           <div style={{ position: 'absolute', top: '-2vh', right: '-1vw', fontSize: '9vw', fontWeight: 900, color: 'rgba(13,148,136,0.06)', lineHeight: 1 }}>2</div>
           <div style={{ fontSize: '0.85vw', fontWeight: 600, color: '#0D9488', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1vh' }}>Phase 2 · 2026–27</div>
           <div style={{ fontSize: '1.4vw', fontWeight: 800, marginBottom: '1.5vh', lineHeight: 1.2, color: '#1E3A5F' }}>12 Cities + Dark Stores</div>
-          <div style={{ fontSize: '0.95vw', color: '#64748B', lineHeight: 1.6 }}>Launch CONON dark stores — pre-positioned material hubs in high-density construction zones across 12 cities.</div>
+          <div style={{ fontSize: '0.95vw', color: '#64748B', lineHeight: 1.6 }}>Launch CONON-NOW dark stores — pre-positioned material hubs in high-density construction zones across 12 cities.</div>
           <div style={{ marginTop: '2vh', display: 'flex', gap: '0.8vw', flexWrap: 'wrap' }}>
             <span style={{ background: 'rgba(13,148,136,0.1)', color: '#0D9488', padding: '0.4vh 0.8vw', borderRadius: '2vw', fontSize: '0.8vw', fontWeight: 600 }}>12 cities</span>
             <span style={{ background: 'rgba(13,148,136,0.1)', color: '#0D9488', padding: '0.4vh 0.8vw', borderRadius: '2vw', fontSize: '0.8vw', fontWeight: 600 }}>Dark stores</span>
@@ -65,13 +65,13 @@ export default function Slide10GTM() {
         </div>
         <div style={{ background: '#FFFFFF', padding: '2.2vh 2.5vw', borderRadius: '1vw', border: '1px solid #E2E8F0', boxShadow: '0 2px 10px rgba(30,58,95,0.05)' }}>
           <div style={{ fontSize: '0.85vw', fontWeight: 700, color: '#0D9488', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.8vh' }}>Retention</div>
-          <div style={{ fontSize: '1vw', color: '#475569', lineHeight: 1.6 }}>CONON Pro membership, Khata credit line, and AI-driven reorder reminders tied to project timelines keep LTV:CAC at 33×.</div>
+          <div style={{ fontSize: '1vw', color: '#475569', lineHeight: 1.6 }}>CONON-NOW Pro membership, Khata credit line, and AI-driven reorder reminders tied to project timelines keep LTV:CAC at 33×.</div>
         </div>
       </div>
 
       {/* Footer */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2E8F0', paddingTop: '1.5vh', marginTop: '2.5vh', fontSize: '0.9vw', color: '#94A3B8', fontWeight: 500, flexShrink: 0 }}>
-        <span>CONON, Inc.</span>
+        <span>CONON-NOW, Inc.</span>
         <div style={{ display: 'flex', gap: '1vw' }}><span>Confidential &amp; Proprietary</span><span>·</span><span>Slide 10 of 16</span></div>
       </div>
     </div>

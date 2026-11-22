@@ -13,6 +13,28 @@ import {
   type ApiLedgerEntry,
   type CreateProductPayload,
 } from "@/lib/vendorApi";
+import { JWT_STORAGE_KEY, vendorLogin } from "@/lib/authApi";
+import productAssetManifest from "@/lib/productAssetManifest.json";
+
+const manifest = productAssetManifest as Record<string, string>;
+
+function resolveVendorImg(name: string, existingImg?: string): string {
+  if (existingImg && existingImg.trim()) return existingImg.trim();
+  const n = (name || "").toLowerCase();
+  for (const [k, v] of Object.entries(manifest)) {
+    if (k.toLowerCase().includes(n) || n.includes(k.toLowerCase())) {
+      return v;
+    }
+  }
+  if (n.includes("cement")) return "/images/products/cement/ultratech-weatherplus.webp";
+  if (n.includes("steel") || n.includes("tmt")) return "/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp";
+  if (n.includes("brick")) return "/images/products/bricks/first-class-red-brick.webp";
+  if (n.includes("sand")) return "/images/products/sand/screened-river-sand-cft.webp";
+  if (n.includes("aggregate") || n.includes("morang")) return "/images/products/aggregate/gitti-20mm-cft.webp";
+  if (n.includes("pipe")) return "/images/products/plumbing/astral-cpvc-pro-1-inch.webp";
+  if (n.includes("wire")) return "/images/products/steel/gi-binding-wire-18-gauge-25kg.webp";
+  return "";
+}
 
 /* ──────────────────────────────────────────────────────────────────────────
    VendorContext — the single source of truth for the Vendor Panel.
@@ -69,7 +91,7 @@ function mapItem(a: ApiInventoryItem): InventoryItem {
     inStock: a.inStock,
     unit: a.unit,
     category: a.category,
-    img: a.img,
+    img: resolveVendorImg(a.name, a.img),
     emoji: "📦",
     bg: FALLBACK_BG,
   };
@@ -150,6 +172,16 @@ export function VendorProvider({ children }: { children: React.ReactNode }) {
     setLoading(true);
     setError(null);
     try {
+      // Auto-authenticate if no JWT exists in localStorage
+      let token = localStorage.getItem(JWT_STORAGE_KEY);
+      if (!token) {
+        const loginRes = await vendorLogin();
+        if (loginRes.ok && loginRes.token) {
+          localStorage.setItem(JWT_STORAGE_KEY, loginRes.token);
+          token = loginRes.token;
+        }
+      }
+
       const [inv, ord, wallet] = await Promise.all([
         vendorApi.getInventory(),
         vendorApi.getOrders(),
@@ -158,8 +190,26 @@ export function VendorProvider({ children }: { children: React.ReactNode }) {
       setInventory(inv.map(mapItem));
       setOrders(ord.map(mapOrder));
       applyWallet(wallet);
-    } catch {
-      setError("Couldn't load your store. Please try again.");
+    } catch (err) {
+      console.warn("[VendorContext] Refresh initial attempt failed, attempting self-heal:", err);
+      try {
+        const loginRes = await vendorLogin();
+        if (loginRes.ok && loginRes.token) {
+          localStorage.setItem(JWT_STORAGE_KEY, loginRes.token);
+          const [inv, ord, wallet] = await Promise.all([
+            vendorApi.getInventory(),
+            vendorApi.getOrders(),
+            vendorApi.getWallet(),
+          ]);
+          setInventory(inv.map(mapItem));
+          setOrders(ord.map(mapOrder));
+          applyWallet(wallet);
+          return;
+        }
+      } catch (retryErr) {
+        console.error("[VendorContext] Recovery error:", retryErr);
+      }
+      setError("Couldn't load your store. Please check your connection or sign in.");
     } finally {
       setLoading(false);
     }

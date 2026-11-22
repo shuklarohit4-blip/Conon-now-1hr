@@ -4,7 +4,7 @@ import { beginLoading, endLoading } from "./loading";
 import { API_ORIGIN } from "./apiBase";
 
 /**
- * Shared axios client for the CONON api-server.
+ * Shared axios client for the CONON-NOW api-server.
  *
  * The API origin can be set to the Render service for production. When unset,
  * local development and deployments continue to use the app's own origin.
@@ -13,7 +13,7 @@ import { API_ORIGIN } from "./apiBase";
  * by the request/response interceptors.
  */
 export const api = axios.create({
-  baseURL: API_ORIGIN,
+  baseURL: `${API_ORIGIN}/api`,
   withCredentials: true,
 });
 

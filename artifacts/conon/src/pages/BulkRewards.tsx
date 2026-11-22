@@ -10,7 +10,7 @@ import { Layout } from "@/components/Layout";
 import { toast } from "sonner";
 import { useWallet } from "@/context/WalletContext";
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const AMBER      = "#f59e0b";
 const EMERALD    = "#10b981";
 
@@ -346,7 +346,7 @@ export function BulkRewards() {
               <div className="relative z-10">
                 <div className="flex justify-between items-start mb-5">
                   <div>
-                    <p className="text-[9px] font-black text-amber-400 uppercase tracking-[0.2em] mb-1">CONON Gold Wallet</p>
+                    <p className="text-[9px] font-black text-amber-400 uppercase tracking-[0.2em] mb-1">CONON-NOW Gold Wallet</p>
                     <p className="font-display font-black italic text-3xl text-white">₹{walletBalance.toLocaleString("en-IN")}</p>
                     <p className="text-[8px] text-slate-400 font-bold mt-1">Available Balance</p>
                   </div>
@@ -416,7 +416,7 @@ export function BulkRewards() {
                 <p className="text-[9px] font-black text-violet-700 uppercase">Architect Rewards Program</p>
               </div>
               <p className="text-[9px] text-slate-500 font-bold mb-2">
-                Earn reward points for every project managed on CONON. Redeem for professional tools and software subscriptions.
+                Earn reward points for every project managed on CONON-NOW. Redeem for professional tools and software subscriptions.
               </p>
               <button onClick={() => toast.success("Architect Rewards registration coming soon!")}
                 className="px-4 py-2 rounded-[12px] text-white text-[9px] font-black" style={{ background: "#7c3aed" }}>
@@ -438,7 +438,7 @@ export function BulkRewards() {
                   Build with Neighbors
                 </p>
                 <p className="text-emerald-100/70 text-[9px] mb-4">
-                  Refer a construction site near you → Earn ₹2,000 CONON Gold when they place their first order.
+                  Refer a construction site near you → Earn ₹2,000 CONON-NOW Gold when they place their first order.
                 </p>
                 <div className="flex gap-2 mb-4">
                   <div className="flex-1 bg-white/10 rounded-[14px] px-3 py-2 text-center">
@@ -555,7 +555,7 @@ export function BulkRewards() {
                   REFER A SITE,<br/>GET REWARDED.
                 </p>
                 <p className="text-slate-400 text-[10px] font-bold uppercase leading-relaxed mb-8 max-w-xs">
-                  When your neighbor starts construction using your link, we credit ₹2,000 to your CONON Gold Wallet.
+                  When your neighbor starts construction using your link, we credit ₹2,000 to your CONON-NOW Gold Wallet.
                 </p>
 
                 <div className="w-full bg-white/5 border border-white/10 p-5 rounded-[28px] mb-6">
@@ -641,7 +641,7 @@ export function BulkRewards() {
                   <button key={m.id} onClick={() => setPayMethod(m.id)}
                     className="w-full flex items-center justify-between p-3.5 rounded-[16px] border-2 transition active:scale-[0.99]"
                     style={payMethod === m.id
-                      ? { borderColor: BRAND_DARK, background: "#1b436608" }
+                      ? { borderColor: BRAND_DARK, background: "#1848a008" }
                       : { borderColor: "#e2e8f0", background: "#fff" }}>
                     <div className="text-left">
                       <p className="text-[12px] font-black" style={{ color: BRAND_DARK }}>{m.label}</p>

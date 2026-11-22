@@ -66,6 +66,18 @@ function Router() {
       <Route path="/"        component={Splash}          />
       <Route path="/home"    component={Home}            />
       <Route path="/categories" component={Categories}   />
+      <Route path="/collections/cement-1" component={Categories} />
+      <Route path="/collections/plywood-blockboard" component={Categories} />
+      <Route path="/collections/wood-adhesives" component={Categories} />
+      <Route path="/collections/hinges" component={Categories} />
+      <Route path="/collections/mechanical-locks" component={Categories} />
+      <Route path="/collections/electrical-wires" component={Categories} />
+      <Route path="/collections/wires-mcb-electrical" component={Categories} />
+      <Route path="/collections/ss-sinks" component={Categories} />
+      <Route path="/collections/kitchen-sinks-faucets" component={Categories} />
+      <Route path="/collections/interior-emulsions" component={Categories} />
+      <Route path="/collections/painting" component={Categories} />
+      <Route path="/collections/:slug" component={Categories} />
       <Route path="/services"component={Services}        />
       <Route path="/orders"  component={Orders}          />
       <Route path="/profile" component={Profile}         />

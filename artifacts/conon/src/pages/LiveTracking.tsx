@@ -8,8 +8,8 @@ import { LiveOrderTracking, type TrackedOrder } from "@/components/LiveOrderTrac
  */
 const DEMO_ORDER: TrackedOrder = {
   id: "CON-28471",
-  vendorName: "CONON Warehouse — Charbagh",
-  origin: { lat: 26.8276, lng: 80.9072, label: "CONON Warehouse, Charbagh" },
+  vendorName: "CONON-NOW Warehouse — Charbagh",
+  origin: { lat: 26.8276, lng: 80.9072, label: "CONON-NOW Warehouse, Charbagh" },
   destination: { lat: 26.8512, lng: 80.9462, label: "Construction Site, Hazratganj" },
   driver: {
     name: "Rajesh Kumar",

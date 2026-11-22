@@ -45,7 +45,7 @@ export function CononImage({
           src={src as string}
           alt={alt}
           loading={loading}
-          className={`w-full h-full object-cover ${imgClassName}`}
+          className={`w-full h-full object-contain p-2 bg-white ${imgClassName}`}
           onError={() => setFailed(true)}
         />
       ) : (

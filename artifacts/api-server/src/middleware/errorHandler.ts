@@ -30,6 +30,10 @@ function isDatabaseConnectionError(error: unknown): boolean {
     "etimedout",
     "server selection timed out",
     "getaddrinfo",
+    "ssl alert",
+    "tlsv1 alert",
+    "err_ssl",
+    "handshake",
   ];
 
   while (pending.length > 0) {

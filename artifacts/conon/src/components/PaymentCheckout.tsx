@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ShoppingBag, Loader2, ShieldCheck } from "lucide-react";
+import { toast } from "sonner";
 
 /* ─── Razorpay type declaration ──────────────────────────────────────────── */
 declare global {
@@ -24,8 +25,13 @@ interface RazorpayOptions {
 }
 interface RazorpayInstance { open(): void; }
 
+const DEFAULT_RAZORPAY_KEY = "rzp_test_U2WeWQ1QNhcFm3";
+
+export const RAZORPAY_KEY_ID =
+  (import.meta.env.VITE_RAZORPAY_KEY_ID as string) || DEFAULT_RAZORPAY_KEY;
+
 /* ─── Script loader ──────────────────────────────────────────────────────── */
-function loadRazorpayScript(): Promise<boolean> {
+export function loadRazorpayScript(): Promise<boolean> {
   return new Promise((resolve) => {
     if (document.getElementById("razorpay-sdk")) {
       resolve(true);
@@ -63,21 +69,21 @@ export default function PaymentCheckout({
 
     const loaded = await loadRazorpayScript();
     if (!loaded || !window.Razorpay) {
-      alert("Failed to load Razorpay SDK. Please check your internet connection.");
+      toast.error("Failed to load Razorpay SDK. Please check your internet connection.");
       setLoading(false);
       return;
     }
 
     const options: RazorpayOptions = {
-      key:         "YOUR_RAZORPAY_KEY_ID",   // ← replace with your Test/Live key
+      key:         RAZORPAY_KEY_ID,
       amount:      amountPaise,               // amount in paise
       currency:    "INR",
-      name:        "Conon Infrabuilt",
+      name:        "CONON-NOW Infrabuilt",
       description: "Construction Materials Order",
       prefill:     prefill ?? {},
-      theme:       { color: "#1b4366" },
+      theme:       { color: "#1848a0" },
       handler: function (response) {
-        alert(`✅ Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`);
+        toast.success(`Payment Successful! ID: ${response.razorpay_payment_id}`);
         onSuccess?.(response.razorpay_payment_id);
       },
       modal: {
@@ -100,14 +106,14 @@ export default function PaymentCheckout({
         onClick={handlePayment}
         disabled={loading}
         className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-black text-[15px] text-white shadow-lg active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-        style={{ background: "linear-gradient(135deg, #1b4366 0%, #2a7a3b 100%)" }}
+        style={{ background: "linear-gradient(135deg, #1848a0 0%, #2563eb 100%)" }}
       >
         {loading ? (
           <Loader2 className="w-5 h-5 animate-spin" />
         ) : (
           <ShoppingBag className="w-5 h-5" />
         )}
-        {loading ? "Opening Payment…" : `Pay Now & Place Order · ${displayAmount}`}
+        {loading ? "Opening Payment…" : `Pay with Razorpay · ${displayAmount}`}
       </button>
 
       {/* Trust badge */}

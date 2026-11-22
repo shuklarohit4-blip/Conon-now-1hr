@@ -319,6 +319,87 @@ router.post("/auth/firebase-verify", async (req: Request, res: Response) => {
   });
 });
 
+/* ── POST /api/auth/vendor-login ──────────────────────────────────
+   Direct / demo vendor sign-in. Enables instant demo vendor testing
+   and fallback authentication when SMS verification is in demo mode. */
+router.post("/auth/vendor-login", async (req: Request, res: Response) => {
+  if (!ensureConfigured(res)) return;
+
+  const phoneRaw = typeof req.body?.phone === "string" ? req.body.phone : "9876543210";
+  const phone = normalizePhone(phoneRaw) || "9876543210";
+  const storeName =
+    typeof req.body?.storeName === "string" && req.body.storeName.trim()
+      ? req.body.storeName.trim()
+      : "CONON Authorized Materials Store";
+  const ownerName =
+    typeof req.body?.name === "string" && req.body.name.trim()
+      ? req.body.name.trim()
+      : "Master Supplier";
+
+  const externalId = `vendor:${phone}`;
+  let user = await collection("users").findOne({ $or: [{ phone }, { vendorStore: storeName }] });
+
+  if (!user) {
+    try {
+      const now = new Date();
+      await collection("users").insertOne({
+        id: await nextId("users"),
+        externalId,
+        name: ownerName,
+        phone,
+        role: "vendor",
+        vendorStore: storeName,
+        createdAt: now,
+      });
+      user = await collection("users").findOne({ phone });
+    } catch {
+      user = await collection("users").findOne({ phone });
+    }
+  }
+
+  if (!user) {
+    res.status(500).json({ error: "Could not initialize vendor account." });
+    return;
+  }
+
+  if (user.role !== "vendor" || !user.vendorStore) {
+    user = await collection("users").findOneAndUpdate(
+      { id: user.id },
+      {
+        $set: {
+          role: "vendor",
+          vendorStore: user.vendorStore || storeName,
+          name: ownerName || user.name,
+        },
+      },
+      { returnDocument: "after" },
+    );
+  }
+
+  if (!user) {
+    res.status(500).json({ error: "Could not update vendor account." });
+    return;
+  }
+
+  const token = signJwt({
+    sub: String(user.id),
+    phone: user.phone,
+    role: "vendor",
+  });
+
+  res.json({
+    success: true,
+    token,
+    user: {
+      id: user.id,
+      name: user.name,
+      phone: user.phone,
+      role: user.role,
+      vendorStore: user.vendorStore ?? storeName,
+    },
+  });
+});
+
 /* ── POST /api/auth/admin-login ────────────────────────────────── */
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 // Demo credentials are only ever allowed outside production. In production the

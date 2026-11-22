@@ -9,8 +9,9 @@ import {
 } from "@workspace/api-client-react";
 import type { QueryKey } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
+import { resolveProductImage } from "@/lib/productImages";
 
-const BRAND_DARK = "#1b4366";
+const BRAND_DARK = "#1848a0";
 const BRAND_MID  = "#5c92b1";
 const AMBER      = "#f59e0b";
 
@@ -191,6 +192,14 @@ export function CartSheet() {
                                 >
                                   <Trash2 className="w-4 h-4 text-rose-500" />
                                 </button>
+                                <div className="w-10 h-10 rounded-xl overflow-hidden bg-white border border-slate-100 flex items-center justify-center p-0.5 shrink-0 shadow-sm">
+                                  <img
+                                    src={resolveProductImage(cat.category, item.name)}
+                                    alt={item.name}
+                                    className="w-full h-full object-contain"
+                                    loading="lazy"
+                                  />
+                                </div>
                                 <div className="flex-1 min-w-0">
                                   <p className="font-bold text-sm text-slate-800 truncate">{item.name}</p>
                                   <p className="text-[10px] text-slate-400 font-semibold">₹{item.price}/{item.unit}</p>

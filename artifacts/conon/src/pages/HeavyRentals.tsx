@@ -19,7 +19,7 @@ import concreteMixerImg from "@assets/rentals/concrete-mixer.jpg";
 import vibratorImg from "@assets/rentals/needle-vibrator.png";
 import scaffoldingImg from "@assets/rentals/scaffolding.jpg";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const AMBER = "#f59e0b";
 const NEON = "#84cc16";
 
@@ -148,7 +148,7 @@ export function HeavyRentals() {
           name: `${eq.model} · ${rateLabel}${operatorAdd ? " + Operator" : ""}`,
           price: total,
           unit: rateLabel,
-          vendor: "Conon Heavy Rentals",
+          vendor: "CONON-NOW Heavy Rentals",
           category: "rental",
         },
       },

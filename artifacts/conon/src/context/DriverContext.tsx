@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Conon Fleet — Driver Partner state machine (frontend-only).
+   CONON-NOW Fleet — Driver Partner state machine (frontend-only).
 
    A single source of truth for the entire driver journey:
      duty (offline ⇄ online) → dispatch → 3-step trip → paid (wallet).
@@ -39,7 +39,7 @@ const DISPATCH_POOL: Omit<Trip, "id">[] = [
     material: "UltraTech Cement",
     qty: "50 Bags",
     earn: 450,
-    pickup: "Conon Depot",
+    pickup: "CONON-NOW Depot",
     pickupArea: "Sushant Lok, Gurugram",
     drop: "Site Block 45",
     dropArea: "Sector 45, Gurugram",
@@ -50,7 +50,7 @@ const DISPATCH_POOL: Omit<Trip, "id">[] = [
     material: "Tata Tiscon TMT",
     qty: "2 Ton",
     earn: 620,
-    pickup: "Conon Steel Yard",
+    pickup: "CONON-NOW Steel Yard",
     pickupArea: "Udyog Vihar, Gurugram",
     drop: "Tower B Site",
     dropArea: "Sector 62, Noida",
@@ -61,7 +61,7 @@ const DISPATCH_POOL: Omit<Trip, "id">[] = [
     material: "River Sand (Morang)",
     qty: "4 Ton",
     earn: 540,
-    pickup: "Conon Aggregates",
+    pickup: "CONON-NOW Aggregates",
     pickupArea: "Manesar",
     drop: "Villa Project",
     dropArea: "Sohna Road",
@@ -72,7 +72,7 @@ const DISPATCH_POOL: Omit<Trip, "id">[] = [
     material: "Red Bricks (A-Grade)",
     qty: "1000 Pcs",
     earn: 380,
-    pickup: "Conon Brick Hub",
+    pickup: "CONON-NOW Brick Hub",
     pickupArea: "Dharuhera",
     drop: "Farmhouse Site",
     dropArea: "Golf Course Ext",

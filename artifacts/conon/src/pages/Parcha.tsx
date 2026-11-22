@@ -8,7 +8,7 @@ import {
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const AMBER  = "#f59e0b";
 const GREEN  = "#15803d";
 const RED    = "#dc2626";

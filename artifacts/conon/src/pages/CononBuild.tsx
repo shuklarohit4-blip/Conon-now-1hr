@@ -11,7 +11,7 @@ import {
   Sparkles, Crown, Shield, Star, X, Calculator, Zap, Layers, Hammer,
 } from "lucide-react";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const AMBER = "#f59e0b";
 const NEON  = "#84cc16";
 
@@ -39,13 +39,13 @@ export function CononBuild() {
               <HardHat className="w-5 h-5 text-amber-300" strokeWidth={2.4} />
             </span>
             <div>
-              <h2 className="font-display font-black italic text-2xl text-white leading-none">Conon Build</h2>
+              <h2 className="font-display font-black italic text-2xl text-white leading-none">CONON-NOW Build</h2>
               <p className="text-[10px] font-bold text-blue-200 uppercase tracking-[0.2em] mt-1">Turnkey Home Construction</p>
             </div>
           </div>
           <p className="text-sm text-blue-100/90 leading-snug mt-3">
             From blueprint to handover — premium materials, certified engineers and transparent
-            pricing for your dream home. Built start to finish by CONON.
+            pricing for your dream home. Built start to finish by CONON-NOW.
           </p>
           <div className="flex gap-2 mt-4">
             <Trust icon={<Shield className="w-3 h-3" />} label="ISI Certified" />
@@ -330,7 +330,7 @@ function EstimatorSection() {
             ))}
           </div>
           <p className="text-[9px] text-slate-400 mt-4 leading-snug">
-            * Indicative estimate based on standard CONON rates. Final quote provided after site survey.
+            * Indicative estimate based on standard CONON-NOW rates. Final quote provided after site survey.
           </p>
         </div>
       </div>
@@ -463,7 +463,7 @@ function MaterialCalculatorSection() {
             name: l.name,
             price: l.price,
             unit: l.unit,
-            vendor: "CONON Build",
+            vendor: "CONON-NOW Build",
             category: l.category,
           },
         });
@@ -547,7 +547,7 @@ function MaterialCalculatorSection() {
               style={{ background: `linear-gradient(135deg, ${BRAND}, #2563eb)`, boxShadow: "0 10px 26px -8px rgba(27,67,102,0.6)" }}
             >
               <ShoppingCart className="w-4 h-4" />
-              {addToCart.isPending ? "Adding…" : "Add all to Conon Cart for 1-Hour Delivery"}
+              {addToCart.isPending ? "Adding…" : "Add all to CONON-NOW Cart for 1-Hour Delivery"}
             </button>
             <div className="flex items-center justify-center gap-1 mt-2.5">
               <Zap className="w-3 h-3" style={{ color: NEON }} fill="currentColor" />

@@ -125,3 +125,31 @@ export async function adminLogin(
     return { ok: false, error: "Network error. Please check your connection." };
   }
 }
+
+export interface VendorLoginOptions {
+  phone?: string;
+  storeName?: string;
+  name?: string;
+}
+
+export async function vendorLogin(opts?: VendorLoginOptions): Promise<VerifyOtpResult> {
+  try {
+    const r = await fetch(`${API}/auth/vendor-login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        phone: opts?.phone || "9876543210",
+        storeName: opts?.storeName || "CONON Authorized Materials Store",
+        name: opts?.name || "Master Supplier",
+      }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      return { ok: false, error: data.error ?? "Vendor login failed." };
+    }
+    return { ok: true, token: data.token, user: data.user };
+  } catch {
+    return { ok: false, error: "Network error. Please check your connection." };
+  }
+}

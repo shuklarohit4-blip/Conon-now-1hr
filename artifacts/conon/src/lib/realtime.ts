@@ -2,7 +2,7 @@ import { io, type Socket } from "socket.io-client";
 import { API_ORIGIN } from "./apiBase";
 
 /**
- * Shared Socket.io client for CONON real-time features.
+ * Shared Socket.io client for CONON-NOW real-time features.
  *
  * The API server mounts Socket.IO at `/api/socket.io`; use the same configurable
  * API origin as REST so Render and the Vercel frontend can run separately.

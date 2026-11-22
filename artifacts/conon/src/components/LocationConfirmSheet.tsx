@@ -11,7 +11,7 @@ import { AddressAutocomplete } from "./AddressAutocomplete";
 import { Confetti } from "./Confetti";
 import type { PlaceDetails } from "@/lib/mapsApi";
 
-const BRAND = "#1b4366";
+const BRAND = "#1848a0";
 const GREEN = "#2a7a3b";
 const AMBER = "#f59e0b";
 
