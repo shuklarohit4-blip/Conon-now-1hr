@@ -7,6 +7,8 @@ interface UIContextType {
   setCartOpen: (open: boolean) => void;
   isMenuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
+  isLoginModalOpen: boolean;
+  setLoginModalOpen: (open: boolean) => void;
   screenRatio: ScreenRatioMode;
   setScreenRatio: (ratio: ScreenRatioMode) => void;
 }
@@ -16,6 +18,7 @@ const UIContext = createContext<UIContextType | undefined>(undefined);
 export function UIProvider({ children }: { children: React.ReactNode }) {
   const [isCartOpen, setCartOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [screenRatio, setScreenRatioState] = useState<ScreenRatioMode>(() => {
     try {
       const saved = localStorage.getItem("conon_screen_ratio");
@@ -38,6 +41,8 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
         setCartOpen,
         isMenuOpen,
         setMenuOpen,
+        isLoginModalOpen,
+        setLoginModalOpen,
         screenRatio,
         setScreenRatio,
       }}

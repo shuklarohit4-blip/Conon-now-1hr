@@ -18,10 +18,25 @@ export function useAuth(): AuthState {
   useEffect(() => {
     let cancelled = false;
 
+    // Only attempt server auth if an active token or user session actually exists
     const token =
       typeof window !== "undefined"
-        ? localStorage.getItem("conon_jwt") || localStorage.getItem("jwt")
+        ? localStorage.getItem("conon_customer_jwt") ||
+          localStorage.getItem("conon_jwt") ||
+          localStorage.getItem("jwt")
         : null;
+
+    const savedAuthUser =
+      typeof window !== "undefined"
+        ? localStorage.getItem("conon_auth_user")
+        : null;
+
+    if (!token && !savedAuthUser) {
+      setUser(null);
+      setIsLoading(false);
+      return;
+    }
+
     const headers: Record<string, string> = {};
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
@@ -59,11 +74,36 @@ export function useAuth(): AuthState {
 
   const login = useCallback(() => {
     const base = import.meta.env.BASE_URL.replace(/\/+$/, "") || "/";
-    window.location.href = `/api/login?returnTo=${encodeURIComponent(base)}`;
+    const apiOrigin = (
+      (import.meta as any).env?.VITE_API_URL ||
+      (import.meta as any).env?.VITE_API_BASE_URL ||
+      ""
+    ).replace(/\/+$/, "");
+    window.location.href = `${apiOrigin}/api/login?returnTo=${encodeURIComponent(base)}`;
   }, []);
 
-  const logout = useCallback(() => {
-    window.location.href = "/api/logout";
+  const logout = useCallback(async () => {
+    const apiOrigin = (
+      (import.meta as any).env?.VITE_API_URL ||
+      (import.meta as any).env?.VITE_API_BASE_URL ||
+      ""
+    ).replace(/\/+$/, "");
+
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("conon_auth_user");
+      localStorage.removeItem("conon_customer_jwt");
+      localStorage.removeItem("conon_jwt");
+      localStorage.removeItem("jwt");
+    }
+
+    try {
+      await fetch(`${apiOrigin}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (_) {}
+
+    setUser(null);
   }, []);
 
   return {

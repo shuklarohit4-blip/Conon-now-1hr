@@ -14,6 +14,7 @@ import { SuccessScreen } from "@/components/driver/SuccessScreen";
 import { DriverNav } from "@/components/driver/DriverNav";
 import { LanguageToggle } from "@/components/driver/LanguageToggle";
 import { GREEN, RED, type DriverTab } from "@/components/driver/theme";
+import { LoaderRiderCockpit } from "@/components/driver/LoaderRiderCockpit";
 
 /* ──────────────────────────────────────────────────────────────────────────
    CONON-NOW Fleet — Driver Partner App shell.
@@ -156,9 +157,37 @@ function DriverShell() {
 }
 
 export function DriverApp() {
+  const [viewMode, setViewMode] = useState<"cockpit" | "classic">("cockpit");
+
+  if (viewMode === "cockpit") {
+    return (
+      <div className="relative">
+        <div className="fixed bottom-4 right-4 z-50">
+          <button
+            type="button"
+            onClick={() => setViewMode("classic")}
+            className="px-3.5 py-2 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold shadow-xl transition flex items-center gap-1.5 cursor-pointer backdrop-blur"
+          >
+            <span>Switch to Classic Duty View</span>
+          </button>
+        </div>
+        <LoaderRiderCockpit />
+      </div>
+    );
+  }
+
   return (
     <DriverLanguageProvider>
       <DriverProvider>
+        <div className="fixed bottom-4 right-4 z-50">
+          <button
+            type="button"
+            onClick={() => setViewMode("cockpit")}
+            className="px-4 py-2 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs shadow-xl transition flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>⚡ Open Loader & Rider Cockpit</span>
+          </button>
+        </div>
         <DriverShell />
       </DriverProvider>
     </DriverLanguageProvider>

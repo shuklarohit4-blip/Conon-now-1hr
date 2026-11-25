@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Star, Clock, RotateCcw, ChevronRight, Plus, Minus } from "lucide-react";
 import { type Product } from "./ProductCard";
+import { RealProductImage } from "./RealProductImage";
 
 interface CompactCatalogCardProps {
   product: Product;
@@ -102,19 +103,15 @@ export const CompactCatalogCard: React.FC<CompactCatalogCardProps> = ({
         )}
 
         {/* Local Verified Brand Packshot */}
-        {!imgError && product.image ? (
-          <img
-            src={product.image}
-            alt={product.title}
-            loading="lazy"
-            onError={() => setImgError(true)}
-            className="w-full h-full object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.06)] transition-transform duration-200 group-hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-slate-300 font-bold text-xs">
-            📦
-          </div>
-        )}
+        <RealProductImage
+          product={product}
+          src={product.image}
+          title={product.title}
+          brand={product.brand || product.vendor}
+          category={product.materialTag}
+          alt={product.title}
+          className="w-full h-full object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.06)] transition-transform duration-200 group-hover:scale-105"
+        />
 
         {/* Bottom-Left Carousel 4-Dot Indicator */}
         <div className="absolute bottom-1.5 left-2 flex items-center gap-0.5 pointer-events-none">

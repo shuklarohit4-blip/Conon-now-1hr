@@ -11,6 +11,9 @@ export interface JwtPayload {
   role: string;
   name?: string;
   email?: string;
+  vendorStore?: string;
+  vehicleType?: string;
+  vehiclePlate?: string;
   iat?: number;
   exp?: number;
 }

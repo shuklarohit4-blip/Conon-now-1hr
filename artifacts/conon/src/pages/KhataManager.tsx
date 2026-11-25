@@ -37,7 +37,20 @@ import { apiUrl } from "@/lib/apiBase";
 /* ── Helpers ─────────────────────────────────────────────────── */
 async function api<T>(path: string, opts?: RequestInit): Promise<T> {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  const r = await fetch(apiUrl(normalizedPath), { credentials: "include", ...opts });
+  const token =
+    typeof window !== "undefined"
+      ? localStorage.getItem("conon_admin_jwt") ||
+        localStorage.getItem("conon_customer_jwt") ||
+        localStorage.getItem("conon_jwt")
+      : null;
+  const r = await fetch(apiUrl(normalizedPath), {
+    credentials: "include",
+    ...opts,
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(opts?.headers || {}),
+    },
+  });
   if (!r.ok) throw new Error(String(r.status));
   return r.json() as Promise<T>;
 }

@@ -1,0 +1,10 @@
+/home/vendor           /vendor           301!
+/home/vendor/register  /vendor/register  301!
+/home/driver           /driver           301!
+/home/driver/register  /driver/register  301!
+/home/admin            /                 302!
+/home/admin/*          /                 302!
+/delivery-tracker      /track            301!
+/admin     /             302!
+/admin/*   /             302!
+/*         /index.html   200

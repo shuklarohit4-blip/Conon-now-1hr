@@ -3,7 +3,7 @@ const path = require('path');
 const sharp = require('../node_modules/sharp');
 
 const PUBLIC_PRODUCTS_DIR = path.resolve(__dirname, '../artifacts/conon/public/images/products');
-const ATTACHED_ASSETS_DIR = path.resolve(__dirname, '../attached_assets');
+const ATTACHED_ASSETS_DIR = path.resolve(__dirname, '../artifacts/conon/src/assets');
 
 // Ensure base dir exists
 fs.mkdirSync(PUBLIC_PRODUCTS_DIR, { recursive: true });

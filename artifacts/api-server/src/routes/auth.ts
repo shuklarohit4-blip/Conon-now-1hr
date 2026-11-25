@@ -186,19 +186,26 @@ router.get("/callback", async (req: Request, res: Response) => {
   res.redirect(returnTo);
 });
 
-router.get("/logout", async (req: Request, res: Response) => {
-  const config = await getOidcConfig();
-  const origin = getOrigin(req);
+router.all(["/logout", "/auth/logout"], async (req: Request, res: Response) => {
+  try {
+    const sid = getSessionId(req);
+    if (sid) {
+      await clearSession(res, sid);
+    }
+  } catch (err) {
+    // Non-fatal session clearance
+  }
 
-  const sid = getSessionId(req);
-  await clearSession(res, sid);
+  res.clearCookie("_sid", { path: "/" });
+  res.clearCookie("conon_jwt", { path: "/" });
+  res.clearCookie("jwt", { path: "/" });
 
-  const endSessionUrl = oidc.buildEndSessionUrl(config, {
-    client_id: process.env.REPL_ID!,
-    post_logout_redirect_uri: origin,
-  });
+  // If browser navigates directly via GET without AJAX
+  if (req.method === "GET" && !req.xhr && req.headers.accept?.includes("text/html")) {
+    return res.redirect("/");
+  }
 
-  res.redirect(endSessionUrl.href);
+  return res.json({ success: true, message: "Logged out successfully" });
 });
 
 router.post(

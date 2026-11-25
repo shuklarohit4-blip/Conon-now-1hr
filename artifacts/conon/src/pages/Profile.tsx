@@ -1,8 +1,9 @@
 import React from "react";
 import { Layout } from "@/components/Layout";
 import { useUser } from "@/context/UserContext";
-import { useAuth } from "@workspace/auth-web";
+import { useAuthContext } from "@/context/AuthContext";
 import { useLocation, Link } from "wouter";
+import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 import {
   User, Settings, Bell, Shield, ChevronRight,
   Camera, Cpu, Store, Sparkles, Clock,
@@ -17,26 +18,21 @@ const ADMIN_DARK = "#1e1b4b";
 const ROLE_META = {
   customer: { label: "Builder / Owner",    color: BRAND_DARK, bg: "#eff6ff", dash: "/home"   },
   vendor:   { label: "Supplier / Vendor",  color: GREEN,      bg: "#f0fdf4", dash: "/vendor" },
-  admin:    { label: "Admin — Control Room",color: ADMIN_DARK, bg: "#eef2ff", dash: "/admin"  },
+  admin:    { label: "Admin — Control Room",color: ADMIN_DARK, bg: "#eef2ff", dash: IS_LOCAL_ADMIN ? "/admin" : "/home"  },
 };
 
 export function Profile() {
   const { role, phone, logout } = useUser();
-  const { user: authUser, isAuthenticated, login, logout: authLogout } = useAuth();
+  const { user: authUser, isAuthenticated, openAuthModal, logout: authLogout } = useAuthContext();
   const [, setLocation] = useLocation();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     logout();
-    if (isAuthenticated) {
-      authLogout();
-    } else {
-      setLocation("/login");
-    }
+    await authLogout();
+    setLocation("/home");
   };
 
-  const authName = authUser
-    ? [authUser.firstName, authUser.lastName].filter(Boolean).join(" ") || authUser.email || "Account"
-    : "";
+  const authName = authUser?.name || "Account";
 
   const menuItems = [
     { key: "account", icon: Settings, label: "Account Settings"  },
@@ -121,7 +117,7 @@ export function Profile() {
           </div>
         ) : (
           <button
-            onClick={login}
+            onClick={() => openAuthModal("login")}
             className="w-full rounded-[28px] p-4 border-2 border-slate-900 bg-slate-900 text-white flex items-center gap-3 shadow-lg shadow-slate-900/10"
           >
             <LogIn className="w-7 h-7 shrink-0" />

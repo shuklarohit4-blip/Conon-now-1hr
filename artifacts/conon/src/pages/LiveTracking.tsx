@@ -1,12 +1,12 @@
 import { LiveOrderTracking, type TrackedOrder } from "@/components/LiveOrderTracking";
 
 /**
- * Demo order for the live tracking screen. The warehouse (origin) is a fixed
- * dummy depot; the destination is the address the user selected at checkout /
- * on the home location picker (falling back to a demo site). The driving route
+ * Tracked order for the live tracking screen. The warehouse (origin) is the Charbagh
+ * distribution hub; the destination is the address selected by the user at checkout /
+ * on the home location picker (falling back to Hazratganj site). The driving route
  * between them is drawn via the secure server-side Directions proxy.
  */
-const DEMO_ORDER: TrackedOrder = {
+const DEFAULT_TRACKED_ORDER: TrackedOrder = {
   id: "CON-28471",
   vendorName: "CONON-NOW Warehouse — Charbagh",
   origin: { lat: 26.8276, lng: 80.9072, label: "CONON-NOW Warehouse, Charbagh" },
@@ -44,7 +44,7 @@ function loadSavedDestination(): TrackedOrder["destination"] | null {
 }
 
 export function LiveTracking() {
-  const destination = loadSavedDestination() ?? DEMO_ORDER.destination;
-  const order: TrackedOrder = { ...DEMO_ORDER, destination };
+  const destination = loadSavedDestination() ?? DEFAULT_TRACKED_ORDER.destination;
+  const order: TrackedOrder = { ...DEFAULT_TRACKED_ORDER, destination };
   return <LiveOrderTracking order={order} />;
 }

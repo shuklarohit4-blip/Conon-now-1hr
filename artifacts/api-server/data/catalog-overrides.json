@@ -1,0 +1,3464 @@
+{
+  "updatedAt": "2026-11-25T11:42:23.956Z",
+  "overrides": {
+    "ultratech-ppc-cement-50kg": {
+      "sellingPrice": 410,
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:22.041Z"
+    },
+    "prod-cement-civil-works-ambuja-plus-kawach-cement-50kg": {
+      "sellingPrice": 428,
+      "updatedAt": "2026-11-24T14:15:04.978Z",
+      "inStock": false
+    },
+    "ambuja-plus-kawach-cement-50kg": {
+      "sellingPrice": 428,
+      "updatedAt": "2026-11-24T14:15:05.646Z",
+      "inStock": false
+    },
+    "prod-cement-civil-works-dalmia-dsp-opc-53-cement-50kg": {
+      "sellingPrice": 391,
+      "updatedAt": "2026-11-24T14:19:58.727Z",
+      "inStock": false
+    },
+    "dalmia-dsp-opc-53-cement-50kg": {
+      "sellingPrice": 391,
+      "updatedAt": "2026-11-24T14:19:58.043Z",
+      "inStock": false
+    },
+    "prod-cement-civil-works-shree-cement-bangur-opc-53-50kg": {
+      "sellingPrice": 398,
+      "updatedAt": "2026-11-24T14:29:11.572Z",
+      "inStock": false
+    },
+    "shree-cement-bangur-opc-53-50kg": {
+      "sellingPrice": 398,
+      "updatedAt": "2026-11-24T14:29:11.040Z",
+      "inStock": false
+    },
+    "prod-cement-civil-works-ultratech-opc-43-cement-50kg": {
+      "sellingPrice": 417,
+      "updatedAt": "2026-11-24T14:31:24.874Z",
+      "inStock": false
+    },
+    "ultratech-opc-43-cement-50kg": {
+      "sellingPrice": 417,
+      "updatedAt": "2026-11-24T14:31:24.255Z",
+      "inStock": false
+    },
+    "prod-cement-civil-works-ultratech-opc-53-cement-50kg": {
+      "sellingPrice": 438,
+      "updatedAt": "2026-11-24T14:31:23.740Z",
+      "inStock": false
+    },
+    "ultratech-opc-53-cement-50kg": {
+      "sellingPrice": 438,
+      "updatedAt": "2026-11-24T14:31:23.174Z",
+      "inStock": false
+    },
+    "dc-power-connectors-pack-of-10": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:45.463Z"
+    },
+    "prod-cement-civil-works-acc-gold-water-shield-50kg": {
+      "dealerLandingCost": 379,
+      "updatedAt": "2026-11-24T14:14:52.214Z",
+      "inStock": false
+    },
+    "prod-safety-3m-fahrenheit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:46.497Z"
+    },
+    "cctv-pvc-junction-box-4x4-pack-of-10": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:47.362Z"
+    },
+    "prod-adh-abro-masking-tape-24mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:48.197Z"
+    },
+    "prod-adh-abro-masking-tape-48mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:48.999Z"
+    },
+    "prod-masonry-acc-fly-ash-brick-1000": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:50.678Z"
+    },
+    "prod-masonry-acc-fly-ash-brick-single": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:51.514Z"
+    },
+    "acc-gold-water-shield-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:55.295Z"
+    },
+    "prod-cement-civil-works-acc-suraksha-f2r-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:56.146Z"
+    },
+    "acc-suraksha-f2r-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:56.945Z"
+    },
+    "prod-masonry-adani-acc-cool-walls-aac-4-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:57.710Z"
+    },
+    "prod-adh-aipl-abro-pu-foam-750ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:14:58.629Z"
+    },
+    "prod-tiles-25-rajasthan-stone-alaska-white-exotic-grani": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:00.827Z"
+    },
+    "prod-cement-civil-works-ambuja-compocem-ppc-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:01.564Z"
+    },
+    "ambuja-compocem-ppc-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:03.178Z"
+    },
+    "anchor-panasonic-advance-fr-wire": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:06.361Z"
+    },
+    "prod-wires-mcb-electrical-anchor-adv": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:07.047Z"
+    },
+    "anchor-zelect-wire-row2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:11.076Z"
+    },
+    "anchor-roma-fan-regulator": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:11.980Z"
+    },
+    "prod-wires-mcb-electrical-roma-switch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:12.878Z"
+    },
+    "anchor-roma-6a-1-way-switch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:13.659Z"
+    },
+    "anchor-modular-plate-8m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:14.447Z"
+    },
+    "prod-wires-mcb-electrical-roma-plate": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:15.230Z"
+    },
+    "prod-home-appliances-ao-smith-finesse-25l-5-star-storage-geyser": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:16.077Z"
+    },
+    "prod-home-appliances-ao-smith-xpress-15l-5-star-storage-geyser": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:16.846Z"
+    },
+    "prod-door-apace-tower-bolt-8in-apstb89ss": {
+      "inStock": true,
+      "updatedAt": "2026-11-24T15:48:33.574Z",
+      "dealerLandingCost": 103
+    },
+    "prod-adh-araldite-standard-1800g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:19.278Z"
+    },
+    "prod-adh-araldite-standard-180g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:19.979Z"
+    },
+    "prod-adh-araldite-standard-450g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:20.744Z"
+    },
+    "prod-adh-araldite-standard-90g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:22.794Z"
+    },
+    "prod-adh-araldite-standard-900g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:23.662Z"
+    },
+    "aristo-wheel-waste-bin-120l-blue": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:25.378Z"
+    },
+    "aristo-wheel-waste-bin-120l-green": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:26.861Z"
+    },
+    "aristo-wheel-waste-bin-pedal-65l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:28.444Z"
+    },
+    "prod-cpvc-plumbing-tanks-water-tank": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:29.094Z"
+    },
+    "prod-cpvc-plumbing-tanks-cpvc-elbow": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:31.014Z"
+    },
+    "ashirvad-cpvc-ball-valve-25mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:32.062Z"
+    },
+    "ashirvad-cpvc-ball-valve-20mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:32.743Z"
+    },
+    "prod-cpvc-plumbing-tanks-cpvc-pipe": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:34.227Z"
+    },
+    "ashirvad-cpvc-tank-nipple-25mm-standard": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:35.028Z"
+    },
+    "ashirvad-cpvc-yellow-medium-solvent-118ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:36.447Z"
+    },
+    "prod-cpvc-plumbing-tanks-cpvc-cement": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:37.160Z"
+    },
+    "ashirvad-flowguard-plus-25mm-sdr11-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:38.845Z"
+    },
+    "ashirvad-flowguard-plus-20mm-sdr11-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:39.595Z"
+    },
+    "ashirvad-flowguard-plus-brass-elbow-20x20mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:41.110Z"
+    },
+    "ashirvad-flowguard-plus-cpvc-solvent-100ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:41.763Z"
+    },
+    "ashirvad-flowguard-plus-cpvc-tank-nipple-25mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:42.761Z"
+    },
+    "astral-cpvc-tank-nipple-25mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:48.527Z"
+    },
+    "astral-cpvc-pro-20mm-sdr135-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:49.111Z"
+    },
+    "astral-cpvc-pro-20mm-sdr11-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:52.710Z"
+    },
+    "astral-cpvc-pro-15mm-sdr11-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:53.513Z"
+    },
+    "astral-cpvc-pro-25mm-sdr135-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:54.178Z"
+    },
+    "astral-cpvc-pro-25mm-sdr11-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:54.879Z"
+    },
+    "astral-cpvc-pro-25mm-sdr11-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:55.396Z"
+    },
+    "astral-cpvc-elbow-90-25mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:57.027Z"
+    },
+    "astral-cpvc-elbow-90-20mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:57.878Z"
+    },
+    "astral-cpvc-brass-mta-20x15mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:58.828Z"
+    },
+    "astral-cpvc-brass-fta-15mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:15:59.928Z"
+    },
+    "astral-cpvc-brass-elbow-20x15mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:00.711Z"
+    },
+    "astral-cpvc-ball-valve-25mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:02.345Z"
+    },
+    "astral-aquarius-upvc-25mm-union": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:03.412Z"
+    },
+    "prod-paint-ap-trucare-roller-800": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:04.228Z"
+    },
+    "prod-paint-ap-trucare-int-primer-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:05.761Z"
+    },
+    "prod-paint-ap-trucare-red-oxide-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:06.462Z"
+    },
+    "prod-paint-ap-trucare-int-primer-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:08.196Z"
+    },
+    "prod-paint-ap-trucare-ext-primer-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:09.209Z"
+    },
+    "prod-paint-ap-trucare-ext-primer-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:09.911Z"
+    },
+    "prod-paint-ap-trucare-acrylic-putty-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:11.711Z"
+    },
+    "prod-paint-ap-trucare-brush-4in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:12.343Z"
+    },
+    "prod-paint-ap-tractor-uno-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:13.461Z"
+    },
+    "prod-paint-ap-tractor-emul-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:15.128Z"
+    },
+    "prod-paint-ap-tractor-emul-white-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:15.828Z"
+    },
+    "smartcare-tile-adhesive-t1-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:17.243Z"
+    },
+    "smartcare-tile-adhesive-t3-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:18.127Z"
+    },
+    "asian-paints-smartcare-damp-proof-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:18.912Z"
+    },
+    "prod-cement-civil-works-asian-paints-smartcare-damp-proof-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:20.458Z"
+    },
+    "asian-paints-smartcare-damp-proof-advanced-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:21.177Z"
+    },
+    "prod-cement-civil-works-asian-paints-smartcare-damp-proof-advanced-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:22.099Z"
+    },
+    "prod-paint-ap-royale-luxury-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:25.546Z"
+    },
+    "prod-paint-ap-royale-luxury-white-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:26.194Z"
+    },
+    "prod-paint-ap-apex-weather-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:27.796Z"
+    },
+    "prod-paint-ap-apex-weather-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:28.410Z"
+    },
+    "prod-paint-ap-apex-ultima-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:29.260Z"
+    },
+    "prod-paint-ap-apex-ultima-white-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:30.027Z"
+    },
+    "prod-paint-ap-apcolite-gloss-enamel-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:30.846Z"
+    },
+    "prod-paint-ap-apcolite-gloss-enamel-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:31.979Z"
+    },
+    "prod-paint-ap-apcolite-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:32.564Z"
+    },
+    "prod-paint-ap-apcolite-white-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:33.412Z"
+    },
+    "prod-paint-ap-ace-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:34.179Z"
+    },
+    "prod-paint-ap-ace-white-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:35.997Z"
+    },
+    "prod-tiles-10-asian-granito-asian-granito-agl-double-": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:36.660Z"
+    },
+    "ashirvad-upvc-solvent-cement-118ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:37.379Z"
+    },
+    "ashirvad-pure-4-layer-insulated-foam-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:38.061Z"
+    },
+    "ashirvad-pure-3-layer-anti-bacterial-tank-500l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:38.646Z"
+    },
+    "prod-cpvc-plumbing-tanks-metal-clamp": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:41.912Z"
+    },
+    "ashirvad-pure-3-layer-anti-bacterial-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:43.795Z"
+    },
+    "ashirvad-pure-3-layer-anti-bacterial-tank-2000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:44.977Z"
+    },
+    "astral-cpvc-tank-nipple-20mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:16:57.946Z"
+    },
+    "astral-cpvc-tee-25mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:12.210Z"
+    },
+    "astral-cpvc-tee-20mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:12.776Z"
+    },
+    "astral-cpvc-union-20mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:13.410Z"
+    },
+    "astral-weld-on-cts-500-cpvc-solvent-118ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:15.193Z"
+    },
+    "prod-home-appliances-atomberg-efficio-200mm-bldc-exhaust-fan": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:15.812Z"
+    },
+    "prod-home-appliances-atomberg-studio-plus-150mm-bldc-exhaust-fan": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:17.411Z"
+    },
+    "prod-acc-backline-ro-faucet-304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:17.927Z"
+    },
+    "prod-home-appliances-bajaj-shield-series-new-shakti-15l-storage-geyser": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:18.544Z"
+    },
+    "prod-masonry-banda-hamirpur-coarse-morang-trolley-100": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:20.078Z"
+    },
+    "prod-masonry-banda-hamirpur-coarse-morang-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:35.893Z"
+    },
+    "prod-paint-berger-bison-emul-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:36.610Z"
+    },
+    "prod-paint-berger-bison-putty-40kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:37.294Z"
+    },
+    "prod-paint-berger-bp-primer-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:37.961Z"
+    },
+    "prod-paint-berger-easy-clean-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:39.895Z"
+    },
+    "prod-paint-berger-bp-primer-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:41.763Z"
+    },
+    "prod-paint-berger-easy-clean-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:42.877Z"
+    },
+    "prod-paint-berger-luxol-enamel-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:43.610Z"
+    },
+    "prod-paint-berger-luxol-enamel-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:45.809Z"
+    },
+    "prod-paint-berger-weathercoat-anti-dust-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:47.094Z"
+    },
+    "prod-paint-berger-weathercoat-anti-dust-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:47.810Z"
+    },
+    "prod-masonry-birla-aerocon-aac-4-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:50.694Z"
+    },
+    "prod-masonry-birla-aerocon-aac-6-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:51.292Z"
+    },
+    "prod-masonry-birla-aerocon-aac-8-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:51.944Z"
+    },
+    "prod-masonry-birla-aerocon-aac-cbm-bulk": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:52.626Z"
+    },
+    "prod-paint-birla-opus-calista-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:54.844Z"
+    },
+    "prod-paint-birla-opus-one-shine-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:55.542Z"
+    },
+    "prod-cement-civil-works-birla-white-cement-5kg-pack": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:56.230Z"
+    },
+    "birla-white-cement-5kg-pack": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:56.926Z"
+    },
+    "prod-paint-bw-wallseal-40kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:58.796Z"
+    },
+    "prod-paint-bw-putty-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:17:59.446Z"
+    },
+    "prod-paint-bw-putty-40kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:00.377Z"
+    },
+    "prod-tiles-20-south-indian-black-galaxy-polished-gra": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:03.147Z"
+    },
+    "prod-door-bling-queen-aldrop-12in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:03.877Z"
+    },
+    "prod-tools-bosch-gbh-2-26-dre": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:05.326Z"
+    },
+    "bnc-connectors-pack-of-10": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:06.130Z"
+    },
+    "prod-tools-bosch-gbh-2-26-re": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:06.977Z"
+    },
+    "prod-tools-bosch-gws-600": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:09.310Z"
+    },
+    "prod-tiles-42-bosch-bosch-4-inch-110mm-contin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:09.910Z"
+    },
+    "prod-tools-hardware-bosch-gbh220": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:10.561Z"
+    },
+    "prod-tools-hardware-bosch-gsb550": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:11.226Z"
+    },
+    "prod-tools-hardware-bosch-gst650": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:12.860Z"
+    },
+    "prod-tools-hardware-bosch-gws600": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:13.644Z"
+    },
+    "prod-tiles-30-italian-imported-botticino-carrara-polishe": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:14.277Z"
+    },
+    "prod-sink-carysil-big-bowl-plus-nera-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:15.628Z"
+    },
+    "prod-sink-carysil-big-bowl-champagne-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:16.326Z"
+    },
+    "prod-sink-carysil-big-bowl-nera-black-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:17.829Z"
+    },
+    "prod-sink-carysil-elegance-esm-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:18.742Z"
+    },
+    "prod-sink-carysil-new-ascend-arena-34x20": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:19.545Z"
+    },
+    "prod-sink-carysil-vogue-drainboard-36x20": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:21.078Z"
+    },
+    "d-link-cat6-cable-100m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:23.261Z"
+    },
+    "prod-tiles-34-natural-stone-cuddapah-kadappa-black-po": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:23.910Z"
+    },
+    "prod-home-appliances-crompton-ozone-75l-desert-air-cooler": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:24.624Z"
+    },
+    "prod-home-appliances-crompton-instabliss-3l-3000w-instant-geyser": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:25.359Z"
+    },
+    "prod-home-appliances-crompton-brisk-air-neo-200mm-exhaust-fan": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:26.011Z"
+    },
+    "cp-plus-8ch-12v-smps-power-supply": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:26.661Z"
+    },
+    "cp-plus-8-port-poe-switch-cp-anw-hpu8h2-n12": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:27.243Z"
+    },
+    "cp-plus-8-channel-dvr-cp-uvr-0801e1v-i": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:27.995Z"
+    },
+    "cp-plus-8-channel-nvr-cp-unr-108f1": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:28.626Z"
+    },
+    "cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:29.291Z"
+    },
+    "prod-cctv-networking-cp-z43q": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:29.961Z"
+    },
+    "cp-plus-4mp-ip-dome-camera-cp-unc-da41l3c-q": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:30.595Z"
+    },
+    "cp-plus-4ch-12v-smps-power-supply": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:32.160Z"
+    },
+    "cp-plus-4-port-poe-switch-cp-anw-hp4h2-n65": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:35.594Z"
+    },
+    "cp-plus-4-channel-dvr": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:36.347Z"
+    },
+    "cp-plus-4-channel-nvr-cp-unr-104f1": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:37.309Z"
+    },
+    "cp-plus-3mp-wifi-pt-camera-cp-e38q": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:37.960Z"
+    },
+    "prod-cctv-networking-cp-e38q": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:38.561Z"
+    },
+    "cp-plus-3mp-wifi-outdoor-bullet-camera-cp-v32g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:39.263Z"
+    },
+    "cp-plus-3mp-4g-sim-camera-ez-r33t": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:39.912Z"
+    },
+    "prod-cctv-networking-ez-r33t": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:40.542Z"
+    },
+    "cp-plus-3-plus-1-pure-copper-cctv-cable-90m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:41.646Z"
+    },
+    "cp-plus-2mp-ip-dome-camera-cp-unc-da21l3c-q": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:42.944Z"
+    },
+    "prod-cctv-networking-cp-unc-da21l3c-q": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:43.627Z"
+    },
+    "prod-cctv-networking-cp-vac-d24l2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:44.541Z"
+    },
+    "cp-plus-2-4mp-full-hd-ir-dome-camera-cp-vac-d24l2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:45.125Z"
+    },
+    "prod-cctv-networking-cp-vac-t24l2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:46.027Z"
+    },
+    "cp-plus-2-4mp-full-hd-ir-bullet-camera-cp-vac-t24l2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:50.175Z"
+    },
+    "cp-plus-16-channel-nvr": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:50.841Z"
+    },
+    "conon-4-cam-ip-poe-complete-ready-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:51.596Z"
+    },
+    "conon-4-cam-analog-hd-complete-ready-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:52.243Z"
+    },
+    "prod-san-cera-victor-corner-basin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:52.976Z"
+    },
+    "prod-san-cera-victor-one-piece-s-trap": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:53.610Z"
+    },
+    "prod-fauc-cera-titanium-wall-cock-f1003261": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:54.677Z"
+    },
+    "prod-san-cera-slim-cistern-tank-80mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:55.277Z"
+    },
+    "prod-san-cera-qtype-flush-plate-chr": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:55.945Z"
+    },
+    "prod-san-cera-bottle-trap-32mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:56.641Z"
+    },
+    "prod-san-cera-garnet-2way-bibcock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:18:59.460Z"
+    },
+    "prod-fauc-cera-crayon-wall-cock-f2008251": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:00.325Z"
+    },
+    "prod-san-cera-careo-thin-rim-basin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:01.075Z"
+    },
+    "prod-san-cera-calisto-rimless-wall-hung": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:01.727Z"
+    },
+    "centuryply-sainik-710-plywood-19mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:02.343Z"
+    },
+    "centuryply-sainik-710-marine-plywood-18mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:03.144Z"
+    },
+    "centuryply-club-prime-bwp-plywood-19mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:03.760Z"
+    },
+    "centuryply-club-prime-bwp-marine-plywood-18mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:04.342Z"
+    },
+    "centuryply-club-prime-bwp-flush-door-30mm-7x3": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:04.908Z"
+    },
+    "centuryply-bond-flush-door-30mm-solid-core-7x3": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:05.546Z"
+    },
+    "century-1mm-laminate-449-urban-teak-8x4": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:08.060Z"
+    },
+    "century-1mm-laminate-3846-white-marble-8x4": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:09.042Z"
+    },
+    "prod-door-cent-style-aldrop-12in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:09.711Z"
+    },
+    "prod-paint-dulux-weathershield-powerflexx-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:14.526Z"
+    },
+    "prod-waterproofing-repairing-drf-urp": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:15.877Z"
+    },
+    "dr-fixit-roofseal-classic-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:16.576Z"
+    },
+    "prod-cement-civil-works-dr-fixit-roofseal-classic-white-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:17.343Z"
+    },
+    "dr-fixit-roofseal-classic-white-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:18.243Z"
+    },
+    "prod-cement-civil-works-dr-fixit-roofseal-classic-white-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:18.843Z"
+    },
+    "dr-fixit-roofseal-classic-white-10l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:19.476Z"
+    },
+    "prod-cement-civil-works-dr-fixit-roofseal-classic-white-10l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:20.708Z"
+    },
+    "dr-fixit-raincoat-wpc-exterior-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:21.408Z"
+    },
+    "prod-cement-civil-works-dr-fixit-raincoat-wpc-exterior-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:22.109Z"
+    },
+    "prod-waterproofing-repairing-drf-raincoat": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:22.741Z"
+    },
+    "prod-waterproofing-repairing-drf-pidifin-terrace": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:23.443Z"
+    },
+    "prod-waterproofing-repairing-drf-pidifin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:24.576Z"
+    },
+    "dr-fixit-tile-stone-sealer-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:27.758Z"
+    },
+    "prod-waterproofing-repairing-drf-crackx": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:28.410Z"
+    },
+    "dr-fixit-301-pidicrete-urp-5kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:29.109Z"
+    },
+    "prod-cement-civil-works-dr-fixit-301-pidicrete-urp-5kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:29.775Z"
+    },
+    "dr-fixit-301-pidicrete-urp-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:30.375Z"
+    },
+    "prod-cement-civil-works-dr-fixit-301-pidicrete-urp-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:31.077Z"
+    },
+    "dr-fixit-201-crack-x-paste-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:31.711Z"
+    },
+    "prod-cement-civil-works-dr-fixit-201-crack-x-paste-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:32.343Z"
+    },
+    "dr-fixit-112-pidifin-2k-3kg-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:32.959Z"
+    },
+    "prod-cement-civil-works-dr-fixit-112-pidifin-2k-3kg-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:33.660Z"
+    },
+    "dr-fixit-112-pidifin-2k-15kg-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:34.275Z"
+    },
+    "prod-cement-civil-works-dr-fixit-112-pidifin-2k-15kg-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:34.895Z"
+    },
+    "dr-fixit-101-pidiproof-lw-plus-5l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:35.462Z"
+    },
+    "prod-cement-civil-works-dr-fixit-101-pidiproof-lw-plus-5l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:40.408Z"
+    },
+    "dr-fixit-101-pidiproof-lw-plus-200ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:40.959Z"
+    },
+    "prod-cement-civil-works-dr-fixit-101-pidiproof-lw-plus-200ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:41.559Z"
+    },
+    "dr-fixit-101-pidiproof-lw-plus-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:42.176Z"
+    },
+    "prod-cement-civil-works-dr-fixit-101-pidiproof-lw-plus-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:42.743Z"
+    },
+    "dr-fixit-101-pidiproof-lw-plus-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:43.307Z"
+    },
+    "prod-cement-civil-works-dr-fixit-101-pidiproof-lw-plus-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:43.942Z"
+    },
+    "prod-adh-dowsil-gp-280ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:45.711Z"
+    },
+    "prod-waterproofing-repairing-drf-lw-wp": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:46.761Z"
+    },
+    "prod-adh-dowsil-789-300ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:48.408Z"
+    },
+    "dorset-cylindrical-knob-lock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:49.325Z"
+    },
+    "dorset-dc60sm-60kg-overhead-door-closer": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:49.960Z"
+    },
+    "prod-door-dorset-kaira-10in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:51.143Z"
+    },
+    "prod-door-dorset-dc60sm-closer": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:54.258Z"
+    },
+    "prod-tools-hardware-dewalt-dwd024": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:55.392Z"
+    },
+    "prod-tools-hardware-dewalt-dw801": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:55.949Z"
+    },
+    "prod-adh-dendrite-pc65-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:56.675Z"
+    },
+    "prod-fur-decoranddecor-sliding-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:19:57.377Z"
+    },
+    "dahua-4ch-cooper-xvr-dh-xvr1b04h-i": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:20:00.858Z"
+    },
+    "dahua-2mp-hd-cooper-bullet-dh-hac-b1a21p": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:20:01.561Z"
+    },
+    "d-link-cat6-cable-305m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:20:02.410Z"
+    },
+    "d-link-rj45-modular-connectors-box-100pcs": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:20:03.074Z"
+    },
+    "prod-tiles-40-fastobond-fastobond-tile-leveling-s": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:21:55.326Z"
+    },
+    "prod-door-falna-pull-handle-ss304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:21:56.141Z"
+    },
+    "prod-home-appliances-faber-hood-primus-plus-energy-90cm-chimney": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:21:56.773Z"
+    },
+    "prod-home-appliances-faber-hood-polo-in-hc-sc-bk-60-chimney": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:21:57.507Z"
+    },
+    "europa-mortise-rose-handle-combo-set-m516961r692ab": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:21:58.175Z"
+    },
+    "europa-hexabolt-h341-lock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:21:58.786Z"
+    },
+    "europa-main-door-lock-antique-brass": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:21:59.659Z"
+    },
+    "europa-jemmy-proof-j320-lock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:00.773Z"
+    },
+    "prod-door-europa-parma-v321": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:01.356Z"
+    },
+    "prod-door-europa-mortise-rose-m516961r692ab": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:02.047Z"
+    },
+    "prod-fauc-essco-cosmo-wall-cock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:03.258Z"
+    },
+    "erd-12v-2a-power-adapter": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:03.889Z"
+    },
+    "prod-home-appliances-elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:04.590Z"
+    },
+    "prod-home-appliances-elica-wd-tbf-hac-60-ms-nero-filterless-chimney": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:08.490Z"
+    },
+    "ebco-wicker-basket-soft-close": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:09.223Z"
+    },
+    "ebco-universal-magic-corner-double-pullout": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:10.459Z"
+    },
+    "ebco-thali-kitchen-basket-ss304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:11.089Z"
+    },
+    "ebco-swing-out-waste-bin-rectangular": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:11.827Z"
+    },
+    "ebco-side-pullout-frameless": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:12.974Z"
+    },
+    "ebco-roll-top-pro-vertical-rolling-shutter": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:13.825Z"
+    },
+    "ebco-pvc-skirting-q-plinth-clip-100mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:14.825Z"
+    },
+    "ebco-pvc-skirting-joints-100mm-black": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:15.492Z"
+    },
+    "ebco-pull-out-waste-bin-40l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:16.225Z"
+    },
+    "ebco-pro-motion-tandem-box": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:17.156Z"
+    },
+    "ebco-plate-kitchen-basket-ss304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:17.823Z"
+    },
+    "ebco-plain-kitchen-basket-ss304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:18.490Z"
+    },
+    "ebco-pantry-unit-soft-close": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:19.223Z"
+    },
+    "ebco-magic-corner-max-90-single-pullout": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:22.512Z"
+    },
+    "ebco-kitchen-plate-glass-tray": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:24.356Z"
+    },
+    "ebco-kitchen-drip-tray": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:24.973Z"
+    },
+    "ebco-fascia-bracket-powb4-40": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:25.689Z"
+    },
+    "ebco-eurolift-bi-fold-door-system": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:26.290Z"
+    },
+    "ebco-cutlery-kitchen-basket-ss304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:26.909Z"
+    },
+    "ebco-cup-saucer-kitchen-basket-ss304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:27.507Z"
+    },
+    "ebco-bottle-pullout-soft-close": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:28.075Z"
+    },
+    "ebco-auto-pull-out-waste-bin-30l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:28.656Z"
+    },
+    "prod-mod-ebco-slim-s3-500-122": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:29.223Z"
+    },
+    "prod-fur-ebco-sleek-soft-20in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:29.825Z"
+    },
+    "prod-fur-ebco-sleek-reg-20in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:30.425Z"
+    },
+    "prod-mod-ebco-roll-top-pro-shutter-600mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:30.990Z"
+    },
+    "prod-fur-ebco-stds-i-35-20in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:35.222Z"
+    },
+    "prod-mod-ebco-waste-bin-40l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:35.959Z"
+    },
+    "prod-mod-ebco-pro-lift-100n-gas-spring": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:36.739Z"
+    },
+    "prod-mod-ebco-magic-corner-mcdp90": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:38.475Z"
+    },
+    "prod-mod-ebco-livsmart-wicker-450": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:39.323Z"
+    },
+    "prod-mod-ebco-frameless-side-pullout-150mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:40.126Z"
+    },
+    "prod-mod-ebco-corner-carousel-polymer": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:40.740Z"
+    },
+    "prod-mod-ebco-bpo2sc2-250mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:41.392Z"
+    },
+    "prod-mod-ebco-bpo2sc2-200mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:42.123Z"
+    },
+    "prod-mod-ebco-bpo2sc2-150mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:22:43.008Z"
+    },
+    "prod-door-godrej-hercules-closer-60kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:11.426Z"
+    },
+    "prod-door-godrej-cylindrical-5805": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:12.122Z"
+    },
+    "prod-door-godrej-centaur-9143": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:12.788Z"
+    },
+    "prod-door-godrej-catus-touch-plus-4200": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:13.371Z"
+    },
+    "prod-door-godrej-advantis-iot9": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:14.039Z"
+    },
+    "prod-door-godrej-advantis-gsld1-4406": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:14.605Z"
+    },
+    "prod-masonry-ghaghara-white-balu-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:15.191Z"
+    },
+    "prod-masonry-ghaghara-white-balu-trolley-100": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:15.756Z"
+    },
+    "gallantt-fe-500-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:16.341Z"
+    },
+    "prod-cement-civil-works-gallantt-fe-500-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:17.289Z"
+    },
+    "prod-san-futura-linear-drain-600mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:17.840Z"
+    },
+    "prod-sink-futura-dura-double-bowl-37x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:18.473Z"
+    },
+    "finolex-cpvc-25mm-sdr11-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:21.506Z"
+    },
+    "finolex-cpvc-20mm-sdr11-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:22.336Z"
+    },
+    "finolex-cpvc-20mm-sdr11-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:22.941Z"
+    },
+    "finolex-flameguard-wire-row2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:23.588Z"
+    },
+    "finolex-gen-z-3-plus-1-cctv-cable-90m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:24.239Z"
+    },
+    "finolex-rg-6-ccs-axial-cable-100m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:24.821Z"
+    },
+    "prod-wires-mcb-electrical-fino-silver": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:25.406Z"
+    },
+    "finolex-silver-fr-wire": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:25.956Z"
+    },
+    "prod-tiles-41-flamingo-flamingo-pro-tile-levelin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:26.507Z"
+    },
+    "prod-cement-civil-works-fosroc-brushbond-rfx-2k-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:27.140Z"
+    },
+    "prod-cement-civil-works-fosroc-conplast-wl-xtra-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:28.438Z"
+    },
+    "fosroc-brushbond-rfx-2k-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:29.055Z"
+    },
+    "fosroc-conplast-wl-xtra-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:30.205Z"
+    },
+    "prod-acc-fossa-soap-dispenser-300ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:31.623Z"
+    },
+    "finolex-cat-6-lite-lan-cable-100m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:34.173Z"
+    },
+    "finolex-cpvc-25mm-sdr11-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:35.307Z"
+    },
+    "prod-adh-fevitite-standard-180g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:36.255Z"
+    },
+    "prod-adh-feviseal-weatherproof-pro-280ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:36.772Z"
+    },
+    "prod-adh-feviseal-neutral-pro-280ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:37.321Z"
+    },
+    "prod-adh-fevicol-sr-998-5l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:37.881Z"
+    },
+    "prod-adh-fevicol-sr-998-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:38.739Z"
+    },
+    "prod-adh-fevicol-speedx-5kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:39.255Z"
+    },
+    "prod-adh-fevicol-speedx-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:39.774Z"
+    },
+    "prod-adh-fevicol-sh-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:40.287Z"
+    },
+    "prod-adh-fevicol-sh-5kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:41.638Z"
+    },
+    "prod-adh-fevicol-sh-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:42.322Z"
+    },
+    "prod-adh-fevicol-sh-2kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:43.140Z"
+    },
+    "prod-adh-fevicol-sh-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:46.606Z"
+    },
+    "prod-adh-fevicol-probond-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:47.171Z"
+    },
+    "prod-adh-fevicol-marine-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:47.772Z"
+    },
+    "prod-adh-fevicol-marine-5kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:48.304Z"
+    },
+    "prod-adh-fevicol-marine-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:48.838Z"
+    },
+    "prod-adh-fevicol-marine-2kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:49.438Z"
+    },
+    "prod-adh-fevicol-marine-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:49.957Z"
+    },
+    "prod-adh-fevicol-hiper-star-2kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:50.957Z"
+    },
+    "prod-adh-fevicol-hiper-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:51.557Z"
+    },
+    "prod-adh-fevicol-hiper-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:52.090Z"
+    },
+    "prod-adh-fevicol-heatx-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:52.605Z"
+    },
+    "hettich-avantech-tandem-box-anthracite": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:24:59.426Z"
+    },
+    "prod-mod-hettich-orgatray-560-cutlery": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:00.142Z"
+    },
+    "prod-fur-hettich-onsys-8crank-105": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:00.810Z"
+    },
+    "prod-fur-hettich-onsys-0crank-105": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:01.546Z"
+    },
+    "prod-fur-hettich-ka4732-20in-black": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:02.763Z"
+    },
+    "prod-mod-hettich-magic-corner-iron-grey": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:03.648Z"
+    },
+    "prod-fur-hettich-ka4732-18in-black": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:04.445Z"
+    },
+    "prod-fur-hettich-ka4532-18in-zinc": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:05.045Z"
+    },
+    "prod-mod-hettich-innotech-cutlery-70mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:06.049Z"
+    },
+    "prod-mod-hettich-innotech-cup-144mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:06.631Z"
+    },
+    "prod-mod-hettich-atira-6in-anthracite": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:07.333Z"
+    },
+    "prod-mod-hettich-atira-pot-pan-176mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:08.415Z"
+    },
+    "prod-mod-hettich-atira-thali-pantry-200mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:08.999Z"
+    },
+    "prod-fur-hettich-wardrobe-lift-540-690": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:11.566Z"
+    },
+    "prod-mod-hettich-gola-profile-3000mm-black": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:12.150Z"
+    },
+    "prod-mod-hettich-cargoplus-ss304-thali": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:12.900Z"
+    },
+    "prod-mod-hettich-100n-gas-piston-0062316": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:13.501Z"
+    },
+    "notched-trowel-10mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:14.136Z"
+    },
+    "prod-fur-heavy-duty-ss-closet-rod-36in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:14.752Z"
+    },
+    "construction-safety-net-green": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:15.503Z"
+    },
+    "prod-home-appliances-havells-ventil-air-dx-150mm-exhaust-fan": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:16.187Z"
+    },
+    "havells-3-core-flat-2-5mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:16.752Z"
+    },
+    "havells-spn-db-8-way-mcb": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:17.319Z"
+    },
+    "havells-lifeline-2-5-sq-mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:18.073Z"
+    },
+    "havells-flameguard-wire-row2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:18.787Z"
+    },
+    "havells-mcb-sp-16a-c-type": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:21.220Z"
+    },
+    "prod-tiles-23-south-indian-hassan-green-polished-gra": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:21.788Z"
+    },
+    "prod-fur-hw-depot-handle-224mm-zblack": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:22.388Z"
+    },
+    "prod-fur-hw-depot-handle-160mm-zblack": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:23.072Z"
+    },
+    "prod-fur-hw-depot-handle-96mm-black": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:23.757Z"
+    },
+    "prod-door-hafele-butt-hinge-5x3x3": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:24.355Z"
+    },
+    "prod-fur-hafele-metalla-110-half": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:25.288Z"
+    },
+    "prod-fur-hafele-metalla-110-full": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:25.823Z"
+    },
+    "prod-mod-hafele-matrixbox-slim-ss-500-88": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:26.507Z"
+    },
+    "prod-tiles-12-h-r-johnson-h-r-johnson-marbonite-dou": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:27.222Z"
+    },
+    "prod-tiles-15-h-r-johnson-h-r-johnson-ceramic-digit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:27.856Z"
+    },
+    "greenply-optima-g-flush-door-30mm-7x3": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:32.241Z"
+    },
+    "greenply-green-gold-2-0-marine-plywood-18mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:32.805Z"
+    },
+    "greenply-green-ecotech-platinum-flush-door-30mm-7x3": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:33.392Z"
+    },
+    "greenply-ecotec-bwr-plywood-18mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:33.942Z"
+    },
+    "godrej-tribolt-ultra-lock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:34.791Z"
+    },
+    "godrej-stella-180mm-mortise-door-lock-handle-set": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:35.373Z"
+    },
+    "godrej-navtal-brass-padlock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:36.024Z"
+    },
+    "prod-door-godrej-vertibolt-4291": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:37.609Z"
+    },
+    "prod-door-godrej-tribolt-2c-8131": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:38.476Z"
+    },
+    "prod-door-godrej-tribolt-1ck-8111": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:39.059Z"
+    },
+    "prod-door-godrej-stella-180mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:39.908Z"
+    },
+    "prod-door-godrej-navtal-65mm-brass": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:41.808Z"
+    },
+    "prod-door-godrej-neo-prime-9686": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:42.441Z"
+    },
+    "prod-door-godrej-butt-hinge-5in-12g-black": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:43.074Z"
+    },
+    "prod-paint-jk-wallmaxx-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:46.541Z"
+    },
+    "prod-adh-jivanjor-allrounder-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:47.258Z"
+    },
+    "prod-adh-jivanjor-allrounder-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:48.191Z"
+    },
+    "prod-adh-jivanjor-allrounder-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:49.073Z"
+    },
+    "prod-san-jaquar-rain-shower-8in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:49.942Z"
+    },
+    "prod-mix-jaquar-single-lever-wall-chrome": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:50.959Z"
+    },
+    "prod-san-jaquar-maze-hand-shower-120mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:51.875Z"
+    },
+    "prod-san-jaquar-kubix-prime-rimless-wc": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:52.559Z"
+    },
+    "prod-san-jaquar-kubix-bath-spout": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:53.959Z"
+    },
+    "prod-san-jaquar-kubix-flush-plate-chr": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:54.874Z"
+    },
+    "prod-san-jaquar-kubix-diverter-trim-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:55.627Z"
+    },
+    "prod-san-jaquar-cistern-frame-tank": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:56.242Z"
+    },
+    "prod-san-jaquar-highflow-diverter-body": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:25:56.957Z"
+    },
+    "prod-san-jaquar-health-faucet-abs": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:00.706Z"
+    },
+    "prod-fauc-jaquar-florentine-wall-5347pm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:01.391Z"
+    },
+    "prod-fauc-jaquar-florentine-wall-black-5347pm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:02.125Z"
+    },
+    "prod-mix-jaquar-florentine-wall-black-5166pm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:02.764Z"
+    },
+    "prod-san-jaquar-florentine-angle-cock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:03.309Z"
+    },
+    "prod-fauc-jaquar-florentine-table-5357pm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:03.909Z"
+    },
+    "prod-mix-jaquar-florentine-pullout-black-5177bpm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:04.524Z"
+    },
+    "prod-fauc-jaquar-darc-wall-cock-37347": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:05.091Z"
+    },
+    "prod-fauc-jaquar-continental-wall-cock-347knm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:05.692Z"
+    },
+    "prod-san-jaquar-continental-thin-rim-basin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:06.276Z"
+    },
+    "prod-san-jaquar-alive-flush-plate-blk": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:06.876Z"
+    },
+    "prod-san-jaquar-alive-diverter-trim-kit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:07.442Z"
+    },
+    "prod-adh-ingco-caulking-gun-9in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:09.457Z"
+    },
+    "prod-fur-hydraulic-lift-ottoman-1200n": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:10.024Z"
+    },
+    "prod-san-hindware-venice-round-basin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:10.577Z"
+    },
+    "prod-fauc-hindware-flora-wall-cock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:11.176Z"
+    },
+    "prod-san-hindware-element-one-piece-wc": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:11.740Z"
+    },
+    "prod-fauc-hindware-contessa-neo-wall-cock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:12.625Z"
+    },
+    "prod-safety-workwear-hillson-gumboots": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:15.009Z"
+    },
+    "hillson-dragon-steel-toe-gumboots-15-high": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:15.592Z"
+    },
+    "hikvision-8ch-nxi-acuasense-nvr-ds-7608nxi-k1": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:16.142Z"
+    },
+    "hikvision-2mp-turbo-hd-bullet-ds-2ce16d0t-irpf": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:17.392Z"
+    },
+    "hikvision-2mp-colorvu-dome-ds-2ce72dft-f": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:18.043Z"
+    },
+    "hikvision-4ch-turbo-hd-dvr-ds-7104hghi-m1": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:19.209Z"
+    },
+    "scaffolding-net-black": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:20.458Z"
+    },
+    "hettich-wicker-basket-beech-runners": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:21.124Z"
+    },
+    "hettich-waste-bin-it-classic": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:21.776Z"
+    },
+    "hettich-universal-magic-corner-double-pullout": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:22.308Z"
+    },
+    "hettich-pull-out-2-tier-iron-grey": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:22.975Z"
+    },
+    "hettich-orgatray-440-trimmable": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:23.522Z"
+    },
+    "hettich-onsys-4447i-soft-close-hinges-105-1-pair": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:24.143Z"
+    },
+    "hettich-cargo-detergent-holder": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:27.442Z"
+    },
+    "hettich-cargo-dish-drainer-set": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:28.141Z"
+    },
+    "hettich-cargo-iq-300-bottle-pull-out": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:28.790Z"
+    },
+    "hettich-duo-6-tier-frame-pantry-unit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:29.424Z"
+    },
+    "hettich-innotech-tandem-box-silver": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:30.042Z"
+    },
+    "hettich-larder-6-tier-frame-pantry-unit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:30.724Z"
+    },
+    "kei-homecab-fr-wire": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:34.409Z"
+    },
+    "prod-tiles-26-indian-marble-katni-beige-polished-marb": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:35.007Z"
+    },
+    "prod-safety-workwear-karam-helmet": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:35.543Z"
+    },
+    "karam-pn-521-helmet-isi": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:36.125Z"
+    },
+    "prod-safety-workwear-karam-mask": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:36.657Z"
+    },
+    "karam-pn-16-hi-vis-jacket": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:37.223Z"
+    },
+    "karam-fs-51-full-harness": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:37.759Z"
+    },
+    "prod-safety-workwear-karam-harness": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:38.326Z"
+    },
+    "karam-es-01-safety-goggles": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:39.008Z"
+    },
+    "prod-safety-workwear-karam-goggles": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:40.374Z"
+    },
+    "karam-dust-mask-pack-50": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:41.007Z"
+    },
+    "prod-safety-karam-pn501": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:41.877Z"
+    },
+    "prod-safety-karam-ki01-pn351": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:42.624Z"
+    },
+    "kamdhenu-nxt-fe-550-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:46.490Z"
+    },
+    "prod-cement-civil-works-kamdhenu-nxt-fe-550-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:47.124Z"
+    },
+    "kamdhenu-nxt-fe-550-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:47.691Z"
+    },
+    "prod-cement-civil-works-kamdhenu-nxt-fe-550-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:49.394Z"
+    },
+    "kamdhenu-nxt-fe-550-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:50.041Z"
+    },
+    "prod-cement-civil-works-kamdhenu-nxt-fe-550-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:50.640Z"
+    },
+    "kamdhenu-nxt-fe-550-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:51.243Z"
+    },
+    "prod-cement-civil-works-kamdhenu-nxt-fe-550-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:53.543Z"
+    },
+    "kamdhenu-22-gauge-ms-binding-wire-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:54.176Z"
+    },
+    "prod-cement-civil-works-kamdhenu-22-gauge-ms-binding-wire-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:54.892Z"
+    },
+    "prod-tiles-04-kajaria-kajaria-rave-gris-dry-gra": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:55.492Z"
+    },
+    "prod-tiles-02-kajaria-kajaria-polished-vitrifie": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:56.076Z"
+    },
+    "prod-tiles-01-kajaria-kajaria-eternity-zion-mar": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:56.791Z"
+    },
+    "prod-tiles-03-kajaria-kajaria-eternity-jade-gre": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:26:59.825Z"
+    },
+    "prod-tiles-18-kajaria-kajaria-endura-heavy-duty": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:00.425Z"
+    },
+    "prod-tiles-13-kajaria-kajaria-ceramic-glossy-ba": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:01.023Z"
+    },
+    "prod-masonry-kabrai-concrete-stone-dust-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:01.692Z"
+    },
+    "prod-masonry-kabrai-6mm-jeera-gitti-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:02.641Z"
+    },
+    "prod-masonry-kabrai-40mm-heavy-gitti-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:03.259Z"
+    },
+    "prod-masonry-kabrai-20mm-kali-gitti-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:04.025Z"
+    },
+    "prod-masonry-kabrai-20mm-kali-gitti-trolley-100": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:04.807Z"
+    },
+    "prod-masonry-kabrai-10mm-crushed-gitti-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:05.427Z"
+    },
+    "prod-masonry-kabrai-10mm-crushed-gitti-trolley-100": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:05.975Z"
+    },
+    "jsw-tile-fix-premium-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:06.507Z"
+    },
+    "jsw-neosteel-fe-550d-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:09.657Z"
+    },
+    "prod-cement-civil-works-jsw-neosteel-fe-550d-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:10.208Z"
+    },
+    "jsw-neosteel-fe-550d-20mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:10.740Z"
+    },
+    "prod-cement-civil-works-jsw-neosteel-fe-550d-20mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:11.809Z"
+    },
+    "jsw-neosteel-fe-550d-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:12.576Z"
+    },
+    "prod-cement-civil-works-jsw-neosteel-fe-550d-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:14.175Z"
+    },
+    "jsw-neosteel-fe-550d-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:14.892Z"
+    },
+    "prod-cement-civil-works-jsw-neosteel-fe-550d-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:15.992Z"
+    },
+    "jsw-neosteel-fe-550d-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:16.691Z"
+    },
+    "prod-cement-civil-works-jsw-neosteel-fe-550d-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:17.393Z"
+    },
+    "prod-masonry-jkm-a-plus-solid-aac-cbm-bulk": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:17.991Z"
+    },
+    "prod-paint-jk-waterproof-40kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:19.859Z"
+    },
+    "prod-paint-jk-wallmaxx-40kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:20.390Z"
+    },
+    "prod-paint-nerolac-beauty-gold-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:27.241Z"
+    },
+    "myk-stonetech-cleaner-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:27.806Z"
+    },
+    "prod-tiles-37-myk-laticrete-myk-laticrete-sp-100-stai": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:28.456Z"
+    },
+    "myk-335-super-flex-adh-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:29.007Z"
+    },
+    "myk-laticrete-315-thin-set-adh-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:29.575Z"
+    },
+    "myk-laticrete-315-plus-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:30.158Z"
+    },
+    "prod-cement-civil-works-myk-laticrete-315-plus-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:30.757Z"
+    },
+    "myk-laticrete-305-tile-adhesive-grey-30kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:31.307Z"
+    },
+    "myk-laticrete-305-floor-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:31.891Z"
+    },
+    "prod-cement-civil-works-myk-laticrete-305-floor-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:32.475Z"
+    },
+    "myk-laticrete-303-grey-tile-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:33.090Z"
+    },
+    "mp-birla-samrat-ppc-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:33.724Z"
+    },
+    "prod-cement-civil-works-mp-birla-samrat-ppc-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:37.491Z"
+    },
+    "prod-tiles-27-indian-marble-morwad-banswara-white-mar": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:38.076Z"
+    },
+    "prod-tiles-16-morbi-heavy-duty-morbi-heavy-duty-green-di": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:38.777Z"
+    },
+    "prod-tiles-17-morbi-heavy-duty-morbi-heavy-duty-blue-gre": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:39.341Z"
+    },
+    "prod-home-appliances-microtek-luxe-1200-inverter-150ah-battery-combo": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:39.959Z"
+    },
+    "prod-door-met-craft-magnetic-stopper": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:40.823Z"
+    },
+    "prod-adh-soudaflex-40fc-600ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:41.410Z"
+    },
+    "prod-tiles-29-makrana-makrana-pure-white-premiu": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:42.007Z"
+    },
+    "prod-tiles-28-makrana-makrana-dungri-albeta-whi": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:42.574Z"
+    },
+    "prod-masonry-magicrete-aac-cbm-bulk": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:43.124Z"
+    },
+    "prod-masonry-magicrete-aac-8-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:46.307Z"
+    },
+    "prod-masonry-magicrete-aac-6-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:47.108Z"
+    },
+    "prod-masonry-magicrete-aac-4-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:47.807Z"
+    },
+    "prod-home-appliances-luminous-zelio-plus-1100-inverter-150ah-battery-combo": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:48.507Z"
+    },
+    "prod-masonry-lucknow-avval-red-clay-brick-single": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:49.124Z"
+    },
+    "prod-masonry-lucknow-avval-red-clay-brick-1000": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:49.776Z"
+    },
+    "prod-masonry-lucknow-doyam-red-clay-brick-1000": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:50.358Z"
+    },
+    "prod-masonry-lucknow-broken-brick-ballast-trolley": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:50.957Z"
+    },
+    "prod-masonry-local-precast-solid-concrete-block-8-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:53.908Z"
+    },
+    "prod-masonry-local-precast-hollow-concrete-block-8-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:54.543Z"
+    },
+    "prod-masonry-local-precast-80mm-m35-zigzag-paver-sqft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:55.093Z"
+    },
+    "prod-masonry-local-precast-60mm-m30-zigzag-paver-sqft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:55.658Z"
+    },
+    "local-isi-gi-binding-wire-14-swg-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:56.209Z"
+    },
+    "prod-cement-civil-works-local-isi-gi-binding-wire-14-swg-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:56.790Z"
+    },
+    "local-isi-18-20-swg-binding-wire-25kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:57.359Z"
+    },
+    "prod-cement-civil-works-local-isi-18-20-swg-binding-wire-25kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:57.926Z"
+    },
+    "prod-tiles-39-leqwell-leqwell-3mm-reusable-tile": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:58.491Z"
+    },
+    "legrand-rccb-40a-30ma-dp": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:27:59.474Z"
+    },
+    "legrand-myrius-6a-socket-5-pin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:01.824Z"
+    },
+    "prod-tiles-22-rajasthan-stone-lakha-red-polished-granit": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:02.409Z"
+    },
+    "prod-tiles-33-kota-stone-kota-high-polished-floori": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:04.925Z"
+    },
+    "prod-tiles-32-kota-stone-kota-grey-unpolished-cut-": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:06.158Z"
+    },
+    "prod-san-kohler-veil-wall-hung-wc": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:06.876Z"
+    },
+    "prod-sink-kohler-strive-21in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:07.741Z"
+    },
+    "prod-san-kohler-forefront-basin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:08.357Z"
+    },
+    "prod-mix-kohler-atom-pulldown-chrome-25981in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:09.090Z"
+    },
+    "prod-mod-kings-nimbus-tall-pantry-600mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:09.758Z"
+    },
+    "prod-wires-mcb-electrical-kei-homecab": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:11.041Z"
+    },
+    "prod-cement-civil-works-prism-champion-all-weather-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:22.325Z"
+    },
+    "prince-swr-pvc-110mm-type-b-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:22.925Z"
+    },
+    "prince-flowguard-plus-20mm-sdr11-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:23.457Z"
+    },
+    "tile-spacer-3mm-pack-200": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:24.124Z"
+    },
+    "polycab-optima-fr-wire-row2": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:24.707Z"
+    },
+    "prod-wires-mcb-electrical-poly-maxima": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:25.289Z"
+    },
+    "polycab-maxima-green-wire-hr-fr-lsh": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:25.840Z"
+    },
+    "polycab-cat6-pure-copper-utp-cable-305m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:27.026Z"
+    },
+    "prod-fur-pneumatic-bed-lift-900mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:28.125Z"
+    },
+    "prod-fur-pneumatic-bed-lift-1500mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:29.141Z"
+    },
+    "plasto-triple-layer-water-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:30.175Z"
+    },
+    "plasto-gold-10-layer-water-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:31.257Z"
+    },
+    "prod-acc-plantex-coupling-304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:33.875Z"
+    },
+    "pitbull-mirage-low-ankle-steel-toe-safety-shoes": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:34.623Z"
+    },
+    "prod-safety-workwear-pitbull-shoes": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:35.378Z"
+    },
+    "prod-cpvc-plumbing-tanks-m-seal": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:36.039Z"
+    },
+    "prod-adh-mseal-regular-500g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:36.658Z"
+    },
+    "prod-adh-mseal-regular-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:37.273Z"
+    },
+    "prod-adh-fevikwik-industrial-20g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:37.940Z"
+    },
+    "prod-adh-fevikwik-gel-20g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:38.524Z"
+    },
+    "philips-t5-high-lumen-20w-tube-batten": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:39.108Z"
+    },
+    "philips-stellar-smart-led-bulb-12w-b22": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:39.657Z"
+    },
+    "philips-stellar-bright-rimless-surface-downlight-15w": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:40.208Z"
+    },
+    "prod-lighting-phil-stellar": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:44.109Z"
+    },
+    "philips-star-glass-downlight-recessed-ceiling-panel-12w": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:44.706Z"
+    },
+    "prod-lighting-phil-glow": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:45.224Z"
+    },
+    "philips-full-glow-led-surface-light-round": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:45.824Z"
+    },
+    "philips-cob-spotlight-recessed-7w": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:46.341Z"
+    },
+    "prod-sink-parryware-new-coral-drainboard-34x20": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:46.942Z"
+    },
+    "prod-san-parryware-jordon-basin": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:47.875Z"
+    },
+    "prod-sink-parryware-eco-single-bowl-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:48.539Z"
+    },
+    "prod-san-parryware-cruz-wall-mounted-wc": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:49.156Z"
+    },
+    "prod-fauc-parryware-claret-wall-cock": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:49.792Z"
+    },
+    "prod-tiles-24-rajasthan-stone-p-white-platinum-white-gr": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:50.359Z"
+    },
+    "prod-door-ozone-fs8400-floor-spring": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:50.907Z"
+    },
+    "prod-tiles-08-orientbell-orientbell-pgvt-emperador": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:53.759Z"
+    },
+    "prod-tiles-09-orientbell-orientbell-gvt-glossy-mat": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:54.325Z"
+    },
+    "prod-tiles-14-orientbell-orientbell-dyna-grey-dk-g": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:55.174Z"
+    },
+    "nomwell-4u-wall-mount-network-rack": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:55.725Z"
+    },
+    "nomwell-rack-cabinet": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:56.291Z"
+    },
+    "prod-sink-nirali-monet-double-bowl-37x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:56.857Z"
+    },
+    "prod-paint-nerolac-excel-everlast-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:28:59.475Z"
+    },
+    "prod-paint-nerolac-impressions-hd-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:00.024Z"
+    },
+    "prod-paint-nerolac-pop-primer-4l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:00.522Z"
+    },
+    "prod-sink-nirali-grace-plain-21x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:01.022Z"
+    },
+    "prod-sink-nirali-orra-straight-satin-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:01.592Z"
+    },
+    "prod-sink-nirali-popular-master-double-bowl-37x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:02.992Z"
+    },
+    "prod-sink-nirali-orra-straight-glossy-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:03.589Z"
+    },
+    "prod-sink-nirali-evan-bg-handmade-21x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:04.273Z"
+    },
+    "prod-sink-nirali-evan-handmade-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:05.056Z"
+    },
+    "prod-cement-civil-works-sika-sikalatex-power-sbr-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:09.390Z"
+    },
+    "shree-cement-rockstrong-ppc-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:09.956Z"
+    },
+    "prod-cement-civil-works-shree-cement-rockstrong-ppc-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:10.490Z"
+    },
+    "seagate-skyhawk-surveillance-internal-hard-drive-1tb": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:12.126Z"
+    },
+    "schneider-32a-dp-mcb": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:13.289Z"
+    },
+    "sandisk-high-endurance-64gb-microsd": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:13.840Z"
+    },
+    "sandisk-high-endurance-128gb-microsd": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:14.474Z"
+    },
+    "sail-seqr-fe-550-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:15.072Z"
+    },
+    "prod-cement-civil-works-sail-seqr-fe-550-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:15.673Z"
+    },
+    "sail-seqr-fe-550-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:16.489Z"
+    },
+    "prod-cement-civil-works-sail-seqr-fe-550-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:20.338Z"
+    },
+    "sail-seqr-fe-550-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:20.890Z"
+    },
+    "prod-cement-civil-works-sail-seqr-fe-550-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:21.474Z"
+    },
+    "sail-seqr-fe-550-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:22.041Z"
+    },
+    "prod-cement-civil-works-sail-seqr-fe-550-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:22.557Z"
+    },
+    "safari-helmet-white-isi": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:23.173Z"
+    },
+    "safari-safety-vest-reflective": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:23.741Z"
+    },
+    "prod-acc-ruhe-waste-pipe-35in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:24.272Z"
+    },
+    "prod-sink-ruhe-handmade-32x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:24.840Z"
+    },
+    "prod-sink-ruhe-handmade-24x18": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:25.388Z"
+    },
+    "roff-tilefix-ready-mix-5kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:25.990Z"
+    },
+    "prod-tiles-38-roff-roff-t16-cera-clean-tile-": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:26.576Z"
+    },
+    "prod-tiles-36-roff-roff-t13-rainbow-tile-mat": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:30.108Z"
+    },
+    "roff-t03-powerflex-tile-adhesive-grey-30kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:30.891Z"
+    },
+    "roff-t02-nsa-tile-adhesive-grey-30kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:31.425Z"
+    },
+    "roff-t02-non-skid-tile-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:32.108Z"
+    },
+    "prod-cement-civil-works-roff-t02-non-skid-tile-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:32.706Z"
+    },
+    "roff-t01-new-construction-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:33.206Z"
+    },
+    "prism-champion-all-weather-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:39.976Z"
+    },
+    "prod-cement-civil-works-prism-champion-plus-duratech-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:40.555Z"
+    },
+    "prism-champion-plus-duratech-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:41.139Z"
+    },
+    "prod-cement-civil-works-prism-champion-ppc-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:41.723Z"
+    },
+    "prism-champion-ppc-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:42.356Z"
+    },
+    "manual-tile-cutter-24": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:42.909Z"
+    },
+    "prod-mod-quba-symetry-plain-basket-ss304": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:44.341Z"
+    },
+    "prod-home-appliances-racold-eterno-pro-15l-4-star-storage-geyser": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:44.939Z"
+    },
+    "prod-home-appliances-racold-pronto-neo-3l-4500w-instant-geyser": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:46.922Z"
+    },
+    "prod-tiles-19-rajasthan-stone-rajasthan-black-r-black-p": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:47.858Z"
+    },
+    "prod-mod-rehau-rauvolet-vetroline-glass-shutter": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:48.639Z"
+    },
+    "prod-cement-civil-works-rhl-gold-fe-500-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:51.092Z"
+    },
+    "rhl-gold-fe-500-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:51.808Z"
+    },
+    "prod-fur-rigwell-closet-rod-850-1150": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:53.322Z"
+    },
+    "roff-cera-clean-5l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:54.907Z"
+    },
+    "roff-rainbow-tile-grout-epoxy-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:55.541Z"
+    },
+    "roff-rainbow-grout-2kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:56.191Z"
+    },
+    "prod-tiles-35-roff-roff-rainbow-tile-mate-ce": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:57.707Z"
+    },
+    "roff-t01-nca-tile-adhesive-grey-30kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:58.357Z"
+    },
+    "prod-cement-civil-works-roff-t01-new-construction-adhesive-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:29:59.091Z"
+    },
+    "tp-link-tapo-c200-smart-camera": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:02.557Z"
+    },
+    "tp-link-ceiling-mount-access-point": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:03.139Z"
+    },
+    "tp-link-ls110p-10-port-gigabit-poe-switch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:04.255Z"
+    },
+    "tp-link-ls108gp-8-port-poe-switch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:05.105Z"
+    },
+    "tp-link-es220gmp-20-port-managed-poe-switch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:05.924Z"
+    },
+    "tp-link-archer-c6-wi-fi-router": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:06.475Z"
+    },
+    "tp-link-16-port-switch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:07.125Z"
+    },
+    "tp-link-10-100-mbps-switch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:07.975Z"
+    },
+    "prod-adh-tomahawk-sealant-gun-9in": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:08.656Z"
+    },
+    "tile-leveling-clip-wedge-100pc": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:09.324Z"
+    },
+    "tata-wiron-18-swg-binding-wire-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:09.841Z"
+    },
+    "prod-cement-civil-works-tata-wiron-18-swg-binding-wire-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:10.940Z"
+    },
+    "tata-tiscon-fe-500d-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:11.739Z"
+    },
+    "prod-cement-civil-works-tata-tiscon-fe-500d-8mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:15.207Z"
+    },
+    "tata-tiscon-fe-500d-20mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:15.788Z"
+    },
+    "prod-cement-civil-works-tata-tiscon-fe-500d-20mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:16.356Z"
+    },
+    "tata-tiscon-fe-500d-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:16.856Z"
+    },
+    "prod-cement-civil-works-tata-tiscon-fe-500d-16mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:17.542Z"
+    },
+    "tata-tiscon-fe-500d-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:18.157Z"
+    },
+    "prod-cement-civil-works-tata-tiscon-fe-500d-12mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:18.807Z"
+    },
+    "tata-tiscon-fe-500d-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:19.372Z"
+    },
+    "prod-cement-civil-works-tata-tiscon-fe-500d-10mm-12m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:19.907Z"
+    },
+    "prod-tools-taparia-tk-052": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:21.273Z"
+    },
+    "syska-ultraslim-led-recessed-ceiling-panel-light-7w": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:21.907Z"
+    },
+    "prod-home-appliances-symphony-sumo-75-xl-desert-air-cooler": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:28.207Z"
+    },
+    "supreme-swr-pvc-75mm-type-a-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:28.839Z"
+    },
+    "supreme-swr-pvc-110mm-type-a-3m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:29.557Z"
+    },
+    "supreme-swr-pvc-110mm-single-socket-10ft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:30.291Z"
+    },
+    "supreme-lifeline-cpvc-20mm-sdr11-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:30.807Z"
+    },
+    "supreme-lifeline-cpvc-25mm-sdr11-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:31.391Z"
+    },
+    "supreme-aqua-gold-upvc-25mm-sch80-6m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:31.941Z"
+    },
+    "sturlite-lexxo-trimless-surface-mount-led-downlight": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:32.523Z"
+    },
+    "prod-lighting-sturlite-lexxo": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:33.072Z"
+    },
+    "prod-tiles-31-italian-imported-statuario-polished-italia": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:33.805Z"
+    },
+    "prod-tools-stanley-tylon-5m": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:34.356Z"
+    },
+    "prod-masonry-standard-precast-concrete-cover-blocks-pack-100": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:34.957Z"
+    },
+    "prod-paint-standard-sandpaper-180-pack10": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:35.723Z"
+    },
+    "prod-paint-standard-mto-thinner-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:38.123Z"
+    },
+    "prod-tiles-06-somany-somany-valor-liston-grey-": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:38.708Z"
+    },
+    "prod-tiles-07-somany-somany-pgvt-polished-glaz": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:39.272Z"
+    },
+    "prod-tiles-05-somany-somany-glossy-vitrified-f": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:39.923Z"
+    },
+    "prod-safety-smasys-jacket": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:40.589Z"
+    },
+    "sintex-triple-layer-overhead-water-tank-1000l-white": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:41.155Z"
+    },
+    "sintex-titus-4-layer-water-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:41.940Z"
+    },
+    "sintex-smart-3-layer-water-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:42.474Z"
+    },
+    "sintex-pure-puf-5-layer-foam-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:43.058Z"
+    },
+    "prod-tiles-11-simpolo-simpolo-gvt-statuario-mat": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:43.888Z"
+    },
+    "sika-sikalatex-power-sbr-1kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:46.189Z"
+    },
+    "prod-cement-civil-works-sika-sikatop-seal-107-2k-25kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:46.808Z"
+    },
+    "sika-sikatop-seal-107-2k-25kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:47.875Z"
+    },
+    "prod-tiles-21-rajasthan-stone-z-black-absolute-black-pr": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:52.090Z"
+    },
+    "prod-masonry-yamuna-fine-plaster-morang-cft": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:52.639Z"
+    },
+    "prod-masonry-yamuna-fine-plaster-morang-trolley-100": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:53.138Z"
+    },
+    "prod-door-yale-ydr-41a-biometric": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:53.723Z"
+    },
+    "prod-door-yale-ydme-50nxt-brown": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:54.307Z"
+    },
+    "prod-lighting-wipro-square": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:54.839Z"
+    },
+    "wipro-garnet-wave-led-slim-panel-square-18w": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:55.424Z"
+    },
+    "wipro-garnet-rimless-round-led-surface-panel-light": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:55.989Z"
+    },
+    "prod-lighting-wipro-round": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:56.704Z"
+    },
+    "wipro-garnet-rimless-3in1-cct-surface-mounted-led-panel": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:57.290Z"
+    },
+    "prod-lighting-wipro-3in1": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:57.840Z"
+    },
+    "wipro-dglow-strip-light-5m-warm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:30:58.456Z"
+    },
+    "western-digital-purple-4tb-surveillance-hard-drive": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:01.788Z"
+    },
+    "western-digital-purple-surveillance-hard-drive-2tb": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:02.307Z"
+    },
+    "western-digital-purple-1tb-surveillance-hard-drive": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:02.841Z"
+    },
+    "prod-adh-wacker-wn-280ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:03.355Z"
+    },
+    "prod-adh-wacker-gp-280ml": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:03.940Z"
+    },
+    "vectus-ten-x-10-layer-water-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:04.456Z"
+    },
+    "vectus-tank-filter-y-type-screen-20mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:06.123Z"
+    },
+    "vectus-tank-filter-y-type-screen-25mm": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:06.740Z"
+    },
+    "vectus-cool-5-layer-double-foam-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:07.290Z"
+    },
+    "vectus-4-layer-printed-water-tank-1000l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:07.989Z"
+    },
+    "prod-home-appliances-v-guard-victo-dg-15l-digital-storage-geyser": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:11.308Z"
+    },
+    "ultratech-weather-pro-wp200-5l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:11.855Z"
+    },
+    "prod-cement-civil-works-ultratech-weather-pro-wp200-5l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:12.423Z"
+    },
+    "ultratech-weather-pro-wp200-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:12.972Z"
+    },
+    "prod-cement-civil-works-ultratech-weather-pro-wp200-20l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:13.575Z"
+    },
+    "ultratech-weather-pro-wp200-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:14.157Z"
+    },
+    "prod-cement-civil-works-ultratech-weather-pro-wp200-1l": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:14.724Z"
+    },
+    "ultratech-weather-plus-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:15.273Z"
+    },
+    "prod-cement-civil-works-ultratech-weather-plus-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:15.823Z"
+    },
+    "ultratech-tilefixo-vt-vitrified-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:16.457Z"
+    },
+    "prod-cement-civil-works-ultratech-tilefixo-vt-vitrified-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:17.139Z"
+    },
+    "ultratech-tilefixo-nt-stone-wall-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:17.822Z"
+    },
+    "prod-cement-civil-works-ultratech-tilefixo-nt-stone-wall-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:18.541Z"
+    },
+    "ultratech-tilefixo-ct-ceramic-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:20.973Z"
+    },
+    "prod-cement-civil-works-ultratech-tilefixo-ct-ceramic-20kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:21.522Z"
+    },
+    "prod-cement-civil-works-ultratech-ppc-cement-50kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:22.588Z"
+    },
+    "tp-link-tl-wr850n-300-mbps-wireless-router": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:27.222Z"
+    },
+    "udyogi-full-body-harness": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:27.922Z"
+    },
+    "prod-masonry-ultratech-xtralite-aac-4-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:28.772Z"
+    },
+    "prod-masonry-ultratech-xtralite-aac-6-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:29.423Z"
+    },
+    "prod-masonry-ultratech-xtralite-aac-8-inch": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:30.107Z"
+    },
+    "prod-cement-civil-works-ultratech-fixoblock-aac-jointing-40kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:30.806Z"
+    },
+    "ultratech-fixoblock-aac-jointing-40kg": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:31.441Z"
+    },
+    "prod-mod-zinc-plus-perforated-thali-basket": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:36.338Z"
+    },
+    "zebster-by-zebronics-zeb-v19hd-18-5-inch-led-monitor": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:36.904Z"
+    },
+    "zebster-by-zebronics-z-ee22hd-21-5-inch-led-monitor": {
+      "inStock": false,
+      "updatedAt": "2026-11-24T14:31:37.524Z"
+    },
+    "electricals-269515": {
+      "sellingPrice": 4150,
+      "fitGuardrailBadge": "Updated: 100% Copper · Tested with Havells Submersible Cable",
+      "isFeatured": false,
+      "updatedAt": "2026-11-24T14:57:49.530Z",
+      "archived": true
+    },
+    "electricals-269515-copy-jxzp": {
+      "archived": true,
+      "updatedAt": "2026-11-24T14:57:49.532Z"
+    },
+    "electricals-080483": {
+      "archived": true,
+      "updatedAt": "2026-11-24T15:11:20.494Z"
+    },
+    "electricals-235426": {
+      "inStock": false,
+      "dealerLandingCost": 3845,
+      "updatedAt": "2026-11-25T08:09:58.084Z"
+    },
+    "electricals-959256": {
+      "archived": true,
+      "updatedAt": "2026-11-25T02:32:39.267Z"
+    }
+  },
+  "customSkus": [
+    {
+      "name": "Havells Hi-Flow 1.0 HP Monoblock Submersible Pump (Lucknow Special)",
+      "brand": "Havells",
+      "categoryId": "electricals",
+      "categorySlug": "electricals",
+      "subcategory": "Pumps & Motors",
+      "unit": "Piece",
+      "packSize": "1 Set (With Starter)",
+      "shortDescription": "High-torque 1.0 HP pump with double ball bearings and thermal overload protector.",
+      "highlights": [
+        "100% Pure Copper Wound Motor",
+        "Thermal Overload Protector (TOP)",
+        "High Discharge up to 3500 LPH",
+        "Class F Insulation Rating",
+        "Rust-Resistant Cast Iron Impeller",
+        "2-Year Havells On-Site Warranty"
+      ],
+      "specs": [
+        {
+          "label": "Power Rating",
+          "value": "1.0 HP / 0.75 kW"
+        },
+        {
+          "label": "Operating Voltage",
+          "value": "180V - 240V AC"
+        },
+        {
+          "label": "Max Head Range",
+          "value": "32 Meters"
+        },
+        {
+          "label": "Pipe Suction/Delivery",
+          "value": "25mm x 25mm (1 inch)"
+        },
+        {
+          "label": "Lubrication",
+          "value": "Factory Sealed Pre-Greased"
+        }
+      ],
+      "fitGuardrailBadge": "Requires 2.5mm² Copper Cable & 16A MCB",
+      "preferredVendorId": "naza-authorized-hub",
+      "sellingPrice": 4250,
+      "mrp": 5499,
+      "landingCost": 3800,
+      "inStock": true,
+      "isExpress60": true,
+      "isFeatured": true,
+      "pairedSkuIds": [
+        "finolex-2-5sqmm-wire",
+        "schneider-16a-mcb"
+      ],
+      "gstPercent": 18,
+      "hsnCode": "8413",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "imageUrl": "/images/products/electricals/test-havells-monoblock-pump-j7o8.webp",
+      "category": "electricals",
+      "dealerLandingCost": 3800,
+      "express60Min": true,
+      "id": "electricals-235426",
+      "skuId": "electricals-235426",
+      "isCustom": true,
+      "updatedAt": "2026-11-24T14:57:15.426Z",
+      "pairedProducts": []
+    },
+    {
+      "name": "Havells Hi-Flow 1.0 HP Monoblock Submersible Pump (Lucknow Special)",
+      "brand": "Havells",
+      "categoryId": "electricals",
+      "categorySlug": "electricals",
+      "subcategory": "Pumps & Motors",
+      "unit": "Piece",
+      "packSize": "1 Set (With Starter)",
+      "shortDescription": "High-torque 1.0 HP pump with double ball bearings and thermal overload protector.",
+      "highlights": [
+        "100% Pure Copper Wound Motor",
+        "Thermal Overload Protector (TOP)",
+        "High Discharge up to 3500 LPH",
+        "Class F Insulation Rating",
+        "Rust-Resistant Cast Iron Impeller",
+        "2-Year Havells On-Site Warranty"
+      ],
+      "specs": [
+        {
+          "label": "Power Rating",
+          "value": "1.0 HP / 0.75 kW"
+        },
+        {
+          "label": "Operating Voltage",
+          "value": "180V - 240V AC"
+        },
+        {
+          "label": "Max Head Range",
+          "value": "32 Meters"
+        },
+        {
+          "label": "Pipe Suction/Delivery",
+          "value": "25mm x 25mm (1 inch)"
+        },
+        {
+          "label": "Lubrication",
+          "value": "Factory Sealed Pre-Greased"
+        }
+      ],
+      "fitGuardrailBadge": "Requires 2.5mm² Copper Cable & 16A MCB",
+      "preferredVendorId": "naza-authorized-hub",
+      "sellingPrice": 4250,
+      "mrp": 5499,
+      "landingCost": 3800,
+      "inStock": true,
+      "isExpress60": true,
+      "isFeatured": true,
+      "pairedSkuIds": [
+        "finolex-2-5sqmm-wire",
+        "schneider-16a-mcb"
+      ],
+      "gstPercent": 18,
+      "hsnCode": "8413",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "imageUrl": "/images/products/electricals/test-havells-monoblock-pump-jxz8.webp",
+      "category": "electricals",
+      "dealerLandingCost": 3800,
+      "express60Min": true,
+      "id": "electricals-269515",
+      "skuId": "electricals-269515",
+      "isCustom": true,
+      "updatedAt": "2026-11-24T14:57:49.515Z",
+      "pairedProducts": []
+    },
+    {
+      "name": "Havells Hi-Flow 1.0 HP Monoblock Submersible Pump (Lucknow Special) (Copy)",
+      "brand": "Havells",
+      "categoryId": "electricals",
+      "categorySlug": "electricals",
+      "subcategory": "Pumps & Motors",
+      "unit": "Piece",
+      "packSize": "1 Set (With Starter)",
+      "shortDescription": "High-torque 1.0 HP pump with double ball bearings and thermal overload protector.",
+      "highlights": [
+        "100% Pure Copper Wound Motor",
+        "Thermal Overload Protector (TOP)",
+        "High Discharge up to 3500 LPH",
+        "Class F Insulation Rating",
+        "Rust-Resistant Cast Iron Impeller",
+        "2-Year Havells On-Site Warranty"
+      ],
+      "specs": [
+        {
+          "label": "Power Rating",
+          "value": "1.0 HP / 0.75 kW"
+        },
+        {
+          "label": "Operating Voltage",
+          "value": "180V - 240V AC"
+        },
+        {
+          "label": "Max Head Range",
+          "value": "32 Meters"
+        },
+        {
+          "label": "Pipe Suction/Delivery",
+          "value": "25mm x 25mm (1 inch)"
+        },
+        {
+          "label": "Lubrication",
+          "value": "Factory Sealed Pre-Greased"
+        }
+      ],
+      "fitGuardrailBadge": "Requires 2.5mm² Copper Cable & 16A MCB",
+      "preferredVendorId": "naza-authorized-hub",
+      "sellingPrice": 4250,
+      "mrp": 5499,
+      "landingCost": 3800,
+      "inStock": true,
+      "isExpress60": true,
+      "isFeatured": true,
+      "pairedSkuIds": [
+        "finolex-2-5sqmm-wire",
+        "schneider-16a-mcb"
+      ],
+      "gstPercent": 18,
+      "hsnCode": "8413",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "imageUrl": "/images/products/electricals/test-havells-monoblock-pump-jxz8.webp",
+      "category": "electricals",
+      "dealerLandingCost": 3800,
+      "express60Min": true,
+      "id": "electricals-269515-copy-jxzp",
+      "skuId": "electricals-269515-copy-jxzp",
+      "isCustom": true,
+      "updatedAt": "2026-11-24T14:57:49.525Z",
+      "pairedProducts": []
+    },
+    {
+      "name": "Anchor by Panasonic Roma Classic 16A Modular Switch (War-Room Spec)",
+      "brand": "Anchor by Panasonic",
+      "category": "electricals",
+      "categorySlug": "electricals",
+      "subcategory": "Modular Switches",
+      "unit": "Piece",
+      "packSize": "Box of 10",
+      "shortDescription": "High-grade silver cadmium contacts for 1,00,000+ clicks and heavy appliance durability.",
+      "highlights": [
+        "Silver Cadmium Oxide Contacts",
+        "Flame Retardant Polycarbonate Body",
+        "Spark Shield Enclosure",
+        "ISI Marked IS 3854",
+        "10-Year Manufacturer Warranty",
+        "Tested for 1,00,000+ Clicks"
+      ],
+      "specs": [
+        {
+          "label": "Current Rating",
+          "value": "16A Heavy Duty"
+        },
+        {
+          "label": "Voltage Rating",
+          "value": "240V AC ~ 50Hz"
+        },
+        {
+          "label": "Module Size",
+          "value": "1 Module (Standard)"
+        },
+        {
+          "label": "Material",
+          "value": "Self-extinguishing Engineering Resin"
+        }
+      ],
+      "fitGuardrailBadge": "ISI Marked · Flame Retardant Polycarbonate",
+      "preferredVendorId": "latouche-hub-01",
+      "sellingPrice": 185,
+      "mrp": 240,
+      "dealerLandingCost": 155,
+      "inStock": true,
+      "isExpress60": true,
+      "isFeatured": true,
+      "pairedSkuIds": [
+        "schneider-32a-mcb-dp",
+        "havells-hi-flow-pump"
+      ],
+      "gstPercent": 18,
+      "hsnCode": "8536",
+      "deliveryVehicleType": "2W_BIKE",
+      "imageUrl": "/images/products/electricals/god-eye-verified-mcb-1bq6.webp",
+      "express60Min": true,
+      "id": "electricals-080483",
+      "skuId": "electricals-080483",
+      "isCustom": true,
+      "updatedAt": "2026-11-24T15:11:20.483Z",
+      "pairedProducts": []
+    },
+    {
+      "name": "Anchor by Panasonic Roma Classic 16A Modular Switch (War-Room Spec)",
+      "brand": "Anchor by Panasonic",
+      "category": "electricals",
+      "categorySlug": "electricals",
+      "subcategory": "Modular Switches",
+      "unit": "Piece",
+      "packSize": "Box of 10",
+      "shortDescription": "High-grade silver cadmium contacts for 1,00,000+ clicks and heavy appliance durability.",
+      "highlights": [
+        "Silver Cadmium Oxide Contacts",
+        "Flame Retardant Polycarbonate Body",
+        "Spark Shield Enclosure",
+        "ISI Marked IS 3854",
+        "10-Year Manufacturer Warranty",
+        "Tested for 1,00,000+ Clicks"
+      ],
+      "specs": [
+        {
+          "label": "Current Rating",
+          "value": "16A Heavy Duty"
+        },
+        {
+          "label": "Voltage Rating",
+          "value": "240V AC ~ 50Hz"
+        },
+        {
+          "label": "Module Size",
+          "value": "1 Module (Standard)"
+        },
+        {
+          "label": "Material",
+          "value": "Self-extinguishing Engineering Resin"
+        }
+      ],
+      "fitGuardrailBadge": "ISI Marked · Flame Retardant Polycarbonate",
+      "preferredVendorId": "latouche-hub-01",
+      "sellingPrice": 185,
+      "mrp": 240,
+      "dealerLandingCost": 155,
+      "inStock": true,
+      "isExpress60": true,
+      "isFeatured": true,
+      "pairedSkuIds": [
+        "schneider-32a-mcb-dp",
+        "havells-hi-flow-pump"
+      ],
+      "gstPercent": 18,
+      "hsnCode": "8536",
+      "deliveryVehicleType": "2W_BIKE",
+      "imageUrl": "/images/products/electricals/god-eye-verified-mcb-dhzp.webp",
+      "express60Min": true,
+      "id": "electricals-959256",
+      "skuId": "electricals-959256",
+      "isCustom": true,
+      "updatedAt": "2026-11-25T02:32:39.256Z",
+      "pairedProducts": []
+    },
+    {
+      "id": "vhp-mwvrb7sq-41zj",
+      "name": "CP Plus 4K UHD 8MP Bullet IP Camera (Night Color)",
+      "brand": "CP Plus",
+      "category": "cctv-networking",
+      "categoryName": "CCTV & Networking",
+      "unit": "Piece",
+      "sellingPrice": 3520,
+      "mrp": 4600,
+      "dealerLandingCost": 3200,
+      "imageUrl": "/images/products/cctv/cp-plus-8mp-bullet.webp",
+      "inStock": true,
+      "express60Min": true,
+      "gstPercent": 18,
+      "hsnCode": "6802",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "skuId": "vhp-mwvrb7sq-41zj",
+      "isCustom": true,
+      "updatedAt": "2026-11-25T06:42:49.275Z"
+    },
+    {
+      "id": "vhp-mwvrjt37-9yp6",
+      "name": "CP Plus 4K UHD 8MP Bullet IP Camera (Night Color)",
+      "brand": "CP Plus",
+      "category": "cctv-networking",
+      "categoryName": "CCTV & Networking",
+      "unit": "Piece",
+      "sellingPrice": 3520,
+      "mrp": 4600,
+      "dealerLandingCost": 3200,
+      "imageUrl": "/images/products/cctv/cp-plus-8mp-bullet.webp",
+      "inStock": true,
+      "express60Min": true,
+      "gstPercent": 18,
+      "hsnCode": "6802",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "skuId": "vhp-mwvrjt37-9yp6",
+      "isCustom": true,
+      "updatedAt": "2026-11-25T06:49:30.116Z"
+    },
+    {
+      "id": "vhp-mwvyxxyo-ifo2",
+      "name": "CP Plus 4K UHD 8MP Bullet IP Camera (Night Color)",
+      "brand": "CP Plus",
+      "category": "cctv-networking",
+      "categoryName": "CCTV & Networking",
+      "unit": "Piece",
+      "sellingPrice": 3520,
+      "mrp": 4600,
+      "dealerLandingCost": 3200,
+      "imageUrl": "/images/products/cctv/cp-plus-8mp-bullet.webp",
+      "inStock": true,
+      "express60Min": true,
+      "gstPercent": 18,
+      "hsnCode": "6802",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "skuId": "vhp-mwvyxxyo-ifo2",
+      "isCustom": true,
+      "updatedAt": "2026-11-25T10:16:26.929Z"
+    },
+    {
+      "id": "vhp-mww19l90-itaf",
+      "name": "CP Plus 4K UHD 8MP Bullet IP Camera (Night Color)",
+      "brand": "CP Plus",
+      "category": "cctv-networking",
+      "categoryName": "CCTV & Networking",
+      "unit": "Piece",
+      "sellingPrice": 3520,
+      "mrp": 4600,
+      "dealerLandingCost": 3200,
+      "imageUrl": "/images/products/cctv/cp-plus-8mp-bullet.webp",
+      "inStock": true,
+      "express60Min": true,
+      "gstPercent": 18,
+      "hsnCode": "6802",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "skuId": "vhp-mww19l90-itaf",
+      "isCustom": true,
+      "updatedAt": "2026-11-25T11:21:29.558Z"
+    },
+    {
+      "id": "vhp-mww20h5e-zcet",
+      "name": "CP Plus 4K UHD 8MP Bullet IP Camera (Night Color)",
+      "brand": "CP Plus",
+      "category": "cctv-networking",
+      "categoryName": "CCTV & Networking",
+      "unit": "Piece",
+      "sellingPrice": 3520,
+      "mrp": 4600,
+      "dealerLandingCost": 3200,
+      "imageUrl": "/images/products/cctv/cp-plus-8mp-bullet.webp",
+      "inStock": true,
+      "express60Min": true,
+      "gstPercent": 18,
+      "hsnCode": "6802",
+      "deliveryVehicleType": "3W_ELECTRIC_LOADER",
+      "skuId": "vhp-mww20h5e-zcet",
+      "isCustom": true,
+      "updatedAt": "2026-11-25T11:42:23.956Z"
+    }
+  ]
+}

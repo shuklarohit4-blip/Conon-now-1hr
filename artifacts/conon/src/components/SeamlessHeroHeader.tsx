@@ -3,7 +3,8 @@ import { Link } from "wouter";
 import {
   Search, X, Mic, MapPin, ChevronDown, ChevronRight,
   Wallet, User, ShoppingBag, Menu, Sparkles,
-  Palette, Layers, Shield, Box, Wrench, Zap, Droplets, Grid3x3, Tag
+  Palette, Layers, Shield, Box, Wrench, Zap, Droplets, Grid3x3, Tag,
+  Package, FileText, LogOut, Radio
 } from "lucide-react";
 import {
   getActiveCampaign,
@@ -13,6 +14,11 @@ import {
   CategoryStripItem,
 } from "@/config/heroCampaignConfig";
 import { formatINR } from "@/lib/wallet";
+import { useUI } from "@/context/UIContext";
+import { useUser } from "@/context/UserContext";
+import { useAuthContext } from "@/context/AuthContext";
+import { toast } from "sonner";
+import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 
 interface SeamlessHeroHeaderProps {
   searchTerm: string;
@@ -61,6 +67,41 @@ export const SeamlessHeroHeader: React.FC<SeamlessHeroHeaderProps> = ({
     }, 2800);
     return () => clearInterval(timer);
   }, [config.searchPlaceholders]);
+
+  const { setLoginModalOpen } = useUI();
+  const { user, userProfile, logout } = useUser();
+  const { user: authUser, isAuthenticated: isAuthed, isAdmin, openAuthModal, logout: authLogout } = useAuthContext();
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const heroProfileRef = useRef<HTMLDivElement>(null);
+  const logoClicksRef = useRef<number[]>([]);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (!IS_LOCAL_ADMIN) return;
+    const now = Date.now();
+    logoClicksRef.current = [...logoClicksRef.current.filter((t) => now - t < 2000), now];
+    if (logoClicksRef.current.length >= 5) {
+      e.preventDefault();
+      logoClicksRef.current = [];
+      openAuthModal("admin");
+      toast.info("🔒 Founder Admin Gate Unlocked (5x tap)");
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (heroProfileRef.current && !heroProfileRef.current.contains(e.target as Node)) {
+        setProfileMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const isUserLoggedIn = loggedIn || isAuthed || !!authUser;
+  const resolvedName = authUser?.name || user.name || userProfile.name || "";
+  const resolvedRole = authUser?.displayRole || userProfile.role || "Builder / Homeowner";
+  const resolvedPhone = authUser?.phone || user.phone || "";
+  const userFirstName = resolvedName.trim().split(" ")[0] || (resolvedPhone ? `+91 ${resolvedPhone.slice(-4)}` : "Profile");
 
   // Left Tall Bento Card - Spotlight Carousel
   const [dealIdx, setDealIdx] = useState(0);
@@ -142,7 +183,12 @@ export const SeamlessHeroHeader: React.FC<SeamlessHeroHeaderProps> = ({
           {/* Left: Top Left Brand Logo + Hamburger + Delivery In 60 Mins + Location Pill */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0">
             {/* Top Left Corner: CONON-NOW Brand Logo */}
-            <Link href="/home" className="flex items-center gap-1 shrink-0 group active:scale-95 transition -ml-0.5" aria-label="CONON-NOW Home">
+            <Link
+              href="/home"
+              onClick={handleLogoClick}
+              className="flex items-center gap-1 shrink-0 group active:scale-95 transition -ml-0.5 cursor-pointer"
+              aria-label="CONON-NOW Home"
+            >
               <img
                 src={`${import.meta.env.BASE_URL}images/conon-logo-transparent.png`}
                 alt="CONON-NOW Logo"
@@ -194,37 +240,149 @@ export const SeamlessHeroHeader: React.FC<SeamlessHeroHeaderProps> = ({
             </div>
           </div>
 
-          {/* Right: Frosted Wallet Chip + User Profile + Cart Bag */}
-          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          {/* Right: Frosted Wallet Chip + Login / Profile + Cart Bag */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Dark Frosted Wallet Chip */}
             <Link
               href="/rewards?tab=wallet"
-              className="flex items-center gap-1 sm:gap-1.5 bg-black/30 hover:bg-black/40 active:scale-95 transition backdrop-blur-md px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full border border-white/20 text-white shadow-2xs"
+              className="flex items-center gap-1 sm:gap-1.5 bg-black/35 hover:bg-black/50 active:scale-95 transition backdrop-blur-md px-2.5 sm:px-3 py-1.5 rounded-full border border-white/25 text-white shadow-xs"
               title="Gold Wallet Balance"
             >
-              <Wallet className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-300" strokeWidth={2.5} />
-              <span className="text-[10.5px] sm:text-[11.5px] font-black tracking-tight text-white">
+              <Wallet className="w-3.5 h-3.5 text-amber-300" strokeWidth={2.5} />
+              <span className="text-[11px] sm:text-xs font-black tracking-tight text-white">
                 ₹{formatINR(walletBalance)}
               </span>
             </Link>
 
-            {/* Circular Profile Button */}
-            <button
-              onClick={onOpenMenu}
-              aria-label="User account"
-              className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 transition backdrop-blur-md border border-white/30 flex items-center justify-center text-white relative shadow-2xs shrink-0"
-            >
-              <User className="w-3.5 sm:w-4 h-3.5 sm:h-4" strokeWidth={2.4} />
-              {loggedIn && (
-                <span className="absolute bottom-0 right-0 w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#1B73CA]" />
-              )}
-            </button>
+            {/* Glowing Indigo Admin Command OS Pill (Visible only when Local Admin) */}
+            {IS_LOCAL_ADMIN && isAdmin && (
+              <Link
+                href="/admin"
+                aria-label="Admin Command OS"
+                title="Launch CONON COMMAND OS Operations Control"
+                className="flex items-center gap-1.5 h-7 sm:h-8 px-2.5 sm:px-3 rounded-full bg-[#0F172A] hover:bg-[#1E293B] border border-indigo-500/60 text-indigo-300 font-black text-[11px] sm:text-xs shadow-md shadow-indigo-950/50 active:scale-95 transition animate-pulse"
+              >
+                <Radio className="w-3.5 h-3.5 text-indigo-400" />
+                <span className="hidden sm:inline">Admin Command OS</span>
+                <span className="sm:hidden">Admin OS</span>
+              </Link>
+            )}
+
+            {/* Login Button or Profile Pill */}
+            {!isUserLoggedIn ? (
+              <button
+                type="button"
+                onClick={() => openAuthModal("login")}
+                aria-label="Login / Sign Up"
+                className="flex items-center gap-1.5 h-7 sm:h-8 px-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold text-[11px] sm:text-xs shadow-md transition active:scale-95 cursor-pointer"
+              >
+                <User className="w-3.5 h-3.5 text-slate-900" strokeWidth={2.4} />
+                <span>Login / Sign Up</span>
+              </button>
+            ) : (
+              <div className="relative" ref={heroProfileRef}>
+                <button
+                  type="button"
+                  onClick={() => setProfileMenuOpen((prev) => !prev)}
+                  aria-label="User profile & menu"
+                  className="flex items-center gap-1.5 h-7 sm:h-8 px-2.5 sm:px-3 rounded-full bg-white/20 hover:bg-white/30 text-white font-bold text-xs backdrop-blur-md border border-white/30 transition active:scale-95 cursor-pointer shadow-xs"
+                >
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-white shrink-0" />
+                  <span className="max-w-[70px] sm:max-w-[90px] truncate text-[11px] sm:text-xs">
+                    {userFirstName}
+                  </span>
+                  <ChevronDown className={`w-3 h-3 text-white/80 shrink-0 transition-transform ${profileMenuOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {/* Dropdown Menu */}
+                {profileMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-1.5 z-50 text-xs animate-in fade-in zoom-in-95 text-slate-800">
+                    <div className="px-3.5 py-2.5 border-b border-slate-100 bg-slate-50/80 rounded-t-2xl">
+                      <p className="font-bold text-slate-900 truncate text-[13px]">
+                        {resolvedName || "CONON Builder"}
+                      </p>
+                      <p className="text-[11px] text-slate-500 font-medium">
+                        {resolvedPhone ? `+91 ${resolvedPhone}` : "Verified Account"}
+                      </p>
+                      <span className="inline-block mt-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[9.5px] uppercase tracking-wider">
+                        {resolvedRole}
+                      </span>
+                    </div>
+
+                    <div className="py-1">
+                      {IS_LOCAL_ADMIN && isAdmin && (
+                        <Link
+                          href="/admin"
+                          onClick={() => setProfileMenuOpen(false)}
+                          className="flex items-center gap-2.5 px-3.5 py-2 text-indigo-700 bg-indigo-50/80 hover:bg-indigo-100/80 font-black transition rounded-lg mx-1.5 mb-1"
+                        >
+                          <Radio className="w-4 h-4 text-indigo-600 shrink-0 animate-pulse" />
+                          <span>Admin Command OS</span>
+                        </Link>
+                      )}
+                      <Link
+                        href="/live-track"
+                        onClick={() => setProfileMenuOpen(false)}
+                        className="flex items-center gap-2.5 px-3.5 py-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-medium transition"
+                      >
+                        <Package className="w-4 h-4 text-blue-600 shrink-0" />
+                        <span>My Orders (Live Track)</span>
+                      </Link>
+                      <Link
+                        href="/khata"
+                        onClick={() => setProfileMenuOpen(false)}
+                        className="flex items-center gap-2.5 px-3.5 py-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-medium transition"
+                      >
+                        <FileText className="w-4 h-4 text-amber-600 shrink-0" />
+                        <span>CONON-NOW Khata</span>
+                      </Link>
+                      <Link
+                        href="/kits"
+                        onClick={() => setProfileMenuOpen(false)}
+                        className="flex items-center gap-2.5 px-3.5 py-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-medium transition"
+                      >
+                        <Layers className="w-4 h-4 text-purple-600 shrink-0" />
+                        <span>My Builder Kit BOQs</span>
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setProfileMenuOpen(false);
+                          onOpenLocationSheet();
+                        }}
+                        className="w-full text-left flex items-center gap-2.5 px-3.5 py-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-medium transition cursor-pointer"
+                      >
+                        <MapPin className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span>Saved Lucknow Sites</span>
+                      </button>
+                    </div>
+
+                    <div className="border-t border-slate-100 pt-1 mt-1">
+                      <button
+                        type="button"
+                        onClick={async (e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setProfileMenuOpen(false);
+                          logout();
+                          await authLogout();
+                        }}
+                        className="w-full text-left flex items-center gap-2.5 px-3.5 py-2 text-rose-600 hover:bg-rose-50 font-semibold transition cursor-pointer"
+                      >
+                        <LogOut className="w-4 h-4 shrink-0" />
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Circular Cart Bag Button */}
             <button
               onClick={onOpenCart}
               aria-label="Shopping Cart"
-              className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 transition backdrop-blur-md border border-white/30 flex items-center justify-center text-white relative shadow-2xs shrink-0"
+              className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 transition backdrop-blur-md border border-white/30 flex items-center justify-center text-white relative shadow-2xs shrink-0 cursor-pointer"
             >
               <ShoppingBag className="w-3.5 sm:w-4 h-3.5 sm:h-4" strokeWidth={2.4} />
               {cartCount > 0 && (

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "e1",
+    "name": "JCB 3DX Excavator",
+    "category": "Earthmoving",
+    "rate": 2500,
+    "unit": "day",
+    "available": true,
+    "specs": "Heavy excavation, 1.0 m³ loader bucket, diesel operator included",
+    "imageUrl": "/assets/jcb-3dx.jpg"
+  },
+  {
+    "id": "e2",
+    "name": "Transit Mixer (6m³)",
+    "category": "Concrete",
+    "rate": 3200,
+    "unit": "day",
+    "available": false,
+    "specs": "Ready-mix concrete transport, 6m³ drum capacity, driver included",
+    "imageUrl": "/assets/transit-mixer.jpg"
+  },
+  {
+    "id": "e3",
+    "name": "Tower Crane (50T)",
+    "category": "Lifting",
+    "rate": 8000,
+    "unit": "day",
+    "available": true,
+    "specs": "High-rise construction, 50-tonne lifting capacity, certified rigger",
+    "imageUrl": "/assets/tower-crane.jpg"
+  },
+  {
+    "id": "e4",
+    "name": "Mobile Batching Plant",
+    "category": "Concrete",
+    "rate": 6500,
+    "unit": "day",
+    "available": true,
+    "specs": "30m³/hr automated concrete batching, digital load cell weighing",
+    "imageUrl": "/assets/batching-plant.jpg"
+  }
+]

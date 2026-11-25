@@ -11,6 +11,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import type { Product } from "@/components/ProductCard";
+import { RealProductImage } from "@/components/RealProductImage";
 
 export interface TileProduct {
   id: string;
@@ -621,9 +622,13 @@ export function TileAdhesivesCollectionStorefront({
                       onClick={() => openModal(p)}
                       className="relative w-full aspect-square bg-[#F9FAFB] p-4 flex items-center justify-center cursor-pointer overflow-hidden"
                     >
-                      <img
+                      <RealProductImage
+                        product={p}
                         src={p.image}
                         alt={p.title}
+                        title={p.title}
+                        brand={p.brand}
+                        category="tile-stone-installation"
                         className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
                       />
                       {/* Dots indicator at bottom right of image */}

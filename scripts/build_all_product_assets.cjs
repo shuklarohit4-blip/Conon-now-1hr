@@ -46,7 +46,7 @@ const VERIFIED_OFFICIAL_URLS = {
   'berger-walmasta-putty-40kg': 'https://images.bergerpaints.com/s3fs-public/2023-11/Bison%20Wall%20Putty_1.png',
 };
 
-// Map of attached_assets files
+// Map of artifacts/conon/src/assets files
 const LOCAL_SOURCE_MAP = {
   // Cement
   'ultratech-opc-53-grade': 'ai-image-e0c6d9a8-04e0-48f8-af5a-c9f3095bb39a_1781000536697.png',
@@ -293,7 +293,7 @@ async function main() {
       }
     }
 
-    // Check if local source exists in attached_assets
+    // Check if local source exists in artifacts/conon/src/assets
     if (!handled && LOCAL_SOURCE_MAP[slug]) {
       const srcFile = path.resolve(ATTACHED_ASSETS_DIR, LOCAL_SOURCE_MAP[slug]);
       if (fs.existsSync(srcFile)) {
@@ -307,7 +307,7 @@ async function main() {
       }
     }
 
-    // Check fuzzy match in attached_assets
+    // Check fuzzy match in artifacts/conon/src/assets
     if (!handled) {
       // Find suitable matching brand image or category base
       let matchFile = null;

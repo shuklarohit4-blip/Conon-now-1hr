@@ -569,6 +569,29 @@ export function resolveProductImage(category: string, name: string): string {
       if (has("centuryply", "century ply", "century", "sainik")) return imgCenturyplyPly;
       return imgCenturyplyPly;
 
+    case "home-appliances":
+    case "appliances":
+      if (has("instabliss")) return `${base}/images/products/home-appliances/crompton-instabliss-3l-3000w-instant-geyser.webp`;
+      if (has("pronto neo", "pronto")) return `${base}/images/products/home-appliances/racold-pronto-neo-3l-4500w-instant-geyser.webp`;
+      if (has("new shakti", "shakti")) return `${base}/images/products/home-appliances/bajaj-shield-series-new-shakti-15l-storage-geyser.webp`;
+      if (has("eterno pro", "eterno")) return `${base}/images/products/home-appliances/racold-eterno-pro-15l-4-star-storage-geyser.webp`;
+      if (has("victo dg", "victo")) return `${base}/images/products/home-appliances/v-guard-victo-dg-15l-digital-storage-geyser.webp`;
+      if (has("xpress 15l", "xpress")) return `${base}/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp`;
+      if (has("finesse 25l", "finesse")) return `${base}/images/products/home-appliances/ao-smith-finesse-25l-5-star-storage-geyser.webp`;
+      if (has("wd tbf")) return `${base}/images/products/home-appliances/elica-wd-tbf-hac-60-ms-nero-filterless-chimney.webp`;
+      if (has("wdfl 906")) return `${base}/images/products/home-appliances/elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney.webp`;
+      if (has("polo in", "polo")) return `${base}/images/products/home-appliances/faber-hood-polo-in-hc-sc-bk-60-chimney.webp`;
+      if (has("primus plus", "primus")) return `${base}/images/products/home-appliances/faber-hood-primus-plus-energy-90cm-chimney.webp`;
+      if (has("brisk air", "brisk")) return `${base}/images/products/home-appliances/crompton-brisk-air-neo-200mm-exhaust-fan.webp`;
+      if (has("efficio", "efficio 200mm")) return `${base}/images/products/home-appliances/atomberg-efficio-200mm-bldc-exhaust-fan.webp`;
+      if (has("ventil air", "ventilair")) return `${base}/images/products/home-appliances/havells-ventil-air-dx-150mm-exhaust-fan.webp`;
+      if (has("studio+", "studio plus")) return `${base}/images/products/home-appliances/atomberg-studio-plus-150mm-bldc-exhaust-fan.webp`;
+      if (has("ozone 75l", "ozone")) return `${base}/images/products/home-appliances/crompton-ozone-75l-desert-air-cooler.webp`;
+      if (has("sumo 75", "sumo")) return `${base}/images/products/home-appliances/symphony-sumo-75-xl-desert-air-cooler.webp`;
+      if (has("luxe new", "luxe 1200", "microtek")) return `${base}/images/products/home-appliances/microtek-luxe-1200-inverter-150ah-battery-combo.webp`;
+      if (has("zelio+", "zelio plus", "luminous")) return `${base}/images/products/home-appliances/luminous-zelio-plus-1100-inverter-150ah-battery-combo.webp`;
+      return `${base}/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp`;
+
     default:
       return utWaterplus;
   }

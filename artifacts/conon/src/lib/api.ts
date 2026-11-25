@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { JWT_STORAGE_KEY } from "./authApi";
 import { beginLoading, endLoading } from "./loading";
 import { API_ORIGIN } from "./apiBase";
+import { IS_LOCAL_ADMIN, MAC_ADMIN_KEY } from "@/config/adminGuard";
 
 /**
  * Shared axios client for the CONON-NOW api-server.
@@ -19,10 +20,24 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   beginLoading();
-  const token = localStorage.getItem(JWT_STORAGE_KEY);
+  let token: string | null = null;
+  const path = typeof window !== "undefined" ? window.location.pathname : "";
+  if (path.startsWith("/admin")) {
+    token = localStorage.getItem("conon_admin_jwt");
+  } else if (path.startsWith("/vendor")) {
+    token = localStorage.getItem("conon_vendor_jwt") || localStorage.getItem("conon_jwt");
+  } else if (path.startsWith("/driver")) {
+    token = localStorage.getItem("conon_driver_jwt") || localStorage.getItem("conon_driver_token");
+  } else {
+    token = localStorage.getItem("conon_customer_jwt") || localStorage.getItem("conon_jwt");
+  }
+
+  config.headers = config.headers ?? {};
   if (token) {
-    config.headers = config.headers ?? {};
     config.headers.Authorization = `Bearer ${token}`;
+  }
+  if (IS_LOCAL_ADMIN && MAC_ADMIN_KEY) {
+    config.headers["x-admin-key"] = MAC_ADMIN_KEY;
   }
   return config;
 });

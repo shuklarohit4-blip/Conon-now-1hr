@@ -9,6 +9,7 @@ import {
 import { Layout } from "@/components/Layout";
 import { toast } from "sonner";
 import { useWallet } from "@/context/WalletContext";
+import { LivingMaterialVault } from "@/components/wallet/LivingMaterialVault";
 
 const BRAND_DARK = "#1848a0";
 const AMBER      = "#f59e0b";
@@ -123,7 +124,8 @@ export function BulkRewards() {
   const [showWallet, setShowWallet] = useState(false);
   const [tab, setTab]               = useState<"bulk" | "wallet" | "refer">(() => {
     const t = new URLSearchParams(window.location.search).get("tab");
-    return t === "wallet" || t === "refer" ? t : "bulk";
+    if (t === "bulk" || t === "refer") return t;
+    return "wallet";
   });
 
   const { balance: walletBalance, transactions: walletTxns, addMoney } = useWallet();
@@ -338,93 +340,7 @@ export function BulkRewards() {
         )}
 
         {/* ═══════════════ GOLD WALLET TAB ═══════════════ */}
-        {tab === "wallet" && (
-          <div className="space-y-5">
-            {/* Wallet card */}
-            <div className="relative overflow-hidden rounded-[28px] p-6 text-white"
-              style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)" }}>
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-5">
-                  <div>
-                    <p className="text-[9px] font-black text-amber-400 uppercase tracking-[0.2em] mb-1">CONON-NOW Gold Wallet</p>
-                    <p className="font-display font-black italic text-3xl text-white">₹{walletBalance.toLocaleString("en-IN")}</p>
-                    <p className="text-[8px] text-slate-400 font-bold mt-1">Available Balance</p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ background: "rgba(245,158,11,0.15)" }}>
-                    <Wallet className="w-6 h-6 text-amber-400" />
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <button onClick={() => toast.success("Wallet will be applied at checkout!")}
-                    className="flex-1 py-2.5 rounded-[14px] text-[9px] font-black uppercase bg-amber-400 text-slate-900">
-                    Use at Checkout
-                  </button>
-                  <button onClick={() => setShowAddMoney(true)}
-                    className="px-4 py-2.5 rounded-[14px] text-[9px] font-black uppercase border border-white/20 text-white/90 active:scale-95 transition">
-                    + Add Money
-                  </button>
-                </div>
-              </div>
-              <div className="absolute -right-8 -bottom-8 w-36 h-36 bg-amber-400/10 rounded-full blur-3xl" />
-            </div>
-
-            {/* How to earn */}
-            <div>
-              <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Ways to Earn Gold</p>
-              <div className="grid grid-cols-3 gap-2">
-                {[
-                  { icon: "🤝", label: "Refer a Site", val: "₹2,000" },
-                  { icon: "📦", label: "Bulk Bonus",   val: "Up to ₹900" },
-                  { icon: "⭐", label: "5-Star Review", val: "₹100" },
-                ].map(w => (
-                  <div key={w.label} className="bg-white rounded-[18px] p-3 text-center border border-slate-100 shadow-sm">
-                    <span className="text-2xl">{w.icon}</span>
-                    <p className="text-[8px] font-black text-slate-700 mt-1">{w.label}</p>
-                    <p className="text-[9px] font-black mt-0.5" style={{ color: AMBER }}>{w.val}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Transaction history */}
-            <div>
-              <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Recent Transactions</p>
-              <div className="space-y-2.5">
-                {walletTxns.map((txn, i) => (
-                  <motion.div key={txn.id} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="flex items-center justify-between p-3 bg-white rounded-[18px] border border-slate-100 shadow-sm">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-[10px] flex items-center justify-center text-[10px] font-black text-white"
-                        style={{ background: txn.color }}>₹</div>
-                      <div>
-                        <p className="text-[10px] font-black text-slate-800 leading-tight">{txn.label}</p>
-                        <p className="text-[8px] font-bold text-slate-400">{txn.date}</p>
-                      </div>
-                    </div>
-                    <span className="text-[11px] font-black italic" style={{ color: txn.color }}>{txn.amt}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Architect kickback teaser */}
-            <div className="p-4 rounded-[22px] border-2 border-dashed" style={{ borderColor: "#7c3aed40", background: "#7c3aed08" }}>
-              <div className="flex items-center gap-2 mb-2">
-                <Award className="w-4 h-4 text-violet-600" />
-                <p className="text-[9px] font-black text-violet-700 uppercase">Architect Rewards Program</p>
-              </div>
-              <p className="text-[9px] text-slate-500 font-bold mb-2">
-                Earn reward points for every project managed on CONON-NOW. Redeem for professional tools and software subscriptions.
-              </p>
-              <button onClick={() => toast.success("Architect Rewards registration coming soon!")}
-                className="px-4 py-2 rounded-[12px] text-white text-[9px] font-black" style={{ background: "#7c3aed" }}>
-                Learn More
-              </button>
-            </div>
-          </div>
-        )}
+        {tab === "wallet" && <LivingMaterialVault />}
 
         {/* ═══════════════ REFERRALS TAB ═══════════════ */}
         {tab === "refer" && (

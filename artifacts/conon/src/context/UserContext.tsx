@@ -55,16 +55,85 @@ const UserContext = createContext<UserContextType>({
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [role, setRoleState]   = useState<UserRole>(() => (localStorage.getItem("conon_role") as UserRole) ?? null);
-  const [phone, setPhoneState] = useState(() => localStorage.getItem("conon_phone") ?? "");
-  const [name, setNameState]   = useState(() => localStorage.getItem("conon_name") ?? "");
-  const [displayRole, setDisplayRoleState] = useState(() => localStorage.getItem("conon_display_role") ?? "");
+  const [role, setRoleState] = useState<UserRole>(() => {
+    try {
+      const authUserRaw = localStorage.getItem("conon_auth_user");
+      if (authUserRaw) {
+        const u = JSON.parse(authUserRaw);
+        if (u?.phone) return "customer";
+      }
+      return ((localStorage.getItem("conon_customer_role") || localStorage.getItem("conon_role")) as UserRole) ?? null;
+    } catch (_) {
+      return null;
+    }
+  });
+
+  const [phone, setPhoneState] = useState(() => {
+    try {
+      const authUserRaw = localStorage.getItem("conon_auth_user");
+      if (authUserRaw) {
+        const u = JSON.parse(authUserRaw);
+        if (u?.phone) return u.phone;
+      }
+      return (localStorage.getItem("conon_customer_phone") || localStorage.getItem("conon_phone")) ?? "";
+    } catch (_) {
+      return "";
+    }
+  });
+
+  const [name, setNameState] = useState(() => {
+    try {
+      const authUserRaw = localStorage.getItem("conon_auth_user");
+      if (authUserRaw) {
+        const u = JSON.parse(authUserRaw);
+        if (u?.name) return u.name;
+      }
+      return (localStorage.getItem("conon_customer_name") || localStorage.getItem("conon_name")) ?? "";
+    } catch (_) {
+      return "";
+    }
+  });
+
+  const [displayRole, setDisplayRoleState] = useState(() => {
+    try {
+      const authUserRaw = localStorage.getItem("conon_auth_user");
+      if (authUserRaw) {
+        const u = JSON.parse(authUserRaw);
+        if (u?.displayRole) return u.displayRole;
+      }
+      return (localStorage.getItem("conon_customer_display_role") || localStorage.getItem("conon_display_role")) ?? "";
+    } catch (_) {
+      return "";
+    }
+  });
+
   const [vendorStore, setVendorStoreState] = useState<string | null>(() => localStorage.getItem("conon_vendor_store") || null);
 
-  const setRole  = (r: UserRole) => { setRoleState(r); localStorage.setItem("conon_role", r ?? ""); };
-  const setPhone = (p: string)   => { setPhoneState(p); localStorage.setItem("conon_phone", p); };
-  const setName  = (n: string)   => { setNameState(n);  localStorage.setItem("conon_name", n); };
-  const setDisplayRole = (d: string) => { setDisplayRoleState(d); localStorage.setItem("conon_display_role", d); };
+  const setRole  = (r: UserRole) => {
+    setRoleState(r);
+    if (r) {
+      localStorage.setItem("conon_customer_role", r);
+      localStorage.setItem("conon_role", r);
+    } else {
+      localStorage.removeItem("conon_customer_role");
+      localStorage.removeItem("conon_role");
+    }
+  };
+  const setPhone = (p: string)   => {
+    setPhoneState(p);
+    localStorage.setItem("conon_customer_phone", p);
+    localStorage.setItem("conon_phone", p);
+  };
+  const setName  = (n: string)   => {
+    setNameState(n);
+    localStorage.setItem("conon_customer_name", n);
+    localStorage.setItem("conon_name", n);
+  };
+  const setDisplayRole = (d: string) => {
+    setDisplayRoleState(d);
+    localStorage.setItem("conon_customer_display_role", d);
+    localStorage.setItem("conon_display_role", d);
+  };
   const setVendorStore = (s: string | null) => {
     setVendorStoreState(s);
     if (s) localStorage.setItem("conon_vendor_store", s);
@@ -79,14 +148,52 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     setVendorStore(payload.vendorStore ?? null);
   };
 
-  const logout   = () => {
-    setRoleState(null); setPhoneState(""); setNameState(""); setDisplayRoleState(""); setVendorStoreState(null);
-    localStorage.removeItem("conon_role");
-    localStorage.removeItem("conon_phone");
-    localStorage.removeItem("conon_name");
-    localStorage.removeItem("conon_display_role");
-    localStorage.removeItem("conon_vendor_store");
-    localStorage.removeItem("conon_jwt");
+  const logout = () => {
+    setRoleState(null);
+    setPhoneState("");
+    setNameState("");
+    setDisplayRoleState("");
+    setVendorStoreState(null);
+
+    const keys = [
+      "conon_auth_user",
+      "conon_customer_role",
+      "conon_customer_phone",
+      "conon_customer_name",
+      "conon_customer_display_role",
+      "conon_customer_jwt",
+      "conon_role",
+      "conon_phone",
+      "conon_name",
+      "conon_display_role",
+      "conon_jwt",
+      "jwt",
+      "token",
+      "user",
+      "role",
+    ];
+
+    if (typeof window !== "undefined") {
+      for (const k of keys) {
+        try {
+          localStorage.removeItem(k);
+          sessionStorage.removeItem(k);
+        } catch (_) {}
+      }
+    }
+
+    // Attempt backend session clear in background
+    try {
+      const apiOrigin = (
+        (import.meta as any).env?.VITE_API_URL ||
+        (import.meta as any).env?.VITE_API_BASE_URL ||
+        ""
+      ).replace(/\/+$/, "");
+      fetch(`${apiOrigin}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      }).catch(() => {});
+    } catch (_) {}
   };
 
   const isAuthenticated = role !== null;

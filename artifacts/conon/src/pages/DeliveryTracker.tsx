@@ -7,6 +7,8 @@ import {
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { useGetOrders } from "@workspace/api-client-react";
+import { resolveApiUrl } from "@/lib/apiBase";
 
 /* ── constants ───────────────────────────────────────────────── */
 const ORDER_ID  = "CON-28471";
@@ -172,6 +174,15 @@ function TipBtn({ label, selected, onClick }: { label: string; selected: boolean
 
 /* ── main page ───────────────────────────────────────────────── */
 export function DeliveryTracker() {
+  const { data: orders } = useGetOrders();
+  const latestOrder = orders && orders.length > 0 ? orders[0] : null;
+
+  const activeOrderId = latestOrder?.id || ORDER_ID;
+  const activeTotalAmt = latestOrder?.total ?? TOTAL_AMT;
+  const activeItemsStr = latestOrder?.items && latestOrder.items.length > 0
+    ? latestOrder.items.map((i: any) => `${i.quantity} × ${i.name}`).join(" + ")
+    : ORDER_ITEMS_STR;
+
   const [stage, setStage]           = useState<Stage>("packing");
   const [driverIndex, setDriverIndex] = useState(2);
   const [eta, setEta]               = useState(16);
@@ -185,12 +196,102 @@ export function DeliveryTracker() {
   const [refreshing, setRefreshing]         = useState(false);
   const [safetyOpen, setSafetyOpen]         = useState(false);
   const [isiOpen, setIsiOpen]               = useState(false);
-  const [contact, setContact]               = useState(CONTACT);
+
+  const [deliveryOtp, setDeliveryOtp] = useState<string>("7390");
+  const [vehicleLabel, setVehicleLabel] = useState<string>("4W Mini-Truck (1.5 Ton)");
+  const [driverPlate, setDriverPlate] = useState<string>("UP 32 PK 7744");
+  const [liveDriver, setLiveDriver] = useState({
+    name: "Vikram Singh",
+    initials: "VS",
+    phone: "+91 98394 45566",
+    rating: 4.8,
+    trips: "1.5k",
+  });
+  const [liveVendor, setLiveVendor] = useState({
+    name: "Shree Balaji Cement & Steel",
+    area: "Chinhat Industrial Hub, Lucknow",
+  });
+
+  const savedName = typeof window !== "undefined" ? localStorage.getItem("conon_name") : null;
+  const savedPhone = typeof window !== "undefined" ? localStorage.getItem("conon_phone") : null;
+  const initialContact = savedName ? `${savedName}, ${savedPhone ? savedPhone.slice(0, 4) + "XXXX" : "Verified Buyer"}` : CONTACT;
+  const [contact, setContact]               = useState(initialContact);
   const [editingContact, setEditingContact] = useState(false);
-  const [deliveryAddr, setDeliveryAddr]     = useState(DELIVERY_ADDR);
+
+  const initialAddr = latestOrder?.deliveryAddress || (typeof window !== "undefined" ? localStorage.getItem("conon_last_address") : null) || DELIVERY_ADDR;
+  const [deliveryAddr, setDeliveryAddr]     = useState(initialAddr);
   const [editingAddr, setEditingAddr]       = useState(false);
   const [instructions, setInstructions]     = useState("");
   const [editingInstr, setEditingInstr]     = useState(false);
+
+  useEffect(() => {
+    // 1. Fetch current live order from ecosystem
+    fetch(resolveApiUrl("/api/orders/current"))
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.order) {
+          const o = data.order;
+          if (o.deliveryOtp) setDeliveryOtp(o.deliveryOtp);
+          if (o.vehicleLabel) setVehicleLabel(o.vehicleLabel);
+          if (o.driverVehiclePlate) setDriverPlate(o.driverVehiclePlate);
+          if (o.driverName) {
+            setLiveDriver({
+              name: o.driverName,
+              initials: o.driverName.split(" ").map((n: string) => n[0]).join("").slice(0, 2),
+              phone: o.driverPhone || "+91 98394 45566",
+              rating: 4.8,
+              trips: "1.2k",
+            });
+          }
+          if (o.vendorStore) {
+            setLiveVendor({
+              name: o.vendorStore,
+              area: o.vendorAddress || "Lucknow Hub",
+            });
+          }
+          if (o.deliveryAddress) setDeliveryAddr(o.deliveryAddress);
+          if (o.status === "DELIVERED") setStage("delivered");
+          else if (o.status === "OUT_FOR_DELIVERY" || o.status === "PICKED_UP" || o.status === "DRIVER_ASSIGNED") setStage("on_way");
+          else if (o.status === "PACKING_READY" || o.status === "VENDOR_ACCEPTED") setStage("packing");
+          else if (o.status === "PLACED") setStage("placed");
+        }
+      })
+      .catch(() => {});
+
+    // 2. Subscribe to Ecosystem SSE events
+    let sse: EventSource | null = null;
+    try {
+      sse = new EventSource(resolveApiUrl("/api/events/stream?role=CUSTOMER"));
+      sse.addEventListener("order_updated", (evt) => {
+        try {
+          const payload = JSON.parse(evt.data);
+          if (payload) {
+            if (payload.deliveryOtp) setDeliveryOtp(payload.deliveryOtp);
+            if (payload.driverName) {
+              setLiveDriver((prev) => ({
+                ...prev,
+                name: payload.driverName,
+                phone: payload.driverPhone || prev.phone,
+              }));
+            }
+            if (payload.status === "DELIVERED") {
+              setStage("delivered");
+              toast.success("🎉 Materials delivered and site verified!");
+            } else if (payload.status === "OUT_FOR_DELIVERY" || payload.status === "PICKED_UP") {
+              setStage("on_way");
+              toast.info("🚛 Order loaded on vehicle! En-route to your site.");
+            } else if (payload.status === "PACKING_READY") {
+              setStage("packing");
+            }
+          }
+        } catch {}
+      });
+    } catch {}
+
+    return () => {
+      if (sse) sse.close();
+    };
+  }, []);
 
   const handleRefresh = () => {
     if (refreshing) return;
@@ -202,12 +303,12 @@ export function DeliveryTracker() {
   };
 
   const handleMessage = () => {
-    const body = encodeURIComponent(`Hi ${DRIVER.name}, regarding my CONON-NOW order ${ORDER_ID}.`);
+    const body = encodeURIComponent(`Hi ${DRIVER.name}, regarding my CONON-NOW order ${activeOrderId}.`);
     window.location.href = `sms:${DRIVER.phone}?body=${body}`;
   };
 
   const handleShare = async () => {
-    const text = `Track my CONON-NOW order ${ORDER_ID} — arriving in ${eta} mins!`;
+    const text = `Track my CONON-NOW order ${activeOrderId} — arriving in ${eta} mins!`;
     try {
       if (navigator.share) {
         await navigator.share({ title: "CONON-NOW Delivery", text });
@@ -273,7 +374,7 @@ export function DeliveryTracker() {
         </motion.div>
         <p className="text-xs font-black tracking-widest text-gray-500 uppercase mb-2">Delivered</p>
         <h2 className="text-2xl font-black text-gray-900 mb-3">Materials Delivered!</h2>
-        <p className="text-sm text-gray-500 leading-relaxed mb-8">Order {ORDER_ID} delivered to your site at Hazratganj.</p>
+        <p className="text-sm text-gray-500 leading-relaxed mb-8">Order {activeOrderId} delivered to your site at {deliveryAddr.split(",")[0] || "site"}.</p>
         <Link href="/home">
           <button className="px-8 py-3 rounded-2xl text-white font-black text-sm" style={{ background: GREEN }}>
             Back to Home
@@ -295,7 +396,7 @@ export function DeliveryTracker() {
               <ChevronLeft className="w-5 h-5 text-white" />
             </button>
           </Link>
-          <p className="text-sm font-bold opacity-90 flex-1 text-center">{VENDOR.name}</p>
+          <p className="text-sm font-bold opacity-90 flex-1 text-center">{liveVendor.name}</p>
           <button onClick={handleShare}
             className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center active:scale-90 transition">
             <Share2 className="w-4 h-4 text-white" />
@@ -325,6 +426,57 @@ export function DeliveryTracker() {
         {/* Map */}
         <div className="bg-white overflow-hidden" style={{ borderBottom: "1px solid #e5e7eb" }}>
           <GPSMap driverIndex={driverIndex} onExpand={() => setLocation("/live-track")} />
+          <div className="px-4 py-2.5 bg-emerald-50 border-t border-emerald-100 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-bold text-emerald-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Live Vehicle Telemetry Active</span>
+            </div>
+            <button
+              onClick={() => setLocation("/live-track")}
+              className="text-xs font-black text-emerald-700 hover:text-emerald-800 flex items-center gap-1 active:scale-95 transition"
+            >
+              <span>Open Full GPS Map</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* ── Customer Delivery OTP Security Card ────────────────── */}
+        <div className="mx-4 mt-3 bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 text-white rounded-2xl p-4 shadow-xl border border-emerald-500/40">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-emerald-400" />
+              <span className="text-[11px] font-black uppercase tracking-wider text-emerald-300">
+                Site Verification Delivery OTP
+              </span>
+            </div>
+            <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded-full border border-emerald-400/30">
+              Anti-Theft Lock
+            </span>
+          </div>
+
+          <div className="mt-3 flex items-center justify-between">
+            <div>
+              <p className="text-[11px] text-slate-300">
+                Share this 4-digit code with driver after inspecting materials:
+              </p>
+              <div className="mt-1.5 flex items-center gap-2">
+                {(deliveryOtp || "7390").split("").map((digit, i) => (
+                  <span
+                    key={i}
+                    className="w-10 h-12 bg-white/10 rounded-xl flex items-center justify-center font-black text-2xl text-emerald-400 border border-emerald-400/40 shadow-inner font-mono"
+                  >
+                    {digit}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="text-right pl-3 border-l border-white/10">
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Vehicle Class</span>
+              <p className="text-xs font-black text-white">{vehicleLabel}</p>
+              <p className="text-[11px] text-emerald-400 font-mono font-bold">{driverPlate}</p>
+            </div>
+          </div>
         </div>
 
         {/* ── Add more items card ────────────────────────────── */}
@@ -357,8 +509,8 @@ export function DeliveryTracker() {
             <div className="flex-1">
               <p className="text-sm font-black text-gray-900">
                 {paid
-                  ? `₹${TOTAL_AMT.toLocaleString("en-IN")} paid online`
-                  : `Pay ₹${TOTAL_AMT.toLocaleString("en-IN")} before or on delivery`}
+                  ? `₹${activeTotalAmt.toLocaleString("en-IN")} paid online`
+                  : `Pay ₹${activeTotalAmt.toLocaleString("en-IN")} before or on delivery`}
               </p>
               <p className="text-[11px] text-gray-500 mt-0.5">
                 {paid ? "Payment received — show this screen on delivery" : "Please keep change handy or avoid the hassle by paying online"}
@@ -370,7 +522,7 @@ export function DeliveryTracker() {
               <CheckCircle2 className="w-4 h-4" /> Paid online
             </div>
           ) : (
-            <button onClick={() => { setPaid(true); toast.success(`Payment successful — ₹${TOTAL_AMT.toLocaleString("en-IN")} paid`); }}
+            <button onClick={() => { setPaid(true); toast.success(`Payment successful — ₹${activeTotalAmt.toLocaleString("en-IN")} paid`); }}
               className="mt-3 text-sm font-black active:scale-95 transition" style={{ color: GREEN }}>Pay online</button>
           )}
         </div>
@@ -380,16 +532,16 @@ export function DeliveryTracker() {
           <div className="px-4 pt-4 pb-3 flex items-center gap-3">
             <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-base shrink-0"
               style={{ background: "#d97706" }}>
-              {DRIVER.initials}
+              {liveDriver.initials}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-black text-gray-900">I'm {DRIVER.name}, your delivery partner</p>
+              <p className="text-sm font-black text-gray-900">I'm {liveDriver.name}, your delivery partner</p>
               <div className="flex items-center gap-1 mt-0.5">
                 <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                <span className="text-[11px] font-bold text-gray-500">{DRIVER.rating} · {DRIVER.trips} orders delivered</span>
+                <span className="text-[11px] font-bold text-gray-500">{liveDriver.rating} · {liveDriver.trips} orders delivered</span>
               </div>
             </div>
-            <a href={`tel:${DRIVER.phone}`}
+            <a href={`tel:${liveDriver.phone}`}
               className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center shrink-0 hover:bg-gray-200 transition">
               <Phone className="w-4 h-4 text-gray-600" />
             </a>
@@ -540,8 +692,8 @@ export function DeliveryTracker() {
               <span className="text-[8px] font-black text-green-700">ISI</span>
             </div>
             <div className="flex-1 text-left">
-              <p className="text-[12px] font-bold text-gray-800">Order {ORDER_NUM}</p>
-              <p className="text-[11px] text-gray-400 mt-0.5 truncate">{ORDER_ITEMS_STR}</p>
+              <p className="text-[12px] font-bold text-gray-800">Order {activeOrderId}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5 truncate">{activeItemsStr}</p>
             </div>
             <ChevronRight className="w-4 h-4 text-gray-300 shrink-0 mt-1" />
           </button>

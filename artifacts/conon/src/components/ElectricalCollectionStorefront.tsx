@@ -12,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { VariantSelectorSheet } from "@/components/VariantSelectorSheet";
 import type { Product } from "@/components/ProductCard";
+import { RealProductImage } from "@/components/RealProductImage";
 
 export interface ElectricalProduct {
   id: string;
@@ -150,7 +151,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 1640,
     mrp: 2980,
     discountPct: 45,
-    image: "/images/products/electrical/polycab-fr-house-wire-1-5-sq-mm-90m-coil-bis-certified-flame-retardant.webp",
+    image: "/images/products/electrical/polycab-optima-fr-wire-row2.webp",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Flame Retardant",
     deliveryTime: "60 Mins",
@@ -174,7 +175,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 2690,
     mrp: 4800,
     discountPct: 44,
-    image: "/images/products/electrical/havells-lifeline-2-5-sq-mm.webp",
+    image: "/images/products/electrical/finolex-flameguard-wire-row2.webp",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Low Smoke Zero Halogen",
     deliveryTime: "60 Mins",
@@ -198,7 +199,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 1420,
     mrp: 3550,
     discountPct: 60,
-    image: "/images/products/electrical/havells-lifeline-1-0-sq-mm.webp",
+    image: "/images/products/electrical/anchor-zelect-wire-row2.webp",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Anti-Termite Rodent Repellent",
     deliveryTime: "60 Mins",
@@ -222,7 +223,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 4120,
     mrp: 6650,
     discountPct: 38,
-    image: "/images/products/electrical/havells-4-0-sqmm-90m.webp",
+    image: "/images/products/electrical/havells-flameguard-wire-row2.webp",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "High Heat Resistant 85°C",
     deliveryTime: "60 Mins",
@@ -818,11 +819,14 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
                       }}
                       className="w-full aspect-square bg-[#F9FAFB] rounded-lg border border-[#F3F4F6] p-2 flex items-center justify-center cursor-pointer overflow-hidden group-hover:scale-[1.02] transition-transform"
                     >
-                      <img
+                      <RealProductImage
+                        product={p}
                         src={p.image}
                         alt={p.title}
+                        title={p.title}
+                        brand={p.brand}
+                        category="wires-mcb-electrical"
                         className="w-full h-full object-contain"
-                        loading="lazy"
                       />
                     </div>
 

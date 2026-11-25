@@ -1,28 +1,14 @@
 import React from "react";
 import {
   Star, Clock, ShoppingCart, Check,
-  Package, Layers, Blocks, Paintbrush, Grid3x3,
-  type LucideIcon,
 } from "lucide-react";
 import { type Product } from "@/components/ProductCard";
 import { QuantityStepper } from "@/components/QuantityStepper";
+import { ProductImage } from "./ProductImage";
+import { useSafeLiveCatalog } from "@/context/LiveCatalogContext";
 
 const BRAND_DARK = "#1848a0";
 const BLINKIT_GREEN = "#1848a0";
-
-const MATERIAL_ICONS: Record<string, LucideIcon> = {
-  cement: Package,
-  steel: Layers,
-  "tmt steel": Layers,
-  bricks: Blocks,
-  sand: Package,
-  aggregate: Package,
-  paint: Paintbrush,
-  tiles: Grid3x3,
-};
-function materialIcon(tag: string): LucideIcon {
-  return MATERIAL_ICONS[(tag || "").trim().toLowerCase()] ?? Package;
-}
 
 /* Pull up to 3 short spec/tag pills from a product for the card chips row. */
 function buildPills(product: Product): string[] {
@@ -62,16 +48,15 @@ export function CompactProductCard({
   cartQty = 0,
   isAdding = false,
 }: CompactProductCardProps) {
-  const { image, title, materialTag, price, mrp, rating, reviews, deliveryEta, unit } = product;
+  const liveCatalog = useSafeLiveCatalog();
+  const liveProduct = liveCatalog?.getLiveProduct(product) ?? product;
+
+  const { image, title, materialTag, price, mrp, rating, reviews, deliveryEta, unit, inStock } = liveProduct;
   const off = mrp > price ? mrp - price : 0;
   const discountPct = mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0;
 
-  const [imgError, setImgError] = React.useState(false);
-  React.useEffect(() => { setImgError(false); }, [image]);
-  const showImage = Boolean(image) && !imgError;
-  const MaterialIcon = materialIcon(materialTag);
-  const pills = buildPills(product);
-  const openDetail = () => onOpenDetail?.(product);
+  const pills = buildPills(liveProduct);
+  const openDetail = () => onOpenDetail?.(liveProduct);
 
   return (
     <div
@@ -86,20 +71,16 @@ export function CompactProductCard({
           aria-label={`View ${title}`}
           className="block w-full aspect-square rounded-xl bg-white border border-slate-100 flex items-center justify-center p-2 overflow-hidden"
         >
-          {showImage ? (
-            <img
-              src={image}
-              alt={title}
-              loading="lazy"
-              onError={() => setImgError(true)}
-              className="w-full h-full object-contain"
-            />
-          ) : (
-            <span className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-slate-100 px-2">
-              <MaterialIcon size={34} className="text-slate-400" strokeWidth={1.5} />
-              <span className="text-[10px] font-medium text-slate-500 text-center line-clamp-2">{title}</span>
-            </span>
-          )}
+          <ProductImage
+            product={liveProduct}
+            src={image}
+            alt={title}
+            title={title}
+            brand={liveProduct.brand || liveProduct.vendor}
+            category={materialTag}
+            sku={product.slug || product.id}
+            className="w-full h-full object-contain"
+          />
         </button>
 
         {/* Unit pill — bottom-left, straddling the image base */}
@@ -110,11 +91,15 @@ export function CompactProductCard({
         )}
 
         {/* ADD button / −qty+ stepper — bottom-right, straddling the image base */}
-        {onSetQty ? (
+        {inStock === false ? (
+          <span className="absolute right-3 -bottom-2 text-[10px] font-black px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-sm uppercase">
+            Out
+          </span>
+        ) : onSetQty ? (
           <div className="absolute right-3 -bottom-2 shadow-sm rounded-lg">
             <QuantityStepper
               qty={cartQty}
-              onChange={(q) => onSetQty(product, q)}
+              onChange={(q) => onSetQty(liveProduct, q)}
               isBusy={isAdding}
               size="sm"
               className="min-w-[68px]"
@@ -123,7 +108,7 @@ export function CompactProductCard({
         ) : (
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); onAdd?.(product); }}
+            onClick={(e) => { e.stopPropagation(); onAdd?.(liveProduct); }}
             disabled={isAdding}
             className="absolute right-3 -bottom-2 min-w-[68px] flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg bg-white font-black text-[12px] shadow-sm active:scale-95 transition disabled:opacity-60"
             style={{ color: BLINKIT_GREEN, border: `1.5px solid ${BLINKIT_GREEN}` }}

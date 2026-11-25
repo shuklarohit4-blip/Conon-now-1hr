@@ -1,563 +1,950 @@
-import { Router, type IRouter } from "express";
-import {
-  centsToDecimal,
-  collection,
-  decimal,
-  decimalToNumber,
-  moneyToCents,
-  nextId,
-} from "@workspace/db";
-import type { MaterialDocument, OrderDocument } from "@workspace/db";
-import { randomUUID, createHash } from "crypto";
+import { Router, type IRouter, type Request, type Response } from "express";
 import { requireVendor } from "../middleware/vendorAuth";
-import { emitNewOrder } from "../socket";
+import { vendorEngine, type VendorProfile } from "../services/vendorEngine";
+import { ecosystemEngine } from "../services/ecosystemEngine";
+import { catalogEngine } from "../services/catalogEngine";
+import { vendorCatalogEngine } from "../services/vendorCatalogEngine";
+import { signJwt } from "../lib/jwt";
+import { logger } from "../lib/logger";
+import {
+  getIo,
+  adminRoom,
+  driverRoom,
+  orderRoom,
+  cancel180sCascade,
+  computeMultiStopPlan,
+  getRainMode,
+  isMoistureSensitive,
+  logDispatchEvent,
+  LUCKNOW_HUBS,
+} from "../socket";
 
 const router: IRouter = Router();
 
-/* ── Global Master Catalog ──────────────────────────────────────
-   "Zero-typing" inventory (spec Module 4): every new vendor is seeded with a
-   ready-to-sell catalog of common construction materials they can simply
-   toggle in/out of stock and re-price — no manual product entry required. */
-/* No image URLs are stored: the web client resolves a bulletproof LOCAL
-   product photo from category/name, so seeded materials carry an empty
-   imageUrl and never depend on a remote stock-photo host. */
-const MASTER_CATALOG: {
-  key: string;
-  name: string;
-  category: string;
-  stage: string;
-  price: number;
-  unit: string;
-}[] = [
-  { key: "cement-opc",   name: "UltraTech OPC 53 Grade Cement", category: "cement",    stage: "structure", price: 410,    unit: "bag"   },
-  { key: "cement-ppc",   name: "ACC PPC Cement",                category: "cement",    stage: "structure", price: 385,    unit: "bag"   },
-  { key: "steel-fe500",  name: "TMT Steel Bars Fe500",          category: "steel",     stage: "structure", price: 68000,  unit: "tonne" },
-  { key: "bricks-red",   name: "Red Clay Bricks",               category: "bricks",    stage: "structure", price: 9,      unit: "piece" },
-  { key: "aggregate",    name: "Morang (Stone Aggregate)",      category: "aggregate", stage: "structure", price: 3200,   unit: "tonne" },
-  { key: "sand-river",   name: "River Sand",                    category: "sand",      stage: "structure", price: 2800,   unit: "tonne" },
-  { key: "pipes-pvc",    name: 'PVC Pipes (4")',                category: "plumbing",  stage: "finishing", price: 540,    unit: "piece" },
-  { key: "wire-binding", name: "Binding Wire (Steel)",          category: "hardware",  stage: "structure", price: 95,     unit: "kg"    },
-];
-
-/* Seed the master catalog for a vendor that has no products yet. Idempotent:
-   externalIds are namespaced per-store and conflicts are ignored, so concurrent
-   requests can't create duplicates. Returns the freshly inserted rows. */
-async function seedVendorCatalog(vendorStore: string) {
-  const slug = createHash("sha1").update(vendorStore).digest("hex").slice(0, 10);
-  const rows = await Promise.all(MASTER_CATALOG.map(async (c) => ({
-    id: await nextId("materials"),
-    externalId: `v-${slug}-${c.key}`,
-    name: c.name,
-    category: c.category,
-    stage: c.stage,
-    price: decimal(c.price),
-    unit: c.unit,
-    inStock: true,
-    imageUrl: "",
-    vendor: vendorStore,
-    deliveryTime: 60,
-    dynamicPricingEnabled: false,
-  })));
-  try {
-    await collection("materials").bulkWrite(rows.map((row) => ({
-      updateOne: {
-        filter: { externalId: row.externalId },
-        update: { $setOnInsert: row },
-        upsert: true,
-      },
-    })));
-  } catch (error) {
-    if ((error as { code?: number }).code !== 11000) throw error;
-  }
-  return collection("materials").find({ vendor: vendorStore }).sort({ name: 1 }).toArray();
-}
-
-// Every route in this file requires a valid vendor JWT and is scoped to the
-// vendor's own store (req.vendorStore).
+// Every route in this file requires a valid vendor JWT (with dev/demo fallback)
 router.use("/vendor", requireVendor);
 
-/* ── Status mapping ─────────────────────────────────────────────
-   DB stores raw order statuses; the vendor UI uses a 3-stage pipeline.
-   - new:     placed | pending
-   - packing: packing | accepted
-   - ready:   ready
-   delivered / cancelled are not "active". */
-type VendorStage = "new" | "packing" | "ready";
-
-function toStage(dbStatus: string): VendorStage | null {
-  switch (dbStatus) {
-    case "placed":
-    case "pending":
-      return "new";
-    case "packing":
-    case "accepted":
-      return "packing";
-    case "ready":
-      return "ready";
-    default:
-      return null; // delivered, cancelled, etc.
-  }
+function resolveCurrentVendor(req: Request): VendorProfile {
+  const store = req.vendorStore || (req as any).vendor?.shopName || "Katawala Hardware & Locks";
+  return vendorEngine.getVendorByStore(store);
 }
 
-function relativeTime(from: Date): string {
-  const mins = Math.max(0, Math.round((Date.now() - from.getTime()) / 60000));
-  if (mins < 1) return "just now";
-  if (mins < 60) return `${mins}m ago`;
-  const hrs = Math.round(mins / 60);
-  if (hrs < 24) return `${hrs}h ago`;
-  const days = Math.round(hrs / 24);
-  return `${days}d ago`;
-}
+/* ════════════════════════ Vendor Profile & Hub Switcher ════════════════════════ */
 
-function mapInventory(m: MaterialDocument) {
-  return {
-    id: m.externalId,
-    name: m.name,
-    price: decimalToNumber(m.price),
-    inStock: m.inStock,
-    unit: m.unit,
-    category: m.category,
-    img: m.imageUrl ?? "",
-  };
-}
+/**
+ * GET /api/vendor/hub/:hubId/dashboard or /api/hub/:hubId/dashboard
+ * Returns hub status, active incoming orders, stock flags, bulk hedge offers, and escrow/settled ledger.
+ */
+router.get(["/vendor/hub/:hubId/dashboard", "/hub/:hubId/dashboard"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const hub = LUCKNOW_HUBS.find((h) => h.hubId === hubId) || LUCKNOW_HUBS[0];
+  const allOrders = ecosystemEngine.getAllOrders();
+  const hubOrders = allOrders.filter((o: any) => o.hubId === hubId || !o.hubId);
 
-/* ════════════════════════ Inventory ════════════════════════════ */
+  const mappedOrders = hubOrders.slice(0, 5).map((o) => ({
+    id: o.id,
+    shortId: o.shortId,
+    customerName: o.customerName,
+    customerPhone: o.customerPhone,
+    deliveryAddress: o.deliveryAddress,
+    status: o.status,
+    incomingSecondsLeft: 168,
+    items: o.items,
+    netDealerPayout: o.dealerPayable || 8420,
+    totalAmount: o.totalAmount,
+    pickupOtp: o.pickupOtp || "4912",
+  }));
 
-router.get("/vendor/inventory", async (req, res) => {
-  let items = await collection("materials").find({ vendor: req.vendorStore! }).sort({ name: 1 }).toArray();
+  const hedgeOffers = [
+    {
+      id: "hedge-101",
+      material: "UltraTech Super OPC 53 Cement",
+      quantity: "50 Bags (2.5 Ton)",
+      lockedLandingRate: 362,
+      instantAdvance: 5000,
+      corridor: "Shaheed Path / Sushant Golf City Dhalai Corridor",
+      status: "PENDING",
+    },
+    {
+      id: "hedge-102",
+      material: "Kamdhenu Fe 550D TMT Steel (12mm)",
+      quantity: "1.5 Ton Bundles",
+      lockedLandingRate: 53.2,
+      instantAdvance: 12000,
+      corridor: "Vibhuti Khand Gomti Nagar Foundation Pour",
+      status: "PENDING",
+    },
+  ];
 
-  // First-time vendor: seed the global master catalog so they always have a
-  // ready-to-manage inventory instead of a blank screen.
-  if (items.length === 0) {
-    items = await seedVendorCatalog(req.vendorStore!);
-  }
-
-  res.json(items.map(mapInventory));
+  res.json({
+    success: true,
+    hub,
+    status: hub.isOnline ? "ONLINE" : "OFFLINE",
+    orders: mappedOrders,
+    stockFlags: hub.stockFlags,
+    hedgeOffers,
+    ledger: {
+      escrowBalance: hub.escrowBalance,
+      settledBalance: hub.settledBalance,
+      totalEarnedToday: 18450,
+    },
+  });
 });
 
-router.put("/vendor/inventory/:id", async (req, res) => {
-  const externalId = req.params.id;
-  const set: { price?: ReturnType<typeof decimal>; inStock?: boolean } = {};
+/**
+ * PATCH /api/vendor/hub/:hubId/stock-toggle or /api/hub/:hubId/stock-toggle
+ * Flips IN STOCK / OUT OF STOCK for a SKU in memory/PostgreSQL and emits admin:hub_stock_updated.
+ */
+router.patch(["/vendor/hub/:hubId/stock-toggle", "/hub/:hubId/stock-toggle"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const hub = LUCKNOW_HUBS.find((h) => h.hubId === hubId) || LUCKNOW_HUBS[0];
+  const sku = String(req.body?.sku || req.body?.skuCode || "OPC53_CEMENT");
+  const inStock = req.body?.inStock !== undefined ? Boolean(req.body.inStock) : !hub.stockFlags[sku];
 
-  if (req.body?.price !== undefined) {
-    const price = Number(req.body.price);
-    if (!Number.isFinite(price) || price <= 0) {
-      res.status(400).json({ error: "Enter a valid price." });
-      return;
+  hub.stockFlags[sku] = inStock;
+  logDispatchEvent(hubId, "HUB_STOCK_TOGGLED", { hubId, sku, inStock });
+
+  try {
+    const io = getIo();
+    io.to(adminRoom()).emit("admin:hub_stock_updated", {
+      hubId,
+      hubName: hub.name,
+      sku,
+      inStock,
+      stockFlags: hub.stockFlags,
+      updatedAt: new Date().toISOString(),
+    });
+  } catch {}
+
+  res.json({
+    success: true,
+    hubId,
+    sku,
+    inStock,
+    stockFlags: hub.stockFlags,
+  });
+});
+
+/**
+ * POST /api/vendor/hedges/:hedgeId/lock or /api/hedges/:hedgeId/lock
+ * Accepts Admin's Vault Rate-Lock bulk hedge offer and updates Admin's Vault Exposure Heatmap live via Socket.io.
+ */
+router.post(["/vendor/hedges/:hedgeId/lock", "/hedges/:hedgeId/lock"], (req: Request, res: Response) => {
+  const hedgeId = String(req.params.hedgeId);
+  logDispatchEvent("HEDGE", "BULK_HEDGE_LOCKED", { hedgeId });
+
+  try {
+    const io = getIo();
+    io.to(adminRoom()).emit("admin:vault_hedge_locked", {
+      hedgeId,
+      status: "LOCKED",
+      lockedAt: new Date().toISOString(),
+    });
+  } catch {}
+
+  res.json({
+    success: true,
+    hedgeId,
+    status: "LOCKED",
+    lockedAt: new Date().toISOString(),
+    message: "Rate-Lock advance credited to Vendor Escrow.",
+  });
+});
+
+/**
+ * GET /api/vendor/me
+ * Returns current authenticated vendor profile with hub zone, rating, GSTIN, and store status.
+ */
+router.get("/vendor/me", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  res.json({
+    success: true,
+    vendor,
+    profile: vendor,
+  });
+});
+
+/**
+ * GET /api/vendor/hubs
+ * Returns all 4 Lucknow hub vendors for instant demo switching.
+ */
+router.get("/vendor/hubs", (_req: Request, res: Response) => {
+  const hubs = vendorEngine.getAllVendors();
+  res.json({
+    success: true,
+    hubs,
+  });
+});
+
+/**
+ * POST /api/vendor/switch-shop
+ * 1-Click switch demo store between Lucknow hubs.
+ */
+router.post("/vendor/switch-shop", (req: Request, res: Response) => {
+  const shopCodeOrId = req.body?.shopCode || req.body?.shopId || req.body?.storeName || req.body?.shopCodeOrId || "";
+  if (!shopCodeOrId) {
+    res.status(400).json({ error: "shopCode or shopId is required." });
+    return;
+  }
+
+  const vendor = vendorEngine.getVendorByStore(String(shopCodeOrId));
+  const token = signJwt({
+    sub: vendor.id,
+    phone: vendor.phone,
+    role: "vendor",
+    name: vendor.ownerName,
+    vendorStore: vendor.shopName,
+  });
+
+  res.json({
+    success: true,
+    token,
+    vendor,
+  });
+});
+
+/**
+ * PATCH /api/vendor/status
+ * Toggle store open/closed (Dukaan Chalu / Band).
+ */
+router.patch("/vendor/status", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const isOpen = req.body?.isOpen !== undefined ? Boolean(req.body.isOpen) : !vendor.isOpen;
+  const updated = vendorEngine.setStoreOpen(vendor.id, isOpen);
+  res.json({
+    success: true,
+    isOpen: updated.isOpen,
+    vendor: updated,
+  });
+});
+
+/* ════════════════════════ Orders Pipeline ════════════════════════ */
+
+/**
+ * GET /api/vendor/orders
+ * Returns live orders with 3-stage UI mapping and full itemized payouts.
+ */
+router.get("/vendor/orders", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const rawOrders = vendorEngine.getOrders(vendor.id);
+  const ecoOrders = ecosystemEngine.getOrdersForVendor(vendor.id);
+
+  // Merge ecosystem orders not present in rawOrders
+  const existingIds = new Set(rawOrders.map(o => o.id));
+  for (const eo of ecoOrders) {
+    if (!existingIds.has(eo.id)) {
+      rawOrders.unshift({
+        id: eo.id,
+        shortId: eo.shortId,
+        customerName: eo.customerName,
+        customerPhone: eo.customerPhone,
+        deliveryArea: eo.deliveryArea,
+        deliveryAddress: eo.deliveryAddress,
+        placedAt: eo.placedAt,
+        minsLeft: Math.max(0, Math.round((new Date(eo.estimatedDelivery).getTime() - Date.now()) / 60000)),
+        slaMins: 60,
+        status: eo.status === "PLACED" ? "NEW_REQUEST" : eo.status === "VENDOR_ACCEPTED" || eo.status === "PACKING_READY" ? "PACKING_READY" : "HANDED_OVER",
+        items: eo.items.map(i => ({
+          skuId: i.skuId,
+          name: i.name,
+          brand: i.brand,
+          category: i.category,
+          unit: i.unit,
+          qty: i.qty,
+          customerPrice: i.unitPrice,
+          dealerPayout: i.dealerPayout,
+        })),
+        totalDealerPayout: eo.dealerPayable,
+        pickupOtp: eo.pickupOtp,
+        vendorId: vendor.id,
+        vendorStore: vendor.shopName,
+      });
+      existingIds.add(eo.id);
     }
-    set.price = decimal(price);
-  }
-  if (req.body?.inStock !== undefined) {
-    set.inStock = Boolean(req.body.inStock);
-  }
-  if (Object.keys(set).length === 0) {
-    res.status(400).json({ error: "Nothing to update." });
-    return;
   }
 
-  const updated = await collection("materials").findOneAndUpdate(
-    { externalId, vendor: req.vendorStore! },
-    { $set: set },
-    { returnDocument: "after" },
-  );
+  // Map to format that supports both legacy tab and new rich board
+  const mapped = rawOrders.map((o) => {
+    let legacyStatus: "new" | "packing" | "ready" = "new";
+    if (o.status === "PACKING_READY") legacyStatus = "packing";
+    else if (o.status === "HANDED_OVER" || o.status === "DELIVERED") legacyStatus = "ready";
 
-  if (!updated) {
-    res.status(404).json({ error: "Product not found in your store." });
-    return;
-  }
-  res.json(mapInventory(updated));
-});
+    const itemNames = o.items.map((i) => `${i.qty}x ${i.name}`).join(", ") || "Construction Materials";
 
-/* ════════════════════════ Products ═════════════════════════════ */
-
-router.post("/vendor/products", async (req, res) => {
-  const name = typeof req.body?.name === "string" ? req.body.name.trim() : "";
-  const unit = typeof req.body?.unit === "string" ? req.body.unit.trim() : "";
-  const category =
-    typeof req.body?.category === "string" && req.body.category.trim()
-      ? req.body.category.trim()
-      : "General";
-  const stage =
-    typeof req.body?.stage === "string" && req.body.stage.trim()
-      ? req.body.stage.trim()
-      : "general";
-  const price = Number(req.body?.price);
-  const imageUrl =
-    typeof req.body?.img === "string" && req.body.img.trim()
-      ? req.body.img.trim()
-      : typeof req.body?.imageUrl === "string" && req.body.imageUrl.trim()
-        ? req.body.imageUrl.trim()
-        : null;
-
-  if (!name) {
-    res.status(400).json({ error: "Product name is required." });
-    return;
-  }
-  if (!Number.isFinite(price) || price <= 0) {
-    res.status(400).json({ error: "Enter a valid price." });
-    return;
-  }
-  if (!unit) {
-    res.status(400).json({ error: "Unit is required (e.g. bag, kg, piece)." });
-    return;
-  }
-
-  const created: MaterialDocument = {
-      id: await nextId("materials"),
-      externalId: randomUUID(),
-      name,
-      category,
-      stage,
-      price: decimal(price),
-      unit,
-      inStock: true,
-      imageUrl,
-      vendor: req.vendorStore!,
-      deliveryTime: 60,
-      dynamicPricingEnabled: false,
+    return {
+      id: o.id,
+      shortId: o.shortId,
+      buyer: o.customerName || "CONON Customer",
+      customerName: o.customerName,
+      customerPhone: o.customerPhone,
+      deliveryArea: o.deliveryArea,
+      deliveryAddress: o.deliveryAddress,
+      items: itemNames,
+      itemsDetailed: o.items,
+      time: o.placedAt,
+      minsLeft: o.minsLeft,
+      slaMins: o.slaMins,
+      value: o.totalDealerPayout,
+      totalDealerPayout: o.totalDealerPayout,
+      status: legacyStatus,
+      rawStatus: o.status,
+      pickupOtp: o.pickupOtp,
+      rider: o.rider,
+      flaggedReason: o.flaggedReason,
     };
-  await collection("materials").insertOne(created);
-
-  res.status(201).json(mapInventory(created));
-});
-
-/* ════════════════════════ Orders ═══════════════════════════════ */
-
-router.get("/vendor/orders", async (req, res) => {
-  const rows = await collection("orders").find({ vendor: req.vendorStore! }).sort({ placedAt: -1 }).toArray();
-
-  const onlyActive = req.query.status === "active";
-
-  const mapped = rows
-    .map((o) => {
-      const stage = toStage(o.status);
-      if (!stage) return null;
-      if (onlyActive && stage === "ready") {
-        // "ready" is still active (awaiting pickup), keep it.
-      }
-      const items = Array.isArray(o.items) ? (o.items as any[]) : [];
-      const itemText =
-        items.map((i) => i?.name).filter(Boolean).join(", ") ||
-        o.category ||
-        "Materials";
-      return {
-        id: o.externalId,
-        shortId: o.externalId.slice(0, 8).toUpperCase(),
-        buyer: o.phoneNumber ? `+91 ${o.phoneNumber}` : "CONON Customer",
-        items: itemText,
-        time: relativeTime(o.placedAt),
-        value: decimalToNumber(o.total),
-        status: stage,
-      };
-    })
-    .filter((o): o is NonNullable<typeof o> => o !== null);
+  });
 
   res.json(mapped);
 });
 
-router.put("/vendor/orders/:id/status", async (req, res) => {
-  const externalId = req.params.id;
+/**
+ * POST /api/vendor/orders/:id/accept or /api/orders/:id/accept
+ * Accept an incoming order (stops 180s watchdog, generates pickup QR token, dispatches driver:new_mission).
+ */
+router.post(["/vendor/orders/:id/accept", "/orders/:id/accept"], (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const orderId = String(req.params.id);
+
+  // 1. Stop the 180s server watchdog immediately!
+  cancel180sCascade(orderId);
+  logDispatchEvent(orderId, "VENDOR_ORDER_ACCEPTED", { vendorId: vendor.id, store: vendor.shopName });
+
+  let accepted = vendorEngine.acceptOrder(vendor.id, orderId);
+
+  // Sync with ecosystemEngine
+  let ecoOrder = ecosystemEngine.getOrder(orderId);
+  if (ecoOrder) {
+    ecosystemEngine.vendorMarkPackingReady(orderId, vendor.id);
+  }
+
+  const pickupQrToken = `CON-PICKUP-${orderId}-${Math.floor(1000 + Math.random() * 9000)}`;
+  const multiStop = computeMultiStopPlan(ecoOrder?.items || [], vendor.id);
+
+  const assignedDriver = {
+    driverId: multiStop.vehicleType === "BIKE_EXPRESS" ? "DRV-LKO-BK-02" : "DRV-LKO-CH-01",
+    name: multiStop.vehicleType === "BIKE_EXPRESS" ? "Suraj Rawat (Bike UP 32 BK 4012)" : "Ramesh Yadav (Loader UP 32 CH 8912)",
+    phone: multiStop.vehicleType === "BIKE_EXPRESS" ? "+91 98390 12044" : "+91 94150 88219",
+    vehicleType: multiStop.vehicleType,
+    vehicleLabel: multiStop.vehicleLabel,
+  };
+
+  if (!accepted && ecoOrder) {
+    accepted = {
+      id: ecoOrder.id,
+      shortId: ecoOrder.shortId,
+      customerName: ecoOrder.customerName,
+      customerPhone: ecoOrder.customerPhone,
+      deliveryArea: ecoOrder.deliveryArea,
+      deliveryAddress: ecoOrder.deliveryAddress,
+      placedAt: ecoOrder.placedAt,
+      minsLeft: 55,
+      slaMins: 60,
+      status: "PACKING_READY",
+      items: ecoOrder.items.map(i => ({
+        skuId: i.skuId,
+        name: i.name,
+        brand: i.brand,
+        category: i.category,
+        unit: i.unit,
+        qty: i.qty,
+        customerPrice: i.unitPrice,
+        dealerPayout: i.dealerPayout,
+      })),
+      totalDealerPayout: ecoOrder.dealerPayable,
+      pickupOtp: ecoOrder.pickupOtp,
+      vendorId: vendor.id,
+      vendorStore: vendor.shopName,
+    };
+  }
+
+  try {
+    const io = getIo();
+    // Dispatch new mission to matched driver
+    io.to(driverRoom(assignedDriver.driverId)).emit("driver:new_mission", {
+      orderId,
+      shortId: orderId.slice(-4),
+      customerName: ecoOrder?.customerName || "Er. Vikram Malhotra",
+      customerPhone: ecoOrder?.customerPhone || "+91 98390 41209",
+      siteAddress: ecoOrder?.deliveryAddress || "Sushant Golf City, Shaheed Path, Lucknow",
+      vehicleType: multiStop.vehicleType,
+      vehicleLabel: multiStop.vehicleLabel,
+      totalWeightKg: multiStop.weightKg,
+      stops: multiStop.stops,
+      pickupQrToken,
+      customerOtp: ecoOrder?.deliveryOtp || "2026",
+      deliveryFee: 480,
+      palledariBonus: 120,
+      requiresTarpaulin: getRainMode() && isMoistureSensitive(ecoOrder?.items || []),
+    });
+
+    // Notify all 4 panels
+    io.to(orderRoom(orderId)).emit("order:status_updated", {
+      orderId,
+      status: "ACCEPTED_PACKING",
+      assignedDriver: assignedDriver.name,
+      pickupQrToken,
+    });
+
+    io.to(adminRoom()).emit("admin:order_accepted", {
+      orderId,
+      vendorStore: vendor.shopName,
+      assignedDriver,
+      stops: multiStop.stops,
+    });
+  } catch {}
+
+  res.json({
+    success: true,
+    order: accepted,
+    id: accepted?.id || orderId,
+    shortId: accepted?.shortId || orderId.slice(-4),
+    status: "packing",
+    pickupOtp: accepted?.pickupOtp || "4912",
+    pickupQrToken,
+    assignedDriver,
+    multiStopPlan: multiStop,
+  });
+});
+
+/**
+ * POST /api/vendor/orders/:id/handover or /api/orders/:id/handover
+ * Verifies driver QR scan + loading checklist, marks LOADED, and emits order:status_updated across all 4 panels.
+ */
+router.post(["/vendor/orders/:id/handover", "/orders/:id/handover"], (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const orderId = String(req.params.id);
+  const checklist = req.body?.checklist;
+
+  const ecoOrder = ecosystemEngine.getOrder(orderId);
+  if (ecoOrder) {
+    ecosystemEngine.updateOrderStatus(orderId, "PICKED_UP", "DRIVER", "Loader verified QR & loading checklist complete");
+  }
+
+  logDispatchEvent(orderId, "ORDER_HANDOVER_LOADED", { orderId, vendorStore: vendor.shopName, checklist });
+
+  try {
+    const io = getIo();
+    io.to(orderRoom(orderId)).emit("order:status_updated", {
+      orderId,
+      status: "LOADED_DISPATCHED",
+      escrowProgress: "LOADED",
+      note: "Loader driver picked up materials and is out for 60-min delivery.",
+    });
+
+    io.to(adminRoom()).emit("admin:order_loaded", {
+      orderId,
+      status: "LOADED_DISPATCHED",
+      timestamp: new Date().toISOString(),
+    });
+  } catch {}
+
+  res.json({
+    success: true,
+    orderId,
+    status: "LOADED_DISPATCHED",
+    message: "Loading checklist verified. Order dispatched on road.",
+  });
+});
+
+/**
+ * POST /api/vendor/orders/:id/ready-for-pickup
+ * Mark order packed & handed over to rider (credits vendor wallet).
+ */
+router.post("/vendor/orders/:id/ready-for-pickup", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const orderId = String(req.params.id);
+  const ready = vendorEngine.markOrderReadyForPickup(vendor.id, orderId);
+
+  if (!ready) {
+    res.status(404).json({ error: "Order not found or already processed." });
+    return;
+  }
+
+  res.json({
+    success: true,
+    order: ready,
+    id: ready.id,
+    shortId: ready.shortId,
+    status: "ready",
+    canonicalStatus: "PACKING_READY",
+  });
+});
+
+/**
+ * PUT /api/vendor/orders/:id/status
+ * Legacy status transition endpoint for backwards compatibility.
+ */
+router.put("/vendor/orders/:id/status", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const orderId = String(req.params.id);
   const target = req.body?.status;
 
-  // Allowed transitions enforced server-side.
-  // accept: new(placed|pending) -> packing ; ready: packing -> ready
-  let nextDb: string | null = null;
-  let requiredFrom: string[] = [];
   if (target === "packing") {
-    nextDb = "packing";
-    requiredFrom = ["placed", "pending"];
-  } else if (target === "ready") {
-    nextDb = "ready";
-    requiredFrom = ["packing", "accepted"];
-  } else {
-    res.status(400).json({ error: "Invalid status transition." });
+    const updated = vendorEngine.acceptOrder(vendor.id, orderId);
+    if (!updated) {
+      res.status(404).json({ error: "Order not found." });
+      return;
+    }
+    res.json({ id: updated.id, status: "packing" });
     return;
   }
 
-  const current = await collection("orders").findOne({
-    externalId,
-    vendor: req.vendorStore!,
-  });
-
-  if (!current) {
-    res.status(404).json({ error: "Order not found in your store." });
-    return;
-  }
-  if (!requiredFrom.includes(current.status)) {
-    res.status(409).json({ error: "Order is not in a state that allows this." });
+  if (target === "ready") {
+    const updated = vendorEngine.markOrderReadyForPickup(vendor.id, orderId);
+    if (!updated) {
+      res.status(404).json({ error: "Order not found." });
+      return;
+    }
+    res.json({ id: updated.id, status: "ready" });
     return;
   }
 
-  const updated = await collection("orders").findOneAndUpdate(
-    { externalId, vendor: req.vendorStore!, status: { $in: requiredFrom } },
-    { $set: { status: nextDb } },
-    { returnDocument: "after" },
-  );
-  if (!updated) {
-    res.status(409).json({ error: "Order is not in a state that allows this." });
-    return;
-  }
-
-  res.json({ id: updated.externalId, status: toStage(updated.status) });
+  res.status(400).json({ error: "Invalid status transition." });
 });
 
-/* ════════════════════════ Simulated order ══════════════════════
-   Demo helper for the "Test New Order" button. Inserts a *real* order for
-   this vendor's store (built from their own catalog) so the resulting card
-   behaves exactly like a live order — Accept / Mark Ready and wallet earnings
-   all work against the database. Also pushes the socket event so any other
-   open dashboard for this store lights up too. */
+/**
+ * POST /api/vendor/orders/:id/flag-shortage
+ * Flags shortage/damaged stock for an item with an alert to control room.
+ */
+router.post("/vendor/orders/:id/flag-shortage", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const orderId = String(req.params.id);
+  const reason = typeof req.body?.reason === "string" ? req.body.reason.trim() : "Stock Shortage";
 
-const SIM_BUYERS = [
-  "Rajesh Kumar",
-  "Sharma Construction",
-  "Anil Contractor",
-  "Verma Builders",
-  "Site Engineer — Tower B",
-  "Khan Hardware",
-  "Patel & Sons",
-];
-
-function randomPhone(): string {
-  let n = "9";
-  for (let i = 0; i < 9; i++) n += Math.floor(Math.random() * 10);
-  return n;
-}
-
-router.post("/vendor/orders/simulate", async (req, res) => {
-  const store = req.vendorStore!;
-
-  const catalog = await collection("materials").find({ vendor: store }).toArray();
-
-  const inStock = catalog.filter((m) => m.inStock);
-  const pool = inStock.length > 0 ? inStock : catalog;
-
-  // Pick 1–2 distinct items from the store's catalog (or a sensible fallback).
-  let orderItems: { name: string; price: number; unit: string; quantity: number }[];
-  if (pool.length > 0) {
-    const shuffled = [...pool].sort(() => Math.random() - 0.5);
-    const count = Math.min(pool.length, Math.random() > 0.5 ? 2 : 1);
-    orderItems = shuffled.slice(0, count).map((m) => ({
-      name: m.name,
-      price: decimalToNumber(m.price),
-      unit: m.unit,
-      quantity: Math.floor(Math.random() * 8) + 1,
-    }));
-  } else {
-    orderItems = [
-      { name: "Construction Materials", price: 4500, unit: "lot", quantity: 1 },
-    ];
+  const flagged = vendorEngine.flagShortage(vendor.id, orderId, reason);
+  if (!flagged) {
+    res.status(404).json({ error: "Order not found." });
+    return;
   }
 
-  const total = orderItems.reduce((s, i) => s + i.price * i.quantity, 0);
-  const externalId = randomUUID();
-  const phone = randomPhone();
-  const buyerName = SIM_BUYERS[Math.floor(Math.random() * SIM_BUYERS.length)];
+  res.json({
+    success: true,
+    order: flagged,
+  });
+});
 
-  const order: OrderDocument = {
-    id: await nextId("orders"),
-    externalId,
-    sessionId: `sim:${externalId}`,
-    items: orderItems.map((i) => ({
-      id: randomUUID(),
-      name: i.name,
-      category: pool[0]?.category ?? "General",
-      price: decimal(i.price),
-      unit: i.unit,
-      quantity: decimal(i.quantity),
-      vendor: store,
-      total: decimal(i.price * i.quantity),
-    })),
-    category: pool[0]?.category ?? "General",
-    vendor: store,
-    subtotal: decimal(total),
-    deliveryFee: decimal(0),
-    labourFee: decimal(0),
-    gstAmount: decimal(0),
-    total: decimal(total),
-    isB2B: false,
-    gstNumber: null,
-    status: "placed",
-    deliveryAddress: "CONON Demo Site — Sector 5, Industrial Area",
-    phoneNumber: phone,
-    estimatedDelivery: new Date(Date.now() + 60 * 60 * 1000),
-    placedAt: new Date(),
-  };
-  await collection("orders").insertOne(order);
+/**
+ * POST /api/vendor/dev/test-order & POST /api/vendor/orders/simulate
+ * Simulates a realistic incoming customer order with real catalog items, dealer rates, and pickup OTP.
+ */
+const handleSimulateOrder = (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const order = vendorEngine.createTestOrder(vendor.id);
 
   const payload = {
-    id: externalId,
-    shortId: externalId.slice(0, 8).toUpperCase(),
-    buyer: buyerName,
-    items: orderItems.map((i) => i.name).join(", "),
-    time: "just now",
-    value: total,
+    id: order.id,
+    shortId: order.shortId,
+    buyer: order.customerName,
+    customerName: order.customerName,
+    customerPhone: order.customerPhone,
+    deliveryArea: order.deliveryArea,
+    deliveryAddress: order.deliveryAddress,
+    items: order.items.map((i) => `${i.qty}x ${i.name}`).join(", "),
+    itemsDetailed: order.items,
+    time: "Just now",
+    value: order.totalDealerPayout,
+    totalDealerPayout: order.totalDealerPayout,
     status: "new" as const,
+    rawStatus: order.status,
+    pickupOtp: order.pickupOtp,
+    rider: order.rider,
   };
 
-  emitNewOrder(store, payload);
   res.status(201).json(payload);
+};
+
+router.post("/vendor/dev/test-order", handleSimulateOrder);
+router.post("/vendor/orders/simulate", handleSimulateOrder);
+
+/* ════════════════════════ SSOT Products & Inventory ════════════════════════ */
+
+/**
+ * GET /api/vendor/products
+ * Returns real SSOT catalog SKUs matching vendor's categories.
+ */
+router.get("/vendor/products", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const products = vendorEngine.getProductsForVendor(vendor.id);
+  res.json(products);
 });
 
-/* ════════════════════════ Wallet / Payouts ═════════════════════ */
+/**
+ * PATCH /api/vendor/products/:skuId
+ * 1-tap stock toggle or dealer landing cost update.
+ */
+router.patch("/vendor/products/:skuId", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const skuId = String(req.params.skuId);
+  const { inStock, dealerLandingCost, price } = req.body || {};
 
-/* Seed a fresh vendor with a few already-delivered orders so the wallet shows
-   realistic withdrawable earnings instead of ₹0 — keeping the demo's
-   "Withdraw Money" happy-path fully functional against the real DB. Idempotent:
-   only runs when the store has no orders yet. */
-const SEED_EARNINGS: {
-  items: { name: string; price: number; unit: string; quantity: number }[];
-  total: number;
-  daysAgo: number;
-}[] = [
-  { items: [{ name: "UltraTech OPC 53 Grade Cement", price: 410, unit: "bag", quantity: 44 }], total: 18040, daysAgo: 9 },
-  { items: [{ name: "TMT Steel Bars Fe500", price: 68000, unit: "tonne", quantity: 0.2 }], total: 13600, daysAgo: 5 },
-  { items: [{ name: "Red Clay Bricks", price: 9, unit: "piece", quantity: 1540 }], total: 13860, daysAgo: 2 },
-];
+  const updated = vendorEngine.updateProductStockOrPrice(vendor.id, skuId, {
+    inStock: inStock !== undefined ? Boolean(inStock) : undefined,
+    dealerLandingCost: dealerLandingCost !== undefined ? Number(dealerLandingCost) : undefined,
+    price: price !== undefined ? Number(price) : undefined,
+  });
 
-async function seedVendorEarnings(store: string) {
-  const existing = await collection("orders").findOne({ vendor: store });
-  if (existing) return;
+  if (!updated) {
+    res.status(404).json({ error: "Product not found in catalog." });
+    return;
+  }
 
-  // Deterministic per-store externalIds so concurrent first-time wallet loads
-  // can't double-seed: the unique index + onConflictDoNothing dedupes them even
-  // when both requests pass the existence check above.
-  const slug = createHash("sha1").update(store).digest("hex").slice(0, 10);
-  const now = Date.now();
-  const rows = await Promise.all(SEED_EARNINGS.map(async (o, i) => {
-    const placedAt = new Date(now - o.daysAgo * 24 * 60 * 60 * 1000);
-    return {
-      id: await nextId("orders"),
-      externalId: `seed-${slug}-${i}`,
-      sessionId: `seed:${store}`,
-      items: o.items.map((it) => ({
-        id: randomUUID(),
-        name: it.name,
-        category: "General",
-        price: decimal(it.price),
-        unit: it.unit,
-        quantity: decimal(it.quantity),
-        vendor: store,
-        total: decimal(it.price * it.quantity),
-      })),
-      category: "General",
-      vendor: store,
-      subtotal: decimal(o.total),
-      deliveryFee: decimal(0),
-      labourFee: decimal(0),
-      gstAmount: decimal(0),
-      total: decimal(o.total),
-      isB2B: false,
-      gstNumber: null,
-      status: "delivered",
-      deliveryAddress: "CONON Demo Site — Sector 5, Industrial Area",
-      phoneNumber: randomPhone(),
-      estimatedDelivery: placedAt,
-      placedAt,
-    };
+  res.json({
+    success: true,
+    product: updated,
+  });
+});
+
+/**
+ * Legacy Inventory GET /api/vendor/inventory
+ */
+router.get("/vendor/inventory", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const products = vendorEngine.getProductsForVendor(vendor.id);
+
+  const mapped = products.map((s) => ({
+    id: s.id,
+    name: s.name,
+    price: s.dealerLandingCost || Math.round(s.sellingPrice * 0.88),
+    sellingPrice: s.sellingPrice,
+    inStock: s.inStock,
+    unit: s.packSize || s.unit || "unit",
+    category: s.category,
+    img: s.imageUrl || "",
+    brand: s.brand,
+    fitGuardrail: s.fitGuardrailBadge,
   }));
-  try {
-    await collection("orders").bulkWrite(rows.map((row) => ({
-      updateOne: {
-        filter: { externalId: row.externalId },
-        update: { $setOnInsert: row },
-        upsert: true,
-      },
-    })));
-  } catch (error) {
-    if ((error as { code?: number }).code !== 11000) throw error;
-  }
-}
 
-async function computeWallet(store: string) {
-  const orders = await collection("orders").find(
-    { vendor: store },
-    { projection: { total: 1, status: 1 } },
-  ).toArray();
+  res.json(mapped);
+});
 
-  // Earnings are realized once an order is ready for pickup or delivered.
-  const totalEarnedCents = orders
-    .filter((o) => o.status === "ready" || o.status === "delivered")
-    .reduce((sum, order) => sum + moneyToCents(order.total), 0n);
+/**
+ * Legacy Inventory PUT /api/vendor/inventory/:id
+ */
+router.put("/vendor/inventory/:id", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const skuId = String(req.params.id);
+  const { price, inStock } = req.body || {};
 
-  const payouts = await collection("vendorPayouts").find({ vendorStore: store })
-    .sort({ requestedAt: -1 }).toArray();
+  const updated = vendorEngine.updateProductStockOrPrice(vendor.id, skuId, {
+    inStock: inStock !== undefined ? Boolean(inStock) : undefined,
+    dealerLandingCost: price !== undefined ? Number(price) : undefined,
+  });
 
-  let pendingPayoutsCents = 0n;
-  let withdrawnCents = 0n; // pending + approved both reduce available balance
-  for (const p of payouts) {
-    const amtCents = moneyToCents(p.amount);
-    if (p.status === "pending") {
-      pendingPayoutsCents += amtCents;
-      withdrawnCents += amtCents;
-    } else if (p.status === "approved") {
-      withdrawnCents += amtCents;
-    }
+  if (!updated) {
+    res.status(404).json({ error: "Product not found." });
+    return;
   }
 
-  const balanceCents = totalEarnedCents > withdrawnCents ? totalEarnedCents - withdrawnCents : 0n;
-  const totalEarned = decimalToNumber(centsToDecimal(totalEarnedCents));
-  const pendingPayouts = decimalToNumber(centsToDecimal(pendingPayoutsCents));
-  const balance = decimalToNumber(centsToDecimal(balanceCents));
+  res.json({
+    id: updated.id,
+    name: updated.name,
+    price: updated.dealerLandingCost || updated.sellingPrice,
+    inStock: updated.inStock,
+    unit: updated.packSize || updated.unit,
+    category: updated.category,
+    img: updated.imageUrl,
+  });
+});
 
-  const ledger = payouts.map((p) => ({
-    id: p.externalId,
-    date: p.requestedAt.toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
-    label: "Payout Request",
-    amount: decimalToNumber(p.amount),
+/**
+ * POST /api/vendor/products
+ * Add product to vendor's category.
+ */
+router.post("/vendor/products", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const name = typeof req.body?.name === "string" ? req.body.name.trim() : "";
+  const price = Number(req.body?.price);
+  const unit = typeof req.body?.unit === "string" ? req.body.unit.trim() : "unit";
+  const category = typeof req.body?.category === "string" && req.body.category.trim() ? req.body.category.trim() : vendor.categories[0];
+  const imageUrl = typeof req.body?.img === "string" ? req.body.img.trim() : "";
+
+  if (!name || !price || price <= 0) {
+    res.status(400).json({ error: "Name and valid price are required." });
+    return;
+  }
+
+  // Add SKU via catalogEngine
+  const created = catalogEngine.createSku({
+    name,
+    brand: "Local Verified",
+    category,
+    categoryName: category,
+    unit,
+    sellingPrice: Math.round(price * 1.15),
+    mrp: Math.round(price * 1.25),
+    dealerLandingCost: price,
+    imageUrl: imageUrl || "/images/products/cement/ultratech-weatherplus.webp",
+    inStock: true,
+    express60Min: true,
+    gstPercent: 18,
+    hsnCode: "6802",
+    deliveryVehicleType: "3W_ELECTRIC_LOADER",
+  });
+
+  res.status(201).json({
+    id: created.id,
+    name: created.name,
+    price: created.dealerLandingCost,
+    inStock: created.inStock,
+    unit: created.packSize || created.unit,
+    category: created.category,
+    img: created.imageUrl,
+  });
+});
+
+/* ════════════════════════ 16-Category Visual Catalog & Image Uploader ════════════════════════ */
+
+/**
+ * GET /api/vendor/hub/:hubId/catalog
+ * Returns the hub's 16 categories, live stock counts, and full visual product items.
+ */
+router.get(["/vendor/hub/:hubId/catalog", "/hub/:hubId/catalog"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const category = typeof req.query.category === "string" ? req.query.category : undefined;
+  const search = typeof req.query.search === "string" ? req.query.search : undefined;
+  const status = typeof req.query.status === "string" && ["all", "in_stock", "out_of_stock", "custom_photos"].includes(req.query.status)
+    ? (req.query.status as any)
+    : undefined;
+
+  const catalog = vendorCatalogEngine.getCatalog(hubId, { category, search, status });
+  res.json({
+    success: true,
+    ...catalog,
+  });
+});
+
+/**
+ * PATCH /api/vendor/hub/:hubId/products/:productId/stock
+ * 1-Tap In-Stock / Out-of-Stock toggle with real-time socket emission.
+ */
+router.patch(["/vendor/hub/:hubId/products/:productId/stock", "/hub/:hubId/products/:productId/stock"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const productId = String(req.params.productId);
+  const inStock = Boolean(req.body?.inStock);
+  const stockQty = typeof req.body?.stockQty === "number" ? req.body.stockQty : undefined;
+
+  const updated = vendorCatalogEngine.setStock(hubId, productId, inStock, stockQty);
+  if (!updated) {
+    res.status(404).json({ error: "Product not found in hub catalog." });
+    return;
+  }
+
+  res.json({
+    success: true,
+    product: updated,
+  });
+});
+
+/**
+ * PATCH /api/vendor/hub/:hubId/products/:productId/image
+ * Update custom product photo (supports base64 WebP/JPEG data URL or CDN path).
+ */
+router.patch(["/vendor/hub/:hubId/products/:productId/image", "/hub/:hubId/products/:productId/image"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const productId = String(req.params.productId);
+  const imageUrl = typeof req.body?.imageUrl === "string" ? req.body.imageUrl.trim() : "";
+
+  if (!imageUrl) {
+    res.status(400).json({ error: "imageUrl is required." });
+    return;
+  }
+
+  const updated = vendorCatalogEngine.setImage(hubId, productId, imageUrl);
+  if (!updated) {
+    res.status(404).json({ error: "Product not found in hub catalog." });
+    return;
+  }
+
+  res.json({
+    success: true,
+    product: updated,
+  });
+});
+
+/**
+ * POST /api/vendor/hub/:hubId/products/:productId/reset-image
+ * Revert custom photo back to official Conon master catalog image.
+ */
+router.post(["/vendor/hub/:hubId/products/:productId/reset-image", "/hub/:hubId/products/:productId/reset-image"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const productId = String(req.params.productId);
+
+  const updated = vendorCatalogEngine.resetImage(hubId, productId);
+  if (!updated) {
+    res.status(404).json({ error: "Product not found in hub catalog." });
+    return;
+  }
+
+  res.json({
+    success: true,
+    product: updated,
+  });
+});
+
+/**
+ * PATCH /api/vendor/hub/:hubId/products/:productId/price
+ * Inline price & stock quantity editor.
+ */
+router.patch(["/vendor/hub/:hubId/products/:productId/price", "/hub/:hubId/products/:productId/price"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const productId = String(req.params.productId);
+  const dealerPrice = Number(req.body?.dealerPrice || 0);
+  const mrp = Number(req.body?.mrp || 0);
+  const stockQty = Number(req.body?.stockQty || 0);
+
+  const updated = vendorCatalogEngine.updatePriceAndQty(hubId, productId, dealerPrice, mrp, stockQty);
+  if (!updated) {
+    res.status(404).json({ error: "Product not found in hub catalog." });
+    return;
+  }
+
+  res.json({
+    success: true,
+    product: updated,
+  });
+});
+
+/**
+ * POST /api/vendor/hub/:hubId/products
+ * Add brand new item into any of the 16 categories.
+ */
+router.post(["/vendor/hub/:hubId/products", "/hub/:hubId/products"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const categorySlug = String(req.body?.categorySlug || req.body?.category || "cement-civil-works");
+  const name = String(req.body?.name || "").trim();
+  const brand = String(req.body?.brand || "Conon Verified").trim();
+  const unit = String(req.body?.unit || "Unit").trim();
+  const dealerPrice = Number(req.body?.dealerPrice || req.body?.price || 0);
+  const mrp = Number(req.body?.mrp || dealerPrice * 1.25);
+  const imageUrl = String(req.body?.imageUrl || req.body?.img || "");
+  const stockQty = typeof req.body?.stockQty === "number" ? req.body.stockQty : 50;
+
+  if (!name || dealerPrice <= 0) {
+    res.status(400).json({ error: "Product name and valid dealer price are required." });
+    return;
+  }
+
+  const created = vendorCatalogEngine.addProduct(hubId, {
+    categorySlug,
+    name,
+    brand,
+    unit,
+    dealerPrice,
+    mrp,
+    imageUrl: imageUrl || undefined,
+    inStock: true,
+    stockQty,
+  });
+
+  res.status(201).json({
+    success: true,
+    product: created,
+  });
+});
+
+/**
+ * POST /api/vendor/hub/:hubId/categories/:categorySlug/toggle
+ * Category-level master power switch.
+ */
+router.post(["/vendor/hub/:hubId/categories/:categorySlug/toggle", "/hub/:hubId/categories/:categorySlug/toggle"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const categorySlug = String(req.params.categorySlug);
+  const enabled = Boolean(req.body?.enabled);
+
+  const result = vendorCatalogEngine.toggleCategory(hubId, categorySlug, enabled);
+  res.json({
+    success: true,
+    ...result,
+  });
+});
+
+/**
+ * POST /api/vendor/hub/:hubId/categories/:categorySlug/restock-all
+ * Morning 1-Click "Mark All In Stock" restock button.
+ */
+router.post(["/vendor/hub/:hubId/categories/:categorySlug/restock-all", "/hub/:hubId/categories/:categorySlug/restock-all"], (req: Request, res: Response) => {
+  const hubId = String(req.params.hubId || "hub-naka");
+  const categorySlug = String(req.params.categorySlug);
+
+  const result = vendorCatalogEngine.restockAllCategory(hubId, categorySlug);
+  res.json({
+    success: true,
+    ...result,
+  });
+});
+
+/* ════════════════════════ Paisa Meter & Payouts ════════════════════════ */
+
+/**
+ * GET /api/vendor/payouts
+ * Returns "Paisa Meter" wallet, T+1 settlement details, and passbook ledger with UTR numbers.
+ */
+router.get("/vendor/payouts", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const wallet = vendorEngine.getWallet(vendor.id);
+  res.json({
+    success: true,
+    wallet,
+    ...wallet,
+  });
+});
+
+/**
+ * Legacy Wallet GET /api/vendor/wallet
+ */
+router.get("/vendor/wallet", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
+  const wallet = vendorEngine.getWallet(vendor.id);
+
+  const mappedLedger = wallet.ledger.map((l) => ({
+    id: l.id,
+    date: l.date,
+    label: l.description,
+    amount: l.amount,
     type: "payout" as const,
-    status:
-      p.status === "approved"
-        ? ("Approved" as const)
-        : ("Pending Admin Approval" as const),
+    status: l.status === "SETTLED" ? ("Approved" as const) : ("Pending Admin Approval" as const),
+    utrNumber: l.utrNumber,
   }));
 
-  return {
-    balance,
-    totalEarned,
-    pendingPayouts,
-    ledger,
-  };
-}
-
-router.get("/vendor/wallet", async (req, res) => {
-  await seedVendorEarnings(req.vendorStore!);
-  res.json(await computeWallet(req.vendorStore!));
+  res.json({
+    balance: wallet.pendingSettlement,
+    totalEarned: wallet.todayEarnings + wallet.totalSettledMonth,
+    pendingPayouts: wallet.pendingSettlement,
+    todayEarnings: wallet.todayEarnings,
+    totalSettledMonth: wallet.totalSettledMonth,
+    nextSettlementDate: wallet.nextSettlementDate,
+    bankAccountMasked: wallet.bankAccountMasked,
+    ledger: mappedLedger,
+  });
 });
 
-router.post("/vendor/payouts/request", async (req, res) => {
+/**
+ * POST /api/vendor/payouts/request
+ */
+router.post("/vendor/payouts/request", (req: Request, res: Response) => {
+  const vendor = resolveCurrentVendor(req);
   const amount = Number(req.body?.amount);
+
   if (!Number.isFinite(amount) || amount <= 0) {
     res.status(400).json({ error: "Enter a valid amount.", reason: "invalid" });
     return;
   }
 
-  const store = req.vendorStore!;
-  const wallet = await computeWallet(store);
-  const requestedCents = moneyToCents(amount);
-  const balanceCents = moneyToCents(wallet.balance);
-  if (requestedCents > balanceCents) {
-    res
-      .status(400)
-      .json({ error: "Amount exceeds available balance.", reason: "insufficient" });
+  const wallet = vendorEngine.getWallet(vendor.id);
+  if (amount > wallet.pendingSettlement && wallet.pendingSettlement > 0) {
+    res.status(400).json({ error: "Amount exceeds available balance.", reason: "insufficient" });
     return;
   }
 
-  await collection("vendorPayouts").insertOne({
-    id: await nextId("vendorPayouts"),
-    externalId: randomUUID(),
-    vendorStore: store,
-    amount: decimal(amount),
-    status: "pending",
-    requestedAt: new Date(),
-    approvedAt: null,
+  const updatedWallet = vendorEngine.requestPayout(vendor.id, amount);
+  res.status(201).json({
+    success: true,
+    wallet: updatedWallet,
+    balance: updatedWallet.pendingSettlement,
+    totalEarned: updatedWallet.todayEarnings + updatedWallet.totalSettledMonth,
+    pendingPayouts: updatedWallet.pendingSettlement,
+    ledger: updatedWallet.ledger,
   });
-
-  res.status(201).json(await computeWallet(store));
 });
 
 export default router;

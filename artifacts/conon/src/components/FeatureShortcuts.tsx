@@ -27,7 +27,7 @@ const FEATURES: Feature[] = [
   { href: "/smart-draft", icon: PencilRuler,   label: "Smart-Draft",  tint: "#be123c" },
   { href: "/arch-genius", icon: Compass,       label: "Arch-Genius",  tint: "#0f766e" },
   { href: "/designers",   icon: Palette,       label: "Designers",    tint: "#9333ea" },
-  { href: "/kits",        icon: Package,       label: "Builder Kits", tint: "#ca8a04" },
+  { href: "/builder-kit", icon: Package,       label: "Builder Kit",  tint: "#ca8a04", badge: "HOT" },
   { href: "/rewards",     icon: Gift,          label: "Rewards",      tint: "#16a34a" },
   { href: "/track",       icon: MapPin,        label: "Track Order",  tint: "#2563eb" },
   { href: "/project",     icon: ClipboardList, label: "My Project",   tint: "#475569" },

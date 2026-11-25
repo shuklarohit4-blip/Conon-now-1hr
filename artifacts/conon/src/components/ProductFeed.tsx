@@ -92,9 +92,9 @@ const RAW_DUMMY_PRODUCTS: Product[] = [
       "UltraTech Weather Plus is a premium waterproofing cement engineered for monsoon-resistant, crack-free structures. Its dense particle packing reduces water seepage and delivers high early strength, making it ideal for foundations, columns, slabs and exterior plaster in all weather conditions.",
     rating: 4.5,
     reviews: 991,
-    price: 380,
-    mrp: 450,
-    bankOfferPrice: 360,
+    price: 395,
+    mrp: 440,
+    bankOfferPrice: 385,
     bankOfferLabel: "CONON-NOW Khata or HDFC Bank",
     deliveryEta: "Today, 2:00 PM (1-Hour)",
     service: "Free Unloading / Labour",
@@ -808,14 +808,15 @@ function enrichProduct(p: Product): Product {
   };
 }
 
-export const DUMMY_PRODUCTS: Product[] = RAW_DUMMY_PRODUCTS.map(enrichProduct);
+export const CORE_BUILDER_PRODUCTS: Product[] = RAW_DUMMY_PRODUCTS.map(enrichProduct);
+export const DUMMY_PRODUCTS: Product[] = CORE_BUILDER_PRODUCTS;
 export const BUILDER_PICKS: Product[] = RAW_BUILDER_PICKS.map(enrichProduct);
 
 /* Combined full catalog containing every authentic product across all categories */
-export const ALL_CATALOG_PRODUCTS: Product[] = [...DUMMY_PRODUCTS, ...BUILDER_PICKS];
+export const ALL_CATALOG_PRODUCTS: Product[] = [...CORE_BUILDER_PRODUCTS, ...BUILDER_PICKS];
 
 export type ProductFeedProps = {
-  /** Override the dummy data with real products. */
+  /** Real products to display. */
   products?: Product[];
   /** Add-to-cart handler wired to the host page's cart mutation. */
   onAddToCart?: (product: Product) => void;
@@ -837,11 +838,10 @@ export type ProductFeedProps = {
 
 /**
  * ProductFeed — a stacked, mobile-first list of premium ProductCards.
- * Defaults to a dummy construction-materials catalog so the exact layout
- * is visible without a backend.
+ * Uses the builder construction-materials catalog.
  */
 export function ProductFeed({
-  products = DUMMY_PRODUCTS,
+  products = CORE_BUILDER_PRODUCTS,
   onAddToCart,
   onSetQty,
   onSeeOptions,

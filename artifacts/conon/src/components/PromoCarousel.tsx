@@ -240,14 +240,16 @@ export default function PromoCarousel() {
         {SLIDES.map((_, i) => (
           <button
             key={i}
+            type="button"
+            aria-label={`Slide ${i + 1}`}
             onClick={() => { setActive(i); startTimer(); }}
-            className="rounded-full transition-all duration-300"
+            className="rounded-full transition-all duration-300 cursor-pointer"
             style={{
               width:   i === active ? 18 : 6,
               height:  6,
               background: i === active ? "#1848a0" : "#cbd5e1",
             }}
-          />
+          ></button>
         ))}
       </div>
 

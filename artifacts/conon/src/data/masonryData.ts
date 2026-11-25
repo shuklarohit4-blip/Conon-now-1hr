@@ -1,0 +1,2655 @@
+export interface MasonryProduct {
+  id: string;
+  slug: string;
+  name: string;
+  title: string;
+  brand: string;
+  categorySlug: string;
+  categoryName: string;
+  subCategory: string;
+  masonrySubcategory: "BRICKS" | "AAC_CONCRETE_BLOCKS" | "SAND_MORANG" | "GITTI_AGGREGATES" | "PAVERS_COVER_BLOCKS";
+  sellingUnit: string;
+  minOrderQty: number;
+  piecesPerCbm?: number | null;
+  aggregateSizeMm?: number | null;
+  thicknessMm?: number | null;
+  dimensionsLabel?: string;
+  price: number;
+  exGstPrice: number;
+  mrp: number;
+  discountPercent: number;
+  gstPercent: number;
+  hsnCode: string;
+  unit: string;
+  deliveryVehicleType: string;
+  deliveryMode: "EXPRESS_60_MIN" | "SAME_DAY_SCHEDULED";
+  requiresMiningTransitPass: boolean;
+  requiresUnloadingLabour: boolean;
+  brandTier: 1 | 2 | 3;
+  image: string;
+  images: string[];
+  shortTagline: string;
+  specChips: string[];
+  description: string;
+  highlights: string[];
+  specifications: { label: string; value: string }[];
+  variants: any[];
+  inStock: boolean;
+  rating: number;
+  reviewsCount: number;
+  deliveryEta: string;
+  vendor: string;
+}
+
+// Canonical 37 Products
+export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] = 
+[
+  {
+    "id": "prod-masonry-lucknow-avval-red-clay-brick-1000",
+    "slug": "lucknow-avval-red-clay-brick-1000-pcs",
+    "name": "Lucknow Bhatta (Avval) — First Class (Avval) Red Clay Brick 9×4×3 in (per 1,000 pcs)",
+    "title": "Lucknow Bhatta (Avval) — First Class (Avval) Red Clay Brick 9×4×3 in (per 1,000 pcs)",
+    "brand": "Lucknow Bhatta (Avval)",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Red Clay & Fly Ash Bricks",
+    "masonrySubcategory": "BRICKS",
+    "sellingUnit": "PER_1000_PCS",
+    "minOrderQty": 1000,
+    "dimensionsLabel": "9×4.25×2.75 in (Standard 9x4x3)",
+    "price": 7500,
+    "exGstPrice": 6696,
+    "mrp": 8200,
+    "discountPercent": 9,
+    "gstPercent": 12,
+    "hsnCode": "6904",
+    "unit": "1,000 Pcs",
+    "deliveryVehicleType": "Tractor Trolley / Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-1000-pcs.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-1000-pcs.webp"
+    ],
+    "shortTagline": "First Class Kiln-Fired Deep Red Bricks • High Compressive Strength",
+    "specChips": [
+      "1,000 Pcs Load",
+      "Avval Grade-1",
+      "12% GST (HSN 6904)",
+      "Tractor Trolley"
+    ],
+    "description": "Authentic Lucknow kiln-fired Avval (First Class) red clay brick with sharp rectangular edges, uniform deep red colour, and ringing metallic sound on impact. Sourced directly from premier bhattas along Kisan Path and Sitapur Road with compressive strength > 10.5 N/mm².",
+    "highlights": [
+      "Compressive strength exceeding 10.5 N/mm² (IS 1077 compliant)",
+      "Water absorption strictly less than 15% by weight after 24-hr immersion",
+      "No efflorescence — kiln-fired with controlled coal temperature",
+      "Supplied in full 1,000-piece multiples via heavy trolley/truck"
+    ],
+    "specifications": [
+      {
+        "label": "Nominal Dimensions",
+        "value": "9 × 4.25 × 2.75 inches (225 × 110 × 70 mm)"
+      },
+      {
+        "label": "Class / Grade",
+        "value": "Class 105 (Avval / First Class)"
+      },
+      {
+        "label": "Compressive Strength",
+        "value": "> 10.5 N/mm² (105 kg/cm²)"
+      },
+      {
+        "label": "Water Absorption",
+        "value": "< 15% (24-hr cold water soak)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6904 • 12% GST (ITC Eligible)"
+      },
+      {
+        "label": "Delivery Vehicle",
+        "value": "Tractor Trolley / Truck (Scheduled No-Entry Compliant)"
+      },
+      {
+        "label": "Source Bhatta",
+        "value": "Kisan Path / Mohan Road Kilns"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 312,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Bhatta Syndicate (Kisan Path Yard)"
+  },
+  {
+    "id": "prod-masonry-lucknow-avval-red-clay-brick-single",
+    "slug": "lucknow-avval-red-clay-brick-single-piece",
+    "name": "Lucknow Bhatta (Avval) — First Class (Avval) Red Clay Brick 9×4×3 in (Single Piece)",
+    "title": "Lucknow Bhatta (Avval) — First Class (Avval) Red Clay Brick 9×4×3 in (Single Piece)",
+    "brand": "Lucknow Bhatta (Avval)",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Red Clay & Fly Ash Bricks",
+    "masonrySubcategory": "BRICKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 10,
+    "dimensionsLabel": "9×4.25×2.75 in",
+    "price": 8,
+    "exGstPrice": 7,
+    "mrp": 10,
+    "discountPercent": 20,
+    "gstPercent": 12,
+    "hsnCode": "6904",
+    "unit": "Piece",
+    "deliveryVehicleType": "E-Loader / Trolley",
+    "deliveryMode": "EXPRESS_60_MIN",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-single-piece.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-single-piece.webp"
+    ],
+    "shortTagline": "Single Piece Top-Up • Express Site Delivery for Minor Masonry & Repairs",
+    "specChips": [
+      "Per Piece",
+      "Avval Grade-1",
+      "12% GST (HSN 6904)",
+      "60-Min E-Loader"
+    ],
+    "description": "Single-piece Avval (1st Class) Red Clay Brick for site top-ups, boundary repairs, plumbing chases, and lintel packings. Dispatchable within 60 minutes via local E-Loader from local ward stockyards across Lucknow.",
+    "highlights": [
+      "Convenient per-piece ordering for repairs and shortfalls",
+      "Same high-strength Avval grade (10.5 N/mm²)",
+      "Available for 60-min express transit on orders up to 150 pcs",
+      "Eliminates full-trolley minimums for small construction repairs"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "9 × 4.25 × 2.75 inches"
+      },
+      {
+        "label": "Grade",
+        "value": "Avval (First Class)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6904 • 12% GST"
+      },
+      {
+        "label": "Delivery Mode",
+        "value": "Express 60-Min (<= 150 pcs) or E-Loader"
+      },
+      {
+        "label": "Origin",
+        "value": "Sitapur Road Hub"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 164,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Local Stockyard Network"
+  },
+  {
+    "id": "prod-masonry-lucknow-doyam-red-clay-brick-1000",
+    "slug": "lucknow-doyam-red-clay-brick-1000-pcs",
+    "name": "Lucknow Bhatta (2nd Class) — Second Class (Doyam) Red Clay Brick 9×4×3 in (per 1,000 pcs)",
+    "title": "Lucknow Bhatta (2nd Class) — Second Class (Doyam) Red Clay Brick 9×4×3 in (per 1,000 pcs)",
+    "brand": "Lucknow Bhatta (Avval)",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Red Clay & Fly Ash Bricks",
+    "masonrySubcategory": "BRICKS",
+    "sellingUnit": "PER_1000_PCS",
+    "minOrderQty": 1000,
+    "dimensionsLabel": "9×4.25×2.75 in (Doyam)",
+    "price": 7000,
+    "exGstPrice": 6250,
+    "mrp": 7600,
+    "discountPercent": 8,
+    "gstPercent": 12,
+    "hsnCode": "6904",
+    "unit": "1,000 Pcs",
+    "deliveryVehicleType": "Tractor Trolley / Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/lucknow-doyam-red-clay-brick-1000-pcs.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/lucknow-doyam-red-clay-brick-1000-pcs.webp"
+    ],
+    "shortTagline": "Doyam Class Bricks • Ideal for Internal Partition Walls & Boundary Enclosures",
+    "specChips": [
+      "1,000 Pcs Load",
+      "Doyam 2nd Class",
+      "12% GST (HSN 6904)",
+      "Tractor Trolley"
+    ],
+    "description": "Second Class (Doyam) kiln-fired clay bricks with slight surface irregularities and minor color variations. Highly economical for internal non-loadbearing partitions, compound walls, and foundation filling across Lucknow.",
+    "highlights": [
+      "Compressive strength ~7.5 N/mm² (IS 1077 Class 75)",
+      "Cost-saving alternative for plastered interior walls",
+      "Consistent kiln burn from Mohan Road / Sultanpur Road kilns",
+      "Delivered in 1,000-piece batch trolley loads"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "9 × 4.25 × 2.75 inches"
+      },
+      {
+        "label": "Class",
+        "value": "Class 75 (Doyam / 2nd Class)"
+      },
+      {
+        "label": "Compressive Strength",
+        "value": "~7.5 N/mm²"
+      },
+      {
+        "label": "Water Absorption",
+        "value": "< 20%"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6904 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.7,
+    "reviewsCount": 188,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Bhatta Syndicate"
+  },
+  {
+    "id": "prod-masonry-lucknow-broken-brick-ballast-trolley",
+    "slug": "lucknow-broken-red-brick-ballast-roda-trolley",
+    "name": "Lucknow Bhatta — Broken Red Brick Ballast / Roda (1 Tractor Trolley, ~100 CFT)",
+    "title": "Lucknow Bhatta — Broken Red Brick Ballast / Roda (1 Tractor Trolley, ~100 CFT)",
+    "brand": "Lucknow Bhatta (Avval)",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Red Clay & Fly Ash Bricks",
+    "masonrySubcategory": "BRICKS",
+    "sellingUnit": "TROLLEY_100_CFT",
+    "minOrderQty": 1,
+    "dimensionsLabel": "40-63mm Hand-Broken Roda (~100 CFT)",
+    "price": 4700,
+    "exGstPrice": 4196,
+    "mrp": 5200,
+    "discountPercent": 10,
+    "gstPercent": 12,
+    "hsnCode": "6904",
+    "unit": "1 Trolley (~100 CFT)",
+    "deliveryVehicleType": "Tractor Trolley",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/lucknow-broken-red-brick-ballast-roda-trolley.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/lucknow-broken-red-brick-ballast-roda-trolley.webp"
+    ],
+    "shortTagline": "Hand-Broken Overburnt Brick Roda • Sub-Base Foundation & Soling",
+    "specChips": [
+      "100 CFT Brass Trolley",
+      "Foundation Soling",
+      "12% GST (HSN 6904)",
+      "Tractor Trolley"
+    ],
+    "description": "Dense kiln-fired Jhama/overburnt red brick ballast (Roda) graded 40mm to 63mm. The undisputed standard in Lucknow for floor sub-base soling, courtyard PCC subgrades, foundation footing beds, and anti-dampness base layers.",
+    "highlights": [
+      "Overburnt Jhama brick material — zero soil crumbling",
+      "High dry rodded density for solid ground compaction",
+      "Provides excellent interlocking for 1:4:8 or 1:5:10 foundation concrete",
+      "Full 1 Brass (100 CFT) loaded tractor trolley delivery"
+    ],
+    "specifications": [
+      {
+        "label": "Grading Size",
+        "value": "40 mm to 63 mm hand-broken"
+      },
+      {
+        "label": "Volume per Load",
+        "value": "~100 CFT (1 Brass Trolley)"
+      },
+      {
+        "label": "Recommended Use",
+        "value": "PCC Base, Ground Floor Soling, Road Subgrade"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6904 • 12% GST"
+      },
+      {
+        "label": "Delivery Vehicle",
+        "value": "Tractor Trolley (Hydraulic Tipping available)"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 96,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Bhatta Crusher Yard"
+  },
+  {
+    "id": "prod-masonry-acc-fly-ash-brick-1000",
+    "slug": "acc-local-isi-fly-ash-brick-1000-pcs",
+    "name": "ACC / Local ISI — Fly Ash Brick 9×4×3 in, IS 12894 (per 1,000 pcs)",
+    "title": "ACC / Local ISI — Fly Ash Brick 9×4×3 in, IS 12894 (per 1,000 pcs)",
+    "brand": "ACC / Local ISI",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Red Clay & Fly Ash Bricks",
+    "masonrySubcategory": "BRICKS",
+    "sellingUnit": "PER_1000_PCS",
+    "minOrderQty": 1000,
+    "dimensionsLabel": "230×110×70 mm (IS 12894)",
+    "price": 6000,
+    "exGstPrice": 5357,
+    "mrp": 6600,
+    "discountPercent": 9,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "1,000 Pcs",
+    "deliveryVehicleType": "Tractor Trolley / Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-1000-pcs.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-1000-pcs.webp"
+    ],
+    "shortTagline": "Hydraulically Compressed Cement-Fly Ash Bricks • Zero Plaster Waviness",
+    "specChips": [
+      "1,000 Pcs Load",
+      "IS 12894 Certified",
+      "12% GST (HSN 6815)",
+      "Tractor Trolley"
+    ],
+    "description": "Mechanically pressed and steam-cured fly ash bricks conforming to IS 12894. Perfectly uniform dimensions eliminate excess mortar consumption by up to 25% and provide high thermal insulation for contemporary Lucknow construction.",
+    "highlights": [
+      "Conforms to IS 12894:2002 standards with uniform grey finish",
+      "Compressive strength 7.5 to 10 N/mm²",
+      "Precision sharp edges save 25% plaster thickness",
+      "Eco-friendly composition using NTPC thermal fly ash & cement"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "230 × 110 × 70 mm (9 × 4.3 × 2.75 in)"
+      },
+      {
+        "label": "Standard",
+        "value": "IS 12894:2002 Class 75/100"
+      },
+      {
+        "label": "Compressive Strength",
+        "value": "7.5 - 10.0 N/mm²"
+      },
+      {
+        "label": "Dry Weight",
+        "value": "~2.8 - 3.0 kg per brick"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 142,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Chinhat Industrial Area Press Plant"
+  },
+  {
+    "id": "prod-masonry-acc-fly-ash-brick-single",
+    "slug": "acc-local-isi-fly-ash-brick-single-piece",
+    "name": "ACC / Local ISI — Fly Ash Brick 9×4×3 in, IS 12894 (Single Piece)",
+    "title": "ACC / Local ISI — Fly Ash Brick 9×4×3 in, IS 12894 (Single Piece)",
+    "brand": "ACC / Local ISI",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Red Clay & Fly Ash Bricks",
+    "masonrySubcategory": "BRICKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 10,
+    "dimensionsLabel": "230×110×70 mm",
+    "price": 6,
+    "exGstPrice": 5,
+    "mrp": 8,
+    "discountPercent": 25,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "E-Loader / Trolley",
+    "deliveryMode": "EXPRESS_60_MIN",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-single-piece.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-single-piece.webp"
+    ],
+    "shortTagline": "Single Piece Fly Ash Brick • Fast E-Loader Dispatch for Small Jobs",
+    "specChips": [
+      "Per Piece",
+      "IS 12894",
+      "12% GST (HSN 6815)",
+      "60-Min E-Loader"
+    ],
+    "description": "Per-piece Fly Ash Brick for repair work, utility ducts, plumbing shafts, and parapet modifications. Quick delivery within 60 minutes via local E-Loader.",
+    "highlights": [
+      "Low per-unit cost with uniform dimensions",
+      "Immediate local dispatch from Gomti Nagar and Alambagh yards",
+      "Easy cut and drill without cracking"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "230 × 110 × 70 mm"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Delivery Mode",
+        "value": "Express 60-Min (<= 150 pcs)"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.7,
+    "reviewsCount": 89,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Local Stockyard Network"
+  },
+  {
+    "id": "prod-masonry-birla-aerocon-aac-4-inch",
+    "slug": "birla-aerocon-aac-block-4-inch-600x200x100mm",
+    "name": "Birla Aerocon — AAC Block 4 Inch (600×200×100mm, 83 pcs/m³)",
+    "title": "Birla Aerocon — AAC Block 4 Inch (600×200×100mm, 83 pcs/m³)",
+    "brand": "Birla Aerocon",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 25,
+    "piecesPerCbm": 83,
+    "thicknessMm": 100,
+    "dimensionsLabel": "600×200×100 mm (4 Inch | 83 pcs/m³)",
+    "price": 43,
+    "exGstPrice": 38,
+    "mrp": 50,
+    "discountPercent": 14,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-4-inch-600x200x100mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-4-inch-600x200x100mm.webp"
+    ],
+    "shortTagline": "Premium High-Precision 4\" Autoclaved Aerated Concrete Partition Blocks",
+    "specChips": [
+      "4\" (100mm)",
+      "83 pcs/m³",
+      "12% GST (HSN 6815)",
+      "Birla Tier-1"
+    ],
+    "description": "Birla Aerocon 4-inch AAC Blocks manufactured by HIL Limited with precision autoclave steam curing. Weighs 1/3rd of traditional clay bricks and provides superior sound reduction (38 dB) and 4-hour fire rating for internal partition walls.",
+    "highlights": [
+      "Exact yield of 83 pieces per cubic meter (CBM)",
+      "Reduces dead load on high-rise RCC frames by up to 50%",
+      "Precision dimensional tolerance (±1.5mm) for thin-bed Fixoblock mortar",
+      "Thermal conductivity K = 0.16 W/m-K saves up to 30% AC energy"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 100 mm (L × H × W)"
+      },
+      {
+        "label": "Thickness",
+        "value": "4 inches (100 mm)"
+      },
+      {
+        "label": "CBM Yield",
+        "value": "83.33 pieces per Cubic Meter"
+      },
+      {
+        "label": "Dry Density",
+        "value": "550 - 650 kg/m³"
+      },
+      {
+        "label": "Compressive Strength",
+        "value": "3.5 - 4.5 N/mm² (IS 2185 Part 3)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Delivery Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 278,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Birla Aerocon Lucknow Depot (Transport Nagar)"
+  },
+  {
+    "id": "prod-masonry-birla-aerocon-aac-6-inch",
+    "slug": "birla-aerocon-aac-block-6-inch-600x200x150mm",
+    "name": "Birla Aerocon — AAC Block 6 Inch (600×200×150mm, 55 pcs/m³)",
+    "title": "Birla Aerocon — AAC Block 6 Inch (600×200×150mm, 55 pcs/m³)",
+    "brand": "Birla Aerocon",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 20,
+    "piecesPerCbm": 55,
+    "thicknessMm": 150,
+    "dimensionsLabel": "600×200×150 mm (6 Inch | 55 pcs/m³)",
+    "price": 65,
+    "exGstPrice": 58,
+    "mrp": 75,
+    "discountPercent": 13,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-6-inch-600x200x150mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-6-inch-600x200x150mm.webp"
+    ],
+    "shortTagline": "6\" External & Common Wall Block • 55 pcs/m³ • Exceptional Thermal Shield",
+    "specChips": [
+      "6\" (150mm)",
+      "55 pcs/m³",
+      "12% GST (HSN 6815)",
+      "Birla Tier-1"
+    ],
+    "description": "Birla Aerocon 6-inch (150mm) lightweight AAC blocks engineered for external boundary walls, shaft enclosures, and inter-flat privacy walls. Certified for high seismic resistance and up to 42 dB acoustic insulation.",
+    "highlights": [
+      "Exact yield of 55 pieces per cubic meter (CBM)",
+      "Substantial sound damping between living units",
+      "Non-combustible class A1 fire performance",
+      "Cuts installation time by 60% compared to traditional brickwork"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 150 mm"
+      },
+      {
+        "label": "Thickness",
+        "value": "6 inches (150 mm)"
+      },
+      {
+        "label": "CBM Yield",
+        "value": "55.55 pieces / m³"
+      },
+      {
+        "label": "Compressive Strength",
+        "value": "> 4.0 N/mm²"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 195,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Birla Aerocon Lucknow Depot (Transport Nagar)"
+  },
+  {
+    "id": "prod-masonry-birla-aerocon-aac-8-inch",
+    "slug": "birla-aerocon-aac-block-8-inch-600x200x200mm",
+    "name": "Birla Aerocon — AAC Block 8 Inch (600×200×200mm, 41 pcs/m³)",
+    "title": "Birla Aerocon — AAC Block 8 Inch (600×200×200mm, 41 pcs/m³)",
+    "brand": "Birla Aerocon",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 15,
+    "piecesPerCbm": 41,
+    "thicknessMm": 200,
+    "dimensionsLabel": "600×200×200 mm (8 Inch | 41 pcs/m³)",
+    "price": 86,
+    "exGstPrice": 77,
+    "mrp": 98,
+    "discountPercent": 12,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-8-inch-600x200x200mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-8-inch-600x200x200mm.webp"
+    ],
+    "shortTagline": "Heavy-Duty 8\" External Envelope Block • Maximum Insulation & Strength",
+    "specChips": [
+      "8\" (200mm)",
+      "41 pcs/m³",
+      "12% GST (HSN 6815)",
+      "Birla Tier-1"
+    ],
+    "description": "Birla Aerocon 8-inch (200mm) AAC Blocks designed for building facades, external envelopes, and commercial perimeter walls exposed to harsh Lucknow summers. Delivers peak thermal mass and minimal heat transmission.",
+    "highlights": [
+      "Exact yield of 41 pieces per cubic meter (CBM)",
+      "Replaces double brick masonry with a single lightweight unit",
+      "Zero dampness seepage through micro-cellular air pore network",
+      "Supplied with batch test certificates"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 200 mm"
+      },
+      {
+        "label": "Thickness",
+        "value": "8 inches (200 mm)"
+      },
+      {
+        "label": "CBM Yield",
+        "value": "41.66 pieces / m³"
+      },
+      {
+        "label": "Sound Insulation",
+        "value": "45 dB"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 154,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Birla Aerocon Lucknow Depot (Transport Nagar)"
+  },
+  {
+    "id": "prod-masonry-birla-aerocon-aac-cbm-bulk",
+    "slug": "birla-aerocon-aac-block-bulk-supply-cbm",
+    "name": "Birla Aerocon — AAC Block Bulk Supply (per Cubic Meter / CBM)",
+    "title": "Birla Aerocon — AAC Block Bulk Supply (per Cubic Meter / CBM)",
+    "brand": "Birla Aerocon",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "CBM",
+    "minOrderQty": 5,
+    "dimensionsLabel": "Bulk Supply per m³ (Choice of 4\", 6\", 8\")",
+    "price": 3600,
+    "exGstPrice": 3214,
+    "mrp": 4100,
+    "discountPercent": 12,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "1 CBM (m³)",
+    "deliveryVehicleType": "Mini-Truck / Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-bulk-supply-cbm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-bulk-supply-cbm.webp"
+    ],
+    "shortTagline": "Wholesale Contractor Volume Pricing • Delivered in Palletized Truckloads",
+    "specChips": [
+      "Per CBM (m³)",
+      "Wholesale Volume",
+      "12% GST (HSN 6815)",
+      "Mini-Truck / Truck"
+    ],
+    "description": "Factory-direct Cubic Meter (CBM) bulk supply of Birla Aerocon AAC blocks for Lucknow commercial and residential multi-storey projects. Direct transport from regional plant in strapped and palletized bundles to minimize handling chipping.",
+    "highlights": [
+      "Direct volume rate for contractors, developers, and large sites",
+      "Choice of 4\" (83 pcs), 6\" (55 pcs), or 8\" (41 pcs) mix per CBM order",
+      "Free site delivery across Shaheed Path, Chinhat, and Kisan Path for 15+ CBM",
+      "ITC compliant commercial GST invoice included"
+    ],
+    "specifications": [
+      {
+        "label": "Unit of Measurement",
+        "value": "Cubic Meter (m³ / CBM)"
+      },
+      {
+        "label": "Packaging",
+        "value": "Shrink-wrapped strapped pallets"
+      },
+      {
+        "label": "Minimum Order",
+        "value": "5 CBM"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Full / Mini Commercial Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 310,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Birla Aerocon Central Regional Depot"
+  },
+  {
+    "id": "prod-masonry-magicrete-aac-4-inch",
+    "slug": "magicrete-magic-blox-aac-block-4-inch-625x200x100mm",
+    "name": "Magicrete — Magic Blox AAC Block 4 Inch (625×200×100mm)",
+    "title": "Magicrete — Magic Blox AAC Block 4 Inch (625×200×100mm)",
+    "brand": "Magicrete",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 25,
+    "piecesPerCbm": 80,
+    "thicknessMm": 100,
+    "dimensionsLabel": "625×200×100 mm (Extra Length 625mm)",
+    "price": 45,
+    "exGstPrice": 40,
+    "mrp": 52,
+    "discountPercent": 13,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-4-inch-625x200x100mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-4-inch-625x200x100mm.webp"
+    ],
+    "shortTagline": "Extended 625mm Format • Speeds Up Laying by 4% • High Strength AAC",
+    "specChips": [
+      "4\" (100mm)",
+      "625mm Length",
+      "12% GST (HSN 6815)",
+      "Magicrete Tier-1"
+    ],
+    "description": "Magicrete Magic Blox 4-inch AAC Blocks feature an extended 625mm format that covers more wall area per block and reduces joint mortar requirements. Manufactured using German automated aerated autoclaving technology.",
+    "highlights": [
+      "Extended 625mm length covers 4% more surface per piece",
+      "Compressive strength > 4.0 N/mm²",
+      "High fire rating (up to 4 hours) and eco-friendly certified green product",
+      "Precision cut for thin 2-3mm adhesive joints"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "625 × 200 × 100 mm"
+      },
+      {
+        "label": "Thickness",
+        "value": "4 inches (100 mm)"
+      },
+      {
+        "label": "Dry Density",
+        "value": "550 - 650 kg/m³"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Delivery Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 221,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Magicrete Lucknow Regional Hub (Sitapur Road)"
+  },
+  {
+    "id": "prod-masonry-magicrete-aac-6-inch",
+    "slug": "magicrete-magic-blox-aac-block-6-inch-600x200x150mm",
+    "name": "Magicrete — Magic Blox AAC Block 6 Inch (600×200×150mm)",
+    "title": "Magicrete — Magic Blox AAC Block 6 Inch (600×200×150mm)",
+    "brand": "Magicrete",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 20,
+    "piecesPerCbm": 55,
+    "thicknessMm": 150,
+    "dimensionsLabel": "600×200×150 mm (6 Inch | 55 pcs/m³)",
+    "price": 70,
+    "exGstPrice": 62,
+    "mrp": 80,
+    "discountPercent": 12,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-6-inch-600x200x150mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-6-inch-600x200x150mm.webp"
+    ],
+    "shortTagline": "Heavy-Duty 6\" Magic Blox • Ideal for External Walls & Boundary Structures",
+    "specChips": [
+      "6\" (150mm)",
+      "55 pcs/m³",
+      "12% GST (HSN 6815)",
+      "Magicrete Tier-1"
+    ],
+    "description": "Magicrete 6-inch AAC Blocks for structural infill and exterior wall construction. Delivers superb acoustic performance and resistance to water penetration, perfect for Lucknow residential complexes and commercial spaces.",
+    "highlights": [
+      "55 pieces per cubic meter (CBM)",
+      "High dimensional uniformity (±1.5mm tolerance)",
+      "Reduces air conditioning loads by preventing exterior solar radiation ingress",
+      "Compatible with all thin-bed block jointing mortars"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 150 mm"
+      },
+      {
+        "label": "Compressive Strength",
+        "value": "> 4.0 N/mm²"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 167,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Magicrete Lucknow Regional Hub"
+  },
+  {
+    "id": "prod-masonry-magicrete-aac-8-inch",
+    "slug": "magicrete-magic-blox-aac-block-8-inch-600x200x200mm",
+    "name": "Magicrete — Magic Blox AAC Block 8 Inch (600×200×200mm)",
+    "title": "Magicrete — Magic Blox AAC Block 8 Inch (600×200×200mm)",
+    "brand": "Magicrete",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 15,
+    "piecesPerCbm": 41,
+    "thicknessMm": 200,
+    "dimensionsLabel": "600×200×200 mm (8 Inch | 41 pcs/m³)",
+    "price": 90,
+    "exGstPrice": 80,
+    "mrp": 104,
+    "discountPercent": 13,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-8-inch-600x200x200mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-8-inch-600x200x200mm.webp"
+    ],
+    "shortTagline": "Solid 8\" Solid Envelope AAC Block • Maximum Loadbearing Infill Rating",
+    "specChips": [
+      "8\" (200mm)",
+      "41 pcs/m³",
+      "12% GST (HSN 6815)",
+      "Magicrete Tier-1"
+    ],
+    "description": "Magicrete 8-inch (200mm) AAC Blocks engineered for exterior facade walls where maximum thermal damping, weather resistance, and sound deadening are strictly specified by structural architects.",
+    "highlights": [
+      "41 pieces per cubic meter (CBM)",
+      "High thermal resistance R-value",
+      "Replaces conventional 9-inch brick wall with 70% dead-weight reduction",
+      "Precision tongue-and-groove or flat surface variants available"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 200 mm"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 138,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Magicrete Lucknow Regional Hub"
+  },
+  {
+    "id": "prod-masonry-magicrete-aac-cbm-bulk",
+    "slug": "magicrete-magic-blox-aac-bulk-supply-cbm",
+    "name": "Magicrete — Magic Blox AAC Bulk Supply (per Cubic Meter / CBM)",
+    "title": "Magicrete — Magic Blox AAC Bulk Supply (per Cubic Meter / CBM)",
+    "brand": "Magicrete",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "CBM",
+    "minOrderQty": 5,
+    "dimensionsLabel": "Wholesale per CBM (Choice of 4\", 6\", 8\")",
+    "price": 3850,
+    "exGstPrice": 3437,
+    "mrp": 4400,
+    "discountPercent": 12,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "1 CBM (m³)",
+    "deliveryVehicleType": "Mini-Truck / Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-bulk-supply-cbm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-bulk-supply-cbm.webp"
+    ],
+    "shortTagline": "Commercial Bulk Contract Supply • German Autoclaved Precision",
+    "specChips": [
+      "Per CBM (m³)",
+      "Wholesale Volume",
+      "12% GST (HSN 6815)",
+      "Mini-Truck / Truck"
+    ],
+    "description": "Volume commercial supply of Magicrete Magic Blox per Cubic Meter for high-rise residential towers and commercial parks across Lucknow. Dispatched in palletized commercial truckloads direct from plant.",
+    "highlights": [
+      "Contractor pricing with transparent 12% GST ITC breakdown",
+      "Precision factory cut with minimal site breakage (< 2%)",
+      "Direct site staging support"
+    ],
+    "specifications": [
+      {
+        "label": "Volume Unit",
+        "value": "Cubic Meter (m³ / CBM)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Mini-Truck / Heavy Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 184,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Magicrete Central Logistics Hub"
+  },
+  {
+    "id": "prod-masonry-ultratech-xtralite-aac-4-inch",
+    "slug": "ultratech-xtralite-lightweight-aac-block-4-inch-600x200x100mm",
+    "name": "UltraTech — Xtralite Lightweight AAC Block 4 Inch (600×200×100mm)",
+    "title": "UltraTech — Xtralite Lightweight AAC Block 4 Inch (600×200×100mm)",
+    "brand": "UltraTech",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 25,
+    "piecesPerCbm": 83,
+    "thicknessMm": 100,
+    "dimensionsLabel": "600×200×100 mm (4 Inch | 83 pcs/m³)",
+    "price": 44,
+    "exGstPrice": 39,
+    "mrp": 50,
+    "discountPercent": 12,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-4-inch-600x200x100mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-4-inch-600x200x100mm.webp"
+    ],
+    "shortTagline": "India's No. 1 Cement Brand • UltraTech Xtralite Aerated Autoclaved Blocks",
+    "specChips": [
+      "4\" (100mm)",
+      "83 pcs/m³",
+      "12% GST (HSN 6815)",
+      "UltraTech Tier-1"
+    ],
+    "description": "UltraTech Xtralite AAC Blocks deliver top-tier consistency and compressive strength backed by Aditya Birla Group engineering. The optimal choice when paired with UltraTech Fixoblock thin-joint adhesive for crack-free interior partition masonry.",
+    "highlights": [
+      "83 pieces per cubic meter (CBM)",
+      "High thermal insulation & zero internal shrinkage cracks",
+      "Seamless chemical bonding when laid with UltraTech Fixoblock",
+      "Consistent dry density and zero hollow voids"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 100 mm"
+      },
+      {
+        "label": "Thickness",
+        "value": "4 inches (100 mm)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 340,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "UltraTech Lucknow Depot (Mohan Road)"
+  },
+  {
+    "id": "prod-masonry-ultratech-xtralite-aac-6-inch",
+    "slug": "ultratech-xtralite-lightweight-aac-block-6-inch-600x200x150mm",
+    "name": "UltraTech — Xtralite Lightweight AAC Block 6 Inch (600×200×150mm)",
+    "title": "UltraTech — Xtralite Lightweight AAC Block 6 Inch (600×200×150mm)",
+    "brand": "UltraTech",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 20,
+    "piecesPerCbm": 55,
+    "thicknessMm": 150,
+    "dimensionsLabel": "600×200×150 mm (6 Inch | 55 pcs/m³)",
+    "price": 66,
+    "exGstPrice": 59,
+    "mrp": 75,
+    "discountPercent": 12,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-6-inch-600x200x150mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-6-inch-600x200x150mm.webp"
+    ],
+    "shortTagline": "6\" External & Common Wall Block • 55 pcs/m³ • UltraTech Engineered",
+    "specChips": [
+      "6\" (150mm)",
+      "55 pcs/m³",
+      "12% GST (HSN 6815)",
+      "UltraTech Tier-1"
+    ],
+    "description": "UltraTech Xtralite 6-inch (150mm) AAC Blocks deliver high structural integrity and energy efficiency for outer perimeter walls and boundary structures. Proven durability in Lucknow's extreme temperature swings.",
+    "highlights": [
+      "55 pieces per cubic meter (CBM)",
+      "Reduces HVAC air conditioning load by up to 30%",
+      "Smooth surface finish minimizes base coat plaster consumption"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 150 mm"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 215,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "UltraTech Lucknow Depot"
+  },
+  {
+    "id": "prod-masonry-ultratech-xtralite-aac-8-inch",
+    "slug": "ultratech-xtralite-lightweight-aac-block-8-inch-600x200x200mm",
+    "name": "UltraTech — Xtralite Lightweight AAC Block 8 Inch (600×200×200mm)",
+    "title": "UltraTech — Xtralite Lightweight AAC Block 8 Inch (600×200×200mm)",
+    "brand": "UltraTech",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 15,
+    "piecesPerCbm": 41,
+    "thicknessMm": 200,
+    "dimensionsLabel": "600×200×200 mm (8 Inch | 41 pcs/m³)",
+    "price": 88,
+    "exGstPrice": 79,
+    "mrp": 100,
+    "discountPercent": 12,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-8-inch-600x200x200mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-8-inch-600x200x200mm.webp"
+    ],
+    "shortTagline": "Heavy-Duty 8\" Facade Infill AAC Block • Peak Load & Heat Resistance",
+    "specChips": [
+      "8\" (200mm)",
+      "41 pcs/m³",
+      "12% GST (HSN 6815)",
+      "UltraTech Tier-1"
+    ],
+    "description": "UltraTech Xtralite 8-inch (200mm) AAC Blocks engineered for heavy external facades, industrial boundary walls, and large format architectural projects requiring maximum fire separation and thermal buffering.",
+    "highlights": [
+      "41 pieces per cubic meter (CBM)",
+      "High compressive strength > 4.0 N/mm²",
+      "Drastically reduces dead weight on building foundations"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 200 mm"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 148,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "UltraTech Lucknow Depot"
+  },
+  {
+    "id": "prod-masonry-adani-acc-cool-walls-aac-4-inch",
+    "slug": "adani-acc-cool-walls-aac-block-4-inch-600x200x100mm",
+    "name": "Adani / ACC — Cool Walls AAC Block 4 Inch (600×200×100mm)",
+    "title": "Adani / ACC — Cool Walls AAC Block 4 Inch (600×200×100mm)",
+    "brand": "Adani / ACC",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 25,
+    "piecesPerCbm": 83,
+    "thicknessMm": 100,
+    "dimensionsLabel": "600×200×100 mm (4 Inch | 83 pcs/m³)",
+    "price": 48,
+    "exGstPrice": 43,
+    "mrp": 55,
+    "discountPercent": 13,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/adani-acc-cool-walls-aac-block-4-inch-600x200x100mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/adani-acc-cool-walls-aac-block-4-inch-600x200x100mm.webp"
+    ],
+    "shortTagline": "Adani Cement / ACC Cool Walls • Advanced Micro-Cellular Thermal AAC",
+    "specChips": [
+      "4\" (100mm)",
+      "83 pcs/m³",
+      "12% GST (HSN 6815)",
+      "Adani / ACC"
+    ],
+    "description": "ACC Cool Walls AAC Blocks manufactured by Adani Cement using automated autoclaved cellular concrete technology. Delivers exceptional room cooling properties and uniform dimensions across every single block.",
+    "highlights": [
+      "83 pieces per cubic meter (CBM)",
+      "High fire resistance rating exceeding 4 hours",
+      "Precision cut for zero wall waviness"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "600 × 200 × 100 mm"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 160,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "ACC / Adani Regional Distribution Depot"
+  },
+  {
+    "id": "prod-masonry-jkm-a-plus-solid-aac-cbm-bulk",
+    "slug": "jkm-a-plus-grade-1-solid-aac-block-bulk-cbm",
+    "name": "JKM A+ — Grade-1 Solid AAC Block Bulk (per Cubic Meter / CBM)",
+    "title": "JKM A+ — Grade-1 Solid AAC Block Bulk (per Cubic Meter / CBM)",
+    "brand": "JKM A+",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "CBM",
+    "minOrderQty": 5,
+    "dimensionsLabel": "Grade-1 Volume Supply per m³",
+    "price": 3600,
+    "exGstPrice": 3214,
+    "mrp": 4000,
+    "discountPercent": 10,
+    "gstPercent": 12,
+    "hsnCode": "6815",
+    "unit": "1 CBM (m³)",
+    "deliveryVehicleType": "Mini-Truck / Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 2,
+    "image": "/images/products/bricks-sand-gitti-aac/jkm-a-plus-grade-1-solid-aac-block-bulk-cbm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/jkm-a-plus-grade-1-solid-aac-block-bulk-cbm.webp"
+    ],
+    "shortTagline": "Value Leader AAC Block Bulk Supply • Dependable Density & Smooth Cuts",
+    "specChips": [
+      "Per CBM (m³)",
+      "Grade-1 Solid",
+      "12% GST (HSN 6815)",
+      "Mini-Truck / Truck"
+    ],
+    "description": "JKM A+ Grade-1 Solid AAC Blocks offer exceptional cost-per-cubic-meter value for residential builders and commercial framing contractors in Lucknow. Consistent steam cure and reliable edge durability.",
+    "highlights": [
+      "Competitive wholesale pricing per cubic meter",
+      "Clean sharp cuts with standard hand saw",
+      "Supplied with standard commercial tax invoice"
+    ],
+    "specifications": [
+      {
+        "label": "Volume Unit",
+        "value": "Cubic Meter (m³ / CBM)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6815 • 12% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Mini-Truck / Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.7,
+    "reviewsCount": 124,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "JKM Regional Yard (Kanpur Road)"
+  },
+  {
+    "id": "prod-masonry-local-precast-solid-concrete-block-8-inch",
+    "slug": "local-precast-solid-concrete-block-8-inch-400x200x200mm",
+    "name": "Local Precast — Solid Concrete Block 8 Inch (400×200×200mm)",
+    "title": "Local Precast — Solid Concrete Block 8 Inch (400×200×200mm)",
+    "brand": "Local Precast",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 25,
+    "thicknessMm": 200,
+    "dimensionsLabel": "400×200×200 mm (8 Inch Solid Concrete)",
+    "price": 48,
+    "exGstPrice": 41,
+    "mrp": 55,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "6810",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 3,
+    "image": "/images/products/bricks-sand-gitti-aac/local-precast-solid-concrete-block-8-inch-400x200x200mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/local-precast-solid-concrete-block-8-inch-400x200x200mm.webp"
+    ],
+    "shortTagline": "Heavy-Duty Solid Concrete Masonry Block • High Load Bearing Capacity",
+    "specChips": [
+      "8\" (200mm)",
+      "Solid Concrete",
+      "18% GST (HSN 6810)",
+      "Pickup / Mini-Truck"
+    ],
+    "description": "High-density solid concrete blocks manufactured using graded Kabrai stone dust, 10mm crushed aggregate, and OPC cement on hydraulic vibro-press machines. Conforms to IS 2185 (Part 1) for load-bearing foundation and boundary structures.",
+    "highlights": [
+      "Compressive strength > 5.0 N/mm² (load-bearing certified)",
+      "High resistance to ground water salinity and foundation dampness",
+      "Vibro-compacted density > 1800 kg/m³"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "400 × 200 × 200 mm"
+      },
+      {
+        "label": "Type",
+        "value": "Solid Precast Concrete"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6810 • 18% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.7,
+    "reviewsCount": 110,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Chinhat Precast Yard"
+  },
+  {
+    "id": "prod-masonry-local-precast-hollow-concrete-block-8-inch",
+    "slug": "local-precast-hollow-concrete-block-8-inch-400x200x200mm",
+    "name": "Local Precast — Hollow Concrete Block 8 Inch (400×200×200mm)",
+    "title": "Local Precast — Hollow Concrete Block 8 Inch (400×200×200mm)",
+    "brand": "Local Precast",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "AAC & Concrete Blocks",
+    "masonrySubcategory": "AAC_CONCRETE_BLOCKS",
+    "sellingUnit": "PIECE",
+    "minOrderQty": 25,
+    "thicknessMm": 200,
+    "dimensionsLabel": "400×200×200 mm (2-Hole Hollow Concrete)",
+    "price": 41,
+    "exGstPrice": 35,
+    "mrp": 48,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "6810",
+    "unit": "Piece",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 3,
+    "image": "/images/products/bricks-sand-gitti-aac/local-precast-hollow-concrete-block-8-inch-400x200x200mm.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/local-precast-hollow-concrete-block-8-inch-400x200x200mm.webp"
+    ],
+    "shortTagline": "Vibro-Pressed 2-Core Hollow Concrete Block • Faster Build & Lighter Deadload",
+    "specChips": [
+      "8\" (200mm)",
+      "Hollow Block",
+      "18% GST (HSN 6810)",
+      "Pickup / Mini-Truck"
+    ],
+    "description": "Vibro-pressed hollow concrete blocks featuring dual hollow cavities that allow easy vertical steel reinforcement, conduit routing, and cavity insulation. Commonly used in Lucknow for perimeter compound walls and boundary structures.",
+    "highlights": [
+      "Hollow cores allow vertical rebar reinforcement and grouting",
+      "Reduces wall weight by ~35% compared to solid concrete blocks",
+      "Excellent thermal insulation through air cavity buffer"
+    ],
+    "specifications": [
+      {
+        "label": "Dimensions",
+        "value": "400 × 200 × 200 mm"
+      },
+      {
+        "label": "Type",
+        "value": "Hollow Concrete (IS 2185 Part 1)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6810 • 18% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.7,
+    "reviewsCount": 95,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Chinhat Precast Yard"
+  },
+  {
+    "id": "prod-masonry-banda-hamirpur-coarse-morang-cft",
+    "slug": "banda-hamirpur-coarse-red-brown-morang-sand-rcc-per-cft",
+    "name": "Banda / Hamirpur — A-Grade Coarse Red/Brown Morang Sand — RCC (per CFT)",
+    "title": "Banda / Hamirpur — A-Grade Coarse Red/Brown Morang Sand — RCC (per CFT)",
+    "brand": "Banda / Hamirpur",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Sand, Morang & Stone Dust",
+    "masonrySubcategory": "SAND_MORANG",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "dimensionsLabel": "Zone-II Coarse River Morang (per CFT)",
+    "price": 62,
+    "exGstPrice": 59,
+    "mrp": 70,
+    "discountPercent": 11,
+    "gstPercent": 5,
+    "hsnCode": "2505",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-red-brown-morang-sand-rcc-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-red-brown-morang-sand-rcc-per-cft.webp"
+    ],
+    "shortTagline": "Authentic Ken/Betwa River Red Morang • Silt-Free Zone-II for Structural RCC",
+    "specChips": [
+      "Zone-II Coarse",
+      "eMM-11 Mining Pass",
+      "5% GST (HSN 2505)",
+      "Per CFT"
+    ],
+    "description": "Authentic Banda/Hamirpur Ken-Betwa river bed coarse red/brown Morang sand (Zone-II grading). Free from organic silt (< 3%), delivers maximum compressive strength for slab casting, foundation footings, columns, and structural beams across Lucknow.",
+    "highlights": [
+      "Zone-II IS 383 grading with high fineness modulus (2.6 - 3.2)",
+      "Strictly silt-tested (< 3% silt by volume)",
+      "Supplied with verified UP Directorate of Geology & Mining eMM-11 transit pass",
+      "Laser-measured CFT site verification guarantee"
+    ],
+    "specifications": [
+      {
+        "label": "Origin / River Basin",
+        "value": "Banda / Hamirpur (Ken-Betwa Rivers)"
+      },
+      {
+        "label": "Grading Zone",
+        "value": "Zone-II (Coarse Structural Grade)"
+      },
+      {
+        "label": "Fineness Modulus",
+        "value": "2.8 - 3.1"
+      },
+      {
+        "label": "Silt Content",
+        "value": "< 3.0% (Field jar tested)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2505 • 5% GST (Strict 2026 Rate)"
+      },
+      {
+        "label": "Mining Transit Pass",
+        "value": "UP eMM-11 Verified"
+      },
+      {
+        "label": "Delivery Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 420,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Transport Nagar / Chinhat Sand Stockyard"
+  },
+  {
+    "id": "prod-masonry-banda-hamirpur-coarse-morang-trolley-100",
+    "slug": "banda-hamirpur-coarse-morang-sand-100-cft-trolley",
+    "name": "Banda / Hamirpur — A-Grade Coarse Morang Sand — 100 CFT (1 Brass / Trolley)",
+    "title": "Banda / Hamirpur — A-Grade Coarse Morang Sand — 100 CFT (1 Brass / Trolley)",
+    "brand": "Banda / Hamirpur",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Sand, Morang & Stone Dust",
+    "masonrySubcategory": "SAND_MORANG",
+    "sellingUnit": "TROLLEY_100_CFT",
+    "minOrderQty": 1,
+    "dimensionsLabel": "100 CFT (1 Brass Full Trolley Load)",
+    "price": 6200,
+    "exGstPrice": 5905,
+    "mrp": 6800,
+    "discountPercent": 9,
+    "gstPercent": 5,
+    "hsnCode": "2505",
+    "unit": "1 Trolley (100 CFT)",
+    "deliveryVehicleType": "Tractor Trolley",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-morang-sand-100-cft-trolley.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-morang-sand-100-cft-trolley.webp"
+    ],
+    "shortTagline": "100 CFT Brass Trolley Load • Complete with eMM-11 Mining Transit Pass",
+    "specChips": [
+      "100 CFT Brass",
+      "Zone-II Coarse",
+      "5% GST (HSN 2505)",
+      "Tractor Trolley"
+    ],
+    "description": "Standard 1 Brass (100 Cubic Feet) tractor trolley load of genuine Banda coarse red morang sand. Measured at site by height-depth tape measurement, accompanied by valid UP mining eMM-11 form for legal building compliance.",
+    "highlights": [
+      "Exact 100 CFT volume guarantee before tipping",
+      "Hydraulic tipping tractor trolley delivers directly onto site",
+      "Accompanied by UP eMM-11 Mining Transit Challan",
+      "Direct aggregator dispatch avoiding middleman brokerage"
+    ],
+    "specifications": [
+      {
+        "label": "Volume",
+        "value": "100 CFT (1 Brass Trolley Load)"
+      },
+      {
+        "label": "Grading",
+        "value": "Zone-II Structural RCC Coarse"
+      },
+      {
+        "label": "Mining Challan",
+        "value": "Valid UP eMM-11 included"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2505 • 5% GST"
+      },
+      {
+        "label": "Unloading Method",
+        "value": "Hydraulic Rear Tip"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 388,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Aggregator Stockyard Hub"
+  },
+  {
+    "id": "prod-masonry-yamuna-fine-plaster-morang-cft",
+    "slug": "yamuna-local-fine-plastering-morang-sand-p-sand-per-cft",
+    "name": "Yamuna / Local — Fine Plastering Morang Sand — P-Sand (per CFT)",
+    "title": "Yamuna / Local — Fine Plastering Morang Sand — P-Sand (per CFT)",
+    "brand": "Yamuna / Local",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Sand, Morang & Stone Dust",
+    "masonrySubcategory": "SAND_MORANG",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "dimensionsLabel": "Zone-III Fine Screened Sand (per CFT)",
+    "price": 56,
+    "exGstPrice": 53,
+    "mrp": 62,
+    "discountPercent": 10,
+    "gstPercent": 5,
+    "hsnCode": "2505",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 2,
+    "image": "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-p-sand-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-p-sand-per-cft.webp"
+    ],
+    "shortTagline": "Fine Screened Plaster Morang • Smooth Mirror Wall Finish with Zero Cracks",
+    "specChips": [
+      "Zone-III Fine",
+      "Plaster Grade",
+      "5% GST (HSN 2505)",
+      "Per CFT"
+    ],
+    "description": "Screened Zone-III fine plastering river sand (P-Sand) sourced from Yamuna river basins. Uniform grain size ensures buttery troweling consistency for internal and external wall plastering without shrinkage spider cracks.",
+    "highlights": [
+      "Screened through 2.36mm mesh to remove pebbles and clay lumps",
+      "Optimal workability for 1:4 and 1:6 cement-sand plaster mixes",
+      "Leaves smooth surface ready for wall putty application",
+      "eMM-11 transit pass compliant"
+    ],
+    "specifications": [
+      {
+        "label": "Grading Zone",
+        "value": "Zone-III (Fine Plaster Grade)"
+      },
+      {
+        "label": "Fineness Modulus",
+        "value": "2.0 - 2.5"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2505 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 230,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Yamuna Sand Depot (Sitapur Road)"
+  },
+  {
+    "id": "prod-masonry-yamuna-fine-plaster-morang-trolley-100",
+    "slug": "yamuna-local-fine-plastering-morang-sand-100-cft-trolley",
+    "name": "Yamuna / Local — Fine Plastering Morang Sand — 100 CFT (1 Brass / Trolley)",
+    "title": "Yamuna / Local — Fine Plastering Morang Sand — 100 CFT (1 Brass / Trolley)",
+    "brand": "Yamuna / Local",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Sand, Morang & Stone Dust",
+    "masonrySubcategory": "SAND_MORANG",
+    "sellingUnit": "TROLLEY_100_CFT",
+    "minOrderQty": 1,
+    "dimensionsLabel": "100 CFT (1 Brass Plaster Sand Trolley)",
+    "price": 5600,
+    "exGstPrice": 5333,
+    "mrp": 6200,
+    "discountPercent": 10,
+    "gstPercent": 5,
+    "hsnCode": "2505",
+    "unit": "1 Trolley (100 CFT)",
+    "deliveryVehicleType": "Tractor Trolley",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 2,
+    "image": "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-100-cft-trolley.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-100-cft-trolley.webp"
+    ],
+    "shortTagline": "100 CFT Fine Plaster Sand Trolley • Direct Site Tipping with eMM-11",
+    "specChips": [
+      "100 CFT Brass",
+      "Zone-III Fine",
+      "5% GST (HSN 2505)",
+      "Tractor Trolley"
+    ],
+    "description": "Full 100 CFT (1 Brass) tractor trolley delivery of fine plastering morang sand across Lucknow. Fully screened and ready for immediate mortar mixing on site.",
+    "highlights": [
+      "Accurate 100 CFT volume verification on arrival",
+      "Hydraulic tipping mechanism for clean site unloading",
+      "UP mining eMM-11 transit slip attached"
+    ],
+    "specifications": [
+      {
+        "label": "Volume",
+        "value": "100 CFT (1 Brass)"
+      },
+      {
+        "label": "Grading",
+        "value": "Zone-III Fine Plaster Sand"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2505 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 195,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Aggregator Stockyard Hub"
+  },
+  {
+    "id": "prod-masonry-ghaghara-white-balu-cft",
+    "slug": "ghaghara-ganga-white-grey-river-balu-sand-per-cft",
+    "name": "Ghaghara / Ganga — White/Grey River Balu Sand — Plaster & Filling (per CFT)",
+    "title": "Ghaghara / Ganga — White/Grey River Balu Sand — Plaster & Filling (per CFT)",
+    "brand": "Ghaghara / Ganga",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Sand, Morang & Stone Dust",
+    "masonrySubcategory": "SAND_MORANG",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "dimensionsLabel": "Natural River White Balu (per CFT)",
+    "price": 38,
+    "exGstPrice": 36,
+    "mrp": 44,
+    "discountPercent": 14,
+    "gstPercent": 5,
+    "hsnCode": "2505",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 2,
+    "image": "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-per-cft.webp"
+    ],
+    "shortTagline": "Natural Fine White Balu • Basement Backfilling, Paver Bedding & Plaster",
+    "specChips": [
+      "Natural White Balu",
+      "Basement Filling",
+      "5% GST (HSN 2505)",
+      "Per CFT"
+    ],
+    "description": "Pure natural white/grey river balu sand dredged from Ghaghara and Ganga river floodplains. Exceptional flowability for foundation backfilling, floor levelling, paver block jointing, and fine finishing mortar.",
+    "highlights": [
+      "Natural river silt-washed white/grey texture",
+      "Economical solution for foundation trenches and basement backfilling",
+      "Fine round grain creates smooth bedding under interlocking pavers",
+      "Supplied with legal mining transit pass"
+    ],
+    "specifications": [
+      {
+        "label": "River Origin",
+        "value": "Ghaghara / Ganga Basin"
+      },
+      {
+        "label": "Grading",
+        "value": "Zone-IV Extra Fine River Sand"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2505 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 180,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Faizabad Road / Chinhat Sand Yard"
+  },
+  {
+    "id": "prod-masonry-ghaghara-white-balu-trolley-100",
+    "slug": "ghaghara-ganga-white-grey-river-balu-sand-100-cft-trolley",
+    "name": "Ghaghara / Ganga — White/Grey River Balu Sand — 100 CFT (1 Brass / Trolley)",
+    "title": "Ghaghara / Ganga — White/Grey River Balu Sand — 100 CFT (1 Brass / Trolley)",
+    "brand": "Ghaghara / Ganga",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Sand, Morang & Stone Dust",
+    "masonrySubcategory": "SAND_MORANG",
+    "sellingUnit": "TROLLEY_100_CFT",
+    "minOrderQty": 1,
+    "dimensionsLabel": "100 CFT (1 Brass Balu Trolley)",
+    "price": 3800,
+    "exGstPrice": 3619,
+    "mrp": 4400,
+    "discountPercent": 14,
+    "gstPercent": 5,
+    "hsnCode": "2505",
+    "unit": "1 Trolley (100 CFT)",
+    "deliveryVehicleType": "Tractor Trolley",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 2,
+    "image": "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-100-cft-trolley.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-100-cft-trolley.webp"
+    ],
+    "shortTagline": "100 CFT Full Trolley White Balu • Bulk Foundation & Plinth Filling",
+    "specChips": [
+      "100 CFT Brass",
+      "Natural White Balu",
+      "5% GST (HSN 2505)",
+      "Tractor Trolley"
+    ],
+    "description": "Bulk 100 CFT tractor trolley of fine white/grey river balu sand for plot leveling, plinth beam backfilling, and mortar finishing across Lucknow residential developments.",
+    "highlights": [
+      "Guaranteed 100 CFT volume verification at destination",
+      "Hydraulic tipping allows zero-labour dump",
+      "eMM-11 Mining compliance verified"
+    ],
+    "specifications": [
+      {
+        "label": "Volume",
+        "value": "100 CFT (1 Brass)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2505 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 145,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Aggregator Stockyard Hub"
+  },
+  {
+    "id": "prod-masonry-kabrai-concrete-stone-dust-cft",
+    "slug": "kabrai-crusher-concrete-stone-dust-crushed-m-sand-per-cft",
+    "name": "Kabrai Crusher — Concrete Stone Dust / Crushed M-Sand (per CFT)",
+    "title": "Kabrai Crusher — Concrete Stone Dust / Crushed M-Sand (per CFT)",
+    "brand": "Kabrai Crusher",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Sand, Morang & Stone Dust",
+    "masonrySubcategory": "SAND_MORANG",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "dimensionsLabel": "0-4.75mm Crushed Stone Dust (per CFT)",
+    "price": 44,
+    "exGstPrice": 42,
+    "mrp": 50,
+    "discountPercent": 12,
+    "gstPercent": 5,
+    "hsnCode": "2517",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/kabrai-crusher-concrete-stone-dust-crushed-m-sand-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/kabrai-crusher-concrete-stone-dust-crushed-m-sand-per-cft.webp"
+    ],
+    "shortTagline": "Crushed Black Granite M-Sand • Ideal for Concrete Blocks & Paver Bedding",
+    "specChips": [
+      "Crushed 0-4.75mm",
+      "Kabrai Granite Dust",
+      "5% GST (HSN 2517)",
+      "Per CFT"
+    ],
+    "description": "Washed and micro-graded black granite stone dust (M-Sand) crushed at Kabrai Mahoba quarry plants. 0 to 4.75mm angular particles provide outstanding packing density for precast manufacturing, paver block bedding, and concrete block masonry.",
+    "highlights": [
+      "100% genuine Kabrai granite stone dust",
+      "Angular particle shape delivers superior mechanical interlock in concrete",
+      "Free from organic matter and clay lumps",
+      "Taxed at 5% GST under HSN 2517"
+    ],
+    "specifications": [
+      {
+        "label": "Origin",
+        "value": "Kabrai / Mahoba Crusher Belt"
+      },
+      {
+        "label": "Size Grading",
+        "value": "0 to 4.75 mm"
+      },
+      {
+        "label": "Material",
+        "value": "Crushed Black Granite Stone Dust"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2517 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 165,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Transport Nagar Crusher Depot"
+  },
+  {
+    "id": "prod-masonry-kabrai-20mm-kali-gitti-cft",
+    "slug": "kabrai-mahoba-20mm-kali-crushed-stone-gitti-rcc-per-cft",
+    "name": "Kabrai / Mahoba — 20mm Kali Crushed Stone Gitti — RCC Slabs/Columns (per CFT)",
+    "title": "Kabrai / Mahoba — 20mm Kali Crushed Stone Gitti — RCC Slabs/Columns (per CFT)",
+    "brand": "Kabrai / Mahoba",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Stone Aggregates (Gitti)",
+    "masonrySubcategory": "GITTI_AGGREGATES",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "aggregateSizeMm": 20,
+    "dimensionsLabel": "20mm Single-Size Kali Gitti (per CFT)",
+    "price": 58,
+    "exGstPrice": 55,
+    "mrp": 66,
+    "discountPercent": 12,
+    "gstPercent": 5,
+    "hsnCode": "2517",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-rcc-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-rcc-per-cft.webp"
+    ],
+    "shortTagline": "Authentic Kabrai Jet-Black Granite Gitti • 20mm Cubical Shape for Heavy RCC",
+    "specChips": [
+      "20mm Kali Gitti",
+      "eMM-11 Mining Pass",
+      "5% GST (HSN 2517)",
+      "Per CFT"
+    ],
+    "description": "Renowned Kabrai (Mahoba) jet-black granite crushed stone aggregate (20mm). Features cubical angular geometry with minimal flakiness and elongation (< 15%), ensuring zero voids in roof slab casting, foundation footings, and RCC columns.",
+    "highlights": [
+      "100% pure Kabrai black granite with high crushing value (> 350 kg/cm²)",
+      "Cubical particle geometry maximizes concrete density and reduces cement paste demand",
+      "Impact value < 18% & Flakiness index < 15% (IS 2386 compliant)",
+      "UP eMM-11 transit pass and laser volume verification at site"
+    ],
+    "specifications": [
+      {
+        "label": "Nominal Size",
+        "value": "20 mm (Passing 20mm, retained on 10mm)"
+      },
+      {
+        "label": "Crusher Origin",
+        "value": "Kabrai / Mahoba Mining Zone"
+      },
+      {
+        "label": "Rock Type",
+        "value": "High-Density Black Granite"
+      },
+      {
+        "label": "Specific Gravity",
+        "value": "2.68 - 2.74"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2517 • 5% GST (Strict 2026 Slabs)"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 512,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Kabrai Stone Yard (Transport Nagar)"
+  },
+  {
+    "id": "prod-masonry-kabrai-20mm-kali-gitti-trolley-100",
+    "slug": "kabrai-mahoba-20mm-kali-crushed-stone-gitti-100-cft-trolley",
+    "name": "Kabrai / Mahoba — 20mm Kali Crushed Stone Gitti — 100 CFT (1 Brass / Trolley)",
+    "title": "Kabrai / Mahoba — 20mm Kali Crushed Stone Gitti — 100 CFT (1 Brass / Trolley)",
+    "brand": "Kabrai / Mahoba",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Stone Aggregates (Gitti)",
+    "masonrySubcategory": "GITTI_AGGREGATES",
+    "sellingUnit": "TROLLEY_100_CFT",
+    "minOrderQty": 1,
+    "aggregateSizeMm": 20,
+    "dimensionsLabel": "100 CFT (1 Brass 20mm Kali Gitti Trolley)",
+    "price": 5800,
+    "exGstPrice": 5524,
+    "mrp": 6500,
+    "discountPercent": 11,
+    "gstPercent": 5,
+    "hsnCode": "2517",
+    "unit": "1 Trolley (100 CFT)",
+    "deliveryVehicleType": "Tractor Trolley",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-100-cft-trolley.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-100-cft-trolley.webp"
+    ],
+    "shortTagline": "100 CFT Brass Trolley • Kabrai Black Granite Gitti • Verified eMM-11 Pass",
+    "specChips": [
+      "100 CFT Brass",
+      "20mm Kali Gitti",
+      "5% GST (HSN 2517)",
+      "Tractor Trolley"
+    ],
+    "description": "Full 100 CFT (1 Brass) tractor trolley load of genuine 20mm Kabrai black granite aggregate. Delivered with guaranteed volume calibration and official UP Mining eMM-11 transit pass.",
+    "highlights": [
+      "Full 100 CFT volume guarantee measured on site before discharge",
+      "Hydraulic tipping system allows quick unloading",
+      "Includes verified government eMM-11 transit challan",
+      "No sub-standard river shingle or white stone mix"
+    ],
+    "specifications": [
+      {
+        "label": "Volume",
+        "value": "100 CFT (1 Brass Trolley Load)"
+      },
+      {
+        "label": "Nominal Size",
+        "value": "20 mm Black Granite"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2517 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 470,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Aggregator Stockyard Hub"
+  },
+  {
+    "id": "prod-masonry-kabrai-10mm-crushed-gitti-cft",
+    "slug": "kabrai-mahoba-10mm-crushed-stone-gitti-finishing-per-cft",
+    "name": "Kabrai / Mahoba — 10mm Crushed Stone Gitti — Finishing & Lintels (per CFT)",
+    "title": "Kabrai / Mahoba — 10mm Crushed Stone Gitti — Finishing & Lintels (per CFT)",
+    "brand": "Kabrai / Mahoba",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Stone Aggregates (Gitti)",
+    "masonrySubcategory": "GITTI_AGGREGATES",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "aggregateSizeMm": 10,
+    "dimensionsLabel": "10mm Single-Size Black Aggregate (per CFT)",
+    "price": 57,
+    "exGstPrice": 54,
+    "mrp": 65,
+    "discountPercent": 12,
+    "gstPercent": 5,
+    "hsnCode": "2517",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-finishing-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-finishing-per-cft.webp"
+    ],
+    "shortTagline": "10mm Black Granite Chips • Ideal for Dense Rebar Columns, Lintels & Chhajjas",
+    "specChips": [
+      "10mm Chips",
+      "eMM-11 Mining Pass",
+      "5% GST (HSN 2517)",
+      "Per CFT"
+    ],
+    "description": "Kabrai 10mm crushed black granite stone chips. Flows effortlessly around congested TMT reinforcement bars in door/window lintels, chhajjas, thin architectural fins, and high-strength M25/M30 concrete mixes.",
+    "highlights": [
+      "Eliminates honeycomb voids in congested steel rebar cages",
+      "Perfect 60:40 combination with 20mm aggregate for optimum grading curve",
+      "High compressive strength > 350 kg/cm²",
+      "eMM-11 transit pass verified"
+    ],
+    "specifications": [
+      {
+        "label": "Nominal Size",
+        "value": "10 mm (Passing 10mm, retained on 4.75mm)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2517 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 290,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Transport Nagar Crusher Depot"
+  },
+  {
+    "id": "prod-masonry-kabrai-10mm-crushed-gitti-trolley-100",
+    "slug": "kabrai-mahoba-10mm-crushed-stone-gitti-100-cft-trolley",
+    "name": "Kabrai / Mahoba — 10mm Crushed Stone Gitti — 100 CFT (1 Brass / Trolley)",
+    "title": "Kabrai / Mahoba — 10mm Crushed Stone Gitti — 100 CFT (1 Brass / Trolley)",
+    "brand": "Kabrai / Mahoba",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Stone Aggregates (Gitti)",
+    "masonrySubcategory": "GITTI_AGGREGATES",
+    "sellingUnit": "TROLLEY_100_CFT",
+    "minOrderQty": 1,
+    "aggregateSizeMm": 10,
+    "dimensionsLabel": "100 CFT (1 Brass 10mm Gitti Trolley)",
+    "price": 5700,
+    "exGstPrice": 5429,
+    "mrp": 6400,
+    "discountPercent": 11,
+    "gstPercent": 5,
+    "hsnCode": "2517",
+    "unit": "1 Trolley (100 CFT)",
+    "deliveryVehicleType": "Tractor Trolley",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-100-cft-trolley.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-100-cft-trolley.webp"
+    ],
+    "shortTagline": "100 CFT Brass Trolley Load • 10mm Black Granite Aggregate • eMM-11 Slip",
+    "specChips": [
+      "100 CFT Brass",
+      "10mm Gitti",
+      "5% GST (HSN 2517)",
+      "Tractor Trolley"
+    ],
+    "description": "Full 1 Brass (100 CFT) tractor trolley load of 10mm Kabrai black granite aggregate. Delivered with guaranteed volume calibration and official UP Mining eMM-11 transit pass.",
+    "highlights": [
+      "Full 100 CFT verified volume guarantee",
+      "Hydraulic tipping system for efficient discharge",
+      "eMM-11 transit pass included"
+    ],
+    "specifications": [
+      {
+        "label": "Volume",
+        "value": "100 CFT (1 Brass)"
+      },
+      {
+        "label": "Nominal Size",
+        "value": "10 mm Black Granite"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2517 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 210,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Lucknow Aggregator Stockyard Hub"
+  },
+  {
+    "id": "prod-masonry-kabrai-6mm-jeera-gitti-cft",
+    "slug": "kabrai-mahoba-6mm-jeera-gitti-flooring-precast-per-cft",
+    "name": "Kabrai / Mahoba — 6mm Jeera Gitti — Flooring & Precast (per CFT)",
+    "title": "Kabrai / Mahoba — 6mm Jeera Gitti — Flooring & Precast (per CFT)",
+    "brand": "Kabrai / Mahoba",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Stone Aggregates (Gitti)",
+    "masonrySubcategory": "GITTI_AGGREGATES",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "aggregateSizeMm": 6,
+    "dimensionsLabel": "6mm (1/4\") Jeera Aggregate (per CFT)",
+    "price": 50,
+    "exGstPrice": 48,
+    "mrp": 58,
+    "discountPercent": 14,
+    "gstPercent": 5,
+    "hsnCode": "2517",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-6mm-jeera-gitti-flooring-precast-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-6mm-jeera-gitti-flooring-precast-per-cft.webp"
+    ],
+    "shortTagline": "6mm Micro-Aggregate (Jeera) • IPS Flooring, Paver Tops & Precast Concrete",
+    "specChips": [
+      "6mm Jeera Gitti",
+      "Precast Grade",
+      "5% GST (HSN 2517)",
+      "Per CFT"
+    ],
+    "description": "Finely screened 6mm (1/4 inch) black granite aggregate, popularly known as Jeera Gitti in Lucknow. Essential for IPS (Indian Patent Stone) floor finishing, paver block wearing layers, terrazzo floor bedding, and thin-wall precast products.",
+    "highlights": [
+      "Uniform 4.75mm to 6.7mm particle size",
+      "Leaves mirror-smooth concrete surfaces when polished",
+      "High abrasion resistance for industrial floor overlays"
+    ],
+    "specifications": [
+      {
+        "label": "Nominal Size",
+        "value": "6 mm (Jeera Gitti)"
+      },
+      {
+        "label": "Rock Type",
+        "value": "Black Granite"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2517 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 160,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Transport Nagar Crusher Depot"
+  },
+  {
+    "id": "prod-masonry-kabrai-40mm-heavy-gitti-cft",
+    "slug": "kabrai-mahoba-40mm-heavy-crushed-gitti-soling-per-cft",
+    "name": "Kabrai / Mahoba — 40mm Heavy Crushed Gitti — Foundation & Soling (per CFT)",
+    "title": "Kabrai / Mahoba — 40mm Heavy Crushed Gitti — Foundation & Soling (per CFT)",
+    "brand": "Kabrai / Mahoba",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Stone Aggregates (Gitti)",
+    "masonrySubcategory": "GITTI_AGGREGATES",
+    "sellingUnit": "CFT",
+    "minOrderQty": 25,
+    "aggregateSizeMm": 40,
+    "dimensionsLabel": "40mm Coarse Granite Gitti (per CFT)",
+    "price": 54,
+    "exGstPrice": 51,
+    "mrp": 62,
+    "discountPercent": 13,
+    "gstPercent": 5,
+    "hsnCode": "2517",
+    "unit": "per CFT",
+    "deliveryVehicleType": "Tractor Trolley / Dumper",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": true,
+    "requiresUnloadingLabour": false,
+    "brandTier": 1,
+    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-40mm-heavy-crushed-gitti-soling-per-cft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-40mm-heavy-crushed-gitti-soling-per-cft.webp"
+    ],
+    "shortTagline": "Heavy 40mm Soling Aggregate • Mass Foundation Concrete & Road Sub-Base",
+    "specChips": [
+      "40mm Soling",
+      "eMM-11 Mining Pass",
+      "5% GST (HSN 2517)",
+      "Per CFT"
+    ],
+    "description": "Heavy 40mm crushed black granite aggregate for mass concrete footings, foundation PCC beds (1:4:8 / 1:5:10), retaining wall footings, and driveway road sub-base compaction.",
+    "highlights": [
+      "High load bearing capacity for heavy ground compaction",
+      "Resists soil movement and foundation settling",
+      "UP eMM-11 transit pass verified"
+    ],
+    "specifications": [
+      {
+        "label": "Nominal Size",
+        "value": "40 mm"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 2517 • 5% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Tractor Trolley / Dumper"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.7,
+    "reviewsCount": 135,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Transport Nagar Crusher Depot"
+  },
+  {
+    "id": "prod-masonry-local-precast-60mm-m30-zigzag-paver-sqft",
+    "slug": "local-precast-60mm-m30-zigzag-interlocking-paver-block-sqft",
+    "name": "Local Precast — 60mm M30 Zig-Zag Interlocking Paver Block (per sq ft)",
+    "title": "Local Precast — 60mm M30 Zig-Zag Interlocking Paver Block (per sq ft)",
+    "brand": "Local Precast",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Paver Blocks & Concrete Cover Blocks",
+    "masonrySubcategory": "PAVERS_COVER_BLOCKS",
+    "sellingUnit": "SQ_FT",
+    "minOrderQty": 100,
+    "thicknessMm": 60,
+    "dimensionsLabel": "60mm M30 Zig-Zag Paver (per sq ft)",
+    "price": 38,
+    "exGstPrice": 32,
+    "mrp": 45,
+    "discountPercent": 16,
+    "gstPercent": 18,
+    "hsnCode": "6810",
+    "unit": "per sq ft",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 3,
+    "image": "/images/products/bricks-sand-gitti-aac/local-precast-60mm-m30-zigzag-interlocking-paver-block-sqft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/local-precast-60mm-m30-zigzag-interlocking-paver-block-sqft.webp"
+    ],
+    "shortTagline": "M30 Grade Interlocking Pavers • Residential Driveways, Walkways & Patios",
+    "specChips": [
+      "60mm M30",
+      "Zig-Zag Interlock",
+      "18% GST (HSN 6810)",
+      "Per Sq Ft"
+    ],
+    "description": "High-strength 60mm M30 grade zig-zag interlocking concrete paver blocks. Manufactured with synthetic iron-oxide pigments and hydraulic vibro-compaction. Ideal for residential car parking, walkways, landscaping gardens, and office approaches.",
+    "highlights": [
+      "M30 compressive strength (> 30 N/mm²) engineered for light vehicular traffic",
+      "Zig-zag shape creates robust 4-way mechanical interlock preventing block displacement",
+      "Anti-skid textured top surface with UV-stabilized pigments (Red / Grey combo available)",
+      "Supplied on pallets or strapped stacks per square foot"
+    ],
+    "specifications": [
+      {
+        "label": "Thickness",
+        "value": "60 mm"
+      },
+      {
+        "label": "Concrete Grade",
+        "value": "M30 (30 N/mm² at 28 days)"
+      },
+      {
+        "label": "Pattern",
+        "value": "Zig-Zag Interlocking"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6810 • 18% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 176,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Chinhat Precast Yard"
+  },
+  {
+    "id": "prod-masonry-local-precast-80mm-m35-zigzag-paver-sqft",
+    "slug": "local-precast-80mm-m35-heavy-duty-driveway-paver-block-sqft",
+    "name": "Local Precast — 80mm M35 Heavy-Duty Driveway Paver Block (per sq ft)",
+    "title": "Local Precast — 80mm M35 Heavy-Duty Driveway Paver Block (per sq ft)",
+    "brand": "Local Precast",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Paver Blocks & Concrete Cover Blocks",
+    "masonrySubcategory": "PAVERS_COVER_BLOCKS",
+    "sellingUnit": "SQ_FT",
+    "minOrderQty": 100,
+    "thicknessMm": 80,
+    "dimensionsLabel": "80mm M35 Heavy Commercial Paver (per sq ft)",
+    "price": 44,
+    "exGstPrice": 37,
+    "mrp": 52,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "6810",
+    "unit": "per sq ft",
+    "deliveryVehicleType": "Pickup / Mini-Truck",
+    "deliveryMode": "SAME_DAY_SCHEDULED",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": true,
+    "brandTier": 3,
+    "image": "/images/products/bricks-sand-gitti-aac/local-precast-80mm-m35-heavy-duty-driveway-paver-block-sqft.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/local-precast-80mm-m35-heavy-duty-driveway-paver-block-sqft.webp"
+    ],
+    "shortTagline": "Heavy-Duty 80mm M35 Paver • Truck Driveways, Petrol Pumps & Warehouses",
+    "specChips": [
+      "80mm M35",
+      "Heavy Commercial",
+      "18% GST (HSN 6810)",
+      "Per Sq Ft"
+    ],
+    "description": "Heavy-duty 80mm M35 grade interlocking paver blocks designed to withstand continuous heavy commercial vehicles, delivery trucks, petrol pumps, and factory bay roads across Lucknow logistics parks.",
+    "highlights": [
+      "M35 compressive strength (> 35 N/mm²) certified for commercial axle loads",
+      "80mm thick section prevents edge spalling and cracking under truck tires",
+      "High abrasion resistance with durable mineral aggregate matrix"
+    ],
+    "specifications": [
+      {
+        "label": "Thickness",
+        "value": "80 mm"
+      },
+      {
+        "label": "Grade",
+        "value": "M35 (35 N/mm²)"
+      },
+      {
+        "label": "Pattern",
+        "value": "Heavy-Duty Zig-Zag"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6810 • 18% GST"
+      },
+      {
+        "label": "Vehicle",
+        "value": "Pickup / Mini-Truck"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.8,
+    "reviewsCount": 140,
+    "deliveryEta": "Scheduled Heavy Delivery",
+    "vendor": "Chinhat Precast Yard"
+  },
+  {
+    "id": "prod-masonry-standard-precast-concrete-cover-blocks-pack-100",
+    "slug": "standard-precast-multi-size-concrete-cover-blocks-pack-100",
+    "name": "Standard Precast — Multi-Size Concrete Cover Blocks 20/25/40/50mm (Pack of 100)",
+    "title": "Standard Precast — Multi-Size Concrete Cover Blocks 20/25/40/50mm (Pack of 100)",
+    "brand": "Standard Precast",
+    "categorySlug": "bricks-sand-gitti-aac",
+    "categoryName": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "subCategory": "Paver Blocks & Concrete Cover Blocks",
+    "masonrySubcategory": "PAVERS_COVER_BLOCKS",
+    "sellingUnit": "PACK_100",
+    "minOrderQty": 1,
+    "dimensionsLabel": "Multi-Size 20/25/40/50mm (Pack of 100)",
+    "price": 185,
+    "exGstPrice": 157,
+    "mrp": 230,
+    "discountPercent": 20,
+    "gstPercent": 18,
+    "hsnCode": "6810",
+    "unit": "Pack of 100",
+    "deliveryVehicleType": "2-Wheeler",
+    "deliveryMode": "EXPRESS_60_MIN",
+    "requiresMiningTransitPass": false,
+    "requiresUnloadingLabour": false,
+    "brandTier": 3,
+    "image": "/images/products/bricks-sand-gitti-aac/standard-precast-multi-size-concrete-cover-blocks-pack-100.webp",
+    "images": [
+      "/images/products/bricks-sand-gitti-aac/standard-precast-multi-size-concrete-cover-blocks-pack-100.webp"
+    ],
+    "shortTagline": "Multi-Cover Fiber Reinforced Concrete Spacers • Express 60-Min 2-Wheeler Dispatch",
+    "specChips": [
+      "Pack of 100",
+      "20/25/40/50mm",
+      "18% GST (HSN 6810)",
+      "60-Min 2-Wheeler"
+    ],
+    "description": "Engineered multi-cover fibre-reinforced concrete cover blocks providing 20mm (slab), 25mm (beam), 40mm (column), and 50mm (footing) nominal cover according to IS 456:2000. Features binding wire embedding groove to ensure rebar stays locked during vibrating. Dispatched in 60 minutes via 2-Wheeler.",
+    "highlights": [
+      "Multi-cover orientation: 1 block satisfies 20mm, 25mm, 40mm, or 50mm rebar offsets",
+      "M35 high-strength concrete prevents thermal expansion mismatch unlike plastic cover blocks",
+      "Integrated groove prevents rebar slippage during needle vibration",
+      "Eligible for instant 60-min express bike delivery directly to the slab shuttering crew"
+    ],
+    "specifications": [
+      {
+        "label": "Cover Offsets",
+        "value": "20mm, 25mm, 40mm, 50mm multi-face"
+      },
+      {
+        "label": "Standard",
+        "value": "IS 456:2000 Clause 26.4"
+      },
+      {
+        "label": "Strength",
+        "value": "M35 High Performance Fiber-Concrete"
+      },
+      {
+        "label": "Package",
+        "value": "Heavy Woven Sack (Pack of 100)"
+      },
+      {
+        "label": "HSN Code & GST",
+        "value": "HSN 6810 • 18% GST"
+      },
+      {
+        "label": "Delivery Vehicle",
+        "value": "2-Wheeler (60-Min Express Guaranteed)"
+      }
+    ],
+    "variants": [],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 395,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Rapid Supply Hub"
+  }
+];

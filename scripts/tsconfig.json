@@ -1,9 +1,21 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src",
-    "types": ["node"]
+    "noEmit": true,
+    "jsx": "preserve",
+    "types": ["node"],
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "useUnknownInCatchVariables": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../artifacts/conon/src/*"],
+      "@workspace/db": ["../lib/db/src"],
+      "@workspace/api-zod": ["../lib/api-zod/src"]
+    }
   },
-  "include": ["src"]
+  "include": ["*.ts", "**/*.ts"]
 }

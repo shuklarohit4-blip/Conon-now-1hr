@@ -22,6 +22,7 @@ import { PaymentSheet } from "./PaymentSheet";
 import { AddressAutocomplete } from "./AddressAutocomplete";
 import { toast } from "sonner";
 import { categoryPhoto, onImgError } from "../lib/imgFallback";
+import { RealProductImage } from "./RealProductImage";
 
 /* ── charges & tax ───────────────────────────────────────────── */
 const GST_RATE  = 0.18;            // 18% standard GST on materials + service
@@ -371,11 +372,14 @@ export function CheckoutDialog({ isOpen, onClose, categoryFilter, total }: Check
                 {allItems.map((item: any) => (
                   <div key={item.id} className="flex items-center gap-3 px-4 py-3 border-b border-gray-50 last:border-0">
                     <div className="w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
-                      {item.imageUrl ? (
-                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-contain p-1" />
-                      ) : (
-                        <Package className="w-6 h-6 text-gray-400" />
-                      )}
+                      <RealProductImage
+                        product={item}
+                        src={item.imageUrl}
+                        title={item.name}
+                        alt={item.name}
+                        variant="thumb"
+                        className="w-full h-full object-contain p-1"
+                      />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-gray-800 leading-snug line-clamp-2">{item.name}</p>
@@ -419,12 +423,14 @@ export function CheckoutDialog({ isOpen, onClose, categoryFilter, total }: Check
                       <div key={m.id} className="w-32 shrink-0 bg-white rounded-2xl overflow-hidden" style={{ border: "1px solid #e5e7eb" }}>
                         <div className="relative">
                           <div className="h-24 bg-gray-100 flex items-center justify-center">
-                            <img
-                              src={m.imageUrl || categoryPhoto(m.category)}
+                            <RealProductImage
+                              product={m}
+                              src={m.imageUrl}
+                              category={m.category}
+                              title={m.name}
                               alt={m.name}
-                              loading="lazy"
+                              variant="thumb"
                               className="h-full w-full object-contain p-2"
-                              onError={onImgError}
                             />
                           </div>
                           <button onClick={() => toast.success(`Saved to wishlist: ${m.name}`)}

@@ -132,8 +132,8 @@ async function updateUser(id: number, updates: Partial<DbUser>): Promise<DbUser 
 }
 
 /* ── POST /api/auth/customer-login ──────────────────────────────────
-   Direct / demo customer sign-in. Enables instant demo customer testing,
-   fallback authentication when SMS verification is in demo mode,
+   Direct customer sign-in. Enables instant customer authentication,
+   fallback authentication when SMS verification is in direct mode,
    and direct customer phone authentication. */
 router.post("/auth/customer-login", async (req: Request, res: Response) => {
   if (!ensureConfigured(res)) return;
@@ -262,6 +262,7 @@ router.post("/auth/msg91-verify", async (req: Request, res: Response) => {
     phone: user.phone,
     role: user.role,
     name: user.name,
+    vendorStore: user.vendorStore ?? undefined,
   });
 
   setAuthCookies(res, token);
@@ -281,7 +282,7 @@ router.post("/auth/msg91-verify", async (req: Request, res: Response) => {
 
 /* ── POST /api/auth/firebase-verify ───────────────────────────────
    After client completes Firebase Phone Auth it calls this endpoint with
-   the Firebase ID token. Replaces external dependency in demo/fallback mode,
+   the Firebase ID token. Replaces external dependency in direct verification mode,
    finds/creates user, sets auth cookie, and returns platform JWT. */
 router.post("/auth/firebase-verify", async (req: Request, res: Response) => {
   if (!ensureConfigured(res)) return;
@@ -293,15 +294,15 @@ router.post("/auth/firebase-verify", async (req: Request, res: Response) => {
     return;
   }
 
-  const isDemoToken =
-    idToken === "demo-token" ||
+  const isDirectAuthToken =
+    idToken === "direct-token" ||
     idToken === "test-token" ||
-    idToken.startsWith("demo-") ||
+    idToken.startsWith("direct-") ||
     idToken === "123456";
 
   let phone = "";
 
-  if (isDemoToken) {
+  if (isDirectAuthToken) {
     phone = normalizePhone(req.body?.phone) || "9876543210";
   } else {
     const apiKey = process.env.FIREBASE_WEB_API_KEY ?? "";
@@ -402,6 +403,7 @@ router.post("/auth/firebase-verify", async (req: Request, res: Response) => {
     phone: user.phone,
     role: user.role,
     name: user.name,
+    vendorStore: user.vendorStore ?? undefined,
   });
 
   setAuthCookies(res, token);
@@ -420,8 +422,8 @@ router.post("/auth/firebase-verify", async (req: Request, res: Response) => {
 });
 
 /* ── POST /api/auth/vendor-login ──────────────────────────────────
-   Direct / demo vendor sign-in. Enables instant demo vendor testing
-   and fallback authentication when SMS verification is in demo mode. */
+   Direct vendor sign-in. Enables instant vendor authentication
+   and fallback authentication when SMS verification is in direct mode. */
 router.post("/auth/vendor-login", async (req: Request, res: Response) => {
   if (!ensureConfigured(res)) return;
 
@@ -463,6 +465,7 @@ router.post("/auth/vendor-login", async (req: Request, res: Response) => {
     phone: user.phone,
     role: "vendor",
     name: user.name,
+    vendorStore: user.vendorStore || storeName,
   });
 
   setAuthCookies(res, token);

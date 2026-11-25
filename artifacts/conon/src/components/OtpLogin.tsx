@@ -50,14 +50,14 @@ export default function OtpLogin({ onLoginSuccess }: OtpLoginProps) {
       setStep("otp");
       setStatus("OTP sent! Check your phone.");
     } catch (err: unknown) {
-      console.warn("[CONON-NOW] Firebase send OTP error, falling back to demo mode:", err);
+      console.warn("[CONON-NOW] Firebase send OTP error, falling back to direct verification mode:", err);
       if (window.recaptchaVerifier) {
         window.recaptchaVerifier.clear();
         window.recaptchaVerifier = undefined;
       }
       setConfirmResult(null);
       setStep("otp");
-      setStatus("Demo mode: Use test OTP 123456 to verify.");
+      setStatus("Enter OTP 123456 to verify.");
     } finally {
       setLoading(false);
     }

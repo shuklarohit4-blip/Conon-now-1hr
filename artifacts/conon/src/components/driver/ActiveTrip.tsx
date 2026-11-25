@@ -524,7 +524,7 @@ function OtpModal({ open, onClose }: { open: boolean; onClose: () => void }) {
             {activeTrip && (
               <div className="rounded-2xl bg-amber-50 border border-amber-200 px-4 py-3 text-center">
                 <span className="text-[13px] font-bold text-amber-700">
-                  Demo OTP: <span className="text-[18px] font-black tracking-[0.3em]">{activeTrip.customerOtp}</span>
+                  Delivery OTP: <span className="text-[18px] font-black tracking-[0.3em]">{activeTrip.customerOtp}</span>
                 </span>
               </div>
             )}

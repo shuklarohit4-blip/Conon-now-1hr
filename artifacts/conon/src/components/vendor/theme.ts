@@ -1,7 +1,7 @@
 export const GREEN = "#15803d";
 export const GREEN_DARK = "#14532d";
 
-export type VendorTab = "dashboard" | "orders" | "products" | "inventory" | "khata";
+export type VendorTab = "dashboard" | "orders" | "products" | "payouts" | "shop" | "inventory" | "khata";
 
 export const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 export const inrShort = (n: number) =>

@@ -3,7 +3,7 @@ const path = require('path');
 const sharp = require('../node_modules/sharp');
 
 const BASE_DIR = path.resolve(__dirname, '..');
-const ATTACHED_ASSETS = path.resolve(BASE_DIR, 'attached_assets');
+const ATTACHED_ASSETS = path.resolve(BASE_DIR, 'artifacts/conon/src/assets');
 const PUBLIC_DIR = path.resolve(BASE_DIR, 'artifacts/conon/public');
 const PUBLIC_PRODUCTS_DIR = path.resolve(PUBLIC_DIR, 'images/products');
 const MANIFEST_PATH = path.resolve(BASE_DIR, 'artifacts/conon/src/lib/productAssetManifest.json');

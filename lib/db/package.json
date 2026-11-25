@@ -8,9 +8,11 @@
   },
   "dependencies": {
     "mongodb": "^6.16.0",
-    "mongoose": "^9.12.3"
+    "mongoose": "^9.12.3",
+    "pg": "^8.23.1"
   },
   "devDependencies": {
-    "@types/node": "catalog:"
+    "@types/node": "catalog:",
+    "@types/pg": "^8.23.1"
   }
 }

@@ -1,0 +1,4659 @@
+// Master Dataset for Fevicol, Adhesives & Sealants (All 45 Verified Lucknow SKUs)
+export interface AdhesiveProduct {
+  id: string;
+  slug: string;
+  name: string;
+  title: string;
+  brand: string;
+  categorySlug: string;
+  categoryName: string;
+  subCategory: "Wood & Laminate Adhesives" | "Contact & Rubber Adhesives" | "Epoxy, Putty & Instant Repair" | "Silicone, PU Sealants & Foam" | "Applicator Guns & Masking Tapes";
+  adhesiveSubcategory: "WOOD_LAMINATE" | "CONTACT_RUBBER" | "EPOXY_INSTANT" | "SEALANT_FOAM" | "APPLICATOR_TAPE";
+  cureType: "NEUTRAL" | "ACETOXY_GP" | "PU_MOISTURE" | "TWO_PART_EPOXY" | "PVA_RESIN" | "SOLVENT_CONTACT" | "CYANOACRYLATE" | "N/A";
+  baseChemistry: string;
+  settingTimeLabel: string;
+  heatOrWaterRating: string;
+  packSizeValue: number;
+  packSizeUnit: string;
+  packSizeDisplay: string;
+  effectiveUnitRate: number | null;
+  sellingUnit: string;
+  unit: string;
+  price: number;
+  exGstPrice: number;
+  mrp: number;
+  discountPercent: number;
+  gstPercent: number;
+  hsnCode: string;
+  deliveryVehicleType: "2-Wheeler" | "E-Loader" | "E-Loader / Pickup";
+  keySpecBadge: string;
+  brandTier: 1 | 2 | 3;
+  image: string;
+  images: string[];
+  shortTagline: string;
+  specChips: string[];
+  description: string;
+  highlights: string[];
+  specifications: { label: string; value: string }[];
+  variants: {
+    id: string;
+    label: string;
+    unit: string;
+    price: number;
+    mrp: number;
+    discountPercent: number;
+    stock: number;
+    image: string;
+  }[];
+  inStock: boolean;
+  rating: number;
+  reviewsCount: number;
+  deliveryEta: string;
+  vendor: string;
+  crossSellSkus: string[];
+}
+
+export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
+  {
+    "id": "prod-adh-fevicol-sh-1kg",
+    "slug": "fevicol-sh-synthetic-resin-wood-adhesive-1kg",
+    "name": "Fevicol SH Synthetic Resin Wood Adhesive (1 kg)",
+    "title": "Fevicol — SH Synthetic Resin Wood Adhesive (1 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Polyvinyl Acetate (PVAc) Emulsion",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "D3 Water Resistant (IS 4835)",
+    "packSizeValue": 1,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "1 kg Tub",
+    "effectiveUnitRate": 297,
+    "sellingUnit": "Tub",
+    "unit": "1 kg Tub",
+    "price": 297,
+    "exGstPrice": 252,
+    "mrp": 340,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 kg Tub · D3 Water Resistant · Handling 2h",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp"
+    ],
+    "shortTagline": "India's #1 Carpenter Adhesive · High PVAc Resin Content · Unbeatable Bond Strength",
+    "specChips": [
+      "1 kg Tub",
+      "PVAc Resin",
+      "D3 Grade",
+      "Handling 2h",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SH is Lucknow's benchmark synthetic resin wood adhesive for carpentry, wardrobe fabrication, and decorative laminate bonding onto plywood and MDF.",
+    "highlights": [
+      "High solids PVAc emulsion delivers superior shear bonding strength > 280 kg/cm²",
+      "Forms clear, transparent glue lines that will not stain fine veneers or teakwood",
+      "Easy cold-press application with standard notched carpenter trowel",
+      "Resists ambient monsoon humidity and prevents laminate edge-delamination",
+      "Certified low-VOC formulation safe for closed interior modular cabinet work"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol (Pidilite)"
+      },
+      {
+        "label": "Chemistry",
+        "value": "Polyvinyl Acetate (PVAc) Emulsion"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 kg Tub"
+      },
+      {
+        "label": "Bond Strength",
+        "value": "> 280 kg/cm² (Hardwood)"
+      },
+      {
+        "label": "Coverage",
+        "value": "45–50 sq.ft per kg on plywood"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹252"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-sh-1kg",
+        "label": "1 kg Tub",
+        "unit": "Tub",
+        "price": 297,
+        "mrp": 340,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 413,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-sh-2kg",
+    "slug": "fevicol-sh-synthetic-resin-wood-adhesive-2kg",
+    "name": "Fevicol SH Synthetic Resin Wood Adhesive (2 kg)",
+    "title": "Fevicol — SH Synthetic Resin Wood Adhesive (2 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Polyvinyl Acetate (PVAc) Emulsion",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "D3 Water Resistant (IS 4835)",
+    "packSizeValue": 2,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "2 kg Tub",
+    "effectiveUnitRate": 282,
+    "sellingUnit": "Tub",
+    "unit": "2 kg Tub",
+    "price": 564,
+    "exGstPrice": 478,
+    "mrp": 650,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "2 kg Tub · ₹282/kg · D3 Grade",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp"
+    ],
+    "shortTagline": "2 kg Value Tub · ₹282/kg Rate · Proven Wood & Laminate Bonding",
+    "specChips": [
+      "2 kg Tub",
+      "₹282/kg Rate",
+      "PVAc Emulsion",
+      "D3 Grade",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SH 2 kg tub offers economical value for medium carpentry jobs like paneling or bed box fabrication across Lucknow homes.",
+    "highlights": [
+      "Economical per-kg rate of ₹282/kg saves 5% over 1 kg packs",
+      "High solids content ensures zero bubble formation under 1mm laminate sheets",
+      "Handling bond achieved in 2 to 3 hours under standard bar clamps",
+      "Resists seasonal temperature cycling and humidity fluctuations",
+      "Convenient wide-mouth tub for easy paddle and brush dipping"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol (Pidilite)"
+      },
+      {
+        "label": "Chemistry",
+        "value": "PVAc Emulsion"
+      },
+      {
+        "label": "Pack Size",
+        "value": "2 kg Tub"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹282.00 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹478"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-sh-2kg",
+        "label": "2 kg Tub",
+        "unit": "Tub",
+        "price": 564,
+        "mrp": 650,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 415,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-sh-5kg",
+    "slug": "fevicol-sh-synthetic-resin-wood-adhesive-5kg",
+    "name": "Fevicol SH Synthetic Resin Wood Adhesive (5 kg)",
+    "title": "Fevicol — SH Synthetic Resin Wood Adhesive (5 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Polyvinyl Acetate (PVAc) Emulsion",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "D3 Water Resistant (IS 4835)",
+    "packSizeValue": 5,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "5 kg Bucket",
+    "effectiveUnitRate": 257.2,
+    "sellingUnit": "Bucket",
+    "unit": "5 kg Bucket",
+    "price": 1286,
+    "exGstPrice": 1090,
+    "mrp": 1520,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "5 kg Bucket · Bonds ~7 Laminate Sheets · ₹257/kg",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp"
+    ],
+    "shortTagline": "Contractor 5 kg Bucket · Bonds ~7 Laminate Sheets (8x4 ft) · ₹257.2/kg",
+    "specChips": [
+      "5 kg Bucket",
+      "~7 Sheets Coverage",
+      "₹257.2/kg",
+      "D3 Grade",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SH 5 kg bucket is the most popular contractor package in Lucknow. Precisely bonds approximately 7 standard 8x4 ft laminate sheets with maximum savings.",
+    "highlights": [
+      "Bonds approximately 7 full sheets of 8x4 ft decorative laminate",
+      "Economical ₹257.2/kg rate delivers 13.4% direct savings over single kg tubs",
+      "Sturdy handled bucket prevents job site spillage and keeps glue fresh",
+      "Superb tackiness minimizes edge lifting during initial manual taping",
+      "Certified IS 4835 D3 moisture resistance protects kitchen and wardrobe boxes"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "5 kg Handled Bucket"
+      },
+      {
+        "label": "Laminate Coverage",
+        "value": "~7 Sheets (8x4 ft)"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹257.20 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹1,090"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-sh-5kg",
+        "label": "5 kg Bucket",
+        "unit": "Bucket",
+        "price": 1286,
+        "mrp": 1520,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 306,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-sh-20kg",
+    "slug": "fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum",
+    "name": "Fevicol SH Synthetic Resin Wood Adhesive (20 kg Drum)",
+    "title": "Fevicol — SH Synthetic Resin Wood Adhesive (20 kg Drum)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Polyvinyl Acetate (PVAc) Emulsion",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "D3 Water Resistant (IS 4835)",
+    "packSizeValue": 20,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "20 kg Drum",
+    "effectiveUnitRate": 242.5,
+    "sellingUnit": "Drum",
+    "unit": "20 kg Drum",
+    "price": 4850,
+    "exGstPrice": 4110,
+    "mrp": 5750,
+    "discountPercent": 16,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "E-Loader",
+    "keySpecBadge": "20 kg Drum · Bonds ~28 Sheets · E-Loader",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp"
+    ],
+    "shortTagline": "Heavy Commercial 20 kg Drum · Bonds ~28 Sheets · ₹242.5/kg Wholesale",
+    "specChips": [
+      "20 kg Drum",
+      "Bonds ~28 Sheets",
+      "₹242.5/kg",
+      "E-Loader Fleet",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SH 20 kg drum is engineered for full home interiors, office woodwork, and builder modular carpentry projects across Lucknow. Dispatched safely via dedicated E-Loader fleet.",
+    "highlights": [
+      "Bonds approximately 28 full sheets of 8x4 ft laminates",
+      "Commercial ₹242.5/kg rate provides over 18% savings compared to retail tubs",
+      "Heavy-duty airtight lockable drum prevents skinning and wastage",
+      "Standard choice for interior turnkey contractors in Gomti Nagar and Sushant Golf City",
+      "Dispatched via Conon-Now electric E-Loader for safe zero-leak transit"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "20 kg Sealed Drum"
+      },
+      {
+        "label": "Laminate Coverage",
+        "value": "~28 Sheets (8x4 ft)"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹242.50 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹4,110"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "E-Loader (Safely Transported)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-sh-20kg",
+        "label": "20 kg Drum",
+        "unit": "Drum",
+        "price": 4850,
+        "mrp": 5750,
+        "discountPercent": 16,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 345,
+    "deliveryEta": "Same-Day / 3-4 Hrs (E-Loader)",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-sh-50kg",
+    "slug": "fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum",
+    "name": "Fevicol SH Synthetic Resin Wood Adhesive (50 kg Drum)",
+    "title": "Fevicol — SH Synthetic Resin Wood Adhesive (50 kg Drum)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Polyvinyl Acetate (PVAc) Emulsion",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "D3 Water Resistant (IS 4835)",
+    "packSizeValue": 50,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "50 kg Drum",
+    "effectiveUnitRate": 224,
+    "sellingUnit": "Drum",
+    "unit": "50 kg Drum",
+    "price": 11200,
+    "exGstPrice": 9492,
+    "mrp": 13200,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "E-Loader / Pickup",
+    "keySpecBadge": "50 kg Barrel · Lowest ₹224/kg · E-Loader/Pickup",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp"
+    ],
+    "shortTagline": "Master Contractor 50 kg Drum · Lowest ₹224/kg Bulk Rate · Direct Bhatta/Dealer Wholesale",
+    "specChips": [
+      "50 kg Drum",
+      "Lowest ₹224/kg",
+      "Bonds ~70 Sheets",
+      "E-Loader / Pickup",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SH 50 kg barrel delivers Lucknow's absolute lowest wholesale adhesive rate at ₹224/kg. Sourced directly from major Latouche Road distributors for high-volume commercial sites.",
+    "highlights": [
+      "Bonds approximately 70 sheets of 8x4 ft decorative laminates",
+      "Maximum contractor savings at ₹224/kg (24.6% discount vs 1kg retail)",
+      "Factory-sealed heavy industrial polyethylene drum with steel rim clamp",
+      "Guaranteed genuine Pidilite batch coding with fresh manufacturing dates",
+      "Dispatched with heavy E-Loader / Pickup vehicle for secure site unloading"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "50 kg Industrial Drum"
+      },
+      {
+        "label": "Laminate Coverage",
+        "value": "~70 Sheets (8x4 ft)"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹224.00 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹9,492"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "E-Loader / Pickup (Heavy Fleet)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-sh-50kg",
+        "label": "50 kg Drum",
+        "unit": "Drum",
+        "price": 11200,
+        "mrp": 13200,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 450,
+    "deliveryEta": "Same-Day / 3-4 Hrs (E-Loader)",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-marine-1kg",
+    "slug": "fevicol-marine-waterproof-wood-adhesive-1kg",
+    "name": "Fevicol Marine Waterproof Wood Adhesive (1 kg)",
+    "title": "Fevicol — Marine Waterproof Wood Adhesive (1 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Cross-Linking PVAc Emulsion",
+    "settingTimeLabel": "Handling: 4-6 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Boiling Water Resistant (BWR / BWP IS 4835)",
+    "packSizeValue": 1,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "1 kg Tub",
+    "effectiveUnitRate": 364,
+    "sellingUnit": "Tub",
+    "unit": "1 kg Tub",
+    "price": 364,
+    "exGstPrice": 308,
+    "mrp": 428,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 kg Tub · 100% Waterproof · Kitchen & Bath",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp"
+    ],
+    "shortTagline": "100% Waterproof Adhesive · Withstands 48 Hrs Boiling Water · Kitchen & Bathroom Cabinets",
+    "specChips": [
+      "1 kg Tub",
+      "Waterproof",
+      "BWP Grade",
+      "Handling 4-6h",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Marine is specially formulated with cross-linking synthetic polymers to withstand continuous water exposure in kitchen under-sink cabinets, bathrooms, and exterior doors.",
+    "highlights": [
+      "Withstands continuous 48-hour boiling water immersion without delamination",
+      "Essential for modular kitchen carcass, sink counters, and bathroom vanity units",
+      "Higher initial tack holds thick laminates firmly even in damp environments",
+      "Resists fungal and bacterial degradation in high-humidity Lucknow monsoons",
+      "Forms a water-impermeable joint line that blocks moisture ingress into plywood"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Marine (Pidilite)"
+      },
+      {
+        "label": "Water Resistance",
+        "value": "Boiling Water Proof (BWP IS 4835)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 kg Tub"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹364.00 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹308"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-marine-1kg",
+        "label": "1 kg Tub",
+        "unit": "Tub",
+        "price": 364,
+        "mrp": 428,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 447,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-marine-2kg",
+    "slug": "fevicol-marine-waterproof-wood-adhesive-2kg",
+    "name": "Fevicol Marine Waterproof Wood Adhesive (2 kg)",
+    "title": "Fevicol — Marine Waterproof Wood Adhesive (2 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Cross-Linking PVAc Emulsion",
+    "settingTimeLabel": "Handling: 4-6 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Boiling Water Resistant (BWR / BWP IS 4835)",
+    "packSizeValue": 2,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "2 kg Tub",
+    "effectiveUnitRate": 349.5,
+    "sellingUnit": "Tub",
+    "unit": "2 kg Tub",
+    "price": 699,
+    "exGstPrice": 592,
+    "mrp": 820,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "2 kg Tub · ₹349.5/kg · BWP Grade",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp"
+    ],
+    "shortTagline": "2 kg Waterproof Tub · ₹349.5/kg Rate · Kitchen Carcass Specialist",
+    "specChips": [
+      "2 kg Tub",
+      "₹349.5/kg",
+      "100% Waterproof",
+      "BWP Grade",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Marine 2 kg tub is the go-to pack size for fabricating kitchen under-sink cabinets and bathroom door frames.",
+    "highlights": [
+      "Per-kg cost of ₹349.5/kg provides savings over 1 kg tubs",
+      "Superior cross-linking formulation prevents veneer edge-swelling",
+      "Withstands heavy steam and moisture in modern kitchen exhaust zones",
+      "Tested for 100% boiling water immersion per IS 4835 specifications",
+      "Airtight reclosable tub prevents skinning between working days"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Marine (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "2 kg Tub"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹349.50 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹592"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-marine-2kg",
+        "label": "2 kg Tub",
+        "unit": "Tub",
+        "price": 699,
+        "mrp": 820,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 416,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-abro-masking-tape-48mm"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-marine-5kg",
+    "slug": "fevicol-marine-waterproof-wood-adhesive-5kg",
+    "name": "Fevicol Marine Waterproof Wood Adhesive (5 kg)",
+    "title": "Fevicol — Marine Waterproof Wood Adhesive (5 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Cross-Linking PVAc Emulsion",
+    "settingTimeLabel": "Handling: 4-6 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Boiling Water Resistant (BWR / BWP IS 4835)",
+    "packSizeValue": 5,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "5 kg Bucket",
+    "effectiveUnitRate": 310,
+    "sellingUnit": "Bucket",
+    "unit": "5 kg Bucket",
+    "price": 1550,
+    "exGstPrice": 1314,
+    "mrp": 1850,
+    "discountPercent": 16,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "5 kg Bucket · Bonds ~7 Marine Sheets · ₹310/kg",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp"
+    ],
+    "shortTagline": "Contractor 5 kg Bucket · Bonds ~7 BWP Sheets · ₹310/kg Commercial Rate",
+    "specChips": [
+      "5 kg Bucket",
+      "₹310/kg",
+      "BWP Waterproof",
+      "Bonds ~7 Sheets",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Marine 5 kg bucket gives contractors 15% savings at ₹310/kg. Ideal for full modular kitchen carcass fabrication.",
+    "highlights": [
+      "Bonds approximately 7 full sheets of 8x4 ft marine-grade laminates",
+      "Wholesale contractor rate of ₹310/kg saves over ₹54 per kg",
+      "Sturdy handled bucket is easy to transport on Lucknow 2-wheeler express",
+      "Tested for zero bond failure under boiling water and cyclic wet/dry exposure",
+      "Guarantees lifelong protection against bathroom and kitchen steam ingress"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Marine (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "5 kg Bucket"
+      },
+      {
+        "label": "Laminate Coverage",
+        "value": "~7 Sheets (8x4 ft)"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹310.00 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹1,314"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-marine-5kg",
+        "label": "5 kg Bucket",
+        "unit": "Bucket",
+        "price": 1550,
+        "mrp": 1850,
+        "discountPercent": 16,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 338,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-marine-20kg",
+    "slug": "fevicol-marine-waterproof-wood-adhesive-20kg-drum",
+    "name": "Fevicol Marine Waterproof Wood Adhesive (20 kg Drum)",
+    "title": "Fevicol — Marine Waterproof Wood Adhesive (20 kg Drum)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Cross-Linking PVAc Emulsion",
+    "settingTimeLabel": "Handling: 4-6 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Boiling Water Resistant (BWR / BWP IS 4835)",
+    "packSizeValue": 20,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "20 kg Drum",
+    "effectiveUnitRate": 305,
+    "sellingUnit": "Drum",
+    "unit": "20 kg Drum",
+    "price": 6100,
+    "exGstPrice": 5169,
+    "mrp": 7200,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "E-Loader",
+    "keySpecBadge": "20 kg Drum · Bonds ~28 Marine Sheets · E-Loader",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp"
+    ],
+    "shortTagline": "Commercial 20 kg Drum · Bonds ~28 Waterproof Sheets · ₹305/kg",
+    "specChips": [
+      "20 kg Drum",
+      "₹305/kg",
+      "Bonds ~28 Sheets",
+      "E-Loader Fleet",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Marine 20 kg drum is the standard procurement unit for interior contracting teams building luxury kitchens and wet-area wardrobes in Lucknow.",
+    "highlights": [
+      "Bonds approximately 28 full sheets of 8x4 ft waterproof laminates",
+      "Economical ₹305/kg rate provides maximum value for commercial projects",
+      "Hermetically sealed drum preserves cross-linking polymer freshness",
+      "100% boiling water proof performance exceeds IS 4835 standards",
+      "Dispatched in dedicated E-Loader cargo bays to prevent container denting"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Marine (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "20 kg Sealed Drum"
+      },
+      {
+        "label": "Laminate Coverage",
+        "value": "~28 Sheets (8x4 ft)"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹305.00 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹5,169"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "E-Loader (Same-Day / Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-marine-20kg",
+        "label": "20 kg Drum",
+        "unit": "Drum",
+        "price": 6100,
+        "mrp": 7200,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 194,
+    "deliveryEta": "Same-Day / 3-4 Hrs (E-Loader)",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-abro-masking-tape-48mm"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-marine-50kg",
+    "slug": "fevicol-marine-waterproof-wood-adhesive-50kg-drum",
+    "name": "Fevicol Marine Waterproof Wood Adhesive (50 kg Drum)",
+    "title": "Fevicol — Marine Waterproof Wood Adhesive (50 kg Drum)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Cross-Linking PVAc Emulsion",
+    "settingTimeLabel": "Handling: 4-6 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Boiling Water Resistant (BWR / BWP IS 4835)",
+    "packSizeValue": 50,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "50 kg Drum",
+    "effectiveUnitRate": 290,
+    "sellingUnit": "Drum",
+    "unit": "50 kg Drum",
+    "price": 14500,
+    "exGstPrice": 12288,
+    "mrp": 17200,
+    "discountPercent": 16,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "E-Loader / Pickup",
+    "keySpecBadge": "50 kg Barrel · Lowest ₹290/kg · E-Loader/Pickup",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp"
+    ],
+    "shortTagline": "Master Contractor 50 kg Drum · Lowest ₹290/kg BWP Rate · Commercial Projects",
+    "specChips": [
+      "50 kg Drum",
+      "Lowest ₹290/kg",
+      "Bonds ~70 Sheets",
+      "E-Loader / Pickup",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Marine 50 kg barrel gives major interior contractors and furniture factories in Lucknow the lowest wholesale rate of ₹290/kg with guaranteed factory sealing.",
+    "highlights": [
+      "Bonds approximately 70 sheets of 8x4 ft marine decorative laminates",
+      "Deepest volume discount at ₹290/kg (saving ₹74 per kg vs 1kg packs)",
+      "High-density polyethylene barrel with steel lock-ring closure",
+      "Critical for large-scale hotel, hospital, and residential wet-area fit-outs",
+      "Dispatched with heavy E-Loader / Pickup vehicles for secure delivery"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Marine (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "50 kg Industrial Barrel"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹290.00 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹12,288"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "E-Loader / Pickup (Heavy Fleet)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-marine-50kg",
+        "label": "50 kg Drum",
+        "unit": "Drum",
+        "price": 14500,
+        "mrp": 17200,
+        "discountPercent": 16,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 446,
+    "deliveryEta": "Same-Day / 3-4 Hrs (E-Loader)",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevicol-heatx-1l",
+      "prod-adh-abro-masking-tape-48mm"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-hiper-1kg",
+    "slug": "fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg",
+    "name": "Fevicol Hi-Per Anti-Bubble Waterproof Adhesive (1 kg)",
+    "title": "Fevicol — Hi-Per Anti-Bubble Waterproof Adhesive (1 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Advanced Anti-Bubble PVAc Polymer",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Waterproof + Anti-Bubble Technology",
+    "packSizeValue": 1,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "1 kg Tub",
+    "effectiveUnitRate": 423,
+    "sellingUnit": "Tub",
+    "unit": "1 kg Tub",
+    "price": 423,
+    "exGstPrice": 358,
+    "mrp": 495,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 kg Tub · Zero Bubbles · High-Gloss Laminates",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp"
+    ],
+    "shortTagline": "Premium Anti-Bubble Technology · Zero Wave Marks on Acrylic & High-Gloss Laminates",
+    "specChips": [
+      "1 kg Tub",
+      "Anti-Bubble",
+      "High-Gloss Safe",
+      "Waterproof",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Hi-Per is engineered specifically for premium acrylic, PVC, and high-gloss mica sheets where trapped air pockets or adhesive telegraphing would ruin mirror finishes.",
+    "highlights": [
+      "Advanced flow formula releases trapped air bubbles without heat gunning",
+      "Eliminates unsightly surface waves on 1mm and 1.5mm acrylic panels",
+      "Fast setting time allows carpenters to remove pressure tapes in 2 hours",
+      "Excellent waterproof performance ensures zero edge uncurling",
+      "Preferred by modular wardrobe craftsmen in Gomti Nagar and Aliganj"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Hi-Per (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 kg Tub"
+      },
+      {
+        "label": "Special Feature",
+        "value": "Anti-Bubble Flow Formula"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹358"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-hiper-1kg",
+        "label": "1 kg Tub",
+        "unit": "Tub",
+        "price": 423,
+        "mrp": 495,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 319,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-hiper-star-2kg",
+    "slug": "fevicol-hi-per-star-anti-bubble-adhesive-2kg",
+    "name": "Fevicol Hi-Per Star Anti-Bubble Adhesive (2 kg)",
+    "title": "Fevicol — Hi-Per Star Anti-Bubble Adhesive (2 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Enhanced Polymer Anti-Bubble Emulsion",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Waterproof + Star Grade Anti-Bubble",
+    "packSizeValue": 2,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "2 kg Tub",
+    "effectiveUnitRate": 457.5,
+    "sellingUnit": "Tub",
+    "unit": "2 kg Tub",
+    "price": 915,
+    "exGstPrice": 775,
+    "mrp": 1060,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "2 kg Tub · Star Grade · Luxury Acrylic Panels",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp"
+    ],
+    "shortTagline": "Star Grade Acrylic Adhesive · 2 kg Pack · Zero Telegraphing on Gloss Surfaces",
+    "specChips": [
+      "2 kg Tub",
+      "Star Anti-Bubble",
+      "Acrylic Specialist",
+      "Waterproof",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Hi-Per Star 2 kg tub is the flagship anti-bubble adhesive for luxury TV units, designer bar counters, and master bedroom wardrobe shutters.",
+    "highlights": [
+      "Enhanced polymer backbone ensures zero adhesive shrinkage lines",
+      "Superior shear strength holds heavy 1.5mm acrylic sheets effortlessly",
+      "Fast 2-hour clamp release accelerates modular furniture production",
+      "Resists ambient humidity and prevents edge popping over decades",
+      "Ready to use straight from the tub with no dilution needed"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Hi-Per Star (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "2 kg Tub"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹775"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-hiper-star-2kg",
+        "label": "2 kg Tub",
+        "unit": "Tub",
+        "price": 915,
+        "mrp": 1060,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 305,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-hiper-20kg",
+    "slug": "fevicol-hi-per-high-performance-adhesive-20kg-drum",
+    "name": "Fevicol Hi-Per High-Performance Adhesive (20 kg Drum)",
+    "title": "Fevicol — Hi-Per High-Performance Adhesive (20 kg Drum)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "High-Solids Anti-Bubble PVAc",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Waterproof + Commercial Anti-Bubble",
+    "packSizeValue": 20,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "20 kg Drum",
+    "effectiveUnitRate": 377.5,
+    "sellingUnit": "Drum",
+    "unit": "20 kg Drum",
+    "price": 7550,
+    "exGstPrice": 6398,
+    "mrp": 8900,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "E-Loader",
+    "keySpecBadge": "20 kg Drum · Bonds ~28 Acrylic Sheets · E-Loader",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp"
+    ],
+    "shortTagline": "Commercial 20 kg Drum · Bonds ~28 Acrylic & Gloss Sheets · ₹377.5/kg",
+    "specChips": [
+      "20 kg Drum",
+      "₹377.5/kg",
+      "Anti-Bubble",
+      "E-Loader Fleet",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Hi-Per 20 kg drum is the commercial standard for high-end interior woodworking studios and architectural turnkey contractors in Lucknow.",
+    "highlights": [
+      "Bonds approximately 28 sheets of acrylic and high-gloss laminates",
+      "Wholesale ₹377.5/kg rate provides significant savings on luxury turnkey projects",
+      "Airtight drum prevents premature surface skinning across multi-week jobs",
+      "Delivered safely on electric E-Loader vehicles directly to job sites",
+      "Guaranteed bubble-free mirror finish on European high-gloss surfaces"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Hi-Per (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "20 kg Sealed Drum"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹377.50 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹6,398"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "E-Loader (Same-Day / Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-hiper-20kg",
+        "label": "20 kg Drum",
+        "unit": "Drum",
+        "price": 7550,
+        "mrp": 8900,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 360,
+    "deliveryEta": "Same-Day / 3-4 Hrs (E-Loader)",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-probond-1kg"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-speedx-1kg",
+    "slug": "fevicol-speedx-fast-setting-wood-adhesive-1kg",
+    "name": "Fevicol SpeedX Fast-Setting Wood Adhesive (1 kg)",
+    "title": "Fevicol — SpeedX Fast-Setting Wood Adhesive (1 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Rapid-Setting PVAc Polymer",
+    "settingTimeLabel": "Handling: 30 Mins · Full Bond: 6 Hrs",
+    "heatOrWaterRating": "Standard Water Resistant",
+    "packSizeValue": 1,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "1 kg Tub",
+    "effectiveUnitRate": 343,
+    "sellingUnit": "Tub",
+    "unit": "1 kg Tub",
+    "price": 343,
+    "exGstPrice": 291,
+    "mrp": 395,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 kg Tub · Sets in 30 Mins · Urgent Turnaround",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp"
+    ],
+    "shortTagline": "30-Minute Rapid Setting Adhesive · Clamp Release in Half Hour · Urgent Turnarounds",
+    "specChips": [
+      "1 kg Tub",
+      "30-Min Set",
+      "Rapid Cure",
+      "Zero Wait",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SpeedX is specially formulated for rapid-turnaround carpentry repairs, on-site door hanging, and fast laminate pressing with clamp release in only 30 minutes.",
+    "highlights": [
+      "Achieves handling bond strength in just 30 minutes under pressure",
+      "Reduces carpentry clamping time by over 75% compared to regular white glue",
+      "Perfect for urgent store fit-outs, exhibition stalls, and fast handover jobs",
+      "Strong shear grip prevents creep and vertical slip on wall panels",
+      "Dispatched in 60 minutes anywhere across Lucknow via 2-wheeler express"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol SpeedX (Pidilite)"
+      },
+      {
+        "label": "Setting Time",
+        "value": "30 Minutes (Handling Strength)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 kg Tub"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹291"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-speedx-1kg",
+        "label": "1 kg Tub",
+        "unit": "Tub",
+        "price": 343,
+        "mrp": 395,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 279,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevikwik-gel-20g"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-speedx-5kg",
+    "slug": "fevicol-speedx-fast-setting-wood-adhesive-5kg",
+    "name": "Fevicol SpeedX Fast-Setting Wood Adhesive (5 kg)",
+    "title": "Fevicol — SpeedX Fast-Setting Wood Adhesive (5 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Rapid-Setting PVAc Polymer",
+    "settingTimeLabel": "Handling: 30 Mins · Full Bond: 6 Hrs",
+    "heatOrWaterRating": "Standard Water Resistant",
+    "packSizeValue": 5,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "5 kg Bucket",
+    "effectiveUnitRate": 311.6,
+    "sellingUnit": "Bucket",
+    "unit": "5 kg Bucket",
+    "price": 1558,
+    "exGstPrice": 1320,
+    "mrp": 1820,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "5 kg Bucket · 30-Min Set · ₹311.6/kg",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp"
+    ],
+    "shortTagline": "5 kg Rapid Bucket · 30-Min Setting · ₹311.6/kg Commercial Rate",
+    "specChips": [
+      "5 kg Bucket",
+      "30-Min Set",
+      "₹311.6/kg",
+      "Bonds ~7 Sheets",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SpeedX 5 kg bucket gives shop fitters and urgent interior teams volume efficiency with 30-minute rapid clamping turnarounds.",
+    "highlights": [
+      "Bonds approximately 7 full sheets with only 30 minutes of clamping per sheet",
+      "Economical ₹311.6/kg rate saves 10% over single kg tubs",
+      "Enables continuous production without hoarding dozens of bar clamps on site",
+      "Excellent tensile bonding on plywood, MDF, particle board, and teak",
+      "Handled bucket for easy mobility around fast-paced construction sites"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol SpeedX (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "5 kg Bucket"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹311.60 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹1,320"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-speedx-5kg",
+        "label": "5 kg Bucket",
+        "unit": "Bucket",
+        "price": 1558,
+        "mrp": 1820,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 267,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevikwik-gel-20g"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-probond-1kg",
+    "slug": "fevicol-probond-pvc-laminate-edge-band-adhesive-1kg",
+    "name": "Fevicol Probond PVC Laminate & Edge-Band Adhesive (1 kg)",
+    "title": "Fevicol — Probond PVC Laminate & Edge-Band Adhesive (1 kg)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Specialty Polymer for PVC/Edgeband",
+    "settingTimeLabel": "Handling: 2-3 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "High Tack PVC Bonding",
+    "packSizeValue": 1,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "1 kg Bottle",
+    "effectiveUnitRate": 415,
+    "sellingUnit": "Bottle",
+    "unit": "1 kg Bottle",
+    "price": 415,
+    "exGstPrice": 352,
+    "mrp": 480,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 kg Bottle · PVC to Plywood & Edgeband",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp"
+    ],
+    "shortTagline": "Specialist PVC Adhesive · Bonds PVC Sheets, Charcoal Panels & Edge Bands to Plywood",
+    "specChips": [
+      "1 kg Bottle",
+      "PVC to Wood",
+      "Edgeband Specialist",
+      "Charcoal Safe",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol Probond is the only recognized solution for bonding PVC and acrylic decorative sheets directly onto plywood, MDF, or WPC substrates without debonding.",
+    "highlights": [
+      "Engineered chemistry specifically penetrates non-porous PVC sheet backings",
+      "Ideal for edge-banding tape application and charcoal louvers on feature walls",
+      "Eliminates yellow staining and blistering associated with regular contact glues",
+      "No toxic solvent fumes—100% water-based eco-safe formulation",
+      "Essential for modern modular kitchen drawers and acrylic paneling"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol Probond (Pidilite)"
+      },
+      {
+        "label": "Substrate Match",
+        "value": "PVC / Acrylic Sheet to Plywood / MDF"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 kg Squeeze Bottle"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹352"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-probond-1kg",
+        "label": "1 kg Bottle",
+        "unit": "Bottle",
+        "price": 415,
+        "mrp": 480,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 359,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-heatx-1l",
+    "slug": "fevicol-heatx-heatproof-kitchen-adhesive-1l",
+    "name": "Fevicol HeatX 170°C Heatproof Kitchen Adhesive (1 L)",
+    "title": "Fevicol — HeatX 170°C Heatproof Kitchen Adhesive (1 L)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "SOLVENT_CONTACT",
+    "baseChemistry": "Polychloroprene Synthetic Rubber",
+    "settingTimeLabel": "Fast Tack: 5-10 Mins · Zero Springback",
+    "heatOrWaterRating": "Heatproof up to 170°C",
+    "packSizeValue": 1,
+    "packSizeUnit": "L",
+    "packSizeDisplay": "1 L Tin",
+    "effectiveUnitRate": 470,
+    "sellingUnit": "Tin",
+    "unit": "1 L Tin",
+    "price": 470,
+    "exGstPrice": 398,
+    "mrp": 540,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 L Tin · 170°C Heatproof · Near Gas Stoves",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp"
+    ],
+    "shortTagline": "170°C Heatproof Contact Adhesive · Zero Spring-Back · Kitchen Counter & Stove Wall Specialist",
+    "specChips": [
+      "1 L Tin",
+      "170°C Heatproof",
+      "Zero Spring-Back",
+      "Kitchen Stove Zone",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol HeatX withstands high cooking temperatures up to 170°C without bubbling or delaminating. Mandatory for vertical laminates behind kitchen gas hobs and microwave niches.",
+    "highlights": [
+      "Withstands extreme heat up to 170°C without glue line softening",
+      "Zero spring-back formulation holds bent curves and vertical wall laminates instantly",
+      "Essential for modular kitchen chimney zones, burner walls, and oven cabinets",
+      "Fast drying contact adhesive requires only 5–10 minutes open time before joining",
+      "Available for 60-minute express courier delivery directly to Lucknow sites"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol HeatX (Pidilite)"
+      },
+      {
+        "label": "Thermal Limit",
+        "value": "Up to 170°C Continuous Heat"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 L Metal Tin"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹470.00 / L"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹398"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-heatx-1l",
+        "label": "1 L Tin",
+        "unit": "Tin",
+        "price": 470,
+        "mrp": 540,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 184,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevicol-marine-5kg",
+      "prod-adh-abro-masking-tape-48mm"
+    ]
+  },
+  {
+    "id": "prod-adh-jivanjor-allrounder-1kg",
+    "slug": "jivanjor-all-rounder-wood-adhesive-1kg",
+    "name": "Jivanjor All Rounder Wood Adhesive (1 kg)",
+    "title": "Jivanjor — All Rounder Wood Adhesive (1 kg)",
+    "brand": "Jivanjor",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Synthetic Resin Wood Adhesive",
+    "settingTimeLabel": "Handling: 3-4 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Water Resistant All-Rounder",
+    "packSizeValue": 1,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "1 kg Tub",
+    "effectiveUnitRate": 250,
+    "sellingUnit": "Tub",
+    "unit": "1 kg Tub",
+    "price": 250,
+    "exGstPrice": 212,
+    "mrp": 295,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 kg Tub · Economical ₹250 · All Rounder",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp"
+    ],
+    "shortTagline": "Value Wood Adhesive · High Spreadability · Lucknow Contractor Value Choice",
+    "specChips": [
+      "1 kg Tub",
+      "Economical ₹250",
+      "High Coverage",
+      "Smooth Spread",
+      "18% GST HSN 3506"
+    ],
+    "description": "Jivanjor All Rounder (Jubilant Agri & Consumer) is Lucknow's preferred high-coverage value adhesive for commercial plywood, doors, and budget residential interior woodwork.",
+    "highlights": [
+      "Superior price-to-performance ratio at only ₹250 per kg",
+      "Creamy, easy-spread formulation glides smoothly over large plywood sheets",
+      "Reliable bonding on commercial plywood, blockboards, and flush doors",
+      "Fast grab reduces clamp adjustment time for carpenter crews",
+      "Genuine factory batch stock sourced from Aminabad and Shivaji Marg distributors"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Jivanjor (Jubilant)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 kg Tub"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹212"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-jivanjor-allrounder-1kg",
+        "label": "1 kg Tub",
+        "unit": "Tub",
+        "price": 250,
+        "mrp": 295,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 375,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l"
+    ]
+  },
+  {
+    "id": "prod-adh-jivanjor-allrounder-20kg",
+    "slug": "jivanjor-all-rounder-wood-adhesive-20kg-drum",
+    "name": "Jivanjor All Rounder Wood Adhesive (20 kg Drum)",
+    "title": "Jivanjor — All Rounder Wood Adhesive (20 kg Drum)",
+    "brand": "Jivanjor",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Synthetic Resin Wood Adhesive",
+    "settingTimeLabel": "Handling: 3-4 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Water Resistant All-Rounder",
+    "packSizeValue": 20,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "20 kg Drum",
+    "effectiveUnitRate": 217.75,
+    "sellingUnit": "Drum",
+    "unit": "20 kg Drum",
+    "price": 4355,
+    "exGstPrice": 3691,
+    "mrp": 5100,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "E-Loader",
+    "keySpecBadge": "20 kg Drum · ₹217.75/kg · E-Loader",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp"
+    ],
+    "shortTagline": "20 kg Bulk Drum · ₹217.75/kg Value Rate · Commercial Projects",
+    "specChips": [
+      "20 kg Drum",
+      "₹217.75/kg",
+      "Bonds ~28 Sheets",
+      "E-Loader Fleet",
+      "18% GST HSN 3506"
+    ],
+    "description": "Jivanjor All Rounder 20 kg drum provides exceptional budget efficiency at ₹217.75/kg for turnkey hostel, office, and builder residential cabinetry across Lucknow.",
+    "highlights": [
+      "Bonds approximately 28 sheets of standard commercial laminate",
+      "Economical ₹217.75/kg rate cuts adhesive procurement budgets significantly",
+      "High solid emulsion ensures durable bonds without hollow drumming sounds",
+      "Locking airtight drum protects unused adhesive from drying on active job sites",
+      "Shipped safely via Conon-Now electric E-Loader fleet to prevent barrel transit damage"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Jivanjor (Jubilant)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "20 kg Drum"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹217.75 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹3,691"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "E-Loader (Safely Transported)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-jivanjor-allrounder-20kg",
+        "label": "20 kg Drum",
+        "unit": "Drum",
+        "price": 4355,
+        "mrp": 5100,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 166,
+    "deliveryEta": "Same-Day / 3-4 Hrs (E-Loader)",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l"
+    ]
+  },
+  {
+    "id": "prod-adh-jivanjor-allrounder-50kg",
+    "slug": "jivanjor-all-rounder-wood-adhesive-50kg-drum",
+    "name": "Jivanjor All Rounder Wood Adhesive (50 kg Drum)",
+    "title": "Jivanjor — All Rounder Wood Adhesive (50 kg Drum)",
+    "brand": "Jivanjor",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Wood & Laminate Adhesives",
+    "adhesiveSubcategory": "WOOD_LAMINATE",
+    "cureType": "PVA_RESIN",
+    "baseChemistry": "Synthetic Resin Wood Adhesive",
+    "settingTimeLabel": "Handling: 3-4 Hrs · Full Bond: 24 Hrs",
+    "heatOrWaterRating": "Water Resistant All-Rounder",
+    "packSizeValue": 50,
+    "packSizeUnit": "kg",
+    "packSizeDisplay": "50 kg Drum",
+    "effectiveUnitRate": 204.28,
+    "sellingUnit": "Drum",
+    "unit": "50 kg Drum",
+    "price": 10214,
+    "exGstPrice": 8656,
+    "mrp": 12000,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "E-Loader / Pickup",
+    "keySpecBadge": "50 kg Barrel · ₹204.28/kg · E-Loader/Pickup",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp"
+    ],
+    "shortTagline": "Master Contractor 50 kg Barrel · ₹204.28/kg Lowest Wood Adhesive Rate in Lucknow",
+    "specChips": [
+      "50 kg Drum",
+      "Lowest ₹204.28/kg",
+      "Bonds ~70 Sheets",
+      "E-Loader / Pickup",
+      "18% GST HSN 3506"
+    ],
+    "description": "Jivanjor All Rounder 50 kg barrel gives furniture manufacturers and bulk commercial contractors Lucknow's best cost efficiency at ₹204.28/kg.",
+    "highlights": [
+      "Bonds approximately 70 sheets of 8x4 ft laminates",
+      "Lowest wholesale price point in the market at ₹204.28 per kg",
+      "Industrial HDPE barrel with heavy-duty seal clamp for site durability",
+      "High initial tack keeps long veneers and vertical laminate runs in position",
+      "Dispatched via heavy E-Loader / Pickup vehicles directly to site"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Jivanjor (Jubilant)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "50 kg Industrial Barrel"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹204.28 / kg"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹8,656"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "E-Loader / Pickup (Heavy Fleet)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-jivanjor-allrounder-50kg",
+        "label": "50 kg Drum",
+        "unit": "Drum",
+        "price": 10214,
+        "mrp": 12000,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 264,
+    "deliveryEta": "Same-Day / 3-4 Hrs (E-Loader)",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevicol-heatx-1l"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-sr-998-1l",
+    "slug": "fevicol-sr-998-synthetic-rubber-contact-adhesive-1l",
+    "name": "Fevicol SR 998 Synthetic Rubber Contact Adhesive (1 L)",
+    "title": "Fevicol — SR 998 Synthetic Rubber Contact Adhesive (1 L)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Contact & Rubber Adhesives",
+    "adhesiveSubcategory": "CONTACT_RUBBER",
+    "cureType": "SOLVENT_CONTACT",
+    "baseChemistry": "Polychloroprene Synthetic Rubber",
+    "settingTimeLabel": "Open Time: 5-10 Mins · Instant Contact Tack",
+    "heatOrWaterRating": "High-Heat & Water Resistant",
+    "packSizeValue": 1,
+    "packSizeUnit": "L",
+    "packSizeDisplay": "1 L Tin",
+    "effectiveUnitRate": 520,
+    "sellingUnit": "Tin",
+    "unit": "1 L Tin",
+    "price": 520,
+    "exGstPrice": 441,
+    "mrp": 600,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 L Tin · Rubber Contact · Foam & Leather",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp"
+    ],
+    "shortTagline": "Heavy Duty Synthetic Rubber Adhesive · Instant Contact Grab · Foam, Leather & Plywood",
+    "specChips": [
+      "1 L Tin",
+      "Synthetic Rubber",
+      "Instant Tack",
+      "Curved Surfaces",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SR 998 is Lucknow's highest-strength synthetic rubber contact adhesive for bonding acoustic foam, rexine, leather, rubber, and flexible laminates to plywood surfaces.",
+    "highlights": [
+      "Instant aggressive contact bond without prolonged clamping or bar pressing",
+      "Essential for acoustic theater padding, headboard upholstery, and curved laminates",
+      "High solid content prevents substrate soaking and starvation on porous plywood",
+      "Maintains flexibility over years without brittle cracking under vibrations",
+      "Delivered in sealed 1 L tins via 60-minute express 2-wheeler courier"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol SR 998 (Pidilite)"
+      },
+      {
+        "label": "Type",
+        "value": "Polychloroprene Contact Glue"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 L Metal Can"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹441"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-sr-998-1l",
+        "label": "1 L Tin",
+        "unit": "Tin",
+        "price": 520,
+        "mrp": 600,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 425,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevikwik-gel-20g"
+    ]
+  },
+  {
+    "id": "prod-adh-fevicol-sr-998-5l",
+    "slug": "fevicol-sr-998-synthetic-rubber-contact-adhesive-5l",
+    "name": "Fevicol SR 998 Synthetic Rubber Contact Adhesive (5 L)",
+    "title": "Fevicol — SR 998 Synthetic Rubber Contact Adhesive (5 L)",
+    "brand": "Fevicol",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Contact & Rubber Adhesives",
+    "adhesiveSubcategory": "CONTACT_RUBBER",
+    "cureType": "SOLVENT_CONTACT",
+    "baseChemistry": "Polychloroprene Synthetic Rubber",
+    "settingTimeLabel": "Open Time: 5-10 Mins · Instant Contact Tack",
+    "heatOrWaterRating": "High-Heat & Water Resistant",
+    "packSizeValue": 5,
+    "packSizeUnit": "L",
+    "packSizeDisplay": "5 L Tin",
+    "effectiveUnitRate": 430,
+    "sellingUnit": "Tin",
+    "unit": "5 L Tin",
+    "price": 2150,
+    "exGstPrice": 1822,
+    "mrp": 2500,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "5 L Tin · ₹430/L Rate · Bulk Upholstery",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp"
+    ],
+    "shortTagline": "Commercial 5 L Tin · ₹430/L Rate · Upholstery & Acoustic Paneling",
+    "specChips": [
+      "5 L Tin",
+      "₹430/L Rate",
+      "Instant Grab",
+      "Commercial Can",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevicol SR 998 5 L commercial tin saves 17% at ₹430/L. The premier selection for conference room soundproofing, auditorium seating, and curved veneer architectural works in Lucknow.",
+    "highlights": [
+      "Low wholesale rate of ₹430/L provides ₹450 savings per 5 L purchase",
+      "Instant aggressive green strength speeds up repetitive acoustic tile installation",
+      "Resists automotive and commercial HVAC temperature variations up to 90°C",
+      "Packaged in a secure metal can with tamper-proof pull-up pour spout",
+      "Dispatched within 60 minutes for rapid site continuity"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevicol SR 998 (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "5 L Metal Can"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹430.00 / L"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹1,822"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevicol-sr-998-5l",
+        "label": "5 L Tin",
+        "unit": "Tin",
+        "price": 2150,
+        "mrp": 2500,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 450,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevikwik-gel-20g"
+    ]
+  },
+  {
+    "id": "prod-adh-dendrite-pc65-1l",
+    "slug": "dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin",
+    "name": "Dendrite PC-65 Synthetic Rubber Contact Adhesive (1 L Tin)",
+    "title": "Dendrite — PC-65 Synthetic Rubber Contact Adhesive (1 L Tin)",
+    "brand": "Dendrite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Contact & Rubber Adhesives",
+    "adhesiveSubcategory": "CONTACT_RUBBER",
+    "cureType": "SOLVENT_CONTACT",
+    "baseChemistry": "Chloroprene Contact Resin",
+    "settingTimeLabel": "Open Time: 10-15 Mins · Strong Permanent Tack",
+    "heatOrWaterRating": "Moisture & Heat Resistant",
+    "packSizeValue": 1,
+    "packSizeUnit": "L",
+    "packSizeDisplay": "1 L Tin",
+    "effectiveUnitRate": 355,
+    "sellingUnit": "Tin",
+    "unit": "1 L Tin",
+    "price": 355,
+    "exGstPrice": 301,
+    "mrp": 410,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 L Tin · Value Contact · Rexine & Rubber",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp"
+    ],
+    "shortTagline": "Classic Yellow Contact Cement · Reliable Rubber & Leather Bonding · Value Pricing",
+    "specChips": [
+      "1 L Tin",
+      "Rubber & Rexine",
+      "Economical",
+      "Quick Tack",
+      "18% GST HSN 3506"
+    ],
+    "description": "Dendrite PC-65 is the classic yellow contact cement trusted for footwear fabrication, sofa upholstery, bus body interiors, and rubber sheet fixing onto steel or wood.",
+    "highlights": [
+      "Outstanding value at ₹355 for a full 1 L contractor tin",
+      "Excellent multi-surface bonding: leather, rexine, canvas, rubber, and plywood",
+      "Flexible elastomeric bond accommodates structural expansion and contraction",
+      "Simple brush or spatula application with distinct tackiness touch-test",
+      "Directly sourced from wholesale Hewett Road chemical and hardware dealers"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Dendrite Adhesive"
+      },
+      {
+        "label": "Type",
+        "value": "Chloroprene Contact Adhesive"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 L Metal Tin"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹301"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-dendrite-pc65-1l",
+        "label": "1 L Tin",
+        "unit": "Tin",
+        "price": 355,
+        "mrp": 410,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 305,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-fevikwik-gel-20g"
+    ]
+  },
+  {
+    "id": "prod-adh-araldite-standard-90g",
+    "slug": "araldite-standard-2-part-epoxy-adhesive-90g",
+    "name": "Araldite Standard 2-Part Epoxy Adhesive (90 g Pack)",
+    "title": "Araldite — Standard 2-Part Epoxy Adhesive (90 g Pack)",
+    "brand": "Araldite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Resin + Polyamide Hardener (1:1)",
+    "settingTimeLabel": "Initial Set: 4-6 Hrs · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "Waterproof · Chemical & Heat Proof up to 100°C",
+    "packSizeValue": 90,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "90 g Pack",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Pack",
+    "unit": "90 g Pack",
+    "price": 178,
+    "exGstPrice": 151,
+    "mrp": 205,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "90 g Twin Tube · High Strength Epoxy · Glass/Metal/Stone",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp"
+    ],
+    "shortTagline": "The World's Strongest Epoxy Bond · Resin & Hardener Twin Pack · Waterproof & Gap-Filling",
+    "specChips": [
+      "90 g Pack",
+      "1:1 Ratio",
+      "Metal/Stone/Glass",
+      "Waterproof",
+      "18% GST HSN 3506"
+    ],
+    "description": "Araldite Standard 90g twin tube is the world's standard for unbreakable structural repairs bonding marble, granite, ceramic, glass, porcelain, brass, and steel.",
+    "highlights": [
+      "True structural bond strength resists up to 120 kg/cm² tension",
+      "Impervious to water, motor oil, grease, mild acids, and alkalis",
+      "Superior gap-filling properties without volumetric shrinkage",
+      "Twin squeeze tubes ensure easy 1:1 volumetric carpenter mixing",
+      "Dispatched within 60 minutes anywhere in Lucknow via 2-wheeler express"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Araldite (Huntsman / Pidilite)"
+      },
+      {
+        "label": "Type",
+        "value": "Two-Component Epoxy System"
+      },
+      {
+        "label": "Pack Size",
+        "value": "90 g (Resin + Hardener)"
+      },
+      {
+        "label": "Mix Ratio",
+        "value": "1:1 by Volume"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹151"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-araldite-standard-90g",
+        "label": "90 g Pack",
+        "unit": "Pack",
+        "price": 178,
+        "mrp": 205,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 382,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-araldite-standard-180g",
+    "slug": "araldite-standard-2-part-epoxy-adhesive-180g",
+    "name": "Araldite Standard 2-Part Epoxy Adhesive (180 g Pack)",
+    "title": "Araldite — Standard 2-Part Epoxy Adhesive (180 g Pack)",
+    "brand": "Araldite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Resin + Polyamide Hardener (1:1)",
+    "settingTimeLabel": "Initial Set: 4-6 Hrs · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "Waterproof · Chemical & Heat Proof",
+    "packSizeValue": 180,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "180 g Pack",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Pack",
+    "unit": "180 g Pack",
+    "price": 314,
+    "exGstPrice": 266,
+    "mrp": 360,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "180 g Twin Tube · Contractor Pack · High Strength",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp"
+    ],
+    "shortTagline": "180 g Contractor Twin Pack · Structural Bonding · Granite & Marble Counter Jointing",
+    "specChips": [
+      "180 g Pack",
+      "Granite/Marble",
+      "1:1 Mix",
+      "High Strength",
+      "18% GST HSN 3506"
+    ],
+    "description": "Araldite Standard 180g is Lucknow masons' choice for jointing granite kitchen countertops, fixing marble vanities, and anchoring heavy bolts into concrete.",
+    "highlights": [
+      "Provides ample volume for full modular kitchen granite slab jointing",
+      "Forms a water-tight seal between kitchen sink rims and stone counters",
+      "Can be colored with oxide powders to match granite veins and tile shades",
+      "Immune to kitchen cleaning agents, turmeric spills, and boiling water",
+      "Twin tube set includes reusable caps for multi-day usage"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Araldite (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "180 g (Resin + Hardener)"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹266"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-araldite-standard-180g",
+        "label": "180 g Pack",
+        "unit": "Pack",
+        "price": 314,
+        "mrp": 360,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 459,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-araldite-standard-450g",
+    "slug": "araldite-standard-2-part-epoxy-adhesive-450g",
+    "name": "Araldite Standard 2-Part Epoxy Adhesive (450 g Pack)",
+    "title": "Araldite — Standard 2-Part Epoxy Adhesive (450 g Pack)",
+    "brand": "Araldite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Resin + Polyamide Hardener (1:1)",
+    "settingTimeLabel": "Initial Set: 4-6 Hrs · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "Heavy Duty Waterproof & Structural",
+    "packSizeValue": 450,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "450 g Pack",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Pack",
+    "unit": "450 g Pack",
+    "price": 678,
+    "exGstPrice": 575,
+    "mrp": 785,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "450 g Pack · Large Stone Jointing · Structural",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp"
+    ],
+    "shortTagline": "450 g Medium Commercial Pack · Marble & Granite Cladding · Heavy Duty",
+    "specChips": [
+      "450 g Pack",
+      "Commercial Size",
+      "Stone Cladding",
+      "18% GST HSN 3506"
+    ],
+    "description": "Araldite Standard 450g pack is engineered for multi-slab stone cladding, stair risers, and heavy brass door pull anchoring on luxury residences.",
+    "highlights": [
+      "Ample quantity for full staircase bullnosing and risers",
+      "Economical cost per gram compared to retail 90g blister packs",
+      "Unmatched resistance to structural vibration and foundation micro-settling",
+      "Zero shrinkage prevents stone joint hollow cracking over time",
+      "Express 2-wheeler delivery direct to construction sites across Lucknow"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Araldite (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "450 g Combined Weight"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹575"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-araldite-standard-450g",
+        "label": "450 g Pack",
+        "unit": "Pack",
+        "price": 678,
+        "mrp": 785,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 394,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-araldite-standard-900g",
+    "slug": "araldite-standard-2-part-epoxy-adhesive-900g-kit",
+    "name": "Araldite Standard 2-Part Epoxy Adhesive (900 g / 1 kg Kit)",
+    "title": "Araldite — Standard 2-Part Epoxy Adhesive (900 g / 1 kg Kit)",
+    "brand": "Araldite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Resin + Polyamide Hardener (1:1)",
+    "settingTimeLabel": "Initial Set: 4-6 Hrs · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "Heavy Duty Waterproof & Structural",
+    "packSizeValue": 900,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "900 g Kit",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Kit",
+    "unit": "900 g Kit",
+    "price": 1239,
+    "exGstPrice": 1050,
+    "mrp": 1450,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "900 g Kit · Masonry Contractor Tin · High Value",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp"
+    ],
+    "shortTagline": "900 g Contractor Metal Can Set · Commercial Stone & Metal Fabrication",
+    "specChips": [
+      "900 g Kit",
+      "Contractor Cans",
+      "₹1.37/g Value",
+      "18% GST HSN 3506"
+    ],
+    "description": "Araldite Standard 900g metal can kit is designed for commercial stone contractors, stainless steel railing installers, and industrial maintenance engineers.",
+    "highlights": [
+      "Sturdy metal cans with resealable lids for site durability",
+      "Cuts unit adhesive cost down to just ₹1.37 per gram",
+      "High viscosity formula bridges wide gaps in irregular stone joints",
+      "Withstands heavy mechanical shock, road vibration, and weather exposure",
+      "Available for 60-minute express delivery to all Lucknow pin codes"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Araldite (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "900 g (2 x 450g Cans)"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹1,050"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-araldite-standard-900g",
+        "label": "900 g Kit",
+        "unit": "Kit",
+        "price": 1239,
+        "mrp": 1450,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 344,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-araldite-standard-1800g",
+    "slug": "araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit",
+    "name": "Araldite Standard 2-Part Epoxy Adhesive (1.8 kg Industrial Kit)",
+    "title": "Araldite — Standard 2-Part Epoxy Adhesive (1.8 kg Industrial Kit)",
+    "brand": "Araldite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Resin + Polyamide Hardener (1:1)",
+    "settingTimeLabel": "Initial Set: 4-6 Hrs · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "Heavy Duty Waterproof & Structural",
+    "packSizeValue": 1800,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "1.8 kg Kit",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Kit",
+    "unit": "1.8 kg Kit",
+    "price": 1593,
+    "exGstPrice": 1350,
+    "mrp": 1880,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1.8 kg Industrial Kit · Lowest ₹0.88/g · Contractor Tins",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp"
+    ],
+    "shortTagline": "1.8 kg Industrial Mega Kit · Lowest ₹0.88/g Rate · Factory & Stone Fabrication",
+    "specChips": [
+      "1.8 kg Kit",
+      "Lowest ₹0.88/g",
+      "Industrial Size",
+      "18% GST HSN 3506"
+    ],
+    "description": "Araldite Standard 1.8 kg industrial kit offers the lowest cost per gram (₹0.88/g) for large facade stone fixing, factory anchor grouting, and heavy fabrication in Lucknow.",
+    "highlights": [
+      "Maximum economy at ₹0.88/g—saves over 55% compared to 90g tubes",
+      "Two large 900g metal cans for high-volume trowel mixing on site",
+      "Unshakeable bonding between dissimilar materials: iron, stone, wood, glass",
+      "Exceeds industrial tensile and compressive specifications",
+      "Dispatched via 2-wheeler express directly to site within 60 minutes"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Araldite (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1.8 kg Combined Kit (2 x 900g)"
+      },
+      {
+        "label": "Effective Rate",
+        "value": "₹0.88 / gram"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹1,350"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-araldite-standard-1800g",
+        "label": "1.8 kg Kit",
+        "unit": "Kit",
+        "price": 1593,
+        "mrp": 1880,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 293,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-fevitite-standard-180g",
+    "slug": "fevitite-standard-4-hour-heavy-duty-epoxy-180g",
+    "name": "Fevitite Standard 4-Hour Heavy-Duty Epoxy (180 g Pack)",
+    "title": "Fevitite — Standard 4-Hour Heavy-Duty Epoxy (180 g Pack)",
+    "brand": "Fevitite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Resin + Amine Hardener System",
+    "settingTimeLabel": "Initial Set: 4 Hrs · Full Strength: 24 Hrs",
+    "heatOrWaterRating": "Heavy Duty Waterproof & Heat Resistant",
+    "packSizeValue": 180,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "180 g Pack",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Pack",
+    "unit": "180 g Pack",
+    "price": 410,
+    "exGstPrice": 347,
+    "mrp": 475,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "180 g Pack · 4-Hour Set · High Impact Resistance",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp"
+    ],
+    "shortTagline": "Pidilite 4-Hour Epoxy System · Heavy Impact & Vibration Proof · Industrial Repair",
+    "specChips": [
+      "180 g Pack",
+      "Pidilite Fevitite",
+      "4-Hour Cure",
+      "Impact Resistant",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevitite Standard (Pidilite Industries) is a heavy-duty 4-hour epoxy system engineered for machinery mounting, granite repairs, and high-vibration metal bonding.",
+    "highlights": [
+      "Pidilite's heavy-duty industrial alternative with high impact resilience",
+      "Sets reliably in 4 hours under Lucknow ambient weather conditions",
+      "Exceptional resistance to engine oils, hydraulic fluids, and thermal cycling",
+      "Zero sagging on vertical marble cladding and wall repair joints",
+      "Convenient twin tube dispensing for accurate carpenter ratio measurement"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevitite (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "180 g (Resin + Hardener)"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹347"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevitite-standard-180g",
+        "label": "180 g Pack",
+        "unit": "Pack",
+        "price": 410,
+        "mrp": 475,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 353,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-mseal-regular-500g",
+    "slug": "pidilite-m-seal-regular-epoxy-putty-compound-500g",
+    "name": "Pidilite M-Seal Regular Epoxy Putty Compound (500 g)",
+    "title": "Pidilite — M-Seal Regular Epoxy Putty Compound (500 g)",
+    "brand": "Pidilite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Putty (Resin Bar + Hardener Bar)",
+    "settingTimeLabel": "Sets in 30 Mins · Cures in 3-4 Hrs",
+    "heatOrWaterRating": "100% Waterproof · Stops Live Water Leaks",
+    "packSizeValue": 500,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "500 g Pack",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Pack",
+    "unit": "500 g Pack",
+    "price": 155,
+    "exGstPrice": 131,
+    "mrp": 180,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "500 g Pack · Stops Plumbing Leaks · Moldable Putty",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp"
+    ],
+    "shortTagline": "India's #1 Epoxy Putty · Seal, Join, Fix & Insulate · Stops Pipe Leaks & Crack Sealing",
+    "specChips": [
+      "500 g Pack",
+      "Epoxy Putty",
+      "Stops Leaks",
+      "Underwater Cure",
+      "18% GST HSN 3214"
+    ],
+    "description": "M-Seal Regular 500g is India's most trusted moldable epoxy putty for sealing plumbing leaks, patching overhead tank cracks, filling cast iron fissures, and electrical insulation.",
+    "highlights": [
+      "Mixes by hand like kneaded dough (1:1 black resin and white hardener bar)",
+      "Stops active water drips and seals leaking CPVC, GI, and PVC pipe joints",
+      "Hardens rock-solid in 3 hours; can be drilled, filed, tapped, or painted",
+      "Resists temperatures up to 120°C and pressures up to 10 kg/cm²",
+      "Essential toolkit item for every plumber and site engineer in Lucknow"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "M-Seal (Pidilite)"
+      },
+      {
+        "label": "Form",
+        "value": "Hand-Moldable 2-Part Putty"
+      },
+      {
+        "label": "Pack Size",
+        "value": "500 g Pack"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹131"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-mseal-regular-500g",
+        "label": "500 g Pack",
+        "unit": "Pack",
+        "price": 155,
+        "mrp": 180,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 337,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-mseal-regular-1kg",
+    "slug": "pidilite-m-seal-regular-epoxy-putty-compound-1kg",
+    "name": "Pidilite M-Seal Regular Epoxy Putty Compound (1 kg)",
+    "title": "Pidilite — M-Seal Regular Epoxy Putty Compound (1 kg)",
+    "brand": "Pidilite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "TWO_PART_EPOXY",
+    "baseChemistry": "Epoxy Putty (Resin Bar + Hardener Bar)",
+    "settingTimeLabel": "Sets in 30 Mins · Cures in 3-4 Hrs",
+    "heatOrWaterRating": "100% Waterproof · Stops Live Water Leaks",
+    "packSizeValue": 1000,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "1 kg Pack",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Pack",
+    "unit": "1 kg Pack",
+    "price": 286,
+    "exGstPrice": 242,
+    "mrp": 330,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "1 kg Mega Pack · Plumbing Contractor Size",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp"
+    ],
+    "shortTagline": "1 kg Contractor Mega Pack · High Value Bulk M-Seal · Commercial Plumbing Repairs",
+    "specChips": [
+      "1 kg Pack",
+      "Mega Pack",
+      "Plumbing Repairs",
+      "₹286/kg",
+      "18% GST HSN 3214"
+    ],
+    "description": "M-Seal Regular 1 kg pack offers maximum contractor value at ₹286 for commercial building drain line repairs, transformer sealing, and large cistern maintenance.",
+    "highlights": [
+      "Large 1 kg pack provides over 15% savings compared to small retail packs",
+      "Stops water, petrol, and chemical leaks across industrial and residential piping",
+      "Does not soften, swell, or shrink once fully cured",
+      "High dielectric insulation strength safe for high-voltage junction boxes",
+      "60-minute doorstep dispatch across Lucknow via 2-wheeler express"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "M-Seal (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "1 kg Pack"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹242"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-mseal-regular-1kg",
+        "label": "1 kg Pack",
+        "unit": "Pack",
+        "price": 286,
+        "mrp": 330,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 367,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevikwik-gel-20g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-fevikwik-gel-20g",
+    "slug": "pidilite-fevikwik-gel-non-drip-instant-adhesive-20g",
+    "name": "Pidilite Fevikwik Gel Non-Drip Instant Adhesive (20 g)",
+    "title": "Pidilite — Fevikwik Gel Non-Drip Instant Adhesive (20 g)",
+    "brand": "Pidilite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "CYANOACRYLATE",
+    "baseChemistry": "Cyanoacrylate Gel Formulation",
+    "settingTimeLabel": "Instant Tack: 5 Seconds · Full: 10 Mins",
+    "heatOrWaterRating": "Fast Water Resistant Instant Tack",
+    "packSizeValue": 20,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "20 g Tube",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Tube",
+    "unit": "20 g Tube",
+    "price": 48,
+    "exGstPrice": 41,
+    "mrp": 55,
+    "discountPercent": 13,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "20 g Tube · Non-Drip Gel · 5-Sec Instant Bond",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp"
+    ],
+    "shortTagline": "Non-Drip Instant Cyanoacrylate Gel · 5-Second Grab · Precision Vertical Repairs",
+    "specChips": [
+      "20 g Tube",
+      "Non-Drip Gel",
+      "5-Second Bond",
+      "Precision Tip",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevikwik Gel 20g features an advanced non-drip thixotropic gel formula that stays where applied without running. Ideal for vertical laminate chip repairs and instant epoxy tacking.",
+    "highlights": [
+      "Non-drip gel consistency will not run down vertical walls or soil fine laminates",
+      "Bonds in 5 seconds without requiring clamping or holding",
+      "Essential on-site companion for instant tacking while slower 2-part epoxies cure",
+      "Precision applicator nozzle allows micro-drop pinpoint control",
+      "Perfect for ceramic tile chip repairs, plastic trims, and rubber gaskets"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevikwik (Pidilite)"
+      },
+      {
+        "label": "Form",
+        "value": "Thixotropic Non-Drip Gel"
+      },
+      {
+        "label": "Pack Size",
+        "value": "20 g Tube"
+      },
+      {
+        "label": "Bond Time",
+        "value": "5 to 10 Seconds"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹41"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevikwik-gel-20g",
+        "label": "20 g Tube",
+        "unit": "Tube",
+        "price": 48,
+        "mrp": 55,
+        "discountPercent": 13,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 371,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-araldite-standard-90g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-fevikwik-industrial-20g",
+    "slug": "pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g",
+    "name": "Pidilite Fevikwik One-Drop Industrial Instant Adhesive (20 g)",
+    "title": "Pidilite — Fevikwik One-Drop Industrial Instant Adhesive (20 g)",
+    "brand": "Pidilite",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Epoxy, Putty & Instant Repair",
+    "adhesiveSubcategory": "EPOXY_INSTANT",
+    "cureType": "CYANOACRYLATE",
+    "baseChemistry": "High-Viscosity Industrial Cyanoacrylate",
+    "settingTimeLabel": "Instant Bond: 3-5 Seconds",
+    "heatOrWaterRating": "High Tensile Instant Bond",
+    "packSizeValue": 20,
+    "packSizeUnit": "g",
+    "packSizeDisplay": "20 g Bottle",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Bottle",
+    "unit": "20 g Bottle",
+    "price": 82,
+    "exGstPrice": 69,
+    "mrp": 95,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3506",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "20 g Bottle · Industrial Grade · High Tensile",
+    "brandTier": 1,
+    "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp"
+    ],
+    "shortTagline": "Industrial Strength Instant Adhesive · High Tensile & Shear Resistance · Factory Grade",
+    "specChips": [
+      "20 g Bottle",
+      "Industrial Strength",
+      "3-5 Second Bond",
+      "Metal & Plastic",
+      "18% GST HSN 3506"
+    ],
+    "description": "Fevikwik Industrial 20g is engineered for factory assembly, signage fabrication, and heavy contractor hardware fixing with superior tensile holding strength.",
+    "highlights": [
+      "Industrial formulation provides higher shear and peel resistance than domestic tubes",
+      "Immediate 3 to 5 second grab on metal-to-plastic and rubber-to-wood joints",
+      "Special clog-resistant screw-cap bottle with inner pin seal prevents drying",
+      "Widely used in Lucknow for acrylic letter signage and electrical component fixing",
+      "Available for 60-minute express courier delivery"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Fevikwik Industrial (Pidilite)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "20 g Dispenser Bottle"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3506"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹69"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-fevikwik-industrial-20g",
+        "label": "20 g Bottle",
+        "unit": "Bottle",
+        "price": 82,
+        "mrp": 95,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 418,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-araldite-standard-90g",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-dowsil-gp-280ml",
+    "slug": "dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml",
+    "name": "Dowsil GP Acetoxy Silicone Sealant Clear/Black (280 ml)",
+    "title": "Dowsil — GP Acetoxy Silicone Sealant Clear/Black (280 ml)",
+    "brand": "Dowsil",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "ACETOXY_GP",
+    "baseChemistry": "100% Acetoxy Silicone Polymer",
+    "settingTimeLabel": "Skin Over: 10-15 Mins · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "100% Waterproof · UV & Weather Proof",
+    "packSizeValue": 280,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "280 ml Cartridge",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Cartridge",
+    "unit": "280 ml Cartridge",
+    "price": 295,
+    "exGstPrice": 250,
+    "mrp": 345,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "280 ml · Acetoxy GP · ⚠️ Not for Mirrors/Marble",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp"
+    ],
+    "shortTagline": "General Purpose Glazing Silicone · Glass, Ceramic & Aluminum · ⚠️ Not for Mirrors/Marble",
+    "specChips": [
+      "280 ml Cartridge",
+      "Acetoxy GP",
+      "Glass & Aluminum",
+      "⚠️ No Mirrors/Stone",
+      "18% GST HSN 3214"
+    ],
+    "description": "Dowsil GP (formerly Dow Corning) is the global benchmark acetoxy silicone sealant for glass-to-aluminum window sealing, shower cubicles, and sanitary porcelain waterproofing.",
+    "highlights": [
+      "100% silicone polymer formulation provides superior elasticity (±25% movement)",
+      "High UV and ozone resistance prevents yellowing and cracking under direct sunlight",
+      "Fast vinegar cure forms watertight rubber barrier in 15 minutes",
+      "⚠️ Warning: Acetoxy cure releases acetic acid. Do NOT use on mirror silver backing, UPVC, or marble",
+      "Standard cartridge fits all 9-inch silicone caulking guns"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Dowsil (Dow Corning)"
+      },
+      {
+        "label": "Cure Mechanism",
+        "value": "Acetoxy (Releases Acetic Acid)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "280 ml Cartridge"
+      },
+      {
+        "label": "Safe Substrates",
+        "value": "Glass, Glazed Ceramic, Anodized Aluminum"
+      },
+      {
+        "label": "Unsafe Substrates",
+        "value": "Mirrors, Marble, Granite, UPVC Frames"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹250"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-dowsil-gp-280ml",
+        "label": "280 ml Cartridge",
+        "unit": "Cartridge",
+        "price": 295,
+        "mrp": 345,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 242,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-ingco-caulking-gun-9in",
+      "prod-adh-tomahawk-sealant-gun-9in",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-dowsil-789-300ml",
+    "slug": "dowsil-789-weatherproofing-neutral-silicone-sealant-300ml",
+    "name": "Dowsil 789 Weatherproofing Neutral Silicone Sealant (300 ml)",
+    "title": "Dowsil — 789 Weatherproofing Neutral Silicone Sealant (300 ml)",
+    "brand": "Dowsil",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "NEUTRAL",
+    "baseChemistry": "Neutral Cure Silicone Polymer",
+    "settingTimeLabel": "Skin Over: 15-20 Mins · Full Cure: 24-48 Hrs",
+    "heatOrWaterRating": "Architectural Weatherproofing · ±50% Movement",
+    "packSizeValue": 300,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "300 ml Cartridge",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Cartridge",
+    "unit": "300 ml Cartridge",
+    "price": 417,
+    "exGstPrice": 353,
+    "mrp": 490,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "300 ml · Neutral Cure · 🛡️ Mirror & Stone Safe",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp"
+    ],
+    "shortTagline": "Architectural Neutral Silicone · Mirror, ACP & Stone Safe · ±50% Joint Movement",
+    "specChips": [
+      "300 ml Cartridge",
+      "Neutral Cure",
+      "🛡️ Mirror & Stone Safe",
+      "ACP Facades",
+      "18% GST HSN 3214"
+    ],
+    "description": "Dowsil 789 is the premier non-corrosive neutral silicone sealant specified by architects in Lucknow for glass curtain walls, ACP cladding, marble stone facades, and luxury mirror fixing.",
+    "highlights": [
+      "100% Neutral non-corrosive cure—completely safe for mirror silver backing and stone",
+      "±50% joint movement capability handles extreme building expansion and thermal shifts",
+      "Non-staining formulation will not bleed oily halos onto porous Italian marble or granite",
+      "Outstanding adhesion to UPVC windows, coated aluminum, and structural glass",
+      "Specified across high-rise developments in Gomti Nagar Extension and Shaheed Path"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Dowsil (Dow)"
+      },
+      {
+        "label": "Cure Mechanism",
+        "value": "Neutral (Non-Acidic, Alcohol-Safe)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "300 ml Cartridge"
+      },
+      {
+        "label": "Safe Substrates",
+        "value": "Mirrors, Marble, Granite, UPVC, ACP, Glass"
+      },
+      {
+        "label": "Joint Movement",
+        "value": "±50% Class 50"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹353"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-dowsil-789-300ml",
+        "label": "300 ml Cartridge",
+        "unit": "Cartridge",
+        "price": 417,
+        "mrp": 490,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 212,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-ingco-caulking-gun-9in",
+      "prod-adh-tomahawk-sealant-gun-9in",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-wacker-gp-280ml",
+    "slug": "wacker-gp-general-purpose-silicone-sealant-280ml",
+    "name": "Wacker GP General Purpose Silicone Sealant Clear/White (280 ml)",
+    "title": "Wacker — GP General Purpose Silicone Sealant Clear/White (280 ml)",
+    "brand": "Wacker",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "ACETOXY_GP",
+    "baseChemistry": "German Engineered Acetoxy Silicone",
+    "settingTimeLabel": "Skin Over: 12 Mins · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "100% Waterproof · Mildew Resistant",
+    "packSizeValue": 280,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "280 ml Cartridge",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Cartridge",
+    "unit": "280 ml Cartridge",
+    "price": 339,
+    "exGstPrice": 287,
+    "mrp": 395,
+    "discountPercent": 14,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "280 ml · German Quality · ⚠️ Not for Mirrors",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp"
+    ],
+    "shortTagline": "German-Engineered Silicone Sealant · Sanitary & Glazing · ⚠️ Not for Mirrors/Marble",
+    "specChips": [
+      "280 ml Cartridge",
+      "German Quality",
+      "Acetoxy GP",
+      "⚠️ No Mirrors/Stone",
+      "18% GST HSN 3214"
+    ],
+    "description": "Wacker GP (Germany) provides contractor-preferred fast extrusion, smooth tooling, and crystal-clear clarity for bathroom sanitary fixtures and aluminum window perimeters.",
+    "highlights": [
+      "German polymer quality ensures smooth gunning without air pocket sputtering",
+      "High anti-fungal properties prevent black mildew along bathroom bathtub edges",
+      "Permanent elasticity resists water head pressure in swimming pool and shower areas",
+      "⚠️ Note: Acetoxy cure releases acetic acid. Do not apply to mirrors, stone, or UPVC",
+      "Dispatched within 60 minutes from Latouche Road and Shivaji Marg distributor hubs"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Wacker Chemie AG"
+      },
+      {
+        "label": "Cure Mechanism",
+        "value": "Acetoxy General Purpose"
+      },
+      {
+        "label": "Pack Size",
+        "value": "280 ml Cartridge"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹287"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-wacker-gp-280ml",
+        "label": "280 ml Cartridge",
+        "unit": "Cartridge",
+        "price": 339,
+        "mrp": 395,
+        "discountPercent": 14,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 162,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-ingco-caulking-gun-9in",
+      "prod-adh-tomahawk-sealant-gun-9in",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-wacker-wn-280ml",
+    "slug": "wacker-wn-weatherseal-neutral-silicone-sealant-280ml",
+    "name": "Wacker WN Weatherseal Neutral Silicone Sealant (280 ml)",
+    "title": "Wacker — WN Weatherseal Neutral Silicone Sealant (280 ml)",
+    "brand": "Wacker",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "NEUTRAL",
+    "baseChemistry": "Neutral Oxime Silicone Polymer",
+    "settingTimeLabel": "Skin Over: 15 Mins · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "Non-Corrosive Weatherseal · ±25% Movement",
+    "packSizeValue": 280,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "280 ml Cartridge",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Cartridge",
+    "unit": "280 ml Cartridge",
+    "price": 240,
+    "exGstPrice": 203,
+    "mrp": 285,
+    "discountPercent": 16,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "280 ml · Best Value Neutral · 🛡️ Mirror & UPVC Safe",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp"
+    ],
+    "shortTagline": "Best Value Neutral Silicone · 🛡️ Mirror, UPVC & Stone Safe · ₹240 Wholesale Rate",
+    "specChips": [
+      "280 ml Cartridge",
+      "Best Value ₹240",
+      "Neutral Cure",
+      "🛡️ UPVC & Mirror Safe",
+      "18% GST HSN 3214"
+    ],
+    "description": "Wacker WN Weatherseal is Lucknow's highest-volume neutral silicone at an unbeatable ₹240 price point. Fully safe for UPVC door frames, ACP sheets, stone joints, and mirrors.",
+    "highlights": [
+      "Exceptional value at ₹240 for a certified neutral cure architectural silicone",
+      "Non-corrosive chemistry protects sensitive mirror silvering and UPVC welds",
+      "Excellent unprimed adhesion to brickwork, concrete, plaster, glass, and wood",
+      "Low odor formulation comfortable for closed interior apartment installations",
+      "Lucknow's #1 choice for fenestration fabricators and mirror contractors"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Wacker Chemie"
+      },
+      {
+        "label": "Cure Mechanism",
+        "value": "Neutral Weatherseal (Non-Corrosive)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "280 ml Cartridge"
+      },
+      {
+        "label": "Safe Substrates",
+        "value": "Mirrors, UPVC, Stone, Glass, Concrete, Wood"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹203"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-wacker-wn-280ml",
+        "label": "280 ml Cartridge",
+        "unit": "Cartridge",
+        "price": 240,
+        "mrp": 285,
+        "discountPercent": 16,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 212,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-ingco-caulking-gun-9in",
+      "prod-adh-tomahawk-sealant-gun-9in",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-feviseal-neutral-pro-280ml",
+    "slug": "feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml",
+    "name": "Feviseal Neutral Pro Anti-Fungal Silicone Sealant Clear/White (280 ml)",
+    "title": "Feviseal — Neutral Pro Anti-Fungal Silicone Sealant Clear/White (280 ml)",
+    "brand": "Feviseal",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "NEUTRAL",
+    "baseChemistry": "Anti-Fungal Neutral Silicone Polymer",
+    "settingTimeLabel": "Skin Over: 15 Mins · Full Cure: 24 Hrs",
+    "heatOrWaterRating": "10-Year Anti-Fungal Warranty",
+    "packSizeValue": 280,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "280 ml Cartridge",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Cartridge",
+    "unit": "280 ml Cartridge",
+    "price": 301,
+    "exGstPrice": 255,
+    "mrp": 355,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "280 ml · Anti-Fungal Pro · 🛡️ Mirror & Bath Safe",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp"
+    ],
+    "shortTagline": "Anti-Fungal Neutral Silicone · 🛡️ Safe for Mirrors & Granite · Sanitary & Kitchen Pro",
+    "specChips": [
+      "280 ml Cartridge",
+      "Anti-Fungal",
+      "Neutral Pro",
+      "🛡️ Mirror Safe",
+      "18% GST HSN 3214"
+    ],
+    "description": "Feviseal Neutral Pro (Pidilite) combines non-corrosive neutral curing with advanced anti-fungal biocide protection for luxury bathrooms, washbasins, mirrors, and kitchen sinks.",
+    "highlights": [
+      "100% neutral cure—will not corrode mirror backings or yellow on UPVC frames",
+      "Powerful anti-microbial biocide stops black mold growth in steamy bathrooms",
+      "High green strength holds vertical mirror glass securely during installation",
+      "Flexible rubber bond withstands high water pressure without pealing",
+      "Backed by Pidilite's technical warranty across Lucknow residential projects"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Feviseal (Pidilite)"
+      },
+      {
+        "label": "Cure Mechanism",
+        "value": "Neutral Anti-Fungal Silicone"
+      },
+      {
+        "label": "Pack Size",
+        "value": "280 ml Cartridge"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹255"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-feviseal-neutral-pro-280ml",
+        "label": "280 ml Cartridge",
+        "unit": "Cartridge",
+        "price": 301,
+        "mrp": 355,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 370,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-ingco-caulking-gun-9in",
+      "prod-adh-tomahawk-sealant-gun-9in",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-feviseal-weatherproof-pro-280ml",
+    "slug": "feviseal-weatherproof-pro-neutral-silicone-sealant-280ml",
+    "name": "Feviseal Weatherproof Pro Neutral Silicone Sealant Clear (280 ml)",
+    "title": "Feviseal — Weatherproof Pro Neutral Silicone Sealant Clear (280 ml)",
+    "brand": "Feviseal",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "NEUTRAL",
+    "baseChemistry": "Architectural Grade Neutral Silicone",
+    "settingTimeLabel": "Skin Over: 20 Mins · Full Cure: 24-48 Hrs",
+    "heatOrWaterRating": "UV & Monsoon Weatherproof · ±35% Movement",
+    "packSizeValue": 280,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "280 ml Cartridge",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Cartridge",
+    "unit": "280 ml Cartridge",
+    "price": 349,
+    "exGstPrice": 296,
+    "mrp": 410,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "280 ml · Weatherproof Pro · Exterior Facade & ACP",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp"
+    ],
+    "shortTagline": "Heavy Duty Architectural Weatherseal · ACP & Glass Facades · 🛡️ Stone & UPVC Safe",
+    "specChips": [
+      "280 ml Cartridge",
+      "Weatherproof Pro",
+      "Exterior Facade",
+      "🛡️ Stone Safe",
+      "18% GST HSN 3214"
+    ],
+    "description": "Feviseal Weatherproof Pro is Pidilite's heavy-duty neutral silicone for exterior building joints, ACP sheet grooves, window perimeter sealing, and skylight waterproofing.",
+    "highlights": [
+      "Tested for extreme UV exposure, high monsoon wind-driven rain, and 50°C summer heat",
+      "Neutral non-acidic cure does not corrode aluminum mullions, stone, or glass coatings",
+      "±35% dynamic movement capability absorbs building structural vibration",
+      "Smooth tooling consistency ensures clean, bubble-free architectural bead lines",
+      "Available for 60-minute dispatch across Lucknow via 2-wheeler express"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Feviseal (Pidilite)"
+      },
+      {
+        "label": "Cure Mechanism",
+        "value": "Neutral Architectural Weatherseal"
+      },
+      {
+        "label": "Pack Size",
+        "value": "280 ml Cartridge"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹296"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-feviseal-weatherproof-pro-280ml",
+        "label": "280 ml Cartridge",
+        "unit": "Cartridge",
+        "price": 349,
+        "mrp": 410,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 373,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-ingco-caulking-gun-9in",
+      "prod-adh-tomahawk-sealant-gun-9in",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-soudaflex-40fc-600ml",
+    "slug": "mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml",
+    "name": "McCoy Soudal Soudaflex 40FC Construction PU Sealant Grey (600 ml Sausage)",
+    "title": "McCoy Soudal — Soudaflex 40FC Construction PU Sealant Grey (600 ml Sausage)",
+    "brand": "McCoy Soudal",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "PU_MOISTURE",
+    "baseChemistry": "High Modulus Polyurethane Polymer",
+    "settingTimeLabel": "Skin Formation: 15 Mins · Cure Rate: 3mm / 24h",
+    "heatOrWaterRating": "High Elasticity Polyurethane · Overpaintable",
+    "packSizeValue": 600,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "600 ml Sausage Foil",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Sausage",
+    "unit": "600 ml Sausage Foil",
+    "price": 455,
+    "exGstPrice": 386,
+    "mrp": 535,
+    "discountPercent": 15,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "600 ml Foil Sausage · PU Expansion Joint · Overpaintable",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp"
+    ],
+    "shortTagline": "High Modulus Polyurethane Sealant · Concrete Floor Expansion Joints · ⚠️ Requires 600ml Sausage Gun",
+    "specChips": [
+      "600 ml Sausage",
+      "PU Sealant",
+      "Expansion Joints",
+      "Overpaintable",
+      "18% GST HSN 3214"
+    ],
+    "description": "McCoy Soudal Soudaflex 40FC is an industrial-grade polyurethane sealant for concrete floor expansion joints, precast panel sealing, and vibration-proof vehicle body assembly.",
+    "highlights": [
+      "High modulus elastomeric PU bond with exceptional tear and puncture resistance",
+      "Can be sanded and painted over with acrylic exterior emulsions once cured",
+      "Ideal for industrial warehouse concrete floor saw-cut expansion joints",
+      "⚠️ Note: 600 ml foil sausage pack requires a dedicated 600ml sausage barrel gun",
+      "Superior adhesion to concrete, brickwork, steel, and timber without priming"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "McCoy Soudal (Belgium)"
+      },
+      {
+        "label": "Polymer Type",
+        "value": "Polyurethane (PU Moisture Cure)"
+      },
+      {
+        "label": "Pack Size",
+        "value": "600 ml Aluminum Foil Sausage"
+      },
+      {
+        "label": "Application Gun",
+        "value": "Requires 600ml Sausage Barrel Gun"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹386"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-soudaflex-40fc-600ml",
+        "label": "600 ml Sausage Foil",
+        "unit": "Sausage",
+        "price": 455,
+        "mrp": 535,
+        "discountPercent": 15,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 212,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm"
+    ]
+  },
+  {
+    "id": "prod-adh-aipl-abro-pu-foam-750ml",
+    "slug": "aipl-abro-pu-foam-insulation-gap-filling-spray-750ml",
+    "name": "AIPL ABRO PU Foam Insulation & Gap-Filling Spray (750 ml Can)",
+    "title": "AIPL ABRO — PU Foam Insulation & Gap-Filling Spray (750 ml Can)",
+    "brand": "AIPL ABRO",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Silicone, PU Sealants & Foam",
+    "adhesiveSubcategory": "SEALANT_FOAM",
+    "cureType": "PU_MOISTURE",
+    "baseChemistry": "One-Component Expanding Polyurethane Foam",
+    "settingTimeLabel": "Tack-Free: 10 Mins · Cuttable: 45 Mins",
+    "heatOrWaterRating": "Thermal & Acoustic Insulating",
+    "packSizeValue": 750,
+    "packSizeUnit": "ml",
+    "packSizeDisplay": "750 ml Aerosol Can",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Can",
+    "unit": "750 ml Aerosol Can",
+    "price": 354,
+    "exGstPrice": 300,
+    "mrp": 420,
+    "discountPercent": 16,
+    "gstPercent": 18,
+    "hsnCode": "3214",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "750 ml Aerosol Can · Expands 30x · Door & Window Gap Filling",
+    "brandTier": 2,
+    "image": "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp"
+    ],
+    "shortTagline": "30x Expanding Polyurethane Foam · Door Frame & AC Pipe Gap Filler · Thermal & Acoustic Barrier",
+    "specChips": [
+      "750 ml Can",
+      "30x Expansion",
+      "Door Frame Gaps",
+      "AC Piping",
+      "18% GST HSN 3214"
+    ],
+    "description": "AIPL ABRO PU Foam spray expands up to 30 times its liquid volume to seal irregular gaps around door and window frames, AC copper piping penetrations, and electrical conduit voids.",
+    "highlights": [
+      "Expands up to 30x to fill large voids, cracks, and structural wall openings",
+      "Provides excellent thermal and sound insulation with R-value rating",
+      "Tack-free in 10 minutes; fully cures in 45 minutes and can be cut, sanded, or plastered",
+      "Includes plastic straw applicator nozzle for immediate use straight from the can",
+      "Essential for UPVC and wooden door frame installation teams in Lucknow"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "AIPL ABRO"
+      },
+      {
+        "label": "Expansion Ratio",
+        "value": "Up to 30 Times Initial Liquid Volume"
+      },
+      {
+        "label": "Pack Size",
+        "value": "750 ml Aerosol Can with Straw"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3214"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹300"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-aipl-abro-pu-foam-750ml",
+        "label": "750 ml Aerosol Can",
+        "unit": "Can",
+        "price": 354,
+        "mrp": 420,
+        "discountPercent": 16,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 224,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-abro-masking-tape-48mm",
+      "prod-adh-wacker-wn-280ml"
+    ]
+  },
+  {
+    "id": "prod-adh-ingco-caulking-gun-9in",
+    "slug": "ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun",
+    "name": "Ingco HCG1809 9-Inch Metal Half-Barrel Silicone Caulking Gun",
+    "title": "Ingco — HCG1809 9-Inch Metal Half-Barrel Silicone Caulking Gun",
+    "brand": "Ingco",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Applicator Guns & Masking Tapes",
+    "adhesiveSubcategory": "APPLICATOR_TAPE",
+    "cureType": "N/A",
+    "baseChemistry": "Heavy Duty Pressed Steel Barrel",
+    "settingTimeLabel": "Manual Hand Tool",
+    "heatOrWaterRating": "Rust-Resistant Powder Coated",
+    "packSizeValue": 1,
+    "packSizeUnit": "pc",
+    "packSizeDisplay": "9-Inch Gun",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Piece",
+    "unit": "9-Inch Gun",
+    "price": 314,
+    "exGstPrice": 266,
+    "mrp": 380,
+    "discountPercent": 17,
+    "gstPercent": 18,
+    "hsnCode": "8205",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "9-Inch / 235mm · Smooth Thrust Rod · Anti-Drip",
+    "brandTier": 3,
+    "image": "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp"
+    ],
+    "shortTagline": "Heavy-Duty Pressed Steel Half-Barrel Gun · Smooth Ratchet Rod · Fits Standard 280-310ml Cartridges",
+    "specChips": [
+      "9-Inch Gun",
+      "Heavy-Duty Steel",
+      "Smooth Thrust",
+      "280–310ml",
+      "18% GST HSN 8205"
+    ],
+    "description": "Ingco HCG1809 is an industrial-grade 9-inch half-barrel silicone caulking gun with a high-leverage smooth push rod for continuous bead dispensing without hand fatigue.",
+    "highlights": [
+      "Reinforced heavy-gauge steel frame prevents bending under high-viscosity sealants",
+      "Smooth round thrust rod delivers uniform sealant flow with thumb-release clutch",
+      "Universal fit for all 280ml, 300ml, and 310ml silicone and acrylic cartridges",
+      "Ergonomic zinc alloy trigger reduces operator fatigue on large glazing projects",
+      "Dispatched within 60 minutes across Lucknow with any silicone cartridge order"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Ingco Tools"
+      },
+      {
+        "label": "Model",
+        "value": "HCG1809"
+      },
+      {
+        "label": "Barrel Size",
+        "value": "9 Inch (235 mm)"
+      },
+      {
+        "label": "Compatible Cartridges",
+        "value": "All Standard 280ml to 310ml"
+      },
+      {
+        "label": "HSN Code",
+        "value": "8205"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹266"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-ingco-caulking-gun-9in",
+        "label": "9-Inch Gun",
+        "unit": "Piece",
+        "price": 314,
+        "mrp": 380,
+        "discountPercent": 17,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 233,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-dowsil-789-300ml",
+      "prod-adh-wacker-wn-280ml",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-tomahawk-sealant-gun-9in",
+    "slug": "tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml",
+    "name": "Tomahawk TCG-18 9-Inch Heavy-Duty Silicone Sealant Gun 320 ml",
+    "title": "Tomahawk — TCG-18 9-Inch Heavy-Duty Silicone Sealant Gun 320 ml",
+    "brand": "Tomahawk",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Applicator Guns & Masking Tapes",
+    "adhesiveSubcategory": "APPLICATOR_TAPE",
+    "cureType": "N/A",
+    "baseChemistry": "Heavy Duty Skeleton Steel Frame",
+    "settingTimeLabel": "Manual Hand Tool",
+    "heatOrWaterRating": "Contractor Grade Steel",
+    "packSizeValue": 1,
+    "packSizeUnit": "pc",
+    "packSizeDisplay": "9-Inch Gun",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Piece",
+    "unit": "9-Inch Gun",
+    "price": 306,
+    "exGstPrice": 259,
+    "mrp": 370,
+    "discountPercent": 17,
+    "gstPercent": 18,
+    "hsnCode": "8205",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "9-Inch / 320ml · Skeleton Frame · Contractor Grade",
+    "brandTier": 3,
+    "image": "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp"
+    ],
+    "shortTagline": "9-Inch Skeleton Sealant Gun · High Mechanical Advantage · Fits 280ml-320ml Tubes",
+    "specChips": [
+      "9-Inch Skeleton",
+      "High Leverage",
+      "320ml Max",
+      "Contractor Grade",
+      "18% GST HSN 8205"
+    ],
+    "description": "Tomahawk TCG-18 is a contractor skeleton sealant gun with heavy spring return, thumb release lever, and durable electro-plated plunger rod.",
+    "highlights": [
+      "Open skeleton body allows fast cartridge swapping on active construction sites",
+      "Engineered 12:1 mechanical thrust ratio for effortless high-viscosity sealant extrusion",
+      "Accommodates all standard silicone, acrylic, and hybrid polymer cartridges up to 320ml",
+      "Durable powder coated frame resists job site drops and mortar spatters",
+      "Guaranteed 60-minute express courier delivery"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "Tomahawk Professional"
+      },
+      {
+        "label": "Model",
+        "value": "TCG-18"
+      },
+      {
+        "label": "Capacity",
+        "value": "Up to 320 ml Cartridge"
+      },
+      {
+        "label": "HSN Code",
+        "value": "8205"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹259"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-tomahawk-sealant-gun-9in",
+        "label": "9-Inch Gun",
+        "unit": "Piece",
+        "price": 306,
+        "mrp": 370,
+        "discountPercent": 17,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 290,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-feviseal-neutral-pro-280ml",
+      "prod-adh-dowsil-gp-280ml",
+      "prod-adh-abro-masking-tape-24mm"
+    ]
+  },
+  {
+    "id": "prod-adh-abro-masking-tape-24mm",
+    "slug": "abro-masking-tape-24mm-1-inch-roll",
+    "name": "ABRO Masking Tape 24mm (1 Inch) Roll",
+    "title": "ABRO — Masking Tape 24mm (1 Inch) Roll",
+    "brand": "ABRO",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Applicator Guns & Masking Tapes",
+    "adhesiveSubcategory": "APPLICATOR_TAPE",
+    "cureType": "N/A",
+    "baseChemistry": "Crepe Paper with Rubber Adhesive",
+    "settingTimeLabel": "Clean Peel: Up to 48 Hrs",
+    "heatOrWaterRating": "Temperature Resistant up to 80°C",
+    "packSizeValue": 24,
+    "packSizeUnit": "mm",
+    "packSizeDisplay": "24mm x 20m Roll",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Roll",
+    "unit": "24mm x 20m Roll",
+    "price": 36,
+    "exGstPrice": 31,
+    "mrp": 45,
+    "discountPercent": 20,
+    "gstPercent": 18,
+    "hsnCode": "3919",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "24mm / 1-Inch · Razor-Sharp Bead Lines · Zero Residue",
+    "brandTier": 3,
+    "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp"
+    ],
+    "shortTagline": "1-Inch Crepe Paper Masking Tape · Clean Release · Razor-Sharp Sealant & Paint Edges",
+    "specChips": [
+      "24mm (1 Inch)",
+      "Crepe Paper",
+      "Zero Residue",
+      "Sharp Edge",
+      "18% GST HSN 3919"
+    ],
+    "description": "ABRO 24mm (1 inch) masking tape is essential for glass glazing, silicone bead masking, and furniture painting for razor-sharp finish lines without adhesive ghosting.",
+    "highlights": [
+      "Natural rubber adhesive peels cleanly within 48 hours leaving zero sticky residue",
+      "Guarantees laser-straight sealant bead lines along window frames and bathroom tiles",
+      "Conformable crepe paper backing curves smoothly along irregular wall profiles",
+      "Resists bleeding of acrylic sealants, silicone oils, and wall paints",
+      "Essential low-cost add-on for every silicone cartridge order"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "ABRO (AIPL)"
+      },
+      {
+        "label": "Width",
+        "value": "24 mm (1 Inch)"
+      },
+      {
+        "label": "Backing",
+        "value": "Crepe Paper"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3919"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹31"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-abro-masking-tape-24mm",
+        "label": "24mm x 20m Roll",
+        "unit": "Roll",
+        "price": 36,
+        "mrp": 45,
+        "discountPercent": 20,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 426,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-dowsil-789-300ml",
+      "prod-adh-wacker-wn-280ml",
+      "prod-adh-ingco-caulking-gun-9in"
+    ]
+  },
+  {
+    "id": "prod-adh-abro-masking-tape-48mm",
+    "slug": "abro-masking-tape-48mm-2-inch-wide-roll",
+    "name": "ABRO Masking Tape 48mm (2 Inch) Wide Roll",
+    "title": "ABRO — Masking Tape 48mm (2 Inch) Wide Roll",
+    "brand": "ABRO",
+    "categorySlug": "fevicol-adhesives-sealants",
+    "categoryName": "Fevicol, Adhesives & Sealants",
+    "subCategory": "Applicator Guns & Masking Tapes",
+    "adhesiveSubcategory": "APPLICATOR_TAPE",
+    "cureType": "N/A",
+    "baseChemistry": "Heavy Crepe Paper with Rubber Adhesive",
+    "settingTimeLabel": "Clean Peel: Up to 48 Hrs",
+    "heatOrWaterRating": "Temperature Resistant up to 80°C",
+    "packSizeValue": 48,
+    "packSizeUnit": "mm",
+    "packSizeDisplay": "48mm x 20m Roll",
+    "effectiveUnitRate": null,
+    "sellingUnit": "Roll",
+    "unit": "48mm x 20m Roll",
+    "price": 66,
+    "exGstPrice": 56,
+    "mrp": 80,
+    "discountPercent": 18,
+    "gstPercent": 18,
+    "hsnCode": "3919",
+    "deliveryVehicleType": "2-Wheeler",
+    "keySpecBadge": "48mm / 2-Inch · Holds Laminate Edges · Wide Masking",
+    "brandTier": 3,
+    "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp",
+    "images": [
+      "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp"
+    ],
+    "shortTagline": "2-Inch Wide Crepe Tape · High Tensile Holding · Laminate Clamping & Facade Protection",
+    "specChips": [
+      "48mm (2 Inch)",
+      "Wide Coverage",
+      "Laminate Clamping",
+      "Clean Peel",
+      "18% GST HSN 3919"
+    ],
+    "description": "ABRO 48mm (2 inch) wide masking tape is Lucknow carpenters' primary tool for taping down laminate edges during Fevicol curing and masking wide expansion joints.",
+    "highlights": [
+      "Wide 48mm footprint provides high tensile holding power to prevent laminate edge lifting",
+      "Essential for holding PVC edge-banding and acrylic sheets firmly while glue cures",
+      "Peels off cleanly without lifting wooden veneer fibers or leaving gummy stains",
+      "Protects expensive aluminum window profiles during nearby wet masonry and plastering",
+      "Available for 60-minute express courier delivery"
+    ],
+    "specifications": [
+      {
+        "label": "Brand",
+        "value": "ABRO (AIPL)"
+      },
+      {
+        "label": "Width",
+        "value": "48 mm (2 Inch Wide)"
+      },
+      {
+        "label": "Backing",
+        "value": "Heavy Crepe Paper"
+      },
+      {
+        "label": "HSN Code",
+        "value": "3919"
+      },
+      {
+        "label": "GST Rate",
+        "value": "18% Standard GST"
+      },
+      {
+        "label": "Ex-GST Base",
+        "value": "₹56"
+      },
+      {
+        "label": "Delivery Fleet",
+        "value": "2-Wheeler (60-Min Express)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "var-prod-adh-abro-masking-tape-48mm",
+        "label": "48mm x 20m Roll",
+        "unit": "Roll",
+        "price": 66,
+        "mrp": 80,
+        "discountPercent": 18,
+        "stock": 50,
+        "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp"
+      }
+    ],
+    "inStock": true,
+    "rating": 4.9,
+    "reviewsCount": 435,
+    "deliveryEta": "60 Mins Express",
+    "vendor": "Lucknow Central Plywood & Hardware Supply Hub",
+    "crossSellSkus": [
+      "prod-adh-fevicol-sh-5kg",
+      "prod-adh-fevicol-marine-5kg",
+      "prod-adh-soudaflex-40fc-600ml"
+    ]
+  }
+];

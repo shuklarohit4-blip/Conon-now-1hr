@@ -480,12 +480,16 @@ function FallbackMap({
   );
 }
 
+/* ── constants ───────────────────────────────────────────────── */
+const GOOGLE_MAPS_LIBRARIES: ("places" | "geometry")[] = ["places", "geometry"];
+
 /* ── main component ──────────────────────────────────────────── */
 export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
   const hasKey = Boolean(API_KEY && API_KEY.trim().length > 0);
   const { isLoaded, loadError } = useJsApiLoader({
     id: "conon-google-maps",
     googleMapsApiKey: hasKey ? API_KEY! : "",
+    libraries: GOOGLE_MAPS_LIBRARIES,
   });
 
   const canUseGoogle = hasKey && isLoaded && !loadError;
@@ -589,21 +593,56 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
     return 2; // On the Way
   }, [target, order.origin, order.destination, truckTarget]);
 
-  const toggleSim = () => {
+  const startSim = useCallback(() => {
+    if (routePath.length < 2) return;
+    simRef.current?.stop();
+    setSimRunning(true);
+    simRef.current = startDriverSimulation(order.id, routePath, {
+      intervalMs: 1300,
+      onFinish: () => setSimRunning(false),
+    });
+  }, [order.id, routePath]);
+
+  const stopSim = useCallback(() => {
+    simRef.current?.stop();
+    simRef.current = null;
+    setSimRunning(false);
+  }, []);
+
+  const toggleSim = useCallback(() => {
     if (simRunning) {
-      simRef.current?.stop();
-      simRef.current = null;
-      setSimRunning(false);
-    } else if (routePath.length > 1) {
-      setSimRunning(true);
-      simRef.current = startDriverSimulation(order.id, routePath, {
-        intervalMs: 1400,
-        onFinish: () => setSimRunning(false),
-      });
+      stopSim();
+    } else {
+      startSim();
     }
-  };
+  }, [simRunning, startSim, stopSim]);
+
+  const restartSim = useCallback(() => {
+    stopSim();
+    setTimeout(() => {
+      startSim();
+    }, 150);
+  }, [startSim, stopSim]);
+
+  // Auto-start live simulation after route is ready
+  useEffect(() => {
+    if (routePath.length > 1 && !simRef.current && !target) {
+      const timer = setTimeout(() => {
+        startSim();
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+    return undefined;
+  }, [routePath, startSim, target]);
 
   useEffect(() => () => simRef.current?.stop(), []);
+
+  const recenter = useCallback(() => {
+    if (mapRef.current && truckPos) {
+      mapRef.current.panTo(truckPos);
+      mapRef.current.setZoom(15);
+    }
+  }, [truckPos]);
 
   const stale = lastUpdateAt != null && Date.now() - lastUpdateAt > 15000;
 
@@ -674,18 +713,37 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
         </div>
       </div>
 
-      {/* ── Dev-only driver simulator ───────────────────────── */}
-      {import.meta.env.DEV && (
+      {/* ── Live Vehicle Telemetry & Simulator Controls ───────────────────────── */}
+      <div className="absolute left-4 bottom-[19rem] z-20 flex items-center gap-2">
         <button
           onClick={toggleSim}
           disabled={routePath.length < 2}
-          className="absolute left-4 bottom-[19rem] z-20 flex items-center gap-2 px-3.5 py-2 rounded-xl text-white text-xs font-black shadow-lg disabled:opacity-40 active:scale-95 transition-transform"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-white text-xs font-black shadow-lg disabled:opacity-40 active:scale-95 transition-transform"
           style={{ background: simRunning ? "#b91c1c" : "#1f2937" }}
+          title={simRunning ? "Pause live delivery simulation" : "Start driver route simulation"}
         >
           {simRunning ? <Square className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-          {simRunning ? "Stop driver sim" : "Simulate driver"}
+          {simRunning ? "Pause Sim" : "Resume Sim"}
         </button>
-      )}
+
+        <button
+          onClick={restartSim}
+          disabled={routePath.length < 2}
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white text-gray-800 text-xs font-bold shadow-lg border border-gray-200 active:scale-95 transition-transform"
+          title="Restart vehicle from warehouse"
+        >
+          <RotateCcw className="w-3.5 h-3.5 text-gray-600" />
+          <span>Restart</span>
+        </button>
+
+        <button
+          onClick={recenter}
+          className="w-8 h-8 rounded-xl bg-white text-gray-800 flex items-center justify-center shadow-lg border border-gray-200 active:scale-95 transition-transform"
+          title="Center on truck"
+        >
+          <Navigation className="w-4 h-4 text-emerald-700" />
+        </button>
+      </div>
 
       {/* ── Bottom sheet ────────────────────────────────────── */}
       <div className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl px-5 pt-3 pb-6 z-20">

@@ -1,25 +1,43 @@
-# Render Blueprint for the CONON API. Create/configure the Atlas database separately.
-# Render's default plans are paid; select/confirm plans and pricing in the
-# Render Dashboard before creating these resources.
+# ============================================================================
+# CONON-NOW Render Blueprint Infrastructure-as-Code
+# Region: Singapore (ap-southeast-1) - Optimized for Lucknow & India (<60ms)
+# Runtime: Node.js 20+ / pnpm Monorepo
+# ============================================================================
+
 services:
   - type: web
     name: conon-api-prod
     runtime: node
     region: singapore
+    plan: starter
     autoDeployTrigger: commit
-    buildCommand: corepack enable && corepack prepare pnpm@11.23.0 --activate && pnpm install --frozen-lockfile --prod=false && pnpm --filter @workspace/api-server build
-    startCommand: pnpm --filter @workspace/api-server start
-    healthCheckPath: /api/healthz
+    buildCommand: corepack enable && corepack prepare pnpm@10.6.1 --activate && pnpm install --frozen-lockfile --prod=false && pnpm --filter @workspace/api-server build
+    startCommand: node artifacts/api-server/dist/index.mjs
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: "10000"
       - key: LOG_LEVEL
         value: info
+      - key: FRONTEND_URLS
+        value: https://conon-now.netlify.app,https://cononinfrabuilt.com
       - key: ALLOWED_ORIGINS
-        value: https://conon.vercel.app
+        value: https://conon-now.netlify.app,https://cononinfrabuilt.com,http://localhost:5174,http://localhost:5173
       - key: JWT_SECRET
         generateValue: true
+      - key: MAC_ADMIN_KEY
+        sync: false # Set to your local MacBook secret key to authorize Admin Command OS
+      - key: DATABASE_URL
+        sync: false # Cloud PostgreSQL connection string (Supabase Mumbai / Neon)
       - key: MONGODB_DATABASE
         value: conon
       - key: MONGODB_URI
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
         sync: false

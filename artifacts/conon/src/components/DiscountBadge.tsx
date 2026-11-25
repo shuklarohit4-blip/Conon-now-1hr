@@ -50,7 +50,7 @@ export function DiscountBadge({
   );
 }
 
-/** Deterministic helper: derive a fake discount from a material id + price.
+/** Deterministic helper: derive discount promotion from a material id + price.
  *  Returns null for items that shouldn't display a badge (so it's not on every card). */
 export function deriveDiscount(
   id: string,

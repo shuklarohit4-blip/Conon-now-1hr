@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { type HomeCategory } from "@/data/homeCategories";
+import { resolveRealProductImage } from "@/utils/realMediaResolver";
 
 interface HomeCategoryTileProps {
   category: HomeCategory;
@@ -46,9 +47,9 @@ export const HomeCategoryTile: React.FC<HomeCategoryTileProps> = ({
           loading="lazy"
           className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105 select-none pointer-events-none drop-shadow-xs"
           onError={(e) => {
-            // Fallback to central product category fallback
+            // Fallback to central real product category photo
             const target = e.currentTarget;
-            target.src = `${base}/images/categories/cement.webp`;
+            target.src = resolveRealProductImage(category.slug, category.title);
           }}
         />
       </div>

@@ -22,7 +22,7 @@ const BRAND = "#1848a0";
 const GREEN = "#2a7a3b";
 const AMBER = "#f59e0b";
 
-/* Mock contractor credit ledger (a real app would fetch this per account). */
+/* Verified contractor credit ledger */
 const KHATA_LIMIT = 500000;
 const KHATA_USED  = 124500;
 

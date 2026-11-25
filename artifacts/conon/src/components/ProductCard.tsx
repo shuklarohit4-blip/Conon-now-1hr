@@ -1,30 +1,14 @@
 import React from "react";
 import {
   Box, Star, Truck, ShoppingCart, ChevronRight, Check,
-  Package, Layers, Blocks, Paintbrush, Grid3x3,
-  type LucideIcon,
 } from "lucide-react";
 import { QuantityStepper } from "./QuantityStepper";
+import { ProductImage } from "./ProductImage";
+import { useSafeLiveCatalog } from "@/context/LiveCatalogContext";
 
 /* CONON-NOW brand tokens (kept local so the card is fully reusable). */
 const BRAND_DARK = "#1848a0";
 const BLINKIT_GREEN = "#1848a0";
-
-/* Category-relevant fallback icons — used when a product has no reliable
-   image, so hardware never shows irrelevant stock photos (e.g. a person). */
-const MATERIAL_ICONS: Record<string, LucideIcon> = {
-  cement: Package,
-  steel: Layers,
-  "tmt steel": Layers,
-  bricks: Blocks,
-  sand: Package,
-  aggregate: Package,
-  paint: Paintbrush,
-  tiles: Grid3x3,
-};
-function materialIcon(tag: string): LucideIcon {
-  return MATERIAL_ICONS[(tag || "").trim().toLowerCase()] ?? Package;
-}
 
 export type ProductSpec = { label: string; value: string };
 
@@ -74,7 +58,14 @@ export type Product = {
   description?: string;
   /** When true the primary CTA becomes "See options" instead of "Add to cart". */
   hasOptions?: boolean;
+  bulkPrice?: number;
+  bulkSlabText?: string;
+  inStock?: boolean;
+  gstPercent?: number;
+  hsnCode?: string;
   variants?: Array<{ id: string; label: string; unit: string; price: number; mrp: number; discountPercent: number; stock: number; image?: string }>;
+  fitGuardrailBadge?: string;
+  pairedProducts?: Array<any>;
 };
 
 /* ── Star rating row (accurate half-stars via clipped overlay) ───────── */
@@ -138,18 +129,17 @@ export function ProductCard({
   cartQty = 0,
   isAdding = false,
 }: ProductCardProps) {
+  const liveCatalog = useSafeLiveCatalog();
+  const liveProduct = liveCatalog?.getLiveProduct(product) ?? product;
+
   const {
     image, tag, materialTag, title, rating, reviews,
     price, mrp, bankOfferPrice, bankOfferLabel,
-    deliveryEta, service, variantsLabel, unit, hasOptions,
-  } = product;
+    deliveryEta, service, variantsLabel, unit, hasOptions, inStock,
+  } = liveProduct;
 
   const discountPct = mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0;
-  const [imgError, setImgError] = React.useState(false);
-  React.useEffect(() => { setImgError(false); }, [image]);
-  const MaterialIcon = materialIcon(materialTag);
-  const showImage = Boolean(image) && !imgError;
-  const openDetail = () => onOpenDetail?.(product);
+  const openDetail = () => onOpenDetail?.(liveProduct);
 
   return (
     <div
@@ -158,32 +148,28 @@ export function ProductCard({
     >
       {/* 1 ── Product image + overlays (tap → detail sheet) ─────────── */}
       <div
-        className="relative w-full aspect-square bg-white flex items-center justify-center p-3 cursor-pointer overflow-hidden border-b border-slate-100"
+        className="relative w-full aspect-square bg-white flex items-center justify-center p-2 cursor-pointer overflow-hidden border-b border-slate-100"
         role={onOpenDetail ? "button" : undefined}
         onClick={onOpenDetail ? openDetail : undefined}
       >
-        {showImage ? (
-          <img
-            src={image}
-            alt={title}
-            loading="lazy"
-            onError={() => setImgError(true)}
-            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          /* Premium minimal fallback — soft slate block, category-relevant
-             Lucide icon and the product title. Never irrelevant humans. */
-          <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-slate-100 px-2">
-            <MaterialIcon size={40} className="text-slate-400" strokeWidth={1.5} />
-            <span className="text-xs font-medium text-slate-500 text-center line-clamp-2">
-              {title}
-            </span>
-          </div>
-        )}
+        <ProductImage
+          product={liveProduct}
+          src={image}
+          alt={title}
+          title={title}
+          brand={liveProduct.brand || liveProduct.vendor}
+          category={materialTag}
+          sku={product.slug || product.id}
+          className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+        />
 
-        {/* Top-left discount badge */}
-        {discountPct > 0 && (
-          <div className="absolute top-0 left-3 flex flex-col items-center">
+        {/* Top-left discount badge or Out of Stock Badge */}
+        {inStock === false ? (
+          <span className="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 bg-rose-600 text-white text-[10px] font-black rounded-lg uppercase shadow-md">
+            Out of Stock
+          </span>
+        ) : discountPct > 0 && (
+          <div className="absolute top-0 left-3 flex flex-col items-center z-10">
             <span
               className="px-2 pt-1 pb-1.5 text-[11px] font-black text-white leading-none rounded-b-md"
               style={{ background: "#256fef", boxShadow: "0 2px 6px rgba(37,111,239,0.4)" }}
@@ -238,6 +224,11 @@ export function ProductCard({
               {unit}
             </span>
           )}
+          {product.fitGuardrailBadge && (
+            <span className="inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 border border-amber-200">
+              🛡️ {product.fitGuardrailBadge}
+            </span>
+          )}
         </div>
 
         {/* 3 ── Ratings & reviews ──────────────────────────────────── */}
@@ -284,7 +275,17 @@ export function ProductCard({
         </div>
 
         {/* 6 ── Action button ──────────────────────────────────────── */}
-        {onSetQty ? (
+        {inStock === false ? (
+          <div className="mt-3.5">
+            <button
+              type="button"
+              disabled
+              className="w-full py-3 rounded-xl bg-slate-100 text-slate-400 font-black text-xs uppercase cursor-not-allowed border border-slate-200"
+            >
+              Out of Stock
+            </button>
+          </div>
+        ) : onSetQty ? (
           <div className="mt-3.5">
             <QuantityStepper
               qty={cartQty}

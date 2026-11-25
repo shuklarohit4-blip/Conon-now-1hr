@@ -235,6 +235,9 @@ function getClient(): MongoClient {
     client = new MongoClient(uri, {
       serverSelectionTimeoutMS: 5000,
       connectTimeoutMS: 5000,
+      maxPoolSize: 10,
+      minPoolSize: 0,
+      maxIdleTimeMS: 30000,
     });
   }
   return client;
@@ -431,4 +434,6 @@ export { default as mongoose } from "mongoose";
 export * from "./models/Product";
 export * from "./models/Category";
 export * from "./catalogData";
+export * from "./schema/livingVault";
+export * from "./postgres";
 

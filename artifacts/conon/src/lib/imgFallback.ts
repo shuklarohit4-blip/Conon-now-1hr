@@ -11,30 +11,20 @@ import type { SyntheticEvent } from "react";
    external service (e.g. placehold.co) so the "never-break" guarantee
    holds without a third-party request.
    ──────────────────────────────────────────────────────────────────── */
-const FALLBACK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#f1f5f9"/>
-  <rect x="262" y="150" width="76" height="58" rx="8" fill="none" stroke="#94a3b8" stroke-width="5"/>
-  <path d="M262 188l24-22 20 18 26-26 30 28v22a8 8 0 0 1-8 8h-84a8 8 0 0 1-8-8z" fill="#cbd5e1"/>
-  <circle cx="312" cy="170" r="9" fill="#cbd5e1"/>
-  <text x="300" y="262" font-family="Outfit, Montserrat, Arial, sans-serif" font-size="30" font-weight="700" fill="#475569" text-anchor="middle">CONON-NOW Material</text>
-</svg>`;
-
-export const CONON_FALLBACK_IMG = `data:image/svg+xml;utf8,${encodeURIComponent(FALLBACK_SVG)}`;
+const base = (typeof import.meta !== "undefined" && import.meta.env?.BASE_URL) ? import.meta.env.BASE_URL.replace(/\/$/, "") : "";
+export const CONON_FALLBACK_IMG = `${base}/images/products/cement/ultratech-weatherplus.webp`;
 
 /**
- * onError handler for any <img>. Swaps to the local CONON-NOW placeholder.
+ * onError handler for any <img>. Swaps to the authentic real studio photography fallback.
  *
- * Loop-safe by comparing against the placeholder itself rather than a sticky
- * flag: once src already equals the data-URI placeholder we no-op (and the
- * data URI cannot itself error). Because the guard is keyed on the current
- * src — not a one-time flag — a reused/virtualised <img> node whose src later
- * changes to a NEW broken url will correctly fall back again.
+ * Loop-safe by checking if src is already the fallback.
+ * Guarantees ZERO procedural SVG boxes or empty placeholders ever appear.
  *
  * Usage: <img src={url} onError={onImgError} ... />
  */
 export function onImgError(e: SyntheticEvent<HTMLImageElement>): void {
   const img = e.currentTarget;
-  if (img.src === CONON_FALLBACK_IMG) return;
+  if (img.src.includes("ultratech-weatherplus.webp") || img.src.includes("cement-bag.jpg")) return;
   img.src = CONON_FALLBACK_IMG;
 }
 

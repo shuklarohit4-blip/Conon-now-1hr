@@ -12,10 +12,23 @@ import mandiRouter from "./mandi";
 import adminRouter from "./admin";
 import mapsRouter from "./maps";
 import vendorRouter from "./vendor";
+import imageQaRouter from "./imageQa";
+import catalogRouter from "./catalog";
+import builderKitLeadsRouter from "./builderKitLeads";
+import driverRouter from "./driver";
+import eventsRouter from "./events";
+import kycRouter from "./kyc";
+import feedbackRouter from "./feedback";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(feedbackRouter);
+router.use(eventsRouter);
+router.use(kycRouter);
+router.use(driverRouter);
+router.use(catalogRouter);
+router.use(builderKitLeadsRouter);
 router.use(authRouter);
 router.use(otpAuthRouter);
 router.use(materialsRouter);
@@ -28,5 +41,6 @@ router.use(mandiRouter);
 router.use(adminRouter);
 router.use(mapsRouter);
 router.use(vendorRouter);
+router.use(imageQaRouter);
 
 export default router;

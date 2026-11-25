@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ShieldCheck, ShoppingCart } from "lucide-react";
 import { CATALOG_PRODUCTS, type IProduct, type IProductVariant } from "@/data/catalogData";
+import { RealProductImage } from "./RealProductImage";
 import {
   useAddToCart,
   useUpdateCartItem,
@@ -188,13 +189,15 @@ export const VariantSelectorSheet: React.FC<VariantSelectorSheetProps> = ({
             {/* Header row */}
             <div className="flex items-start justify-between gap-3 pb-3.5 border-b border-slate-100">
               <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-14 h-14 rounded-2xl bg-[#F6F8FB] border border-black/[0.06] p-1.5 shrink-0 flex items-center justify-center overflow-hidden">
-                  <img
-                    src={productThumb}
-                    alt={productTitle}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+                <RealProductImage
+                  product={product}
+                  src={productThumb}
+                  alt={productTitle}
+                  title={productTitle}
+                  brand={productBrand}
+                  variant="thumb"
+                  className="w-full h-full object-contain p-1"
+                />
                 <div className="min-w-0">
                   <span className="text-[10px] font-black uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">
                     {productBrand}

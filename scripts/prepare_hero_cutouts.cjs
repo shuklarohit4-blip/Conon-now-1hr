@@ -106,22 +106,22 @@ async function main() {
   }
 
   const items = [
-    { src: "attached_assets/brands/asianpaints-bucket.png", dest: "asianpaints-bucket.webp" },
-    { src: "attached_assets/brands/fevicol-drum.png", dest: "fevicol-drum.webp" },
-    { src: "attached_assets/brands/drfixit-bucket.png", dest: "drfixit-bucket.webp" },
-    { src: "attached_assets/brands/bosch-drill.png", dest: "bosch-drill.webp" },
-    { src: "attached_assets/brands/godrej-lock.png", dest: "godrej-lock.webp" },
-    { src: "attached_assets/brands/acc-cement.png", dest: "acc-cement.webp" },
-    { src: "attached_assets/brands/birla-cement.png", dest: "birla-cement.webp" },
-    { src: "attached_assets/brands/birlawhite-putty.png", dest: "birlawhite-putty.webp" },
-    { src: "attached_assets/brands/actiontesa-mdf.png", dest: "actiontesa-mdf.webp" },
-    { src: "attached_assets/brands/centuryply-ply.png", dest: "centuryply-ply.webp" },
-    { src: "attached_assets/brands/hettich-hinge.png", dest: "hettich-hinge.webp" },
-    { src: "attached_assets/brands/polycab-wire.png", dest: "polycab-wire.webp" },
-    { src: "attached_assets/brands/finolex-wire.png", dest: "finolex-wire.webp" },
-    { src: "attached_assets/brands/roff-adhesive.png", dest: "roff-adhesive.webp" },
-    { src: "attached_assets/brands/dewalt-grinder.png", dest: "dewalt-grinder.webp" },
-    { src: "attached_assets/brands/jaquar-faucet.png", dest: "jaquar-faucet.webp" }
+    { src: "artifacts/conon/src/assets/brands/asianpaints-bucket.png", dest: "asianpaints-bucket.webp" },
+    { src: "artifacts/conon/src/assets/brands/fevicol-drum.png", dest: "fevicol-drum.webp" },
+    { src: "artifacts/conon/src/assets/brands/drfixit-bucket.png", dest: "drfixit-bucket.webp" },
+    { src: "artifacts/conon/src/assets/brands/bosch-drill.png", dest: "bosch-drill.webp" },
+    { src: "artifacts/conon/src/assets/brands/godrej-lock.png", dest: "godrej-lock.webp" },
+    { src: "artifacts/conon/src/assets/brands/acc-cement.png", dest: "acc-cement.webp" },
+    { src: "artifacts/conon/src/assets/brands/birla-cement.png", dest: "birla-cement.webp" },
+    { src: "artifacts/conon/src/assets/brands/birlawhite-putty.png", dest: "birlawhite-putty.webp" },
+    { src: "artifacts/conon/src/assets/brands/actiontesa-mdf.png", dest: "actiontesa-mdf.webp" },
+    { src: "artifacts/conon/src/assets/brands/centuryply-ply.png", dest: "centuryply-ply.webp" },
+    { src: "artifacts/conon/src/assets/brands/hettich-hinge.png", dest: "hettich-hinge.webp" },
+    { src: "artifacts/conon/src/assets/brands/polycab-wire.png", dest: "polycab-wire.webp" },
+    { src: "artifacts/conon/src/assets/brands/finolex-wire.png", dest: "finolex-wire.webp" },
+    { src: "artifacts/conon/src/assets/brands/roff-adhesive.png", dest: "roff-adhesive.webp" },
+    { src: "artifacts/conon/src/assets/brands/dewalt-grinder.png", dest: "dewalt-grinder.webp" },
+    { src: "artifacts/conon/src/assets/brands/jaquar-faucet.png", dest: "jaquar-faucet.webp" }
   ];
 
   for (const item of items) {

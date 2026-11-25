@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Plus, Search, Camera, Mic, ShieldCheck, CheckCircle2, Check,
   ChevronLeft, ChevronRight, ChevronDown, Package, Clock, RotateCcw, X,
-  Zap, Droplets, Paintbrush, Layers, Wrench,
+  Zap, Droplets, Paintbrush, Layers, Wrench, Sparkles,
   HardHat, Hammer, Building2, FlaskConical,
   Grid3x3, Shield, Box, Mountain, Rows3, TreePine, Star,
   Wallet, Percent, Truck,
 } from "lucide-react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import type { LucideIcon } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { VoiceOrderModal } from "@/components/VoiceOrderModal";
@@ -16,7 +16,7 @@ import { IsometricBuilding } from "@/components/IsometricBuilding";
 import { OfferBanner } from "@/components/OfferBanner";
 import { PromoHero } from "@/components/PromoHero";
 import { DiscountBadge, deriveDiscount } from "@/components/DiscountBadge";
-import { ProductFeed, DUMMY_PRODUCTS, BUILDER_PICKS } from "@/components/ProductFeed";
+import { ProductFeed, CORE_BUILDER_PRODUCTS, BUILDER_PICKS } from "@/components/ProductFeed";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { CompactProductCard } from "@/components/CompactProductCard";
 import type { Product, ProductSpec } from "@/components/ProductCard";
@@ -33,23 +33,29 @@ import { HomeCategoryGrid } from "@/components/HomeCategoryGrid";
 import { CementCollectionStorefront } from "@/components/CementCollectionStorefront";
 import { PlywoodCollectionStorefront } from "@/components/PlywoodCollectionStorefront";
 import { FevicolCollectionStorefront } from "@/components/FevicolCollectionStorefront";
-import { HingesCollectionStorefront } from "@/components/HingesCollectionStorefront";
-import { LocksCollectionStorefront } from "@/components/LocksCollectionStorefront";
+import { FurnitureHardwareStorefront } from "@/components/FurnitureHardwareStorefront";
+import { DoorHardwareStorefront } from "@/components/DoorHardwareStorefront";
 import { ElectricalCollectionStorefront } from "@/components/ElectricalCollectionStorefront";
 import { KitchenCollectionStorefront } from "@/components/KitchenCollectionStorefront";
+import { ModularKitchenStorefront } from "@/components/ModularKitchenStorefront";
+import { KitchenSinksStorefront } from "@/components/KitchenSinksStorefront";
 import { PaintingCollectionStorefront } from "@/components/PaintingCollectionStorefront";
+import { PaintsCollectionStorefront } from "@/components/PaintsCollectionStorefront";
 import { CCTVCollectionStorefront } from "@/components/CCTVCollectionStorefront";
 import { TileAdhesivesCollectionStorefront } from "@/components/TileAdhesivesCollectionStorefront";
+import { TilesCollectionStorefront } from "@/components/TilesCollectionStorefront";
 import { LightingCollectionStorefront } from "@/components/LightingCollectionStorefront";
 import { SafetyCollectionStorefront } from "@/components/SafetyCollectionStorefront";
 import { CPVCPlumbingStorefront } from "@/components/CPVCPlumbingStorefront";
 import { SanitaryBathCollectionStorefront } from "@/components/SanitaryBathCollectionStorefront";
+import { AppliancesCollectionStorefront } from "@/components/AppliancesCollectionStorefront";
+import { BricksMasonryStorefront } from "@/components/BricksMasonryStorefront";
 import type { HomeCategory } from "@/data/homeCategories";
 import { getShowcaseProducts } from "@/lib/catalogProducts";
 import { useDeliveryLocation } from "@/context/LocationContext";
 import { useWallet } from "@/context/WalletContext";
 import { useUser } from "@/context/UserContext";
-import { useAuth } from "@workspace/auth-web";
+import { useAuthContext } from "@/context/AuthContext";
 import { useUI } from "@/context/UIContext";
 import { onImgError } from "@/lib/imgFallback";
 import { resolveProductImage as centralResolveProductImage } from "@/lib/productImages";
@@ -281,6 +287,7 @@ const HOMERUN_CATEGORIES: HomeRunCat[] = [
 
   /* Row 6 */
   { slug: "marble-stone",    label: "Marble & Stone",                 image: CAT_LOCAL("marble-stone"),    dbCategory: "marble-stone" },
+  { slug: "home-appliances", label: "Home Appliances",                image: "/images/home-categories/home-appliances.webp", dbCategory: "electrical" },
   { slug: "home-essentials", label: "Home Essentials",                image: CAT_LOCAL("home-essentials"), dbCategory: "hardware"   },
   { slug: "general",         label: "Tools & Equipment",              image: CAT_LOCAL("general"),         dbCategory: "tools"      },
 ];
@@ -288,15 +295,17 @@ const HOMERUN_CATEGORIES: HomeRunCat[] = [
 /* ── Home category chips (horizontal filter bar) ──────────────────── */
 type HomeChip = { label: string; db: string | null; icon: LucideIcon };
 const HOME_CHIPS: HomeChip[] = [
-  { label: "All",        db: null,         icon: Grid3x3    },
-  { label: "Material",   db: "cement",     icon: Building2  },
-  { label: "Tools",      db: "tools",      icon: Wrench     },
-  { label: "Electrical", db: "electrical", icon: Zap        },
-  { label: "Paint",      db: "paint",      icon: Paintbrush },
-  { label: "Plumbing",   db: "plumbing",   icon: Droplets   },
-  { label: "Tiles",      db: "tiles",      icon: Grid3x3    },
-  { label: "Steel",      db: "steel",      icon: Layers     },
-  { label: "Hardware",   db: "hardware",   icon: Hammer     },
+  { label: "All",        db: null,             icon: Grid3x3    },
+  { label: "Appliances", db: "home-appliances", icon: Sparkles   },
+  { label: "Kitchen",    db: "modular-kitchen-systems", icon: Package },
+  { label: "Material",   db: "cement",         icon: Building2  },
+  { label: "Tools",      db: "tools",          icon: Wrench     },
+  { label: "Electrical", db: "electrical",     icon: Zap        },
+  { label: "Paint",      db: "paint",          icon: Paintbrush },
+  { label: "Plumbing",   db: "plumbing",       icon: Droplets   },
+  { label: "Tiles",      db: "tiles",          icon: Grid3x3    },
+  { label: "Steel",      db: "steel",          icon: Layers     },
+  { label: "Hardware",   db: "hardware",       icon: Hammer     },
 ];
 
 /* ── Frequently-bought bundles & Featured cards (presentational) ───── */
@@ -481,8 +490,8 @@ export function Home() {
   const { balance: walletBalance }      = useWallet();
   const { location: deliveryLoc, openLocationSheet } = useDeliveryLocation();
   const { role }                        = useUser();
-  const { isAuthenticated }             = useAuth();
-  const loggedIn                        = !!role || isAuthenticated;
+  const { isAuthenticated, user: authUser } = useAuthContext();
+  const loggedIn                        = !!role || isAuthenticated || !!authUser;
   const pincode                         = deliveryLoc?.pincode || "226010";
 
   const [stage, setStage]               = useState<GetMaterialsStage>("foundation");
@@ -493,6 +502,68 @@ export function Home() {
   const [showVoiceModal, setShowVoiceModal] = useState(false);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
   const [heroMode, setHeroMode]         = useState<"homerun" | "winter_sale">("homerun");
+
+  const handleDepartmentNavSelect = (cat: HomeCategory) => {
+    if (cat.slug === "safety-workwear" || cat.slug === "shoes-gloves") {
+      setSelectedCategory("safety-workwear");
+    } else if (
+      cat.slug === "sanitary-bath-fittings" ||
+      cat.slug.includes("sanitary") ||
+      cat.slug.includes("bath-fittings")
+    ) {
+      setSelectedCategory("sanitary-bath-fittings");
+    } else if (
+      cat.slug === "cpvc-plumbing-tanks" ||
+      cat.slug === "cpvc-pipes-hardware" ||
+      cat.slug.includes("cpvc") ||
+      cat.slug.includes("plumbing")
+    ) {
+      setSelectedCategory("cpvc-plumbing-tanks");
+    } else if (
+      cat.slug === "home-appliances" ||
+      cat.slug.includes("appliance")
+    ) {
+      setSelectedCategory("home-appliances");
+    } else if (
+      cat.slug === "modular-kitchen-systems" ||
+      cat.slug.includes("kitchen-system")
+    ) {
+      setSelectedCategory("modular-kitchen-systems");
+    } else if (
+      cat.slug === "plywood-boards" ||
+      cat.slug.includes("plywood") ||
+      cat.slug.includes("hdhmr") ||
+      cat.slug.includes("laminate")
+    ) {
+      setSelectedCategory("plywood-boards");
+    } else if (
+      cat.slug === "tiles-marble-granite" ||
+      cat.slug.includes("tiles") ||
+      cat.slug.includes("marble") ||
+      cat.slug.includes("granite")
+    ) {
+      setSelectedCategory("tiles-marble-granite");
+    } else if (
+      cat.slug === "paints-putty-primer" ||
+      cat.slug.includes("paint") ||
+      cat.slug.includes("putty") ||
+      cat.slug.includes("primer")
+    ) {
+      setSelectedCategory("paints-putty-primer");
+    } else if (
+      cat.slug === "bricks-sand-gitti-aac" ||
+      cat.slug.includes("brick") ||
+      cat.slug.includes("sand") ||
+      cat.slug.includes("morang") ||
+      cat.slug.includes("gitti") ||
+      cat.slug.includes("aac")
+    ) {
+      setSelectedCategory("bricks-sand-gitti-aac");
+    } else {
+      setSelectedCategory(cat.dbCategory);
+    }
+    setSelectedPanelLabel(cat.title);
+  };
 
   const { data: materials, isLoading } = useGetMaterials({ stage: stage === "all" ? undefined : stage });
   const qc = useQueryClient();
@@ -638,7 +709,7 @@ export function Home() {
   /* Two non-overlapping feeds: top picks = core materials (cement/steel/…),
      builder picks = different categories (hardware/electrical/plumbing/…). */
   const topPicksProducts = React.useMemo(
-    () => DUMMY_PRODUCTS.slice(0, 6),
+    () => CORE_BUILDER_PRODUCTS.slice(0, 6),
     [],
   );
   const builderPicksProducts = React.useMemo(
@@ -753,6 +824,17 @@ export function Home() {
               onOpenCart={() => setCartOpen(true)}
               onSelectCategory={(cat) => setSelectedCategory(cat)}
             />
+            {/* ── Subnavigation Department Bar (Exact Match to Reference Screenshot) ── */}
+            <HomeDepartmentNav
+              activeDepartmentId={selectedCategory ? undefined : "home"}
+              onSelectDepartment={(dept) => {
+                if (dept.id === "home") {
+                  setSelectedCategory(null);
+                  setSelectedPanelLabel(null);
+                }
+              }}
+              onSelectCategory={handleDepartmentNavSelect}
+            />
             <HomeHeroBanner onSelectCategory={(cat) => setSelectedCategory(cat)} />
           </>
         ) : (
@@ -787,7 +869,7 @@ export function Home() {
             }`}
           >
             <span>🚚</span>
-            <span>60-Min Construction Hero (HomeRun)</span>
+            <span>60-Min Construction Hero (CONON-NOW)</span>
           </button>
           <button
             type="button"
@@ -799,7 +881,7 @@ export function Home() {
             }`}
           >
             <span>❄️</span>
-            <span>Winter Build Sale (Blinkit)</span>
+            <span>Winter Build Sale (Express)</span>
           </button>
         </div>
 
@@ -830,37 +912,19 @@ export function Home() {
         {/* ── Normal (non-search) UI ─────────────────────────────── */}
         {!isSearching && (
           <>
-            {/* ── Clean Top Department Navigation Bar (Civil & Interiors, Electrical, Tools, etc.) ── */}
-            <HomeDepartmentNav
-              activeDepartmentId={selectedCategory ? undefined : "home"}
-              onSelectDepartment={(dept) => {
-                if (dept.id === "home") {
-                  setSelectedCategory(null);
-                  setSelectedPanelLabel(null);
-                }
-              }}
-              onSelectCategory={(cat: HomeCategory) => {
-                if (cat.slug === "safety-workwear" || cat.slug === "shoes-gloves") {
-                  setSelectedCategory("safety-workwear");
-                } else if (
-                  cat.slug === "sanitary-bath-fittings" ||
-                  cat.slug.includes("sanitary") ||
-                  cat.slug.includes("bath-fittings")
-                ) {
-                  setSelectedCategory("sanitary-bath-fittings");
-                } else if (
-                  cat.slug === "cpvc-plumbing-tanks" ||
-                  cat.slug === "cpvc-pipes-hardware" ||
-                  cat.slug.includes("cpvc") ||
-                  cat.slug.includes("plumbing")
-                ) {
-                  setSelectedCategory("cpvc-plumbing-tanks");
-                } else {
-                  setSelectedCategory(cat.dbCategory);
-                }
-                setSelectedPanelLabel(cat.title);
-              }}
-            />
+            {/* ── Top Department Navigation Bar (rendered here when in seamless mode) ── */}
+            {heroMode !== "homerun" && (
+              <HomeDepartmentNav
+                activeDepartmentId={selectedCategory ? undefined : "home"}
+                onSelectDepartment={(dept) => {
+                  if (dept.id === "home") {
+                    setSelectedCategory(null);
+                    setSelectedPanelLabel(null);
+                  }
+                }}
+                onSelectCategory={handleDepartmentNavSelect}
+              />
+            )}
 
             {/* Category Grid or Material List */}
             <AnimatePresence mode="wait">
@@ -873,9 +937,24 @@ export function Home() {
                   {/* ── Signature 6-Column x 3-Row Centered Category Directory Grid (HomeRun Spec) ── */}
                   <HomeCategoryGrid
                     onSelectCategory={(cat: HomeCategory) => {
-                      if (cat.slug === "cement-civil-works") {
+                      if (
+                        cat.slug === "cement-civil-works" ||
+                        cat.slug === "cement" ||
+                        cat.slug === "steel" ||
+                        cat.slug.includes("cement") ||
+                        cat.slug.includes("sariya") ||
+                        cat.slug.includes("tmt") ||
+                        cat.slug.includes("steel")
+                      ) {
                         setSelectedCategory("cement");
-                      } else if (cat.slug === "plywood-boards") {
+                      } else if (
+                        cat.slug === "plywood-boards" ||
+                        cat.slug === "plywood-doors-hardware" ||
+                        cat.slug.includes("plywood") ||
+                        cat.slug.includes("door") ||
+                        cat.slug.includes("hdhmr") ||
+                        cat.slug.includes("laminate")
+                      ) {
                         setSelectedCategory("plywood-boards");
                       } else if (cat.slug === "fevicol-adhesives-sealants") {
                         setSelectedCategory("fevicol-adhesives-sealants");
@@ -887,14 +966,24 @@ export function Home() {
                         setSelectedCategory("wires-mcb-electrical");
                       } else if (cat.slug === "kitchen-sinks-faucets") {
                         setSelectedCategory("kitchen-sinks-faucets");
-                      } else if (cat.slug === "painting") {
+                      } else if (
+                        cat.slug === "painting" ||
+                        cat.slug === "paints-putty-primer" ||
+                        cat.slug.includes("paint") ||
+                        cat.slug.includes("putty") ||
+                        cat.slug.includes("primer")
+                      ) {
                         setSelectedCategory("painting");
                       } else if (cat.slug === "cctv-networking") {
                         setSelectedCategory("cctv-networking");
                       } else if (
                         cat.slug === "tile-stone-installation" ||
                         cat.slug === "tile-adhesives" ||
-                        cat.slug === "tiles"
+                        cat.slug === "tiles" ||
+                        cat.slug === "tiles-marble-granite" ||
+                        cat.slug.includes("tile") ||
+                        cat.slug.includes("granite") ||
+                        cat.slug.includes("marble")
                       ) {
                         setSelectedCategory("tile-stone-installation");
                       } else if (
@@ -921,6 +1010,26 @@ export function Home() {
                         cat.slug.includes("plumbing")
                       ) {
                         setSelectedCategory("cpvc-plumbing-tanks");
+                      } else if (
+                        cat.slug === "bricks-sand-gitti-aac" ||
+                        cat.slug === "eeta" ||
+                        cat.slug === "morang" ||
+                        cat.slug.includes("brick") ||
+                        cat.slug.includes("morang") ||
+                        cat.slug.includes("gitti") ||
+                        cat.slug.includes("aac")
+                      ) {
+                        setSelectedCategory("bricks-sand-gitti-aac");
+                      } else if (
+                        cat.slug === "home-appliances" ||
+                        cat.slug.includes("appliance")
+                      ) {
+                        setSelectedCategory("home-appliances");
+                      } else if (
+                        cat.slug === "modular-kitchen-systems" ||
+                        cat.slug.includes("kitchen-system")
+                      ) {
+                        setSelectedCategory("modular-kitchen-systems");
                       } else {
                         setSelectedCategory(cat.dbCategory);
                       }
@@ -971,6 +1080,42 @@ export function Home() {
                   {/* ── Festival / Mega Discount Banner ──── */}
                   <div className="mt-8">
                     <FestivalHeroBanner onSelectCategory={(cat) => setSelectedCategory(cat)} />
+                  </div>
+
+                  {/* ── Flagship Builder Kit 6-Stage Home Construction Planner Banner ── */}
+                  <div className="px-4 mt-6">
+                    <Link href="/builder-kit">
+                      <div
+                        className="relative rounded-3xl p-5 sm:p-6 overflow-hidden text-white cursor-pointer shadow-lg hover:shadow-xl transition active:scale-[0.99] border border-amber-400/30"
+                        style={{
+                          background: "linear-gradient(135deg, #0F172A 0%, #1E293B 55%, #334155 100%)",
+                        }}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                          <div className="space-y-1.5 max-w-lg">
+                            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider">
+                              <span>⚡ Flagship Project Planner</span>
+                            </div>
+                            <h3 className="text-base sm:text-xl font-black text-white leading-tight">
+                              6-Stage Home Construction Material Kit &amp; BOQ
+                            </h3>
+                            <p className="text-xs text-slate-300 leading-relaxed">
+                              Civil engineering formulas, 3 quality tiers (Standard • Premium • Luxury), vehicle split preview &amp; 1-click stage order to cart.
+                            </p>
+                          </div>
+
+                          <div className="flex flex-col items-start sm:items-end shrink-0">
+                            <span className="px-4 py-2.5 rounded-2xl bg-[#FDB813] hover:bg-[#F5B800] text-slate-950 font-black text-xs shadow-md flex items-center gap-1.5 transition">
+                              <span>Calculate BOQ Free</span>
+                              <span>→</span>
+                            </span>
+                            <span className="text-[10px] text-amber-300 font-bold mt-1.5">
+                              Printable A4 Quotation Included
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
 
                   {/* ── Explore CONON-NOW — quick-access feature shortcuts ──── */}
@@ -1178,9 +1323,46 @@ export function Home() {
                   </div>
 
                   {(() => {
-                    if (selectedCategory === "cement") {
+                    if (
+                      selectedCategory === "bricks" ||
+                      selectedCategory === "sand" ||
+                      selectedCategory === "aggregate" ||
+                      selectedCategory === "morang" ||
+                      selectedCategory === "gitti" ||
+                      selectedCategory === "eeta" ||
+                      selectedCategory === "bricks-sand-gitti-aac" ||
+                      selectedCategory?.toLowerCase().includes("brick") ||
+                      selectedCategory?.toLowerCase().includes("morang") ||
+                      selectedCategory?.toLowerCase().includes("gitti") ||
+                      selectedCategory?.toLowerCase().includes("aac")
+                    ) {
+                      return (
+                        <BricksMasonryStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "cement" ||
+                      selectedCategory === "cement-1" ||
+                      selectedCategory === "cement-white-cement" ||
+                      selectedCategory === "tmt-sariya" ||
+                      selectedCategory === "steel" ||
+                      selectedCategory === "binding-wire-accessories" ||
+                      selectedCategory === "waterproofing-chemicals" ||
+                      selectedCategory === "tile-adhesives-block-mortar" ||
+                      selectedCategory === "sand-plaster-mortars" ||
+                      selectedCategory === "masonry-tools-hardware" ||
+                      selectedCategory === "chemicals" ||
+                      selectedCategory === "cement-civil-works" ||
+                      selectedCategory?.toLowerCase().includes("cement") ||
+                      selectedCategory?.toLowerCase().includes("sariya") ||
+                      selectedCategory?.toLowerCase().includes("tmt") ||
+                      selectedCategory?.toLowerCase().includes("steel")
+                    ) {
                       return (
                         <CementCollectionStorefront
+                          defaultSubcat={selectedCategory}
                           onBackToDirectory={() => {
                             setSelectedCategory(null);
                             setSelectedPanelLabel(null);
@@ -1192,14 +1374,23 @@ export function Home() {
                     if (
                       selectedCategory === "plywood-boards" ||
                       selectedCategory === "wood" ||
-                      selectedCategory?.toLowerCase().includes("plywood")
+                      selectedCategory === "plywood-blockboard" ||
+                      selectedCategory === "plywood-8x4" ||
+                      selectedCategory === "flush-doors-30mm" ||
+                      selectedCategory === "laminates-1mm" ||
+                      selectedCategory === "hardware-locks-hinges" ||
+                      selectedCategory === "plywood-doors-hardware" ||
+                      selectedCategory === "hdhmr-mdf-boilo" ||
+                      selectedCategory === "laminates" ||
+                      selectedCategory?.toLowerCase().includes("plywood") ||
+                      selectedCategory?.toLowerCase().includes("flush-door") ||
+                      selectedCategory?.toLowerCase().includes("hdhmr") ||
+                      selectedCategory?.toLowerCase().includes("mdf") ||
+                      selectedCategory?.toLowerCase().includes("boilo") ||
+                      selectedCategory?.toLowerCase().includes("laminate")
                     ) {
                       return (
                         <PlywoodCollectionStorefront
-                          onBackToDirectory={() => {
-                            setSelectedCategory(null);
-                            setSelectedPanelLabel(null);
-                          }}
                           onOpenDetail={setDetailProduct}
                         />
                       );
@@ -1222,11 +1413,13 @@ export function Home() {
                     if (
                       selectedCategory === "furniture-wardrobe-bed-hardware" ||
                       selectedCategory === "hinges" ||
-                      selectedCategory?.toLowerCase().includes("hinge")
+                      selectedCategory?.toLowerCase().includes("hinge") ||
+                      selectedCategory?.toLowerCase().includes("furniture")
                     ) {
                       return (
-                        <HingesCollectionStorefront
+                        <FurnitureHardwareStorefront
                           onOpenDetail={setDetailProduct}
+                          onBackToDirectory={() => setSelectedCategory(null)}
                         />
                       );
                     }
@@ -1236,8 +1429,12 @@ export function Home() {
                       selectedCategory?.toLowerCase().includes("lock")
                     ) {
                       return (
-                        <LocksCollectionStorefront
+                        <DoorHardwareStorefront
                           onOpenDetail={setDetailProduct}
+                          onBackToDirectory={() => {
+                            setSelectedCategory(null);
+                            setSelectedPanelLabel(null);
+                          }}
                         />
                       );
                     }
@@ -1254,22 +1451,66 @@ export function Home() {
                     }
                     if (
                       selectedCategory === "kitchen-sinks-faucets" ||
+                      selectedCategory === "ss-sinks" ||
                       selectedCategory === "sinks" ||
                       selectedCategory?.toLowerCase().includes("sink")
                     ) {
                       return (
-                        <KitchenCollectionStorefront
+                        <KitchenSinksStorefront
+                          onBackToDirectory={() => {
+                            setSelectedCategory(null);
+                            setSelectedPanelLabel(null);
+                          }}
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "kitchen-systems" ||
+                      selectedCategory === "modular-kitchen" ||
+                      selectedCategory === "modular-kitchen-systems" ||
+                      selectedCategory === "kitchen" ||
+                      selectedCategory === "waste-bins-other-accessories" ||
+                      selectedCategory === "skirting-hardware" ||
+                      selectedCategory === "pullouts-baskets-wickers" ||
+                      selectedCategory === "magic-corner-pantry-units-pulldowns" ||
+                      selectedCategory === "tandems-inserts" ||
+                      selectedCategory?.toLowerCase().includes("kitchen") ||
+                      selectedCategory?.toLowerCase().includes("waste-bin") ||
+                      selectedCategory?.toLowerCase().includes("skirting") ||
+                      selectedCategory?.toLowerCase().includes("pullout") ||
+                      selectedCategory?.toLowerCase().includes("magic-corner") ||
+                      selectedCategory?.toLowerCase().includes("tandem")
+                    ) {
+                      return (
+                        <ModularKitchenStorefront
+                          onBackToDirectory={() => {
+                            setSelectedCategory(null);
+                            setSelectedPanelLabel(null);
+                          }}
                           onOpenDetail={setDetailProduct}
                         />
                       );
                     }
                     if (
                       selectedCategory === "painting" ||
+                      selectedCategory === "paint" ||
                       selectedCategory === "interior-emulsions" ||
-                      selectedCategory?.toLowerCase().includes("paint")
+                      selectedCategory === "paints-putty-primer" ||
+                      selectedCategory === "wall-putty" ||
+                      selectedCategory === "wall-metal-primers" ||
+                      selectedCategory === "interior-paints-distempers" ||
+                      selectedCategory === "exterior-paints" ||
+                      selectedCategory === "enamels-tools" ||
+                      selectedCategory === "enamels-thinners-tools" ||
+                      selectedCategory?.toLowerCase().includes("paint") ||
+                      selectedCategory?.toLowerCase().includes("putty") ||
+                      selectedCategory?.toLowerCase().includes("primer") ||
+                      selectedCategory?.toLowerCase().includes("enamel") ||
+                      selectedCategory?.toLowerCase().includes("distemper")
                     ) {
                       return (
-                        <PaintingCollectionStorefront
+                        <PaintsCollectionStorefront
                           onOpenDetail={setDetailProduct}
                         />
                       );
@@ -1278,12 +1519,18 @@ export function Home() {
                       selectedCategory === "cctv-networking" ||
                       selectedCategory === "cctv" ||
                       selectedCategory === "cameras" ||
+                      selectedCategory === "nvr-dvr-switches" ||
+                      selectedCategory === "wifi-networking" ||
+                      selectedCategory === "cctv-cat6-cable" ||
+                      selectedCategory === "cctv-accessories" ||
+                      selectedCategory === "rack-connectors-hardware" ||
                       selectedCategory?.toLowerCase().includes("cctv") ||
                       selectedCategory?.toLowerCase().includes("camera")
                     ) {
                       return (
                         <CCTVCollectionStorefront
                           onOpenDetail={setDetailProduct}
+                          defaultSubcat={selectedCategory}
                         />
                       );
                     }
@@ -1291,10 +1538,20 @@ export function Home() {
                       selectedCategory === "tile-stone-installation" ||
                       selectedCategory === "tile-adhesives" ||
                       selectedCategory === "tiles" ||
-                      selectedCategory?.toLowerCase().includes("tile")
+                      selectedCategory === "tiles-marble-granite" ||
+                      selectedCategory === "vitrified-floor-tiles" ||
+                      selectedCategory === "ceramic-wall-parking-tiles" ||
+                      selectedCategory === "granite-slabs" ||
+                      selectedCategory === "marble-natural-stones" ||
+                      selectedCategory === "grouts-tools" ||
+                      selectedCategory?.toLowerCase().includes("tile") ||
+                      selectedCategory?.toLowerCase().includes("granite") ||
+                      selectedCategory?.toLowerCase().includes("marble") ||
+                      selectedCategory?.toLowerCase().includes("vitrified") ||
+                      selectedCategory?.toLowerCase().includes("grout")
                     ) {
                       return (
-                        <TileAdhesivesCollectionStorefront
+                        <TilesCollectionStorefront
                           onOpenDetail={setDetailProduct}
                         />
                       );
@@ -1334,12 +1591,45 @@ export function Home() {
                       );
                     }
                     if (
+                      selectedCategory === "home-appliances" ||
+                      selectedCategory === "appliances" ||
+                      selectedCategory === "ceiling-fans" ||
+                      selectedCategory === "chimney" ||
+                      selectedCategory === "pedestal-fans" ||
+                      selectedCategory === "exhaust" ||
+                      selectedCategory === "water-heater-geyser" ||
+                      selectedCategory === "ups-inverter-batteries" ||
+                      selectedCategory === "pumps-motors" ||
+                      selectedCategory?.toLowerCase().includes("appliance") ||
+                      selectedCategory?.toLowerCase().includes("geyser") ||
+                      selectedCategory?.toLowerCase().includes("inverter") ||
+                      selectedCategory?.toLowerCase().includes("chimney") ||
+                      selectedCategory?.toLowerCase().includes("fan") ||
+                      selectedCategory?.toLowerCase().includes("pump")
+                    ) {
+                      return (
+                        <AppliancesCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                        />
+                      );
+                    }
+                    if (
                       selectedCategory === "cpvc-plumbing-tanks" ||
                       selectedCategory === "cpvc-pipes-hardware" ||
+                      selectedCategory === "cpvc-pipes" ||
+                      selectedCategory === "upvc-pipes-fittings" ||
+                      selectedCategory === "swr-drainage-pipes" ||
+                      selectedCategory === "cpvc-fittings-valves" ||
+                      selectedCategory === "solvent-cements-adhesives" ||
+                      selectedCategory === "overhead-water-tanks" ||
+                      selectedCategory === "water-tanks" ||
                       selectedCategory === "plumbing" ||
                       selectedCategory === "cpvc" ||
                       selectedCategory?.toLowerCase().includes("cpvc") ||
-                      selectedCategory?.toLowerCase().includes("plumb")
+                      selectedCategory?.toLowerCase().includes("upvc") ||
+                      selectedCategory?.toLowerCase().includes("swr") ||
+                      selectedCategory?.toLowerCase().includes("plumb") ||
+                      selectedCategory?.toLowerCase().includes("water-tank")
                     ) {
                       return (
                         <CPVCPlumbingStorefront

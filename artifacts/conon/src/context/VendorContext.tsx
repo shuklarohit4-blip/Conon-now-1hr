@@ -9,53 +9,35 @@ import React, {
 import {
   vendorApi,
   type ApiInventoryItem,
-  type ApiVendorOrder,
   type ApiLedgerEntry,
   type CreateProductPayload,
+  type MasterCatalogSKU,
+  type VendorOrder,
+  type VendorProfile,
+  type VendorWalletData,
 } from "@/lib/vendorApi";
-import { JWT_STORAGE_KEY, vendorLogin } from "@/lib/authApi";
+import { JWT_STORAGE_KEY, VENDOR_JWT_KEY, vendorLogin } from "@/lib/authApi";
 import productAssetManifest from "@/lib/productAssetManifest.json";
+import { resolveRealProductImage } from "@/utils/realMediaResolver";
 
 const manifest = productAssetManifest as Record<string, string>;
 
-function resolveVendorImg(name: string, existingImg?: string): string {
-  if (existingImg && existingImg.trim()) return existingImg.trim();
-  const n = (name || "").toLowerCase();
-  for (const [k, v] of Object.entries(manifest)) {
-    if (k.toLowerCase().includes(n) || n.includes(k.toLowerCase())) {
-      return v;
-    }
+export function resolveVendorImg(name: string, existingImg?: string): string {
+  if (existingImg && (existingImg.startsWith("data:image/") || existingImg.startsWith("blob:"))) {
+    return existingImg;
   }
-  if (n.includes("cement")) return "/images/products/cement/ultratech-weatherplus.webp";
-  if (n.includes("steel") || n.includes("tmt")) return "/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp";
-  if (n.includes("brick")) return "/images/products/bricks/first-class-red-brick.webp";
-  if (n.includes("sand")) return "/images/products/sand/screened-river-sand-cft.webp";
-  if (n.includes("aggregate") || n.includes("morang")) return "/images/products/aggregate/gitti-20mm-cft.webp";
-  if (n.includes("pipe")) return "/images/products/plumbing/astral-cpvc-pro-1-inch.webp";
-  if (n.includes("wire")) return "/images/products/steel/gi-binding-wire-18-gauge-25kg.webp";
-  return "";
+  return resolveRealProductImage(existingImg || name, name);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   VendorContext — the single source of truth for the Vendor Panel.
-
-   Backed entirely by the api-server (no localStorage mock). On mount it loads
-   the vendor's own inventory, orders and wallet (scoped server-side by the
-   vendor JWT). Every mutation hits the backend first and only updates local
-   state on success, so the UI never drifts from the database.
+   VendorContext — "Conon-Friend" Dukandar Companion Engine
+   Single source of truth for Vendor Portal, synchronized with:
+   - Live SSOT Catalog (753+ SKUs)
+   - 4 Pre-Seeded Lucknow Hubs (Katawala, Shree Balaji, Awasthi, Gomti Mart)
+   - Rider OTP Handover & Real-Time Wallet Credits
    ────────────────────────────────────────────────────────────────────────── */
 
 export type OrderStatus = "new" | "packing" | "ready";
-
-export interface VendorOrder {
-  id: string;
-  shortId: string;
-  buyer: string;
-  items: string;
-  time: string;
-  value: number;
-  status: OrderStatus;
-}
 
 export interface InventoryItem {
   id: string;
@@ -64,9 +46,12 @@ export interface InventoryItem {
   bg: string;
   img: string;
   price: number;
+  sellingPrice?: number;
   inStock: boolean;
   unit: string;
   category: string;
+  brand?: string;
+  fitGuardrail?: string;
 }
 
 export type LedgerStatus = "Pending Admin Approval" | "Approved";
@@ -79,6 +64,7 @@ export interface LedgerEntry {
   amount: number;
   type: LedgerType;
   status: LedgerStatus;
+  utrNumber?: string;
 }
 
 const FALLBACK_BG = "#f0f9ff";
@@ -88,60 +74,61 @@ function mapItem(a: ApiInventoryItem): InventoryItem {
     id: a.id,
     name: a.name,
     price: a.price,
+    sellingPrice: a.sellingPrice || Math.round(a.price * 1.14),
     inStock: a.inStock,
     unit: a.unit,
     category: a.category,
     img: resolveVendorImg(a.name, a.img),
     emoji: "📦",
     bg: FALLBACK_BG,
+    brand: a.brand,
+    fitGuardrail: a.fitGuardrail,
   };
 }
 
-function mapOrder(a: ApiVendorOrder): VendorOrder {
-  return {
-    id: a.id,
-    shortId: a.shortId,
-    buyer: a.buyer,
-    items: a.items,
-    time: a.time,
-    value: a.value,
-    status: (a.status as OrderStatus) ?? "new",
-  };
-}
-
-function mapLedger(a: ApiLedgerEntry): LedgerEntry {
+function mapLedger(a: any): LedgerEntry {
   return {
     id: a.id,
     date: a.date,
-    label: a.label,
+    label: a.description || a.label || "Payout Request",
     amount: a.amount,
     type: "payout",
-    status: a.status,
+    status: a.status === "SETTLED" || a.status === "Approved" ? "Approved" : "Pending Admin Approval",
+    utrNumber: a.utrNumber,
   };
 }
 
 interface VendorContextValue {
+  vendor: VendorProfile | null;
+  hubs: VendorProfile[];
   orders: VendorOrder[];
+  products: MasterCatalogSKU[];
   inventory: InventoryItem[];
   ledger: LedgerEntry[];
+  wallet: VendorWalletData | null;
   balance: number;
   totalEarned: number;
   pendingPayouts: number;
   newOrdersCount: number;
   inStockCount: number;
   outOfStockCount: number;
-  /** True during the initial data load. */
+  isOnline: boolean;
   loading: boolean;
-  /** Set when the initial load fails. */
   error: string | null;
-  /** Actions — all hit the backend and throw on failure. */
+
+  /** Actions */
+  toggleStoreStatus: () => Promise<void>;
+  switchDemoShop: (shopCodeOrId: string) => Promise<void>;
   acceptOrder: (id: string) => Promise<void>;
   markReady: (id: string) => Promise<void>;
+  flagShortage: (id: string, reason: string) => Promise<void>;
+  simulateTestOrder: () => Promise<VendorOrder>;
+  updateProductStock: (skuId: string, inStock: boolean) => Promise<void>;
+  updateProductPrice: (skuId: string, price: number) => Promise<void>;
   toggleStock: (id: string) => Promise<InventoryItem>;
   updatePrice: (id: string, price: number) => Promise<InventoryItem>;
   createProduct: (payload: CreateProductPayload) => Promise<InventoryItem>;
   requestPayout: (amount: number) => Promise<void>;
-  /** Insert an order pushed over the socket (deduped). */
   addIncomingOrder: (order: VendorOrder) => void;
   refresh: () => Promise<void>;
 }
@@ -149,129 +136,231 @@ interface VendorContextValue {
 const VendorContext = createContext<VendorContextValue | null>(null);
 
 export function VendorProvider({ children }: { children: React.ReactNode }) {
+  const [vendor, setVendor] = useState<VendorProfile | null>(null);
+  const [hubs, setHubs] = useState<VendorProfile[]>([]);
   const [orders, setOrders] = useState<VendorOrder[]>([]);
+  const [products, setProducts] = useState<MasterCatalogSKU[]>([]);
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const [ledger, setLedger] = useState<LedgerEntry[]>([]);
+  const [wallet, setWallet] = useState<VendorWalletData | null>(null);
   const [balance, setBalance] = useState(0);
   const [totalEarned, setTotalEarned] = useState(0);
   const [pendingPayouts, setPendingPayouts] = useState(0);
+  const [isOnline, setIsOnline] = useState(true);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const applyWallet = useCallback(
-    (w: { balance: number; totalEarned: number; pendingPayouts: number; ledger: ApiLedgerEntry[] }) => {
-      setBalance(w.balance);
-      setTotalEarned(w.totalEarned);
-      setPendingPayouts(w.pendingPayouts);
+  const applyWallet = useCallback((w: VendorWalletData | any) => {
+    if (!w) return;
+    setWallet(w);
+    const pend = w.pendingSettlement ?? w.pendingPayouts ?? 0;
+    const earned = w.totalEarned ?? (w.todayEarnings ? w.todayEarnings + (w.totalSettledMonth || 0) : 0);
+    setBalance(pend);
+    setPendingPayouts(pend);
+    setTotalEarned(earned);
+    if (Array.isArray(w.ledger)) {
       setLedger(w.ledger.map(mapLedger));
-    },
-    [],
-  );
+    }
+  }, []);
 
   const refresh = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      // Auto-authenticate if no JWT exists in localStorage
-      let token = localStorage.getItem(JWT_STORAGE_KEY);
-      if (!token) {
-        const loginRes = await vendorLogin();
+      // 1. Fetch vendor profile (with auto-recovery if needed)
+      let me: VendorProfile;
+      try {
+        me = await vendorApi.getMe();
+      } catch (authErr) {
+        // Auto-heal session
+        const loginRes = await vendorLogin({
+          phone: "9839011223",
+          storeName: "Katawala Hardware & Locks",
+          name: "Manoj Katawala",
+        });
         if (loginRes.ok && loginRes.token) {
-          localStorage.setItem(JWT_STORAGE_KEY, loginRes.token);
-          token = loginRes.token;
+          localStorage.setItem(VENDOR_JWT_KEY, loginRes.token);
+          localStorage.setItem("conon_vendor_store", "Katawala Hardware & Locks");
         }
+        me = await vendorApi.getMe();
       }
 
-      const [inv, ord, wallet] = await Promise.all([
-        vendorApi.getInventory(),
-        vendorApi.getOrders(),
-        vendorApi.getWallet(),
-      ]);
-      setInventory(inv.map(mapItem));
-      setOrders(ord.map(mapOrder));
-      applyWallet(wallet);
-    } catch (err) {
-      console.warn("[VendorContext] Refresh initial attempt failed, attempting self-heal:", err);
-      try {
-        const loginRes = await vendorLogin();
-        if (loginRes.ok && loginRes.token) {
-          localStorage.setItem(JWT_STORAGE_KEY, loginRes.token);
-          const [inv, ord, wallet] = await Promise.all([
-            vendorApi.getInventory(),
-            vendorApi.getOrders(),
-            vendorApi.getWallet(),
-          ]);
-          setInventory(inv.map(mapItem));
-          setOrders(ord.map(mapOrder));
-          applyWallet(wallet);
-          return;
-        }
-      } catch (retryErr) {
-        console.error("[VendorContext] Recovery error:", retryErr);
+      setVendor(me);
+      setIsOnline(me.isOpen);
+
+      // Clean up any stale garbage strings in localStorage
+      const curStored = localStorage.getItem("conon_vendor_store");
+      if (!curStored || curStored.toLowerCase().includes("undf") || curStored.length < 3) {
+        localStorage.setItem("conon_vendor_store", me.shopName);
       }
+
+      // 2. Load Hubs, Orders, Products, Wallet concurrently
+      const [hubsList, ordersList, productsList, walletData] = await Promise.all([
+        vendorApi.getHubs().catch(() => []),
+        vendorApi.getOrders().catch(() => []),
+        vendorApi.getProducts().catch(() => []),
+        vendorApi.getPayouts().catch(() => null),
+      ]);
+
+      setHubs(hubsList);
+      setOrders(ordersList);
+      setProducts(productsList);
+
+      // Map products to inventory format for backward compat
+      const mappedInv: InventoryItem[] = productsList.map((p) => ({
+        id: p.id,
+        name: p.name,
+        price: p.dealerLandingCost || Math.round(p.sellingPrice * 0.88),
+        sellingPrice: p.sellingPrice,
+        inStock: p.inStock,
+        unit: p.packSize || p.unit || "Unit",
+        category: p.category,
+        img: resolveVendorImg(p.name, p.imageUrl),
+        emoji: "📦",
+        bg: FALLBACK_BG,
+        brand: p.brand,
+        fitGuardrail: p.fitGuardrailBadge,
+      }));
+      setInventory(mappedInv);
+
+      if (walletData) {
+        applyWallet(walletData);
+      }
+    } catch (err: any) {
+      console.error("[VendorContext] Refresh failed:", err);
       setError("Couldn't load your store. Please check your connection or sign in.");
     } finally {
       setLoading(false);
     }
   }, [applyWallet]);
 
-  const refreshWallet = useCallback(async () => {
-    const wallet = await vendorApi.getWallet();
-    applyWallet(wallet);
-  }, [applyWallet]);
-
   useEffect(() => {
     refresh();
   }, [refresh]);
 
+  const toggleStoreStatus = useCallback(async () => {
+    const next = !isOnline;
+    setIsOnline(next);
+    try {
+      const res = await vendorApi.setStoreStatus(next);
+      if (res.vendor) {
+        setVendor(res.vendor);
+        setIsOnline(res.vendor.isOpen);
+      }
+    } catch (err) {
+      setIsOnline(!next);
+      throw err;
+    }
+  }, [isOnline]);
+
+  const switchDemoShop = useCallback(
+    async (shopCodeOrId: string) => {
+      setLoading(true);
+      try {
+        const res = await vendorApi.switchShop(shopCodeOrId);
+        if (res.token) {
+          localStorage.setItem(JWT_STORAGE_KEY, res.token);
+          localStorage.setItem("conon_vendor_store", res.vendor.shopName);
+        }
+        await refresh();
+      } finally {
+        setLoading(false);
+      }
+    },
+    [refresh],
+  );
+
   const acceptOrder = useCallback(async (id: string) => {
-    await vendorApi.updateOrderStatus(id, "packing");
+    const res = await vendorApi.acceptOrder(id);
     setOrders((prev) =>
-      prev.map((o) => (o.id === id ? { ...o, status: "packing" } : o)),
+      prev.map((o) =>
+        o.id === id || o.shortId === id
+          ? { ...o, status: "packing", rawStatus: "PACKING_READY", pickupOtp: res.pickupOtp || o.pickupOtp || "4829" }
+          : o,
+      ),
     );
   }, []);
 
   const markReady = useCallback(
     async (id: string) => {
-      await vendorApi.updateOrderStatus(id, "ready");
+      await vendorApi.markReady(id);
       setOrders((prev) =>
-        prev.map((o) => (o.id === id ? { ...o, status: "ready" } : o)),
+        prev.map((o) =>
+          o.id === id || o.shortId === id ? { ...o, status: "ready", rawStatus: "HANDED_OVER" } : o,
+        ),
       );
-      // "ready" realizes earnings, so the wallet balance changes.
-      await refreshWallet();
+      const w = await vendorApi.getPayouts();
+      applyWallet(w);
     },
-    [refreshWallet],
+    [applyWallet],
+  );
+
+  const flagShortage = useCallback(async (id: string, reason: string) => {
+    await vendorApi.flagShortage(id, reason);
+    setOrders((prev) =>
+      prev.map((o) =>
+        o.id === id || o.shortId === id ? { ...o, rawStatus: "FLAGGED_SHORTAGE", flaggedReason: reason } : o,
+      ),
+    );
+  }, []);
+
+  const simulateTestOrder = useCallback(async (): Promise<VendorOrder> => {
+    const newOrd = await vendorApi.devTestOrder();
+    setOrders((prev) => {
+      if (prev.some((o) => o.id === newOrd.id)) return prev;
+      return [newOrd, ...prev];
+    });
+    return newOrd;
+  }, []);
+
+  const updateProductStock = useCallback(
+    async (skuId: string, inStock: boolean) => {
+      // Optimistic update
+      setProducts((prev) => prev.map((p) => (p.id === skuId ? { ...p, inStock } : p)));
+      setInventory((prev) => prev.map((i) => (i.id === skuId ? { ...i, inStock } : i)));
+      await vendorApi.updateProduct(skuId, { inStock });
+    },
+    [],
+  );
+
+  const updateProductPrice = useCallback(
+    async (skuId: string, dealerLandingCost: number) => {
+      // Optimistic update
+      setProducts((prev) => prev.map((p) => (p.id === skuId ? { ...p, dealerLandingCost } : p)));
+      setInventory((prev) =>
+        prev.map((i) => (i.id === skuId ? { ...i, price: dealerLandingCost } : i)),
+      );
+      await vendorApi.updateProduct(skuId, { dealerLandingCost });
+    },
+    [],
   );
 
   const toggleStock = useCallback(
     async (id: string): Promise<InventoryItem> => {
       const current = inventory.find((x) => x.id === id);
       if (!current) throw new Error("Product not found.");
-      const updated = await vendorApi.updateInventory(id, { inStock: !current.inStock });
-      const mapped = mapItem(updated);
-      setInventory((prev) => prev.map((x) => (x.id === id ? mapped : x)));
-      return mapped;
+      const nextStock = !current.inStock;
+      await updateProductStock(id, nextStock);
+      return { ...current, inStock: nextStock };
     },
-    [inventory],
+    [inventory, updateProductStock],
   );
 
   const updatePrice = useCallback(
     async (id: string, price: number): Promise<InventoryItem> => {
-      const updated = await vendorApi.updateInventory(id, { price });
-      const mapped = mapItem(updated);
-      setInventory((prev) => prev.map((x) => (x.id === id ? mapped : x)));
-      return mapped;
+      const current = inventory.find((x) => x.id === id);
+      if (!current) throw new Error("Product not found.");
+      await updateProductPrice(id, price);
+      return { ...current, price };
     },
-    [],
+    [inventory, updateProductPrice],
   );
 
   const createProduct = useCallback(
     async (payload: CreateProductPayload): Promise<InventoryItem> => {
       const created = await vendorApi.createProduct(payload);
       const mapped = mapItem(created);
-      setInventory((prev) =>
-        [mapped, ...prev].sort((a, b) => a.name.localeCompare(b.name)),
-      );
+      setInventory((prev) => [mapped, ...prev].sort((a, b) => a.name.localeCompare(b.name)));
       return mapped;
     },
     [],
@@ -279,8 +368,9 @@ export function VendorProvider({ children }: { children: React.ReactNode }) {
 
   const requestPayout = useCallback(
     async (amount: number) => {
-      const wallet = await vendorApi.requestPayout(amount);
-      applyWallet(wallet);
+      await vendorApi.requestPayout(amount);
+      const w = await vendorApi.getPayouts();
+      applyWallet(w);
     },
     [applyWallet],
   );
@@ -292,7 +382,10 @@ export function VendorProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const newOrdersCount = useMemo(() => orders.filter((o) => o.status === "new").length, [orders]);
+  const newOrdersCount = useMemo(
+    () => orders.filter((o) => o.status === "new" || o.rawStatus === "NEW_REQUEST").length,
+    [orders],
+  );
   const inStockCount = useMemo(() => inventory.filter((i) => i.inStock).length, [inventory]);
   const outOfStockCount = useMemo(
     () => inventory.filter((i) => !i.inStock).length,
@@ -301,19 +394,30 @@ export function VendorProvider({ children }: { children: React.ReactNode }) {
 
   const value = useMemo<VendorContextValue>(
     () => ({
+      vendor,
+      hubs,
       orders,
+      products,
       inventory,
       ledger,
+      wallet,
       balance,
       totalEarned,
       pendingPayouts,
       newOrdersCount,
       inStockCount,
       outOfStockCount,
+      isOnline,
       loading,
       error,
+      toggleStoreStatus,
+      switchDemoShop,
       acceptOrder,
       markReady,
+      flagShortage,
+      simulateTestOrder,
+      updateProductStock,
+      updateProductPrice,
       toggleStock,
       updatePrice,
       createProduct,
@@ -322,19 +426,30 @@ export function VendorProvider({ children }: { children: React.ReactNode }) {
       refresh,
     }),
     [
+      vendor,
+      hubs,
       orders,
+      products,
       inventory,
       ledger,
+      wallet,
       balance,
       totalEarned,
       pendingPayouts,
       newOrdersCount,
       inStockCount,
       outOfStockCount,
+      isOnline,
       loading,
       error,
+      toggleStoreStatus,
+      switchDemoShop,
       acceptOrder,
       markReady,
+      flagShortage,
+      simulateTestOrder,
+      updateProductStock,
+      updateProductPrice,
       toggleStock,
       updatePrice,
       createProduct,

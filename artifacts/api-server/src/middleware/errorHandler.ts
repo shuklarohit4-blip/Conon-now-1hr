@@ -82,7 +82,9 @@ export function errorHandler(
 
   if (isDatabaseConnectionError(err)) {
     res.status(503).json({
+      ok: false,
       error: "Database unavailable",
+      code: "DB_UNAVAILABLE",
       details:
         "Configure MONGODB_URI with a reachable MongoDB Atlas connection string.",
     });
@@ -91,7 +93,9 @@ export function errorHandler(
 
   if (err instanceof CreditExceededError) {
     res.status(402).json({
+      ok: false,
       error: err.message,
+      code: "CREDIT_EXCEEDED",
       availableCredit: err.availableCredit,
       requiredAmount: err.requiredAmount,
     });
@@ -100,12 +104,18 @@ export function errorHandler(
 
   if (err instanceof ZodError) {
     res.status(400).json({
-      error: "Invalid request",
+      ok: false,
+      error: "Invalid request payload",
+      code: "VALIDATION_ERROR",
       details: err.issues,
     });
     return;
   }
 
   logger.error({ err }, "Unhandled request error");
-  res.status(500).json({ error: "Internal server error" });
+  res.status(500).json({
+    ok: false,
+    error: (err as any)?.message || "Internal server error",
+    code: "INTERNAL_ERROR",
+  });
 }

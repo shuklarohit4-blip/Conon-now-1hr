@@ -1,0 +1,44 @@
+export interface MasterCatalogSKU {
+  id: string;
+  skuId: string;
+  name: string;
+  brand: string;
+  category: string;
+  categoryName: string;
+  subcategory?: string;
+  unit: string;
+  packSize?: string;
+  oemModelCode?: string;
+  shortDescription?: string;
+  highlights?: string[];
+  specs?: Array<{ label: string; value: string }>;
+  fitGuardrailBadge?: string;
+  preferredVendorId?: string;
+  sellingPrice: number;
+  mrp: number;
+  dealerLandingCost: number;
+  inStock: boolean;
+  express60Min: boolean;
+  gstPercent: number;
+  hsnCode: string;
+  deliveryVehicleType: "2W_BIKE" | "3W_ELECTRIC_LOADER" | "4W_PICKUP" | "HEAVY_TRUCK";
+  imageUrl: string;
+  description?: string;
+  specifications?: Record<string, any>;
+  tags?: string[];
+  isFeatured?: boolean;
+  pairedSkuIds?: string[];
+  pairedProducts?: Array<{
+    id: string;
+    name: string;
+    brand: string;
+    sellingPrice: number;
+    mrp: number;
+    imageUrl: string;
+    unit?: string;
+    deliveryVehicleType?: string;
+  }>;
+  isCustom?: boolean;
+  archived?: boolean;
+  updatedAt: string;
+}

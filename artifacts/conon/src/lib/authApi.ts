@@ -10,7 +10,32 @@ import { API_ORIGIN } from "./apiBase";
 
 const API = `${API_ORIGIN}/api`;
 
-export const JWT_STORAGE_KEY = "conon_jwt";
+export const CUSTOMER_JWT_KEY = "conon_customer_jwt";
+export const VENDOR_JWT_KEY   = "conon_vendor_jwt";
+export const DRIVER_JWT_KEY   = "conon_driver_jwt";
+export const ADMIN_JWT_KEY    = "conon_admin_jwt";
+
+/**
+ * Backward compatibility alias (points to customer JWT)
+ */
+export const JWT_STORAGE_KEY = CUSTOMER_JWT_KEY;
+
+/**
+ * Get role-scoped JWT token safely without collisions across tabs.
+ */
+export function getRoleToken(role: "customer" | "vendor" | "driver" | "admin"): string | null {
+  if (typeof window === "undefined") return null;
+  if (role === "admin") {
+    return localStorage.getItem(ADMIN_JWT_KEY);
+  }
+  if (role === "vendor") {
+    return localStorage.getItem(VENDOR_JWT_KEY) || localStorage.getItem("conon_jwt");
+  }
+  if (role === "driver") {
+    return localStorage.getItem(DRIVER_JWT_KEY) || localStorage.getItem("conon_driver_token");
+  }
+  return localStorage.getItem(CUSTOMER_JWT_KEY) || localStorage.getItem("conon_jwt") || localStorage.getItem("jwt");
+}
 
 export interface OtpUser {
   id: number;

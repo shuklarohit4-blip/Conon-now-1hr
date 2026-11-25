@@ -75,6 +75,29 @@ export async function fetchPlaceDetails(
   return (await r.json()) as PlaceDetails;
 }
 
+export interface ReverseGeocodeResult {
+  pincode: string;
+  area: string;
+  city: string;
+  address: string;
+  lat: number;
+  lng: number;
+}
+
+export async function fetchReverseGeocode(
+  lat: number,
+  lng: number,
+): Promise<ReverseGeocodeResult | null> {
+  const url = `${API}/maps/geocode/reverse?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}`;
+  try {
+    const r = await fetch(url, { credentials: "include" });
+    if (!r.ok) return null;
+    return (await r.json()) as ReverseGeocodeResult;
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchDirections(
   origin: LatLng,
   destination: LatLng,

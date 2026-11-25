@@ -15,22 +15,374 @@ const router: IRouter = Router();
 const MAX_CART_ITEMS = 100;
 
 const FALLBACK_MATERIALS = [
-  { id: "demo-cement-weatherplus", name: "UltraTech Weather Plus Cement 50kg", category: "cement", price: 380, unit: "bag", vendor: "UltraTech Depot" },
-  { id: "demo-cement-opc53", name: "OPC 53 Grade Cement", category: "cement", price: 410, unit: "bag", vendor: "CONON-NOW Supplier" },
-  { id: "demo-cement-ppc", name: "PPC Cement", category: "cement", price: 385, unit: "bag", vendor: "CONON-NOW Supplier" },
-  { id: "demo-tmt-fe500", name: "Tata Tiscon 550SD TMT Steel Bars", category: "steel", price: 62000, unit: "tonne", vendor: "Tata Steel Yard" },
-  { id: "demo-river-sand", name: "River Sand (Plaster Grade)", category: "sand", price: 1450, unit: "ton", vendor: "CONON-NOW Sand Yard" },
-  { id: "demo-stone-aggregate", name: "20mm Stone Aggregate (Gitti)", category: "aggregate", price: 3200, unit: "tonne", vendor: "CONON-NOW Quarry" },
-  { id: "demo-red-bricks", name: "First Class Red Clay Bricks", category: "bricks", price: 10, unit: "piece", vendor: "CONON-NOW Brickfield" },
-  { id: "demo-flyash-bricks", name: "Fly Ash Bricks Standard", category: "bricks", price: 7, unit: "piece", vendor: "CONON-NOW Brickfield" },
-  { id: "demo-asian-apex", name: "Asian Paints Apex Weatherproof 20L", category: "paint", price: 6450, unit: "bucket", vendor: "Asian Paints Hub" },
-  { id: "demo-kajaria-tiles", name: "Kajaria Vitrified Floor Tiles 600x600", category: "tiles", price: 1180, unit: "box", vendor: "Kajaria Galaxy" },
-  { id: "demo-polycab-wire", name: "Polycab FR House Wire 1.5 sq.mm", category: "electrical", price: 1480, unit: "coil", vendor: "Polycab Electric" },
-  { id: "demo-astral-pipe", name: "Astral CPVC FlowGuard Pipe 1-Inch", category: "plumbing", price: 320, unit: "piece", vendor: "Astral Pipes Depot" },
-  { id: "demo-fevicol-sh", name: "Fevicol SH Synthetic Resin 50kg", category: "adhesives", price: 6800, unit: "drum", vendor: "Pidilite Distributor" },
-  { id: "demo-drfixit-pidifin", name: "Dr. Fixit Pidifin 2K Waterproofing 20kg", category: "waterproofing", price: 2200, unit: "kit", vendor: "Dr. Fixit Store" },
-  { id: "demo-hettich-hinges", name: "Hettich Soft-Close Concealed Hinges", category: "hardware", price: 580, unit: "pack", vendor: "Hettich Hardware" },
-  { id: "demo-bosch-drill", name: "Bosch GSB 550 Professional Impact Drill", category: "tools", price: 2450, unit: "kit", vendor: "Bosch Tools Hub" },
+  {
+    "id": "maha-ppc-cement-50kg",
+    "name": "Maha PPC Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 355,
+    "unit": "50 Kg Bag",
+    "vendor": "Maha Cement Official"
+  },
+  {
+    "id": "adani-acc-suraksha-power-ppc",
+    "name": "Adani ACC Suraksha Power PPC Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 370,
+    "unit": "50 Kg Bag",
+    "vendor": "ACC Official"
+  },
+  {
+    "id": "ultratech-ppc-cement-50kg",
+    "name": "Ultratech PPC Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 410,
+    "unit": "50 Kg Bag",
+    "vendor": "UltraTech Official"
+  },
+  {
+    "id": "birla-white-cement-50kg",
+    "name": "Birla White Cement",
+    "category": "cement",
+    "price": 40,
+    "unit": "Pack",
+    "vendor": "Birla White Official"
+  },
+  {
+    "id": "priya-opc-53-grade-cement-50kg",
+    "name": "Priya OPC 53 Grade Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 390,
+    "unit": "50 Kg Bag",
+    "vendor": "Priya Cement Official"
+  },
+  {
+    "id": "priya-ppc-cement-50kg",
+    "name": "Priya PPC Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 360,
+    "unit": "50 Kg Bag",
+    "vendor": "Priya Cement Official"
+  },
+  {
+    "id": "maha-cement-opc-53-grade-cement-50kg",
+    "name": "Maha Cement OPC 53 Grade Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 390,
+    "unit": "50 Kg Bag",
+    "vendor": "Maha Cement Official"
+  },
+  {
+    "id": "ramco-supergrade-ppc-cement-50kg",
+    "name": "Ramco Supergrade PPC Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 395,
+    "unit": "50 Kg Bag",
+    "vendor": "Ramco Official"
+  },
+  {
+    "id": "birla-super-opc-53-grade-cement-50kg",
+    "name": "Birla Super OPC 53 Grade Cement, 50 Kg Bag",
+    "category": "cement",
+    "price": 450,
+    "unit": "50 Kg Bag",
+    "vendor": "Birla Super Official"
+  },
+  {
+    "id": "ramco-cement-opc-53-grade-50kg",
+    "name": "Ramco Cement OPC 53 Grade, 50 Kg Bag",
+    "category": "cement",
+    "price": 430,
+    "unit": "50 Kg Bag",
+    "vendor": "Ramco Official"
+  },
+  {
+    "id": "truegrit-triple-washed-m-sand-25kg",
+    "name": "TRUEGRIT Triple Washed M-Sand (Plastering Grade / P-Sand) - 25kg Bag",
+    "category": "sand-plaster-mortars",
+    "price": 150,
+    "unit": "25 Kg Bag",
+    "vendor": "TRUEGRIT Official"
+  },
+  {
+    "id": "alagar-super-plast-gypsum-plaster-25kg",
+    "name": "Alagar Super Plast Gypsum Plaster, 25 Kg Bag",
+    "category": "sand-plaster-mortars",
+    "price": 295,
+    "unit": "25 Kg Bag",
+    "vendor": "Alagar Official"
+  },
+  {
+    "id": "jsw-enduro-plast-ready-mix-plaster-40kg",
+    "name": "JSW Enduro Plast Ready Mix Plaster, 40 Kg Bag",
+    "category": "sand-plaster-mortars",
+    "price": 305,
+    "unit": "40 Kg Bag",
+    "vendor": "JSW Cement Official"
+  },
+  {
+    "id": "saint-gobain-gyproc-xpert-plus-gypsum-25kg",
+    "name": "Saint-Gobain Gyproc Xpert+ Gypsum Punning Plaster, 25 Kg",
+    "category": "sand-plaster-mortars",
+    "price": 395,
+    "unit": "25 Kg Bag",
+    "vendor": "Gyproc Official"
+  },
+  {
+    "id": "jsw-block-grip-aac-block-jointing-mortar-40kg",
+    "name": "JSW Block Grip AAC Block Jointing Mortar/Adhesive, 40 Kg Bag",
+    "category": "sand-plaster-mortars",
+    "price": 415,
+    "unit": "40 Kg Bag",
+    "vendor": "JSW Cement Official"
+  },
+  {
+    "id": "taparia-claw-hammer-with-handle-340g",
+    "name": "Taparia Claw Hammer with Handle, 340 gms",
+    "category": "masonry-tools-hardware",
+    "price": 375,
+    "unit": "1 Pc",
+    "vendor": "Taparia Official"
+  },
+  {
+    "id": "vertical-plumb-bob-leveling-tool",
+    "name": "Vertical Plumb Bob Leveling Tool with Rope String",
+    "category": "masonry-tools-hardware",
+    "price": 115,
+    "unit": "1 Pc",
+    "vendor": "WorkPro Official"
+  },
+  {
+    "id": "masonry-pinji-bricklayer-line-pins",
+    "name": "Masonry Pinji Bricklayer Line Pins (1-Piece)",
+    "category": "masonry-tools-hardware",
+    "price": 55,
+    "unit": "1 Pc",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "notched-trowel-plastering-gurumala",
+    "name": "Notched Trowel Plastering Gurumala",
+    "category": "masonry-tools-hardware",
+    "price": 94,
+    "unit": "1 Pc",
+    "vendor": "WorkPro Official"
+  },
+  {
+    "id": "taparia-club-hammer-with-handle-1kg",
+    "name": "Taparia Club Hammer with Handle - 1KG - GH 1000",
+    "category": "masonry-tools-hardware",
+    "price": 531,
+    "unit": "1 Pc",
+    "vendor": "Taparia Official"
+  },
+  {
+    "id": "taparia-ball-pein-hammer-with-handle-200g",
+    "name": "Taparia Ball Pein Hammer with Handle - 200G - WH 200",
+    "category": "masonry-tools-hardware",
+    "price": 246,
+    "unit": "1 Pc",
+    "vendor": "Taparia Official"
+  },
+  {
+    "id": "blue-tarpaulin-tirpal-110-gsm",
+    "name": "Blue Tarpaulin (Tirpal), 110 GSM, Waterproof Protective Sheet",
+    "category": "masonry-tools-hardware",
+    "price": 389,
+    "unit": "1 Sheet",
+    "vendor": "Tirpal Official"
+  },
+  {
+    "id": "haks-plaster-trowel-gurmala-4x10",
+    "name": "Haks Plaster Trowel Gurmala, 4\" x 10\"",
+    "category": "masonry-tools-hardware",
+    "price": 40,
+    "unit": "1 Pc",
+    "vendor": "Haks Official"
+  },
+  {
+    "id": "chicken-wire-mesh-20-gauge-3ft-2kg",
+    "name": "Chicken Wire Mesh, 20 Gauge, 3ft Wide, 2Kg",
+    "category": "masonry-tools-hardware",
+    "price": 320,
+    "unit": "1 Roll",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "freemans-ikon-steel-measuring-tape",
+    "name": "Freemans Ikon Steel Measuring Tape, Auto-Lock, ABS Case with Belt Clip",
+    "category": "masonry-tools-hardware",
+    "price": 86,
+    "unit": "1 Pc",
+    "vendor": "Freemans Official"
+  },
+  {
+    "id": "freemans-spirit-level-aluminium-magnetic-30cm",
+    "name": "Freemans Spirit Level, Aluminium, Magnetic, 30cm (12\")",
+    "category": "masonry-tools-hardware",
+    "price": 240,
+    "unit": "1 Pc",
+    "vendor": "Freemans Official"
+  },
+  {
+    "id": "khurpi-scraper-steel-blade",
+    "name": "Khurpi / Scraper, Steel Blade with Wooden Handle | Paint, Putty & Plaster Removal | Painter's Tool",
+    "category": "masonry-tools-hardware",
+    "price": 40,
+    "unit": "1 Pc",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "karni-masonry-trowel",
+    "name": "Karni Masonry Trowel",
+    "category": "masonry-tools-hardware",
+    "price": 70,
+    "unit": "1 Pc",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "black-foam-cleaning-sponge-12pcs",
+    "name": "Black Foam Cleaning Sponge - 12 Pcs Pack",
+    "category": "masonry-tools-hardware",
+    "price": 180,
+    "unit": "Pack",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "plastic-bandli-tasla-ghamela",
+    "name": "Plastic Bandli / Tasla / Ghamela | Lightweight Rustproof Pan for Cement, Mortar, Sand & Household",
+    "category": "masonry-tools-hardware",
+    "price": 99,
+    "unit": "1 Pc",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "iron-tasla-bandli-ghamela",
+    "name": "Iron Tasla / Bandli for Construction | Cement, Mortar, Sand & Concrete Carrying Pan | Ghamela",
+    "category": "masonry-tools-hardware",
+    "price": 120,
+    "unit": "1 Pc",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "heavy-duty-wall-cutting-chisel",
+    "name": "Heavy Duty Wall Cutting Chisel",
+    "category": "masonry-tools-hardware",
+    "price": 90,
+    "unit": "1 Pc",
+    "vendor": "WorkPro Official"
+  },
+  {
+    "id": "wooden-gatta-supporting-wedges-100pcs",
+    "name": "Wooden Gatta | Supporting Wedges for Fittings - 100 Pcs Pack",
+    "category": "masonry-tools-hardware",
+    "price": 55,
+    "unit": "Pack",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "pvc-wall-plugs-gitti-box",
+    "name": "PVC Wall Plugs Gitti Box",
+    "category": "masonry-tools-hardware",
+    "price": 35,
+    "unit": "1 Box",
+    "vendor": "Generic Official"
+  },
+  {
+    "id": "double-face-sledge-club-hammer",
+    "name": "Double Face Sledge / Club Hammer, Wooden Handle | Masonry, Chisel Driving & Demolition Work",
+    "category": "masonry-tools-hardware",
+    "price": 150,
+    "unit": "1 Pc",
+    "vendor": "WorkPro Official"
+  },
+  {
+    "id": "floating-trowel-plasterers-float",
+    "name": "Floating Trowel / Plasterer's Float | Wooden Handle | Plaster, Render & Concrete Levelling Tool",
+    "category": "masonry-tools-hardware",
+    "price": 60,
+    "unit": "1 Pc",
+    "vendor": "WorkPro Official"
+  },
+  {
+    "id": "l-square-try-square-2ft-angle-ruler",
+    "name": "L-Square (Try Square) 2FT Right Angle Ruler",
+    "category": "masonry-tools-hardware",
+    "price": 199,
+    "unit": "1 Pc",
+    "vendor": "Freemans Official"
+  },
+  {
+    "id": "fosroc-conbextra-gp2-cementitious-grout-25kg",
+    "name": "Fosroc Conbextra GP2 Cementitious Grout, 25kg",
+    "category": "chemicals",
+    "price": 550,
+    "unit": "25 Kg Bag",
+    "vendor": "Fosroc Official"
+  },
+  {
+    "id": "dr-fixit-lw-plus-5l",
+    "name": "Dr. Fixit LW+ Integral Waterproofing Liquid Compound 5L",
+    "category": "chemicals",
+    "price": 640,
+    "unit": "5 L Can",
+    "vendor": "Dr. Fixit Official"
+  },
+  {
+    "id": "dr-fixit-pidicrete-urp-1l",
+    "name": "Dr. Fixit Pidicrete URP SBR Latex Bonding Agent 1L",
+    "category": "chemicals",
+    "price": 280,
+    "unit": "1 L Bottle",
+    "vendor": "Dr. Fixit Official"
+  },
+  {
+    "id": "dr-fixit-fastflex-12kg",
+    "name": "Dr. Fixit Fastflex Dual Component Waterproofing Coating 12 Kg",
+    "category": "chemicals",
+    "price": 1850,
+    "unit": "12 Kg Kit",
+    "vendor": "Dr. Fixit Official"
+  },
+  {
+    "id": "century-sainik-710-bwp",
+    "name": "Century Sainik 710 BWP Plywood 19mm",
+    "category": "wood",
+    "price": 1455,
+    "unit": "1 Sheet",
+    "vendor": "CenturyPly Official"
+  },
+  {
+    "id": "action-tesa-hdhmr-board-plain",
+    "name": "Action Tesa HDHMR Board Plain 18mm",
+    "category": "wood",
+    "price": 514,
+    "unit": "1 Sheet",
+    "vendor": "Action Tesa Official"
+  },
+  {
+    "id": "cp-plus-4-port-poe-switch",
+    "name": "CP Plus 4 Port PoE Switch, 65W",
+    "category": "cctv",
+    "price": 1350,
+    "unit": "Piece",
+    "vendor": "CP Plus Official"
+  },
+  {
+    "id": "atomberg-renesa-pedestal-fan",
+    "name": "Atomberg Renesa 400mm Pedestal Fan with Remote",
+    "category": "electrical",
+    "price": 3699,
+    "unit": "Piece",
+    "vendor": "Atomberg Official"
+  },
+  {
+    "id": "ebco-pro-motion-tandem-box",
+    "name": "Ebco Pro Motion Tandem Box, S3 Series, 50Kg",
+    "category": "hardware",
+    "price": 2447,
+    "unit": "Full Set",
+    "vendor": "Ebco Official"
+  }
 ];
 
 interface CartItemRecord {
@@ -55,33 +407,29 @@ interface CartRecord {
 const memoryCarts = new Map<string, CartRecord>();
 let memoryCartIdCounter = 1000;
 let memoryItemIdCounter = 5000;
+let isMongoOperational = false; // Fast memory-first bypass for 0-latency instant response
 
 async function getOrCreateCart(sessionId: string): Promise<CartRecord> {
-  try {
-    let cart = await collection("carts").findOne({ sessionId });
-    if (cart) return cart as unknown as CartRecord;
+  if (isMongoOperational) {
+    try {
+      let cart = await collection("carts").findOne({ sessionId });
+      if (cart) return cart as unknown as CartRecord;
 
-    const newCart = {
-      id: await nextId("carts"),
-      sessionId,
-      createdAt: new Date(),
-      items: [],
-    };
-    await collection("carts").insertOne(newCart);
-    cart = await collection("carts").findOne({ sessionId });
-    if (cart) return cart as unknown as CartRecord;
-  } catch (error) {
-    if ((error as { code?: number }).code === 11000) {
-      try {
-        const cart = await collection("carts").findOne({ sessionId });
-        if (cart) return cart as unknown as CartRecord;
-      } catch {
-        // Fall back to memory
-      }
+      const newCart = {
+        id: await nextId("carts"),
+        sessionId,
+        createdAt: new Date(),
+        items: [],
+      };
+      await collection("carts").insertOne(newCart);
+      cart = await collection("carts").findOne({ sessionId });
+      if (cart) return cart as unknown as CartRecord;
+    } catch {
+      isMongoOperational = false;
     }
   }
 
-  // In-memory fallback
+  // Instant in-memory fallback
   let memCart = memoryCarts.get(sessionId);
   if (!memCart) {
     memCart = {
@@ -214,8 +562,8 @@ router.post("/cart", async (req, res) => {
     "CONON Verified Supplier";
 
   const rawPrice =
-    material?.price ??
     body.price ??
+    material?.price ??
     catalogProduct?.price ??
     fallbackMat?.price ??
     100;

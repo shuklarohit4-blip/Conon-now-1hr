@@ -11,6 +11,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import type { Product } from "@/components/ProductCard";
+import { RealProductImage } from "@/components/RealProductImage";
 
 export interface SafetyProduct {
   id: string;
@@ -663,9 +664,13 @@ export function SafetyCollectionStorefront({
                       onClick={() => openModal(p)}
                       className="relative w-full aspect-square bg-[#FFFFFF] p-3 flex items-center justify-center cursor-pointer overflow-hidden border-b border-[#F3F4F6]"
                     >
-                      <img
+                      <RealProductImage
+                        product={p}
                         src={p.image}
                         alt={p.title}
+                        title={p.title}
+                        brand={p.brand}
+                        category="safety-workwear"
                         className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
                       />
 

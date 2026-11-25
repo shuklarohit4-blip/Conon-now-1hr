@@ -13,9 +13,15 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useLocation } from "wouter";
 import { useUser } from "@/context/UserContext";
+import { useAuthContext } from "@/context/AuthContext";
 import { toast } from "sonner";
-import { JWT_STORAGE_KEY } from "@/lib/authApi";
+import { JWT_STORAGE_KEY, ADMIN_JWT_KEY } from "@/lib/authApi";
 import { apiUrl as resolveApiUrl } from "@/lib/apiBase";
+import { IS_LOCAL_ADMIN, MAC_ADMIN_KEY } from "@/config/adminGuard";
+
+const CononCommandOS = IS_LOCAL_ADMIN
+  ? React.lazy(() => import("@/components/admin/CononCommandOS"))
+  : null;
 
 /* ── Brand tokens ───────────────────────────────────────────── */
 const Y  = "#FBBF24";   // Safety Yellow
@@ -1165,10 +1171,52 @@ function SettingsModule() {
 
 export function AdminDashboard() {
   const [, setLocation] = useLocation();
-  const { logout } = useUser();
+  const { user, isAdmin, logout: authLogout } = useAuthContext();
+  const [showClassic, setShowClassic] = useState(false);
+
+  // If not running as local admin, block and return 404
+  if (!IS_LOCAL_ADMIN) {
+    return (
+      <div className="min-h-screen bg-[#0B0F17] flex flex-col items-center justify-center p-6 text-center">
+        <h1 className="text-3xl font-black text-white">404</h1>
+        <p className="text-sm text-slate-400 mt-2">Page not found</p>
+        <button
+          type="button"
+          onClick={() => setLocation("/home")}
+          className="mt-6 px-4 py-2 rounded-xl bg-amber-400 text-slate-900 font-bold text-xs uppercase cursor-pointer"
+        >
+          Return to Storefront
+        </button>
+      </div>
+    );
+  }
+
+  // If running locally as admin and not in classic mode, render the modern CONON COMMAND OS
+  if (IS_LOCAL_ADMIN && CononCommandOS && !showClassic) {
+    return (
+      <React.Suspense
+        fallback={
+          <div className="min-h-screen bg-[#070B14] flex flex-col items-center justify-center text-amber-400 font-bold gap-3">
+            <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+            <p className="text-sm uppercase tracking-widest">Loading CONON COMMAND OS…</p>
+          </div>
+        }
+      >
+        <CononCommandOS onSwitchToClassic={() => setShowClassic(true)} />
+      </React.Suspense>
+    );
+  }
+
   const [active, setActive] = useState<Module>("overview");
 
-  const handleLogout = () => { logout(); setLocation("/login"); };
+  const handleLogout = () => {
+    localStorage.removeItem(ADMIN_JWT_KEY);
+    localStorage.removeItem(JWT_STORAGE_KEY);
+    localStorage.removeItem("conon_role");
+    authLogout();
+    toast.info("Logged out from CEO Control Room");
+    setLocation("/home");
+  };
 
   const nav: { id: Module; icon: LucideIcon; label: string }[] = [
     { id: "overview", icon: LayoutDashboard, label: "God-Eye"          },
@@ -1204,7 +1252,21 @@ export function AdminDashboard() {
             <p className="text-[10px] font-bold leading-none mt-0.5" style={{ color: Y }}>Admin Control Room · Full Access</p>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setShowClassic(false)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black bg-amber-400 text-slate-900 hover:bg-amber-300 transition cursor-pointer"
+          >
+            ⚡ Open CONON COMMAND OS
+          </button>
+          <button
+            type="button"
+            onClick={() => setLocation("/home")}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-200 bg-white/10 hover:bg-white/20 transition cursor-pointer"
+          >
+            ← Storefront
+          </button>
           <span className="flex items-center gap-1.5 text-[11px] font-bold text-green-400">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" /> LIVE
           </span>
@@ -1215,7 +1277,7 @@ export function AdminDashboard() {
             <span className="text-white text-xs font-bold">CEO Admin</span>
           </div>
           <button onClick={handleLogout}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black hover:bg-red-500 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black hover:bg-red-500 transition cursor-pointer"
             style={{ background: "#ffffff18", color: "white" }}>
             <LogOut className="w-3.5 h-3.5" /> Logout
           </button>
@@ -1269,3 +1331,5 @@ export function AdminDashboard() {
     </div>
   );
 }
+
+export default AdminDashboard;

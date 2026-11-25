@@ -1,0 +1,2773 @@
+{
+  "orders": [
+    {
+      "id": "CON-28471",
+      "shortId": "CON-2847",
+      "customerName": "Rohit Shukla (Hazratganj Villa Site)",
+      "customerPhone": "+91 98765 43210",
+      "deliveryAddress": "Plot 42, Hazratganj, Lucknow — 226001",
+      "deliveryArea": "Hazratganj Central",
+      "items": [
+        {
+          "skuId": "sku-ultratech-ppc-50kg",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "UltraTech",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6900,
+          "hsnCode": "2523",
+          "weightKg": 1000
+        },
+        {
+          "skuId": "sku-tata-tiscon-12mm",
+          "name": "Tata Tiscon 550D TMT Rebar 12mm",
+          "brand": "Tata Tiscon",
+          "category": "TMT Steel & Iron Bars",
+          "unit": "Bundle (12m)",
+          "qty": 5,
+          "unitPrice": 1650,
+          "totalPrice": 8250,
+          "dealerPayout": 7450,
+          "hsnCode": "7214",
+          "weightKg": 500
+        },
+        {
+          "skuId": "sku-havells-lifeline-25",
+          "name": "Havells Lifeline Plus HRFR Wire 2.5 sq mm",
+          "brand": "Havells",
+          "category": "Electricals & Modular Switches",
+          "unit": "90m Coil",
+          "qty": 2,
+          "unitPrice": 1900,
+          "totalPrice": 3800,
+          "dealerPayout": 3360,
+          "hsnCode": "8544",
+          "weightKg": 8
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 19750,
+      "gstAmount": 2370,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 22120,
+      "dealerPayable": 17710,
+      "driverPayable": 650,
+      "cononNetMargin": 3760,
+      "status": "PACKING_READY",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "4821",
+      "deliveryOtp": "7390",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T15:48:54.976Z",
+      "estimatedDelivery": "2026-11-24T16:48:54.978Z",
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T15:48:54.978Z",
+          "actor": "CUSTOMER",
+          "note": "Order placed via Customer App (60-Min Express)"
+        },
+        {
+          "status": "VENDOR_ACCEPTED",
+          "timestamp": "2026-11-24T15:51:54.978Z",
+          "actor": "VENDOR",
+          "note": "Shree Balaji Cement confirmed stock readiness"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T15:58:54.978Z",
+          "actor": "VENDOR",
+          "note": "Bags staged at loading dock. Waiting for driver pickup."
+        }
+      ],
+      "financialsPosted": false
+    },
+    {
+      "id": "CON-884303",
+      "shortId": "CON-8843",
+      "sessionId": "11274b5e-cd82-4c25-8f49-99a35256701f",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Plot 104, Gomti Nagar Extension, Lucknow — 226010",
+      "deliveryArea": "Plot 104",
+      "items": [
+        {
+          "skuId": "sku-4462",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "5436",
+      "deliveryOtp": "5169",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T16:22:46.506Z",
+      "estimatedDelivery": "2026-11-24T17:22:46.506Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T16:22:46.506Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T16:22:46.516Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T16:22:46.521Z",
+          "actor": "DRIVER",
+          "note": "Driver Vikram Singh (UP 32 PK 7744) accepted dispatch and is heading to Shree Balaji Cement & Steel."
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T16:22:46.528Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T16:22:46.532Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 5169 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "podPhotoUrl": "/images/pod/verified-site-drop.webp"
+    },
+    {
+      "id": "CON-338055",
+      "shortId": "CON-3380",
+      "sessionId": "9d5eac96-8691-425a-8902-b066c1464fb3",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Plot 104, Gomti Nagar Extension, Lucknow — 226010",
+      "deliveryArea": "Plot 104",
+      "items": [
+        {
+          "skuId": "sku-5470",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "5459",
+      "deliveryOtp": "5703",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T16:23:36.209Z",
+      "estimatedDelivery": "2026-11-24T17:23:36.209Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T16:23:36.209Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T16:23:36.218Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T16:23:36.221Z",
+          "actor": "DRIVER",
+          "note": "Driver Vikram Singh (UP 32 PK 7744) accepted dispatch and is heading to Shree Balaji Cement & Steel."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T16:23:36.227Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 5459. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T16:23:36.227Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Plot 104, Gomti Nagar Extension, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T16:23:36.234Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T16:23:36.238Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 5703 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "podPhotoUrl": "/images/pod/verified-site-drop.webp"
+    },
+    {
+      "id": "CON-253502",
+      "shortId": "CON-2535",
+      "sessionId": "d76a5532-c177-44b6-84c6-066b1d455af8",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Plot 104, Gomti Nagar Extension, Lucknow — 226010",
+      "deliveryArea": "Plot 104",
+      "items": [
+        {
+          "skuId": "sku-6218",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "3454",
+      "deliveryOtp": "2450",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T16:39:04.241Z",
+      "estimatedDelivery": "2026-11-24T17:39:04.241Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T16:39:04.241Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T16:39:04.248Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T16:39:04.252Z",
+          "actor": "DRIVER",
+          "note": "Driver Vikram Singh (UP 32 PK 7744) accepted dispatch and is heading to Shree Balaji Cement & Steel."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T16:39:04.258Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 3454. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T16:39:04.258Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Plot 104, Gomti Nagar Extension, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T16:39:04.260Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T16:39:04.264Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 2450 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "podPhotoUrl": "/images/pod/verified-site-drop.webp"
+    },
+    {
+      "id": "CON-323172",
+      "shortId": "CON-3231",
+      "sessionId": "99e90aa1-1292-4f65-9a03-772c05af8f0e",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-1897",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "4559",
+      "deliveryOtp": "2178",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T16:52:02.740Z",
+      "estimatedDelivery": "2026-11-24T17:52:02.740Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T16:52:02.740Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T16:52:02.747Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T16:52:02.754Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T16:52:02.761Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 4559. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T16:52:02.761Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T16:52:02.762Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T16:52:02.769Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 2178 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795539122767-589.webp"
+    },
+    {
+      "id": "CON-755208",
+      "shortId": "CON-7552",
+      "sessionId": "cff8088d-4d9f-4981-a52c-95b6310c11a4",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-9531",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "8507",
+      "deliveryOtp": "2918",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T16:54:28.881Z",
+      "estimatedDelivery": "2026-11-24T17:54:28.881Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T16:54:28.881Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T16:54:28.887Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T16:54:28.892Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T16:54:28.899Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 8507. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T16:54:28.899Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T16:54:28.901Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T16:54:28.907Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 2918 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795539268905-984.webp"
+    },
+    {
+      "id": "CON-920929",
+      "shortId": "CON-9209",
+      "sessionId": "f7ea92a1-1813-4828-8dda-becab59ce692",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-2033",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "3858",
+      "deliveryOtp": "8779",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T16:59:24.549Z",
+      "estimatedDelivery": "2026-11-24T17:59:24.549Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T16:59:24.549Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T16:59:24.554Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T16:59:24.559Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T16:59:24.566Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 3858. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T16:59:24.566Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T16:59:24.568Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T16:59:24.573Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 8779 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795539564571-856.webp"
+    },
+    {
+      "id": "CON-445977",
+      "shortId": "CON-4459",
+      "sessionId": "b3497faa-fb8f-4d1d-a9d0-faf612da1465",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-4562",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "5146",
+      "deliveryOtp": "2998",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T17:03:03.048Z",
+      "estimatedDelivery": "2026-11-24T18:03:03.048Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T17:03:03.048Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T17:03:03.054Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T17:03:03.059Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T17:03:03.066Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 5146. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T17:03:03.066Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T17:03:03.068Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T17:03:03.074Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 2998 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795539783072-312.webp"
+    },
+    {
+      "id": "CON-174717",
+      "shortId": "CON-1747",
+      "sessionId": "320fd3ff-8071-4d58-a845-f74f123b26cd",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-1191",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "7824",
+      "deliveryOtp": "2228",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T17:13:01.081Z",
+      "estimatedDelivery": "2026-11-24T18:13:01.081Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T17:13:01.081Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T17:13:01.086Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T17:13:01.091Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T17:13:01.098Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 7824. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T17:13:01.098Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T17:13:01.100Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T17:13:01.105Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 2228 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795540381103-256.webp"
+    },
+    {
+      "id": "CON-355776",
+      "shortId": "CON-3557",
+      "sessionId": "e20730c3-59e4-446e-b2de-a92a44f28d42",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-3868",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "4099",
+      "deliveryOtp": "4002",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T17:28:16.949Z",
+      "estimatedDelivery": "2026-11-24T18:28:16.949Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T17:28:16.949Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T17:28:16.954Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T17:28:16.958Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T17:28:16.964Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 4099. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T17:28:16.964Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T17:28:16.966Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T17:28:16.971Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 4002 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795541296969-212.webp"
+    },
+    {
+      "id": "CON-706401",
+      "shortId": "CON-7064",
+      "sessionId": "a6a6ad3c-f379-46bf-8fe2-b14d66451527",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-6064",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "4686",
+      "deliveryOtp": "2121",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T17:52:34.125Z",
+      "estimatedDelivery": "2026-11-24T18:52:34.125Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T17:52:34.125Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T17:52:34.131Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T17:52:34.137Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T17:52:34.144Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 4686. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T17:52:34.144Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T17:52:34.147Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T17:52:34.152Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 2121 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795542754150-414.webp"
+    },
+    {
+      "id": "CON-492966",
+      "shortId": "CON-4929",
+      "sessionId": "879fdc20-3aee-46de-8b2f-6542dec792f1",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-7362",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "3376",
+      "deliveryOtp": "9173",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T18:14:22.365Z",
+      "estimatedDelivery": "2026-11-24T19:14:22.365Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T18:14:22.365Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T18:14:22.370Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T18:14:22.376Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T18:14:22.381Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 3376. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T18:14:22.381Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T18:14:22.382Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T18:14:22.387Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 9173 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795544062386-509.webp"
+    },
+    {
+      "id": "CON-571983",
+      "shortId": "CON-5719",
+      "sessionId": "bf1373a8-9c77-4c1e-9e1b-79c575671b33",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-7739",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "6905",
+      "deliveryOtp": "4047",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-24T18:19:03.292Z",
+      "estimatedDelivery": "2026-11-24T19:19:03.292Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-24T18:19:03.292Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-24T18:19:03.297Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-24T18:19:03.302Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-24T18:19:03.309Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 6905. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-24T18:19:03.309Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-24T18:19:03.311Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-24T18:19:03.317Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 4047 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795544343315-461.webp"
+    },
+    {
+      "id": "CON-862975",
+      "shortId": "CON-8629",
+      "sessionId": "93078118-1aa5-464e-a2c6-312e02315930",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-1859",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "5149",
+      "deliveryOtp": "9694",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T01:52:21.376Z",
+      "estimatedDelivery": "2026-11-25T02:52:21.376Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T01:52:21.376Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T01:52:21.382Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T01:52:21.387Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T01:52:21.394Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 5149. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T01:52:21.394Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T01:52:21.396Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T01:52:21.402Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 9694 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795571541400-740.webp"
+    },
+    {
+      "id": "CON-255917",
+      "shortId": "CON-2559",
+      "sessionId": "d4cdc674-312e-4b6c-9ef5-8af1693fa2f4",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-7135",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "5007",
+      "deliveryOtp": "7048",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T02:32:34.383Z",
+      "estimatedDelivery": "2026-11-25T03:32:34.383Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T02:32:34.383Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T02:32:34.389Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T02:32:34.395Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T02:32:34.402Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 5007. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T02:32:34.402Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T02:32:34.405Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T02:32:34.411Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 7048 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795573954409-282.webp"
+    },
+    {
+      "id": "CON-322113",
+      "shortId": "CON-3221",
+      "sessionId": "2c9636d0-b85a-43bc-97e3-6b5f09cb230b",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Plot 104, Gomti Nagar Extension, Lucknow — 226010",
+      "deliveryArea": "Plot 104",
+      "items": [
+        {
+          "skuId": "sku-2818",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "3460",
+      "deliveryOtp": "3715",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T02:32:39.567Z",
+      "estimatedDelivery": "2026-11-25T03:32:39.567Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T02:32:39.567Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T02:32:39.574Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T02:32:39.578Z",
+          "actor": "DRIVER",
+          "note": "Driver Vikram Singh (UP 32 PK 7744) accepted dispatch and is heading to Shree Balaji Cement & Steel."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T02:32:39.584Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 3460. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T02:32:39.584Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Plot 104, Gomti Nagar Extension, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T02:32:39.585Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T02:32:39.588Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 3715 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "podPhotoUrl": "/images/pod/verified-site-drop.webp"
+    },
+    {
+      "id": "CON-594577",
+      "shortId": "CON-5945",
+      "sessionId": "82dcd336-7de4-49a0-9334-266a2bd14986",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-5846",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "3214",
+      "deliveryOtp": "4205",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T02:50:20.318Z",
+      "estimatedDelivery": "2026-11-25T03:50:20.318Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T02:50:20.318Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T02:50:20.323Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T02:50:20.329Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T02:50:20.336Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 3214. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T02:50:20.336Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T02:50:20.338Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T02:50:20.344Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 4205 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795575020342-453.webp"
+    },
+    {
+      "id": "CON-605125",
+      "shortId": "CON-6051",
+      "sessionId": "4aa4e122-3cc2-4205-988f-f64df1a3e8ff",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Plot 104, Gomti Nagar Extension, Lucknow — 226010",
+      "deliveryArea": "Plot 104",
+      "items": [
+        {
+          "skuId": "sku-7146",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "9064",
+      "deliveryOtp": "7115",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T02:50:20.642Z",
+      "estimatedDelivery": "2026-11-25T03:50:20.642Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T02:50:20.642Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T02:50:20.649Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T02:50:20.653Z",
+          "actor": "DRIVER",
+          "note": "Driver Vikram Singh (UP 32 PK 7744) accepted dispatch and is heading to Shree Balaji Cement & Steel."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T02:50:20.660Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 9064. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T02:50:20.660Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Plot 104, Gomti Nagar Extension, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T02:50:20.663Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T02:50:20.666Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 7115 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "podPhotoUrl": "/images/pod/verified-site-drop.webp"
+    },
+    {
+      "id": "CON-697970",
+      "shortId": "CON-6979",
+      "sessionId": "27d6bd80-7cbd-4e1b-af1b-50a12d4dda52",
+      "customerName": "Site Customer (9415088219)",
+      "customerPhone": "9415088219",
+      "deliveryAddress": "Villa 42, Sushant Golf City, Sultanpur Road, Lucknow",
+      "deliveryArea": "Villa 42",
+      "items": [
+        {
+          "skuId": "sku-1314",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "PACKING_READY",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "8153",
+      "deliveryOtp": "3964",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T03:39:52.878Z",
+      "estimatedDelivery": "2026-11-25T04:39:52.878Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T03:39:52.878Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T03:39:52.885Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        }
+      ]
+    },
+    {
+      "id": "CON-403237",
+      "shortId": "CON-4032",
+      "sessionId": "3ed40ca9-eca8-406b-907c-b41b1bb0bbc7",
+      "customerName": "Site Customer (9415088219)",
+      "customerPhone": "9415088219",
+      "deliveryAddress": "Villa 42, Sushant Golf City, Sultanpur Road, Lucknow",
+      "deliveryArea": "Villa 42",
+      "items": [
+        {
+          "skuId": "sku-8016",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "PACKING_READY",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "3028",
+      "deliveryOtp": "3750",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T03:40:31.821Z",
+      "estimatedDelivery": "2026-11-25T04:40:31.821Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T03:40:31.821Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T03:40:31.826Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        }
+      ]
+    },
+    {
+      "id": "CON-117989",
+      "shortId": "CON-1179",
+      "sessionId": "26379a8a-27df-4f54-ba4e-6bfd8ed30ff6",
+      "customerName": "Site Customer (9415088219)",
+      "customerPhone": "9415088219",
+      "deliveryAddress": "Villa 42, Sushant Golf City, Sultanpur Road, Lucknow",
+      "deliveryArea": "Villa 42",
+      "items": [
+        {
+          "skuId": "sku-2534",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "6979",
+      "deliveryOtp": "3357",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T03:40:59.931Z",
+      "estimatedDelivery": "2026-11-25T04:40:59.931Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T03:40:59.931Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T03:40:59.936Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        }
+      ],
+      "escrow_status": "AWAITING_ADMIN"
+    },
+    {
+      "id": "CON-739176",
+      "shortId": "CON-7391",
+      "sessionId": "ba21e41e-b3a2-4627-93db-b769a27e031c",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-5690",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "7436",
+      "deliveryOtp": "3424",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T03:48:55.921Z",
+      "estimatedDelivery": "2026-11-25T04:48:55.921Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T03:48:55.921Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T03:48:55.930Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T03:48:55.936Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T03:48:55.943Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 7436. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T03:48:55.943Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T03:48:55.945Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T03:48:55.952Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 3424 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795578535949-172.webp"
+    },
+    {
+      "id": "CON-509339",
+      "shortId": "CON-5093",
+      "sessionId": "733c7c51-d780-4711-87ff-b51caf9dfc9d",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Plot 104, Gomti Nagar Extension, Lucknow — 226010",
+      "deliveryArea": "Plot 104",
+      "items": [
+        {
+          "skuId": "sku-3715",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "4518",
+      "deliveryOtp": "4460",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T03:49:03.257Z",
+      "estimatedDelivery": "2026-11-25T04:49:03.257Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T03:49:03.257Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T03:49:03.264Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T03:49:03.268Z",
+          "actor": "DRIVER",
+          "note": "Driver Vikram Singh (UP 32 PK 7744) accepted dispatch and is heading to Shree Balaji Cement & Steel."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T03:49:03.274Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 4518. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T03:49:03.274Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Plot 104, Gomti Nagar Extension, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T03:49:03.277Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T03:49:03.280Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 4460 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "podPhotoUrl": "/images/pod/verified-site-drop.webp"
+    },
+    {
+      "id": "CON-216526",
+      "shortId": "CON-2165",
+      "sessionId": "72f5176a-c80b-4abb-8c5e-2f655cfb0fd1",
+      "customerName": "Site Customer (9415088219)",
+      "customerPhone": "9415088219",
+      "deliveryAddress": "Villa 42, Sushant Golf City, Sultanpur Road, Lucknow",
+      "deliveryArea": "Villa 42",
+      "items": [
+        {
+          "skuId": "sku-1277",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "7888",
+      "deliveryOtp": "9758",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T05:38:16.733Z",
+      "estimatedDelivery": "2026-11-25T06:38:16.733Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T05:38:16.733Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T05:38:16.737Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        }
+      ],
+      "escrow_status": "AWAITING_ADMIN"
+    },
+    {
+      "id": "CON-766877",
+      "shortId": "CON-7668",
+      "sessionId": "c5c20736-23f0-4136-b85f-0cb8695c33c2",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-6921",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "4876",
+      "deliveryOtp": "1805",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T05:41:17.087Z",
+      "estimatedDelivery": "2026-11-25T06:41:17.087Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T05:41:17.087Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T05:41:17.092Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T05:41:17.098Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T05:41:17.105Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 4876. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T05:41:17.105Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T05:41:17.106Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T05:41:17.112Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 1805 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795585277110-241.webp"
+    },
+    {
+      "id": "CON-800147",
+      "shortId": "CON-8001",
+      "sessionId": "999a87a1-30a4-4478-a6dc-db9b7578511e",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Plot 104, Gomti Nagar Extension, Lucknow — 226010",
+      "deliveryArea": "Plot 104",
+      "items": [
+        {
+          "skuId": "sku-8107",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "2560",
+      "deliveryOtp": "8117",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T05:41:38.349Z",
+      "estimatedDelivery": "2026-11-25T06:41:38.349Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T05:41:38.349Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T05:41:38.357Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T05:41:38.361Z",
+          "actor": "DRIVER",
+          "note": "Driver Vikram Singh (UP 32 PK 7744) accepted dispatch and is heading to Shree Balaji Cement & Steel."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T05:41:38.370Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 2560. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T05:41:38.370Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Plot 104, Gomti Nagar Extension, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T05:41:38.374Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T05:41:38.380Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 8117 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-203",
+      "driverName": "Vikram Singh",
+      "driverPhone": "9839445566",
+      "driverVehiclePlate": "UP 32 PK 7744",
+      "driverVehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "podPhotoUrl": "/images/pod/verified-site-drop.webp"
+    },
+    {
+      "id": "CON-544730",
+      "shortId": "CON-5447",
+      "sessionId": "3f3f0786-e829-4bf6-ace4-eaf9c9423efb",
+      "customerName": "Site Customer (9415088219)",
+      "customerPhone": "9415088219",
+      "deliveryAddress": "Villa 42, Sushant Golf City, Sultanpur Road, Lucknow",
+      "deliveryArea": "Villa 42",
+      "items": [
+        {
+          "skuId": "sku-3066",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "6436",
+      "deliveryOtp": "3426",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T06:25:17.970Z",
+      "estimatedDelivery": "2026-11-25T07:25:17.970Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T06:25:17.970Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T06:25:17.976Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        }
+      ],
+      "escrow_status": "AWAITING_ADMIN"
+    },
+    {
+      "id": "CON-475206",
+      "shortId": "CON-4752",
+      "sessionId": "0bdeb35b-c1ed-4a8f-9d33-8f8a1ea961c4",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-3696",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "7552",
+      "deliveryOtp": "5353",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T06:25:21.814Z",
+      "estimatedDelivery": "2026-11-25T07:25:21.814Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T06:25:21.814Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T06:25:21.819Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T06:25:21.826Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T06:25:21.833Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 7552. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T06:25:21.833Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T06:25:21.835Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T06:25:21.840Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 5353 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795587921839-934.webp"
+    },
+    {
+      "id": "CON-478848",
+      "shortId": "CON-4788",
+      "sessionId": "2ab5ea37-74ac-48ad-9463-ef9551b333cb",
+      "customerName": "Site Customer (9415088219)",
+      "customerPhone": "9415088219",
+      "deliveryAddress": "Villa 42, Sushant Golf City, Sultanpur Road, Lucknow",
+      "deliveryArea": "Villa 42",
+      "items": [
+        {
+          "skuId": "sku-6125",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "DELIVERED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "2521",
+      "deliveryOtp": "1600",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T06:42:59.939Z",
+      "estimatedDelivery": "2026-11-25T07:42:59.939Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T06:42:59.939Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T06:42:59.943Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        }
+      ],
+      "escrow_status": "AWAITING_ADMIN"
+    },
+    {
+      "id": "CON-457484",
+      "shortId": "CON-4574",
+      "sessionId": "26e263a7-030e-4197-80df-a9218224e0a9",
+      "customerName": "Site Customer (9876543210)",
+      "customerPhone": "9876543210",
+      "deliveryAddress": "Gomti Nagar Phase 2, Lucknow — 226010",
+      "deliveryArea": "Gomti Nagar Phase 2",
+      "items": [
+        {
+          "skuId": "sku-3183",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Door Hardware & Locks",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Door Hardware & Locks",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 180,
+      "cononNetMargin": 1664,
+      "status": "DELIVERED",
+      "vehicleClass": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "pickupOtp": "1334",
+      "deliveryOtp": "6066",
+      "vendorId": "vnd-latouche-hardware",
+      "vendorStore": "Katawala Hardware & Locks",
+      "vendorPhone": "9839011223",
+      "vendorAddress": "Shop 14, Latouche Rd Commercial Market, Aminabad, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T08:08:45.816Z",
+      "estimatedDelivery": "2026-11-25T09:08:45.816Z",
+      "financialsPosted": true,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T08:08:45.816Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T08:08:45.822Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        },
+        {
+          "status": "DRIVER_ASSIGNED",
+          "timestamp": "2026-11-25T08:08:45.828Z",
+          "actor": "DRIVER",
+          "note": "Driver Rajesh Kumar (UP 32 BK 4819) accepted dispatch and is heading to Katawala Hardware & Locks."
+        },
+        {
+          "status": "PICKED_UP",
+          "timestamp": "2026-11-25T08:08:45.835Z",
+          "actor": "DRIVER",
+          "note": "Verified counter handover with OTP 1334. Materials loaded on vehicle."
+        },
+        {
+          "status": "OUT_FOR_DELIVERY",
+          "timestamp": "2026-11-25T08:08:45.835Z",
+          "actor": "DRIVER",
+          "note": "Driver en-route to delivery location: Gomti Nagar Phase 2, Lucknow — 226010"
+        },
+        {
+          "status": "ARRIVED_AT_SITE",
+          "timestamp": "2026-11-25T08:08:45.837Z",
+          "actor": "DRIVER",
+          "note": "Vehicle arrived at site gate. Unloading initiated."
+        },
+        {
+          "status": "DELIVERED",
+          "timestamp": "2026-11-25T08:08:45.843Z",
+          "actor": "DRIVER",
+          "note": "Customer OTP 6066 verified. Materials delivered and site inspected."
+        }
+      ],
+      "driverId": "DRV-LKO-201",
+      "driverName": "Rajesh Kumar",
+      "driverPhone": "9876543210",
+      "driverVehiclePlate": "UP 32 BK 4819",
+      "driverVehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "podPhotoUrl": "/images/pod/pod-1795594125841-490.webp"
+    },
+    {
+      "id": "CON-441767",
+      "shortId": "CON-4417",
+      "sessionId": "7bdb4a27-8b28-4ee2-a3d9-86a951900008",
+      "customerName": "Site Customer (9415088219)",
+      "customerPhone": "9415088219",
+      "deliveryAddress": "Villa 42, Sushant Golf City, Sultanpur Road, Lucknow",
+      "deliveryArea": "Villa 42",
+      "items": [
+        {
+          "skuId": "sku-3427",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "PACKING_READY",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "5856",
+      "deliveryOtp": "6228",
+      "vendorId": "vnd-chinhat-cement",
+      "vendorStore": "Shree Balaji Cement & Steel",
+      "vendorPhone": "9415088771",
+      "vendorAddress": "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-25T11:21:46.591Z",
+      "estimatedDelivery": "2026-11-25T12:21:46.591Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-25T11:21:46.591Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        },
+        {
+          "status": "PACKING_READY",
+          "timestamp": "2026-11-25T11:21:46.596Z",
+          "actor": "VENDOR",
+          "note": "Packed and staged at loading counter. Dukandar Pickup OTP generated."
+        }
+      ]
+    }
+  ],
+  "drivers": [
+    {
+      "id": "DRV-LKO-201",
+      "name": "Rajesh Kumar",
+      "phone": "9876543210",
+      "vehicleType": "2W_BIKE",
+      "vehicleLabel": "2-Wheeler (Express)",
+      "vehicleModel": "Hero Splendor Pro (UP 32 BK 4819)",
+      "vehiclePlate": "UP 32 BK 4819",
+      "avatarUrl": "/images/drivers/rajesh.webp",
+      "rating": 4.8,
+      "totalTrips": 1256,
+      "isOnline": true,
+      "activeTripId": null,
+      "currentZone": "Latouche Road / Charbagh",
+      "currentLat": 26.832,
+      "currentLng": 80.915,
+      "walletBalance": 4330,
+      "todayEarnings": 3330,
+      "tripsToday": 19,
+      "bankAccountMasked": "State Bank of India ••••••4819",
+      "upiId": "rajesh.splendor@upi"
+    },
+    {
+      "id": "DRV-LKO-202",
+      "name": "Mohd. Shakeel",
+      "phone": "9415123456",
+      "vehicleType": "3W_ELECTRIC_LOADER",
+      "vehicleLabel": "3W E-Loader (500kg)",
+      "vehicleModel": "Mahindra Treo Zor (UP 32 EL 9102)",
+      "vehiclePlate": "UP 32 EL 9102",
+      "avatarUrl": "/images/drivers/shakeel.webp",
+      "rating": 4.9,
+      "totalTrips": 890,
+      "isOnline": true,
+      "activeTripId": null,
+      "currentZone": "Aminabad / Naka Hindola",
+      "currentLat": 26.84,
+      "currentLng": 80.925,
+      "walletBalance": 2850,
+      "todayEarnings": 720,
+      "tripsToday": 2,
+      "bankAccountMasked": "HDFC Bank ••••••9102",
+      "upiId": "shakeel.treo@okaxis"
+    },
+    {
+      "id": "DRV-LKO-203",
+      "name": "Vikram Singh",
+      "phone": "9839445566",
+      "vehicleType": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "vehicleModel": "Tata Ace Gold (UP 32 PK 7744)",
+      "vehiclePlate": "UP 32 PK 7744",
+      "avatarUrl": "/images/drivers/vikram.webp",
+      "rating": 4.7,
+      "totalTrips": 1547,
+      "isOnline": true,
+      "activeTripId": null,
+      "currentZone": "Chinhat Industrial Hub",
+      "currentLat": 26.865,
+      "currentLng": 81.01,
+      "walletBalance": 9150,
+      "todayEarnings": 5800,
+      "tripsToday": 9,
+      "bankAccountMasked": "Punjab National Bank ••••••7744",
+      "upiId": "vikram.tataace@pnb"
+    },
+    {
+      "id": "DRV-LKO-204",
+      "name": "Gurpreet Singh",
+      "phone": "9792556677",
+      "vehicleType": "TRACTOR_DUMPER",
+      "vehicleLabel": "Tractor Trolley / Dumper (4+ Ton)",
+      "vehicleModel": "Mahindra 575 DI (UP 32 TR 3321)",
+      "vehiclePlate": "UP 32 TR 3321",
+      "avatarUrl": "/images/drivers/gurpreet.webp",
+      "rating": 4.9,
+      "totalTrips": 620,
+      "isOnline": true,
+      "activeTripId": null,
+      "currentZone": "Shaheed Path / Sushant Golf City",
+      "currentLat": 26.79,
+      "currentLng": 80.995,
+      "walletBalance": 7800,
+      "todayEarnings": 2800,
+      "tripsToday": 2,
+      "bankAccountMasked": "Bank of Baroda ••••••3321",
+      "upiId": "gurpreet.dumper@barodampay"
+    },
+    {
+      "id": "DRV-LKO-7710",
+      "name": "rohit shukla",
+      "phone": "9696727279",
+      "avatarUrl": "/images/drivers/rajesh.webp",
+      "vehicleType": "2W_BIKE",
+      "vehicleLabel": "Bajaj Pulsar / Hero Splendor",
+      "vehicleModel": "2-Wheeler Express",
+      "vehiclePlate": "UP 32 EL 7710",
+      "rating": 5,
+      "totalTrips": 0,
+      "isOnline": true,
+      "activeTripId": null,
+      "currentZone": "Faizabad Road / Kamta Chauraha",
+      "currentLat": 26.8421,
+      "currentLng": 80.9312,
+      "walletBalance": 0,
+      "todayEarnings": 0,
+      "tripsToday": 0,
+      "bankAccountMasked": "HDFC •••• 9102",
+      "upiId": "driver@upi"
+    }
+  ],
+  "savedAt": "2026-11-25T11:21:46.596Z"
+}

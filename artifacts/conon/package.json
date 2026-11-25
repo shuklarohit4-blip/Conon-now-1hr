@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
+    "dev:admin": "VITE_PORT=5174 VITE_LOCAL_ADMIN=true vite --config vite.config.ts --host 0.0.0.0",
     "build": "vite build --config vite.config.ts",
+    "build:admin": "VITE_LOCAL_ADMIN=true vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },

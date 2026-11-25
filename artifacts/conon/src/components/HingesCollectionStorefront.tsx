@@ -11,6 +11,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import type { Product } from "@/components/ProductCard";
+import { RealProductImage } from "@/components/RealProductImage";
 
 export interface HardwareProduct {
   id: string;
@@ -494,11 +495,14 @@ export function HingesCollectionStorefront({ onOpenDetail }: HingesCollectionSto
                       }}
                       className="w-full aspect-square bg-[#F9FAFB] rounded-lg border border-[#F3F4F6] p-2 flex items-center justify-center cursor-pointer overflow-hidden group-hover:scale-[1.02] transition-transform"
                     >
-                      <img
+                      <RealProductImage
+                        product={p}
                         src={p.image}
                         alt={p.title}
+                        title={p.title}
+                        brand={p.brand}
+                        category="furniture-wardrobe-bed-hardware"
                         className="w-full h-full object-contain"
-                        loading="lazy"
                       />
                     </div>
 

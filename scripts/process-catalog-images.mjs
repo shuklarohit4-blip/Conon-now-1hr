@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const ROOT_DIR = path.resolve(__dirname, '..');
-const ATTACHED_ASSETS_DIR = path.resolve(ROOT_DIR, 'attached_assets');
+const ATTACHED_ASSETS_DIR = path.resolve(ROOT_DIR, 'artifacts/conon/src/assets');
 const PUBLIC_DIR = path.resolve(ROOT_DIR, 'artifacts/conon/public');
 const CATEGORIES_OUT_DIR = path.resolve(PUBLIC_DIR, 'images/categories');
 const PRODUCTS_OUT_DIR = path.resolve(PUBLIC_DIR, 'images/products');

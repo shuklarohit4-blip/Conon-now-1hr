@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import {
   Menu, Search, User, ShoppingBag,
   MapPin, ChevronDown, Truck, X,
   Home, Package, BookOpen, Palette, Gift,
   Phone, HelpCircle, FileText, Settings, LogOut, LogIn,
-  ChevronRight, Shield, Star, Clock,
+  ChevronRight, Shield, ShieldCheck, Star, Clock,
   Wrench, Boxes, MessageCircle, Wallet, Grid3x3, Zap, RotateCcw,
-  ClipboardList, HardHat, PencilRuler, Tractor, Handshake, Compass,
+  ClipboardList, HardHat, PencilRuler, Tractor, Handshake, Compass, Radio
 } from "lucide-react";
 import { toast } from "sonner";
 import { MandiTicker } from "./MandiTicker";
 import { useUI } from "@/context/UIContext";
 import { useGetCart } from "@workspace/api-client-react";
-import { useAuth } from "@workspace/auth-web";
+import { useAuthContext } from "@/context/AuthContext";
 import { useUser } from "@/context/UserContext";
 import { CartSheet } from "./CartSheet";
 import { Footer } from "./Footer";
+import { HomeDepartmentNav } from "./HomeDepartmentNav";
 import { useDeliveryLocation } from "@/context/LocationContext";
 import { formatINR } from "@/lib/wallet";
 import { useWallet } from "@/context/WalletContext";
+import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 
 const ROLE_LABEL: Record<string, string> = {
   customer: "Builder / Owner",
@@ -41,32 +43,37 @@ export function Layout({
   hideHeader?: boolean;
 }) {
   const [location, setLocationPath] = useLocation();
-  const { isCartOpen, setCartOpen, isMenuOpen, setMenuOpen, screenRatio, setScreenRatio } = useUI();
+  const { isCartOpen, setCartOpen, isMenuOpen, setMenuOpen, setLoginModalOpen, screenRatio, setScreenRatio } = useUI();
   const { data: cart } = useGetCart();
   const { balance: walletBalance } = useWallet();
 
   const { role, name, logout } = useUser();
-  const { user: authUser, isAuthenticated, logout: authLogout } = useAuth();
+  const { user: authUser, isAuthenticated, isAdmin, openAuthModal, logout: authLogout } = useAuthContext();
+  const logoClicksRef = useRef<number[]>([]);
 
-  const loggedIn = !!role || isAuthenticated;
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (!IS_LOCAL_ADMIN) return;
+    const now = Date.now();
+    logoClicksRef.current = [...logoClicksRef.current.filter((t) => now - t < 2000), now];
+    if (logoClicksRef.current.length >= 5) {
+      e.preventDefault();
+      logoClicksRef.current = [];
+      openAuthModal("admin");
+      toast.info("🔒 Founder Admin Gate Unlocked (5x tap)");
+    }
+  };
+
+  const loggedIn = !!role || isAuthenticated || !!authUser;
   const displayName =
+    authUser?.name ||
     name ||
-    (authUser
-      ? [authUser.firstName, authUser.lastName].filter(Boolean).join(" ") ||
-        authUser.email ||
-        ""
-      : "") ||
     (role ? ROLE_LABEL[role] : "");
-  const roleLabel = role ? ROLE_LABEL[role] : "Secure account";
+  const roleLabel = authUser?.displayRole || (role ? ROLE_LABEL[role] : "Secure account");
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setMenuOpen(false);
     logout();
-    if (isAuthenticated) {
-      authLogout();
-    } else {
-      setLocationPath("/login");
-    }
+    await authLogout();
   };
 
   const { location: deliveryLoc, openLocationSheet } = useDeliveryLocation();
@@ -179,7 +186,12 @@ export function Layout({
               {/* Left: Brand Logo (Top Left Corner) + Hamburger Menu + 60 Mins Badge + Deliver To */}
               <div className="flex items-center gap-2 sm:gap-3">
                 {/* Brand Logo - Top Left Corner */}
-                <Link href="/home" className="flex items-center gap-1.5 shrink-0 group active:scale-95 transition -ml-0.5" aria-label="CONON-NOW Home">
+                <Link
+                  href="/home"
+                  onClick={handleLogoClick}
+                  className="flex items-center gap-1.5 shrink-0 group active:scale-95 transition -ml-0.5 cursor-pointer"
+                  aria-label="CONON-NOW Home"
+                >
                   <img
                     src={`${import.meta.env.BASE_URL}images/conon-logo-transparent.png`}
                     alt="CONON-NOW"
@@ -210,29 +222,53 @@ export function Layout({
                   <Menu className="w-5 sm:w-6 h-5 sm:h-6" strokeWidth={2.4} />
                 </button>
 
-                {/* Green 60 Mins Pill */}
-                <div className="bg-[#15803d] text-white text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded leading-[1.1] flex flex-col items-center justify-center shrink-0 shadow-xs">
-                  <span>60</span>
-                  <span>Mins</span>
-                </div>
-
-                {/* Deliver To dropdown */}
+                {/* ── Delivery Box (Exact Match to Reference Screenshot) ── */}
                 <button
                   onClick={openLocationSheet}
-                  className="flex flex-col text-left active:opacity-80 transition group"
-                  aria-label="Select delivery location"
+                  className="border border-slate-300 hover:border-slate-400 active:scale-95 transition-all rounded-md px-2.5 py-1 text-left flex flex-col justify-center bg-white cursor-pointer group shadow-2xs leading-tight ml-0.5 shrink-0"
+                  aria-label="Check delivery time and pincode"
+                  title="Click to check delivery time & pincode"
                 >
-                  <span className="text-[9px] sm:text-[10px] text-slate-400 font-semibold leading-none">Deliver To</span>
-                  <div className="flex items-center gap-0.5 text-xs font-extrabold text-slate-900 leading-tight mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-slate-700 shrink-0" strokeWidth={2.4} />
-                    <span className="truncate max-w-[85px]">{pincode || "226010"}</span>
-                    <ChevronDown className="w-3 h-3 text-slate-500 shrink-0 group-hover:translate-y-0.5 transition-transform" strokeWidth={2.4} />
+                  <div className="flex items-center gap-0.5 text-[12px] sm:text-[13px] font-bold text-slate-900 leading-none">
+                    <span>60 mins</span>
+                    <ChevronDown className="w-3 h-3 text-slate-600 group-hover:translate-y-0.5 transition-transform" strokeWidth={2.5} />
                   </div>
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-normal leading-none mt-1 tracking-tight">
+                    {pincode || "226010"}
+                  </span>
                 </button>
               </div>
 
-              {/* Right: Wallet + User Profile + Cart Bag */}
+              {/* Center: Search Bar (Exact Match to Reference Screenshot) */}
+              <div className="hidden md:flex flex-1 max-w-xl mx-4">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const val = (e.currentTarget.elements.namedItem("search") as HTMLInputElement)?.value;
+                    if (val?.trim()) {
+                      setLocationPath(`/categories?q=${encodeURIComponent(val.trim())}`);
+                    }
+                  }}
+                  className="w-full relative flex items-center bg-[#F4F6F8] hover:bg-[#EDF1F5] focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 rounded-lg h-9 sm:h-10 px-3 border border-slate-200 transition-all"
+                >
+                  <Search className="w-4 h-4 text-slate-400 shrink-0 mr-2" strokeWidth={2.2} />
+                  <input
+                    name="search"
+                    type="text"
+                    placeholder="Search for Fevicol, Cement, Tiles..."
+                    className="w-full bg-transparent text-xs sm:text-[13px] font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none"
+                  />
+                </form>
+              </div>
+
+              {/* Right: Guarantee Pill + Wallet + User Profile (Login with OTP) + Cart Bag */}
               <div className="flex items-center gap-2">
+                {/* Green Brand Guarantee Pill */}
+                <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#247c23] text-white text-[11px] font-bold shadow-2xs select-none">
+                  <ShieldCheck className="w-3.5 h-3.5 text-white" strokeWidth={2.4} />
+                  <span>CONON-NOW</span>
+                </div>
+
                 <Link
                   href="/rewards?tab=wallet"
                   aria-label="Gold Wallet"
@@ -244,22 +280,46 @@ export function Layout({
                     ₹{formatINR(walletBalance)}
                   </span>
                 </Link>
-                <button
-                  onClick={() => {
-                    if (!loggedIn) {
-                      setLocationPath("/login");
-                    } else {
-                      setMenuOpen(true);
-                    }
-                  }}
-                  aria-label="User profile & account"
-                  className="p-1 text-slate-700 hover:text-slate-900 active:scale-90 transition relative rounded-md"
-                >
-                  <User className="w-[22px] h-[22px]" strokeWidth={2} />
-                  {loggedIn && (
-                    <span className="absolute bottom-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white" />
-                  )}
-                </button>
+
+                {/* Glowing Indigo Admin Command OS Pill (Visible only when Local Admin) */}
+                {IS_LOCAL_ADMIN && isAdmin && (
+                  <Link
+                    href="/admin"
+                    aria-label="Admin Command OS"
+                    title="Launch CONON COMMAND OS Operations Control"
+                    className="flex items-center gap-1.5 h-7 px-2.5 rounded-full bg-[#0F172A] hover:bg-[#1E293B] border border-indigo-500/60 text-indigo-300 font-black text-[11px] shadow-md shadow-indigo-950/50 active:scale-95 transition animate-pulse"
+                  >
+                    <Radio className="w-3.5 h-3.5 text-indigo-400" />
+                    <span className="hidden sm:inline">Admin Command OS</span>
+                    <span className="sm:hidden">Admin OS</span>
+                  </Link>
+                )}
+
+                {/* ── Login / Profile Button with Text (Exact Match to Reference Screenshot) ── */}
+                {!loggedIn ? (
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal("login")}
+                    aria-label="Login / Sign Up"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xs transition active:scale-95 cursor-pointer"
+                  >
+                    <User className="w-3.5 h-3.5 text-amber-400" strokeWidth={2.2} />
+                    <span>Login / Sign Up</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setMenuOpen(true)}
+                    aria-label="User profile & menu"
+                    className="flex items-center gap-1.5 px-2.5 py-1 text-slate-700 hover:text-slate-900 hover:bg-slate-50 active:scale-90 transition rounded-md cursor-pointer"
+                  >
+                    <User className="w-[19px] sm:w-[21px] h-[19px] sm:h-[21px] text-slate-700" strokeWidth={2.2} />
+                    <span className="text-xs sm:text-[13px] font-bold text-slate-800">
+                      {displayName.split(" ")[0] || "Account"}
+                    </span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white" />
+                  </button>
+                )}
                 <button
                   onClick={() => setCartOpen(true)}
                   aria-label="Shopping bag"
@@ -277,6 +337,15 @@ export function Layout({
                 </button>
               </div>
             </header>
+
+            {/* ── Subnavigation Department Bar (Exact Match to Reference Screenshot) ── */}
+            <div className="hidden sm:block">
+              <HomeDepartmentNav
+                onSelectCategory={(category) => {
+                  setLocationPath(category.route || `/categories?dept=${category.slug}`);
+                }}
+              />
+            </div>
           </div>
         )}
 
@@ -317,7 +386,13 @@ export function Layout({
                     </div>
                   </Link>
                 ) : (
-                  <Link href="/login" onClick={() => setMenuOpen(false)}>
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setLoginModalOpen(true);
+                    }}
+                    className="w-full text-left"
+                  >
                     <div className="flex items-center gap-3 mb-3 cursor-pointer">
                       <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                         <LogIn className="w-6 h-6 text-white" />
@@ -327,7 +402,7 @@ export function Layout({
                         <p className="text-blue-200 text-[10px] font-bold">Login for the best experience</p>
                       </div>
                     </div>
-                  </Link>
+                  </button>
                 )}
                 <div className="flex items-center gap-1.5 text-[10px] text-blue-200">
                   <MapPin className="w-3 h-3" />
@@ -336,6 +411,19 @@ export function Layout({
               </div>
 
               <div className="flex-1 overflow-y-auto py-2">
+                {IS_LOCAL_ADMIN && isAdmin && (
+                  <Link href="/admin" onClick={() => setMenuOpen(false)}>
+                    <div className="flex items-center gap-3 px-5 py-3.5 cursor-pointer transition-colors bg-indigo-50/80 hover:bg-indigo-100 border-b border-indigo-100/60 mb-1">
+                      <Radio className="w-5 h-5 text-indigo-600 animate-pulse" />
+                      <span className="text-sm font-black text-indigo-900">
+                        CONON COMMAND OS
+                      </span>
+                      <span className="ml-auto px-1.5 py-0.5 rounded-full bg-indigo-600 text-white text-[9px] font-black uppercase">
+                        Admin
+                      </span>
+                    </div>
+                  </Link>
+                )}
                 {[
                   { icon: Home,          label: "Home",            href: "/home"      },
                   { icon: HardHat,       label: "CONON-NOW Build",     href: "/build"     },
@@ -440,19 +528,29 @@ export function Layout({
               <div className="border-t border-slate-100 px-5 py-4">
                 {loggedIn ? (
                   <button
-                    onClick={handleLogout}
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleLogout();
+                    }}
                     className="flex items-center gap-2 text-slate-400 cursor-pointer hover:text-red-500 transition-colors"
                   >
                     <LogOut className="w-4 h-4" />
                     <span className="text-[13px] font-bold">Logout</span>
                   </button>
                 ) : (
-                  <Link href="/login" onClick={() => setMenuOpen(false)}>
-                    <div className="flex items-center gap-2 text-slate-500 cursor-pointer hover:text-blue-600 transition-colors">
-                      <LogIn className="w-4 h-4" />
-                      <span className="text-[13px] font-bold">Login / Sign up</span>
-                    </div>
-                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      openAuthModal("login");
+                    }}
+                    className="flex items-center gap-2 text-slate-500 cursor-pointer hover:text-blue-600 transition-colors w-full text-left"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    <span className="text-[13px] font-bold">Login / Sign up</span>
+                  </button>
                 )}
                 <div className="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100">
                   <img
@@ -491,7 +589,7 @@ export function Layout({
                 type="button"
                 onClick={() => setCartOpen(true)}
                 className="pointer-events-auto w-full flex items-center justify-between rounded-2xl px-4 py-3 text-white shadow-xl active:scale-[0.98] transition"
-                style={{ background: "#1848a0", boxShadow: "0 10px 24px -6px rgba(24,72,160,0.45)" }}
+                style={{ background: "#1e7e34", boxShadow: "0 10px 24px -6px rgba(30,126,52,0.45)" }}
               >
                 <span className="flex items-center gap-2.5">
                   <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/20">
