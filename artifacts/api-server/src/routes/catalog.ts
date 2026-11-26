@@ -3,8 +3,10 @@ import { z } from "zod";
 import multer from "multer";
 import { catalogEngine } from "../services/catalogEngine";
 import { imageStudioService } from "../services/imageStudioService";
+import { requireAdmin } from "../middleware/adminAuth";
 
 const router = Router();
+router.use("/admin", requireAdmin);
 
 // Multer memory upload middleware for Mode 1 drag & drop / direct uploads
 const upload = multer({

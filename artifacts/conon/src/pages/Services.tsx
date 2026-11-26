@@ -30,6 +30,7 @@ import { Layout } from "@/components/Layout";
 import { CononProductMedia } from "@/components/CononProductMedia";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { useLiveServices } from "@/hooks/useCononLiveData";
 import { useWallet } from "@/context/WalletContext";
 import { useUser } from "@/context/UserContext";
 import {
@@ -192,8 +193,12 @@ export function Services() {
   const { user } = useUser();
   const vault = useSafeProductMediaVault();
   const vaultVersion = vault?.version ?? 0;
+  const liveServices = useLiveServices();
 
-  const [catalog, setCatalog] = useState<ServiceCatalogItem[]>(FALLBACK_SERVICE_CATALOG);
+  const [catalog, setCatalog] = useState<ServiceCatalogItem[]>(liveServices);
+  React.useEffect(() => {
+    setCatalog((prev) => (prev.length === 0 ? liveServices : liveServices));
+  }, [liveServices]);
   const [detailService, setDetailService] = useState<ServiceCatalogItem | null>(null);
   const [bookings, setBookings] = useState<ServiceBookingRecord[]>([]);
   const [activeTab, setActiveTab] = useState<FilterTab>("ALL");

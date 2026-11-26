@@ -43,6 +43,9 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { useFourPanelRelay, RelayOrder } from "@/context/FourPanelRelayContext";
+import { useGlobalControls } from "@/hooks/useCononLiveData";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { downloadPaymentAdvicePdf } from "@/services/treasuryEngine";
 import { SocketStatusPill } from "@/services/socket";
 import { useKyc } from "@/context/KycContext";
 import { ComplianceHealthShieldDrawer } from "@/components/kyc/ComplianceHealthShieldDrawer";
@@ -92,6 +95,7 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
     setActiveApplicantId,
     complianceAlert,
   } = useKyc();
+  const globalControls = useGlobalControls();
 
   // UI States
   const [shieldDrawerOpen, setShieldDrawerOpen] = useState(false);
@@ -590,7 +594,7 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
       )}
 
       {/* Rain-Shield Active Banner */}
-      {state.isRainModeActive && (
+      {(state.isRainModeActive || globalControls.rainMode) && (
         <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 mt-3">
           <div className="rounded-2xl bg-cyan-950/80 border border-cyan-800/60 px-4 py-2.5 flex items-center gap-3 text-cyan-300 text-xs shadow-inner">
             <CloudRain className="w-4 h-4 text-cyan-400 shrink-0 animate-bounce" />
@@ -1124,6 +1128,35 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
                 <Zap className="w-4 h-4 text-slate-950" />
                 <span>{t("withdrawUpiBtn", "⚡ Withdraw ₹ to UPI Instantly (NPCI 24x7)")}</span>
               </button>
+
+              {(() => {
+                const sync = useSafeCononMasterSync();
+                const latestDriverPayout = (sync?.state.treasury?.ledger || []).find(
+                  (r) => r.entryType === "DRIVER_PAYOUT" && r.status === "SETTLED"
+                );
+                if (!latestDriverPayout) return null;
+                return (
+                  <div className="p-3 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold flex items-center justify-between gap-2">
+                    <span>
+                      ✓ {lang === "hi"
+                        ? `बैंक/UPI ${latestDriverPayout.toAccountRef} में भुगतान • UTR: ${latestDriverPayout.utrNumber}`
+                        : `Paid to ${latestDriverPayout.toAccountRef} • UTR: ${latestDriverPayout.utrNumber}`}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        downloadPaymentAdvicePdf(
+                          latestDriverPayout,
+                          sync?.state.treasury?.companyAccounts || []
+                        )
+                      }
+                      className="px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 text-[10px] font-black cursor-pointer shrink-0"
+                    >
+                      {lang === "hi" ? "पेमेंट एडवाइस" : "View Payment Advice"}
+                    </button>
+                  </div>
+                );
+              })()}
 
               {/* Daily Diesel Streak Bonus Bar */}
               <div className={`p-3.5 rounded-2xl border space-y-2 ${themeInnerCardClass}`}>

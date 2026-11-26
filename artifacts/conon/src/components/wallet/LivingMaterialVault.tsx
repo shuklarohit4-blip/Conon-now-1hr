@@ -11,6 +11,8 @@ import {
 import { toast } from "sonner";
 import { useWallet, WalletTxn } from "@/context/WalletContext";
 import { CustomerDeliveryFeedbackModal } from "@/components/feedback/CustomerDeliveryFeedbackModal";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { generateUtr } from "@/services/treasuryEngine";
 
 /* ── Formatter Helpers ─────────────────────────────────────────────────── */
 const inr = (n: number) => `₹${Math.round(n).toLocaleString("en-IN")}`;
@@ -157,6 +159,7 @@ export function LivingMaterialVault() {
     activateSosCredit,
     markRewardClaimed,
   } = useWallet();
+  const masterSync = useSafeCononMasterSync();
 
   /* ── 3D Magnetic Flip Card State ── */
   const cardRef = useRef<HTMLDivElement>(null);
@@ -275,6 +278,37 @@ export function LivingMaterialVault() {
       return;
     }
     addMoney(amt, selectedPayMethod, `Vault Top-up (${selectedPayMethod})`);
+    if (masterSync) {
+      const accounts = masterSync.state.treasury?.companyAccounts || [];
+      const collectionAcct =
+        accounts.find((a) => (a.role === "COLLECTION" || a.role === "ESCROW_NODAL") && a.isPrimary) ||
+        accounts.find((a) => a.role === "COLLECTION" || a.role === "ESCROW_NODAL") ||
+        accounts[0];
+      masterSync
+        .recordTreasuryEntry({
+          id: `tr_vault_${Date.now()}`,
+          orderId: `VAULT-${Date.now().toString().slice(-6)}`,
+          entryType: "VAULT_TOPUP",
+          direction: "CREDIT",
+          fromAccountLabel: `Customer Vault (${selectedPayMethod})`,
+          fromAccountRef: selectedPayMethod,
+          toAccountLabel: collectionAcct?.label || "CONON Collection A/c",
+          toAccountRef: collectionAcct
+            ? `${collectionAcct.bankName} ${collectionAcct.accountNumberMasked}`
+            : "CONON-COLLECTION",
+          toIfsc: collectionAcct?.ifscCode || "",
+          beneficiaryName: "CONON LIVING VAULT",
+          paymentMode: selectedPayMethod.toUpperCase(),
+          utrNumber: generateUtr("6"),
+          grossAmount: amt,
+          platformMargin: 0,
+          taxAmount: 0,
+          netAmount: amt,
+          status: "SETTLED",
+          createdAt: new Date().toISOString(),
+        })
+        .catch(() => {});
+    }
     setShowAddFunds(false);
     playTone(659.25, "triangle", 0.25);
     toast.success(`${inr(amt)} added to your Living Vault!`, {

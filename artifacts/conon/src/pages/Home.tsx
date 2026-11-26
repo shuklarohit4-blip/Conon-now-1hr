@@ -59,6 +59,7 @@ import { useUser } from "@/context/UserContext";
 import { useAuthContext } from "@/context/AuthContext";
 import { useUI } from "@/context/UIContext";
 import { CononProductMedia } from "@/components/CononProductMedia";
+import { LiveStorefrontBroadcastBar } from "@/components/LiveStorefrontBroadcastBar";
 import { useGetMaterials, useAddToCart, useUpdateCartItem, useRemoveFromCart, useGetCart, getGetCartQueryKey, GetMaterialsStage } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -786,6 +787,7 @@ export function Home() {
         {/* ── Normal (non-search) UI ─────────────────────────────── */}
         {!isSearching && (
           <>
+            <LiveStorefrontBroadcastBar />
             {/* ── Top Department Navigation Bar (rendered here when in seamless mode) ── */}
             {heroMode !== "homerun" && (
               <HomeDepartmentNav

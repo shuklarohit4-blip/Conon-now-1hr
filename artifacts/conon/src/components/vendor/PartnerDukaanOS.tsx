@@ -62,6 +62,9 @@ import { HOME_CATEGORIES } from "@/data/homeCategories";
 import { updateProductImageApi, resetProductImageApi, toggleCategoryApi } from "@/services/vendorCatalogSync";
 import { useVendorTheme, VendorThemeToggle } from "@/context/VendorThemeContext";
 import { useVendorLang, VendorLanguageToggle } from "@/context/VendorLanguageContext";
+import { useGlobalControls } from "@/hooks/useCononLiveData";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { downloadPaymentAdvicePdf } from "@/services/treasuryEngine";
 import { feedbackSync, type DisputeTicket } from "@/services/feedbackSync";
 
 export interface PartnerDukaanOSProps {
@@ -72,6 +75,15 @@ export interface PartnerDukaanOSProps {
 export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}) {
   const { isDark } = useVendorTheme();
   const { t, lang } = useVendorLang();
+  const globalControls = useGlobalControls();
+  const masterSync = useSafeCononMasterSync();
+  const latestVendorPayout = useMemo(
+    () =>
+      (masterSync?.state.treasury?.ledger || []).find(
+        (r) => r.entryType === "VENDOR_PAYOUT" && r.status === "SETTLED"
+      ) || null,
+    [masterSync?.state.treasury?.ledger]
+  );
 
   const {
     state,
@@ -701,6 +713,37 @@ export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}
             </div>
           </div>
         </div>
+
+        {/* LIVE TREASURY UTR SETTLEMENT ADVICE BANNER */}
+        {latestVendorPayout && (
+          <div className="max-w-[1680px] mx-auto mt-2 px-3 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-700 dark:text-emerald-300 flex flex-wrap items-center justify-between gap-2 text-xs font-bold">
+            <span>
+              ✓ {lang === "hi"
+                ? `आपके बैंक खाते ${latestVendorPayout.toAccountRef} में ₹${latestVendorPayout.netAmount.toLocaleString("en-IN")} ट्रांसफर हो गया • UTR: ${latestVendorPayout.utrNumber}`
+                : `Paid ₹${latestVendorPayout.netAmount.toLocaleString("en-IN")} to your Bank A/c ${latestVendorPayout.toAccountRef} • UTR: ${latestVendorPayout.utrNumber}`}
+            </span>
+            <button
+              type="button"
+              onClick={() =>
+                downloadPaymentAdvicePdf(
+                  latestVendorPayout,
+                  masterSync?.state.treasury?.companyAccounts || []
+                )
+              }
+              className="px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 text-[11px] font-black cursor-pointer shrink-0"
+            >
+              {lang === "hi" ? "पेमेंट एडवाइस देखें" : "View Payment Advice"}
+            </button>
+          </div>
+        )}
+
+        {/* LIVE RAIN-SHIELD PACKING BANNER */}
+        {globalControls.rainMode && (
+          <div className="max-w-[1680px] mx-auto mt-2.5 px-3 py-2 rounded-xl bg-sky-500/15 border border-sky-500/40 text-sky-900 dark:text-sky-200 flex items-center justify-between gap-2 text-xs font-bold">
+            <span>🌧️ MONSOON RAIN-SHIELD ACTIVE: Mandatory double-tarpaulin & waterproof wrapping before driver handoff.</span>
+            <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-[10px] uppercase tracking-wider shrink-0">Admin Live</span>
+          </div>
+        )}
 
         {/* MOBILE TAB SELECTOR (Hidden on xl screens) */}
         <div

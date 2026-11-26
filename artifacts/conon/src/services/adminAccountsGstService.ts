@@ -3,8 +3,6 @@
  * Daily Financial Accounting Ledger, GSTR-1 Table 12 HSN Summary & 1-Click CA-Ready PDF Generator
  */
 import { resolveApiUrl } from "@/lib/apiBase";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
 
 export interface CompanyGstSettings {
   companyName: string;
@@ -374,6 +372,10 @@ export async function fetchGstReport(
  * 1-CLICK CLIENT-SIDE CA PDF GENERATOR (JSPDF + AUTOTABLE)
  * ──────────────────────────────────────────────────────────────────────────── */
 export async function generateGstReportPdf(report: GstReportData): Promise<void> {
+  const [{ jsPDF }, { default: autoTable }] = await Promise.all([
+    import("jspdf"),
+    import("jspdf-autotable"),
+  ]);
   const doc = new jsPDF({
     orientation: "portrait",
     unit: "mm",
@@ -634,6 +636,70 @@ export async function generateGstReportPdf(report: GstReportData): Promise<void>
   doc.setTextColor(100, 116, 139);
   doc.text(report.company.signatoryDesignation, signX, finalY + 19);
 
+  // SECTION 4 — BANK ACCOUNT & UTR SETTLEMENT RECONCILIATION
+  try {
+    const rawCache =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("conon_master_live_state_cache_v1")
+        : null;
+    const parsed = rawCache ? JSON.parse(rawCache) : null;
+    const treasury = parsed?.treasury || { companyAccounts: [], ledger: [] };
+    const accounts: any[] = treasury.companyAccounts || [];
+    const ledger: any[] = treasury.ledger || [];
+    const collectionAcct = accounts.find((a) => a.role === "COLLECTION") || accounts[0];
+    const payoutAcct = accounts.find((a) => a.role === "PAYOUT") || accounts[0];
+
+    const totalInflow = ledger
+      .filter((r) => r.direction === "CREDIT")
+      .reduce((s, r) => s + Number(r.netAmount || r.grossAmount || 0), 0);
+    const payouts = ledger.filter((r) => r.direction === "DEBIT" && (r.entryType === "VENDOR_PAYOUT" || r.entryType === "DRIVER_PAYOUT"));
+    const totalDisbursed = payouts.reduce((s, r) => s + Number(r.netAmount || 0), 0);
+    const totalProfit = ledger
+      .filter((r) => r.entryType === "CUSTOMER_INFLOW")
+      .reduce((s, r) => s + Number(r.platformMargin || 0), 0);
+
+    doc.addPage();
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(15, 23, 42);
+    doc.text("SECTION 4 — BANK ACCOUNT & UTR SETTLEMENT RECONCILIATION", margin, 20);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.text(
+      `Collection A/c: ${collectionAcct ? `${collectionAcct.bankName} ${collectionAcct.accountNumberMasked} (${collectionAcct.ifscCode})` : "Not Configured"} | Total Inflow: Rs.${totalInflow.toLocaleString("en-IN")}`,
+      margin,
+      28
+    );
+    doc.text(
+      `Payout A/c: ${payoutAcct ? `${payoutAcct.bankName} ${payoutAcct.accountNumberMasked} (${payoutAcct.ifscCode})` : "Not Configured"} | Total Disbursed: Rs.${totalDisbursed.toLocaleString("en-IN")} | Net Platform Revenue: Rs.${totalProfit.toLocaleString("en-IN")}`,
+      margin,
+      34
+    );
+
+    autoTable(doc, {
+      startY: 40,
+      head: [["Order ID", "Beneficiary", "Beneficiary A/c", "IFSC", "Mode", "12-Digit UTR", "Net (Rs.)", "Status"]],
+      body:
+        payouts.length > 0
+          ? payouts.map((p) => [
+              p.orderId,
+              p.beneficiaryName,
+              p.toAccountRef,
+              p.toIfsc || "-",
+              p.paymentMode,
+              p.utrNumber,
+              Number(p.netAmount || 0).toLocaleString("en-IN"),
+              p.status,
+            ])
+          : [["-", "No Partner Payouts Settled Yet (Zero-Dummy Clean Slate)", "-", "-", "-", "-", "0", "-"]],
+      styles: { fontSize: 8 },
+      headStyles: { fillColor: [15, 23, 42], textColor: [251, 191, 36] },
+    });
+  } catch {
+    // Optional treasury section
+  }
+
   // Trigger direct browser download
   const dateStr = new Date().toISOString().slice(0, 10);
   doc.save(`CONON-NOW_Daily_Accounts_GST_${dateStr}.pdf`);
@@ -658,6 +724,22 @@ export function downloadGstCsv(report: GstReportData): void {
   report.hsnSummary.forEach((h) => {
     csv += `"${h.hsnCode}","${h.description}","${h.uqc}","${h.totalQuantity}","${h.totalValue.toFixed(2)}","${h.taxableValue.toFixed(2)}","${h.cgstAmount.toFixed(2)}","${h.sgstAmount.toFixed(2)}","0.00","${h.totalTax.toFixed(2)}"\n`;
   });
+
+  try {
+    const rawCache =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("conon_master_live_state_cache_v1")
+        : null;
+    const parsed = rawCache ? JSON.parse(rawCache) : null;
+    const ledger: any[] = parsed?.treasury?.ledger || [];
+    csv += `\n"--- SECTION 4: BANK ACCOUNT & UTR SETTLEMENT RECONCILIATION ---"\n`;
+    csv += `"Order ID","Entry Type","Direction","From Account","To Account","IFSC","Mode","12-Digit UTR","Net Amount","Status"\n`;
+    ledger.forEach((r) => {
+      csv += `"${r.orderId}","${r.entryType}","${r.direction}","${r.fromAccountLabel} (${r.fromAccountRef})","${r.toAccountLabel} (${r.toAccountRef})","${r.toIfsc || ""}","${r.paymentMode}","${r.utrNumber}","${Number(r.netAmount || 0).toFixed(2)}","${r.status}"\n`;
+    });
+  } catch {
+    // ignore
+  }
 
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);

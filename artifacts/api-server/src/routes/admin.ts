@@ -1152,7 +1152,7 @@ router.post("/admin/payouts/:id/approve", async (req, res) => {
 
   return res.json({
     id: payoutId,
-    vendorStore: "Katawala Hardware & Locks",
+    vendorStore: "CONON Partner Store",
     amount: 5000,
     status: "approved",
     requestedAt: new Date(),

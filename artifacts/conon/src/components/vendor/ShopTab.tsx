@@ -70,7 +70,7 @@ export function ShopTab() {
             </div>
 
             <h2 className="font-display font-black italic text-xl text-white mt-1.5 leading-tight">
-              {vendor?.shopName || "Katawala Hardware & Locks"}
+              {vendor?.shopName || "CONON Partner Store"}
             </h2>
 
             <p className="text-[10px] text-green-200 font-semibold mt-0.5 flex items-center gap-1">

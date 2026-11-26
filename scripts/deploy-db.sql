@@ -589,6 +589,48 @@ CREATE TABLE IF NOT EXISTS product_media_overrides (
 CREATE INDEX IF NOT EXISTS idx_media_vault_cat ON product_media_overrides(category_slug);
 CREATE INDEX IF NOT EXISTS idx_media_vault_verified ON product_media_overrides(is_admin_verified_media);
 
+-- 23. CONON Treasury & Live Money X-Ray (Zero-Dummy Clean Slate)
+CREATE TABLE IF NOT EXISTS company_bank_accounts (
+    id VARCHAR(80) PRIMARY KEY,
+    label VARCHAR(160) NOT NULL,
+    role VARCHAR(40) NOT NULL CHECK (role IN ('COLLECTION', 'ESCROW_NODAL', 'PAYOUT', 'TAX_RESERVE')),
+    bank_name VARCHAR(120) NOT NULL,
+    account_holder VARCHAR(160) NOT NULL DEFAULT 'CONON INFRABUILT PVT LTD',
+    account_number_masked VARCHAR(40) NOT NULL,
+    account_number_last4 VARCHAR(8) NOT NULL,
+    ifsc_code VARCHAR(20) NOT NULL,
+    upi_vpa VARCHAR(120),
+    gateway_provider VARCHAR(40) NOT NULL DEFAULT 'MANUAL_BANK_UTR' CHECK (gateway_provider IN ('RAZORPAY_ROUTE_API', 'CASHFREE_EASY_SPLIT', 'MANUAL_BANK_UTR')),
+    is_primary BOOLEAN NOT NULL DEFAULT false,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS treasury_ledger_entries (
+    id VARCHAR(80) PRIMARY KEY,
+    order_id VARCHAR(80) NOT NULL,
+    entry_type VARCHAR(40) NOT NULL CHECK (entry_type IN ('CUSTOMER_INFLOW', 'VAULT_TOPUP', 'VENDOR_PAYOUT', 'DRIVER_PAYOUT', 'CUSTOMER_REFUND', 'TAX_RESERVE')),
+    direction VARCHAR(16) NOT NULL CHECK (direction IN ('CREDIT', 'DEBIT')),
+    from_account_label VARCHAR(160) NOT NULL,
+    from_account_ref VARCHAR(120) NOT NULL,
+    to_account_label VARCHAR(160) NOT NULL,
+    to_account_ref VARCHAR(120) NOT NULL,
+    to_ifsc VARCHAR(20),
+    beneficiary_name VARCHAR(160) NOT NULL,
+    payment_mode VARCHAR(40) NOT NULL,
+    utr_number VARCHAR(80) NOT NULL,
+    gateway_ref_id VARCHAR(120),
+    gross_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    platform_margin NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    tax_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    net_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    status VARCHAR(30) NOT NULL DEFAULT 'SETTLED',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_treasury_ledger_order ON treasury_ledger_entries(order_id);
+CREATE INDEX IF NOT EXISTS idx_treasury_ledger_utr ON treasury_ledger_entries(utr_number);
+CREATE INDEX IF NOT EXISTS idx_treasury_ledger_type ON treasury_ledger_entries(entry_type, direction);
+
 
 
 

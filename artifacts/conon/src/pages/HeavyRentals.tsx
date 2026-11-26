@@ -25,6 +25,7 @@ import { Layout } from "@/components/Layout";
 import { CononProductMedia } from "@/components/CononProductMedia";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { useLiveRentals } from "@/hooks/useCononLiveData";
 import { useWallet } from "@/context/WalletContext";
 import { useUser } from "@/context/UserContext";
 import {
@@ -65,8 +66,12 @@ export function HeavyRentals() {
   const { user } = useUser();
   const vault = useSafeProductMediaVault();
   const vaultVersion = vault?.version ?? 0;
+  const liveRentals = useLiveRentals();
 
-  const [catalog, setCatalog] = useState<MachineRentalCatalogItem[]>(FALLBACK_RENTAL_CATALOG);
+  const [catalog, setCatalog] = useState<MachineRentalCatalogItem[]>(liveRentals);
+  useEffect(() => {
+    setCatalog(liveRentals);
+  }, [liveRentals]);
   const [detailMachine, setDetailMachine] = useState<MachineRentalCatalogItem | null>(null);
   const [bookings, setBookings] = useState<MachineRentalBookingRecord[]>([]);
   const [activeCat, setActiveCat] = useState<CatFilter>("ALL");

@@ -22,6 +22,8 @@ import feedbackRouter from "./feedback";
 import adminCatalogAccountsRouter from "./adminCatalogAccounts";
 import servicesRentalsRouter from "./servicesRentals";
 import mediaVaultRouter from "./mediaVault";
+import liveStateRouter from "./liveState";
+import treasuryRouter from "./treasury";
 
 const router: IRouter = Router();
 
@@ -30,6 +32,8 @@ router.use(feedbackRouter);
 router.use(adminCatalogAccountsRouter);
 router.use(servicesRentalsRouter);
 router.use(mediaVaultRouter);
+router.use(liveStateRouter);
+router.use(treasuryRouter);
 router.use(eventsRouter);
 router.use(kycRouter);
 router.use(driverRouter);

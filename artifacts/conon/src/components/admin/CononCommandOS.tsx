@@ -53,11 +53,13 @@ import {
   FileText,
   Receipt,
   Trash2,
+  Landmark,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAuthContext } from "@/context/AuthContext";
 import { useAdminCommand } from "@/context/AdminCommandContext";
 import { useFourPanelRelay } from "@/context/FourPanelRelayContext";
+import { useCononMasterSync } from "@/context/CononMasterSyncContext";
 import { ADMIN_JWT_KEY, JWT_STORAGE_KEY } from "@/lib/authApi";
 import { SocketStatusPill, useSocketStatus } from "@/services/socket";
 import { useKyc } from "@/context/KycContext";
@@ -67,6 +69,8 @@ import { AdminCatalogStudio } from "@/components/admin/AdminCatalogStudio";
 import { AdminMediaVaultStudio } from "@/components/admin/AdminMediaVaultStudio";
 import { Layers as VaultLayersIcon } from "lucide-react";
 import { AdminAccountsGst } from "@/components/admin/AdminAccountsGst";
+import { AdminTreasuryControlCenter } from "@/components/admin/AdminTreasuryControlCenter";
+import { EscrowBankTransferModal, type EscrowReleaseTarget } from "@/components/admin/EscrowBankTransferModal";
 import { fetchGstReport, generateGstReportPdf } from "@/services/adminAccountsGstService";
 import { servicesRentalsSync } from "@/services/servicesRentalsSync";
 
@@ -82,7 +86,8 @@ export type AdminOSModule =
   | "catalog_studio"
   | "accounts_gst"
   | "services_rentals"
-  | "media_vault";
+  | "media_vault"
+  | "khata_bank";
 
 /* ─────────────────────────────────────────────────────────────────────────
    ADMIN SERVICES & RENTALS MODULE (SAC 9954 / 9973)
@@ -332,6 +337,14 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
   const [, setLocation] = useLocation();
   const { user, logout } = useAuthContext();
   const relay = useFourPanelRelay();
+  const masterSync = useCononMasterSync();
+  const [catalogMediaSubTab, setCatalogMediaSubTab] = useState<"media" | "catalog">("media");
+  const [escrowReleaseTarget, setEscrowReleaseTarget] = useState<EscrowReleaseTarget | null>(null);
+  const [xrayOrderId, setXrayOrderId] = useState<string | null>(null);
+  const [bannerDraft, setBannerDraft] = useState(() => masterSync.state.globalControls.storefrontBanner);
+  useEffect(() => {
+    setBannerDraft(masterSync.state.globalControls.storefrontBanner);
+  }, [masterSync.state.globalControls.storefrontBanner]);
   const {
     todayGmv,
     netCommissionMargin,
@@ -507,7 +520,11 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
   const handleSaveRate = (skuId: string) => {
     const edit = editingRates[skuId];
     if (!edit) return;
-    updateMandiRate(skuId, Number(edit.landingCost), Number(edit.marginPercent));
+    const landing = Number(edit.landingCost);
+    const margin = Number(edit.marginPercent);
+    updateMandiRate(skuId, landing, margin);
+    const retailPrice = Math.round(landing * (1 + margin / 100));
+    masterSync.updateMandiRate(skuId, retailPrice, `Margin ${margin}%`).catch(() => {});
   };
 
   // Voice Command Simulation
@@ -528,6 +545,7 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
           description: `Detected site command: Increase OPC 53 Cement landing cost to ₹${newCost}/bag and adjust retail margin automatically.`,
           execute: () => {
             updateMandiRate("mandi_opc53", newCost, 8.0);
+            masterSync.updateMandiRate("mandi_opc53", Math.round(newCost * 1.08), "+₹5 Voice").catch(() => {});
             setEditingRates((prev) => ({
               ...prev,
               mandi_opc53: { landingCost: newCost, marginPercent: 8.0 },
@@ -747,20 +765,20 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
       icon: FileCheck2,
     },
     {
-      id: "catalog_studio",
-      labelHi: "कैटलॉग स्टूडियो",
-      labelEn: "Catalog Studio",
-      label: "कैटलॉग स्टूडियो (Master CMS)",
-      badge: "Master Lock",
-      icon: Package,
+      id: "media_vault",
+      labelHi: "कैटलॉग & मीडिया वॉल्ट",
+      labelEn: "Catalog & Media",
+      label: "Catalog & Media Workbench",
+      badge: "Live Sync",
+      icon: VaultLayersIcon,
     },
     {
-      id: "media_vault",
-      labelHi: "मीडिया & प्रोडक्ट वॉल्ट",
-      labelEn: "Media Vault",
-      label: "Media Vault (1-6 Photos & Specs)",
-      badge: "1-6 Photos",
-      icon: VaultLayersIcon,
+      id: "khata_bank",
+      labelHi: "खाता & बैंक",
+      labelEn: "Khata & Bank",
+      label: "Khata & Bank (Treasury & UTR)",
+      badge: "Money X-Ray",
+      icon: Landmark,
     },
     {
       id: "accounts_gst",
@@ -921,32 +939,72 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
             </div>
           </div>
 
-          {/* Active Module Title + Live Status Dot */}
-          <div className="hidden sm:flex items-center gap-2.5 pl-3 border-l border-slate-700/40">
+          {/* Active Module Title + Live Sync Bus Health HUD */}
+          <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-slate-700/40">
             <span className={`text-xs font-black tracking-tight ${isDark ? "text-slate-200" : "text-slate-800"}`}>
               {tabs.find((t) => t.id === activeTab)?.labelHi || "Aaj Ka Kaam"}
             </span>
             <span
-              className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold border transition ${
-                socketStatus.isConnected
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                  : "bg-amber-500/10 text-amber-400 border-amber-500/30 font-mono"
+              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black border transition ${
+                masterSync.syncStatus === "ERROR"
+                  ? "bg-rose-500/15 text-rose-400 border-rose-500/40"
+                  : masterSync.syncStatus === "SYNCING"
+                  ? "bg-amber-500/15 text-amber-400 border-amber-500/40"
+                  : "bg-emerald-500/15 text-emerald-400 border-emerald-500/40"
               }`}
               title={
-                socketStatus.isConnected
-                  ? "Connected to Lucknow Real-Time WebSocket Relay"
-                  : "Running in Local Offline Fallback Mode"
+                masterSync.lastSyncError
+                  ? `Sync Error: ${masterSync.lastSyncError}`
+                  : `Master Live Bus v${masterSync.state.version} • Socket: ${socketStatus.isConnected ? "Connected" : "Local"}`
               }
             >
               <span
                 className={`w-1.5 h-1.5 rounded-full ${
-                  socketStatus.isConnected
-                    ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]"
-                    : "bg-amber-400"
+                  masterSync.syncStatus === "ERROR"
+                    ? "bg-rose-400"
+                    : masterSync.syncStatus === "SYNCING"
+                    ? "bg-amber-400 animate-ping"
+                    : "bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]"
                 }`}
               />
-              <span>{socketStatus.isConnected ? "Live" : "Local"}</span>
+              <span>
+                {masterSync.syncStatus === "ERROR"
+                  ? "Sync: ERROR"
+                  : masterSync.syncStatus === "SYNCING"
+                  ? "Syncing..."
+                  : "App Sync: LIVE ✓"}
+              </span>
             </span>
+            <span
+              className={`hidden xl:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${
+                isDark
+                  ? "bg-slate-900 text-slate-300 border-slate-700"
+                  : "bg-slate-100 text-slate-700 border-slate-200"
+              }`}
+              title="Open CONON-NOW browser tabs/panels synced via BroadcastChannel"
+            >
+              {masterSync.liveTabsCount} Live {masterSync.liveTabsCount === 1 ? "Tab" : "Tabs"}
+            </span>
+            <button
+              type="button"
+              onClick={async () => {
+                const res = await masterSync.triggerTestPing();
+                if (res.ok) {
+                  toast.success(`Live Sync Ping sent! (${res.tabs} active tab${res.tabs === 1 ? "" : "s"})`);
+                } else {
+                  toast.error("Sync Ping failed — check disk/API connection");
+                }
+              }}
+              className={`hidden lg:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black border transition cursor-pointer ${
+                isDark
+                  ? "bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 border-amber-400/30"
+                  : "bg-amber-50 hover:bg-amber-100 text-amber-700 border-amber-300"
+              }`}
+              title="Send a live test ping to all open Storefront, Vendor, and Driver tabs"
+            >
+              <Zap className="w-3 h-3" />
+              <span>Test Ping</span>
+            </button>
           </div>
         </div>
 
@@ -1012,9 +1070,15 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
           {/* 2. Compact Rain Mode Toggle */}
           <button
             type="button"
-            onClick={relay.toggleRainMode}
+            onClick={() => {
+              const nextRain = !masterSync.state.globalControls.rainMode;
+              if (relay.state.isRainModeActive !== nextRain) {
+                relay.toggleRainMode();
+              }
+              masterSync.toggleRainMode(nextRain).catch(() => {});
+            }}
             className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer border shadow-sm ${
-              relay.state.isRainModeActive
+              masterSync.state.globalControls.rainMode || relay.state.isRainModeActive
                 ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.3)]"
                 : isDark
                 ? "bg-slate-900/90 text-slate-300 hover:text-white border-slate-800 hover:border-slate-700"
@@ -1026,12 +1090,16 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
             <span className="font-extrabold tracking-tight hidden sm:inline">Rain Mode</span>
             <span
               className={`w-7 h-4 rounded-full p-0.5 transition-colors flex items-center ${
-                relay.state.isRainModeActive ? "bg-cyan-400 justify-end" : "bg-slate-600 justify-start"
+                masterSync.state.globalControls.rainMode || relay.state.isRainModeActive
+                  ? "bg-cyan-400 justify-end"
+                  : "bg-slate-600 justify-start"
               }`}
             >
               <span
                 className={`w-3 h-3 rounded-full transition-transform ${
-                  relay.state.isRainModeActive ? "bg-slate-950 shadow-xs" : "bg-white"
+                  masterSync.state.globalControls.rainMode || relay.state.isRainModeActive
+                    ? "bg-slate-950 shadow-xs"
+                    : "bg-white"
                 }`}
               />
             </span>
@@ -1391,6 +1459,169 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
                 </div>
               </div>
 
+              {/* SYNC ERROR BANNER (Explicit, never silent) */}
+              {masterSync.lastSyncError && (
+                <div className="p-3.5 rounded-2xl bg-rose-500/15 border border-rose-500/40 text-rose-300 flex items-center justify-between gap-3 text-xs font-bold">
+                  <span>⚠️ Master Live Sync Error: {masterSync.lastSyncError}</span>
+                  <button
+                    type="button"
+                    onClick={() => masterSync.refreshFromSources()}
+                    className="px-3 py-1 rounded-lg bg-rose-500 text-white font-black cursor-pointer shrink-0"
+                  >
+                    Retry Sync
+                  </button>
+                </div>
+              )}
+
+              {/* LIVE STOREFRONT BROADCAST & REMOTE CONTROL STRIP */}
+              <div
+                className={`p-5 rounded-2xl border transition-colors ${
+                  isDark
+                    ? "bg-[#0F172A] border-slate-800/90"
+                    : "bg-white border-slate-200 shadow-sm"
+                }`}
+              >
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3.5 mb-3.5 border-b border-slate-800/40">
+                  <div className="flex items-center gap-2.5">
+                    <Radio className="w-4 h-4 text-emerald-400" />
+                    <div>
+                      <h2 className={`text-sm font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                        Live Storefront Broadcast & Remote Control
+                      </h2>
+                      <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                        Instant &lt;500ms remote control over Customer Storefront, Vendor Dukaan OS & Driver Cockpit
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const nextRain = !masterSync.state.globalControls.rainMode;
+                        if (relay.state.isRainModeActive !== nextRain) relay.toggleRainMode();
+                        masterSync.toggleRainMode(nextRain);
+                        toast.success(nextRain ? "🌧️ Rain Mode enabled across all panels!" : "Rain Mode turned off.");
+                      }}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-black border cursor-pointer transition ${
+                        masterSync.state.globalControls.rainMode
+                          ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50"
+                          : isDark
+                          ? "bg-slate-900 text-slate-300 border-slate-700"
+                          : "bg-slate-100 text-slate-700 border-slate-200"
+                      }`}
+                    >
+                      🌧️ Rain Mode: {masterSync.state.globalControls.rainMode ? "ON" : "OFF"}
+                    </button>
+
+                    <div className={`flex items-center gap-1 px-2.5 py-1 rounded-xl border text-xs font-bold ${isDark ? "bg-slate-900 border-slate-700 text-slate-200" : "bg-slate-100 border-slate-200 text-slate-800"}`}>
+                      <Clock className="w-3.5 h-3.5 text-amber-400" />
+                      <span>SLA:</span>
+                      {[45, 60, 90].map((mins) => (
+                        <button
+                          key={mins}
+                          type="button"
+                          onClick={() => {
+                            masterSync.updateDeliverySla(mins);
+                            toast.success(`Storefront delivery SLA set to ${mins} mins`);
+                          }}
+                          className={`px-1.5 py-0.5 rounded text-[11px] font-black cursor-pointer ${
+                            masterSync.state.globalControls.deliverySlaMins === mins
+                              ? "bg-amber-400 text-slate-950"
+                              : "opacity-70 hover:opacity-100"
+                          }`}
+                        >
+                          {mins}m
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const nextPause = !masterSync.state.globalControls.emergencyPause;
+                        masterSync.toggleEmergencyPause(nextPause);
+                        toast.warning(nextPause ? "🚨 Storefront Maintenance Pause ENABLED" : "✅ Storefront Resumed Live");
+                      }}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-black border cursor-pointer transition ${
+                        masterSync.state.globalControls.emergencyPause
+                          ? "bg-rose-500/20 text-rose-300 border-rose-500/50"
+                          : isDark
+                          ? "bg-slate-900 text-slate-300 border-slate-700"
+                          : "bg-slate-100 text-slate-700 border-slate-200"
+                      }`}
+                    >
+                      {masterSync.state.globalControls.emergencyPause ? "⏸️ Storefront PAUSED" : "▶ Storefront LIVE"}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        const res = await masterSync.triggerTestPing();
+                        toast.success(`⚡ Live Sync Ping broadcasted (${res.tabs} active tab${res.tabs === 1 ? "" : "s"})`);
+                      }}
+                      className="px-3 py-1.5 rounded-xl text-xs font-black bg-amber-400 hover:bg-amber-300 text-slate-950 cursor-pointer flex items-center gap-1"
+                    >
+                      <Zap className="w-3.5 h-3.5" />
+                      Test Live Sync Ping
+                    </button>
+                  </div>
+                </div>
+
+                {/* Live Announcement Banner Editor */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center">
+                  <label className="md:col-span-2 flex items-center gap-2 text-xs font-bold cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={bannerDraft.enabled}
+                      onChange={(e) => setBannerDraft((p) => ({ ...p, enabled: e.target.checked }))}
+                      className="rounded border-slate-600"
+                    />
+                    <span className={isDark ? "text-slate-200" : "text-slate-800"}>Banner Active</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={bannerDraft.badge}
+                    onChange={(e) => setBannerDraft((p) => ({ ...p, badge: e.target.value }))}
+                    placeholder="Badge (e.g. LIVE OFFER)"
+                    className={`md:col-span-2 px-3 py-1.5 rounded-xl border text-xs font-bold ${
+                      isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                    }`}
+                  />
+                  <input
+                    type="text"
+                    value={bannerDraft.text}
+                    onChange={(e) => setBannerDraft((p) => ({ ...p, text: e.target.value }))}
+                    placeholder="Storefront announcement text..."
+                    className={`md:col-span-5 px-3 py-1.5 rounded-xl border text-xs font-medium ${
+                      isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                    }`}
+                  />
+                  <select
+                    value={bannerDraft.tone}
+                    onChange={(e) =>
+                      setBannerDraft((p) => ({ ...p, tone: e.target.value as "emerald" | "amber" | "crimson" }))
+                    }
+                    className={`md:col-span-1 px-2 py-1.5 rounded-xl border text-xs font-bold ${
+                      isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                    }`}
+                  >
+                    <option value="emerald">Green</option>
+                    <option value="amber">Amber</option>
+                    <option value="crimson">Red</option>
+                  </select>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await masterSync.updateStorefrontBanner(bannerDraft);
+                      toast.success("Live Storefront Broadcast updated across all open tabs!");
+                    }}
+                    className="md:col-span-2 px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black cursor-pointer text-center"
+                  >
+                    Publish Banner
+                  </button>
+                </div>
+              </div>
+
               {/* 4-STEP LIVE LAUNCH READINESS TRACKER (ZERO-DUMMY CLEAN SLATE) */}
               {todayGmv === 0 && dispatchOrders.length === 0 && (
                 <div
@@ -1714,9 +1945,13 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
                         <button
                           type="button"
                           onClick={() => {
-                            releaseEscrowPayout(pendingEscrowList[0].id);
-                            toast.success("1-Click Payout Released", {
-                              description: `₹${pendingEscrowList[0].dealerPayoutAmount.toLocaleString("en-IN")} released to ${pendingEscrowList[0].dealerName}`,
+                            const e0 = pendingEscrowList[0];
+                            setEscrowReleaseTarget({
+                              id: e0.id,
+                              orderShortId: e0.shortId,
+                              dealerName: e0.dealerName,
+                              dealerPayoutAmount: e0.dealerPayoutAmount,
+                              status: e0.status,
                             });
                           }}
                           className="w-full py-2 px-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
@@ -2980,7 +3215,26 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
                         </button>
                         <button
                           type="button"
-                          onClick={() => releaseEscrowPayout(escrow.id)}
+                          onClick={() => {
+                            setXrayOrderId(escrow.shortId);
+                            setActiveTab("khata_bank");
+                          }}
+                          className="px-3.5 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 transition cursor-pointer flex items-center justify-center gap-1.5"
+                        >
+                          <Sparkles className="w-3.5 h-3.5" />
+                          Money X-Ray
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setEscrowReleaseTarget({
+                              id: escrow.id,
+                              orderShortId: escrow.shortId,
+                              dealerName: escrow.dealerName,
+                              dealerPayoutAmount: escrow.dealerPayoutAmount,
+                              status: escrow.status,
+                            })
+                          }
                           className="px-4 py-2 rounded-xl text-xs font-black text-slate-950 bg-emerald-400 hover:bg-emerald-300 shadow-lg shadow-emerald-400/20 transition cursor-pointer flex items-center justify-center gap-1.5"
                         >
                           <CheckCircle2 className="w-4 h-4" />
@@ -3538,9 +3792,71 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
           {activeTab === "kyc_war_room" && <AdminKycWarRoom />}
 
           {/* ─────────────────────────────────────────────────────────
-              MODULE 8: CATALOG STUDIO (MASTER CMS & PRODUCT LOCK)
+              MODULE 8 + 11: UNIFIED CATALOG & MEDIA WORKBENCH
           ────────────────────────────────────────────────────────── */}
-          {activeTab === "catalog_studio" && <AdminCatalogStudio />}
+          {(activeTab === "media_vault" || activeTab === "catalog_studio") && (
+            <div className="space-y-4">
+              <div
+                className={`flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl border ${
+                  isDark ? "bg-[#0F172A] border-slate-800" : "bg-white border-slate-200 shadow-sm"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                    Unified Catalog & Media Workbench
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                    Live Disk + Storefront Sync
+                  </span>
+                </div>
+                <div className={`flex items-center p-1 rounded-xl border ${isDark ? "bg-slate-900 border-slate-800" : "bg-slate-100 border-slate-200"}`}>
+                  <button
+                    type="button"
+                    onClick={() => setCatalogMediaSubTab("media")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-black cursor-pointer transition ${
+                      catalogMediaSubTab === "media"
+                        ? "bg-amber-400 text-slate-950"
+                        : isDark
+                        ? "text-slate-300 hover:text-white"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    Media & Photos (1-6)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCatalogMediaSubTab("catalog")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-black cursor-pointer transition ${
+                      catalogMediaSubTab === "catalog"
+                        ? "bg-amber-400 text-slate-950"
+                        : isDark
+                        ? "text-slate-300 hover:text-white"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    Master Catalog & Stock
+                  </button>
+                </div>
+              </div>
+
+              {catalogMediaSubTab === "media" ? (
+                <AdminMediaVaultStudio isDark={isDark} />
+              ) : (
+                <AdminCatalogStudio />
+              )}
+            </div>
+          )}
+
+          {/* ─────────────────────────────────────────────────────────
+              MODULE 12: KHATA & BANK (TREASURY & LIVE MONEY X-RAY)
+          ────────────────────────────────────────────────────────── */}
+          {activeTab === "khata_bank" && (
+            <AdminTreasuryControlCenter
+              isDark={isDark}
+              initialXrayOrderId={xrayOrderId}
+              onClearInitialXray={() => setXrayOrderId(null)}
+            />
+          )}
 
           {/* ─────────────────────────────────────────────────────────
               MODULE 9: ACCOUNTS & GST (ROZ KA HISAAB & CA PDF)
@@ -3551,13 +3867,18 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
               MODULE 10: SKILLED SERVICES & HEAVY RENTALS (SAC 9954/9973)
           ────────────────────────────────────────────────────────── */}
           {activeTab === "services_rentals" && <AdminServicesRentalsModule isDark={isDark} />}
-
-          {/* ─────────────────────────────────────────────────────────
-              MODULE 11: MASTER MEDIA & PRODUCT VAULT (ALL ITEMS & PHOTOS)
-          ────────────────────────────────────────────────────────── */}
-          {activeTab === "media_vault" && <AdminMediaVaultStudio isDark={isDark} />}
         </main>
       </div>
+
+      {/* Anti-Fraud From -> To Bank Transfer Verification Slip Modal */}
+      <EscrowBankTransferModal
+        escrow={escrowReleaseTarget}
+        isDark={isDark}
+        onClose={() => setEscrowReleaseTarget(null)}
+        onConfirmReleased={(escrowId) => {
+          releaseEscrowPayout(escrowId);
+        }}
+      />
 
       {/* ─────────────────────────────────────────────────────────────
           4. 1-TAP ACTION CONFIRMATION MODAL (Voice or Triggered)

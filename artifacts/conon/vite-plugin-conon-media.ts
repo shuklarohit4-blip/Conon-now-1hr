@@ -3,6 +3,7 @@ import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin, ViteDevServer } from "vite";
 import { pathToFileURL } from "node:url";
+import { patchLiveStateFile, readLiveStateFile, writeLiveStateAtomic } from "./vite-plugin-conon-sync";
 
 export interface CononMediaPluginOptions {
   isLocalAdmin?: boolean;
@@ -330,13 +331,57 @@ export function cononMediaPlugin(options: CononMediaPluginOptions = {}): Plugin 
             }
           }
 
-          // 3. Immediately regenerate realMediaManifest.generated.ts
+          // 3. Immediately regenerate realMediaManifest.generated.ts & manifest.json + conon-live-state.json
           const syncRes = await runManifestSync(rootDir);
 
           const savedImages = preparedImages.map((im) => ({
             url: `/real-products/${safeCat}/${safeItem}/${im.filename}`,
             ...(im.caption ? { caption: im.caption } : {}),
           }));
+
+          const statePath = path.join(publicDir, "conon-live-state.json");
+          const itemProductId = String(body.productId || body.itemKey || safeItem);
+          const productOverridePatch: Record<string, any> = {
+            [itemProductId]: {
+              productId: itemProductId,
+              slug: String(body.slug || safeItem),
+              categorySlug: safeCat,
+              images: savedImages.map((im, idx) => ({
+                id: `disk-${idx}`,
+                url: im.url,
+                caption: im.caption,
+                isPrimary: idx === 0,
+                order: idx,
+              })),
+              ...cleanOverrides,
+              isAdminVerifiedMedia: savedImages.length > 0,
+              updatedAt: new Date().toISOString(),
+            },
+          };
+          for (const target of Array.isArray(body.applyImagesToKeys) ? body.applyImagesToKeys : []) {
+            const tId = String(target.productId || target.itemKey || target.slug || "").trim();
+            const tCat = sanitizeSlug(target.categorySlug || safeCat, safeCat);
+            const tItem = sanitizeSlug(target.itemKey || target.slug || target.productId, "");
+            if (!tId || !tItem) continue;
+            productOverridePatch[tId] = {
+              productId: tId,
+              slug: String(target.slug || tItem),
+              categorySlug: tCat,
+              ...(target.title ? { title: String(target.title) } : {}),
+              ...(target.brand ? { brand: String(target.brand) } : {}),
+              ...(target.subcategory ? { subcategory: String(target.subcategory) } : {}),
+              images: preparedImages.map((im, idx) => ({
+                id: `disk-${idx}`,
+                url: `/real-products/${tCat}/${tItem}/${im.filename}`,
+                caption: im.caption,
+                isPrimary: idx === 0,
+                order: idx,
+              })),
+              isAdminVerifiedMedia: preparedImages.length > 0,
+              updatedAt: new Date().toISOString(),
+            };
+          }
+          patchLiveStateFile(statePath, { products: { overrides: productOverridePatch } });
 
           sendJson(res, 200, {
             ok: true,
@@ -411,6 +456,15 @@ export function cononMediaPlugin(options: CononMediaPluginOptions = {}): Plugin 
           }
 
           const syncRes = await runManifestSync(rootDir);
+          const statePath = path.join(publicDir, "conon-live-state.json");
+          const liveState = readLiveStateFile(statePath);
+          if (liveState?.products?.overrides) {
+            delete liveState.products.overrides[rawKey];
+            if (safeKey) delete liveState.products.overrides[safeKey];
+            liveState.version = Math.max(Date.now(), Number(liveState.version || 0) + 1);
+            liveState.updatedAt = new Date().toISOString();
+            writeLiveStateAtomic(statePath, liveState);
+          }
           sendJson(res, 200, {
             ok: true,
             itemKey: rawKey,

@@ -4,8 +4,10 @@ import path from "path";
 import crypto from "crypto";
 import sharp from "sharp";
 import { REPO_ROOT, CONON_PUBLIC_DIR } from "../lib/paths";
+import { requireAdmin } from "../middleware/adminAuth";
 
 const router = Router();
+router.use("/admin", requireAdmin);
 const rootDir = REPO_ROOT;
 const publicDir = CONON_PUBLIC_DIR;
 const manifestPath = path.join(rootDir, "scripts/image-manifest.json");

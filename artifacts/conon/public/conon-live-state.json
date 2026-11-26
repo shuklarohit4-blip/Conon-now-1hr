@@ -1,0 +1,136 @@
+{
+  "version": 1795684390583,
+  "globalControls": {
+    "rainMode": true,
+    "storefrontBanner": {
+      "enabled": true,
+      "text": "E2E Banner Sync",
+      "badge": "TEST",
+      "tone": "amber"
+    },
+    "deliverySlaMins": 45,
+    "emergencyPause": false
+  },
+  "categories": {
+    "customCategories": [],
+    "hiddenCategorySlugs": [],
+    "overrides": {}
+  },
+  "products": {
+    "customProducts": [],
+    "hiddenProductIds": [],
+    "overrides": {}
+  },
+  "mandiRates": {},
+  "servicesAndRentals": {
+    "serviceOverrides": {},
+    "customServices": [],
+    "rentalOverrides": {},
+    "customRentals": []
+  },
+  "operations": {
+    "orders": [],
+    "kycApplications": [],
+    "approvedVendors": [],
+    "approvedDrivers": [],
+    "escrowItems": [],
+    "disputes": [],
+    "feedback": [],
+    "siteDna": {}
+  },
+  "treasury": {
+    "companyAccounts": [
+      {
+        "id": "test_col",
+        "label": "CONON Collection A/c",
+        "role": "COLLECTION",
+        "bankName": "HDFC Bank",
+        "accountHolder": "CONON INFRABUILT PVT LTD",
+        "accountNumberMasked": "•••• •••• 4411",
+        "accountNumberLast4": "4411",
+        "ifscCode": "HDFC0001234",
+        "gatewayProvider": "MANUAL_BANK_UTR",
+        "isPrimary": true,
+        "createdAt": "2026-11-26T09:13:10.548Z"
+      },
+      {
+        "id": "test_pay",
+        "label": "CONON Payout Current A/c",
+        "role": "PAYOUT",
+        "bankName": "ICICI Bank",
+        "accountHolder": "CONON INFRABUILT PVT LTD",
+        "accountNumberMasked": "•••• •••• 8822",
+        "accountNumberLast4": "8822",
+        "ifscCode": "ICIC0000999",
+        "gatewayProvider": "MANUAL_BANK_UTR",
+        "isPrimary": true,
+        "createdAt": "2026-11-26T09:13:10.550Z"
+      }
+    ],
+    "ledger": [
+      {
+        "id": "tr_1",
+        "orderId": "ORD-E2E-1",
+        "entryType": "CUSTOMER_INFLOW",
+        "direction": "CREDIT",
+        "fromAccountLabel": "customer@okaxis",
+        "fromAccountRef": "customer@okaxis",
+        "toAccountLabel": "CONON Collection A/c",
+        "toAccountRef": "HDFC Bank •••• 4411",
+        "toIfsc": "HDFC0001234",
+        "beneficiaryName": "CONON INFRABUILT PVT LTD",
+        "paymentMode": "UPI",
+        "utrNumber": "512345678901",
+        "grossAmount": 10000,
+        "platformMargin": 800,
+        "taxAmount": 1400,
+        "netAmount": 10000,
+        "status": "SETTLED",
+        "createdAt": "2026-11-26T09:13:10.550Z"
+      },
+      {
+        "id": "tr_2",
+        "orderId": "ORD-E2E-1",
+        "entryType": "VENDOR_PAYOUT",
+        "direction": "DEBIT",
+        "fromAccountLabel": "CONON Payout Current A/c",
+        "fromAccountRef": "ICICI Bank •••• 8822",
+        "toAccountLabel": "Shukla Traders",
+        "toAccountRef": "•••• 9090",
+        "toIfsc": "SBIN0004321",
+        "beneficiaryName": "Shukla Traders",
+        "paymentMode": "IMPS",
+        "utrNumber": "432198765432",
+        "grossAmount": 10000,
+        "platformMargin": 800,
+        "taxAmount": 1400,
+        "netAmount": 7800,
+        "status": "SETTLED",
+        "createdAt": "2026-11-26T09:13:10.550Z"
+      }
+    ]
+  },
+  "updatedAt": "2026-11-26T09:13:10.583Z",
+  "replace": {
+    "globalControls": {
+      "rainMode": false,
+      "deliverySlaMins": 60,
+      "emergencyPause": false,
+      "storefrontBanner": {
+        "enabled": false,
+        "text": "",
+        "badge": "LIVE",
+        "tone": "emerald"
+      }
+    },
+    "products": {
+      "customProducts": [],
+      "hiddenProductIds": [],
+      "overrides": {}
+    },
+    "treasury": {
+      "companyAccounts": [],
+      "ledger": []
+    }
+  }
+}

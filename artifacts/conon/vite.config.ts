@@ -1,23 +1,31 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { cononMediaPlugin } from "./vite-plugin-conon-media";
+import { cononSyncPlugin } from "./vite-plugin-conon-sync";
 
 export default defineConfig(({ command, mode }) => {
-  const isProd = mode === "production" || process.env.VITE_LOCAL_ADMIN === "false";
-  const isLocalAdmin = command === "serve" && !isProd && process.env.VITE_LOCAL_ADMIN === "true";
-  const port = Number(process.env.VITE_PORT) || (!isProd && process.env.VITE_LOCAL_ADMIN === "true" ? 5174 : 5173);
+  const envDir = path.resolve(import.meta.dirname, "../..");
+  const fileEnv = loadEnv(mode, envDir, "");
+  const effectiveLocalAdmin = process.env.VITE_LOCAL_ADMIN ?? fileEnv.VITE_LOCAL_ADMIN ?? "false";
+  const effectiveMacAdminKey = process.env.VITE_MAC_ADMIN_KEY ?? fileEnv.VITE_MAC_ADMIN_KEY ?? "";
+  const effectivePort = process.env.VITE_PORT ?? fileEnv.VITE_PORT;
+  const effectiveApiUrl = process.env.VITE_API_URL ?? fileEnv.VITE_API_URL;
+
+  const isProd = mode === "production" || effectiveLocalAdmin === "false";
+  const isLocalAdmin = command === "serve" && !isProd && effectiveLocalAdmin === "true";
+  const port = Number(effectivePort) || (isLocalAdmin ? 5174 : 5173);
   const basePath = process.env.BASE_PATH || "/";
 
   return {
     base: basePath,
-    envDir: path.resolve(import.meta.dirname, "../.."),
+    envDir,
     define: {
-      "import.meta.env.VITE_LOCAL_ADMIN": JSON.stringify(isProd ? "false" : (process.env.VITE_LOCAL_ADMIN || "false")),
-      "import.meta.env.VITE_MAC_ADMIN_KEY": JSON.stringify(isProd ? "" : (process.env.VITE_MAC_ADMIN_KEY || "")),
+      "import.meta.env.VITE_LOCAL_ADMIN": JSON.stringify(isProd ? "false" : effectiveLocalAdmin),
+      "import.meta.env.VITE_MAC_ADMIN_KEY": JSON.stringify(isProd ? "" : effectiveMacAdminKey),
     },
-    plugins: [react(), tailwindcss(), cononMediaPlugin({ isLocalAdmin })],
+    plugins: [react(), tailwindcss(), cononMediaPlugin({ isLocalAdmin }), cononSyncPlugin({ isLocalAdmin })],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "src"),
@@ -76,7 +84,7 @@ export default defineConfig(({ command, mode }) => {
       },
       proxy: {
         "/api": {
-          target: (process.env.VITE_API_URL || `http://localhost:${process.env.PORT || 5001}`).replace(/\/api\/?$/, ""),
+          target: (effectiveApiUrl || `http://localhost:${process.env.PORT || 5001}`).replace(/\/api\/?$/, ""),
           changeOrigin: true,
           ws: true,
         },

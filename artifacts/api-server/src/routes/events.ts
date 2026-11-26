@@ -1,6 +1,7 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { ecosystemEngine } from "../services/ecosystemEngine";
 import { verifyJwt } from "../lib/jwt";
+import { requireAdmin } from "../middleware/adminAuth";
 import { randomUUID } from "crypto";
 
 const router: IRouter = Router();
@@ -56,7 +57,7 @@ router.get("/events/stream", (req: Request, res: Response) => {
  * GET /api/admin/stream
  * Dedicated Admin SSE War-Room feed.
  */
-router.get("/admin/stream", (_req: Request, res: Response) => {
+router.get("/admin/stream", requireAdmin, (_req: Request, res: Response) => {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache, no-transform");
   res.setHeader("Connection", "keep-alive");

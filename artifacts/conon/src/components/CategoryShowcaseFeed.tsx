@@ -3,6 +3,7 @@ import { ArrowUp, ChevronRight } from "lucide-react";
 import { type Product } from "./ProductCard";
 import { CompactCatalogCard } from "./CompactCatalogCard";
 import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { useLiveProductMerger } from "@/hooks/useCononLiveData";
 import { VariantSelectorSheet } from "./VariantSelectorSheet";
 
 export interface CategoryShelfConfig {
@@ -103,7 +104,7 @@ export const CategoryShowcaseFeed: React.FC<CategoryShowcaseFeedProps> = ({
   onSelectCategory,
   onOpenDetail,
 }) => {
-  const { resolveProduct } = useProductMediaVault();
+  const mergeLiveProducts = useLiveProductMerger();
   // Variant bottom sheet state
   const [variantProduct, setVariantProduct] = useState<Product | null>(null);
 
@@ -147,8 +148,8 @@ export const CategoryShowcaseFeed: React.FC<CategoryShowcaseFeedProps> = ({
           ──────────────────────────────────────────────────────────── */}
       {SHELF_CONFIGS.map((shelf, shelfIdx) => {
         const rawProducts = getProductsForCategory(shelf.categorySlug);
-        // Show up to 6 top SKUs (2 rows of 3)
-        const products = rawProducts.slice(0, 6).map((item) => resolveProduct(item));
+        // Show up to 6 top SKUs (2 rows of 3) merged with live Admin overrides + Vault media
+        const products = mergeLiveProducts(rawProducts).slice(0, 6);
 
         if (products.length === 0) return null;
 

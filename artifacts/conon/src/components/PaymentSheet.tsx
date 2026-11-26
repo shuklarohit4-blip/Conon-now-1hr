@@ -17,6 +17,8 @@ import {
   UPI_APPS, BANKS, type PaymentMethod, type PaymentPlan,
 } from "../lib/payment";
 import { Confetti } from "./Confetti";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { generateUtr } from "@/services/treasuryEngine";
 
 const BRAND = "#1848a0";
 const GREEN = "#2a7a3b";
@@ -81,6 +83,7 @@ export function PaymentSheet({
   const brand = detectCardBrand(cardNo);
 
   const placeOrder = usePlaceOrder();
+  const masterSync = useSafeCononMasterSync();
 
   const khataAvailable = KHATA_LIMIT - KHATA_USED;
 
@@ -183,6 +186,41 @@ export function PaymentSheet({
       // figure that differs from what was charged.
       const orderTotal = amount;
       const paidNow = plan === "khata" ? 0 : payableNow;
+
+      if (paidNow > 0 && masterSync) {
+        const accounts = masterSync.state.treasury?.companyAccounts || [];
+        const collectionAcct =
+          accounts.find((a) => (a.role === "COLLECTION" || a.role === "ESCROW_NODAL") && a.isPrimary) ||
+          accounts.find((a) => a.role === "COLLECTION" || a.role === "ESCROW_NODAL") ||
+          accounts[0];
+        const platformMargin = Math.round(paidNow * 0.08);
+        const taxAmount = Math.round(paidNow * 0.14);
+        masterSync
+          .recordTreasuryEntry({
+            id: `tr_in_${placed.id}_${Date.now()}`,
+            orderId: placed.id,
+            entryType: "CUSTOMER_INFLOW",
+            direction: "CREDIT",
+            fromAccountLabel: upiId || `Customer ${chargeMethod.toUpperCase()}`,
+            fromAccountRef: upiId || phoneNumber || "Customer UPI",
+            toAccountLabel: collectionAcct?.label || "CONON Collection A/c",
+            toAccountRef: collectionAcct
+              ? `${collectionAcct.bankName} ${collectionAcct.accountNumberMasked}`
+              : "CONON-COLLECTION",
+            toIfsc: collectionAcct?.ifscCode || "",
+            beneficiaryName: "CONON INFRABUILT PVT LTD",
+            paymentMode: chargeMethod.toUpperCase(),
+            utrNumber: generateUtr("5"),
+            grossAmount: paidNow,
+            platformMargin,
+            taxAmount,
+            netAmount: paidNow,
+            status: "SETTLED",
+            createdAt: new Date().toISOString(),
+            customerName: phoneNumber || "Customer",
+          })
+          .catch(() => {});
+      }
 
       haptic([14, 30, 14, 30, 50]);
       setOrder({

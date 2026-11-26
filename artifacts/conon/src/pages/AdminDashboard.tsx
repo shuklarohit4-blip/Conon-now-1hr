@@ -1173,6 +1173,7 @@ export function AdminDashboard() {
   const [, setLocation] = useLocation();
   const { user, isAdmin, logout: authLogout } = useAuthContext();
   const [showClassic, setShowClassic] = useState(false);
+  const [active, setActive] = useState<Module>("overview");
 
   // If not running as local admin, block and return 404
   if (!IS_LOCAL_ADMIN) {
@@ -1206,8 +1207,6 @@ export function AdminDashboard() {
       </React.Suspense>
     );
   }
-
-  const [active, setActive] = useState<Module>("overview");
 
   const handleLogout = () => {
     localStorage.removeItem(ADMIN_JWT_KEY);

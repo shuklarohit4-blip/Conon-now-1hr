@@ -17,9 +17,12 @@ async function main() {
 
   const isRemote =
     connectionString.includes("supabase.co") ||
+    connectionString.includes("pooler.supabase.com") ||
     connectionString.includes("neon.tech") ||
     connectionString.includes("render.com") ||
     connectionString.includes("rds.amazonaws.com") ||
+    connectionString.includes("aivencloud.com") ||
+    connectionString.includes("railway") ||
     process.env.NODE_ENV === "production";
 
   console.log(`🔌 Connecting to PostgreSQL at ${connectionString.split("@")[1] || "database"} (SSL: ${isRemote ? "ENABLED" : "OFF"})...`);

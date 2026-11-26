@@ -9,6 +9,7 @@ import { ProductCard, type Product } from "@/components/ProductCard";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { VariantSelectorSheet } from "@/components/VariantSelectorSheet";
 import { ALL_CATALOG_PRODUCTS } from "@/components/ProductFeed";
+import { useLiveProductMerger } from "@/hooks/useCononLiveData";
 import { HOME_CATEGORIES } from "@/data/homeCategories";
 import { CementCollectionStorefront } from "@/components/CementCollectionStorefront";
 import { PlywoodCollectionStorefront } from "@/components/PlywoodCollectionStorefront";
@@ -607,7 +608,8 @@ export function Categories() {
     [cartItemByKey, addProduct, removeFromCart, updateCartItem],
   );
 
-  const products = ALL_CATALOG_PRODUCTS.filter((p) => p.materialTag === active);
+  const mergeLiveProducts = useLiveProductMerger();
+  const products = mergeLiveProducts(ALL_CATALOG_PRODUCTS).filter((p) => p.materialTag === active);
 
   return (
     <Layout>

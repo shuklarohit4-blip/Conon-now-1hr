@@ -1,0 +1,41 @@
+{
+  "version": 1795686666094,
+  "itemCount": 1,
+  "keyCount": 1,
+  "brandGroupCount": 0,
+  "entries": [
+    {
+      "itemKey": "e2e-test-sku",
+      "productId": "e2e-test-sku",
+      "categorySlug": "cement",
+      "images": [
+        {
+          "url": "/real-products/cement/e2e-test-sku/01.webp",
+          "caption": "Front View"
+        }
+      ],
+      "overrides": {
+        "categorySlug": "cement",
+        "updatedAt": "2026-11-26T09:04:18.204Z"
+      }
+    }
+  ],
+  "items": {
+    "e2e-test-sku": {
+      "itemKey": "e2e-test-sku",
+      "productId": "e2e-test-sku",
+      "categorySlug": "cement",
+      "images": [
+        {
+          "url": "/real-products/cement/e2e-test-sku/01.webp",
+          "caption": "Front View"
+        }
+      ],
+      "overrides": {
+        "categorySlug": "cement",
+        "updatedAt": "2026-11-26T09:04:18.204Z"
+      }
+    }
+  },
+  "brandGroups": {}
+}

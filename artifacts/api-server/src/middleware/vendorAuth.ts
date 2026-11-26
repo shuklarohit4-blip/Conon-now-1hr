@@ -37,7 +37,7 @@ export async function requireVendor(
       (req.headers["x-vendor-store"] as string) ||
       (req.headers["x-vendor-id"] as string) ||
       (req.query.vendorStore as string) ||
-      "Katawala Hardware & Locks";
+      "CONON Partner Store";
     const fallbackVendor = vendorEngine.getVendorByStore(storeHeader);
     req.vendorStore = fallbackVendor.shopName;
     req.vendorUserId = 101;

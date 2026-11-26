@@ -165,72 +165,7 @@ export interface AdminCommandContextType {
   setPendingVoiceAction: (action: { title: string; description: string; execute: () => void } | null) => void;
 }
 
-const INITIAL_DISPATCH_ORDERS: DispatchOrder[] = [
-  {
-    id: "ord_dhalai_01",
-    shortId: "#7812",
-    customerName: "Ramesh Singh (Civil Engg)",
-    customerPhone: "98390 12450",
-    siteName: "Sushant Golf City — Sector D Slab Pour",
-    lucknowZone: "Shaheed Path / Sushant Golf City",
-    items: "75 Bags Ultratech OPC 53 + 500 kg TMT 12mm Sariya",
-    weightKg: 4250,
-    vehicleTag: "Pickup Truck 407 • 4,250 kg",
-    isDhalaiPriority: true,
-    minsLeft: 16,
-    hub: "Sushant Golf City Hub",
-    status: "OUT_FOR_DELIVERY",
-    totalAmount: 58900,
-  },
-  {
-    id: "ord_dhalai_02",
-    shortId: "#7815",
-    customerName: "Manoj Builders",
-    customerPhone: "94150 88210",
-    siteName: "Gomti Nagar Extension — 3rd Floor Dhalai",
-    lucknowZone: "Gomti Nagar",
-    items: "90 Bags Ambuja Kawach Cement",
-    weightKg: 4500,
-    vehicleTag: "Chhota Hathi Loader • 4,500 kg",
-    isDhalaiPriority: true,
-    minsLeft: 22,
-    hub: "Chinhat Supply Point",
-    status: "OUT_FOR_DELIVERY",
-    totalAmount: 37800,
-  },
-  {
-    id: "ord_std_03",
-    shortId: "#7818",
-    customerName: "Vikas Verma",
-    customerPhone: "87654 32109",
-    siteName: "Latouche Rd Hardware Storefront",
-    lucknowZone: "Latouche Road",
-    items: "2 Boxes CPVC Ball Valves + 5 Fevicol Pro Drums",
-    weightKg: 28,
-    vehicleTag: "Bike Express • 28 kg",
-    isDhalaiPriority: false,
-    minsLeft: 34,
-    hub: "Latouche Road Hub",
-    status: "PACKING",
-    totalAmount: 9400,
-  },
-  {
-    id: "ord_std_04",
-    shortId: "#7822",
-    customerName: "Alok Construction",
-    customerPhone: "70071 23456",
-    siteName: "Alambagh Chander Nagar Site",
-    lucknowZone: "Alambagh",
-    items: "2000 Avval Red Clay Bricks + 10 Sand Bags",
-    weightKg: 6500,
-    vehicleTag: "Tata 709 Tipper • 6,500 kg",
-    isDhalaiPriority: false,
-    minsLeft: 47,
-    hub: "Naka Market Hub",
-    status: "PACKING",
-    totalAmount: 26400,
-  },
-];
+const INITIAL_DISPATCH_ORDERS: DispatchOrder[] = [];
 
 const INITIAL_MANDI_SKUS: MandiSKU[] = [
   {

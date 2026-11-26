@@ -222,8 +222,25 @@ export function syncRealMediaManifest(options = {}) {
     fs.writeFileSync(outFile, nextContent, "utf8");
   }
 
+  const jsonManifestPath = path.join(realProductsDir, "manifest.json");
+  const jsonPayload = JSON.stringify(
+    {
+      version: Date.now(),
+      itemCount: canonicalEntries.length,
+      keyCount: Object.keys(manifestMap).length,
+      brandGroupCount: Object.keys(brandGroupFallback).length,
+      entries: canonicalEntries,
+      items: manifestMap,
+      brandGroups: brandGroupFallback,
+    },
+    null,
+    2
+  );
+  fs.writeFileSync(jsonManifestPath, jsonPayload, "utf8");
+
   return {
     outFile,
+    jsonManifestPath,
     itemCount: canonicalEntries.length,
     keyCount: Object.keys(manifestMap).length,
     brandGroupCount: Object.keys(brandGroupFallback).length,

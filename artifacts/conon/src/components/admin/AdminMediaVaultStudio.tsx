@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
 import {
   VAULT_CAPTION_OPTIONS,
   resolveProductWithVault,
@@ -121,6 +122,7 @@ function buildDraftFromItem(
 
 export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioProps) {
   const { version, overridesMap, getOverride } = useProductMediaVault();
+  const masterSync = useSafeCononMasterSync();
 
   const allItems = useMemo(() => getUnifiedVaultItems(), [version]);
 
@@ -446,6 +448,7 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
       };
 
       const res = await saveProductMediaVault(payload);
+      masterSync?.refreshFromSources().catch(() => {});
       setDraft((prev) => (prev ? { ...prev, images: res.override.images } : prev));
       setLastSavedDiskInfo({ folderPath: res.folderPath, savedFiles: res.savedFiles });
       setIsDirty(false);
@@ -464,6 +467,7 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
   const handleResetOverride = async () => {
     if (!draft) return;
     await resetProductVaultOverride(draft.productId, draft.categorySlug);
+    masterSync?.refreshFromSources().catch(() => {});
     setDraft((prev) => (prev ? { ...prev, images: [] } : prev));
     setLastSavedDiskInfo(null);
     setIsDirty(false);

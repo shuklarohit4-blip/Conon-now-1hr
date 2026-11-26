@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { z } from "zod";
 import { catalogEngine } from "../services/catalogEngine";
+import { requireAdmin } from "../middleware/adminAuth";
 
 export interface BuilderKitLead {
   id: string;
@@ -261,6 +262,7 @@ router.post("/builder-kit/leads", (req: Request, res: Response) => {
 });
 
 // Admin Endpoint: GET /api/admin/leads
+router.use("/admin", requireAdmin);
 router.get("/admin/leads", (_req: Request, res: Response) => {
   try {
     const leads = leadManager.getAll();

@@ -47,6 +47,7 @@ const rawAllowedOrigins = [
   configuredFrontend,
   process.env.FRONTEND_URLS,
   process.env.ALLOWED_ORIGINS,
+  process.env.CORS_ORIGIN,
 ]
   .filter(Boolean)
   .join(",");

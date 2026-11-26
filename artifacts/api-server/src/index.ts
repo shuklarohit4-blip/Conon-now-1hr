@@ -17,7 +17,7 @@ initSocket(server);
 
 let retryTimer: NodeJS.Timeout | undefined;
 let connectionAttempts = 0;
-const MAX_CONNECT_ATTEMPTS = 3;
+const MAX_CONNECT_ATTEMPTS = 2;
 
 function cleanup() {
   if (retryTimer) {
@@ -51,6 +51,10 @@ server.on("error", (err) => {
 
 let isConnecting = false;
 async function tryConnectDatabase(): Promise<boolean> {
+  if (!(process.env.MONGO_URI || process.env.MONGODB_URI)?.trim()) {
+    logger.info("MongoDB URI not set; running cleanly on PostgreSQL + Ecosystem Engine.");
+    return false;
+  }
   if (isConnecting) return false;
   isConnecting = true;
   connectionAttempts++;

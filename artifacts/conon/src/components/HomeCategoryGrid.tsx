@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { HOME_CATEGORIES, type HomeCategory } from "@/data/homeCategories";
+import { type HomeCategory } from "@/data/homeCategories";
+import { useLiveCategories } from "@/hooks/useCononLiveData";
 import { HomeCategoryTile } from "./HomeCategoryTile";
 
 interface HomeCategoryGridProps {
@@ -10,8 +11,8 @@ interface HomeCategoryGridProps {
 
 export const HomeCategoryGrid: React.FC<HomeCategoryGridProps> = ({
   onSelectCategory,
-  selectedSlug,
 }) => {
+  const categories = useLiveCategories();
   return (
     <section className="bg-white border-b border-[#EAECEF] w-full">
       <div className="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 bg-white">
@@ -31,7 +32,7 @@ export const HomeCategoryGrid: React.FC<HomeCategoryGridProps> = ({
             },
           }}
         >
-          {HOME_CATEGORIES.map((category, index) => (
+          {categories.map((category, index) => (
             <HomeCategoryTile
               key={category.slug}
               category={category}

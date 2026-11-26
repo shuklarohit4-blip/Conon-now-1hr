@@ -10,6 +10,7 @@ import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 import { UIProvider } from "@/context/UIContext";
 import { LiveCatalogProvider } from "@/context/LiveCatalogContext";
 import { ProductMediaVaultProvider } from "@/context/ProductMediaVaultContext";
+import { CononMasterSyncProvider } from "@/context/CononMasterSyncContext";
 import { VendorThemeProvider } from "@/context/VendorThemeContext";
 import { VendorLanguageProvider } from "@/context/VendorLanguageContext";
 import { DriverThemeProvider } from "@/context/DriverThemeContext";
@@ -275,7 +276,8 @@ function App() {
                 <LocationProvider>
                   <WalletProvider>
                     <UIProvider>
-                      <ProductMediaVaultProvider>
+                      <CononMasterSyncProvider>
+                        <ProductMediaVaultProvider>
                         <LiveCatalogProvider>
                         <VendorThemeProvider>
                           <VendorLanguageProvider>
@@ -306,6 +308,7 @@ function App() {
                         </VendorThemeProvider>
                         </LiveCatalogProvider>
                       </ProductMediaVaultProvider>
+                      </CononMasterSyncProvider>
                     </UIProvider>
                   </WalletProvider>
                 </LocationProvider>

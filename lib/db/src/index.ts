@@ -233,8 +233,8 @@ function getClient(): MongoClient {
     if (!rawUri) throw new Error("MONGO_URI or MONGODB_URI is not configured");
     const uri = sanitizeMongoUri(rawUri);
     client = new MongoClient(uri, {
-      serverSelectionTimeoutMS: 5000,
-      connectTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 4000,
+      connectTimeoutMS: 4000,
       maxPoolSize: 10,
       minPoolSize: 0,
       maxIdleTimeMS: 30000,

@@ -153,7 +153,11 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
       setTimeout(() => {
         setPanScanning(false);
         setPanVerified(true);
-        toast.success(lang === "hi" ? "एआई ओसीआर: पैन AAECB1289R अनुराग मिश्रा के नाम से मैच!" : "AI OCR: Proprietor PAN AAECB1289R Matched with Anurag Mishra");
+        toast.success(
+          lang === "hi"
+            ? `एआई ओसीआर: पैन दस्तावेज़ (${ownerName.trim() || "प्रोपराइटर"}) सत्यापित!`
+            : `AI OCR: Proprietor PAN Document Verified (${ownerName.trim() || "Owner"})`
+        );
       }, 1200);
     } else if (docType === "SIGN") {
       setSignScanning(true);
@@ -376,7 +380,7 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
                   value={firmName}
                   onChange={(e) => setFirmName(e.target.value)}
                   className={`w-full px-4 py-2.5 rounded-xl text-sm font-semibold focus:outline-none focus:border-amber-400 border ${themeInputClass}`}
-                  placeholder="e.g. Awadh Building Solutions & Pipe Depot"
+                  placeholder="e.g. Bharat Building Materials & Hardware"
                 />
               </div>
 
@@ -389,7 +393,7 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
                   value={ownerName}
                   onChange={(e) => setOwnerName(e.target.value)}
                   className={`w-full px-4 py-2.5 rounded-xl text-sm font-semibold focus:outline-none focus:border-amber-400 border ${themeInputClass}`}
-                  placeholder="e.g. Anurag Mishra"
+                  placeholder="e.g. Rajesh Kumar"
                 />
               </div>
 

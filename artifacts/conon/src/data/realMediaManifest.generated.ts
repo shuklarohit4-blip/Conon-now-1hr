@@ -34,8 +34,40 @@ export interface RealMediaManifestEntry {
   overrides?: RealMediaOverrides;
 }
 
-export const REAL_MEDIA_ENTRIES: RealMediaManifestEntry[] = [];
+export const REAL_MEDIA_ENTRIES: RealMediaManifestEntry[] = [
+  {
+    "itemKey": "e2e-test-sku",
+    "productId": "e2e-test-sku",
+    "categorySlug": "cement",
+    "images": [
+      {
+        "url": "/real-products/cement/e2e-test-sku/01.webp",
+        "caption": "Front View"
+      }
+    ],
+    "overrides": {
+      "categorySlug": "cement",
+      "updatedAt": "2026-11-26T09:04:18.204Z"
+    }
+  }
+];
 
-export const REAL_MEDIA_MANIFEST: Record<string, RealMediaManifestEntry> = {};
+export const REAL_MEDIA_MANIFEST: Record<string, RealMediaManifestEntry> = {
+  "e2e-test-sku": {
+    "itemKey": "e2e-test-sku",
+    "productId": "e2e-test-sku",
+    "categorySlug": "cement",
+    "images": [
+      {
+        "url": "/real-products/cement/e2e-test-sku/01.webp",
+        "caption": "Front View"
+      }
+    ],
+    "overrides": {
+      "categorySlug": "cement",
+      "updatedAt": "2026-11-26T09:04:18.204Z"
+    }
+  }
+};
 
 export const BRAND_GROUP_MEDIA_FALLBACK: Record<string, RealMediaImageItem[]> = {};

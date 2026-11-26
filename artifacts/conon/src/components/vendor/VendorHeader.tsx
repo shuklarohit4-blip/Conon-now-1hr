@@ -61,7 +61,7 @@ export function VendorHeader({
   const [showHubPicker, setShowHubPicker] = useState(false);
 
   // Fallback cleanly to Lucknow flagship store if loading or unassigned
-  const storeName = vendor?.shopName || "Katawala Hardware & Locks";
+  const storeName = vendor?.shopName || "CONON Partner Store";
   const storeCode = vendor?.shopCode || "CN-LKO-101";
   const hubZone = vendor?.hubZone ? vendor.hubZone.split("(")[0].trim() : "Latouche Road Hub";
 
