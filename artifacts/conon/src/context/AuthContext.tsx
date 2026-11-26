@@ -4,6 +4,7 @@ import { auth } from "@/firebase";
 import { signOut } from "firebase/auth";
 import { customerLogin, CUSTOMER_JWT_KEY, JWT_STORAGE_KEY, ADMIN_JWT_KEY } from "@/lib/authApi";
 import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
+import { apiUrl } from "@/lib/apiBase";
 
 export interface AuthUser {
   id?: string;
@@ -315,12 +316,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // 3. Safe backend session clearance
     try {
-      const apiOrigin = (
-        (import.meta as any).env?.VITE_API_URL ||
-        (import.meta as any).env?.VITE_API_BASE_URL ||
-        ""
-      ).replace(/\/+$/, "");
-      await fetch(`${apiOrigin}/api/auth/logout`, {
+      await fetch(apiUrl("/api/auth/logout"), {
         method: "POST",
         credentials: "include",
       });

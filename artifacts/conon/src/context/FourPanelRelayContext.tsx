@@ -7,6 +7,7 @@ import React, {
   useRef,
 } from "react";
 import { toast } from "sonner";
+import { apiUrl } from "@/lib/apiBase";
 import {
   playOrderChime,
   playFlashBuzzer,
@@ -743,7 +744,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
       });
 
       // Synchronize with backend REST API
-      fetch(`/api/vendor/orders/${orderId}/accept`, {
+      fetch(apiUrl(`/api/vendor/orders/${orderId}/accept`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ hubId: state.vendorHub }),
@@ -798,7 +799,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
       });
 
       // Synchronize with backend REST API
-      fetch(`/api/vendor/orders/${orderId}/handover`, {
+      fetch(apiUrl(`/api/vendor/orders/${orderId}/handover`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ hubId: state.vendorHub }),
@@ -824,7 +825,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
           toast.error(`🔴 ${updatedItem.name} KILLED! Marked OUT OF STOCK across Storefront.`);
         }
 
-        fetch("/api/vendor/hub/hub-naka/stock-toggle", {
+        fetch(apiUrl("/api/vendor/hub/hub-naka/stock-toggle"), {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ sku: skuId, inStock: updatedItem.inStock }),
@@ -853,7 +854,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
           return h;
         });
 
-        fetch(`/api/vendor/hedges/${hedgeId}/lock`, { method: "POST" }).catch(() => {});
+        fetch(apiUrl(`/api/vendor/hedges/${hedgeId}/lock`), { method: "POST" }).catch(() => {});
 
         return {
           ...prev,
@@ -1009,7 +1010,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
       });
 
       // Synchronize with backend REST API
-      fetch(`/api/driver/orders/${orderId}/arrived`, {
+      fetch(apiUrl(`/api/driver/orders/${orderId}/arrived`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ lat: 26.7824, lng: 80.9892 }),
@@ -1134,7 +1135,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
         enqueueBasementAction(escrowPayload);
         toast.warning("📦 Offline Basement Mode: Action queued locally. Will auto-sync when network returns!");
       } else {
-        fetch(`/api/driver/orders/${orderId}/complete-escrow`, {
+        fetch(apiUrl(`/api/driver/orders/${orderId}/complete-escrow`), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(escrowPayload),
@@ -1174,7 +1175,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
         driverSosAlerts: [alert, ...prev.driverSosAlerts],
       }));
 
-      fetch(`/api/driver/orders/${orderId}/sos`, {
+      fetch(apiUrl(`/api/driver/orders/${orderId}/sos`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(alert),
@@ -1198,7 +1199,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
       },
     }));
 
-    fetch("/api/driver/buyback/BUYBACK-LKO-310/accept", { method: "POST" }).catch(() => {});
+    fetch(apiUrl("/api/driver/buyback/BUYBACK-LKO-310/accept"), { method: "POST" }).catch(() => {});
 
     toast.success("♻️ Reverse Buyback Mission Accepted!", {
       description: "Pickup 6 sealed cement bags from Omaxe Heights -> Drop at Naka Hub (+₹220 bonus).",
@@ -1248,7 +1249,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
         };
       });
 
-      fetch(`/api/admin/orders/${orderId}/release-escrow`, {
+      fetch(apiUrl(`/api/admin/orders/${orderId}/release-escrow`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ utr }),
@@ -1284,7 +1285,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
     updateAndBroadcast((prev) => ({ ...prev, isRainModeActive: nextState }));
 
     try {
-      await fetch("/api/admin/weather-rain-mode", {
+      await fetch(apiUrl("/api/admin/weather-rain-mode"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ rainMode: nextState }),

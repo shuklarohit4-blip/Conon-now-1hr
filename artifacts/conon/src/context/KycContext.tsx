@@ -8,6 +8,7 @@ import React, {
   useMemo,
 } from "react";
 import { toast } from "sonner";
+import { apiUrl } from "@/lib/apiBase";
 import { getSocket, joinApplicantRoom } from "@/services/socket";
 import { MAC_ADMIN_KEY } from "@/config/adminGuard";
 
@@ -292,7 +293,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
   const refreshKycQueue = useCallback(async () => {
     setIsLoadingQueue(true);
     try {
-      const res = await fetch("/api/kyc/admin/queue", {
+      const res = await fetch(apiUrl("/api/kyc/admin/queue"), {
         headers: {
           "x-admin-key": MAC_ADMIN_KEY || "conon_admin_secret_lucknow_2025",
         },
@@ -416,7 +417,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
   // Penny Drop Action
   const verifyPennyDrop = useCallback(async (req: PennyDropRequest): Promise<PennyDropResponse> => {
     try {
-      const res = await fetch("/api/kyc/penny-drop", {
+      const res = await fetch(apiUrl("/api/kyc/penny-drop"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(req),
@@ -443,7 +444,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
     async (payload: any): Promise<PartnerKycApplication> => {
       setIsSubmitting(true);
       try {
-        const res = await fetch("/api/kyc/vendor/submit", {
+        const res = await fetch(apiUrl("/api/kyc/vendor/submit"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -530,7 +531,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
     async (payload: any): Promise<PartnerKycApplication> => {
       setIsSubmitting(true);
       try {
-        const res = await fetch("/api/kyc/driver/submit", {
+        const res = await fetch(apiUrl("/api/kyc/driver/submit"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -624,7 +625,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
       extractedName?: string
     ): Promise<boolean> => {
       try {
-        const res = await fetch(`/api/kyc/documents/${docId}/reupload`, {
+        const res = await fetch(apiUrl(`/api/kyc/documents/${docId}/reupload`), {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ docUrl: newUrl, extractedNumber, extractedName }),
@@ -698,7 +699,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
       reason?: string
     ): Promise<boolean> => {
       try {
-        const res = await fetch(`/api/kyc/admin/documents/${docId}/review`, {
+        const res = await fetch(apiUrl(`/api/kyc/admin/documents/${docId}/review`), {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -770,7 +771,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
       reason?: string
     ): Promise<boolean> => {
       try {
-        const res = await fetch(`/api/kyc/admin/applications/${appId}/decision`, {
+        const res = await fetch(apiUrl(`/api/kyc/admin/applications/${appId}/decision`), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -849,7 +850,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
       expiryType: "INSURANCE" | "PUC" | "DL" = "INSURANCE"
     ): Promise<boolean> => {
       try {
-        const res = await fetch("/api/kyc/admin/simulate-expiry", {
+        const res = await fetch(apiUrl("/api/kyc/admin/simulate-expiry"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -4,6 +4,7 @@
  * Instant Damage Auto-Escrow Shield, and Site DNA Road Intelligence across all 4 panels.
  */
 
+import { apiUrl, adminFetch } from "@/lib/apiBase";
 import { getSocket } from "./socket";
 
 export interface CustomerFeedbackPayload {
@@ -393,8 +394,7 @@ class FeedbackSyncManager {
 
     // 2. Network API dispatch with fallback resilience
     try {
-      const apiUrl = (import.meta.env.VITE_API_URL || "").replace(/\/api\/?$/, "");
-      await fetch(`${apiUrl}/api/feedback/customer`, {
+      await fetch(apiUrl("/api/feedback/customer"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -453,8 +453,7 @@ class FeedbackSyncManager {
 
     // Remote API call
     try {
-      const apiUrl = (import.meta.env.VITE_API_URL || "").replace(/\/api\/?$/, "");
-      await fetch(`${apiUrl}/api/feedback/driver-site`, {
+      await fetch(apiUrl("/api/feedback/driver-site"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -489,12 +488,10 @@ class FeedbackSyncManager {
     });
 
     try {
-      const apiUrl = (import.meta.env.VITE_API_URL || "").replace(/\/api\/?$/, "");
-      await fetch(`${apiUrl}/api/feedback/admin/disputes/${orderOrTicketId}/resolve`, {
+      await adminFetch(`/api/feedback/admin/disputes/${orderOrTicketId}/resolve`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-admin-key": "conon_mac_secret_9988",
         },
         body: JSON.stringify(payload),
       });

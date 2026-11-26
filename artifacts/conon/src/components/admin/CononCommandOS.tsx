@@ -577,7 +577,7 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
       return;
     }
     try {
-      const res = await fetch("/api/admin/clean-slate", {
+      const res = await fetch(`${(import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || "").replace(/\/api\/?$/, "").replace(/\/+$/, "")}/api/admin/clean-slate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

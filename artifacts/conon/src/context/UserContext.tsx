@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { apiUrl } from "@/lib/apiBase";
 
 export type UserRole = "customer" | "vendor" | "admin" | null;
 
@@ -184,12 +185,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     // Attempt backend session clear in background
     try {
-      const apiOrigin = (
-        (import.meta as any).env?.VITE_API_URL ||
-        (import.meta as any).env?.VITE_API_BASE_URL ||
-        ""
-      ).replace(/\/+$/, "");
-      fetch(`${apiOrigin}/api/auth/logout`, {
+      fetch(apiUrl("/api/auth/logout"), {
         method: "POST",
         credentials: "include",
       }).catch(() => {});

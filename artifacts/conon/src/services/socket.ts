@@ -1,4 +1,5 @@
 import { io, Socket } from "socket.io-client";
+import { API_ORIGIN, apiUrl } from "@/lib/apiBase";
 import React, { useState, useEffect } from "react";
 
 let socketInstance: Socket | null = null;
@@ -61,7 +62,7 @@ export async function flushBasementQueue(
 
   for (const item of queue) {
     try {
-      const res = await fetch(`/api/driver/orders/${item.orderId}/complete-escrow`, {
+      const res = await fetch(apiUrl(`/api/driver/orders/${item.orderId}/complete-escrow`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(item),
@@ -92,21 +93,24 @@ export async function flushBasementQueue(
 export function getSocket(): Socket {
   if (socketInstance) return socketInstance;
 
-  const apiUrl =
-    typeof window !== "undefined"
-      ? (import.meta.env.VITE_API_URL || window.location.origin).replace(/\/api\/?$/, "")
-      : "http://localhost:5001";
+  const hasExplicitBackend = Boolean(
+    import.meta.env.VITE_API_URL?.trim() || import.meta.env.VITE_API_BASE_URL?.trim()
+  );
+  const isStaticNetlifyWithoutBackend =
+    typeof window !== "undefined" &&
+    !hasExplicitBackend &&
+    window.location.hostname.endsWith(".netlify.app");
 
-  socketInstance = io(apiUrl, {
+  socketInstance = io(API_ORIGIN, {
     path: "/api/socket.io",
     transports: ["websocket", "polling"],
-    reconnection: true,
-    reconnectionAttempts: Infinity,
+    reconnection: !isStaticNetlifyWithoutBackend,
+    reconnectionAttempts: isStaticNetlifyWithoutBackend ? 0 : Infinity,
     reconnectionDelay: 1000,
     reconnectionDelayMax: 5000,
     timeout: 10000,
     withCredentials: true,
-    autoConnect: true,
+    autoConnect: !isStaticNetlifyWithoutBackend,
   });
 
   socketInstance.on("connect", () => {
