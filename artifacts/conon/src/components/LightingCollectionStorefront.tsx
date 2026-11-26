@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 
@@ -44,7 +45,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 389,
     mrp: 890,
     discountPct: 56,
-    image: "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp",
+    image: "",
     spec: "3.5 KV Surge",
     deliveryTime: "60 Mins",
     optionsCount: 9,
@@ -58,7 +59,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 518,
     mrp: 775,
     discountPct: 33,
-    image: "/images/products/lighting/philips-full-glow-led-surface-light-round.webp",
+    image: "",
     spec: "Slim 2.9 cm",
     deliveryTime: "60 Mins",
     optionsCount: 12,
@@ -72,7 +73,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 242,
     mrp: 242,
     discountPct: 0,
-    image: "/images/products/lighting/sturlite-lexxo-trimless-surface-mount-led-downlight.webp",
+    image: "",
     spec: "2-yr warranty",
     deliveryTime: "60 Mins",
     optionsCount: 6,
@@ -86,7 +87,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 579,
     mrp: 990,
     discountPct: 42,
-    image: "/images/products/lighting/wipro-garnet-rimless-3in1-cct-surface-mounted-led-panel.webp",
+    image: "",
     spec: "100 Lm/W",
     deliveryTime: "60 Mins",
     optionsCount: 2,
@@ -100,7 +101,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 449,
     mrp: 650,
     discountPct: 31,
-    image: "/images/products/lighting/wipro-garnet-wave-led-slim-panel-square-18w.webp",
+    image: "",
     spec: "High Lumen Output",
     deliveryTime: "60 Mins",
     optionsCount: 4,
@@ -114,7 +115,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 495,
     mrp: 840,
     discountPct: 41,
-    image: "/images/products/lighting/philips-stellar-bright-rimless-surface-downlight-15w.webp",
+    image: "",
     spec: "EyeComfort Tech",
     deliveryTime: "60 Mins",
     optionsCount: 6,
@@ -128,7 +129,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 399,
     mrp: 799,
     discountPct: 50,
-    image: "/images/products/lighting/philips-star-glass-downlight-recessed-ceiling-panel-12w.webp",
+    image: "",
     spec: "Frosted Diffuser",
     deliveryTime: "60 Mins",
     optionsCount: 3,
@@ -142,7 +143,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 199,
     mrp: 435,
     discountPct: 54,
-    image: "/images/products/lighting/syska-ultraslim-led-recessed-ceiling-panel-light-7w.webp",
+    image: "",
     spec: "Aluminium Heat Sink",
     deliveryTime: "60 Mins",
     optionsCount: 5,
@@ -157,7 +158,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 549,
     mrp: 890,
     discountPct: 38,
-    image: "/images/subcategories/cob-spot-lights-icon.webp",
+    image: "",
     spec: "36° Beam Angle",
     deliveryTime: "60 Mins",
     optionsCount: 4,
@@ -171,7 +172,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 680,
     mrp: 1200,
     discountPct: 43,
-    image: "/images/products/electrical/led-strip-light-5m-warm.webp",
+    image: "",
     spec: "IP65 Waterproof",
     deliveryTime: "60 Mins",
     optionsCount: 3,
@@ -185,7 +186,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 280,
     mrp: 450,
     discountPct: 37,
-    image: "/images/products/electrical/philips-led-tube-20w-4ft.webp",
+    image: "",
     spec: "Surge Protected 4KV",
     deliveryTime: "60 Mins",
     optionsCount: 2,
@@ -199,7 +200,7 @@ export const LIGHTING_PRODUCTS: LightingProduct[] = [
     price: 340,
     mrp: 599,
     discountPct: 43,
-    image: "/images/products/electrical/philips-led-bulb-12w-b22.webp",
+    image: "",
     spec: "4 Hr Power Backup",
     deliveryTime: "60 Mins",
     optionsCount: 4,
@@ -223,6 +224,7 @@ export function LightingCollectionStorefront({
   );
 
   const queryClient = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const { data: cartData } = useGetCart();
   const addToCart = useAddToCart({
     mutation: {
@@ -337,13 +339,13 @@ export function LightingCollectionStorefront({
   ];
 
   const filteredProducts = useMemo(() => {
-    return LIGHTING_PRODUCTS.filter((p) => {
+    return LIGHTING_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       if (activeSubcategory && p.subcategory !== activeSubcategory)
         return false;
       if (selectedBrand !== "All" && p.brand !== selectedBrand) return false;
       return true;
     });
-  }, [activeSubcategory, selectedBrand]);
+  }, [activeSubcategory, selectedBrand, resolveProduct]);
 
   const openModal = (p: LightingProduct) => {
     const mapped: Product = {

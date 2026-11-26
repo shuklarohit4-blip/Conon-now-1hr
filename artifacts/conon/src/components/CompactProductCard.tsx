@@ -5,6 +5,7 @@ import {
 import { type Product } from "@/components/ProductCard";
 import { QuantityStepper } from "@/components/QuantityStepper";
 import { ProductImage } from "./ProductImage";
+import { useResolvedProduct } from "@/context/ProductMediaVaultContext";
 import { useSafeLiveCatalog } from "@/context/LiveCatalogContext";
 
 const BRAND_DARK = "#1848a0";
@@ -49,7 +50,8 @@ export function CompactProductCard({
   isAdding = false,
 }: CompactProductCardProps) {
   const liveCatalog = useSafeLiveCatalog();
-  const liveProduct = liveCatalog?.getLiveProduct(product) ?? product;
+  const baseLiveProduct = liveCatalog?.getLiveProduct(product) ?? product;
+  const liveProduct = useResolvedProduct(baseLiveProduct);
 
   const { image, title, materialTag, price, mrp, rating, reviews, deliveryEta, unit, inStock } = liveProduct;
   const off = mrp > price ? mrp - price : 0;

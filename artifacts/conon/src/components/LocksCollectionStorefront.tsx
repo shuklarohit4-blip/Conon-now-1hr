@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 
@@ -44,7 +45,7 @@ export const MECHANICAL_LOCKS_PRODUCTS: LockProduct[] = [
     price: 2458,
     mrp: 3235,
     discountPct: 24,
-    image: "/images/products/locks/europa-antique-brass-lock.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "15-yr warranty",
     deliveryTime: "60 Mins",
@@ -63,7 +64,7 @@ export const MECHANICAL_LOCKS_PRODUCTS: LockProduct[] = [
     price: 3361,
     mrp: 3740,
     discountPct: 10,
-    image: "/images/products/locks/godrej-tribolt-ultra-lock.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Anti-Lockout",
     deliveryTime: "60 Mins",
@@ -82,7 +83,7 @@ export const MECHANICAL_LOCKS_PRODUCTS: LockProduct[] = [
     price: 4282,
     mrp: 5620,
     discountPct: 24,
-    image: "/images/products/locks/europa-hexabolt-h341-lock.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "₹3 lakh cover",
     deliveryTime: "60 Mins",
@@ -101,7 +102,7 @@ export const MECHANICAL_LOCKS_PRODUCTS: LockProduct[] = [
     price: 2016,
     mrp: 2670,
     discountPct: 24,
-    image: "/images/products/locks/europa-jemmy-proof-j320-lock.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Sliding/Folding",
     deliveryTime: "60 Mins",
@@ -120,7 +121,7 @@ export const MECHANICAL_LOCKS_PRODUCTS: LockProduct[] = [
     price: 615,
     mrp: 750,
     discountPct: 18,
-    image: "/images/products/locks/godrej-tribolt-ultra-lock.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Hardened Shackle",
     deliveryTime: "60 Mins",
@@ -139,7 +140,7 @@ export const MECHANICAL_LOCKS_PRODUCTS: LockProduct[] = [
     price: 840,
     mrp: 1150,
     discountPct: 27,
-    image: "/images/products/locks/europa-antique-brass-lock.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Tubular Latch",
     deliveryTime: "60 Mins",
@@ -190,6 +191,7 @@ export function LocksCollectionStorefront({ onOpenDetail }: LocksCollectionStore
   const [quickDetailProduct, setQuickDetailProduct] = useState<Product | null>(null);
 
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -213,6 +215,7 @@ export function LocksCollectionStorefront({ onOpenDetail }: LocksCollectionStore
 
   const filteredProducts = useMemo(() => {
     return rawProducts
+      .map((p) => resolveProduct(p))
       .filter((p) => {
         if (selectedBrand !== "all" && p.brand.toLowerCase() !== selectedBrand.toLowerCase()) return false;
         if (selectedType !== "all" && !p.type.toLowerCase().includes(selectedType.toLowerCase())) return false;
@@ -226,7 +229,7 @@ export function LocksCollectionStorefront({ onOpenDetail }: LocksCollectionStore
         if (sortBy === "price-high") return b.price - a.price;
         return 0;
       });
-  }, [rawProducts, selectedBrand, selectedType, selectedPrice, sortBy]);
+  }, [rawProducts, selectedBrand, selectedType, selectedPrice, sortBy, resolveProduct]);
 
   const brands = useMemo(() => Array.from(new Set(rawProducts.map((p) => p.brand))), [rawProducts]);
   const types = useMemo(() => Array.from(new Set(rawProducts.map((p) => p.type))), [rawProducts]);

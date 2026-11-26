@@ -10,8 +10,9 @@ import { Link } from "wouter";
 import {
   ChevronLeft, Phone, MapPin, Star, Navigation,
   CheckCircle2, Package, Truck, Radio, Play, Square,
-  Plus, Minus, RotateCcw, Info,
+  Plus, Minus, RotateCcw, Info, Sparkles,
 } from "lucide-react";
+import { CustomerDeliveryFeedbackModal } from "@/components/feedback/CustomerDeliveryFeedbackModal";
 import { useTruckTracking, distanceMeters } from "@/hooks/useTruckTracking";
 import { startDriverSimulation, type DriverSimulator } from "@/lib/driverSimulator";
 import { fetchDirections } from "@/lib/mapsApi";
@@ -500,6 +501,7 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
   const [eta, setEta] = useState<{ text: string; mins: number } | null>(null);
   const [distRemaining, setDistRemaining] = useState<string | null>(null);
   const [simRunning, setSimRunning] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const mapRef = useRef<google.maps.Map | null>(null);
   const simRef = useRef<DriverSimulator | null>(null);
@@ -803,7 +805,25 @@ export function LiveOrderTracking({ order }: { order: TrackedOrder }) {
             <Phone className="w-4 h-4" /> Call
           </a>
         </div>
+
+        {/* 1-Tap Rate Delivery & Material X-Ray Feedback */}
+        <button
+          type="button"
+          onClick={() => setFeedbackOpen(true)}
+          className="w-full mt-3 py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 active:scale-98 transition cursor-pointer"
+        >
+          <Sparkles className="w-4 h-4 text-amber-300" />
+          <span>Rate Delivery & Material X-Ray Feedback</span>
+        </button>
       </div>
+
+      {/* Feedback Studio Modal */}
+      <CustomerDeliveryFeedbackModal
+        isOpen={feedbackOpen}
+        onClose={() => setFeedbackOpen(false)}
+        orderId={order.id}
+        driverName={order.driver.name}
+      />
     </div>
   );
 }

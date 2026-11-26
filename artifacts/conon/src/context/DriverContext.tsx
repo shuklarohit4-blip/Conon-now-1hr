@@ -63,53 +63,7 @@ export interface DriverProfile {
 }
 
 /* Authentic Lucknow dispatch rotation */
-const LUCKNOW_DISPATCH_POOL: Omit<Trip, "id">[] = [
-  {
-    material: "UltraTech Super Cement (50 Bags)",
-    qty: "50 Bags (2.5 Ton)",
-    earn: 650,
-    pickup: "Shree Balaji Cement & Steel",
-    pickupArea: "Chinhat Industrial Hub (Faizabad Rd)",
-    drop: "Villa Site 18, Sultanpur Rd",
-    dropArea: "Sushant Golf City, Lucknow",
-    distanceKm: 8.4,
-    customerOtp: "7390",
-  },
-  {
-    material: "Tata Tiscon 550D TMT Rebar (1.5 Ton)",
-    qty: "15 Bundles (12mm)",
-    earn: 720,
-    pickup: "CONON Hub — Aishbagh Depot",
-    pickupArea: "Aishbagh Industrial Area, Lucknow",
-    drop: "Tower 4 Site, Kisan Bazar",
-    dropArea: "Vibhuti Khand, Gomti Nagar",
-    distanceKm: 9.6,
-    customerOtp: "4821",
-  },
-  {
-    material: "River Sand / Morang (400 CFT)",
-    qty: "1 Dumper Load (4 Ton)",
-    earn: 1450,
-    pickup: "CONON Aggregates Hub",
-    pickupArea: "Shaheed Path Junction, Lucknow",
-    drop: "Omaxe Residency Construction",
-    dropArea: "Raebareli Road Corridor",
-    distanceKm: 12.2,
-    customerOtp: "5043",
-    requiresEmm11: true,
-  },
-  {
-    material: "Godrej Locks & Asian Paints Royale",
-    qty: "6 Boxes (Hardware & Primer)",
-    earn: 220,
-    pickup: "Katawala Hardware & Locks",
-    pickupArea: "Latouche Road, Aminabad",
-    drop: "Hazratganj Villa Site, Plot 42",
-    dropArea: "Hazratganj Central, Lucknow",
-    distanceKm: 3.8,
-    customerOtp: "1265",
-  },
-];
+const LUCKNOW_DISPATCH_POOL: Omit<Trip, "id">[] = [];
 
 interface DriverValue {
   /* state */
@@ -150,8 +104,8 @@ export function DriverProvider({ children }: { children: React.ReactNode }) {
   const [activeTrip, setActiveTrip] = useState<Trip | null>(null);
   const [tripStep, setTripStep] = useState<TripStep>("pickup");
   const [pod, setPod] = useState<PodState>(EMPTY_POD);
-  const [walletEarnings, setWalletEarnings] = useState(1450);
-  const [tripsToday, setTripsToday] = useState(3);
+  const [walletEarnings, setWalletEarnings] = useState(0);
+  const [tripsToday, setTripsToday] = useState(0);
   const [completedTrips, setCompletedTrips] = useState<CompletedTrip[]>([]);
   const lastCustomerOtp = useRef<string>("7390");
 
@@ -166,8 +120,8 @@ export function DriverProvider({ children }: { children: React.ReactNode }) {
       if (data?.driver) {
         setDriverProfile(data.driver);
         setDutyStatus(data.driver.isOnline ? "online" : "offline");
-        setWalletEarnings(data.driver.walletBalance ?? 1450);
-        setTripsToday(data.driver.tripsToday ?? 3);
+        setWalletEarnings(data.driver.walletBalance ?? 0);
+        setTripsToday(data.driver.tripsToday ?? 0);
       }
       if (data?.activeTrip) {
         setActiveTrip(data.activeTrip);

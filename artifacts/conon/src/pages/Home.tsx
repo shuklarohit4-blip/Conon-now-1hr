@@ -18,6 +18,7 @@ import { PromoHero } from "@/components/PromoHero";
 import { DiscountBadge, deriveDiscount } from "@/components/DiscountBadge";
 import { ProductFeed, CORE_BUILDER_PRODUCTS, BUILDER_PICKS } from "@/components/ProductFeed";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import { CompactProductCard } from "@/components/CompactProductCard";
 import type { Product, ProductSpec } from "@/components/ProductCard";
 import { EquipmentRentalSlider } from "@/components/EquipmentRentalSlider";
@@ -57,133 +58,18 @@ import { useWallet } from "@/context/WalletContext";
 import { useUser } from "@/context/UserContext";
 import { useAuthContext } from "@/context/AuthContext";
 import { useUI } from "@/context/UIContext";
-import { onImgError } from "@/lib/imgFallback";
-import { resolveProductImage as centralResolveProductImage } from "@/lib/productImages";
-import productAssetManifest from "@/lib/productAssetManifest.json";
+import { CononProductMedia } from "@/components/CononProductMedia";
 import { useGetMaterials, useAddToCart, useUpdateCartItem, useRemoveFromCart, useGetCart, getGetCartQueryKey, GetMaterialsStage } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import utOpc53 from "@assets/ai-image-e0c6d9a8-04e0-48f8-af5a-c9f3095bb39a_1781000536697.png";
-import utBuildmore from "@assets/build_more_ppc_1781000550304.png";
-import utWaterplus from "@assets/waterplus_1781000563604.png";
-import utPpc from "@assets/ppc_1781000586657.png";
-import utSuperOpc from "@assets/super_opc_1781000603180.png";
 /* Brand-accurate flagship product photos (white-bg studio shots) */
-import imgAccCement from "@assets/brands/acc-cement.png";
-import imgAmbujaCement from "@assets/brands/ambuja-cement.png";
-import imgShreeCement from "@assets/brands/shree-cement.png";
-import imgJkCement from "@assets/brands/jk-cement.png";
-import imgBirlaCement from "@assets/brands/birla-cement.png";
-import imgPrismCement from "@assets/brands/prism-cement.png";
-import imgDalmiaCement from "@assets/brands/dalmia-cement.png";
-import imgMycemCement from "@assets/brands/mycem-cement.png";
 /* Brand-specific cement product photos (real bag shots) */
-import imgAccOpc from "@assets/acc_opc_1781691111056.png";
-import imgAccSuraksha from "@assets/acc_suraksha_1781691111058.png";
-import imgAccRhc from "@assets/acc_rhc_1781691111057.png";
-import imgAccConcretePlus from "@assets/acc_concrete+_1781691111055.png";
-import imgAccGoldWater from "@assets/acc_gold_water_1781691111056.png";
-import imgAmbujaPpc from "@assets/ambuja_ppc_1781691111060.png";
-import imgAmbujaKawach from "@assets/ambuja_kawatch_1781691111059.png";
-import imgAmbujaCoolWalls from "@assets/ambuja_cool_walls_1781691111059.png";
-import imgBirlaOpc from "@assets/birla_opc_1781691111061.png";
-import imgBirlaUttam from "@assets/birla_uttam_ppc_1781691111062.png";
-import imgBirlaA1 from "@assets/birla_a1_1781691111060.png";
-import imgBirlaAdvPpc from "@assets/birla_adv_ppc_1781691111061.png";
-import imgDalmiaKonark from "@assets/dalmia_konark_1781691111063.png";
-import imgDalmiaOpc from "@assets/dalmia_opc_1781692393719.png";
-import imgDalmiaSrc from "@assets/dalmia_src_1781692393720.png";
-import imgJkSuperOpc from "@assets/jk_super_opc_1781692393724.png";
-import imgJkLaxmiPpc from "@assets/jk_laxmi_ppc_1781692393723.png";
-import imgJkSixerOpc from "@assets/jk_laxmi_sixer_opc_1781692393724.png";
-import imgJkSmartcrete from "@assets/jk_smartcrete_1781692393724.png";
-import imgMycemOpc43 from "@assets/mycem_opc43_1781692393726.png";
-import imgMycemOpc53 from "@assets/mycem_opc53_1781692393727.png";
 /* Brick & block product photos */
-import imgFirstClassBrick from "@assets/first_class_brick_1781692393720.png";
-import imgFlyAshStandard from "@assets/fly_ash_brick_standard_1781692393721.png";
-import imgFlyAshHeavy from "@assets/fly_ash_heavy_1781692393721.png";
-import imgFlyAshInterlocking from "@assets/fly_ash_interlocking_1781692393722.png";
-import imgHalfBlock from "@assets/half_block_1781692393722.png";
-import imgHollowBlock from "@assets/hollow_b_1781692393723.png";
-import imgMagicrete4 from "@assets/magicrete_aac_4_inch_1781692393725.png";
-import imgMagicrete6 from "@assets/magicrete_aac_6_inch_1781692393725.png";
-import imgMagicrete8 from "@assets/magicrete_aac_8_inch_1781692393726.png";
-import imgHavellsWire from "@assets/brands/havells-wire.png";
-import imgPolycabWire from "@assets/brands/polycab-wire.png";
-import imgFinolexWire from "@assets/brands/finolex-wire.png";
-import imgAnchorSwitch from "@assets/brands/anchor-switch.png";
-import imgLegrandSwitch from "@assets/brands/legrand-switch.png";
-import imgAstralPipe from "@assets/brands/astral-pipe.png";
-import imgAshirvadPipe from "@assets/brands/ashirvad-pipe.png";
-import imgSupremePipe from "@assets/brands/supreme-pipe.png";
-import imgJaquarFaucet from "@assets/brands/jaquar-faucet.png";
-import imgHindwareEwc from "@assets/brands/hindware-ewc.png";
-import imgAsianpaintsBucket from "@assets/brands/asianpaints-bucket.png";
-import imgBergerBucket from "@assets/brands/berger-bucket.png";
-import imgNerolacBucket from "@assets/brands/nerolac-bucket.png";
-import imgDuluxBucket from "@assets/brands/dulux-bucket.png";
-import imgDrfixitBucket from "@assets/brands/drfixit-bucket.png";
-import imgBirlawhitePutty from "@assets/brands/birlawhite-putty.png";
-import imgKajariaTile from "@assets/brands/kajaria-tile.png";
-import imgSomanyTile from "@assets/brands/somany-tile.png";
 /* Real brand tile faces (mapped by brand + finish/size to the exact product). */
-import imgNitcoVitrified from "@assets/nitco_2ft_1782798518743.png";
-import imgNitcoStep from "@assets/nitco_step_riser_1782798533109.png";
-import imgNitcoTerrazzo from "@assets/nitco_terrazzo_look_1782798547454.png";
-import imgNitcoItalian from "@assets/nitco_italian_marbal_1782798547454.png";
-import imgOrientGvt from "@assets/orient_gvt_1782798547455.png";
-import imgOrientPgvt from "@assets/orient_pgvt_1782798547455.png";
-import imgOrientWall from "@assets/orient_bell_wall_tile_1782798562964.png";
-import imgOrientMosaic from "@assets/orient_bell_sheet_1782798562964.png";
-import imgKajariaVitrified from "@assets/kajariya_2ft_1782798562965.png";
 /* NOTE: the two Kajaria 4×2 files are named opposite to their printed labels —
    the "pGVT" file actually shows GVT, the "GVT" file shows PGVT (Polished). */
-import imgKajariaGvt from "@assets/Kajaria_pGVT_4×2_ft_1782798562966.png";
-import imgKajariaPgvt from "@assets/Kajaria_GVT_4×2_ft_1782798562967.png";
-import imgKajariaWall from "@assets/kajariya_wall_tile_1782798562967.png";
 /* Real putty / plaster sacks for the finishing category. */
-import imgJkPutty from "@assets/jk_wall_putty_1782798620452.png";
-import imgBirlaLevelplast from "@assets/birla_25_kg_1782798620453.png";
-import imgBirlaWallPutty from "@assets/birla_white_putty_1782798620454.png";
-import imgTrucarePutty from "@assets/ai-image-e6930906-7434-4ddb-a824-439620f96d73_1782798620454.png";
 /* Marble & Stone — photoreal slab swatches (Lucknow market demand). */
-import imgMakranaWhite from "@assets/generated_images/marble-stone/makrana-white.png";
-import imgMakranaAlbeta from "@assets/generated_images/marble-stone/makrana-albeta.png";
-import imgMakranaKumari from "@assets/generated_images/marble-stone/makrana-kumari.png";
-import imgStatuario from "@assets/generated_images/marble-stone/statuario.png";
-import imgCarrara from "@assets/generated_images/marble-stone/carrara.png";
-import imgBotticino from "@assets/generated_images/marble-stone/botticino.png";
-import imgMorwadWhite from "@assets/generated_images/marble-stone/morwad-white.png";
-import imgOnyx from "@assets/generated_images/marble-stone/onyx.png";
-import imgBlackGalaxy from "@assets/generated_images/marble-stone/black-galaxy.png";
-import imgTanBrown from "@assets/generated_images/marble-stone/tan-brown.png";
-import imgSteelGrey from "@assets/generated_images/marble-stone/steel-grey.png";
-import imgKashmirWhite from "@assets/generated_images/marble-stone/kashmir-white.png";
-import imgKotaBlue from "@assets/generated_images/marble-stone/kota-blue.png";
-import imgKotaBrown from "@assets/generated_images/marble-stone/kota-brown.png";
-import imgDholpurBeige from "@assets/generated_images/marble-stone/dholpur-beige.png";
-import imgMintSandstone from "@assets/generated_images/marble-stone/mint-sandstone.png";
-import imgRoffAdhesive from "@assets/brands/roff-adhesive.png";
-import imgFevicolDrum from "@assets/brands/fevicol-drum.png";
-import imgHettichHinge from "@assets/brands/hettich-hinge.png";
-import imgGodrejLock from "@assets/brands/godrej-lock.png";
-import imgKaramHelmet from "@assets/brands/karam-helmet.png";
-import imgBoschDrill from "@assets/brands/bosch-drill.png";
-import imgMakitaDrill from "@assets/brands/makita-drill.png";
-import imgDewaltGrinder from "@assets/brands/dewalt-grinder.png";
-import imgStanleyTape from "@assets/brands/stanley-tape.png";
-import imgCenturyplyPly from "@assets/brands/centuryply-ply.png";
-import imgGreenplyPly from "@assets/brands/greenply-ply.png";
-import imgActiontesaMdf from "@assets/brands/actiontesa-mdf.png";
-import imgGyprocBoard from "@assets/brands/gyproc-board.png";
-import imgMsealEpoxy from "@assets/generated_images/products/mseal-epoxy.png";
-import imgInstantGlue from "@assets/generated_images/products/instant-glue.png";
-import imgEbcoFitting from "@assets/generated_images/products/ebco-fitting.png";
-import imgDorsetHandle from "@assets/generated_images/products/dorset-handle.png";
-import imgStanleyHinge from "@assets/generated_images/products/stanley-hinge.png";
-import imgLaminateSheet from "@assets/generated_images/products/laminate-sheet.png";
-import imgIndigoBucket from "@assets/generated_images/products/indigo-bucket.png";
 
 const BRAND_DARK = "#1848a0";
 const LOGO_BLUE  = "#1848a0";
@@ -202,18 +88,7 @@ const GREEN      = "#2a7a3b";
 
 /* ── Category config ──────────────────────────────────────────────── */
 /* Category → representative LOCAL product photo (bulletproof, no remote deps). */
-const PROD_IMG = (slug: string) => `${import.meta.env.BASE_URL}products/${slug}.jpg`;
-const CAT_PHOTO = (cat: string) =>
-  PROD_IMG(
-    (
-      {
-        cement: "cement-bag", steel: "tmt-bars", sand: "sand", aggregate: "aggregate",
-        bricks: "red-brick", electrical: "wire", plumbing: "pipe", paint: "paint-bucket",
-        tiles: "floor-tile", finishing: "putty", hardware: "door-hardware", safety: "helmet",
-        tools: "drill", shuttering: "scaffolding", wood: "plywood",
-      } as Record<string, string>
-    )[cat] ?? "cement-bag",
-  );
+const CAT_PHOTO = (_cat: string) => "";
 
 const CAT_CONFIG: Record<string, { icon: LucideIcon; bg: string; iconColor: string; label: string; hinglish: string; emoji: string; image: string }> = {
   cement:     { icon: Mountain,     bg: "#f0f9ff", iconColor: "#c8894a", label: "Cement",       hinglish: "Cement",    emoji: "📦", image: CAT_PHOTO("cement") },
@@ -225,14 +100,14 @@ const CAT_CONFIG: Record<string, { icon: LucideIcon; bg: string; iconColor: stri
   plumbing:   { icon: Droplets,     bg: "#ecfeff", iconColor: "#3a8ab0", label: "Pipes & Bath", hinglish: "Nali",      emoji: "🚰", image: CAT_PHOTO("plumbing") },
   paint:      { icon: Paintbrush,   bg: "#f0fdf4", iconColor: "#d05050", label: "Painting",     hinglish: "Rang",      emoji: "🎨", image: CAT_PHOTO("paint") },
   tiles:      { icon: Grid3x3,      bg: "#fdf2f8", iconColor: "#5060a0", label: "Tiling",       hinglish: "Pathhar",   emoji: "🧱", image: CAT_PHOTO("tiles") },
-  "marble-stone": { icon: Mountain, bg: "#f7f5f2", iconColor: "#8a7a5a", label: "Marble & Stone", hinglish: "Marble", emoji: "🪨", image: imgMakranaWhite },
+  "marble-stone": { icon: Mountain, bg: "#f7f5f2", iconColor: "#8a7a5a", label: "Marble & Stone", hinglish: "Marble", emoji: "🪨", image: "" },
   finishing:  { icon: Building2,    bg: "#eff6ff", iconColor: "#3a8a3a", label: "Finishing",    hinglish: "Finishing", emoji: "🏠", image: CAT_PHOTO("finishing") },
   hardware:   { icon: Hammer,       bg: "#f8fafc", iconColor: "#606070", label: "Hardware",     hinglish: "Saaman",    emoji: "🔩", image: CAT_PHOTO("hardware") },
   safety:     { icon: Shield,       bg: "#fffbeb", iconColor: "#c07a10", label: "Safety",       hinglish: "Suraksha",  emoji: "⛑️", image: CAT_PHOTO("safety") },
   tools:      { icon: Wrench,       bg: "#f5f3ff", iconColor: "#3060a0", label: "Tools",        hinglish: "Aujar",     emoji: "🔧", image: CAT_PHOTO("tools") },
   shuttering: { icon: Box,          bg: "#fef9f0", iconColor: "#8a6030", label: "Shuttering",   hinglish: "Shuttering",emoji: "🪵", image: CAT_PHOTO("shuttering") },
   wood:       { icon: TreePine,    bg: "#fef3e2", iconColor: "#92400e", label: "Wood & Boards",hinglish: "Lakdi",     emoji: "🪵", image: CAT_PHOTO("wood") },
-  adhesives:  { icon: Droplets,     bg: "#f5f3ff", iconColor: "#7c3aed", label: "Fevicol & Adhesives", hinglish: "Fevicol", emoji: "🧴", image: imgFevicolDrum },
+  adhesives:  { icon: Droplets,     bg: "#f5f3ff", iconColor: "#7c3aed", label: "Fevicol & Adhesives", hinglish: "Fevicol", emoji: "🧴", image: "" },
 };
 
 const getCatLabel = (cat: string) =>
@@ -250,10 +125,6 @@ const CAT_LOCAL = (slug: string) => `${(import.meta.env.BASE_URL || "/").replace
    resolveProductImage() maps any product to the right photo by its category
    + keywords in the name, so every item shows a correct, clean image with no
    broken links. */
-const PROD = PROD_IMG;
-function resolveProductImage(category: string, name: string): string {
-  return centralResolveProductImage(category, name);
-}
 const HOMERUN_CATEGORIES: HomeRunCat[] = [
   /* Row 1 — matches reference screenshot */
   { slug: "cement",          label: "Cement",                         image: CAT_LOCAL("cement"),          dbCategory: "cement",       badge: "Bulk Prices" },
@@ -706,15 +577,17 @@ export function Home() {
   const cartMutationPending =
     addToCart.isPending || updateCartItem.isPending || removeFromCart.isPending;
 
+  const { resolveProduct } = useProductMediaVault();
+
   /* Two non-overlapping feeds: top picks = core materials (cement/steel/…),
      builder picks = different categories (hardware/electrical/plumbing/…). */
   const topPicksProducts = React.useMemo(
-    () => CORE_BUILDER_PRODUCTS.slice(0, 6),
-    [],
+    () => CORE_BUILDER_PRODUCTS.slice(0, 6).map((p) => resolveProduct(p)),
+    [resolveProduct],
   );
   const builderPicksProducts = React.useMemo(
-    () => BUILDER_PICKS,
-    [],
+    () => BUILDER_PICKS.map((p) => resolveProduct(p)),
+    [resolveProduct],
   );
 
   const categories = materials ? Array.from(new Set(materials.map(m => m.category))) : [];
@@ -781,15 +654,16 @@ export function Home() {
     );
   };
 
-  /* Filtered materials for list view */
+  /* Filtered materials for list view (with Priority #1 Admin Media Vault overrides) */
   const listMaterials = (() => {
-    let base = selectedCategory ? materials?.filter(m => m.category === selectedCategory) : materials;
+    const mapped = materials?.map((m) => resolveProduct(m as any));
+    let base = selectedCategory ? mapped?.filter((m: any) => m.category === selectedCategory) : mapped;
     if (searchTerm.trim()) {
       const q = searchTerm.toLowerCase();
-      base = base?.filter(m =>
-        m.name.toLowerCase().includes(q) ||
-        m.category.toLowerCase().includes(q) ||
-        m.description?.toLowerCase().includes(q)
+      base = base?.filter((m: any) =>
+        (m.title || m.name || "").toLowerCase().includes(q) ||
+        (m.category || "").toLowerCase().includes(q) ||
+        (m.description || "").toLowerCase().includes(q)
       );
     }
     return base;
@@ -1207,14 +1081,19 @@ export function Home() {
                           className="shrink-0 w-[120px] active:scale-95 transition"
                         >
                           <div className="w-full h-[100px] rounded-2xl overflow-hidden relative border border-slate-100 bg-slate-50">
-                            <img
-                              src={b.image}
-                              alt={b.label}
-                              loading="lazy"
+                            <CononProductMedia
+                              product={{
+                                id: `bundle-${b.db}`,
+                                title: b.label,
+                                brand: "CONON BUNDLE",
+                                categorySlug: b.db,
+                              }}
+                              variant="tile"
+                              showGalleryBadge={false}
+                              containerClassName="w-full h-full"
                               className="w-full h-full object-cover"
-                              onError={onImgError}
                             />
-                            <span className="absolute bottom-1.5 left-1.5 text-[9px] font-black text-white px-1.5 py-0.5 rounded-md" style={{ background: "rgba(15,23,42,0.7)" }}>
+                            <span className="absolute bottom-1.5 left-1.5 text-[9px] font-black text-white px-1.5 py-0.5 rounded-md z-10" style={{ background: "rgba(15,23,42,0.7)" }}>
                               {b.extra}
                             </span>
                           </div>
@@ -1246,8 +1125,20 @@ export function Home() {
                           className="shrink-0 w-[170px] rounded-2xl overflow-hidden relative active:scale-95 transition text-left"
                           style={{ background: card.tint }}
                         >
-                          <div className="absolute inset-0 opacity-25">
-                            <img src={card.image} alt="" loading="lazy" className="w-full h-full object-cover blur-[1px]" onError={onImgError} />
+                          <div className="absolute inset-0 opacity-25 pointer-events-none">
+                            <CononProductMedia
+                              product={{
+                                id: `featured-${card.db}`,
+                                title: card.title,
+                                brand: "CONON",
+                                categorySlug: card.db,
+                              }}
+                              variant="banner"
+                              isDark
+                              showGalleryBadge={false}
+                              containerClassName="w-full h-full"
+                              className="w-full h-full object-cover blur-[1px]"
+                            />
                           </div>
                           <div className="relative z-10 p-3.5 h-[112px] flex flex-col">
                             <span className="self-start text-[8px] font-black uppercase tracking-widest text-white/90 bg-white/20 px-2 py-0.5 rounded-full">
@@ -1753,15 +1644,15 @@ function MaterialList({ materials, isLoading, addToCart }: {
                   style={{ background: cfg?.bg ?? "#f0f4f8" }}
                 >
                   {disc && <DiscountBadge type={disc.type} value={disc.value} size="sm" />}
-                  <img
-                    src={resolveProductImage(mat.category, mat.name)}
-                    alt={mat.name}
-                    loading="lazy"
+                  <CononProductMedia
+                    product={mat}
+                    src={mat.primaryImage}
+                    title={mat.name}
+                    category={mat.category}
+                    variant="thumb"
+                    showGalleryBadge={false}
+                    containerClassName="w-full h-full"
                     className="w-full h-full object-cover rounded-2xl"
-                    onError={(e) => {
-                      const fb = resolveProductImage(mat.category, mat.name);
-                      if (e.currentTarget.src !== fb) e.currentTarget.src = fb;
-                    }}
                   />
                 </div>
               );
@@ -1803,7 +1694,7 @@ const CEMENT_TYPES = [
     short:    "OPC",
     tag:      "Most Popular",
     tagColor: "#1848a0",
-    image:    utOpc53,
+    image:    "",
     grades:   ["Grade 33", "Grade 43", "Grade 53"],
     price:    "₹380–₹420",
     unit:     "per 50 kg bag",
@@ -1823,7 +1714,7 @@ const CEMENT_TYPES = [
     short:    "PPC",
     tag:      "Eco-Friendly",
     tagColor: "#15803d",
-    image:    utPpc,
+    image:    "",
     grades:   ["IS 1489 Grade"],
     price:    "₹350–₹390",
     unit:     "per 50 kg bag",
@@ -1843,7 +1734,7 @@ const CEMENT_TYPES = [
     short:    "RHC",
     tag:      "Time-Saver",
     tagColor: "#d97706",
-    image:    imgAccRhc,
+    image:    "",
     grades:   ["IS 8041"],
     price:    "₹440–₹490",
     unit:     "per 50 kg bag",
@@ -1863,7 +1754,7 @@ const CEMENT_TYPES = [
     short:    "LHC",
     tag:      "Mass Concrete",
     tagColor: "#0891b2",
-    image:    imgBirlaUttam,
+    image:    "",
     grades:   ["IS 12600"],
     price:    "₹410–₹460",
     unit:     "per 50 kg bag",
@@ -1883,7 +1774,7 @@ const CEMENT_TYPES = [
     short:    "SRC",
     tag:      "Coastal / Soil",
     tagColor: "#7c3aed",
-    image:    imgDalmiaSrc,
+    image:    "",
     grades:   ["IS 12330"],
     price:    "₹420–₹470",
     unit:     "per 50 kg bag",
@@ -2119,7 +2010,7 @@ function brandVariantToProduct(
   const slug = `brand-${category}-${prod.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
   const m = (prod.price || "").replace(/,/g, "").match(/(\d+(?:\.\d+)?)/);
   const price = m ? parseFloat(m[1]) : 0;
-  const hero = resolveProductImage(category, prod.name);
+  const hero = "";
   const catLabel = category.charAt(0).toUpperCase() + category.slice(1);
   const specs: ProductSpec[] = [
     { label: "Brand", value: brand.name },
@@ -2288,16 +2179,23 @@ function CategoryStorefront({
     setVendors([]); setOnlyDiscount(false); setOnlyAssured(false); setMinRating(0);
   }, [category]);
 
+  const { resolveProduct } = useProductMediaVault();
+
+  const resolvedCategoryProducts = React.useMemo(
+    () => products.map((p) => resolveProduct(p)),
+    [products, resolveProduct],
+  );
+
   const vendorOptions = React.useMemo(
-    () => Array.from(new Set(products.map((p) => p.vendor || "CONON-NOW Marketplace"))),
-    [products],
+    () => Array.from(new Set(resolvedCategoryProducts.map((p) => p.vendor || "CONON-NOW Marketplace"))),
+    [resolvedCategoryProducts],
   );
 
   const filterCount = (onlyDiscount ? 1 : 0) + (onlyAssured ? 1 : 0) + (minRating > 0 ? 1 : 0);
 
   const visibleProducts = React.useMemo(() => {
     const range = priceIdx !== null ? PRICE_RANGES[priceIdx] : null;
-    const list = products.filter((p) => {
+    const list = resolvedCategoryProducts.filter((p) => {
       if (onlyDiscount && !(p.mrp > p.price)) return false;
       if (onlyAssured && !(p.tag || "").toLowerCase().includes("assured")) return false;
       if (minRating > 0 && p.rating < minRating) return false;
@@ -2314,7 +2212,7 @@ function CategoryStorefront({
       default: break;
     }
     return list;
-  }, [products, sort, priceIdx, vendors, onlyDiscount, onlyAssured, minRating]);
+  }, [resolvedCategoryProducts, sort, priceIdx, vendors, onlyDiscount, onlyAssured, minRating]);
 
   const chips: { key: "Filters" | "Sort" | "Type" | "Price"; active: boolean; badge?: string }[] = [
     { key: "Filters", active: filterCount > 0, badge: filterCount > 0 ? String(filterCount) : undefined },
@@ -2626,11 +2524,19 @@ function CementCatalog({ onAddProduct, isAdding, getQty, onOpenDetail }: {
           >
             {/* Hero image strip */}
             <div className="relative h-28 overflow-hidden">
-              <img
-                src={ct.image}
-                alt={ct.name}
+              <CononProductMedia
+                product={{
+                  id: ct.id,
+                  title: ct.name,
+                  brand: ct.short,
+                  categorySlug: "cement-civil-works",
+                  unit: ct.unit,
+                  spec: ct.grades.join(" / "),
+                }}
+                variant="banner"
+                showGalleryBadge={false}
+                containerClassName="w-full h-full"
                 className="w-full h-full object-cover"
-                onError={onImgError}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               {/* Grade badge */}
@@ -2809,8 +2715,18 @@ function CementCatalog({ onAddProduct, isAdding, getQty, onOpenDetail }: {
                       onClick={() => onOpenDetail?.(brandVariantToProduct("cement", activeBrand, prod))}
                       aria-label={`View ${prod.name} details`}
                       className="w-12 h-12 rounded-[14px] overflow-hidden shrink-0 bg-white border border-slate-100 relative active:scale-95 transition-transform">
-                      <img src={resolveProductImage("cement", prod.name)} alt={prod.name} loading="lazy" className="w-full h-full object-contain p-0.5" onError={onImgError} />
-                      <span className="absolute bottom-0 left-0 right-0 text-[6px] font-black text-white text-center py-0.5"
+                      <CononProductMedia
+                        product={brandVariantToProduct("cement", activeBrand, prod)}
+                        title={prod.name}
+                        brand={activeBrand.name}
+                        category="cement"
+                        categorySlug="cement-civil-works"
+                        variant="thumb"
+                        showGalleryBadge={false}
+                        containerClassName="w-full h-full"
+                        className="w-full h-full object-contain p-0.5"
+                      />
+                      <span className="absolute bottom-0 left-0 right-0 text-[6px] font-black text-white text-center py-0.5 z-10"
                         style={{ background: TYPE_BADGE[prod.type] ?? "#1848a0" }}>{prod.type}</span>
                     </button>
                     <div className="flex-1 min-w-0">
@@ -3924,7 +3840,16 @@ function BrandCatalog({ category, onAddProduct, isAdding, getQty, onOpenDetail }
                       onClick={() => onOpenDetail?.(brandVariantToProduct(category, activeBrand, prod))}
                       aria-label={`View ${prod.name} details`}
                       className="w-12 h-12 rounded-[14px] overflow-hidden shrink-0 bg-white border border-slate-100 active:scale-95 transition-transform">
-                      <img src={resolveProductImage(category, prod.name)} alt={prod.name} loading="lazy" className="w-full h-full object-contain p-0.5" onError={onImgError} />
+                      <CononProductMedia
+                        product={brandVariantToProduct(category, activeBrand, prod)}
+                        title={prod.name}
+                        brand={activeBrand.name}
+                        category={category}
+                        variant="thumb"
+                        showGalleryBadge={false}
+                        containerClassName="w-full h-full"
+                        className="w-full h-full object-contain p-0.5"
+                      />
                     </button>
                     <div className="flex-1 min-w-0">
                       <p className="text-[11px] font-black text-slate-800 leading-tight">{prod.name}</p>
@@ -3967,7 +3892,7 @@ const STEEL_TYPES = [
     short:    "TMT",
     tag:      "Gold Standard",
     tagColor: "#b45309",
-    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp`,
+    image:    "",
     grades:   ["Fe415", "Fe500", "Fe550", "Fe600"],
     price:    "₹62–₹74",
     unit:     "per kg",
@@ -3987,7 +3912,7 @@ const STEEL_TYPES = [
     short:    "TMX",
     tag:      "German Tech",
     tagColor: "#1848a0",
-    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/kamdhenu-nxt-12mm-tmt-fe500d.webp`,
+    image:    "",
     grades:   ["Fe500", "Fe550", "Fe600"],
     price:    "₹68–₹80",
     unit:     "per kg",
@@ -4007,7 +3932,7 @@ const STEEL_TYPES = [
     short:    "HSD",
     tag:      "Cold Twisted",
     tagColor: "#374151",
-    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/jindal-panther-12mm-tmt-fe550d.webp`,
+    image:    "",
     grades:   ["Fe415"],
     price:    "₹58–₹65",
     unit:     "per kg",
@@ -4027,7 +3952,7 @@ const STEEL_TYPES = [
     short:    "CRS",
     tag:      "Coastal Safe",
     tagColor: "#0891b2",
-    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/jsw-neosteel-12mm-tmt-fe500d.webp`,
+    image:    "",
     grades:   ["Fe500 CRS", "Epoxy Coated"],
     price:    "₹78–₹95",
     unit:     "per kg",
@@ -4047,7 +3972,7 @@ const STEEL_TYPES = [
     short:    "MS",
     tag:      "Economy",
     tagColor: "#15803d",
-    image:    `${(import.meta.env.BASE_URL || "/").replace(/\/$/, "")}/images/products/steel/sail-seqr-12mm-tmt-fe500d.webp`,
+    image:    "",
     grades:   ["Fe250"],
     price:    "₹50–₹58",
     unit:     "per kg",
@@ -4094,7 +4019,20 @@ function SteelCatalog({ onAddProduct, isAdding, getQty }: {
             style={{ border: "1px solid #f1f5f9", boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
           >
             <div className="relative h-28 overflow-hidden">
-              <img src={st.image} alt={st.name} className="w-full h-full object-cover" onError={onImgError} />
+              <CononProductMedia
+                product={{
+                  id: st.id,
+                  title: st.name,
+                  brand: st.short,
+                  categorySlug: "tmt-bars-steel",
+                  unit: st.unit,
+                  spec: st.grades.join(" / "),
+                }}
+                variant="banner"
+                showGalleryBadge={false}
+                containerClassName="w-full h-full"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
                 {st.grades.map(g => (

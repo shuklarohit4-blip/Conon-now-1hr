@@ -17,8 +17,10 @@ export type KycDocStatus =
   | "PENDING_SCAN"
   | "SCANNING"
   | "SUBMITTED"
+  | "PENDING"
   | "VERIFIED"
-  | "REUPLOAD_REQUIRED";
+  | "REUPLOAD_REQUIRED"
+  | "REJECTED";
 
 export type KycOverallStatus =
   | "PENDING_VERIFICATION"
@@ -87,6 +89,7 @@ export interface PartnerKycApplication {
   pennyDropRef?: string;
   aiAuthenticityScore: number;
   status: KycOverallStatus;
+  partnerId?: string;
   slaSignedAt?: string;
   insuranceExpiry?: string;
   dlExpiry?: string;
@@ -100,191 +103,7 @@ export interface PartnerKycApplication {
 const STORAGE_KEY = "conon_kyc_state_v2";
 const BROADCAST_NAME = "conon_kyc_bus";
 
-const SEED_APPLICATIONS: PartnerKycApplication[] = [
-  {
-    id: "APP-VND-2026-7712",
-    applicantType: "VENDOR",
-    applicantId: "VND-APP-7712",
-    firmOrName: "Awadh Building Solutions & Pipe Depot",
-    ownerOrDriverName: "Anurag Mishra",
-    phone: "+91 94150 88219",
-    zone: "Sushant Golf City / Shaheed Path",
-    loadingBayAccess: "LOADER_FRIENDLY",
-    categories: ["CEMENT", "STEEL", "PIPES", "BRICKS"],
-    shopLat: 26.7812,
-    shopLng: 80.9981,
-    bankAccount: "910283746182",
-    bankIfsc: "HDFC0001824",
-    bankUpi: "awadhpipe@okaxis",
-    pennyDropStatus: "VERIFIED",
-    pennyDropHolderName: "AWADH BUILDING SOLUTIONS",
-    pennyDropRef: "NPCI-IMPS-9982410",
-    aiAuthenticityScore: 97,
-    status: "PENDING_VERIFICATION",
-    slaSignedAt: "2026-03-29T10:15:00Z",
-    documents: [
-      {
-        docId: "doc-gst-7712",
-        docType: "GSTIN_CERTIFICATE",
-        docName: "GSTIN Registration (09AAECB1289R1Z4)",
-        docUrl: "/images/kyc/sample-gst-cert.webp",
-        extractedNumber: "09AAECB1289R1Z4",
-        extractedName: "AWADH BUILDING SOLUTIONS",
-        ocrAuthenticityScore: 98,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T10:15:00Z",
-        updatedAt: "2026-03-29T10:15:00Z",
-      },
-      {
-        docId: "doc-pan-7712",
-        docType: "PAN_CARD",
-        docName: "Proprietor PAN (AAECB1289R)",
-        docUrl: "/images/kyc/sample-pan-card.webp",
-        extractedNumber: "AAECB1289R",
-        extractedName: "ANURAG MISHRA",
-        ocrAuthenticityScore: 96,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T10:15:00Z",
-        updatedAt: "2026-03-29T10:15:00Z",
-      },
-      {
-        docId: "doc-sign-7712",
-        docType: "SIGNBOARD_PHOTO",
-        docName: "Shop Front Signboard with GPS",
-        docUrl: "/images/kyc/sample-shop-sign.webp",
-        ocrAuthenticityScore: 94,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T10:15:00Z",
-        updatedAt: "2026-03-29T10:15:00Z",
-      },
-      {
-        docId: "doc-brand-7712",
-        docType: "BRAND_DEALERSHIP",
-        docName: "UltraTech & Astral Dealership Letter",
-        docUrl: "/images/kyc/sample-dealership.webp",
-        extractedNumber: "DL-UT-2025-881",
-        ocrAuthenticityScore: 99,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T10:15:00Z",
-        updatedAt: "2026-03-29T10:15:00Z",
-      },
-    ],
-    auditLogs: [
-      {
-        logId: "log-1",
-        action: "SUBMISSION",
-        actor: "Anurag Mishra",
-        note: "Submitted via Dukaan OS Partner Onboarding",
-        timestamp: "2026-03-29T10:15:00Z",
-      },
-    ],
-    createdAt: "2026-03-29T10:15:00Z",
-    updatedAt: "2026-03-29T10:15:00Z",
-  },
-  {
-    id: "APP-DRV-2026-4401",
-    applicantType: "DRIVER",
-    applicantId: "DRV-APP-4401",
-    firmOrName: "Tata Ace Loader (UP 32 EL 7710)",
-    ownerOrDriverName: "Mohd. Rizwan Khan",
-    phone: "+91 98390 12398",
-    zone: "Alambagh / Transport Nagar",
-    vehicleMode: "CHHOTA_HATHI",
-    vehiclePlate: "UP 32 EL 7710",
-    categories: ["HEAVY_LOGISTICS"],
-    bankAccount: "50100491823901",
-    bankIfsc: "SBIN0001290",
-    bankUpi: "rizwan.ace@upi",
-    pennyDropStatus: "VERIFIED",
-    pennyDropHolderName: "MOHD RIZWAN KHAN",
-    pennyDropRef: "NPCI-IMPS-8871029",
-    aiAuthenticityScore: 99,
-    status: "PENDING_VERIFICATION",
-    slaSignedAt: "2026-03-29T11:00:00Z",
-    insuranceExpiry: "2026-11-20",
-    dlExpiry: "2031-08-14",
-    pucExpiry: "2026-10-15",
-    documents: [
-      {
-        docId: "doc-dl-4401",
-        docType: "DRIVING_LICENCE",
-        docName: "Transport Driving License (UP32 20180049120)",
-        docUrl: "/images/kyc/sample-dl.webp",
-        extractedNumber: "UP32 20180049120",
-        extractedName: "MOHD RIZWAN KHAN",
-        extractedExpiry: "2031-08-14",
-        ocrAuthenticityScore: 99,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T11:00:00Z",
-        updatedAt: "2026-03-29T11:00:00Z",
-      },
-      {
-        docId: "doc-rc-4401",
-        docType: "VEHICLE_RC",
-        docName: "Commercial Vehicle RC (UP 32 EL 7710)",
-        docUrl: "/images/kyc/sample-rc.webp",
-        extractedNumber: "UP 32 EL 7710",
-        extractedName: "MOHD RIZWAN KHAN",
-        ocrAuthenticityScore: 98,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T11:00:00Z",
-        updatedAt: "2026-03-29T11:00:00Z",
-      },
-      {
-        docId: "doc-ins-4401",
-        docType: "INSURANCE_PUC",
-        docName: "Commercial Goods Insurance Policy",
-        docUrl: "/images/kyc/sample-insurance.webp",
-        extractedNumber: "NIC-COMM-9918231",
-        extractedExpiry: "2026-11-20",
-        ocrAuthenticityScore: 97,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T11:00:00Z",
-        updatedAt: "2026-03-29T11:00:00Z",
-      },
-      {
-        docId: "doc-selfie-4401",
-        docType: "SELFIE_LIVENESS",
-        docName: "Driver Live Selfie with Tata Ace",
-        docUrl: "/images/kyc/sample-selfie.webp",
-        ocrAuthenticityScore: 99,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T11:00:00Z",
-        updatedAt: "2026-03-29T11:00:00Z",
-      },
-      {
-        docId: "doc-tirpal-4401",
-        docType: "TIRPAL_WATERPROOF",
-        docName: "Heavy Heavy-Duty Tarpaulin Proof",
-        docUrl: "/images/kyc/sample-tarpaulin.webp",
-        ocrAuthenticityScore: 95,
-        ocrReadQuality: "HIGH",
-        status: "SUBMITTED",
-        createdAt: "2026-03-29T11:00:00Z",
-        updatedAt: "2026-03-29T11:00:00Z",
-      },
-    ],
-    auditLogs: [
-      {
-        logId: "log-drv-1",
-        action: "SUBMISSION",
-        actor: "Mohd. Rizwan Khan",
-        note: "Submitted via Rider & Loader Cockpit",
-        timestamp: "2026-03-29T11:00:00Z",
-      },
-    ],
-    createdAt: "2026-03-29T11:00:00Z",
-    updatedAt: "2026-03-29T11:00:00Z",
-  },
-];
+const SEED_APPLICATIONS: PartnerKycApplication[] = [];
 
 export interface PennyDropRequest {
   accountNumber: string;
@@ -397,7 +216,7 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
   const [applications, setApplications] = useState<PartnerKycApplication[]>(loadSavedApplications);
   const [activeApplicantId, setActiveApplicantIdState] = useState<string | null>(() => {
     if (typeof window === "undefined") return null;
-    return localStorage.getItem("conon_active_applicant_id") || "VND-APP-7712";
+    return localStorage.getItem("conon_active_applicant_id") || null;
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoadingQueue, setIsLoadingQueue] = useState(false);
@@ -983,16 +802,27 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
               : decision === "REUPLOAD"
               ? "REUPLOAD_REQUESTED"
               : "REJECTED";
+          const assignedPartnerId =
+            app.partnerId ||
+            (decision === "APPROVE"
+              ? app.applicantType === "VENDOR"
+                ? `CN-VND-LKO-${Math.floor(100 + Math.random() * 900)}`
+                : `CN-DRV-LKO-${Math.floor(200 + Math.random() * 800)}`
+              : undefined);
           return {
             ...app,
             status: newStatus,
+            partnerId: assignedPartnerId,
+            documents: decision === "APPROVE"
+              ? app.documents.map((d) => ({ ...d, status: "VERIFIED" as const }))
+              : app.documents,
             auditLogs: [
               ...app.auditLogs,
               {
                 logId: `log-${Date.now()}`,
                 action: `DECISION_${decision}`,
                 actor: "Admin Command OS",
-                note: reason || `Application ${decision.toLowerCase()}d`,
+                note: reason || `Application ${decision.toLowerCase()}d. Partner ID: ${assignedPartnerId || "N/A"}`,
                 timestamp: new Date().toISOString(),
               },
             ],

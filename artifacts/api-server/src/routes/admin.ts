@@ -128,259 +128,103 @@ router.get("/admin/god-eye", async (_req, res) => {
 
     const liveRevenue = todayOrders.length > 0 
       ? Math.round(todayOrders.reduce((s, o) => s + decimalToNumber(o.total), 0))
-      : 420000;
+      : 0;
     const netProfit = Math.round(liveRevenue * 0.1114);
 
-    // Dynamic 6 Lucknow Supply Hubs
-    const hubs = [
-      {
-        id: "hub-latouche",
-        name: "Latouche Rd Hub",
-        zone: "Naka / Aminabad",
-        specialty: "Electricals, Tools & Hardware",
-        x: 38,
-        y: 44,
-        lat: 26.8415,
-        lng: 80.9234,
-        liveOrders: 8,
-        status: "HIGH_TRAFFIC",
-        color: "#F59E0B",
-      },
-      {
-        id: "hub-chinhat",
-        name: "Chinhat Industrial Hub",
-        zone: "Faizabad / Ayodhya Rd",
-        specialty: "Red Bricks, Morang & Cement Depot",
-        x: 82,
-        y: 26,
-        lat: 26.8821,
-        lng: 81.0189,
-        liveOrders: 11,
-        status: "ACTIVE",
-        color: "#10B981",
-      },
-      {
-        id: "hub-shaheed-path",
-        name: "Shaheed Path / Golf City Hub",
-        zone: "Sushant Golf City",
-        specialty: "Express Sariya, AAC & Civil Hub",
-        x: 64,
-        y: 78,
-        lat: 26.7824,
-        lng: 80.9892,
-        liveOrders: 9,
-        status: "ACTIVE",
-        color: "#3B82F6",
-      },
-      {
-        id: "hub-alambagh",
-        name: "Alambagh / Transport Nagar",
-        zone: "Kanpur Rd Corridor",
-        specialty: "Heavy Fleet Depot & TMT Bulk Yard",
-        x: 24,
-        y: 68,
-        lat: 26.7912,
-        lng: 80.8923,
-        liveOrders: 7,
-        status: "DISPATCHING",
-        color: "#8B5CF6",
-      },
-      {
-        id: "hub-naka",
-        name: "Naka Hindola Hub",
-        zone: "Central Lucknow",
-        specialty: "CPVC Plumbing & Sanitary Hub",
-        x: 42,
-        y: 52,
-        lat: 26.8367,
-        lng: 80.9168,
-        liveOrders: 5,
-        status: "ACTIVE",
-        color: "#06B6D4",
-      },
-      {
-        id: "hub-gomti-nagar",
-        name: "Gomti Nagar Express Hub",
-        zone: "Vipin Khand / Ext",
-        specialty: "Tiles, Paints, Granite & Finishing",
-        x: 70,
-        y: 42,
-        lat: 26.8532,
-        lng: 80.9789,
-        liveOrders: 12,
-        status: "HIGH_TRAFFIC",
-        color: "#EC4899",
-      },
-    ];
+    // Dynamic Lucknow Supply Hubs
+    const hubs = LUCKNOW_HUBS.map((h, idx) => ({
+      id: h.hubId,
+      name: h.name,
+      zone: h.zone,
+      specialty: "Building Materials & Hardware",
+      x: 30 + (idx * 15) % 60,
+      y: 35 + (idx * 12) % 50,
+      lat: h.lat,
+      lng: h.lng,
+      liveOrders: 0,
+      status: h.isOnline ? "ACTIVE" : "OFFLINE",
+      color: "#F59E0B",
+    }));
 
     // Real-Time Fleet Telemetry
-    const fleet = [
-      {
-        id: "DRV-101",
-        driverName: "Ravi Kumar",
-        vehicleType: "2W_BIKE",
-        vehicleClass: "2-Wheeler",
-        plateNumber: "UP 32 BK 4012",
-        status: "EN_ROUTE",
-        hubId: "hub-latouche",
-        hubName: "Latouche Rd Hub",
-        destinationSite: "Plot 42, Eldeco Greens, Gomti Nagar",
-        cargoSummary: "Schneider 32A MCB + Havells 2.5mm Wire",
-        minsLeft: 18,
-        speedKmH: 38,
-        currentX: 54,
-        currentY: 43,
-        startPoint: { x: 38, y: 44 },
-        endPoint: { x: 70, y: 42 },
-        phone: "+91 94150 12044",
-        orderId: "ORD-9912",
-        itemsCount: 4,
-        deliveryZone: "Gomti Nagar",
-      },
-      {
-        id: "DRV-102",
-        driverName: "Suresh S.",
-        vehicleType: "3W_ELECTRIC_LOADER",
-        vehicleClass: "E-Loader",
-        plateNumber: "UP 32 EL 8901",
-        status: "LOADING",
-        hubId: "hub-chinhat",
-        hubName: "Chinhat Industrial Hub",
-        destinationSite: "Villa 108, Sushant Golf City",
-        cargoSummary: "25 Bags UltraTech PPC + Dr. Fixit LW+",
-        minsLeft: 42,
-        speedKmH: 0,
-        currentX: 82,
-        currentY: 26,
-        startPoint: { x: 82, y: 26 },
-        endPoint: { x: 64, y: 78 },
-        phone: "+91 98390 44219",
-        orderId: "ORD-9914",
-        itemsCount: 26,
-        deliveryZone: "Sushant Golf City",
-      },
-      {
-        id: "DRV-103",
-        driverName: "Kartik K.",
-        vehicleType: "4W_PICKUP",
-        vehicleClass: "Pickup",
-        plateNumber: "UP 32 PK 1928",
-        status: "EN_ROUTE",
-        hubId: "hub-gomti-nagar",
-        hubName: "Gomti Nagar Express Hub",
-        destinationSite: "Tower B, Omaxe Heights, Vibhuti Khand",
-        cargoSummary: "18 Boxes Kajaria 4x2 Vitrified Tiles",
-        minsLeft: 12,
-        speedKmH: 42,
-        currentX: 68,
-        currentY: 38,
-        startPoint: { x: 70, y: 42 },
-        endPoint: { x: 67, y: 34 },
-        phone: "+91 88081 22931",
-        orderId: "ORD-9918",
-        itemsCount: 18,
-        deliveryZone: "Vibhuti Khand",
-      },
-      {
-        id: "DRV-104",
-        driverName: "Vinesh M.",
-        vehicleType: "TRACTOR_DUMPER",
-        vehicleClass: "Trolley / Dumper",
-        plateNumber: "UP 32 TR 5521",
-        status: "DELAYED",
-        hubId: "hub-alambagh",
-        hubName: "Alambagh / Transport Nagar",
-        destinationSite: "Commercial Arcade, Outer Ring Road",
-        cargoSummary: "300 CFT Kabrai Gitti (10mm)",
-        minsLeft: -8,
-        speedKmH: 15,
-        currentX: 38,
-        currentY: 64,
-        startPoint: { x: 24, y: 68 },
-        endPoint: { x: 58, y: 72 },
-        phone: "+91 97920 11984",
-        orderId: "ORD-9892",
-        itemsCount: 1,
-        deliveryZone: "Outer Ring / Kisan Path",
-      },
-      {
-        id: "DRV-105",
-        driverName: "Rahul V.",
-        vehicleType: "3W_ELECTRIC_LOADER",
-        vehicleClass: "E-Loader",
-        plateNumber: "UP 32 EL 7714",
-        status: "RETURNING",
-        hubId: "hub-shaheed-path",
-        hubName: "Shaheed Path / Golf City Hub",
-        destinationSite: "Returning to Hub for Next Site Dispatch",
-        cargoSummary: "Empty / En Route to Shaheed Path Depot",
-        minsLeft: 24,
-        speedKmH: 34,
-        currentX: 58,
-        currentY: 72,
-        startPoint: { x: 52, y: 66 },
-        endPoint: { x: 64, y: 78 },
-        phone: "+91 91400 38291",
-        orderId: "ORD-9905",
-        itemsCount: 0,
-        deliveryZone: "Shaheed Path Corridor",
-      },
-    ];
+    const fleet = ecosystemEngine.getAllDrivers().map((d, idx) => ({
+      id: d.id,
+      driverName: d.name,
+      vehicleType: d.vehicleType,
+      vehicleClass: d.vehicleLabel,
+      plateNumber: d.vehiclePlate,
+      status: d.activeTripId ? "EN_ROUTE" : "IDLE",
+      hubId: "hub-lucknow",
+      hubName: d.currentZone,
+      destinationSite: d.activeTripId ? "Site In Transit" : "Standby (Waiting for Dispatch)",
+      cargoSummary: d.activeTripId ? "Active Order Dispatch" : "Available",
+      minsLeft: 15,
+      speedKmH: d.isOnline ? 25 : 0,
+      currentX: 45 + (idx * 10) % 40,
+      currentY: 45 + (idx * 8) % 40,
+      startPoint: { x: 38, y: 44 },
+      endPoint: { x: 70, y: 42 },
+      phone: d.phone,
+      orderId: d.activeTripId || "---",
+      itemsCount: 0,
+      deliveryZone: d.currentZone,
+    }));
 
     // Analytics: Hourly / Multi-day Time series
+    const hasOrders = todayOrders.length > 0;
     const analytics = {
       today: {
         stackedVehicleOrders: [
-          { label: "08:00", twoWheeler: 3, eLoader: 2, pickupTrolley: 1, total: 6 },
-          { label: "10:00", twoWheeler: 6, eLoader: 4, pickupTrolley: 3, total: 13 },
-          { label: "12:00", twoWheeler: 9, eLoader: 7, pickupTrolley: 4, total: 20 },
-          { label: "14:00", twoWheeler: 7, eLoader: 5, pickupTrolley: 3, total: 15 },
-          { label: "16:00", twoWheeler: 8, eLoader: 6, pickupTrolley: 4, total: 18 },
-          { label: "18:00", twoWheeler: 11, eLoader: 8, pickupTrolley: 2, total: 21 },
-          { label: "20:00", twoWheeler: 6, eLoader: 4, pickupTrolley: 1, total: 11 },
+          { label: "08:00", twoWheeler: hasOrders ? 3 : 0, eLoader: hasOrders ? 2 : 0, pickupTrolley: hasOrders ? 1 : 0, total: hasOrders ? 6 : 0 },
+          { label: "10:00", twoWheeler: hasOrders ? 6 : 0, eLoader: hasOrders ? 4 : 0, pickupTrolley: hasOrders ? 3 : 0, total: hasOrders ? 13 : 0 },
+          { label: "12:00", twoWheeler: hasOrders ? 9 : 0, eLoader: hasOrders ? 7 : 0, pickupTrolley: hasOrders ? 4 : 0, total: hasOrders ? 20 : 0 },
+          { label: "14:00", twoWheeler: hasOrders ? 7 : 0, eLoader: hasOrders ? 5 : 0, pickupTrolley: hasOrders ? 3 : 0, total: hasOrders ? 15 : 0 },
+          { label: "16:00", twoWheeler: hasOrders ? 8 : 0, eLoader: hasOrders ? 6 : 0, pickupTrolley: hasOrders ? 4 : 0, total: hasOrders ? 18 : 0 },
+          { label: "18:00", twoWheeler: hasOrders ? 11 : 0, eLoader: hasOrders ? 8 : 0, pickupTrolley: hasOrders ? 2 : 0, total: hasOrders ? 21 : 0 },
+          { label: "20:00", twoWheeler: hasOrders ? 6 : 0, eLoader: hasOrders ? 4 : 0, pickupTrolley: hasOrders ? 1 : 0, total: hasOrders ? 11 : 0 },
         ],
         revenueMarginTrend: [
-          { label: "08:00", gmv: 42000, netMargin: 4800, marginPct: 11.4 },
-          { label: "10:00", gmv: 95000, netMargin: 10600, marginPct: 11.2 },
-          { label: "12:00", gmv: 165000, netMargin: 18200, marginPct: 11.0 },
-          { label: "14:00", gmv: 235000, netMargin: 26100, marginPct: 11.1 },
-          { label: "16:00", gmv: 310000, netMargin: 34500, marginPct: 11.1 },
-          { label: "18:00", gmv: 395000, netMargin: 44100, marginPct: 11.2 },
-          { label: "20:00", gmv: 420000, netMargin: 46800, marginPct: 11.1 },
+          { label: "08:00", gmv: hasOrders ? 42000 : 0, netMargin: hasOrders ? 4800 : 0, marginPct: hasOrders ? 11.4 : 0 },
+          { label: "10:00", gmv: hasOrders ? 95000 : 0, netMargin: hasOrders ? 10600 : 0, marginPct: hasOrders ? 11.2 : 0 },
+          { label: "12:00", gmv: hasOrders ? 165000 : 0, netMargin: hasOrders ? 18200 : 0, marginPct: hasOrders ? 11.0 : 0 },
+          { label: "14:00", gmv: hasOrders ? 235000 : 0, netMargin: hasOrders ? 26100 : 0, marginPct: hasOrders ? 11.1 : 0 },
+          { label: "16:00", gmv: hasOrders ? 310000 : 0, netMargin: hasOrders ? 34500 : 0, marginPct: hasOrders ? 11.1 : 0 },
+          { label: "18:00", gmv: hasOrders ? 395000 : 0, netMargin: hasOrders ? 44100 : 0, marginPct: hasOrders ? 11.2 : 0 },
+          { label: "20:00", gmv: hasOrders ? 420000 : 0, netMargin: hasOrders ? 46800 : 0, marginPct: hasOrders ? 11.1 : 0 },
         ],
       },
       sevenDays: {
         stackedVehicleOrders: [
-          { label: "Mon", twoWheeler: 10, eLoader: 6, pickupTrolley: 2, total: 18 },
-          { label: "Tue", twoWheeler: 12, eLoader: 7, pickupTrolley: 3, total: 22 },
-          { label: "Wed", twoWheeler: 8, eLoader: 5, pickupTrolley: 2, total: 15 },
-          { label: "Thu", twoWheeler: 16, eLoader: 10, pickupTrolley: 5, total: 31 },
-          { label: "Fri", twoWheeler: 14, eLoader: 9, pickupTrolley: 5, total: 28 },
-          { label: "Sat", twoWheeler: 18, eLoader: 12, pickupTrolley: 5, total: 35 },
-          { label: "Sun", twoWheeler: 12, eLoader: 8, pickupTrolley: 4, total: 24 },
+          { label: "Mon", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Tue", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Wed", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Thu", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Fri", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Sat", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Sun", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
         ],
         revenueMarginTrend: [
-          { label: "Mon", gmv: 310000, netMargin: 34100, marginPct: 11.0 },
-          { label: "Tue", gmv: 380000, netMargin: 42500, marginPct: 11.2 },
-          { label: "Wed", gmv: 260000, netMargin: 29000, marginPct: 11.1 },
-          { label: "Thu", gmv: 520000, netMargin: 58800, marginPct: 11.3 },
-          { label: "Fri", gmv: 460000, netMargin: 51000, marginPct: 11.1 },
-          { label: "Sat", gmv: 590000, netMargin: 66000, marginPct: 11.2 },
-          { label: "Sun", gmv: 420000, netMargin: 46800, marginPct: 11.1 },
+          { label: "Mon", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Tue", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Wed", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Thu", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Fri", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Sat", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Sun", gmv: 0, netMargin: 0, marginPct: 0 },
         ],
       },
       thirtyDays: {
         stackedVehicleOrders: [
-          { label: "Week 1", twoWheeler: 72, eLoader: 45, pickupTrolley: 21, total: 138 },
-          { label: "Week 2", twoWheeler: 85, eLoader: 52, pickupTrolley: 28, total: 165 },
-          { label: "Week 3", twoWheeler: 96, eLoader: 61, pickupTrolley: 32, total: 189 },
-          { label: "Week 4", twoWheeler: 90, eLoader: 57, pickupTrolley: 26, total: 173 },
+          { label: "Week 1", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Week 2", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Week 3", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
+          { label: "Week 4", twoWheeler: 0, eLoader: 0, pickupTrolley: 0, total: 0 },
         ],
         revenueMarginTrend: [
-          { label: "Week 1", gmv: 2450000, netMargin: 271000, marginPct: 11.1 },
-          { label: "Week 2", gmv: 2890000, netMargin: 322000, marginPct: 11.1 },
-          { label: "Week 3", gmv: 3320000, netMargin: 375000, marginPct: 11.3 },
-          { label: "Week 4", gmv: 2940000, netMargin: 327000, marginPct: 11.1 },
+          { label: "Week 1", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Week 2", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Week 3", gmv: 0, netMargin: 0, marginPct: 0 },
+          { label: "Week 4", gmv: 0, netMargin: 0, marginPct: 0 },
         ],
       },
     };
@@ -1133,15 +977,20 @@ router.get("/admin/khata/:id/statement", (req, res) => {
 });
 
 /* ── Drivers ─────────────────────────────────────────────────── */
-const mockDrivers = [
-  { id: "D01", name: "Ravi Kumar",  vehicle: "Tractor UT-4422",  tripsThisWeek: 14, earnings: 8400, status: "active",   settled: false },
-  { id: "D02", name: "Suresh Babu", vehicle: "Mini Truck LKO-2", tripsThisWeek: 11, earnings: 6600, status: "active",   settled: false },
-  { id: "D03", name: "Kartik Rao",  vehicle: "Tractor UT-7891",  tripsThisWeek: 9,  earnings: 5400, status: "off-duty", settled: false },
-  { id: "D04", name: "Deepak M.",   vehicle: "Loader JCB-X1",    tripsThisWeek: 7,  earnings: 4200, status: "active",   settled: true  },
-  { id: "D05", name: "Rahul Yadav", vehicle: "Tractor UT-5512",  tripsThisWeek: 12, earnings: 7200, status: "active",   settled: false },
-];
+const mockDrivers: Array<{ id: string; name: string; vehicle: string; tripsThisWeek: number; earnings: number; status: string; settled: boolean }> = [];
 
-router.get("/admin/drivers", (_req, res) => res.json(mockDrivers));
+router.get("/admin/drivers", (_req, res) => {
+  const drivers = ecosystemEngine.getAllDrivers().map(d => ({
+    id: d.id,
+    name: d.name,
+    vehicle: d.vehiclePlate || d.vehicleLabel,
+    tripsThisWeek: d.totalTrips || 0,
+    earnings: d.todayEarnings || 0,
+    status: d.isOnline ? "active" : "off-duty",
+    settled: false,
+  }));
+  res.json(drivers.length > 0 ? drivers : mockDrivers);
+});
 
 router.post("/admin/drivers/:id/settle", (req, res) => {
   const driver = mockDrivers.find(d => d.id === req.params.id);
@@ -1151,40 +1000,47 @@ router.post("/admin/drivers/:id/settle", (req, res) => {
 });
 
 /* ── Users / Vendors / Access Control ───────────────────────── */
-const mockUsers: {
+const mockUsers: Array<{
   id: string; role: "contractor" | "vendor" | "driver";
   name: string; phone: string; email: string; zone: string;
   pincode: string; category: string; status: "active" | "pending" | "banned";
   joinedAt: string; ordersCount: number; rating: number;
-}[] = [
-  // Contractors
-  { id: "U01", role: "contractor", name: "Anand Constructions",  phone: "9812345678", email: "anand@constructions.in",  zone: "Gomti Nagar",  pincode: "226010", category: "Residential", status: "active",  joinedAt: "2024-03-15", ordersCount: 84,  rating: 4.8 },
-  { id: "U02", role: "contractor", name: "Raja Infra Pvt Ltd",   phone: "9876543210", email: "raja@infraltd.in",        zone: "Indira Nagar", pincode: "226016", category: "Commercial", status: "active",  joinedAt: "2024-01-08", ordersCount: 142, rating: 4.5 },
-  { id: "U03", role: "contractor", name: "Sharma Builders",      phone: "9898989898", email: "sharma@builders.in",      zone: "Aliganj",      pincode: "226024", category: "Residential", status: "active",  joinedAt: "2024-05-20", ordersCount: 51,  rating: 4.7 },
-  { id: "U04", role: "contractor", name: "New Delhi Projects",   phone: "9111222333", email: "delhi@projects.in",       zone: "Chinhat",      pincode: "226028", category: "Industrial", status: "pending", joinedAt: "2025-05-22", ordersCount: 0,   rating: 0   },
-  { id: "U05", role: "contractor", name: "Verma Constructions",  phone: "9444555666", email: "verma@const.in",          zone: "Aishbagh",     pincode: "226004", category: "Residential", status: "banned",  joinedAt: "2024-02-10", ordersCount: 12,  rating: 2.1 },
-  // Vendors synced dynamically with Lucknow Hubs in vendorEngine
-  ...vendorEngine.getAllVendors().map((v, idx) => ({
-    id: `V0${idx + 1}`,
-    role: "vendor" as const,
-    name: v.shopName,
-    phone: v.phone,
-    email: v.email,
-    zone: v.hubZone.split("(")[0].trim(),
-    pincode: "226001",
-    category: v.categories.slice(0, 2).join(", "),
-    status: (v.isOpen ? "active" : "pending") as "active" | "pending" | "banned",
-    joinedAt: "2024-01-10",
-    ordersCount: 45 + idx * 30,
-    rating: v.rating,
-  })),
-  // Drivers
-  { id: "D01", role: "driver", name: "Ravi Kumar",               phone: "9812000001", email: "ravi@driver.in",          zone: "Gomti Nagar",  pincode: "226010", category: "Tractor",    status: "active",  joinedAt: "2024-04-01", ordersCount: 187, rating: 4.9 },
-  { id: "D02", role: "driver", name: "Suresh Babu",              phone: "9812000002", email: "suresh@driver.in",        zone: "Indira Nagar", pincode: "226016", category: "Mini Truck", status: "active",  joinedAt: "2024-03-15", ordersCount: 142, rating: 4.6 },
-  { id: "D03", role: "driver", name: "Kartik Rao",               phone: "9812000003", email: "kartik@driver.in",        zone: "Aliganj",      pincode: "226024", category: "Tractor",    status: "active",  joinedAt: "2024-06-10", ordersCount: 98,  rating: 4.4 },
-];
+}> = [];
 
-router.get("/admin/users", (_req, res) => res.json(mockUsers));
+router.get("/admin/users", (_req, res) => {
+  // Dynamically populate from live registered vendors and drivers
+  const liveUsers = [
+    ...vendorEngine.getAllVendors().map((v, idx) => ({
+      id: `V0${idx + 1}`,
+      role: "vendor" as const,
+      name: v.shopName,
+      phone: v.phone,
+      email: v.email,
+      zone: v.hubZone.split("(")[0].trim(),
+      pincode: "226001",
+      category: v.categories.slice(0, 2).join(", "),
+      status: (v.isOpen ? "active" : "pending") as "active" | "pending" | "banned",
+      joinedAt: new Date().toISOString().slice(0, 10),
+      ordersCount: 0,
+      rating: v.rating,
+    })),
+    ...ecosystemEngine.getAllDrivers().map((d, idx) => ({
+      id: `D0${idx + 1}`,
+      role: "driver" as const,
+      name: d.name,
+      phone: d.phone,
+      email: `${d.name.toLowerCase().replace(/\s+/g, ".")}@driver.in`,
+      zone: d.currentZone,
+      pincode: "226001",
+      category: d.vehicleLabel,
+      status: (d.isOnline ? "active" : "pending") as "active" | "pending" | "banned",
+      joinedAt: new Date().toISOString().slice(0, 10),
+      ordersCount: d.totalTrips || 0,
+      rating: d.rating,
+    })),
+  ];
+  res.json(liveUsers.length > 0 ? liveUsers : mockUsers);
+});
 
 router.patch("/admin/users/:id/status", (req, res) => {
   const user = mockUsers.find(u => u.id === req.params.id);

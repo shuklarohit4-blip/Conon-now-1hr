@@ -420,7 +420,7 @@ export const HOME_CATEGORIES: HomeCategory[] = [
     "slug": "power-tools-safety",
     "title": "Power Tools, Hand Tools & Site Safety",
     "department": "Tools",
-    "image": "/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp",
+    "image": "/images/home-categories/tools-hardware.webp",
     "dbCategory": "tools",
     "route": "/collections/power-tools-safety",
     "badge": "60-Min Express · 2-Wheeler",

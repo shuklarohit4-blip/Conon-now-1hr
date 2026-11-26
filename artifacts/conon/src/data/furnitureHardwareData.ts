@@ -72,10 +72,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/ebco-regular-drawer-channel-stds-i-35-20in.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/ebco-regular-drawer-channel-stds-i-35-20in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-grade cold rolled steel telescopic slide for modular drawers",
     "specChips": [
       "20\" (500mm)",
@@ -133,7 +131,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 490,
         "discountPercent": 29,
         "stock": 65,
-        "image": "/images/products/furniture-wardrobe-hardware/ebco-regular-drawer-channel-stds-i-35-20in.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -171,10 +169,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-regular-close.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-regular-close.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Slim profile 12.7mm clearance runner with silent solid ball bearings",
     "specChips": [
       "20\" (500mm)",
@@ -232,7 +228,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 690,
         "discountPercent": 25,
         "stock": 45,
-        "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-regular-close.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -269,10 +265,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-soft-close.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-soft-close.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hydraulic damper cushion for silent, slam-proof soft drawer closure",
     "specChips": [
       "20\" (500mm)",
@@ -326,7 +320,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 1390,
         "discountPercent": 23,
         "stock": 40,
-        "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-soft-close.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -363,10 +357,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4532-telescopic-channel-18in-soft-close-zinc.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-ka-4532-telescopic-channel-18in-soft-close-zinc.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German engineered ball bearing slide with integrated Silent System cushion",
     "specChips": [
       "18\" (450mm)",
@@ -420,7 +412,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 1250,
         "discountPercent": 21,
         "stock": 55,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4532-telescopic-channel-18in-soft-close-zinc.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -457,10 +449,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-18in-soft-close-black.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-18in-soft-close-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Luxury black electrophoretic coating for dark interior modular cabinetry",
     "specChips": [
       "18\" (450mm)",
@@ -514,7 +504,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 1450,
         "discountPercent": 21,
         "stock": 35,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-18in-soft-close-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -551,10 +541,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-20in-soft-close-black.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-20in-soft-close-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "20-inch deep drawer luxury runner in matte black with fluid deceleration",
     "specChips": [
       "20\" (500mm)",
@@ -608,7 +596,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 1520,
         "discountPercent": 21,
         "stock": 40,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-20in-soft-close-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -645,10 +633,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-0-crank.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-0-crank.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "0-Crank full overlay concealed hinge with integrated hydraulic soft-close",
     "specChips": [
       "105° Opening",
@@ -706,7 +692,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 280,
         "discountPercent": 25,
         "stock": 120,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-0-crank.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -743,10 +729,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-8-crank.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-8-crank.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "8-Crank cranked arm hinge for twin doors meeting on a shared center partition",
     "specChips": [
       "105° Opening",
@@ -800,7 +784,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 295,
         "discountPercent": 25,
         "stock": 85,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-8-crank.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -837,10 +821,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-full-overlay-soft-close-hinge-315-07-075.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-full-overlay-soft-close-hinge-315-07-075.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury architectural clip-on hinge with wider 110° clear access",
     "specChips": [
       "110° Wide Angle",
@@ -894,7 +876,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 4490,
         "discountPercent": 19,
         "stock": 25,
-        "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-full-overlay-soft-close-hinge-315-07-075.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -931,10 +913,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-half-overlay-soft-close-hinge-315-07-076.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-half-overlay-soft-close-hinge-315-07-076.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Luxury clip-on half-overlay hinge for shared middle cabinet partition gables",
     "specChips": [
       "110° Wide Angle",
@@ -984,7 +964,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 4550,
         "discountPercent": 19,
         "stock": 20,
-        "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-half-overlay-soft-close-hinge-315-07-076.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1021,10 +1001,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/decoranddecor-sliding-wardrobe-door-track-kit-2-doors-1-2m.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/decoranddecor-sliding-wardrobe-door-track-kit-2-doors-1-2m.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-duty aluminum sliding door system for 2-door wardrobe closets up to 75kg/door",
     "specChips": [
       "1.2 Meter Track",
@@ -1078,7 +1056,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 14500,
         "discountPercent": 21,
         "stock": 15,
-        "image": "/images/products/furniture-wardrobe-hardware/decoranddecor-sliding-wardrobe-door-track-kit-2-doors-1-2m.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1115,10 +1093,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hydraulic-lift-ottoman-bed-mechanism-1200n-gas-strut-set.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hydraulic-lift-ottoman-bed-mechanism-1200n-gas-strut-set.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy pneumatic gas spring ottoman bed lifting mechanism for effortless mattress storage access",
     "specChips": [
       "1200N High Pressure",
@@ -1172,7 +1148,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 17500,
         "discountPercent": 22,
         "stock": 18,
-        "image": "/images/products/furniture-wardrobe-hardware/hydraulic-lift-ottoman-bed-mechanism-1200n-gas-strut-set.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1209,10 +1185,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-storage-lifter-900mm.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-storage-lifter-900mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "900mm heavy-duty hydraulic bed frame lifter for single and queen box beds",
     "specChips": [
       "900mm Frame Length",
@@ -1266,7 +1240,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 19800,
         "discountPercent": 21,
         "stock": 14,
-        "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-storage-lifter-900mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1303,10 +1277,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-lift-kit-1500mm.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-lift-kit-1500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1500mm full-length master king bed storage lift mechanism with dual high-tonnage gas dampers",
     "specChips": [
       "1500mm Master Length",
@@ -1360,7 +1332,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 52000,
         "discountPercent": 20,
         "stock": 10,
-        "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-lift-kit-1500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1397,10 +1369,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-hydraulic-pull-down-wardrobe-garment-lift-540-690mm-grey.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-hydraulic-pull-down-wardrobe-garment-lift-540-690mm-grey.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Telescopic pull-down wardrobe hanger lift brings high hanging clothes down to eye level",
     "specChips": [
       "540–690mm Width",
@@ -1454,7 +1424,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 4990,
         "discountPercent": 21,
         "stock": 22,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-hydraulic-pull-down-wardrobe-garment-lift-540-690mm-grey.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1491,10 +1461,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/rigwell-soft-close-pull-down-closet-rod-850-1150mm-15kg-silver.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/rigwell-soft-close-pull-down-closet-rod-850-1150mm-15kg-silver.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Wide-span 850–1150mm heavy-duty pull-down wardrobe rod with soft-closing return",
     "specChips": [
       "850–1150mm Extra Wide",
@@ -1544,7 +1512,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 5600,
         "discountPercent": 21,
         "stock": 28,
-        "image": "/images/products/furniture-wardrobe-hardware/rigwell-soft-close-pull-down-closet-rod-850-1150mm-15kg-silver.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1581,10 +1549,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "7306",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/heavy-duty-ss-304-stainless-steel-32mm-closet-rod-flanges-36in-set-of-2.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/heavy-duty-ss-304-stainless-steel-32mm-closet-rod-flanges-36in-set-of-2.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Solid 32mm AISI-304 heavy-gauge closet hanging rod kit with cast heavy wall flanges",
     "specChips": [
       "32mm Outer Diameter",
@@ -1638,7 +1604,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 9200,
         "discountPercent": 19,
         "stock": 30,
-        "image": "/images/products/furniture-wardrobe-hardware/heavy-duty-ss-304-stainless-steel-32mm-closet-rod-flanges-36in-set-of-2.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1675,10 +1641,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-knurled-pvd-cabinet-handle-96mm-ss-304-matte-black-9409.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-knurled-pvd-cabinet-handle-96mm-ss-304-matte-black-9409.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Diamond knurled tactile grip with industrial matte black PVD coating",
     "specChips": [
       "96mm Hole Pitch (C.C.)",
@@ -1736,7 +1700,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 750,
         "discountPercent": 26,
         "stock": 90,
-        "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-knurled-pvd-cabinet-handle-96mm-ss-304-matte-black-9409.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1774,10 +1738,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-160mm-ss-304-z-black-9401.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-160mm-ss-304-z-black-9401.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "160mm C.C. sleek minimalist bar handle in deep Z-Black PVD finish",
     "specChips": [
       "160mm Hole Pitch (C.C.)",
@@ -1835,7 +1797,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 860,
         "discountPercent": 26,
         "stock": 110,
-        "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-160mm-ss-304-z-black-9401.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1873,10 +1835,8 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-224mm-ss-304-z-black-9401.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-224mm-ss-304-z-black-9401.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Long 224mm C.C. grand pull handle for 7-foot and 8-foot wardrobe shutters",
     "specChips": [
       "224mm Hole Pitch (C.C.)",
@@ -1938,7 +1898,7 @@ export const ALL_20_FURNITURE_HARDWARE_PRODUCTS: FurnitureHardwareProduct[] = [
         "mrp": 1100,
         "discountPercent": 25,
         "stock": 80,
-        "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-224mm-ss-304-z-black-9401.webp"
+        "image": ""
       }
     ],
     "inStock": true,

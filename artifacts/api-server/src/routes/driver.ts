@@ -67,16 +67,16 @@ router.post("/driver/switch", (req: Request, res: Response) => {
  * Returns driver profile, active vehicle mode, active multi-stop mission, today's earnings, and nearby Reverse Buyback offers.
  */
 router.get(["/driver/:driverId/cockpit", "/driver/cockpit", "/:driverId/cockpit"], (req: Request, res: Response) => {
-  const driverId = String(req.params.driverId || req.query.driverId || (req as any).driverId || "DRV-LKO-CH-01");
+  const driverId = String(req.params.driverId || req.query.driverId || (req as any).driverId || "DRV-LKO-01");
   const driver = ecosystemEngine.getDriver(driverId) || {
     id: driverId,
-    name: "Ramesh Yadav",
-    phone: "+91 94150 88219",
+    name: "Fleet Partner",
+    phone: "+91 94150 00000",
     vehicleType: "CHHOTA_HATHI",
-    vehiclePlate: "UP 32 CH 8912",
-    walletBalance: 1840,
-    todayEarnings: 1450,
-    tripsToday: 4,
+    vehiclePlate: "UP 32 XX 0000",
+    walletBalance: 0,
+    todayEarnings: 0,
+    tripsToday: 0,
     isOnline: true,
   };
 
@@ -84,11 +84,11 @@ router.get(["/driver/:driverId/cockpit", "/driver/cockpit", "/:driverId/cockpit"
   const vehicleType = (vType === "2W_BIKE" || vType === "BIKE_EXPRESS") ? "BIKE_EXPRESS" : "CHHOTA_HATHI";
   const vehicleLabel = vehicleType === "BIKE_EXPRESS" ? "Bike Express • Max 30 kg" : "Chhota Hathi Loader • Max 1,500 kg";
 
-  // Active mission / order
-  const activeOrder = ecosystemEngine.getAllOrders().find((o) => o.status !== "DELIVERED" && o.status !== "CANCELLED") || ecosystemEngine.getAllOrders()[0];
-  const multiStop = computeMultiStopPlan(activeOrder?.items || [], "hub-naka");
+  // Active mission / order (null when clean zero state)
+  const activeOrder = ecosystemEngine.getAllOrders().find((o) => o.status !== "DELIVERED" && o.status !== "CANCELLED");
+  const multiStop = activeOrder ? computeMultiStopPlan(activeOrder.items || [], activeOrder.vendorId) : null;
 
-  const activeMission = activeOrder ? {
+  const activeMission = activeOrder && multiStop ? {
     orderId: activeOrder.id,
     shortId: activeOrder.shortId,
     customerName: activeOrder.customerName,
@@ -242,8 +242,8 @@ router.post(["/driver/orders/:orderId/complete-escrow", "/orders/:orderId/comple
       otp,
       gpsDistanceMeters,
       gpsMatchPercent,
-      driverName: "Ramesh Yadav (UP 32 CH 8912)",
-      driverPhone: "+91 94150 88219",
+      driverName: (req as any).driverName || req.body?.driverName || "Verified Driver Partner",
+      driverPhone: (req as any).driverPhone || req.body?.driverPhone || "+91 94150 00000",
       netDealerPayout: 8420,
       palledariBonus,
       totalEarned,
@@ -283,12 +283,12 @@ router.post(["/driver/orders/:orderId/complete-escrow", "/orders/:orderId/comple
  * Triggers instant admin:driver_sos red alert on CONON COMMAND OS for breakdown/dhalai rescue.
  */
 router.post(["/driver/orders/:orderId/sos", "/driver/sos", "/orders/:orderId/sos"], (req: Request, res: Response) => {
-  const orderId = String(req.params.orderId || req.body?.orderId || "ORD-LKO-9241");
-  const reason = String(req.body?.reason || "Mechanical Breakdown / Flat Tyre on Shaheed Path");
-  const lat = Number(req.body?.lat) || 26.8123;
-  const lng = Number(req.body?.lng) || 80.9987;
-  const driverName = req.body?.driverName || "Ramesh Yadav (UP 32 CH 8912)";
-  const driverPhone = req.body?.driverPhone || "+91 94150 88219";
+  const orderId = String(req.params.orderId || req.body?.orderId || "ORD-SOS");
+  const reason = String(req.body?.reason || "Mechanical Breakdown / Flat Tyre on Road");
+  const lat = Number(req.body?.lat) || 26.8467;
+  const lng = Number(req.body?.lng) || 80.9462;
+  const driverName = req.body?.driverName || (req as any).driverName || "Driver Partner";
+  const driverPhone = req.body?.driverPhone || (req as any).driverPhone || "+91 94150 00000";
 
   const alert = {
     id: `sos-${Date.now()}`,

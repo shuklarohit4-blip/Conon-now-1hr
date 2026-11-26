@@ -26,6 +26,10 @@ import {
   Phone,
   RefreshCw,
   Zap,
+  QrCode,
+  Share2,
+  Copy,
+  Building2,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useKyc, PartnerKycApplication, KycDocument, KycDocStatus } from "@/context/KycContext";
@@ -260,7 +264,7 @@ export function AdminKycWarRoom() {
                           </span>
                         )}
                         <span className="text-[10px] font-mono text-slate-400">
-                          {app.applicantId}
+                          {app.partnerId ? `${app.partnerId} (${app.applicantId})` : app.applicantId}
                         </span>
                       </div>
 
@@ -313,6 +317,12 @@ export function AdminKycWarRoom() {
                       <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                         {selectedApp.applicantId}
                       </span>
+                      {selectedApp.partnerId && (
+                        <span className="text-[10px] font-mono font-black px-2 py-0.5 rounded bg-amber-400 text-slate-950 border border-amber-300 shadow-sm flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3 text-slate-950" />
+                          <span>PARTNER ID: {selectedApp.partnerId}</span>
+                        </span>
+                      )}
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
                         AI Score: {selectedApp.aiAuthenticityScore}% Authentic
                       </span>
@@ -544,8 +554,103 @@ export function AdminKycWarRoom() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-slate-500 text-xs">
-            Select an application from the queue to inspect papers.
+          <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 overflow-y-auto bg-[#070B14]">
+            <div className="max-w-2xl w-full bg-[#0F172A] border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 rounded-3xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center mx-auto mb-4 text-amber-400 shadow-lg shadow-amber-400/10">
+                  <ShieldCheck className="w-8 h-8 text-amber-400" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white">
+                  Partner KYC War Room — Clean Slate Standby
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto mt-2">
+                  All dummy partners have been cleared. Onboard real Lucknow hardware stores and fleet drivers with instant paper verification.
+                </p>
+              </div>
+
+              {/* Real-Time Compliance Engine Badges */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6 text-center">
+                <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
+                  <span className="text-[10px] font-black uppercase text-emerald-400 flex items-center justify-center gap-1 mb-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    ARMED
+                  </span>
+                  <div className="text-xs font-bold text-white">NPCI IMPS Penny-Drop</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">₹1 Name Match Bank Sync</div>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
+                  <span className="text-[10px] font-black uppercase text-sky-400 flex items-center justify-center gap-1 mb-1">
+                    <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+                    ONLINE
+                  </span>
+                  <div className="text-xs font-bold text-white">AI OCR Engine</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Automated Field Extractor</div>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
+                  <span className="text-[10px] font-black uppercase text-amber-400 flex items-center justify-center gap-1 mb-1">
+                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                    CONNECTED
+                  </span>
+                  <div className="text-xs font-bold text-white">4-Panel Relay</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Real-time Socket.io Bridge</div>
+                </div>
+              </div>
+
+              {/* 1-Click WhatsApp Onboarding Invite Links */}
+              <div className="space-y-3 p-4 rounded-2xl bg-slate-900/80 border border-slate-800 mb-6">
+                <div className="text-xs font-black text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <Share2 className="w-3.5 h-3.5 text-amber-400" />
+                  <span>1-Click Partner WhatsApp Invite Links</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <a
+                    href="https://wa.me/?text=Namaste!%20Join%20CONON-NOW%20as%20a%20Verified%20Hardware%20Partner%20Shop%20in%20Lucknow.%20Register%20here%3A%20https%3A%2F%2Fconon.now%2Fvendor%2Fregister"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-3 rounded-xl bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 text-amber-300 text-xs font-bold transition flex items-center justify-between group cursor-pointer"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Store className="w-4 h-4 text-amber-400" />
+                      <span>Invite Hardware Store</span>
+                    </span>
+                    <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </a>
+
+                  <a
+                    href="https://wa.me/?text=Namaste!%20Join%20CONON-NOW%20as%20a%20Verified%20Fleet%20Driver%20(Chhota%20Hathi%20%2F%20Loader)%20in%20Lucknow.%20Register%20here%3A%20https%3A%2F%2Fconon.now%2Fdriver%2Fregister"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-3 rounded-xl bg-emerald-400/10 hover:bg-emerald-400/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold transition flex items-center justify-between group cursor-pointer"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Truck className="w-4 h-4 text-emerald-400" />
+                      <span>Invite Fleet Driver</span>
+                    </span>
+                    <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Onboarding Flow Preview */}
+              <div className="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800/80 pt-4">
+                <div className="font-bold text-slate-300 mb-1">How Real Partner Verification Works:</div>
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-slate-800 text-amber-400 font-bold flex items-center justify-center text-[10px]">1</span>
+                  <span>Partner fills quick KYC form on Dukaan OS or Driver Cockpit</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-slate-800 text-amber-400 font-bold flex items-center justify-center text-[10px]">2</span>
+                  <span>AI OCR verifies document clarity & NPCI runs ₹1 penny-drop validation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-slate-800 text-amber-400 font-bold flex items-center justify-center text-[10px]">3</span>
+                  <span>New submission instantly pops into this War Room queue for your 1-click approval</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>

@@ -24,6 +24,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 import {
@@ -57,6 +58,7 @@ export function FevicolCollectionStorefront({
   onBackToDirectory,
 }: FevicolCollectionStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -107,7 +109,7 @@ export function FevicolCollectionStorefront({
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    return ALL_45_ADHESIVES_PRODUCTS.filter((prod) => {
+    return ALL_45_ADHESIVES_PRODUCTS.map((p) => resolveProduct(p)).filter((prod) => {
       // Subcategory filter
       if (activeSubcat !== "ALL" && prod.adhesiveSubcategory !== activeSubcat) {
         return false;
@@ -125,7 +127,7 @@ export function FevicolCollectionStorefront({
 
       return true;
     });
-  }, [activeSubcat, selectedBrandTier, selectedBrand, cureFilter]);
+  }, [activeSubcat, selectedBrandTier, selectedBrand, cureFilter, resolveProduct]);
 
   // Laminate Sheet Calculator Calculation
   const calculatorResult = useMemo(() => {

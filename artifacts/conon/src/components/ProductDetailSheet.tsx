@@ -8,8 +8,9 @@ import {
 import { toast } from "sonner";
 import { enrichProduct, type EnrichedProductData, type ProductVariant, type BulkTier } from "@/lib/productMetadata";
 import { ProductGallerySlide } from "./ProductGallerySlide";
-import { RealProductImage } from "./RealProductImage";
-import { resolveRealProductImage } from "@/utils/realMediaResolver";
+import { CononProductMedia } from "./CononProductMedia";
+import { useProductMedia, useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { resolveVaultAssetUrl } from "@/services/productMediaVault";
 
 const BLINKIT_GREEN = "#0C831F";
 const BLINKIT_GREEN_HOVER = "#0A6E1A";
@@ -38,16 +39,35 @@ export function ProductDetailSheet({
   initialScrollToBulk = false,
 }: ProductDetailSheetProps) {
   const isSheetOpen = Boolean((openProp ?? isOpenProp ?? (rawProduct !== null)) && rawProduct !== null);
+  const vault = useSafeProductMediaVault();
+  const vaultVersion = vault?.version ?? 0;
 
-  // Enrich product with civil specs, highlights, and verified pricing
+  // Enrich product with civil specs, highlights, Admin Media Vault overrides, and verified pricing
   const product: EnrichedProductData | null = useMemo(() => {
     if (!rawProduct) return null;
     return enrichProduct(rawProduct);
-  }, [rawProduct]);
+  }, [rawProduct, vaultVersion]);
 
   // Gallery carousel state
   const [activeSlide, setActiveSlide] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  const media = useProductMedia(product);
+  const galleryItems = useMemo(() => {
+    if (media.images.length > 0) return media.images;
+    if (product?.galleryImages && product.galleryImages.length > 0) {
+      return product.galleryImages
+        .map((g) => ({
+          url: resolveVaultAssetUrl(g.url, g.fallbackDataUrl) || g.url,
+          fallbackDataUrl: g.fallbackDataUrl,
+          caption: g.caption,
+        }))
+        .filter((g) => Boolean(g.url));
+    }
+    return [];
+  }, [media.images, product]);
+  const galleryCount = galleryItems.length;
+  const activeGalleryEntry = galleryItems[activeSlide] || galleryItems[0] || null;
 
   // Variant state
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
@@ -92,9 +112,14 @@ export function ProductDetailSheet({
     document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      const slideCount = product?.images?.length ?? 0;
       if (e.key === "Escape") {
         if (lightboxOpen) setLightboxOpen(false);
         else onClose();
+      } else if (e.key === "ArrowLeft" && slideCount > 1) {
+        setActiveSlide((prev) => (prev - 1 + slideCount) % slideCount);
+      } else if (e.key === "ArrowRight" && slideCount > 1) {
+        setActiveSlide((prev) => (prev + 1) % slideCount);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -212,12 +237,14 @@ export function ProductDetailSheet({
 
   const handlePrevSlide = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setActiveSlide((prev) => (prev > 0 ? prev - 1 : product.images.length - 1));
+    if (galleryCount <= 1) return;
+    setActiveSlide((prev) => (prev > 0 ? prev - 1 : galleryCount - 1));
   };
 
   const handleNextSlide = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setActiveSlide((prev) => (prev < product.images.length - 1 ? prev + 1 : 0));
+    if (galleryCount <= 1) return;
+    setActiveSlide((prev) => (prev < galleryCount - 1 ? prev + 1 : 0));
   };
 
   return (
@@ -269,14 +296,12 @@ export function ProductDetailSheet({
             }`}
           >
             <div className="flex items-center gap-3 min-w-0">
-              <RealProductImage
+              <CononProductMedia
                 product={product}
-                src={product.image}
-                title={product.title}
-                brand={product.brand}
-                category={product.categoryTag}
-                alt={product.title}
-                className="w-11 h-11 rounded-xl object-contain bg-gray-50 border border-gray-100 p-0.5 shrink-0"
+                variant="thumb"
+                showGalleryBadge={false}
+                containerClassName="w-11 h-11 rounded-xl shrink-0"
+                className="w-full h-full object-contain p-0.5"
               />
               <div className="min-w-0">
                 <p className="text-[13px] font-bold text-gray-900 truncate leading-snug">
@@ -310,19 +335,22 @@ export function ProductDetailSheet({
           >
             {/* ── 1. MULTI-IMAGE CAROUSEL SECTION ──────────────────────── */}
             <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] bg-[#F8FAFC] border-b border-gray-100 overflow-hidden flex items-center justify-center select-none">
-              {/* Product Slide Renderer with zero-broken fallback info cards */}
               <div className="w-full h-full">
                 <ProductGallerySlide
-                  key={activeSlide}
-                  src={product.images[activeSlide] || product.image}
+                  key={`${product.id}-${activeSlide}-${vaultVersion}`}
+                  src={activeGalleryEntry?.url}
                   slideIndex={activeSlide}
                   product={product}
-                  onZoom={() => setLightboxOpen(true)}
+                  caption={activeGalleryEntry?.caption}
+                  fallbackDataUrl={activeGalleryEntry?.fallbackDataUrl}
+                  onZoom={() => {
+                    if (galleryCount > 0) setLightboxOpen(true);
+                  }}
                 />
               </div>
 
               {/* Prev / Next Arrows */}
-              {product.images.length > 1 && (
+              {galleryCount > 1 && (
                 <>
                   <button
                     type="button"
@@ -356,27 +384,29 @@ export function ProductDetailSheet({
               </div>
 
               {/* Tap to Zoom Hint */}
-              <button
-                onClick={() => setLightboxOpen(true)}
-                className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-gray-600 flex items-center justify-center shadow-xs active:scale-95 transition z-10"
-                title="Tap to zoom image"
-              >
-                <ZoomIn className="w-3.5 h-3.5" />
-              </button>
+              {galleryCount > 0 && (
+                <button
+                  onClick={() => setLightboxOpen(true)}
+                  className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-gray-600 flex items-center justify-center shadow-xs active:scale-95 transition z-10"
+                  title="Tap to zoom image"
+                >
+                  <ZoomIn className="w-3.5 h-3.5" />
+                </button>
+              )}
 
               {/* Bottom Carousel Pill Counter */}
-              {product.images.length > 1 && (
+              {galleryCount > 1 && (
                 <div className="absolute bottom-3 right-3 z-10">
                   <span className="bg-black/60 backdrop-blur-sm text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
-                    {activeSlide + 1} / {product.images.length}
+                    {activeSlide + 1} / {galleryCount}
                   </span>
                 </div>
               )}
 
               {/* Dot Indicators */}
-              {product.images.length > 1 && (
+              {galleryCount > 1 && (
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-10">
-                  {product.images.map((_, i) => (
+                  {galleryItems.map((_, i) => (
                     <button
                       key={i}
                       type="button"
@@ -392,47 +422,63 @@ export function ProductDetailSheet({
             </div>
 
             {/* Thumbnail Mini Strip */}
-            {product.images.length > 1 && (
+            {galleryCount > 1 && (
               <div className="flex gap-2 px-4 py-2.5 overflow-x-auto border-b border-gray-100 bg-white scrollbar-hide">
-                {product.images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveSlide(i)}
-                    className={`relative w-12 h-12 rounded-lg border-2 p-0.5 shrink-0 transition-all bg-gray-50 flex items-center justify-center ${
-                      i === activeSlide ? "border-emerald-600 ring-2 ring-emerald-600/20 shadow-xs" : "border-gray-200 opacity-70"
-                    }`}
-                  >
-                    {i === 0 ? (
-                      <RealProductImage
-                        product={product}
-                        src={img}
-                        title={product.title}
-                        brand={product.brand}
-                        category={product.categoryTag}
-                        alt="Thumbnail 1"
-                        variant="thumb"
-                        className="w-full h-full object-contain"
+                {galleryItems.map((galleryItem, i) => {
+                  const thumbSrc = resolveVaultAssetUrl(galleryItem.url, galleryItem.fallbackDataUrl) || galleryItem.url;
+
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActiveSlide(i)}
+                      title={galleryItem.caption || `Photo ${i + 1}`}
+                      className={`relative w-14 h-14 rounded-lg border-2 p-0.5 shrink-0 transition-all bg-gray-50 flex items-center justify-center overflow-hidden cursor-pointer ${
+                        i === activeSlide
+                          ? "border-emerald-600 ring-2 ring-emerald-600/20 shadow-xs"
+                          : "border-gray-200 opacity-75 hover:opacity-100"
+                      }`}
+                    >
+                      <img
+                        src={thumbSrc}
+                        alt={galleryItem.caption || `${product.title} thumbnail ${i + 1}`}
+                        onError={(e) => {
+                          const fb = galleryItem.fallbackDataUrl;
+                          if (fb && e.currentTarget.src !== fb) e.currentTarget.src = fb;
+                        }}
+                        className="w-full h-full object-contain rounded"
                       />
-                    ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center bg-emerald-950 text-white rounded text-[8px] font-black leading-tight text-center p-0.5">
-                        <span>SLIDE</span>
-                        <span>{i + 1}</span>
-                      </div>
-                    )}
-                  </button>
-                ))}
+                      {galleryItem.caption && (
+                        <span className="absolute bottom-0 inset-x-0 bg-black/70 text-[8px] text-white font-semibold truncate px-0.5 text-center leading-tight">
+                          {galleryItem.caption}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
             )}
 
             {/* ── 2. PRODUCT HEADLINE & PRICING HEADER ─────────────────── */}
             <div className="p-4 sm:p-5 pb-3">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100">
                   {product.brand}
                 </span>
                 <span className="text-[11px] font-semibold text-gray-500">
                   {product.categoryTag}
                 </span>
+                {product.isAdminVerifiedMedia && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wide text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                    <CheckCircle2 className="w-3 h-3" /> Conon Verified Media
+                  </span>
+                )}
+                {product.hsnCode && (
+                  <span className="text-[10px] font-mono text-gray-500 bg-gray-100 px-2 py-0.5 rounded-md">
+                    HSN/SAC {product.hsnCode}
+                    {product.gstRate !== undefined ? ` · ${product.gstRate}% GST` : ""}
+                  </span>
+                )}
               </div>
 
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 mt-2 leading-snug">
@@ -441,6 +487,26 @@ export function ProductDetailSheet({
               <p className="text-xs text-gray-500 font-medium mt-1 leading-relaxed">
                 {product.shortTagline}
               </p>
+
+              {(product.description || (product.specBullets && product.specBullets.length > 0)) && (
+                <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50/70 p-3 space-y-2">
+                  {product.description && (
+                    <p className="text-xs text-slate-700 whitespace-pre-line leading-relaxed">
+                      {product.description}
+                    </p>
+                  )}
+                  {product.specBullets && product.specBullets.length > 0 && (
+                    <ul className="space-y-1 pt-1 border-t border-slate-200/70">
+                      {product.specBullets.map((bullet, bIdx) => (
+                        <li key={bIdx} className="flex items-start gap-1.5 text-xs text-slate-700 font-medium">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
 
               {product.fitGuardrailBadge && (
                 <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold">
@@ -555,15 +621,12 @@ export function ProductDetailSheet({
                         className="flex items-center justify-between p-2.5 rounded-xl border border-gray-200 bg-white hover:border-emerald-300 transition shadow-2xs"
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <RealProductImage
+                          <CononProductMedia
                             product={paired}
-                            src={paired.image}
-                            title={paired.name}
-                            brand={paired.brand}
-                            category={product.categoryTag}
-                            alt={paired.name}
                             variant="thumb"
-                            className="w-11 h-11 rounded-lg object-contain bg-gray-50 border border-gray-100 p-0.5 shrink-0"
+                            showGalleryBadge={false}
+                            containerClassName="w-11 h-11 rounded-lg shrink-0"
+                            className="w-full h-full object-contain p-0.5"
                           />
                           <div className="min-w-0">
                             <p className="text-[12px] font-bold text-gray-900 truncate leading-snug">
@@ -822,7 +885,7 @@ export function ProductDetailSheet({
         </motion.div>
 
         {/* ── 8. FULLSCREEN ZOOM LIGHTBOX MODAL ───────────────────────── */}
-        {lightboxOpen && (
+        {lightboxOpen && galleryCount > 0 && activeGalleryEntry && (
           <div
             onClick={() => setLightboxOpen(false)}
             className="fixed inset-0 z-[120] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
@@ -833,19 +896,41 @@ export function ProductDetailSheet({
             >
               <X className="w-6 h-6" />
             </button>
-            <div className="relative max-w-[90vw] max-h-[85vh] p-2">
-              <RealProductImage
-                product={product}
-                src={product.images[activeSlide] || product.image}
-                title={product.title}
-                brand={product.brand}
-                category={product.categoryTag}
-                alt={product.title}
-                variant="modal"
-                className="max-w-full max-h-[80vh] object-contain mx-auto rounded-lg"
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-[90vw] max-h-[85vh] p-2 flex flex-col items-center cursor-default"
+            >
+              {galleryCount > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setActiveSlide((prev) => (prev - 1 + galleryCount) % galleryCount)}
+                    aria-label="Previous lightbox photo"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center z-20 cursor-pointer"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveSlide((prev) => (prev + 1) % galleryCount)}
+                    aria-label="Next lightbox photo"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center z-20 cursor-pointer"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </>
+              )}
+              <img
+                src={resolveVaultAssetUrl(activeGalleryEntry.url, activeGalleryEntry.fallbackDataUrl) || activeGalleryEntry.url}
+                alt={activeGalleryEntry.caption || product.title}
+                onError={(e) => {
+                  const fb = activeGalleryEntry.fallbackDataUrl;
+                  if (fb && e.currentTarget.src !== fb) e.currentTarget.src = fb;
+                }}
+                className="max-w-full max-h-[80vh] object-contain mx-auto rounded-lg bg-white p-2"
               />
-              <p className="text-center text-white/80 text-xs mt-3 font-semibold">
-                {product.title} · Slide {activeSlide + 1} of {product.images.length}
+              <p className="text-center text-white/90 text-xs mt-3 font-semibold">
+                {product.title} · {activeGalleryEntry.caption || `Photo ${activeSlide + 1}`} ({activeSlide + 1} / {galleryCount})
               </p>
             </div>
           </div>

@@ -33,10 +33,16 @@ export const CONON_IMAGES_DIR = path.resolve(CONON_PUBLIC_DIR, "images");
 export const CONON_PRODUCTS_IMAGES_DIR = path.resolve(CONON_IMAGES_DIR, "products");
 export const POD_DIR = path.resolve(CONON_IMAGES_DIR, "pod");
 export const ECOSYSTEM_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/ecosystem-store.json");
+export const UPLOADS_DIR = path.resolve(REPO_ROOT, "artifacts/api-server/uploads");
+export const PRODUCTS_UPLOADS_DIR = path.resolve(UPLOADS_DIR, "products");
+export const MEDIA_VAULT_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/media-vault-overrides.json");
 
 // Ensure required runtime directories exist
 if (!fs.existsSync(POD_DIR)) {
   fs.mkdirSync(POD_DIR, { recursive: true });
+}
+if (!fs.existsSync(PRODUCTS_UPLOADS_DIR)) {
+  fs.mkdirSync(PRODUCTS_UPLOADS_DIR, { recursive: true });
 }
 if (!fs.existsSync(path.dirname(ECOSYSTEM_STORE_PATH))) {
   fs.mkdirSync(path.dirname(ECOSYSTEM_STORE_PATH), { recursive: true });

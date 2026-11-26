@@ -1,5 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { query } from "@workspace/db/src/postgres";
+import { query } from "@workspace/db";
 import { getIo, adminRoom, driverRoom, vendorRoom, orderRoom } from "../socket";
 import { ecosystemEngine } from "../services/ecosystemEngine";
 import { requireAdmin } from "../middleware/adminAuth";

@@ -45,85 +45,7 @@ export interface LucknowHub {
   isOnline: boolean;
 }
 
-export const LUCKNOW_HUBS: LucknowHub[] = [
-  {
-    hubId: "hub-naka",
-    name: "Naka Market Hub (Shri Balaji Traders)",
-    zone: "Naka Hindola / Charbagh",
-    lat: 26.8367,
-    lng: 80.9168,
-    stockFlags: { OPC53_CEMENT: true, TMT_FE550D: true, AVVAL_BRICK: false, AAC_BLOCK: false, CPVC_PIPES: true },
-    escrowBalance: 12500,
-    settledBalance: 84500,
-    isOnline: true,
-  },
-  {
-    hubId: "hub-aminabad",
-    name: "Aminabad Hardware & Pipe Depot",
-    zone: "Old Lucknow / Aminabad",
-    lat: 26.8452,
-    lng: 80.9254,
-    stockFlags: { OPC53_CEMENT: false, TMT_FE550D: false, AVVAL_BRICK: false, AAC_BLOCK: false, CPVC_PIPES: true },
-    escrowBalance: 4200,
-    settledBalance: 62100,
-    isOnline: true,
-  },
-  {
-    hubId: "hub-gomti-nagar",
-    name: "Gomti Nagar Express Depot",
-    zone: "Vibhuti Khand / Gomti Nagar",
-    lat: 26.8532,
-    lng: 80.9789,
-    stockFlags: { OPC53_CEMENT: true, TMT_FE550D: true, AVVAL_BRICK: true, AAC_BLOCK: true, CPVC_PIPES: true },
-    escrowBalance: 18900,
-    settledBalance: 142000,
-    isOnline: true,
-  },
-  {
-    hubId: "hub-sushant-golf-city",
-    name: "Sushant Golf City Civil Depot",
-    zone: "Sultanpur Road Corridor",
-    lat: 26.7824,
-    lng: 80.9892,
-    stockFlags: { OPC53_CEMENT: true, TMT_FE550D: true, AVVAL_BRICK: true, AAC_BLOCK: true, CPVC_PIPES: false },
-    escrowBalance: 9800,
-    settledBalance: 71500,
-    isOnline: true,
-  },
-  {
-    hubId: "hub-alambagh",
-    name: "Alambagh Heavy Yard (Transport Nagar)",
-    zone: "Kanpur Road Corridor",
-    lat: 26.7912,
-    lng: 80.8923,
-    stockFlags: { OPC53_CEMENT: true, TMT_FE550D: true, AVVAL_BRICK: true, AAC_BLOCK: true, CPVC_PIPES: true },
-    escrowBalance: 24000,
-    settledBalance: 198000,
-    isOnline: true,
-  },
-  {
-    hubId: "hub-chinhat",
-    name: "Chinhat Industrial Brick & Sand Depot",
-    zone: "Faizabad Road Industrial",
-    lat: 26.8821,
-    lng: 81.0189,
-    stockFlags: { OPC53_CEMENT: true, TMT_FE550D: false, AVVAL_BRICK: true, AAC_BLOCK: true, CPVC_PIPES: false },
-    escrowBalance: 15300,
-    settledBalance: 114000,
-    isOnline: true,
-  },
-  {
-    hubId: "hub-shaheed-path",
-    name: "Shaheed Path Outer Depot",
-    zone: "Outer Ring Road / Omaxe City",
-    lat: 26.8123,
-    lng: 80.9987,
-    stockFlags: { OPC53_CEMENT: true, TMT_FE550D: true, AVVAL_BRICK: true, AAC_BLOCK: false, CPVC_PIPES: true },
-    escrowBalance: 7600,
-    settledBalance: 52300,
-    isOnline: true,
-  },
-];
+export const LUCKNOW_HUBS: LucknowHub[] = [];
 
 // Room names
 export function adminRoom(): string {
@@ -262,7 +184,18 @@ export function computeMultiStopPlan(items: any[], primaryHubId = "hub-naka"): M
   const vehicleType: "BIKE_EXPRESS" | "CHHOTA_HATHI" = totalWeightKg <= 30 ? "BIKE_EXPRESS" : "CHHOTA_HATHI";
   const vehicleLabel = vehicleType === "BIKE_EXPRESS" ? "Bike Express • Max 30 kg" : "Chhota Hathi Loader • Max 1,500 kg";
 
-  const primaryHub = LUCKNOW_HUBS.find((h) => h.hubId === primaryHubId) || LUCKNOW_HUBS[0];
+  const fallbackHub: LucknowHub = {
+    hubId: primaryHubId || "hub-organics",
+    name: "Lucknow Partner Hub",
+    zone: "Central Lucknow",
+    lat: 26.8467,
+    lng: 80.9462,
+    stockFlags: {},
+    escrowBalance: 0,
+    settledBalance: 0,
+    isOnline: true,
+  };
+  const primaryHub = LUCKNOW_HUBS.find((h) => h.hubId === primaryHubId) || LUCKNOW_HUBS[0] || fallbackHub;
   const stops: StopDetail[] = [
     {
       stopId: `stop-1-${Date.now()}`,
@@ -276,8 +209,8 @@ export function computeMultiStopPlan(items: any[], primaryHubId = "hub-naka"): M
   ];
 
   // If order clubs plumbing + civil from two different partner shops within 1.5 km
-  if (hasPlumbing && hasCivil && items.length > 1) {
-    const secondaryHub = LUCKNOW_HUBS.find((h) => h.hubId === "hub-aminabad") || LUCKNOW_HUBS[1];
+  if (hasPlumbing && hasCivil && items.length > 1 && LUCKNOW_HUBS.length > 1) {
+    const secondaryHub = LUCKNOW_HUBS.find((h) => h.hubId !== primaryHub.hubId) || LUCKNOW_HUBS[1] || primaryHub;
     stops.push({
       stopId: `stop-2-${Date.now()}`,
       hubId: secondaryHub.hubId,
@@ -307,7 +240,12 @@ export function schedule180sCascade(order: any, initialHubId?: string): void {
   // Clear existing watchdog if any
   cancel180sCascade(orderId);
 
-  const startHubId = initialHubId || order.hubId || "hub-naka";
+  if (LUCKNOW_HUBS.length <= 1) {
+    // Cannot cascade when 0 or 1 hub is active
+    return;
+  }
+
+  const startHubId = initialHubId || order.hubId || LUCKNOW_HUBS[0]?.hubId || "hub-organics";
   let assignedIndex = LUCKNOW_HUBS.findIndex((h) => h.hubId === startHubId);
   if (assignedIndex === -1) assignedIndex = 0;
 

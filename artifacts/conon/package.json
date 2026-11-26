@@ -81,6 +81,8 @@
     "@workspace/auth-web": "workspace:*",
     "axios": "^1.17.0",
     "firebase": "^12.15.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.9",
     "socket.io-client": "^4.8.3",
     "three": "^0.184.0"
   }

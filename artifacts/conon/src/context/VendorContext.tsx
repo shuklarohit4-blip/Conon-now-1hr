@@ -167,22 +167,14 @@ export function VendorProvider({ children }: { children: React.ReactNode }) {
     setLoading(true);
     setError(null);
     try {
-      // 1. Fetch vendor profile (with auto-recovery if needed)
+      // 1. Fetch vendor profile
       let me: VendorProfile;
       try {
         me = await vendorApi.getMe();
       } catch (authErr) {
-        // Auto-heal session
-        const loginRes = await vendorLogin({
-          phone: "9839011223",
-          storeName: "Katawala Hardware & Locks",
-          name: "Manoj Katawala",
-        });
-        if (loginRes.ok && loginRes.token) {
-          localStorage.setItem(VENDOR_JWT_KEY, loginRes.token);
-          localStorage.setItem("conon_vendor_store", "Katawala Hardware & Locks");
-        }
-        me = await vendorApi.getMe();
+        setVendor(null);
+        setLoading(false);
+        return;
       }
 
       setVendor(me);

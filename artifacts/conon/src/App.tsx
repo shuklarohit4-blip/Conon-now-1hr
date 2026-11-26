@@ -9,6 +9,7 @@ import { KycProvider } from "@/context/KycContext";
 import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 import { UIProvider } from "@/context/UIContext";
 import { LiveCatalogProvider } from "@/context/LiveCatalogContext";
+import { ProductMediaVaultProvider } from "@/context/ProductMediaVaultContext";
 import { VendorThemeProvider } from "@/context/VendorThemeContext";
 import { VendorLanguageProvider } from "@/context/VendorLanguageContext";
 import { DriverThemeProvider } from "@/context/DriverThemeContext";
@@ -274,7 +275,8 @@ function App() {
                 <LocationProvider>
                   <WalletProvider>
                     <UIProvider>
-                      <LiveCatalogProvider>
+                      <ProductMediaVaultProvider>
+                        <LiveCatalogProvider>
                         <VendorThemeProvider>
                           <VendorLanguageProvider>
                             <DriverThemeProvider>
@@ -302,7 +304,8 @@ function App() {
                             </DriverThemeProvider>
                           </VendorLanguageProvider>
                         </VendorThemeProvider>
-                      </LiveCatalogProvider>
+                        </LiveCatalogProvider>
+                      </ProductMediaVaultProvider>
                     </UIProvider>
                   </WalletProvider>
                 </LocationProvider>

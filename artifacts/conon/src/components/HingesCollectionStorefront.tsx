@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 
@@ -44,7 +45,7 @@ export const HINGES_PRODUCTS: HardwareProduct[] = [
     price: 146,
     mrp: 234,
     discountPct: 38,
-    image: "/images/products/hardware/ebco-soft-close-hinges-set.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Nickel-plated",
     deliveryTime: "60 Mins",
@@ -63,7 +64,7 @@ export const HINGES_PRODUCTS: HardwareProduct[] = [
     price: 222,
     mrp: 430,
     discountPct: 48,
-    image: "/images/products/hardware/hettich-onsys-4447i-hinges-set.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "10-yr Warranty",
     deliveryTime: "60 Mins",
@@ -82,7 +83,7 @@ export const HINGES_PRODUCTS: HardwareProduct[] = [
     price: 69,
     mrp: 112,
     discountPct: 38,
-    image: "/images/products/hardware/ebco-slip-on-hinge-regular.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Nickel-plated",
     deliveryTime: "60 Mins",
@@ -101,7 +102,7 @@ export const HINGES_PRODUCTS: HardwareProduct[] = [
     price: 34,
     mrp: 57,
     discountPct: 40,
-    image: "/images/products/hardware/premium-ss-butt-hinges.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: '3" & 5" sizes',
     deliveryTime: "60 Mins",
@@ -120,7 +121,7 @@ export const HINGES_PRODUCTS: HardwareProduct[] = [
     price: 195,
     mrp: 290,
     discountPct: 32,
-    image: "/images/products/hardware/ebco-soft-close-hinges-set.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Clip-on 110°",
     deliveryTime: "60 Mins",
@@ -139,7 +140,7 @@ export const HINGES_PRODUCTS: HardwareProduct[] = [
     price: 245,
     mrp: 320,
     discountPct: 23,
-    image: "/images/products/hardware/premium-ss-butt-hinges.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Ball Bearing 4\"",
     deliveryTime: "60 Mins",
@@ -161,7 +162,7 @@ export const DRAWER_CHANNELS_PRODUCTS: HardwareProduct[] = [
     price: 1250,
     mrp: 1650,
     discountPct: 24,
-    image: "/images/products/hardware/ebco-soft-close-hinges-set.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "30 Kg Load Capacity",
     deliveryTime: "60 Mins",
@@ -180,7 +181,7 @@ export const DRAWER_CHANNELS_PRODUCTS: HardwareProduct[] = [
     price: 380,
     mrp: 520,
     discountPct: 27,
-    image: "/images/products/hardware/ebco-slip-on-hinge-regular.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "45 Kg Rated",
     deliveryTime: "60 Mins",
@@ -243,6 +244,7 @@ export function HingesCollectionStorefront({ onOpenDetail }: HingesCollectionSto
   const [quickDetailProduct, setQuickDetailProduct] = useState<Product | null>(null);
 
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -273,6 +275,7 @@ export function HingesCollectionStorefront({ onOpenDetail }: HingesCollectionSto
 
   const filteredProducts = useMemo(() => {
     return rawProducts
+      .map((p) => resolveProduct(p))
       .filter((p) => {
         if (selectedBrand !== "all" && p.brand.toLowerCase() !== selectedBrand.toLowerCase()) return false;
         if (selectedType !== "all" && !p.type.toLowerCase().includes(selectedType.toLowerCase())) return false;
@@ -286,7 +289,7 @@ export function HingesCollectionStorefront({ onOpenDetail }: HingesCollectionSto
         if (sortBy === "price-high") return b.price - a.price;
         return 0;
       });
-  }, [rawProducts, selectedBrand, selectedType, selectedPrice, sortBy]);
+  }, [rawProducts, selectedBrand, selectedType, selectedPrice, sortBy, resolveProduct]);
 
   const brands = useMemo(() => Array.from(new Set(rawProducts.map((p) => p.brand))), [rawProducts]);
   const types = useMemo(() => Array.from(new Set(rawProducts.map((p) => p.type))), [rawProducts]);

@@ -217,40 +217,6 @@ CREATE INDEX IF NOT EXISTS idx_order_stops_order ON order_stops(order_id);
 CREATE INDEX IF NOT EXISTS idx_dispatch_events_order ON dispatch_events(order_id);
 CREATE INDEX IF NOT EXISTS idx_dispatch_events_type ON dispatch_events(event_type);
 
--- Seed 7 Key Lucknow Vendor Hubs
-INSERT INTO vendor_hubs (hub_id, name, zone, lat, lng, is_online, stock_flags, escrow_balance, settled_balance)
-VALUES
-    ('hub-naka', 'Naka Market Hub (Shri Balaji Traders)', 'Naka Hindola / Charbagh', 26.836700, 80.916800, true, '{"OPC53_CEMENT": true, "TMT_FE550D": true, "AVVAL_BRICK": false, "AAC_BLOCK": false, "CPVC_PIPES": true}'::jsonb, 12500.00, 84500.00),
-    ('hub-aminabad', 'Aminabad Hardware & Pipe Depot', 'Old Lucknow / Aminabad', 26.845200, 80.925400, true, '{"OPC53_CEMENT": false, "TMT_FE550D": false, "AVVAL_BRICK": false, "AAC_BLOCK": false, "CPVC_PIPES": true}'::jsonb, 4200.00, 62100.00),
-    ('hub-gomti-nagar', 'Gomti Nagar Express Depot', 'Vibhuti Khand / Gomti Nagar', 26.853200, 80.978900, true, '{"OPC53_CEMENT": true, "TMT_FE550D": true, "AVVAL_BRICK": true, "AAC_BLOCK": true, "CPVC_PIPES": true}'::jsonb, 18900.00, 142000.00),
-    ('hub-sushant-golf-city', 'Sushant Golf City Civil Depot', 'Sultanpur Road Corridor', 26.782400, 80.989200, true, '{"OPC53_CEMENT": true, "TMT_FE550D": true, "AVVAL_BRICK": true, "AAC_BLOCK": true, "CPVC_PIPES": false}'::jsonb, 9800.00, 71500.00),
-    ('hub-alambagh', 'Alambagh Heavy Yard (Transport Nagar)', 'Kanpur Road Corridor', 26.791200, 80.892300, true, '{"OPC53_CEMENT": true, "TMT_FE550D": true, "AVVAL_BRICK": true, "AAC_BLOCK": true, "CPVC_PIPES": true}'::jsonb, 24000.00, 198000.00),
-    ('hub-chinhat', 'Chinhat Industrial Brick & Sand Depot', 'Faizabad Road Industrial', 26.882100, 81.018900, true, '{"OPC53_CEMENT": true, "TMT_FE550D": false, "AVVAL_BRICK": true, "AAC_BLOCK": true, "CPVC_PIPES": false}'::jsonb, 15300.00, 114000.00),
-    ('hub-shaheed-path', 'Shaheed Path Outer Depot', 'Outer Ring Road / Omaxe City', 26.812300, 80.998700, true, '{"OPC53_CEMENT": true, "TMT_FE550D": true, "AVVAL_BRICK": true, "AAC_BLOCK": false, "CPVC_PIPES": true}'::jsonb, 7600.00, 52300.00)
-ON CONFLICT (hub_id) DO UPDATE SET
-    name = EXCLUDED.name,
-    zone = EXCLUDED.zone,
-    lat = EXCLUDED.lat,
-    lng = EXCLUDED.lng,
-    is_online = EXCLUDED.is_online,
-    stock_flags = EXCLUDED.stock_flags,
-    updated_at = NOW();
-
--- Seed Lucknow Drivers
-INSERT INTO drivers (driver_id, name, phone, vehicle_type, max_payload_kg, is_online, current_lat, current_lng, today_earnings, palledari_bonus)
-VALUES
-    ('DRV-LKO-CH-01', 'Ramesh Yadav', '+91 94150 88219', 'CHHOTA_HATHI', 1500.00, true, 26.842100, 80.931200, 1450.00, 360.00),
-    ('DRV-LKO-BK-02', 'Suraj Rawat', '+91 98390 12044', 'BIKE_EXPRESS', 30.00, true, 26.851000, 80.975000, 820.00, 120.00),
-    ('DRV-LKO-CH-03', 'Mukesh Verma', '+91 91400 44921', 'CHHOTA_HATHI', 1500.00, true, 26.789000, 80.985000, 1850.00, 480.00),
-    ('DRV-LKO-BK-04', 'Sonu Prajapati', '+91 93350 77123', 'BIKE_EXPRESS', 30.00, true, 26.834000, 80.912000, 640.00, 0.00)
-ON CONFLICT (driver_id) DO UPDATE SET
-    name = EXCLUDED.name,
-    phone = EXCLUDED.phone,
-    vehicle_type = EXCLUDED.vehicle_type,
-    max_payload_kg = EXCLUDED.max_payload_kg,
-    is_online = EXCLUDED.is_online,
-    updated_at = NOW();
-
 -- 13. Partner KYC & Compliance Applications (Vendor & Driver)
 CREATE TABLE IF NOT EXISTS partner_kyc_applications (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -326,51 +292,6 @@ CREATE INDEX IF NOT EXISTS idx_kyc_docs_app ON kyc_documents(application_id);
 CREATE INDEX IF NOT EXISTS idx_kyc_docs_status ON kyc_documents(status);
 CREATE INDEX IF NOT EXISTS idx_kyc_logs_app ON kyc_audit_logs(application_id);
 
--- Seed Initial Realistic Pending Applications (1 Vendor + 1 Driver)
-INSERT INTO partner_kyc_applications (
-    id, applicant_type, applicant_id, firm_or_name, owner_or_driver_name, phone, zone,
-    loading_bay_access, categories, bank_account, bank_ifsc, bank_upi, penny_drop_status,
-    penny_drop_holder_name, penny_drop_ref, ai_authenticity_score, status, sla_signed_at
-) VALUES (
-    'a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d', 'VENDOR', 'VND-APP-7712',
-    'Awadh Building Solutions & Pipe Depot', 'Anurag Mishra', '+91 94500 11289', 'Sushant Golf City',
-    'LOADER_FRIENDLY', '["Cement", "TMT Steel", "CPVC Plumbing", "Paints & Putty"]'::jsonb,
-    '50100482190123', 'HDFC0001234', 'awadhbuild@okaxis', 'VERIFIED',
-    'ANURAG MISHRA', 'PENNY-HDFC-991204', 98, 'PENDING_VERIFICATION', NOW()
-) ON CONFLICT (applicant_id) DO NOTHING;
-
-INSERT INTO kyc_documents (
-    application_id, doc_type, doc_name, doc_url, extracted_number, extracted_name, ocr_authenticity_score, ocr_read_quality, status
-) VALUES 
-    ('a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d', 'GSTIN_CERTIFICATE', 'GST Registration Certificate', '/images/kyc/sample-gstin.webp', '09AAECB1289R1Z4', 'AWADH BUILDING SOLUTIONS', 99, 'HIGH', 'PENDING'),
-    ('a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d', 'PAN_CARD', 'Proprietor PAN Card', '/images/kyc/sample-pan.webp', 'AAECB1289R', 'ANURAG MISHRA', 97, 'HIGH', 'PENDING'),
-    ('a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d', 'SIGNBOARD_PHOTO', 'GPS Shop Front Signboard', '/images/kyc/sample-shop-front.webp', 'GPS: 26.7824, 80.9892', 'AWADH BUILDING SOLUTIONS', 96, 'HIGH', 'PENDING'),
-    ('a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d', 'BRAND_DEALERSHIP', 'UltraTech Authorized Dealership Certificate', '/images/kyc/sample-ultratech-dealership.webp', 'AUTH-UT-LKO-2026-88', 'AWADH BUILDING SOLUTIONS', 98, 'HIGH', 'PENDING')
-ON CONFLICT DO NOTHING;
-
-INSERT INTO partner_kyc_applications (
-    id, applicant_type, applicant_id, firm_or_name, owner_or_driver_name, phone, zone,
-    vehicle_mode, vehicle_plate, bank_account, bank_ifsc, bank_upi, penny_drop_status,
-    penny_drop_holder_name, penny_drop_ref, ai_authenticity_score, status, insurance_expiry, dl_expiry, puc_expiry, sla_signed_at
-) VALUES (
-    'b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'DRIVER', 'DRV-APP-4401',
-    'Mohd. Rizwan Khan (Tata Ace)', 'Mohd. Rizwan Khan', '+91 98394 55102', 'Alambagh / Transport Nagar',
-    'CHHOTA_HATHI', 'UP 32 EL 7710', '919839455102', 'PYTM0123456', 'rizwankhan@paytm', 'VERIFIED',
-    'MOHD RIZWAN KHAN', 'PENNY-PYTM-881290', 97, 'PENDING_VERIFICATION',
-    NOW() + INTERVAL '214 days', NOW() + INTERVAL '1120 days', NOW() + INTERVAL '180 days', NOW()
-) ON CONFLICT (applicant_id) DO NOTHING;
-
-INSERT INTO kyc_documents (
-    application_id, doc_type, doc_name, doc_url, extracted_number, extracted_name, extracted_expiry, ocr_authenticity_score, ocr_read_quality, status
-) VALUES 
-    ('b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'AADHAAR_FRONT_BACK', 'Aadhaar Card (Masked)', '/images/kyc/sample-aadhaar.webp', 'XXXX-XXXX-4821', 'MOHD RIZWAN KHAN', NULL, 99, 'HIGH', 'PENDING'),
-    ('b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'DRIVING_LICENCE', 'Commercial Driving Licence', '/images/kyc/sample-dl.webp', 'UP32 20180049120', 'MOHD RIZWAN KHAN', NOW() + INTERVAL '1120 days', 98, 'HIGH', 'PENDING'),
-    ('b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'VEHICLE_RC', 'Tata Ace Commercial Yellow Plate RC', '/images/kyc/sample-rc.webp', 'UP 32 EL 7710', 'MOHD RIZWAN KHAN', NULL, 96, 'HIGH', 'PENDING'),
-    ('b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'INSURANCE_PUC', 'Commercial Vehicle Comprehensive Policy', '/images/kyc/sample-insurance.webp', 'POL-HDFC-99120412', 'UP 32 EL 7710', NOW() + INTERVAL '214 days', 97, 'HIGH', 'PENDING'),
-    ('b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'SELFIE_LIVENESS', 'Live Selfie Liveness Scan', '/images/kyc/sample-selfie.webp', 'Face Match 98% with DL', 'MOHD RIZWAN KHAN', NULL, 98, 'HIGH', 'PENDING'),
-    ('b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'TIRPAL_WATERPROOF', 'Heavy Waterproof Tarpaulin on Loader', '/images/kyc/sample-tirpal.webp', 'Heavy Duty PVC Tarpaulin 18x12', 'Verified Ready', NULL, 99, 'HIGH', 'PENDING')
-ON CONFLICT DO NOTHING;
-
 -- 16. Vendor Hub Inventory & Custom Visual Catalog (16-Category Unified Sync)
 CREATE TABLE IF NOT EXISTS vendor_hub_products (
     id VARCHAR(80) PRIMARY KEY,
@@ -391,22 +312,6 @@ CREATE TABLE IF NOT EXISTS vendor_hub_products (
 
 CREATE INDEX IF NOT EXISTS idx_hub_products_hub_cat ON vendor_hub_products(hub_id, category_slug);
 CREATE INDEX IF NOT EXISTS idx_hub_products_stock ON vendor_hub_products(hub_id, is_in_stock);
-
--- Seed Sample Live Hub Products for Verified Latouche Road Hub (hub-naka)
-INSERT INTO vendor_hub_products (
-    id, hub_id, category_slug, sku_code, name, brand, unit, dealer_price, mrp, image_url, is_in_stock, stock_qty, is_custom
-) VALUES 
-    ('vhp-ut-weatherplus', 'hub-naka', 'cement-civil-works', 'UT-WP-50KG', 'UltraTech Weather Plus Cement (50kg)', 'UltraTech', '50kg Bag', 385.00, 440.00, '/images/products/cement/ultratech-weatherplus.webp', true, 250, false),
-    ('vhp-tata-tmt-12mm', 'hub-naka', 'cement-civil-works', 'TATA-TMT-12', 'Tata Tiscon 550D TMT Steel 12mm', 'Tata Tiscon', 'Piece (12m)', 710.00, 790.00, '/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp', true, 180, false),
-    ('vhp-astral-cpvc-1in', 'hub-naka', 'cpvc-plumbing-tanks', 'AST-CPVC-1', 'Astral CPVC Pro Pipe 1 Inch SDR 11', 'Astral', '3m Length', 420.00, 510.00, '/images/products/plumbing/astral-cpvc-pro-pipe-1inch.webp', true, 120, false),
-    ('vhp-godrej-navtal-7l', 'hub-naka', 'door-hardware-locks', 'GD-NAV-7L', 'Godrej Nav-Tal Brass Padlock 7 Levers', 'Godrej', 'Unit', 540.00, 680.00, '/images/products/hardware/godrej-navtal-brass-padlock.webp', true, 80, false),
-    ('vhp-fevicol-sh-5kg', 'hub-naka', 'fevicol-adhesives-sealants', 'FEV-SH-5K', 'Fevicol SH Synthetic Adhesive 5kg', 'Pidilite', '5kg Bucket', 940.00, 1120.00, '/images/products/adhesives/fevicol-sh-synthetic-resin-adhesive.webp', true, 65, false)
-ON CONFLICT (id) DO UPDATE SET
-    dealer_price = EXCLUDED.dealer_price,
-    mrp = EXCLUDED.mrp,
-    image_url = EXCLUDED.image_url,
-    is_in_stock = EXCLUDED.is_in_stock,
-    updated_at = NOW();
 
 -- 12. Customer Delivery Feedback & Visual Construction X-Ray
 CREATE TABLE IF NOT EXISTS customer_delivery_feedback (
@@ -464,21 +369,226 @@ CREATE TABLE IF NOT EXISTS site_dna_profiles (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Seed Known Lucknow Corridors Site DNA
-INSERT INTO site_dna_profiles (
-    site_address_key, zone, recommended_vehicle, road_summary, labour_readiness_pct, avg_site_rating, total_reports, recent_tags
-) VALUES
-    ('sushant-golf-city', 'Shaheed Path / Sushant Golf City', 'Loader 1.5T', 'Wide Road — Easy direct unloading near crane slab', 98, 4.95, 34, '["Wide Road (Easy Loader)", "Labour Ready ✓", "Respectful & Helpful"]'::jsonb),
-    ('aminabad-hardware', 'Old Lucknow / Aminabad', 'Bike Only', 'Narrow Lane — Loader must park 80m back at main chowk', 90, 4.65, 18, '["Narrow Lane (Bike Only)", "Safe Unloading Spot", "Smooth OTP Handover"]'::jsonb),
-    ('latouche-road', 'Latouche Road / Charbagh', 'Bike / 3W Only', 'Busy Mandi Corridor — Tight turning radius, morning unload ideal', 92, 4.75, 27, '["Narrow Lane (Bike Only)", "Labour Ready ✓", "Smooth OTP Handover"]'::jsonb),
-    ('gomti-nagar-ext', 'Gomti Nagar Extension', 'Loader 1.5T', 'Wide 40ft Sector Road — Clean ramp unloading available', 99, 4.98, 42, '["Wide Road (Easy Loader)", "Labour Ready ✓", "Respectful & Helpful"]'::jsonb),
-    ('indira-nagar-c', 'Indira Nagar Sector C', 'Loader 1.5T', 'Standard Residential — Watch overhead low-hanging cables', 94, 4.82, 15, '["Wide Road (Easy Loader)", "Safe Unloading Spot", "Respectful & Helpful"]'::jsonb)
-ON CONFLICT (site_address_key) DO UPDATE SET
-    road_summary = EXCLUDED.road_summary,
-    labour_readiness_pct = EXCLUDED.labour_readiness_pct,
-    avg_site_rating = EXCLUDED.avg_site_rating,
-    recent_tags = EXCLUDED.recent_tags,
-    updated_at = NOW();
+-- 15. Admin Master Catalog Categories
+CREATE TABLE IF NOT EXISTS catalog_categories (
+    id VARCHAR(60) PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    name_hi VARCHAR(120),
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    image_url TEXT NOT NULL,
+    default_gst_rate INT NOT NULL DEFAULT 18,
+    vehicle_type VARCHAR(40) NOT NULL DEFAULT 'LOADER',
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    sort_order INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_cat_slug ON catalog_categories(slug);
+CREATE INDEX IF NOT EXISTS idx_cat_active ON catalog_categories(is_active);
+
+-- 16. Admin Master Products (Master CMS with HSN, GST, Specs & Lock)
+CREATE TABLE IF NOT EXISTS master_products (
+    id VARCHAR(80) PRIMARY KEY,
+    title VARCHAR(240) NOT NULL,
+    brand VARCHAR(120) NOT NULL,
+    category_slug VARCHAR(120) NOT NULL,
+    subcategory VARCHAR(120),
+    unit VARCHAR(40) NOT NULL DEFAULT 'Unit',
+    mrp NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    selling_price NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    bulk_price NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    bulk_min_qty INT NOT NULL DEFAULT 10,
+    hsn_code VARCHAR(20) NOT NULL DEFAULT '25232910',
+    gst_rate INT NOT NULL DEFAULT 18,
+    vehicle_requirement VARCHAR(40) NOT NULL DEFAULT 'LOADER',
+    image_url TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    spec_tags JSONB NOT NULL DEFAULT '[]'::jsonb,
+    is_in_stock BOOLEAN NOT NULL DEFAULT true,
+    admin_locked BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_prod_cat ON master_products(category_slug);
+CREATE INDEX IF NOT EXISTS idx_prod_hsn ON master_products(hsn_code);
+CREATE INDEX IF NOT EXISTS idx_prod_locked ON master_products(admin_locked);
+
+-- 17. Master Skilled Services Catalog (SAC 9954)
+CREATE TABLE IF NOT EXISTS service_catalog_items (
+    id VARCHAR(80) PRIMARY KEY,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    trade_name VARCHAR(160) NOT NULL,
+    trade_name_hi VARCHAR(160),
+    category VARCHAR(40) NOT NULL CHECK (category IN ('CIVIL', 'MEP', 'FINISHING', 'AUDIT')),
+    sac_code VARCHAR(20) NOT NULL DEFAULT '9954',
+    shift_rate NUMERIC(10, 2) NOT NULL,
+    shift_hours INT NOT NULL DEFAULT 8,
+    unit VARCHAR(40) NOT NULL DEFAULT 'Shift (8 Hrs)',
+    description TEXT NOT NULL DEFAULT '',
+    image_url TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    sort_order INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- 18. Master Machine Rental Catalog (SAC 9973)
+CREATE TABLE IF NOT EXISTS machine_rental_catalog (
+    id VARCHAR(80) PRIMARY KEY,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    machine_name VARCHAR(160) NOT NULL,
+    model_name VARCHAR(160) NOT NULL,
+    category VARCHAR(40) NOT NULL CHECK (category IN ('EARTHMOVING', 'CONCRETE', 'TRANSPORT', 'TOOLS')),
+    sac_code VARCHAR(20) NOT NULL DEFAULT '9973',
+    wet_hourly_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    dry_hourly_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    wet_shift_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    dry_shift_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    wet_weekly_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    dry_weekly_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    mobilization_fee NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    needs_operator BOOLEAN NOT NULL DEFAULT true,
+    description TEXT NOT NULL DEFAULT '',
+    image_url TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    sort_order INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- 19. Vendor Fleet & Crew Listings (Organic Partners Only - Zero Dummy Seeds)
+CREATE TABLE IF NOT EXISTS vendor_fleet_listings (
+    id VARCHAR(80) PRIMARY KEY,
+    vendor_hub_id VARCHAR(80) NOT NULL,
+    vendor_name VARCHAR(160) NOT NULL,
+    item_type VARCHAR(20) NOT NULL CHECK (item_type IN ('SERVICE', 'RENTAL')),
+    master_item_id VARCHAR(80) NOT NULL,
+    custom_title VARCHAR(200),
+    hourly_wet_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    shift_wet_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    weekly_wet_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    hourly_dry_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    shift_dry_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    weekly_dry_rate NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    rc_or_fitness_expiry DATE,
+    custom_photo_url TEXT,
+    is_available BOOLEAN NOT NULL DEFAULT true,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- 20. Skilled Service Bookings (Escrow, Start/End OTP, GPS Selfie Haziri - Zero Dummy Seeds)
+CREATE TABLE IF NOT EXISTS service_bookings (
+    id VARCHAR(80) PRIMARY KEY,
+    short_id VARCHAR(40) NOT NULL UNIQUE,
+    customer_id VARCHAR(120),
+    customer_name VARCHAR(160) NOT NULL,
+    customer_phone VARCHAR(30) NOT NULL,
+    customer_gstin VARCHAR(30),
+    site_address TEXT NOT NULL,
+    lucknow_zone VARCHAR(100) NOT NULL DEFAULT 'Lucknow Core',
+    booking_date VARCHAR(30) NOT NULL,
+    shift_slot VARCHAR(80) NOT NULL DEFAULT 'Morning 8:30 AM - 5:00 PM',
+    squad_items_json JSONB NOT NULL DEFAULT '[]'::jsonb,
+    addon_items_json JSONB NOT NULL DEFAULT '[]'::jsonb,
+    subtotal_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    gst_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    total_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    sac_code VARCHAR(20) NOT NULL DEFAULT '9954',
+    payment_mode VARCHAR(30) NOT NULL DEFAULT 'LIVING_VAULT',
+    start_otp VARCHAR(8) NOT NULL,
+    end_otp VARCHAR(8) NOT NULL,
+    selfie_haziri_url TEXT,
+    haziri_gps_verified BOOLEAN NOT NULL DEFAULT false,
+    work_done_photo_url TEXT,
+    status VARCHAR(40) NOT NULL DEFAULT 'BOOKED',
+    assigned_vendor_id VARCHAR(80),
+    assigned_vendor_name VARCHAR(160),
+    escrow_status VARCHAR(30) NOT NULL DEFAULT 'LOCKED' CHECK (escrow_status IN ('LOCKED', 'AWAITING_RELEASE', 'SETTLED')),
+    settled_utr VARCHAR(80),
+    partner_payout NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    platform_margin NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    completed_at TIMESTAMPTZ
+);
+
+-- 21. Machine Rental Bookings (Digital HMR Optical Lock & Breakdown Pause - Zero Dummy Seeds)
+CREATE TABLE IF NOT EXISTS machine_rental_bookings (
+    id VARCHAR(80) PRIMARY KEY,
+    short_id VARCHAR(40) NOT NULL UNIQUE,
+    customer_id VARCHAR(120),
+    customer_name VARCHAR(160) NOT NULL,
+    customer_phone VARCHAR(30) NOT NULL,
+    customer_gstin VARCHAR(30),
+    site_address TEXT NOT NULL,
+    lucknow_zone VARCHAR(100) NOT NULL DEFAULT 'Lucknow Core',
+    machine_id VARCHAR(80) NOT NULL,
+    machine_name VARCHAR(160) NOT NULL,
+    model_name VARCHAR(160) NOT NULL,
+    fuel_mode VARCHAR(16) NOT NULL CHECK (fuel_mode IN ('WET', 'DRY')),
+    billing_unit VARCHAR(16) NOT NULL CHECK (billing_unit IN ('HOUR', 'SHIFT', 'WEEK')),
+    quantity_units INT NOT NULL DEFAULT 1,
+    rate_per_unit NUMERIC(10, 2) NOT NULL,
+    mobilization_fee NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    estimated_total NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    net_bill_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    taxable_value NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    gst_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    sac_code VARCHAR(20) NOT NULL DEFAULT '9973',
+    payment_mode VARCHAR(30) NOT NULL DEFAULT 'LIVING_VAULT',
+    start_otp VARCHAR(8) NOT NULL,
+    end_otp VARCHAR(8) NOT NULL,
+    start_hmr NUMERIC(10, 2),
+    end_hmr NUMERIC(10, 2),
+    start_hmr_photo TEXT,
+    end_hmr_photo TEXT,
+    is_breakdown_paused BOOLEAN NOT NULL DEFAULT false,
+    breakdown_paused_mins INT NOT NULL DEFAULT 0,
+    breakdown_reason TEXT,
+    pause_started_at TIMESTAMPTZ,
+    status VARCHAR(40) NOT NULL DEFAULT 'BOOKED',
+    assigned_vendor_id VARCHAR(80),
+    assigned_vendor_name VARCHAR(160),
+    assigned_operator_id VARCHAR(80),
+    assigned_operator_name VARCHAR(160),
+    escrow_status VARCHAR(30) NOT NULL DEFAULT 'LOCKED' CHECK (escrow_status IN ('LOCKED', 'AWAITING_RELEASE', 'SETTLED')),
+    settled_utr VARCHAR(80),
+    partner_payout NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    platform_margin NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    completed_at TIMESTAMPTZ
+);
+
+CREATE INDEX IF NOT EXISTS idx_srv_bookings_status ON service_bookings(status, escrow_status);
+CREATE INDEX IF NOT EXISTS idx_rent_bookings_status ON machine_rental_bookings(status, escrow_status);
+CREATE INDEX IF NOT EXISTS idx_vendor_fleet_vendor ON vendor_fleet_listings(vendor_hub_id, is_available);
+
+-- 22. Admin Master Media & Product Vault (Multi-Image Gallery + Descriptions + Pricing Overrides)
+CREATE TABLE IF NOT EXISTS product_media_overrides (
+    product_id TEXT PRIMARY KEY,
+    category_slug TEXT,
+    title TEXT,
+    brand TEXT,
+    subcategory TEXT,
+    description TEXT,
+    spec_bullets JSONB NOT NULL DEFAULT '[]'::jsonb,
+    images JSONB NOT NULL DEFAULT '[]'::jsonb,
+    price NUMERIC,
+    mrp NUMERIC,
+    bulk_price NUMERIC,
+    bulk_min_qty NUMERIC,
+    hsn_code TEXT,
+    gst_rate NUMERIC,
+    unit TEXT,
+    is_in_stock BOOLEAN NOT NULL DEFAULT true,
+    is_admin_verified_media BOOLEAN NOT NULL DEFAULT true,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_media_vault_cat ON product_media_overrides(category_slug);
+CREATE INDEX IF NOT EXISTS idx_media_vault_verified ON product_media_overrides(is_admin_verified_media);
+
 
 
 

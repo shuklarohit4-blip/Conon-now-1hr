@@ -384,7 +384,7 @@ function getFallbackVendorCatalog(hubId: string): VendorCatalogState {
         dealerPrice: 385,
         mrp: 440,
         sellingPrice: 415,
-        imageUrl: "/images/products/cement/ultratech-weatherplus.webp",
+        imageUrl: "",
         inStock: true,
         stockQty: 320,
         updatedAt: new Date().toISOString(),

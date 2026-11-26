@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 
@@ -38,7 +39,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 300,
     discountPct: 15,
     bulkPrice: 235,
-    image: "/images/products/tiles/myk-laticrete-303-grey-tile-adhesive-20kg.webp",
+    image: "",
     spec: "Interior dry",
     deliveryTime: "60 Mins",
     dotsCount: 5,
@@ -52,7 +53,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 460,
     discountPct: 7,
     bulkPrice: 410,
-    image: "/images/products/tiles/roff-t01-nca-tile-adhesive-grey-30kg.webp",
+    image: "",
     spec: "Polymer-modified",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -66,7 +67,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 460,
     discountPct: 9,
     bulkPrice: 400,
-    image: "/images/products/tiles/myk-laticrete-305-tile-adhesive-grey-30kg.webp",
+    image: "",
     spec: "Polymer-modified",
     deliveryTime: "60 Mins",
     dotsCount: 5,
@@ -80,7 +81,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 780,
     discountPct: 5,
     bulkPrice: 715,
-    image: "/images/products/tiles/roff-t02-nsa-tile-adhesive-grey-30kg.webp",
+    image: "",
     spec: "8-12 sqm/bag",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -94,7 +95,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 990,
     discountPct: 7,
     bulkPrice: 885,
-    image: "/images/products/tiles/roff-t02-nsa-40kg.webp",
+    image: "",
     spec: "Heavy Vitrified / Granite",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -108,7 +109,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 395,
     discountPct: 9,
     bulkPrice: 345,
-    image: "/images/products/tiles/myk-laticrete-303-grey-tile-adhesive-20kg.webp",
+    image: "",
     spec: "Interior Vitrified",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -122,7 +123,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 350,
     discountPct: 11,
     bulkPrice: 295,
-    image: "/images/products/tiles/jsw-tile-fix-adhesive-20kg.webp",
+    image: "",
     spec: "High Bond Strength",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -136,7 +137,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 330,
     discountPct: 12,
     bulkPrice: 275,
-    image: "/images/products/tiles/smartcare-tile-adhesive-t1-20kg.webp",
+    image: "",
     spec: "Ceramic & Semi-vitrified",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -151,7 +152,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 1280,
     discountPct: 10,
     bulkPrice: 1100,
-    image: "/images/products/tiles/myk-335-super-flex-adh-20kg.webp",
+    image: "",
     spec: "Outdoor & Swimming Pool",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -165,7 +166,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 580,
     discountPct: 10,
     bulkPrice: 495,
-    image: "/images/products/tiles/roff-tilefix-ready-mix-5kg.webp",
+    image: "",
     spec: "Direct Tile-on-Tile",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -179,7 +180,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 1490,
     discountPct: 9,
     bulkPrice: 1290,
-    image: "/images/products/tiles/smartcare-tile-adhesive-t3-20kg.webp",
+    image: "",
     spec: "Glass Mosaic & Marble",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -194,7 +195,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 550,
     discountPct: 10,
     bulkPrice: 465,
-    image: "/images/products/tiles/roff-tile-grout-epoxy-1kg.webp",
+    image: "",
     spec: "Stain & Chemical Resistant",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -208,7 +209,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 150,
     discountPct: 13,
     bulkPrice: 120,
-    image: "/images/products/tiles/roff-rainbow-grout-2kg.webp",
+    image: "",
     spec: "Water Resistant Joint Filler",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -222,7 +223,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 600,
     discountPct: 10,
     bulkPrice: 510,
-    image: "/images/products/tiles/roff-cera-clean-5l.webp",
+    image: "",
     spec: "Removes Cement Stains",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -236,7 +237,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 430,
     discountPct: 10,
     bulkPrice: 360,
-    image: "/images/products/tiles/myk-stonetech-cleaner-1l.webp",
+    image: "",
     spec: "Neutral pH Non-Acidic",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -250,7 +251,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 520,
     discountPct: 12,
     bulkPrice: 435,
-    image: "/images/products/tiles/dr-fixit-tile-stone-sealer-1l.webp",
+    image: "",
     spec: "Water & Oil Repellent",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -265,7 +266,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 450,
     discountPct: 29,
     bulkPrice: 299,
-    image: "/images/products/tiles/tile-leveling-clip-wedge-100pc.webp",
+    image: "",
     spec: "Zero Lippage System",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -279,7 +280,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 120,
     discountPct: 25,
     bulkPrice: 80,
-    image: "/images/products/tiles/tile-spacer-3mm-pack-200.webp",
+    image: "",
     spec: "Uniform 3mm Joints",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -293,7 +294,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 350,
     discountPct: 20,
     bulkPrice: 260,
-    image: "/images/products/tiles/notched-trowel-10mm.webp",
+    image: "",
     spec: "Rubber Grip Handle",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -307,7 +308,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     mrp: 3100,
     discountPct: 21,
     bulkPrice: 2320,
-    image: "/images/products/tiles/manual-tile-cutter-24.webp",
+    image: "",
     spec: "Tungsten Carbide Wheel",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -327,6 +328,7 @@ export function TileAdhesivesCollectionStorefront({
   const [quickDetailProduct, setQuickDetailProduct] = useState<Product | null>(null);
 
   const queryClient = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const { data: cartData } = useGetCart();
   const addToCart = useAddToCart({
     mutation: {
@@ -418,12 +420,12 @@ export function TileAdhesivesCollectionStorefront({
   ];
 
   const filteredProducts = useMemo(() => {
-    return TILE_PRODUCTS.filter((p) => {
+    return TILE_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       if (activeSubcategory && p.subcategory !== activeSubcategory) return false;
       if (selectedBrand !== "All" && p.brand !== selectedBrand) return false;
       return true;
     });
-  }, [activeSubcategory, selectedBrand]);
+  }, [activeSubcategory, selectedBrand, resolveProduct]);
 
   const openModal = (p: TileProduct) => {
     const mapped: Product = {

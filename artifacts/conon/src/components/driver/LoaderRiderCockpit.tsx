@@ -36,6 +36,9 @@ import {
   TrendingUp,
   Receipt,
   X,
+  Dna,
+  Award,
+  LogOut,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -48,8 +51,15 @@ import { KycSandboxPendingBanner } from "@/components/kyc/KycSandboxPendingBanne
 import { useDriverTheme, DriverThemeToggle } from "@/context/DriverThemeContext";
 import { useDriverLang, DriverLanguageToggle } from "@/context/DriverLanguageContext";
 import { playOrderChime, playCashoutChime, playSosAlarm } from "@/lib/sound";
+import { feedbackSync, type SiteDnaProfile } from "@/services/feedbackSync";
+import { DriverSiteDnaDrawer } from "./DriverSiteDnaDrawer";
 
-export function LoaderRiderCockpit() {
+export interface LoaderRiderCockpitProps {
+  onLogout?: () => void;
+  session?: any;
+}
+
+export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProps = {}) {
   const { isDark } = useDriverTheme();
   const { t, lang } = useDriverLang();
 
@@ -88,6 +98,29 @@ export function LoaderRiderCockpit() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [driverSwitcherOpen, setDriverSwitcherOpen] = useState(false);
   const [activeDriverMode, setActiveDriverMode] = useState<"DEMO" | "APPLICANT">("DEMO");
+  const [siteDnaDrawerOpen, setSiteDnaDrawerOpen] = useState(false);
+  const [driverTipBonus, setDriverTipBonus] = useState<number>(() => feedbackSync.getDriverTipBonus());
+  const [celebrationToast, setCelebrationToast] = useState<{ amount: number; badges: string[] } | null>(null);
+
+  // Subscribe to real-time driver tips and site DNA updates
+  useEffect(() => {
+    const unsub = feedbackSync.subscribe((event) => {
+      if (event.type === "DRIVER_TIP" || (event.type === "CUSTOMER_FEEDBACK" && event.payload?.tipAmount > 0)) {
+        const tip = Number(event.payload?.tipAmount || 0);
+        const badges = event.payload?.driverBadges || [];
+        setDriverTipBonus((prev) => prev + tip);
+        playCashoutChime();
+        setCelebrationToast({ amount: tip, badges });
+        toast.success(
+          lang === "hi"
+            ? `🎉 ग्राहक ने भेजा +₹${tip} चाय-पानी टिप व '${badges[0] || "शाबाशी"}'!`
+            : `🎉 Customer sent +₹${tip} Chai-Pani Tip & '${badges[0] || "Shabaashi"}' Badge!`
+        );
+        setTimeout(() => setCelebrationToast(null), 8000);
+      }
+    });
+    return () => unsub();
+  }, [lang]);
 
   const [activeVoiceOrder, setActiveVoiceOrder] = useState<string | null>(null);
   const [hudOpen, setHudOpen] = useState(false);
@@ -98,7 +131,7 @@ export function LoaderRiderCockpit() {
   const [cashoutSuccess, setCashoutSuccess] = useState(false);
 
   const [otpInput, setOtpInput] = useState("");
-  const [photoProof, setPhotoProof] = useState<string>("/images/products/cement/ultratech-weatherplus.webp");
+  const [photoProof, setPhotoProof] = useState<string>("");
   const [isPhotoUploaded, setIsPhotoUploaded] = useState(false);
   const [isTarpaulinVerified, setIsTarpaulinVerified] = useState(true);
 
@@ -132,8 +165,8 @@ export function LoaderRiderCockpit() {
       otp: otpInput || "2026",
       gpsDistanceMeters: 9,
       gpsMatchPercent: 99,
-      photoUrl: photoProof,
-      tarpaulinPhotoUrl: isTarpaulinVerified ? "/images/products/cement/ultratech-weatherplus.webp" : undefined,
+      photoUrl: photoProof || "",
+      tarpaulinPhotoUrl: undefined,
       tarpaulinPhotoVerified: isTarpaulinVerified,
     });
     if (success) {
@@ -142,6 +175,7 @@ export function LoaderRiderCockpit() {
       setOtpInput("");
       setIsPhotoUploaded(false);
       toast.success(lang === "hi" ? "जियो-फोटो डिलीवरी सफल! एस्क्रो राशि यूपीआई में ट्रांसफर।" : "Geo-Photo Escrow Delivery Verified! Funds credited to UPI.");
+      setSiteDnaDrawerOpen(true);
     }
   };
 
@@ -183,17 +217,24 @@ export function LoaderRiderCockpit() {
     Boolean(complianceAlert?.show) ||
     currentApplication?.status === "COMPLIANCE_PAUSED";
 
+  const driverSession = useMemo(() => {
+    try {
+      const raw = localStorage.getItem("conon_driver_session");
+      if (raw) return JSON.parse(raw);
+    } catch {}
+    return null;
+  }, []);
+
   const activeDriverName =
-    activeDriverMode === "DEMO"
-      ? "Ravi Kumar (UP 32 EL 8901)"
-      : currentApplication?.ownerOrDriverName
-      ? `${currentApplication.ownerOrDriverName} (${currentApplication.vehiclePlate || "UP 32 EL 7710"})`
-      : "Mohd. Rizwan Khan (UP 32 EL 7710)";
+    driverSession?.firmOrName ||
+    (currentApplication?.ownerOrDriverName
+      ? `${currentApplication.ownerOrDriverName} (${currentApplication.vehiclePlate || "UP 32 XX 0000"})`
+      : "Fleet Partner (Standby)");
 
   const activeVehiclePlate =
-    activeDriverMode === "DEMO"
-      ? "UP 32 EL 8901"
-      : currentApplication?.vehiclePlate || "UP 32 EL 7710";
+    driverSession?.vehiclePlate ||
+    currentApplication?.vehiclePlate ||
+    "UP 32 XX 0000";
 
   // Close dropdown on outside click
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -289,6 +330,11 @@ export function LoaderRiderCockpit() {
                         ? t("verifiedFleet", "VERIFIED FLEET")
                         : "REGISTERED"}
                     </span>
+                    {session?.partnerId && (
+                      <span className="text-[9px] font-mono font-black px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 border border-amber-300">
+                        {session.partnerId}
+                      </span>
+                    )}
                     <ChevronDown
                       className={`w-3.5 h-3.5 text-slate-400 transition-transform ${
                         driverSwitcherOpen ? "rotate-180 text-amber-500" : ""
@@ -324,28 +370,11 @@ export function LoaderRiderCockpit() {
                   </div>
 
                   <div className="space-y-1 mt-1.5 max-h-60 overflow-y-auto">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setActiveDriverMode("DEMO");
-                        setDriverSwitcherOpen(false);
-                      }}
-                      className={`w-full text-left p-2 rounded-xl text-xs transition cursor-pointer flex items-center justify-between ${
-                        activeDriverMode === "DEMO"
-                          ? isDark
-                            ? "bg-amber-400/15 border border-amber-400/40 text-amber-300 font-bold"
-                            : "bg-amber-50 border border-amber-300 text-amber-900 font-bold"
-                          : isDark
-                          ? "text-slate-300 hover:bg-slate-800"
-                          : "text-slate-700 hover:bg-slate-100"
-                      }`}
-                    >
-                      <div>
-                        <p className={`font-bold ${themeTitleClass}`}>Ravi Kumar (Verified Fleet)</p>
-                        <p className={`text-[10px] ${themeSubtextClass}`}>Tata Ace UP 32 EL 8901 • Latouche Hub</p>
+                    {applications.filter((a) => a.applicantType === "DRIVER").length === 0 && (
+                      <div className={`p-2.5 text-center text-xs ${themeSubtextClass}`}>
+                        {lang === "hi" ? "कोई अन्य ड्राइवर पंजीकृत नहीं है" : "No other drivers registered"}
                       </div>
-                      {activeDriverMode === "DEMO" && <Check className="w-3.5 h-3.5 text-amber-500" />}
-                    </button>
+                    )}
 
                     {applications
                       .filter((a) => a.applicantType === "DRIVER")
@@ -415,6 +444,21 @@ export function LoaderRiderCockpit() {
             {/* Real-time Socket Sync Status */}
             <SocketStatusPill />
 
+            {/* Site DNA Intelligence Quick Button */}
+            <button
+              type="button"
+              onClick={() => setSiteDnaDrawerOpen(true)}
+              className={`px-2.5 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition flex items-center gap-1 cursor-pointer border ${
+                isDark
+                  ? "bg-purple-500/15 text-purple-300 border-purple-500/30 hover:bg-purple-500/25"
+                  : "bg-purple-50 text-purple-900 border-purple-200 hover:bg-purple-100"
+              }`}
+              title="Rate Site & Road (Site DNA)"
+            >
+              <Dna className="w-3 h-3 text-purple-500" />
+              <span>{lang === "hi" ? "साइट डीएनए" : "Site DNA"}</span>
+            </button>
+
             {/* Compliance Health Shield Pill */}
             <button
               type="button"
@@ -479,6 +523,22 @@ export function LoaderRiderCockpit() {
                   : t("dutyOff", "DUTY OFF")}
               </span>
             </button>
+
+            {onLogout && (
+              <button
+                type="button"
+                onClick={onLogout}
+                className={`px-2.5 py-1.5 rounded-xl border text-xs font-bold transition flex items-center gap-1 cursor-pointer ${
+                  isDark
+                    ? "bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border-rose-500/30"
+                    : "bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs"
+                }`}
+                title={lang === "hi" ? "लॉगआउट / पार्टनर बदलें" : "Logout / Switch Partner"}
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">{lang === "hi" ? "लॉगआउट" : "Logout"}</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -646,6 +706,50 @@ export function LoaderRiderCockpit() {
                     </div>
                   </div>
                 </div>
+
+                {/* 🧬 Live Site DNA Heads-Up Card (Crowd-Sourced Road & Unloading Intelligence) */}
+                {(() => {
+                  const siteDna = feedbackSync.getSiteDna(activeMission.siteAddress || activeMission.siteName);
+                  return (
+                    <div
+                      className={`p-3.5 rounded-2xl border text-xs space-y-2 transition-all shadow-md ${
+                        isDark
+                          ? "bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-purple-950/40 border-purple-500/40 text-purple-200"
+                          : "bg-gradient-to-r from-purple-50 via-indigo-50/50 to-purple-50 border-purple-200 text-purple-900"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 text-purple-600 dark:text-purple-300">
+                          <Dna className="w-3.5 h-3.5 text-purple-500 animate-pulse" />
+                          <span>{lang === "hi" ? "🧬 साइट डीएनए रोड जानकारी" : "🧬 Site DNA Road Intelligence"}</span>
+                          <span className="text-[9px] font-normal opacity-80">(From Previous Conon Drivers)</span>
+                        </span>
+                        <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30">
+                          ⭐ {siteDna.avgSiteRating} ({siteDna.totalReports} {lang === "hi" ? "रिपोर्ट्स" : "reports"})
+                        </span>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="font-bold text-[11px] leading-snug">
+                          {siteDna.roadSummary}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                          <span className="text-[9px] font-bold px-2 py-0.5 rounded-md bg-purple-500/15 border border-purple-500/30">
+                            {lang === "hi" ? "सलाह:" : "Recommended:"} {siteDna.recommendedVehicle}
+                          </span>
+                          <span className="text-[9px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                            {siteDna.labourReadinessPct}% {lang === "hi" ? "लेबर रेडी" : "Labour Ready"}
+                          </span>
+                          {siteDna.recentTags.map((tag, idx) => (
+                            <span key={idx} className="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-500/10 border border-slate-500/20">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
 
                 {/* Smart Multi-Stop Clubbing (if 2 shops) */}
                 {activeMission.stops && activeMission.stops.length > 1 && (
@@ -866,14 +970,82 @@ export function LoaderRiderCockpit() {
                 </div>
               </div>
             ) : (
-              <div className={`p-8 text-center rounded-3xl border ${themeCardClass}`}>
-                <Navigation className={`w-12 h-12 mx-auto mb-3 ${isDark ? "text-slate-600" : "text-slate-300"}`} />
-                <h3 className={`text-base font-bold ${themeTitleClass}`}>
-                  {t("noActiveMissionTitle", "No Active Mission in Queue")}
+              <div
+                className={`p-6 sm:p-8 text-center rounded-3xl border transition-all relative overflow-hidden ${
+                  isDark
+                    ? "bg-gradient-to-b from-[#131C2E] to-[#0A101D] border-emerald-500/30 shadow-2xl shadow-emerald-500/5 ring-1 ring-emerald-500/20"
+                    : "bg-gradient-to-b from-emerald-50/50 to-white border-emerald-300 shadow-xl ring-1 ring-emerald-400/30"
+                }`}
+              >
+                {/* Real-Time Telemetry & Radar Badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-xs font-bold font-mono mb-4">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>
+                    {lang === "hi"
+                      ? "मिशन रडार एक्टिव • अगले पिकअप का इंतज़ार"
+                      : "Mission Radar Active • Standby for Next Pickup"}
+                  </span>
+                </div>
+
+                <div className="w-16 h-16 rounded-3xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-3 text-emerald-500 shadow-lg shadow-emerald-500/10">
+                  <Navigation className="w-8 h-8 text-emerald-500 animate-pulse" />
+                </div>
+
+                <h3 className={`text-base sm:text-lg font-black ${themeTitleClass}`}>
+                  {lang === "hi"
+                    ? "लखनऊ जोन मिशन रडार — रेडी"
+                    : "Lucknow Zone Mission Radar — Standby"}
                 </h3>
-                <p className={`text-xs max-w-sm mx-auto mt-1 ${themeSubtextClass}`}>
-                  {t("noActiveMissionDesc", "Accepted orders from the Vendor Panel will buzz directly into this cockpit.")}
+
+                <p className={`text-xs max-w-sm mx-auto mt-1 mb-5 ${themeSubtextClass}`}>
+                  {lang === "hi"
+                    ? "वेरिफाइड हार्डवेयर दुकानों से ऑर्डर पैक होते ही इस कॉकपिट में लाउड अलर्ट बजेगा और साइट का नेविगेशन खुल जाएगा।"
+                    : "As soon as a verified hardware hub packs materials, orders will buzz live with direct turn-by-turn site directions."}
                 </p>
+
+                {/* Driver Cockpit Readiness Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-md mx-auto mb-6 text-left">
+                  <div className={`p-2.5 rounded-xl border text-xs ${isDark ? "bg-[#090D18] border-slate-800" : "bg-white border-slate-200"}`}>
+                    <div className="text-[10px] font-bold text-amber-500">VEHICLE CLASS</div>
+                    <div className={`font-bold mt-0.5 truncate ${themeTitleClass}`}>
+                      {state.driverVehicle === "LOADER" ? "Chhota Hathi 1.5T" : "Bike Express 30kg"}
+                    </div>
+                    <div className="text-[10px] text-emerald-500 font-bold mt-1">✓ Payload Armed</div>
+                  </div>
+
+                  <div className={`p-2.5 rounded-xl border text-xs ${isDark ? "bg-[#090D18] border-slate-800" : "bg-white border-slate-200"}`}>
+                    <div className="text-[10px] font-bold text-cyan-400">GPS TELEMETRY</div>
+                    <div className={`font-bold mt-0.5 truncate ${themeTitleClass}`}>Supply Corridor</div>
+                    <div className="text-[10px] text-cyan-400 font-bold mt-1">✓ GPS Lock Strong</div>
+                  </div>
+
+                  <div className={`p-2.5 rounded-xl border text-xs col-span-2 sm:col-span-1 ${isDark ? "bg-[#090D18] border-slate-800" : "bg-white border-slate-200"}`}>
+                    <div className="text-[10px] font-bold text-emerald-400">GEO-ESCROW</div>
+                    <div className={`font-bold mt-0.5 truncate ${themeTitleClass}`}>Instant Cashout</div>
+                    <div className="text-[10px] text-emerald-400 font-bold mt-1">✓ UPI Pipeline Live</div>
+                  </div>
+                </div>
+
+                {/* Cabin Audio Alert Test Button */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playOrderChime();
+                      toast.info("Cabin Audio Alert Test: Sound Active", {
+                        description: "High-volume mission siren verified. You will hear this inside the moving cabin.",
+                      });
+                    }}
+                    className={`w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-2 cursor-pointer ${
+                      isDark
+                        ? "bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700"
+                        : "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-200"
+                    }`}
+                  >
+                    <Volume2 className="w-4 h-4 text-emerald-500" />
+                    <span>{lang === "hi" ? "🔊 केबिन सायरन टेस्ट करें" : "🔊 Test Cabin Alert Sound"}</span>
+                  </button>
+                </div>
               </div>
             )}
           </section>
@@ -902,7 +1074,7 @@ export function LoaderRiderCockpit() {
                 </span>
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
-                    ₹{state.driverTodayKamai.toLocaleString("en-IN")}
+                    ₹{(state.driverTodayKamai + driverTipBonus).toLocaleString("en-IN")}
                   </span>
                   <span className={`text-xs font-semibold ${themeSubtextClass}`}>
                     (100% Verified)
@@ -930,6 +1102,17 @@ export function LoaderRiderCockpit() {
                     +₹{Math.max(0, Math.round(state.driverTodayKamai * 0.10)).toLocaleString("en-IN")}
                   </strong>
                 </div>
+                {driverTipBonus > 0 && (
+                  <div className="flex items-center justify-between pt-1 border-t border-amber-500/20">
+                    <span className="text-amber-500 font-bold flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      {lang === "hi" ? "ग्राहक चाय-पानी टिप" : "Customer Chai-Pani Tip"}
+                    </span>
+                    <strong className="text-amber-500 font-mono">
+                      +₹{driverTipBonus.toLocaleString("en-IN")}
+                    </strong>
+                  </div>
+                )}
               </div>
 
               {/* Instant Cashout Button */}
@@ -965,6 +1148,56 @@ export function LoaderRiderCockpit() {
                       ? `${currentStreak}/${streakGoal} ट्रिप्स पूरी हुईं — +₹250 डीजल बोनस के लिए ${tripsUntilBonus} ट्रिप बाकी!`
                       : `${currentStreak}/${streakGoal} Trips Completed — ${tripsUntilBonus} more trip to unlock +₹250 Diesel Bonus!`
                     : t("dieselStreakUnlocked", "🎉 +₹250 Daily Diesel Bonus Unlocked & Added to Wallet!")}
+                </p>
+              </div>
+            </div>
+
+            {/* 2. Driver Trust & Gold Pilot Card */}
+            <div className={`p-5 rounded-3xl border shadow-xl space-y-3.5 ${
+              isDark
+                ? "bg-gradient-to-br from-amber-950/30 via-slate-900 to-slate-900 border-amber-500/40 text-slate-100"
+                : "bg-gradient-to-br from-amber-50/80 via-white to-white border-amber-300 text-slate-900"
+            }`}>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider text-amber-500 flex items-center gap-1.5">
+                  <Award className="w-4 h-4 text-amber-500" />
+                  {lang === "hi" ? "गोल्ड पायलट व ट्रस्ट स्कोर" : "Gold Pilot & Driver Trust"}
+                </span>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 shadow-xs">
+                  {lang === "hi" ? "गोल्ड पायलट एक्टिव" : "GOLD PILOT ACTIVE"}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className={`text-[10px] uppercase font-bold block ${themeSubtextClass}`}>
+                    {lang === "hi" ? "ड्राइवर ट्रस्ट स्कोर" : "Driver Trust Score"}
+                  </span>
+                  <div className="flex items-baseline gap-1 mt-0.5">
+                    <span className="text-3xl font-black text-amber-500 font-mono">94</span>
+                    <span className="text-xs font-bold text-slate-400">/ 100</span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className={`text-[10px] uppercase font-bold block ${themeSubtextClass}`}>
+                    {lang === "hi" ? "शबाशी टिप्स कुल" : "Shabaashi Tips Earned"}
+                  </span>
+                  <span className="text-xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
+                    +₹{driverTipBonus.toLocaleString("en-IN")}
+                  </span>
+                </div>
+              </div>
+
+              <div className={`p-2.5 rounded-2xl border text-[11px] font-medium space-y-1 ${
+                isDark ? "bg-slate-900/80 border-slate-800 text-slate-300" : "bg-amber-50/60 border-amber-200 text-amber-950"
+              }`}>
+                <p className="flex items-center gap-1.5 font-bold">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-amber-500" />
+                  {lang === "hi" ? "प्राथमिकता थोक ऑर्डर (Priority Bulk Orders)" : "Priority Bulk Orders Unlocked"}
+                </p>
+                <p className="flex items-center gap-1.5 font-bold">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  {lang === "hi" ? "शून्य-शुल्क तत्काल यूपीआई कैशआउट (0% Fee Cashout)" : "Zero-Fee Instant UPI Cashout 24x7"}
                 </p>
               </div>
             </div>
@@ -1393,7 +1626,7 @@ export function LoaderRiderCockpit() {
                     ₹{state.driverTodayKamai.toLocaleString("en-IN")}
                   </p>
                   <p className={`text-xs mt-1 ${themeSubtextClass}`}>
-                    Beneficiary: <strong className={themeTitleClass}>Ravi Kumar</strong> • NPCI Ref: IMPS-998124
+                    Beneficiary: <strong className={themeTitleClass}>{driverSession?.firmOrName || currentApplication?.ownerOrDriverName || "Verified Driver Partner"}</strong> • NPCI Ref: IMPS-998124
                   </p>
                 </div>
                 <button
@@ -1431,6 +1664,15 @@ export function LoaderRiderCockpit() {
           </div>
         </div>
       )}
+
+      {/* Driver Site DNA & Road Intelligence Drawer */}
+      <DriverSiteDnaDrawer
+        isOpen={siteDnaDrawerOpen}
+        onClose={() => setSiteDnaDrawerOpen(false)}
+        orderId={activeMission?.id}
+        siteName={activeMission?.siteName}
+        siteAddress={activeMission?.siteAddress}
+      />
     </div>
   );
 }

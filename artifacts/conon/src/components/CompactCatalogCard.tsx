@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Star, Clock, RotateCcw, ChevronRight, Plus, Minus } from "lucide-react";
 import { type Product } from "./ProductCard";
 import { RealProductImage } from "./RealProductImage";
+import { useResolvedProduct } from "@/context/ProductMediaVaultContext";
 
 interface CompactCatalogCardProps {
   product: Product;
@@ -18,7 +19,7 @@ interface CompactCatalogCardProps {
 }
 
 export const CompactCatalogCard: React.FC<CompactCatalogCardProps> = ({
-  product,
+  product: rawProduct,
   cartQty = 0,
   onAdd,
   onSetQty,
@@ -30,6 +31,7 @@ export const CompactCatalogCard: React.FC<CompactCatalogCardProps> = ({
   discoveryTag,
   onDiscoveryClick,
 }) => {
+  const product = useResolvedProduct(rawProduct);
   const [imgError, setImgError] = useState(false);
   const [activeDot, setActiveDot] = useState(0);
 

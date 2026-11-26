@@ -4,6 +4,8 @@
  * 8-12 Key Information rows, application guides, and bulk pricing tiers.
  */
 
+import { resolveProductWithVault, type VaultImageEntry } from "@/services/productMediaVault";
+
 export interface HighlightItem {
   label: string;
   value: string;
@@ -45,6 +47,12 @@ export interface EnrichedProductData {
   discountPercent: number;
   image: string;
   images: string[];
+  galleryImages?: VaultImageEntry[];
+  description?: string;
+  specBullets?: string[];
+  hsnCode?: string;
+  gstRate?: number;
+  isAdminVerifiedMedia?: boolean;
   rating: number;
   reviews: number;
   deliveryEta: string;
@@ -415,10 +423,11 @@ export const PRODUCT_SPEC_DATABASE: Record<string, Partial<EnrichedProductData>>
  * Produces guaranteed authentic highlights, key specifications, and tips
  * so 100% of products across the entire catalog have rich Blinkit cards.
  */
-export function enrichProduct(raw: any): EnrichedProductData {
-  if (!raw) {
+export function enrichProduct(rawInput: any): EnrichedProductData {
+  if (!rawInput) {
     throw new Error("Cannot enrich undefined product");
   }
+  const raw = resolveProductWithVault(rawInput);
 
   const id = String(raw.id || raw.slug || "prod-item");
   const slug = String(raw.slug || raw.id || "product");
@@ -430,7 +439,7 @@ export function enrichProduct(raw: any): EnrichedProductData {
   const price = typeof raw.price === "number" && raw.price > 0 ? raw.price : 99;
   const mrp = typeof raw.mrp === "number" && raw.mrp >= price ? raw.mrp : Math.round(price * 1.2);
   const discountPercent = Math.max(0, Math.round(((mrp - price) / mrp) * 100));
-  const image = String(raw.image || "/images/products/cement/ultratech-ppc-cement-50kg.webp");
+  const image = String(raw.image && !String(raw.image).includes("ultratech-ppc-cement-50kg.webp") ? raw.image : "");
   const rating = typeof raw.rating === "number" ? raw.rating : 4.8;
   const reviews = typeof raw.reviews === "number" ? raw.reviews : 128;
   const deliveryEta = String(raw.deliveryTime || raw.deliveryEta || "60 Mins Express");
@@ -438,21 +447,15 @@ export function enrichProduct(raw: any): EnrichedProductData {
   // Check if we have curated specs
   const curated = PRODUCT_SPEC_DATABASE[id] || PRODUCT_SPEC_DATABASE[slug];
 
-  // 1. Build Multi-Image Array (Slide 1: Real Image, Slides 2-5: Fallback-compatible info slides)
+  // 1. Build Multi-Image Array STRICTLY from Verified Disk Manifest / Vault / Valid Images (NO fake 2-back..5-bulk stubs!)
   let images: string[] = [];
-  if (Array.isArray(raw.images) && raw.images.length > 1) {
-    images = raw.images;
-  } else if (curated?.images && curated.images.length > 1) {
-    images = curated.images;
-  } else {
-    // Generate standard 5-slide visual presentation paths
-    images = [
-      image,
-      `/images/products/${slug}/2-back.webp`,
-      `/images/products/${slug}/3-specs.webp`,
-      `/images/products/${slug}/4-usage.webp`,
-      `/images/products/${slug}/5-bulk.webp`,
-    ];
+  const rawGallery: VaultImageEntry[] = Array.isArray(raw.galleryImages) ? raw.galleryImages : [];
+  if (rawGallery.length > 0) {
+    images = rawGallery.map((g: any) => g.url).filter(Boolean);
+  } else if (Array.isArray(raw.images) && raw.images.length > 0) {
+    images = raw.images.filter(Boolean);
+  } else if (image) {
+    images = [image];
   }
 
   // 2. Build 6-Item Highlights Grid (Exactly 6 key-value pairs)
@@ -653,6 +656,12 @@ export function enrichProduct(raw: any): EnrichedProductData {
     discountPercent,
     image,
     images,
+    galleryImages: rawGallery,
+    description: raw.description || "",
+    specBullets: Array.isArray(raw.specBullets) ? raw.specBullets : [],
+    hsnCode: raw.hsnCode || raw.hsn || "",
+    gstRate: raw.gstRate ?? raw.gstPercent,
+    isAdminVerifiedMedia: Boolean(raw.isAdminVerifiedMedia),
     rating,
     reviews,
     deliveryEta,

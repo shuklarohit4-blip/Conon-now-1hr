@@ -17,6 +17,7 @@ import {
   isMoistureSensitive,
   logDispatchEvent,
   LUCKNOW_HUBS,
+  type LucknowHub,
 } from "../socket";
 
 const router: IRouter = Router();
@@ -25,7 +26,7 @@ const router: IRouter = Router();
 router.use("/vendor", requireVendor);
 
 function resolveCurrentVendor(req: Request): VendorProfile {
-  const store = req.vendorStore || (req as any).vendor?.shopName || "Katawala Hardware & Locks";
+  const store = req.vendorStore || (req as any).vendor?.shopName || "Partner Hub";
   return vendorEngine.getVendorByStore(store);
 }
 
@@ -36,8 +37,19 @@ function resolveCurrentVendor(req: Request): VendorProfile {
  * Returns hub status, active incoming orders, stock flags, bulk hedge offers, and escrow/settled ledger.
  */
 router.get(["/vendor/hub/:hubId/dashboard", "/hub/:hubId/dashboard"], (req: Request, res: Response) => {
-  const hubId = String(req.params.hubId || "hub-naka");
-  const hub = LUCKNOW_HUBS.find((h) => h.hubId === hubId) || LUCKNOW_HUBS[0];
+  const hubId = String(req.params.hubId || "hub-organics");
+  const fallbackHub: LucknowHub = {
+    hubId: hubId || "hub-organics",
+    name: "Lucknow Partner Hub",
+    zone: "Lucknow Central",
+    lat: 26.8467,
+    lng: 80.9462,
+    stockFlags: {},
+    escrowBalance: 0,
+    settledBalance: 0,
+    isOnline: true,
+  };
+  const hub = LUCKNOW_HUBS.find((h) => h.hubId === hubId) || LUCKNOW_HUBS[0] || fallbackHub;
   const allOrders = ecosystemEngine.getAllOrders();
   const hubOrders = allOrders.filter((o: any) => o.hubId === hubId || !o.hubId);
 
@@ -320,10 +332,18 @@ router.post(["/vendor/orders/:id/accept", "/orders/:id/accept"], (req: Request, 
   const pickupQrToken = `CON-PICKUP-${orderId}-${Math.floor(1000 + Math.random() * 9000)}`;
   const multiStop = computeMultiStopPlan(ecoOrder?.items || [], vendor.id);
 
-  const assignedDriver = {
-    driverId: multiStop.vehicleType === "BIKE_EXPRESS" ? "DRV-LKO-BK-02" : "DRV-LKO-CH-01",
-    name: multiStop.vehicleType === "BIKE_EXPRESS" ? "Suraj Rawat (Bike UP 32 BK 4012)" : "Ramesh Yadav (Loader UP 32 CH 8912)",
-    phone: multiStop.vehicleType === "BIKE_EXPRESS" ? "+91 98390 12044" : "+91 94150 88219",
+  const onlineDrivers = ecosystemEngine.getAllDrivers().filter((d) => d.isOnline);
+  const matchingDriver = onlineDrivers.find((d) => multiStop.vehicleType === "BIKE_EXPRESS" ? d.vehicleType === "2W_BIKE" : d.vehicleType !== "2W_BIKE") || onlineDrivers[0];
+  const assignedDriver = matchingDriver ? {
+    driverId: matchingDriver.id,
+    name: `${matchingDriver.name} (${matchingDriver.vehiclePlate || matchingDriver.vehicleLabel})`,
+    phone: matchingDriver.phone,
+    vehicleType: multiStop.vehicleType,
+    vehicleLabel: multiStop.vehicleLabel,
+  } : {
+    driverId: "DRV-AUTO",
+    name: "Fleet Partner (Standby Dispatch)",
+    phone: "+91 94150 00000",
     vehicleType: multiStop.vehicleType,
     vehicleLabel: multiStop.vehicleLabel,
   };

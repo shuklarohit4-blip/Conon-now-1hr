@@ -28,6 +28,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 import {
@@ -107,7 +108,7 @@ const MODULAR_CROSS_SELL_CATALOG: Record<
     brand: "Hettich",
     role: "Drawer Interior Organizer",
     price: 2930,
-    image: "/images/products/modular-kitchen-systems/hettich-orgatray-560-adjustable-pvc-cutlery-tray-600mm.webp",
+    image: "",
     desc: "Custom-fit trimmable compartments for spoons, forks & knives. Fits InnoTech & Atira drawers.",
   },
   "prod-mod-hettich-gola-profile-3000mm-black": {
@@ -116,7 +117,7 @@ const MODULAR_CROSS_SELL_CATALOG: Record<
     brand: "Hettich",
     role: "Handleless Cabinet Trim",
     price: 2399,
-    image: "/images/products/modular-kitchen-systems/hettich-gola-profile-l-type-handleless-aluminium-3000mm-black-9299225.webp",
+    image: "",
     desc: "Continuous seamless recessed aluminium profile for modern handle-free modular kitchens.",
   },
   "prod-adh-fevicol-heatx-1l": {
@@ -125,7 +126,7 @@ const MODULAR_CROSS_SELL_CATALOG: Record<
     brand: "Fevicol",
     role: "Kitchen Fascia Laminate Adhesive",
     price: 480,
-    image: "/images/products/adhesives/fevicol-heatx-high-heat-resistance-fast-grab-adhesive-1l.webp",
+    image: "",
     desc: "Essential for bonding laminate fascias to Tandem Box drawer wooden fronts with high thermal resistance near gas stoves.",
   },
   "prod-fur-hettich-ka4732-20in-black": {
@@ -134,7 +135,7 @@ const MODULAR_CROSS_SELL_CATALOG: Record<
     brand: "Hettich",
     role: "Heavy Wire Basket Slide",
     price: 699,
-    image: "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-20in-soft-close-black.webp",
+    image: "",
     desc: "35kg rated ball-bearing soft-closing slide pair for fitting wire kitchen baskets onto wooden carcasses.",
   },
   "prod-mod-ebco-pro-lift-100n-gas-spring": {
@@ -143,7 +144,7 @@ const MODULAR_CROSS_SELL_CATALOG: Record<
     brand: "Ebco",
     role: "Overhead Loft Lift-Up Piston",
     price: 239,
-    image: "/images/products/modular-kitchen-systems/ebco-pro-lift-hydraulic-gas-spring-100n-for-loft-cabinets-1-pair.webp",
+    image: "",
     desc: "Smooth effortless upward lift for top kitchen cabinets and loft shutters. Tested to 50,000 cycles.",
   },
   "prod-mod-ebco-waste-bin-40l": {
@@ -152,7 +153,7 @@ const MODULAR_CROSS_SELL_CATALOG: Record<
     brand: "Ebco",
     role: "Under-Sink Dry/Wet Segregation",
     price: 5304,
-    image: "/images/products/modular-kitchen-systems/ebco-pull-out-under-sink-dual-waste-bin-40l-2x20l-anthracite.webp",
+    image: "",
     desc: "Soft-close telescopic under-sink waste separation system with twin removable buckets.",
   },
   "prod-fur-hettich-onsys-0crank-105": {
@@ -161,7 +162,7 @@ const MODULAR_CROSS_SELL_CATALOG: Record<
     brand: "Hettich",
     role: "Full Overlay Cabinet Hinge",
     price: 185,
-    image: "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-0-crank.webp",
+    image: "",
     desc: "Silent hydraulic soft closing for modular kitchen shutter doors. Fits 18mm board with zero slam.",
   },
 };
@@ -171,6 +172,7 @@ export function ModularKitchenStorefront({
   onBackToDirectory,
 }: ModularKitchenStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -223,7 +225,7 @@ export function ModularKitchenStorefront({
 
   // Filter Logic
   const filteredProducts = useMemo(() => {
-    return ALL_26_MODULAR_KITCHEN_PRODUCTS.filter((prod) => {
+    return ALL_26_MODULAR_KITCHEN_PRODUCTS.map((p) => resolveProduct(p)).filter((prod) => {
       // 1. Subcategory
       if (activeSubcat !== "ALL" && prod.modularSubcategory !== activeSubcat) {
         return false;
@@ -288,6 +290,7 @@ export function ModularKitchenStorefront({
     loadCapacityFilter,
     finishFilter,
     vehicleFilter,
+    resolveProduct,
   ]);
 
   // Cart operations

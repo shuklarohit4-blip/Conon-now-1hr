@@ -11,7 +11,7 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import type { BOQLineItem } from "@/lib/builderKitEngine";
-import { resolveProductImage } from "@/lib/productImages";
+import { CononProductMedia } from "@/components/CononProductMedia";
 
 interface StageBOQTableProps {
   items: BOQLineItem[];
@@ -67,7 +67,6 @@ export function StageBOQTable({
       <div className="divide-y divide-slate-100">
         {items.map((item) => {
           const vehicle = getVehicleBadge(item.deliveryVehicleType);
-          const resolvedImg = resolveProductImage(item.categorySlug, item.title);
 
           return (
             <div
@@ -92,13 +91,23 @@ export function StageBOQTable({
 
                 {/* Product Thumbnail */}
                 <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-xs overflow-hidden">
-                  <img
-                    src={item.thumbnail || resolvedImg}
-                    alt={item.title}
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = resolvedImg;
+                  <CononProductMedia
+                    product={{
+                      id: item.id,
+                      title: item.title,
+                      brand: item.brand,
+                      categorySlug: item.categorySlug,
+                      unit: item.unit,
+                      image: item.thumbnail,
                     }}
+                    src={item.thumbnail}
+                    title={item.title}
+                    brand={item.brand}
+                    categorySlug={item.categorySlug}
+                    variant="thumb"
+                    showGalleryBadge={false}
+                    containerClassName="w-full h-full"
+                    className="w-full h-full object-contain"
                   />
                 </div>
 

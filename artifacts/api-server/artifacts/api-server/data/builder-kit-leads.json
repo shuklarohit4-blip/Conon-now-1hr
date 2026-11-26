@@ -1,0 +1,179 @@
+[
+  {
+    "id": "LEAD-LKO-9812",
+    "name": "Er. Ankit Srivastava",
+    "phone": "9839012345",
+    "lucknowZone": "Sushant Golf City",
+    "builtUpSqFt": 2400,
+    "qualityTier": "PREMIUM",
+    "wallType": "RED_BRICK",
+    "floors": 2,
+    "grandTotal": 2980000,
+    "notes": "Requires single batch dye-lot delivery for floor tiles, 43 Grade cement for plastering.",
+    "startDate": "Within 15 Days",
+    "status": "NEW",
+    "assignedEngineer": "Er. Rahul Verma (Central Lucknow)",
+    "createdAt": "2026-11-26T02:08:42.558Z",
+    "updatedAt": "2026-11-26T02:08:42.558Z",
+    "boqSummary": {
+      "grandTotal": 2980000,
+      "costPerSqFt": 1242,
+      "stages": [
+        {
+          "stageId": 1,
+          "stageName": "Foundation, RCC & Masonry",
+          "subtotal": 1050000,
+          "itemCount": 6
+        },
+        {
+          "stageId": 2,
+          "stageName": "Concealed Plumbing & Electrical",
+          "subtotal": 420000,
+          "itemCount": 8
+        },
+        {
+          "stageId": 3,
+          "stageName": "Plaster, Waterproofing & Flooring",
+          "subtotal": 510000,
+          "itemCount": 5
+        },
+        {
+          "stageId": 4,
+          "stageName": "Doors, Woodwork & Modular Kitchen",
+          "subtotal": 440000,
+          "itemCount": 7
+        },
+        {
+          "stageId": 5,
+          "stageName": "Putty, Primer & Painting",
+          "subtotal": 240000,
+          "itemCount": 4
+        },
+        {
+          "stageId": 6,
+          "stageName": "Sanitary, Sinks, Appliances & CCTV",
+          "subtotal": 320000,
+          "itemCount": 7
+        }
+      ]
+    }
+  },
+  {
+    "id": "LEAD-LKO-9755",
+    "name": "Col. Rajeshwar Singh (Retd.)",
+    "phone": "9415098765",
+    "lucknowZone": "Gomti Nagar / Extension",
+    "builtUpSqFt": 3600,
+    "qualityTier": "LUXURY",
+    "wallType": "AAC_BLOCK",
+    "floors": 3,
+    "grandTotal": 6420000,
+    "notes": "Villa construction in Sector 4 Gomti Nagar Ext. Needs Astral Silencio and Kohler sanitary.",
+    "startDate": "Immediate (In 24h)",
+    "status": "CONTACTED",
+    "assignedEngineer": "Er. Abhishek Mishra (Gomti Nagar Hub)",
+    "createdAt": "2026-11-25T10:08:42.558Z",
+    "updatedAt": "2026-11-25T23:08:42.558Z",
+    "boqSummary": {
+      "grandTotal": 6420000,
+      "costPerSqFt": 1783,
+      "stages": [
+        {
+          "stageId": 1,
+          "stageName": "Foundation, RCC & Masonry",
+          "subtotal": 2150000,
+          "itemCount": 6
+        },
+        {
+          "stageId": 2,
+          "stageName": "Concealed Plumbing & Electrical",
+          "subtotal": 940000,
+          "itemCount": 8
+        },
+        {
+          "stageId": 3,
+          "stageName": "Plaster, Waterproofing & Flooring",
+          "subtotal": 1220000,
+          "itemCount": 5
+        },
+        {
+          "stageId": 4,
+          "stageName": "Doors, Woodwork & Modular Kitchen",
+          "subtotal": 980000,
+          "itemCount": 7
+        },
+        {
+          "stageId": 5,
+          "stageName": "Putty, Primer & Painting",
+          "subtotal": 480000,
+          "itemCount": 4
+        },
+        {
+          "stageId": 6,
+          "stageName": "Sanitary, Sinks, Appliances & CCTV",
+          "subtotal": 650000,
+          "itemCount": 7
+        }
+      ]
+    }
+  },
+  {
+    "id": "LEAD-LKO-9610",
+    "name": "Vikas Agrawal (Contractor)",
+    "phone": "9918077889",
+    "lucknowZone": "Shaheed Path",
+    "builtUpSqFt": 1800,
+    "qualityTier": "STANDARD",
+    "wallType": "RED_BRICK",
+    "floors": 2,
+    "grandTotal": 1620000,
+    "notes": "Requires wholesale contractor credit terms and 50-bag cement scheduled drops.",
+    "startDate": "Next Month",
+    "status": "QUOTE_SENT",
+    "assignedEngineer": "Er. Sumit Pandey (Transport Nagar)",
+    "createdAt": "2026-11-24T04:08:42.558Z",
+    "updatedAt": "2026-11-25T04:08:42.558Z",
+    "boqSummary": {
+      "grandTotal": 1620000,
+      "costPerSqFt": 900,
+      "stages": [
+        {
+          "stageId": 1,
+          "stageName": "Foundation, RCC & Masonry",
+          "subtotal": 620000,
+          "itemCount": 6
+        },
+        {
+          "stageId": 2,
+          "stageName": "Concealed Plumbing & Electrical",
+          "subtotal": 260000,
+          "itemCount": 8
+        },
+        {
+          "stageId": 3,
+          "stageName": "Plaster, Waterproofing & Flooring",
+          "subtotal": 310000,
+          "itemCount": 5
+        },
+        {
+          "stageId": 4,
+          "stageName": "Doors, Woodwork & Modular Kitchen",
+          "subtotal": 210000,
+          "itemCount": 7
+        },
+        {
+          "stageId": 5,
+          "stageName": "Putty, Primer & Painting",
+          "subtotal": 110000,
+          "itemCount": 4
+        },
+        {
+          "stageId": 6,
+          "stageName": "Sanitary, Sinks, Appliances & CCTV",
+          "subtotal": 110000,
+          "itemCount": 7
+        }
+      ]
+    }
+  }
+]

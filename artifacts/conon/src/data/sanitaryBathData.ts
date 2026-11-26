@@ -85,10 +85,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-rimless-wall-hung-wc-soft-close-uf-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-rimless-wall-hung-wc-soft-close-uf-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rimless Flush · Anti-Bacterial Glaze · Soft-Close UF Seat Cover",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -147,7 +145,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 12600,
         "discountPercent": 25,
         "stock": 18,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-rimless-wall-hung-wc-soft-close-uf-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -190,10 +188,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-victor-one-piece-s-trap-300mm-ceramic-commode-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-victor-one-piece-s-trap-300mm-ceramic-commode-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Single Piece Floor Mount · Syphonic S-Trap 300mm · Soft Close Seat",
     "specChips": [
       "S-Trap 300mm",
@@ -252,7 +248,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 9980,
         "discountPercent": 30,
         "stock": 22,
-        "image": "/images/products/sanitary-bath-fittings/cera-victor-one-piece-s-trap-300mm-ceramic-commode-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -294,10 +290,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/parryware-cruz-rimless-wall-mounted-ceramic-closet-slim-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/parryware-cruz-rimless-wall-mounted-ceramic-closet-slim-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rimless Clean · Slim Duroplast Cover · 180mm P-Trap Standard",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -356,7 +350,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 10700,
         "discountPercent": 30,
         "stock": 15,
-        "image": "/images/products/sanitary-bath-fittings/parryware-cruz-rimless-wall-mounted-ceramic-closet-slim-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -398,10 +392,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/hindware-element-one-piece-s-trap-300mm-dual-flush-commode-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/hindware-element-one-piece-s-trap-300mm-dual-flush-commode-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "360° Whirlpool Flush · Dual Flush Syphonic · Pre-fitted Valve",
     "specChips": [
       "S-Trap 300mm",
@@ -460,7 +452,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 11215,
         "discountPercent": 30,
         "stock": 14,
-        "image": "/images/products/sanitary-bath-fittings/hindware-element-one-piece-s-trap-300mm-dual-flush-commode-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -501,10 +493,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 2,
-    "image": "/images/products/sanitary-bath-fittings/kohler-veil-rimless-wall-hung-toilet-quiet-close-slim-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/kohler-veil-rimless-wall-hung-toilet-quiet-close-slim-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Luxury Sculpted Curves · CleanCoat Glaze · Quiet-Close Slim Seat",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -563,7 +553,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 28750,
         "discountPercent": 20,
         "stock": 8,
-        "image": "/images/products/sanitary-bath-fittings/kohler-veil-rimless-wall-hung-toilet-quiet-close-slim-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -604,10 +594,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-calisto-rimless-wall-hung-ceramic-wc-antibacterial-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-calisto-rimless-wall-hung-ceramic-wc-antibacterial-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rimless Hydro-Clean · Silent Vortex Wash · UF Antibacterial Seat",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -666,7 +654,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 11700,
         "discountPercent": 30,
         "stock": 16,
-        "image": "/images/products/sanitary-bath-fittings/cera-calisto-rimless-wall-hung-ceramic-wc-antibacterial-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -708,10 +696,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-in-wall-concealed-cistern-tank-structural-mounting-frame-dual-flush.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-in-wall-concealed-cistern-tank-structural-mounting-frame-dual-flush.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "400kg Load Tested Chair · Seamless Blow-Molded Tank · Dual Flush 3/6L",
     "specChips": [
       "400kg Load Tested",
@@ -766,7 +752,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 6500,
         "discountPercent": 25,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-in-wall-concealed-cistern-tank-structural-mounting-frame-dual-flush.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -808,10 +794,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-slim-80mm-concealed-cistern-tank-galvanized-steel-frame-dual-flush.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-slim-80mm-concealed-cistern-tank-galvanized-steel-frame-dual-flush.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ultra Slim 80mm Depth · Fits 4-Inch Thin Brick Walls · 400kg Rated",
     "specChips": [
       "Slim 80mm Depth",
@@ -866,7 +850,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 5950,
         "discountPercent": 28,
         "stock": 20,
-        "image": "/images/products/sanitary-bath-fittings/cera-slim-80mm-concealed-cistern-tank-galvanized-steel-frame-dual-flush.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -907,10 +891,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-mechanical-dual-flush-actuator-push-plate-gloss-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-mechanical-dual-flush-actuator-push-plate-gloss-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kubix Geometric Lines · Mirror Chrome Finish · Smooth Mechanical Touch",
     "specChips": [
       "Mirror Chrome",
@@ -965,7 +947,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 1950,
         "discountPercent": 26,
         "stock": 35,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-mechanical-dual-flush-actuator-push-plate-gloss-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1006,10 +988,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-alive-pneumatic-dual-flush-actuator-plate-matte-black.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-alive-pneumatic-dual-flush-actuator-plate-matte-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Architectural Matte Black · Feather-Light Pneumatic Push · Fingerprint Free",
     "specChips": [
       "Matte Black",
@@ -1064,7 +1044,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 2990,
         "discountPercent": 23,
         "stock": 20,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-alive-pneumatic-dual-flush-actuator-plate-matte-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1105,10 +1085,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-q-type-dual-flush-actuator-push-plate-mirror-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-q-type-dual-flush-actuator-push-plate-mirror-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Q-Type Circular Buttons · Mirror Chrome Plating · Fits Cera Tanks",
     "specChips": [
       "Mirror Chrome",
@@ -1163,7 +1141,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 1650,
         "discountPercent": 30,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/cera-q-type-dual-flush-actuator-push-plate-mirror-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1204,10 +1182,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-careo-sleek-rim-500mm-ceramic-tabletop-counter-wash-basin-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-careo-sleek-rim-500mm-ceramic-tabletop-counter-wash-basin-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ultra-Thin Rim · 500×400mm Countertop · Anti-Bacterial Nano Glaze",
     "specChips": [
       "500×400mm Vessel",
@@ -1266,7 +1242,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 4350,
         "discountPercent": 25,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/cera-careo-sleek-rim-500mm-ceramic-tabletop-counter-wash-basin-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1307,10 +1283,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-continental-thin-rim-oval-550mm-table-top-ceramic-basin-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-continental-thin-rim-oval-550mm-table-top-ceramic-basin-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Organic Oval Form · 550×400mm Countertop · Anti-Splash Deep Bowl",
     "specChips": [
       "550×400mm Oval",
@@ -1369,7 +1343,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 5500,
         "discountPercent": 25,
         "stock": 18,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-continental-thin-rim-oval-550mm-table-top-ceramic-basin-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1410,10 +1384,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/parryware-jordon-480mm-rectangular-tabletop-basin-with-faucet-hole-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/parryware-jordon-480mm-rectangular-tabletop-basin-with-faucet-hole-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Pre-Punched Tap Hole · 480×370mm · No Need for Tall Body Tap",
     "specChips": [
       "480×370mm Rectangular",
@@ -1472,7 +1444,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 4100,
         "discountPercent": 30,
         "stock": 22,
-        "image": "/images/products/sanitary-bath-fittings/parryware-jordon-480mm-rectangular-tabletop-basin-with-faucet-hole-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1513,10 +1485,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/hindware-venice-round-410mm-countertop-ceramic-vessel-basin-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/hindware-venice-round-410mm-countertop-ceramic-vessel-basin-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Circular Vessel · 410mm Diameter · Space-Saving Vanity Fit",
     "specChips": [
       "410mm Round",
@@ -1575,7 +1545,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 4900,
         "discountPercent": 30,
         "stock": 14,
-        "image": "/images/products/sanitary-bath-fittings/hindware-venice-round-410mm-countertop-ceramic-vessel-basin-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1616,10 +1586,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/sanitary-bath-fittings/kohler-forefront-580mm-rectangular-vessel-basin-with-faucet-hole-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/kohler-forefront-580mm-rectangular-vessel-basin-with-faucet-hole-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer Rectangular · Wide 580mm Deck · Integrated Overflow & Tap Hole",
     "specChips": [
       "580×460mm Luxury",
@@ -1678,7 +1646,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 14990,
         "discountPercent": 20,
         "stock": 9,
-        "image": "/images/products/sanitary-bath-fittings/kohler-forefront-580mm-rectangular-vessel-basin-with-faucet-hole-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1719,10 +1687,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-victor-wall-hung-compact-corner-ceramic-basin-400x300mm-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-victor-wall-hung-compact-corner-ceramic-basin-400x300mm-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Wall-Hung Corner · 400×300mm · Perfect for Powder Rooms & Small Baths",
     "specChips": [
       "400×300mm Corner",
@@ -1781,7 +1747,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 2100,
         "discountPercent": 29,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/cera-victor-wall-hung-compact-corner-ceramic-basin-400x300mm-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1822,10 +1788,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-high-flow-single-lever-concealed-diverter-rough-in-brass-body.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-high-flow-single-lever-concealed-diverter-rough-in-brass-body.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "In-Wall Rough-In · 24 LPM High Flow · Forged Brass CW617N Body",
     "specChips": [
       "In-Wall Rough-In",
@@ -1880,7 +1844,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 4200,
         "discountPercent": 25,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-high-flow-single-lever-concealed-diverter-rough-in-brass-body.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1923,10 +1887,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-concealed-diverter-exposed-upper-trim-kit-joystick-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-concealed-diverter-exposed-upper-trim-kit-joystick-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kubix Prime Styling · Solid Brass Chrome Flange · Smooth Single Lever Joystick",
     "specChips": [
       "Exposed Trim Kit",
@@ -1981,7 +1943,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 2945,
         "discountPercent": 25,
         "stock": 28,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-concealed-diverter-exposed-upper-trim-kit-joystick-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2023,10 +1985,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-alive-high-flow-concealed-diverter-upper-trim-kit-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-alive-high-flow-concealed-diverter-upper-trim-kit-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Alive Fluid Curvature · Solid Brass Faceplate · Ergonomic Control",
     "specChips": [
       "Exposed Trim Kit",
@@ -2081,7 +2041,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 3320,
         "discountPercent": 25,
         "stock": 20,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-alive-high-flow-concealed-diverter-upper-trim-kit-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2123,10 +2083,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-maze-120mm-square-multi-flow-abs-hand-shower-rubit-nozzles.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-maze-120mm-square-multi-flow-abs-hand-shower-rubit-nozzles.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3 Spray Patterns · Rubit Silicone De-scaling · 120mm Square Face",
     "specChips": [
       "120mm Square",
@@ -2181,7 +2139,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 2375,
         "discountPercent": 23,
         "stock": 35,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-maze-120mm-square-multi-flow-abs-hand-shower-rubit-nozzles.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2222,10 +2180,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-ss-304-overhead-rain-shower-8inch-square-with-15inch-brass-arm.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-ss-304-overhead-rain-shower-8inch-square-with-15inch-brass-arm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "200mm SS 304 Head · 15\" Heavy Brass Arm · Rubit Descaling Nozzles",
     "specChips": [
       "200mm Square",
@@ -2280,7 +2236,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 3800,
         "discountPercent": 25,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-ss-304-overhead-rain-shower-8inch-square-with-15inch-brass-arm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2321,10 +2277,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-heavy-cast-brass-bathtub-spout-wall-flange-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-heavy-cast-brass-bathtub-spout-wall-flange-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kubix Geometric Form · Solid Brass Casting · Neoperl Aerator",
     "specChips": [
       "Solid Brass Spout",
@@ -2383,7 +2337,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 2520,
         "discountPercent": 25,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-heavy-cast-brass-bathtub-spout-wall-flange-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2424,10 +2378,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-health-faucet-abs-body-with-1-2m-ss-flexible-hose-wall-hook-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-health-faucet-abs-body-with-1-2m-ss-flexible-hose-wall-hook-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-Pressure Jet · 1.2m SS Flexible Hose · Ergonomic Thumb Trigger",
     "specChips": [
       "ABS Chrome Body",
@@ -2482,7 +2434,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 1450,
         "discountPercent": 23,
         "stock": 50,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-health-faucet-abs-body-with-1-2m-ss-flexible-hose-wall-hook-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2523,10 +2475,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-garnet-2-way-bib-cock-with-wall-flange-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-garnet-2-way-bib-cock-with-wall-flange-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2-Way Dual Control · Solid Forged Brass · Independent Ceramic Discs",
     "specChips": [
       "2-Way Dual Outlet",
@@ -2581,7 +2531,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 1680,
         "discountPercent": 25,
         "stock": 35,
-        "image": "/images/products/sanitary-bath-fittings/cera-garnet-2-way-bib-cock-with-wall-flange-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2622,10 +2572,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-florentine-prime-triangular-angular-stop-cock-with-wall-flange.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-florentine-prime-triangular-angular-stop-cock-with-wall-flange.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Triangular Knob · High-Purity Brass · Quarter-Turn Ceramic Cartridge",
     "specChips": [
       "Triangular Knob",
@@ -2680,7 +2628,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 1135,
         "discountPercent": 25,
         "stock": 60,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-florentine-prime-triangular-angular-stop-cock-with-wall-flange.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2721,10 +2669,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-heavy-brass-32mm-chrome-wash-basin-bottle-trap-250mm-pipe.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-heavy-brass-32mm-chrome-wash-basin-bottle-trap-250mm-pipe.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "32mm Heavy Brass · Anti-Odor Water Barrier · 250mm Outlet Pipe",
     "specChips": [
       "32mm Brass Trap",
@@ -2779,7 +2725,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 2690,
         "discountPercent": 25,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/cera-heavy-brass-32mm-chrome-wash-basin-bottle-trap-250mm-pipe.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2820,10 +2766,8 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/sanitary-bath-fittings/futura-ss-304-linear-floor-drain-with-tile-insert-grating-100x600mm.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/futura-ss-304-linear-floor-drain-with-tile-insert-grating-100x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Tile-Insert Invisible Look · 600mm SS 304 Channel · Removable Hair Trap",
     "specChips": [
       "100×600mm SS 304",
@@ -2878,7 +2822,7 @@ export const ALL_28_SANITARY_BATH_PRODUCTS: SanitaryBathProduct[] = [
         "mrp": 3500,
         "discountPercent": 30,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/futura-ss-304-linear-floor-drain-with-tile-insert-grating-100x600mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,

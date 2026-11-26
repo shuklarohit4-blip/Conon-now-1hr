@@ -83,10 +83,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub · D3 Water Resistant · Handling 2h",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's #1 Carpenter Adhesive · High PVAc Resin Content · Unbeatable Bond Strength",
     "specChips": [
       "1 kg Tub",
@@ -150,7 +148,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 340,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -193,10 +191,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "2 kg Tub · ₹282/kg · D3 Grade",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2 kg Value Tub · ₹282/kg Rate · Proven Wood & Laminate Bonding",
     "specChips": [
       "2 kg Tub",
@@ -256,7 +252,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 650,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -299,10 +295,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 kg Bucket · Bonds ~7 Laminate Sheets · ₹257/kg",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor 5 kg Bucket · Bonds ~7 Laminate Sheets (8x4 ft) · ₹257.2/kg",
     "specChips": [
       "5 kg Bucket",
@@ -362,7 +356,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 1520,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -405,10 +399,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum · Bonds ~28 Sheets · E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy Commercial 20 kg Drum · Bonds ~28 Sheets · ₹242.5/kg Wholesale",
     "specChips": [
       "20 kg Drum",
@@ -468,7 +460,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 5750,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -511,10 +503,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "E-Loader / Pickup",
     "keySpecBadge": "50 kg Barrel · Lowest ₹224/kg · E-Loader/Pickup",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master Contractor 50 kg Drum · Lowest ₹224/kg Bulk Rate · Direct Bhatta/Dealer Wholesale",
     "specChips": [
       "50 kg Drum",
@@ -574,7 +564,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 13200,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -617,10 +607,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub · 100% Waterproof · Kitchen & Bath",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100% Waterproof Adhesive · Withstands 48 Hrs Boiling Water · Kitchen & Bathroom Cabinets",
     "specChips": [
       "1 kg Tub",
@@ -680,7 +668,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 428,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -723,10 +711,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "2 kg Tub · ₹349.5/kg · BWP Grade",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2 kg Waterproof Tub · ₹349.5/kg Rate · Kitchen Carcass Specialist",
     "specChips": [
       "2 kg Tub",
@@ -782,7 +768,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 820,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -824,10 +810,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 kg Bucket · Bonds ~7 Marine Sheets · ₹310/kg",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor 5 kg Bucket · Bonds ~7 BWP Sheets · ₹310/kg Commercial Rate",
     "specChips": [
       "5 kg Bucket",
@@ -887,7 +871,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 1850,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -930,10 +914,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum · Bonds ~28 Marine Sheets · E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Commercial 20 kg Drum · Bonds ~28 Waterproof Sheets · ₹305/kg",
     "specChips": [
       "20 kg Drum",
@@ -993,7 +975,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 7200,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1035,10 +1017,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "E-Loader / Pickup",
     "keySpecBadge": "50 kg Barrel · Lowest ₹290/kg · E-Loader/Pickup",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master Contractor 50 kg Drum · Lowest ₹290/kg BWP Rate · Commercial Projects",
     "specChips": [
       "50 kg Drum",
@@ -1094,7 +1074,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 17200,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1136,10 +1116,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub · Zero Bubbles · High-Gloss Laminates",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Premium Anti-Bubble Technology · Zero Wave Marks on Acrylic & High-Gloss Laminates",
     "specChips": [
       "1 kg Tub",
@@ -1195,7 +1173,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 495,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1237,10 +1215,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "2 kg Tub · Star Grade · Luxury Acrylic Panels",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Star Grade Acrylic Adhesive · 2 kg Pack · Zero Telegraphing on Gloss Surfaces",
     "specChips": [
       "2 kg Tub",
@@ -1292,7 +1268,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 1060,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1334,10 +1310,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum · Bonds ~28 Acrylic Sheets · E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Commercial 20 kg Drum · Bonds ~28 Acrylic & Gloss Sheets · ₹377.5/kg",
     "specChips": [
       "20 kg Drum",
@@ -1393,7 +1367,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 8900,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1435,10 +1409,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub · Sets in 30 Mins · Urgent Turnaround",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "30-Minute Rapid Setting Adhesive · Clamp Release in Half Hour · Urgent Turnarounds",
     "specChips": [
       "1 kg Tub",
@@ -1494,7 +1466,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 395,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1536,10 +1508,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 kg Bucket · 30-Min Set · ₹311.6/kg",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "5 kg Rapid Bucket · 30-Min Setting · ₹311.6/kg Commercial Rate",
     "specChips": [
       "5 kg Bucket",
@@ -1595,7 +1565,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 1820,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1637,10 +1607,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Bottle · PVC to Plywood & Edgeband",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Specialist PVC Adhesive · Bonds PVC Sheets, Charcoal Panels & Edge Bands to Plywood",
     "specChips": [
       "1 kg Bottle",
@@ -1696,7 +1664,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 480,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1738,10 +1706,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 L Tin · 170°C Heatproof · Near Gas Stoves",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "170°C Heatproof Contact Adhesive · Zero Spring-Back · Kitchen Counter & Stove Wall Specialist",
     "specChips": [
       "1 L Tin",
@@ -1801,7 +1767,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 540,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1843,10 +1809,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub · Economical ₹250 · All Rounder",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Value Wood Adhesive · High Spreadability · Lucknow Contractor Value Choice",
     "specChips": [
       "1 kg Tub",
@@ -1898,7 +1862,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 295,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1940,10 +1904,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum · ₹217.75/kg · E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "20 kg Bulk Drum · ₹217.75/kg Value Rate · Commercial Projects",
     "specChips": [
       "20 kg Drum",
@@ -1999,7 +1961,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 5100,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2041,10 +2003,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "E-Loader / Pickup",
     "keySpecBadge": "50 kg Barrel · ₹204.28/kg · E-Loader/Pickup",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master Contractor 50 kg Barrel · ₹204.28/kg Lowest Wood Adhesive Rate in Lucknow",
     "specChips": [
       "50 kg Drum",
@@ -2100,7 +2060,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 12000,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2142,10 +2102,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 L Tin · Rubber Contact · Foam & Leather",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy Duty Synthetic Rubber Adhesive · Instant Contact Grab · Foam, Leather & Plywood",
     "specChips": [
       "1 L Tin",
@@ -2201,7 +2159,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 600,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2243,10 +2201,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 L Tin · ₹430/L Rate · Bulk Upholstery",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Commercial 5 L Tin · ₹430/L Rate · Upholstery & Acoustic Paneling",
     "specChips": [
       "5 L Tin",
@@ -2302,7 +2258,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 2500,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2344,10 +2300,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 L Tin · Value Contact · Rexine & Rubber",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Classic Yellow Contact Cement · Reliable Rubber & Leather Bonding · Value Pricing",
     "specChips": [
       "1 L Tin",
@@ -2403,7 +2357,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 410,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2445,10 +2399,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "90 g Twin Tube · High Strength Epoxy · Glass/Metal/Stone",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "The World's Strongest Epoxy Bond · Resin & Hardener Twin Pack · Waterproof & Gap-Filling",
     "specChips": [
       "90 g Pack",
@@ -2508,7 +2460,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 205,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2550,10 +2502,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "180 g Twin Tube · Contractor Pack · High Strength",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "180 g Contractor Twin Pack · Structural Bonding · Granite & Marble Counter Jointing",
     "specChips": [
       "180 g Pack",
@@ -2605,7 +2555,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 360,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2647,10 +2597,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "450 g Pack · Large Stone Jointing · Structural",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "450 g Medium Commercial Pack · Marble & Granite Cladding · Heavy Duty",
     "specChips": [
       "450 g Pack",
@@ -2701,7 +2649,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 785,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2743,10 +2691,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "900 g Kit · Masonry Contractor Tin · High Value",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "900 g Contractor Metal Can Set · Commercial Stone & Metal Fabrication",
     "specChips": [
       "900 g Kit",
@@ -2797,7 +2743,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 1450,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2839,10 +2785,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1.8 kg Industrial Kit · Lowest ₹0.88/g · Contractor Tins",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.8 kg Industrial Mega Kit · Lowest ₹0.88/g Rate · Factory & Stone Fabrication",
     "specChips": [
       "1.8 kg Kit",
@@ -2897,7 +2841,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 1880,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2939,10 +2883,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "180 g Pack · 4-Hour Set · High Impact Resistance",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Pidilite 4-Hour Epoxy System · Heavy Impact & Vibration Proof · Industrial Repair",
     "specChips": [
       "180 g Pack",
@@ -2994,7 +2936,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 475,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3036,10 +2978,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "500 g Pack · Stops Plumbing Leaks · Moldable Putty",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's #1 Epoxy Putty · Seal, Join, Fix & Insulate · Stops Pipe Leaks & Crack Sealing",
     "specChips": [
       "500 g Pack",
@@ -3095,7 +3035,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 180,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3137,10 +3077,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Mega Pack · Plumbing Contractor Size",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1 kg Contractor Mega Pack · High Value Bulk M-Seal · Commercial Plumbing Repairs",
     "specChips": [
       "1 kg Pack",
@@ -3192,7 +3130,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 330,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3234,10 +3172,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "20 g Tube · Non-Drip Gel · 5-Sec Instant Bond",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Non-Drip Instant Cyanoacrylate Gel · 5-Second Grab · Precision Vertical Repairs",
     "specChips": [
       "20 g Tube",
@@ -3297,7 +3233,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 55,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3339,10 +3275,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "20 g Bottle · Industrial Grade · High Tensile",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Industrial Strength Instant Adhesive · High Tensile & Shear Resistance · Factory Grade",
     "specChips": [
       "20 g Bottle",
@@ -3394,7 +3328,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 95,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3436,10 +3370,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml · Acetoxy GP · ⚠️ Not for Mirrors/Marble",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "General Purpose Glazing Silicone · Glass, Ceramic & Aluminum · ⚠️ Not for Mirrors/Marble",
     "specChips": [
       "280 ml Cartridge",
@@ -3503,7 +3435,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 345,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3546,10 +3478,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "300 ml · Neutral Cure · 🛡️ Mirror & Stone Safe",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Architectural Neutral Silicone · Mirror, ACP & Stone Safe · ±50% Joint Movement",
     "specChips": [
       "300 ml Cartridge",
@@ -3613,7 +3543,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 490,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3656,10 +3586,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml · German Quality · ⚠️ Not for Mirrors",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German-Engineered Silicone Sealant · Sanitary & Glazing · ⚠️ Not for Mirrors/Marble",
     "specChips": [
       "280 ml Cartridge",
@@ -3715,7 +3643,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 395,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3758,10 +3686,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml · Best Value Neutral · 🛡️ Mirror & UPVC Safe",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Best Value Neutral Silicone · 🛡️ Mirror, UPVC & Stone Safe · ₹240 Wholesale Rate",
     "specChips": [
       "280 ml Cartridge",
@@ -3821,7 +3747,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 285,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3864,10 +3790,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml · Anti-Fungal Pro · 🛡️ Mirror & Bath Safe",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Anti-Fungal Neutral Silicone · 🛡️ Safe for Mirrors & Granite · Sanitary & Kitchen Pro",
     "specChips": [
       "280 ml Cartridge",
@@ -3923,7 +3847,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 355,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3966,10 +3890,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml · Weatherproof Pro · Exterior Facade & ACP",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy Duty Architectural Weatherseal · ACP & Glass Facades · 🛡️ Stone & UPVC Safe",
     "specChips": [
       "280 ml Cartridge",
@@ -4025,7 +3947,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 410,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -4068,10 +3990,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "600 ml Foil Sausage · PU Expansion Joint · Overpaintable",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High Modulus Polyurethane Sealant · Concrete Floor Expansion Joints · ⚠️ Requires 600ml Sausage Gun",
     "specChips": [
       "600 ml Sausage",
@@ -4131,7 +4051,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 535,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -4172,10 +4092,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "750 ml Aerosol Can · Expands 30x · Door & Window Gap Filling",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "30x Expanding Polyurethane Foam · Door Frame & AC Pipe Gap Filler · Thermal & Acoustic Barrier",
     "specChips": [
       "750 ml Can",
@@ -4231,7 +4149,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 420,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -4273,10 +4191,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "9-Inch / 235mm · Smooth Thrust Rod · Anti-Drip",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty Pressed Steel Half-Barrel Gun · Smooth Ratchet Rod · Fits Standard 280-310ml Cartridges",
     "specChips": [
       "9-Inch Gun",
@@ -4336,7 +4252,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 380,
         "discountPercent": 17,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -4379,10 +4295,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "9-Inch / 320ml · Skeleton Frame · Contractor Grade",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "9-Inch Skeleton Sealant Gun · High Mechanical Advantage · Fits 280ml-320ml Tubes",
     "specChips": [
       "9-Inch Skeleton",
@@ -4438,7 +4352,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 370,
         "discountPercent": 17,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -4481,10 +4395,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "24mm / 1-Inch · Razor-Sharp Bead Lines · Zero Residue",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1-Inch Crepe Paper Masking Tape · Clean Release · Razor-Sharp Sealant & Paint Edges",
     "specChips": [
       "24mm (1 Inch)",
@@ -4540,7 +4452,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 45,
         "discountPercent": 20,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -4583,10 +4495,8 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "48mm / 2-Inch · Holds Laminate Edges · Wide Masking",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2-Inch Wide Crepe Tape · High Tensile Holding · Laminate Clamping & Facade Protection",
     "specChips": [
       "48mm (2 Inch)",
@@ -4642,7 +4552,7 @@ export const ALL_45_ADHESIVES_PRODUCTS: AdhesiveProduct[] = [
         "mrp": 80,
         "discountPercent": 18,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp"
+        "image": ""
       }
     ],
     "inStock": true,

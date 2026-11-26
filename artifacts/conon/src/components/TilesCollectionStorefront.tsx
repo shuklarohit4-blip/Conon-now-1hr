@@ -26,6 +26,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { ProductImage } from "@/components/ProductImage";
 
@@ -107,10 +108,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x600mm",
       "Glazed Vitrified (GVT) Glossy Finish"
     ],
-    "image": "/images/products/tiles-marble-granite/kajaria-eternity-zion-marfil-gvt-vitrified-floor-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-eternity-zion-marfil-gvt-vitrified-floor-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kajaria Eternity Zion Marfil GVT 600x600mm offers an elegant warm-toned Spanish marble visual with digital nano-polish and high stain resistance. Single shade batch lock guaranteed for color uniformity across rooms.",
     "highlights": [
       "15.5 sq ft coverage per box (4 pcs)",
@@ -161,10 +160,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x600mm",
       "Polished Vitrified (PVT) Mirror Shine"
     ],
-    "image": "/images/products/tiles-marble-granite/kajaria-polished-vitrified-tile-k6209-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-polished-vitrified-tile-k6209-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kajaria K6209 Polished Vitrified Tile is Lucknow's highest-running residential flooring tile. Features a pristine mirror shine, rectified sharp edges, and superior load-bearing strength.",
     "highlights": [
       "15.5 sq ft per box (4 pcs)",
@@ -215,10 +212,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x1200mm",
       "Glazed Vitrified (GVT) Exotic Jade Marble"
     ],
-    "image": "/images/products/tiles-marble-granite/kajaria-eternity-jade-green-gvt-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-eternity-jade-green-gvt-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kajaria Eternity Jade Green 600x1200mm slab vitrified tile creates seamless floors with 50% fewer grout lines. Stunning emerald onyx book-match styling perfect for drawing halls and accent floors.",
     "highlights": [
       "Large format 600x1200mm (2x4 ft)",
@@ -269,10 +264,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x1200mm",
       "Dry Granula Matt Architectural Texture"
     ],
-    "image": "/images/products/tiles-marble-granite/kajaria-rave-gris-dry-granula-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-rave-gris-dry-granula-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kajaria Rave Gris Dry Granula Vitrified 600x1200mm is an ultra-premium designer slab with granular tactile feel, R10 slip resistance, and contemporary Scandinavian slate grey aesthetics.",
     "highlights": [
       "Architectural dry granula tactile finish",
@@ -323,10 +316,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x600mm",
       "Glossy Polished Vitrified"
     ],
-    "image": "/images/products/tiles-marble-granite/somany-glossy-vitrified-floor-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/somany-glossy-vitrified-floor-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Somany 600x600mm Glossy Vitrified Floor Tile delivers unmatched brightness and scratch-resistance at an unbeatable \u20b951/sq ft rate. Protected with patented VC Shield high-abrasion technology.",
     "highlights": [
       "15.5 sq ft coverage per box (4 pcs)",
@@ -377,10 +368,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x600mm",
       "Dark Matt Anti-Skid Textured"
     ],
-    "image": "/images/products/tiles-marble-granite/somany-valor-liston-grey-dark-matt-vitrified-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/somany-valor-liston-grey-dark-matt-vitrified-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Somany Valor Liston Grey Dark Matt 600x600mm tile combines urban industrial concrete styling with slip-resistant durability. Perfect for open kitchens, modern bathrooms, and master suites.",
     "highlights": [
       "15.5 sq ft per box (4 pcs)",
@@ -431,10 +420,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x1200mm",
       "Polished Glazed Vitrified (PGVT) High Gloss"
     ],
-    "image": "/images/products/tiles-marble-granite/somany-pgvt-polished-glazed-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/somany-pgvt-polished-glazed-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Somany PGVT Polished Glazed Vitrified 600x1200mm features crystal-clear digital printing mimicking imported Italian Statuario and Travertine veining with high light reflectivity.",
     "highlights": [
       "15.5 sq ft coverage per box (2 slabs)",
@@ -485,10 +472,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x600mm",
       "Marble Finish Glossy PGVT"
     ],
-    "image": "/images/products/tiles-marble-granite/orientbell-pgvt-emperador-marble-finish-floor-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/orientbell-pgvt-emperador-marble-finish-floor-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Orientbell PGVT Emperador Marble Finish 600x600mm reproduces Spanish Dark Emperador marble's rich cocoa brown veins with razor-sharp high-definition digital ceramic glazing.",
     "highlights": [
       "15.5 sq ft per box (4 pcs)",
@@ -539,10 +524,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x1200mm",
       "GVT Premium Surface Glazed"
     ],
-    "image": "/images/products/tiles-marble-granite/orientbell-gvt-glossy-matte-designer-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/orientbell-gvt-glossy-matte-designer-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Orientbell GVT 600x1200mm Vitrified Floor & Wall Tile delivers grand visual scale and minimal grout joints. Highly recommended for upscale living rooms and contemporary bathrooms.",
     "highlights": [
       "15.5 sq ft per box (2 slabs)",
@@ -593,10 +576,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "800x800mm",
       "Double Charge Polished Heavy Duty"
     ],
-    "image": "/images/products/tiles-marble-granite/asian-granito-agl-double-charge-vitrified-floor-tile-800x800mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/asian-granito-agl-double-charge-vitrified-floor-tile-800x800mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Asian Granito (AGL) 800x800mm Double Charge Vitrified Tile features a 3-4mm upper design layer fused with high-density vitrified porcelain base. Engineered for lifetime high-traffic commercial & bungalow flooring.",
     "highlights": [
       "Extra large 800x800mm (32x32 inch) format",
@@ -647,10 +628,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x1200mm",
       "Statuario Marble Vein GVT"
     ],
-    "image": "/images/products/tiles-marble-granite/simpolo-gvt-statuario-matte-glossy-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/simpolo-gvt-statuario-matte-glossy-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Simpolo GVT Statuario 600x1200mm brings authentic Italian Carrara/Statuario elegance with subtle feathered grey veins on an ultra-white background. Manufactured with iM+ surface antibacterial coating.",
     "highlights": [
       "15.5 sq ft coverage per box (2 slabs)",
@@ -701,10 +680,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "600x600mm",
       "Double Charge High Gloss Marbonite"
     ],
-    "image": "/images/products/tiles-marble-granite/h-r-johnson-marbonite-double-charge-vitrified-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/h-r-johnson-marbonite-double-charge-vitrified-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Johnson Marbonite Double Charge 600x600mm is synonymous with luxury Indian flooring. High breaking strength, deep nano-sealed gloss, and extreme wear-resistance make it ideal for multi-generation homes.",
     "highlights": [
       "15.5 sq ft per box (4 pcs)",
@@ -755,10 +732,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "300x450mm",
       "Glossy Ceramic Wall Glaze"
     ],
-    "image": "/images/products/tiles-marble-granite/kajaria-ceramic-glossy-bathroom-kitchen-wall-tile-300x450mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-ceramic-glossy-bathroom-kitchen-wall-tile-300x450mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kajaria 300x450mm (12x18 in) Glossy Ceramic Wall Tile features water-repellent glazed ceramic body that resists soap scum, water stains, and kitchen oil grease.",
     "highlights": [
       "9 sq ft coverage per box (6 pcs)",
@@ -809,10 +784,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "300x450mm",
       "Digital Glossy Ceramic Dyna Texture"
     ],
-    "image": "/images/products/tiles-marble-granite/orientbell-dyna-grey-dk-glossy-ceramic-wall-tile-300x450mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/orientbell-dyna-grey-dk-glossy-ceramic-wall-tile-300x450mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Orientbell Dyna Grey DK 300x450mm brings rich charcoal grey marble textures with contrasting white veins. Pairs perfectly with light highlighter wall tiles for designer bathroom themes.",
     "highlights": [
       "9 sq ft coverage per box (6 pcs)",
@@ -863,10 +836,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "300x450mm",
       "Digital Printed Glazed Ceramic"
     ],
-    "image": "/images/products/tiles-marble-granite/h-r-johnson-ceramic-digital-wall-tile-300x450mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/h-r-johnson-ceramic-digital-wall-tile-300x450mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "H&R Johnson 300x450mm Digital Wall Tile provides proven ceramic durability with contemporary patterns. Easy to cut, fix, and maintain across residential and commercial wet areas.",
     "highlights": [
       "9 sq ft coverage per box (6 pcs)",
@@ -917,10 +888,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "300x300mm",
       "Rustic Anti-Skid Embossed Diamond Pattern"
     ],
-    "image": "/images/products/tiles-marble-granite/morbi-heavy-duty-green-diamond-rustic-anti-skid-parking-tile-300x300mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/morbi-heavy-duty-green-diamond-rustic-anti-skid-parking-tile-300x300mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Morbi Heavy-Duty 300x300mm (12x12 in) Green Diamond Parking Tile features deeply embossed diamond tread pattern for extreme tire grip in wet rain conditions. Built to withstand SUV and truck axle loads.",
     "highlights": [
       "8 sq ft coverage per box (8 pcs)",
@@ -971,10 +940,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "300x300mm",
       "Rustic Heavy-Duty Checked Matte"
     ],
-    "image": "/images/products/tiles-marble-granite/morbi-heavy-duty-blue-grey-checked-rustic-parking-tile-300x300mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/morbi-heavy-duty-blue-grey-checked-rustic-parking-tile-300x300mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Morbi Heavy-Duty Blue Grey Checked 300x300mm Parking Tile provides durable slip-resistance for residential driveways, ramps, and covered car porches in Lucknow.",
     "highlights": [
       "8 sq ft coverage per box (8 pcs)",
@@ -1025,10 +992,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "300x300mm",
       "Endura Industrial Heavy-Duty Anti-Slip"
     ],
-    "image": "/images/products/tiles-marble-granite/kajaria-endura-heavy-duty-outdoor-parking-tile-300x300mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-endura-heavy-duty-outdoor-parking-tile-300x300mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kajaria Endura 300x300mm is engineered for high vehicular stress, commercial petrol pumps, commercial parking lots, and luxury villa ramps with R11 slip rating.",
     "highlights": [
       "8 sq ft coverage per box (8 pcs)",
@@ -1078,10 +1043,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Mirror Polished Natural Granite"
     ],
-    "image": "/images/products/tiles-marble-granite/rajasthan-black-r-black-polished-granite-slab-16-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/rajasthan-black-r-black-polished-granite-slab-16-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Rajasthan Black (R-Black) Granite Slab 16-18mm from Transport Nagar / Chinhat stockyards. Uniform fine crystalline black grain with high gloss mirror polish. Delivered strictly via A-frame vertical truck.",
     "highlights": [
       "16-18mm calibrated natural granite slab",
@@ -1131,10 +1094,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Golden Fleck Mirror Polish"
     ],
-    "image": "/images/products/tiles-marble-granite/black-galaxy-polished-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/black-galaxy-polished-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "South Indian Black Galaxy Granite Slab 18mm imported from Chimakurthy/Ongole mines. Features pitch-black backdrop shimmering with natural golden and silver bronzite mineral crystals.",
     "highlights": [
       "18mm calibrated premium gangsaw cut slab",
@@ -1184,10 +1145,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Jet Black High Gloss Line Polished"
     ],
-    "image": "/images/products/tiles-marble-granite/z-black-absolute-black-premium-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/z-black-absolute-black-premium-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Z-Black (Absolute Black) Premium Granite Slab 18mm offers unmatched monolithic black elegance. Line-polished on Italian machinery with zero color variation or pinholes. The definitive luxury kitchen platform stone.",
     "highlights": [
       "18mm solid thickness line-polished slab",
@@ -1237,10 +1196,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Deep Red Fine Grain Mirror Polish"
     ],
-    "image": "/images/products/tiles-marble-granite/lakha-red-polished-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/lakha-red-polished-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Lakha Red Polished Granite Slab 18mm mined in Jodhpur Rajasthan. Renowned for its auspicious crimson red hue sprinkled with subtle micro-crystals. Highly sought after for home mandir altars and stairs.",
     "highlights": [
       "18mm thickness premium gangsaw polished slab",
@@ -1290,10 +1247,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Natural Green Mirror Finish"
     ],
-    "image": "/images/products/tiles-marble-granite/hassan-green-polished-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/hassan-green-polished-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Hassan Green Polished Granite Slab 18mm from Karnataka brings deep olive forest green tones with subtle clouding. Exceptional mechanical density and moisture resistance.",
     "highlights": [
       "18mm gangsaw cut slab",
@@ -1343,10 +1298,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Uniform White Grain Polish"
     ],
-    "image": "/images/products/tiles-marble-granite/p-white-platinum-white-granite-slab-16-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/p-white-platinum-white-granite-slab-16-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "P-White (Platinum White) Granite Slab 16-18mm is Lucknow's highest-volume natural stone for apartment staircase steps, commercial lobbies, and window sills at an economical \u20b960/sq ft.",
     "highlights": [
       "Economical \u20b960/sq ft natural granite solution",
@@ -1396,10 +1349,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Exotic Veined Gloss Finish"
     ],
-    "image": "/images/products/tiles-marble-granite/alaska-white-exotic-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/alaska-white-exotic-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Alaska White Exotic Granite Slab 18mm showcases swirling frosty white quartz, warm beige feldspar, and dark biotite veins. Gives kitchen islands and bathroom vanities an ultra-luxe Italian appearance.",
     "highlights": [
       "18mm calibrated slab with dramatic natural veins",
@@ -1449,10 +1400,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Fine Polished Beige Marble"
     ],
-    "image": "/images/products/tiles-marble-granite/katni-beige-polished-marble-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/katni-beige-polished-marble-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Katni Beige Polished Marble Slab 18mm sourced from Madhya Pradesh quarries. Features warm honey and beige hues with subtle gold waves. Takes a mirror polish and stays cool underfoot during Lucknow summers.",
     "highlights": [
       "18mm thick natural calcite marble slab",
@@ -1502,10 +1451,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Calcite White Polished with Purple/Grey Veins"
     ],
-    "image": "/images/products/tiles-marble-granite/morwad-banswara-white-marble-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/morwad-banswara-white-marble-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Morwad (Banswara) White Marble Slab 18mm is Rajasthan's most popular residential marble. Pristine white calcite background adorned with flowing grey and violet minerals.",
     "highlights": [
       "18mm calibrated slab with high compressive strength",
@@ -1555,10 +1502,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Dungri Natural Vein Polish"
     ],
-    "image": "/images/products/tiles-marble-granite/makrana-dungri-albeta-white-marble-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/makrana-dungri-albeta-white-marble-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Makrana Dungri White Marble Slab 18mm comes from the same legendary veins as the Taj Mahal. Does not require chemical resin treatment and never loses gloss over generations.",
     "highlights": [
       "Authentic 18mm Makrana Dungri quarry stock",
@@ -1608,10 +1553,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Heritage Pure White Mirror Polish"
     ],
-    "image": "/images/products/tiles-marble-granite/makrana-pure-white-premium-marble-slab-20mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/makrana-pure-white-premium-marble-slab-20mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Makrana Pure White Premium Marble Slab 20mm represents the pinnacle of Indian natural stone. Crystalline snow-white texture with near-zero veins, cut to a solid 20mm thickness.",
     "highlights": [
       "Solid 20mm thickness for lifetime re-polishing",
@@ -1661,10 +1604,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Italian Polished Classico High Shine"
     ],
-    "image": "/images/products/tiles-marble-granite/botticino-carrara-polished-italian-marble-slab-20mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/botticino-carrara-polished-italian-marble-slab-20mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Botticino / Carrara Polished Italian Marble Slab 20mm imported from Brescia, Italy. Features a warm beige luminous oyster background with gold ochre accents and fiber-mesh resin backing.",
     "highlights": [
       "Authentic Italian imported Botticino/Carrara 20mm slab",
@@ -1714,10 +1655,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Signature Bold Grey Vein Mirror Polish"
     ],
-    "image": "/images/products/tiles-marble-granite/statuario-polished-italian-marble-slab-20mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/statuario-polished-italian-marble-slab-20mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Statuario Polished Italian Marble 20mm is the world's most coveted natural stone. Mined in Carrara, Italy, its bright white field is crossed by sweeping charcoal-grey river veins.",
     "highlights": [
       "Genuine Carrara Italian Statuario 20mm gangsaw slab",
@@ -1767,10 +1706,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Rough Cut Calibrated Natural Non-Slip"
     ],
-    "image": "/images/products/tiles-marble-granite/kota-grey-unpolished-cut-flooring-stone-22x22-in.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kota-grey-unpolished-cut-flooring-stone-22x22-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kota Grey Unpolished/Cut Flooring Stone 22x22 in (approx 25-30mm thick). Limestone quarried in Kota, Rajasthan. Naturally slip-resistant, non-water absorbent, and compliant with 2026 5% GST HSN 2515.",
     "highlights": [
       "2026 GST compliant: strictly 5% GST (HSN 2515)",
@@ -1820,10 +1757,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "High Gloss Machine Polished Kota Green"
     ],
-    "image": "/images/products/tiles-marble-granite/kota-high-polished-flooring-slab-22x22-in.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kota-high-polished-flooring-slab-22x22-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Kota High-Polished Flooring Slab 22x22 in provides a clean bluish-green natural sheen. Milled with mirror-gloss polish on one side and ready for immediate laying with Birla White or grey cement mortar.",
     "highlights": [
       "Polished stone slab 18% GST (HSN 6802)",
@@ -1873,10 +1808,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "Pickup / Mini-Truck",
       "Fine Honed/Polished Black Slate"
     ],
-    "image": "/images/products/tiles-marble-granite/cuddapah-kadappa-black-polished-stone-slab.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/cuddapah-kadappa-black-polished-stone-slab.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Cuddapah (Kadappa) Black Polished Stone Slab from Andhra Pradesh is Lucknow's classic choice for kitchen cabinets, pantry vertical partitions, sink slabs, and boundary wall plinths.",
     "highlights": [
       "20mm thick dense black metamorphic limestone",
@@ -1924,10 +1857,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/roff-rainbow-tile-mate-cementitious-grout-1kg-ivory-terracotta.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/roff-rainbow-tile-mate-cementitious-grout-1kg-ivory-terracotta.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Roff Rainbow Tile Mate is a premium polymer-modified cementitious joint filler for ceramic wall and vitrified floor tiles (1-5mm joint width). Provides vibrant crack-free joint sealing.",
     "highlights": [
       "1 kg pack fills up to 40-50 sq ft of 300x450mm tile joints",
@@ -1975,10 +1906,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/roff-t13-rainbow-tile-mate-epoxy-grout-1kg-kit.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/roff-t13-rainbow-tile-mate-epoxy-grout-1kg-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Roff T13 Rainbow Tile Mate Epoxy Grout is a 3-component chemical resistant epoxy system for luxury vitrified tile and granite flooring joints. Resists turmeric, acid, oil, and chemical stains.",
     "highlights": [
       "100% stain-proof & waterproof epoxy formulation",
@@ -2026,10 +1955,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/myk-laticrete-sp-100-stainfree-3-component-epoxy-tile-grout-1kg.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/myk-laticrete-sp-100-stainfree-3-component-epoxy-tile-grout-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "MYK Laticrete SP-100 Stainfree is the gold standard for floor tile jointing. Complete 3-part kit (Part A resin, Part B hardener, Part C colored filler). Never cracks or discolors.",
     "highlights": [
       "ANSI A118.3 certified 100% solid epoxy grout",
@@ -2077,10 +2004,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/roff-t16-cera-clean-tile-ceramic-cleaner-1l.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/roff-t16-cera-clean-tile-ceramic-cleaner-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Roff T16 Cera Clean 1L rapidly removes tough cement residue, grout haze, white water scale, and construction grime from new vitrified tiles, ceramic walls, and bathroom fittings.",
     "highlights": [
       "Dissolves dried cement residue & construction grout haze",
@@ -2128,10 +2053,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/leqwell-3mm-reusable-tile-spacers-pack-of-100.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/leqwell-3mm-reusable-tile-spacers-pack-of-100.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Leqwell 3mm Reusable Cross Tile Spacers ensure exact 3mm joint symmetry across all floor and wall tile installations. Virgin durable plastic prevents crushing under heavy tiles.",
     "highlights": [
       "Pack of 100 precision injection-molded spacers",
@@ -2179,10 +2102,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/fastobond-tile-leveling-system-kit-50-clips-50-wedges.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/fastobond-tile-leveling-system-kit-50-clips-50-wedges.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Fastobond Tile Leveling System Starter Kit includes 50 disposable 1.5mm clips and 50 heavy-duty reusable wedges. Eliminates tile lippage and uneven edges on large format 600x1200mm tiles.",
     "highlights": [
       "Eliminates tile lippage for perfectly flat floors",
@@ -2230,10 +2151,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/flamingo-pro-tile-leveling-system-300-clips-100-wedges.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/flamingo-pro-tile-leveling-system-300-clips-100-wedges.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Flamingo Pro Tile Leveling System provides contractor volume: 300 disposable clips and 100 heavy-gauge reusable wedges. Covers ~300-400 sq ft of large format vitrified tiles with zero lippage.",
     "highlights": [
       "Full contractor pack: 300 clips + 100 reusable wedges",
@@ -2281,10 +2200,8 @@ export const TILES_STONE_PRODUCTS: TileStoneProduct[] = [
       "18% GST",
       "2-Wheeler"
     ],
-    "image": "/images/products/tiles-marble-granite/bosch-4-inch-110mm-continuous-rim-diamond-tile-blade-2607019471.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/bosch-4-inch-110mm-continuous-rim-diamond-tile-blade-2607019471.webp"
-    ],
+    "image": "",
+    "images": [],
     "description": "Bosch 110mm (4-Inch) Continuous Rim Diamond Cutting Disc (2607019471) is optimized for angle grinders and marble cutters. Delivers razor-clean, chip-free cuts on vitrified tiles, ceramic slabs, and granite.",
     "highlights": [
       "Bosch OEM Part Number: 2607019471",
@@ -2306,6 +2223,7 @@ export interface TilesStorefrontProps {
 
 export const TilesCollectionStorefront: React.FC<TilesStorefrontProps> = ({ onOpenDetail }) => {
   const queryClient = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const { data: cartData } = useGetCart();
   const addToCartMutation = useAddToCart();
   const updateCartMutation = useUpdateCartItem();
@@ -2365,7 +2283,7 @@ export const TilesCollectionStorefront: React.FC<TilesStorefrontProps> = ({ onOp
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    return TILES_STONE_PRODUCTS.filter((p) => {
+    return TILES_STONE_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       // Subcategory filter
       if (activeSubcategory !== "all") {
         const matchedSub = subcategories.find((s) => s.id === activeSubcategory);
@@ -2388,7 +2306,7 @@ export const TilesCollectionStorefront: React.FC<TilesStorefrontProps> = ({ onOp
       }
       return true;
     });
-  }, [activeSubcategory, selectedBrand, searchQuery]);
+  }, [activeSubcategory, selectedBrand, searchQuery, resolveProduct]);
 
   // Cart items flattened
   const cartItems = useMemo(() => {

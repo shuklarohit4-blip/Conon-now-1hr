@@ -17,13 +17,7 @@ import {
 import { toast } from "sonner";
 import { rememberPromo } from "@/lib/promoCodes";
 import { Confetti } from "./Confetti";
-import {
-  utWaterplus,
-  imgAsianpaintsBucket,
-  imgKajariaTile,
-  imgAstralPipe,
-  PROD,
-} from "@/lib/productImages";
+import { CononProductMedia } from "./CononProductMedia";
 
 interface FestivalHeroBannerProps {
   onSelectCategory?: (category: string) => void;
@@ -42,7 +36,7 @@ interface FestivalOffer {
   gradient: string;
   accentColor: string;
   glowColor: string;
-  products: { name: string; img: string; tag: string }[];
+  products: { name: string; brand: string; categorySlug: string; tag: string }[];
   usps: string[];
   ctaCategory: string;
 }
@@ -61,9 +55,9 @@ const FESTIVAL_OFFERS: FestivalOffer[] = [
     accentColor: "#fbbf24",
     glowColor: "rgba(251, 191, 36, 0.28)",
     products: [
-      { name: "UltraTech Weather Plus", img: utWaterplus, tag: "OPC 53" },
-      { name: "Tata Tiscon 550SD", img: PROD("tmt-bars"), tag: "Fe 550D" },
-      { name: "First-Class Bricks", img: PROD("red-brick"), tag: "Kiln Fired" },
+      { name: "UltraTech Weather Plus", brand: "UltraTech", categorySlug: "cement-civil-works", tag: "OPC 53" },
+      { name: "Tata Tiscon 550SD", brand: "Tata Steel", categorySlug: "tmt-bars-steel", tag: "Fe 550D" },
+      { name: "First-Class Bricks", brand: "Avval Kiln", categorySlug: "bricks-blocks", tag: "Kiln Fired" },
     ],
     usps: [
       "⚡ 60-Min Guaranteed Site Delivery",
@@ -85,9 +79,9 @@ const FESTIVAL_OFFERS: FestivalOffer[] = [
     accentColor: "#f59e0b",
     glowColor: "rgba(245, 158, 11, 0.25)",
     products: [
-      { name: "Asian Paints Apex", img: imgAsianpaintsBucket, tag: "20L Bucket" },
-      { name: "Kajaria Vitrified", img: imgKajariaTile, tag: "600x600mm" },
-      { name: "Astral CPVC", img: imgAstralPipe, tag: "FlowGuard" },
+      { name: "Asian Paints Apex", brand: "Asian Paints", categorySlug: "paints-surface", tag: "20L Bucket" },
+      { name: "Kajaria Vitrified", brand: "Kajaria", categorySlug: "tiles-flooring", tag: "600x600mm" },
+      { name: "Astral CPVC", brand: "Astral", categorySlug: "cpvc-plumbing-tanks", tag: "FlowGuard" },
     ],
     usps: [
       "🎨 Free Computerized Color Tinting",
@@ -255,14 +249,23 @@ export function FestivalHeroBanner({
                   <div
                     className="w-14 h-14 rounded-2xl p-1 bg-white flex items-center justify-center shadow-lg border border-amber-300/40 relative overflow-hidden"
                   >
-                    <img
-                      src={p.img}
-                      alt={p.name}
+                    <CononProductMedia
+                      product={{
+                        id: p.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+                        title: p.name,
+                        brand: p.brand,
+                        categorySlug: p.categorySlug,
+                      }}
+                      title={p.name}
+                      brand={p.brand}
+                      categorySlug={p.categorySlug}
+                      variant="thumb"
+                      showGalleryBadge={false}
+                      containerClassName="w-full h-full"
                       className="w-full h-full object-contain"
-                      loading="lazy"
                     />
                     <span
-                      className="absolute bottom-0 inset-x-0 text-[7px] font-black uppercase text-center py-0.5 bg-slate-900/80 text-amber-300 truncate px-0.5"
+                      className="absolute bottom-0 inset-x-0 text-[7px] font-black uppercase text-center py-0.5 bg-slate-900/80 text-amber-300 truncate px-0.5 z-10"
                     >
                       {p.tag}
                     </span>

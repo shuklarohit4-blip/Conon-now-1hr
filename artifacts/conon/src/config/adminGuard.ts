@@ -11,7 +11,7 @@
  */
 
 export const IS_LOCAL_ADMIN: boolean =
-  import.meta.env.VITE_LOCAL_ADMIN === "true";
+  Boolean(import.meta.env?.VITE_LOCAL_ADMIN === "true");
 
 export const MAC_ADMIN_KEY: string =
-  IS_LOCAL_ADMIN ? ((import.meta.env.VITE_MAC_ADMIN_KEY as string) || "") : "";
+  IS_LOCAL_ADMIN ? ((import.meta.env?.VITE_MAC_ADMIN_KEY as string) || "") : "";

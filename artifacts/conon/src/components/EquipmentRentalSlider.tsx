@@ -5,7 +5,8 @@ import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAddToCart, getGetCartQueryKey } from "@workspace/api-client-react";
 import { Zap, ChevronRight, ShieldCheck, Clock } from "lucide-react";
-import { CononImage } from "./CononImage";
+import { CononProductMedia } from "./CononProductMedia";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 
 /* ── Heavy equipment fleet (home slider) ──────────────────────────────
    Industrial dark-theme rental fleet shown directly below the category
@@ -22,57 +23,55 @@ type Rental = {
   image: string;
 };
 
-/** Local machine photo (bulletproof — no remote dependency). */
-const RENTAL_IMG = (slug: string) => `${import.meta.env.BASE_URL}rentals/${slug}.png`;
-
+/** Master heavy equipment rental cards (images sourced strictly from Admin Media Vault / real-products). */
 const rentalEquipment: Rental[] = [
   {
     id: "r1", name: "JCB Backhoe Loader 3DX", category: "Earthmoving",
     rate: "₹1,200 / Hour", minBooking: "Min. 4 Hours",
     specs: "Includes operator. Ideal for excavation & loading.",
-    image: RENTAL_IMG("jcb-backhoe"),
+    image: "",
   },
   {
     id: "r2", name: "Hydraulic Excavator (Poclain)", category: "Earthmoving",
     rate: "₹1,800 / Hour", minBooking: "Min. 8 Hours",
     specs: "Chain-mounted, for heavy deep excavation.",
-    image: RENTAL_IMG("excavator"),
+    image: "",
   },
   {
     id: "r3", name: "Concrete Mixer (1-Bag)", category: "Concrete",
     rate: "₹800 / Day", minBooking: "Min. 1 Day",
     specs: "Diesel engine, heavy-duty mixing drum.",
-    image: RENTAL_IMG("concrete-mixer"),
+    image: "",
   },
   {
     id: "r4", name: "Concrete Needle Vibrator", category: "Concrete",
     rate: "₹350 / Day", minBooking: "Min. 1 Day",
     specs: "High-frequency compaction with 2m nozzle.",
-    image: RENTAL_IMG("needle-vibrator"),
+    image: "",
   },
   {
     id: "r5", name: "Earth Rammer / Compactor", category: "Compaction",
     rate: "₹900 / Day", minBooking: "Min. 1 Day",
     specs: "Petrol-driven, perfect for plinth/soil compaction.",
-    image: RENTAL_IMG("earth-rammer"),
+    image: "",
   },
   {
     id: "r6", name: "Hydra Crane (14 Ton)", category: "Material Handling",
     rate: "₹1,200 / Hour", minBooking: "Min. 4 Hours",
     specs: "Mobile crane for TMT and heavy material shifting.",
-    image: RENTAL_IMG("hydra-crane"),
+    image: "",
   },
   {
     id: "r7", name: "Air Compressor (50L)", category: "Support Equipment",
     rate: "₹800 / Day", minBooking: "Min. 1 Day",
     specs: "8 Bar pressure, for painting & pneumatic tools.",
-    image: RENTAL_IMG("air-compressor"),
+    image: "",
   },
   {
     id: "r8", name: "DG Set (62.5 kVA)", category: "Support Equipment",
     rate: "₹2,000 / Day", minBooking: "Min. 1 Day",
     specs: "Silent Diesel Generator for site power backup.",
-    image: RENTAL_IMG("dg-set"),
+    image: "",
   },
 ];
 
@@ -84,6 +83,7 @@ function parseRate(rate: string): { amount: number; unit: string } {
 }
 
 export function EquipmentRentalSlider() {
+  const { resolveProduct } = useProductMediaVault();
   const qc = useQueryClient();
   const addToCart = useAddToCart({
     mutation: { onSuccess: () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() }) },
@@ -153,7 +153,8 @@ export function EquipmentRentalSlider() {
         className="flex gap-3 overflow-x-auto px-5 pb-5 pt-1 snap-x snap-mandatory"
         style={{ scrollbarWidth: "none" }}
       >
-        {rentalEquipment.map((eq, i) => {
+        {rentalEquipment.map((rawEq, i) => {
+          const eq = resolveProduct(rawEq);
           const busy = addToCart.isPending && pendingId === eq.id;
           return (
             <motion.div
@@ -166,7 +167,23 @@ export function EquipmentRentalSlider() {
             >
               {/* Image (aspect-video, cinematic) */}
               <div className="relative w-full aspect-video bg-slate-800">
-                <CononImage src={eq.image} alt={eq.name} dark className="absolute inset-0" />
+                <CononProductMedia
+                  product={{
+                    id: eq.id,
+                    title: eq.name,
+                    name: eq.name,
+                    brand: eq.category,
+                    category: eq.category,
+                    categorySlug: "heavy-machine-rentals",
+                    unit: parseRate(eq.rate).unit,
+                    mediaType: "rental",
+                  }}
+                  mediaType="rental"
+                  variant="cover"
+                  isDark
+                  containerClassName="w-full h-full"
+                  className="w-full h-full object-cover"
+                />
                 <span className="absolute top-2 right-2 flex items-center gap-1 text-[9px] font-black text-slate-900 bg-yellow-400 px-2 py-1 rounded-full shadow">
                   <Zap className="w-2.5 h-2.5" fill="currentColor" strokeWidth={0} /> Ready to Dispatch
                 </span>

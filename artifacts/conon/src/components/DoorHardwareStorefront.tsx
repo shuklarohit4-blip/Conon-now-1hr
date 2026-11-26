@@ -31,6 +31,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import { RealProductImage } from "@/components/RealProductImage";
 import type { Product } from "@/components/ProductCard";
 import {
@@ -107,7 +108,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Hafele",
     role: "Heavy Main Door Hinge (80kg Grade)",
     price: 349,
-    image: "/images/products/door-hardware-locks/hafele-ss304-ball-bearing-butt-hinge-5x3x3in-fire-rated.webp",
+    image: "",
     desc: "Grade 304 stainless steel ball bearing hinge with two-ball bearings. Fire door tested, handles 80kg door leaf with 3 hinges.",
     hsn: "8302",
   },
@@ -117,7 +118,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Godrej",
     role: "Matte Black Designer Hinge (70kg)",
     price: 648,
-    image: "/images/products/door-hardware-locks/godrej-ss304-ball-bearing-butt-hinge-5in-12g-matte-black-2pcs.webp",
+    image: "",
     desc: "Matches matte black digital locks and handles. Heavy-duty 12 gauge SS 304 with ball bearing motion.",
     hsn: "8302",
   },
@@ -127,7 +128,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Met Craft",
     role: "Silent Magnetic Floor/Wall Stopper",
     price: 435,
-    image: "/images/products/door-hardware-locks/met-craft-ss304-soft-close-magnetic-door-stopper-4-25in-silver.webp",
+    image: "",
     desc: "Integrated soft-catch spring absorbs closing impact and firmly retains doors up to 60kg without slamming.",
     hsn: "8302",
   },
@@ -137,7 +138,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Apace",
     role: "Secondary Security Night Latch Bolt",
     price: 98,
-    image: "/images/products/door-hardware-locks/apace-apstb89ss-8inch-ss-matte-tower-bolt.webp",
+    image: "",
     desc: "High-grade stainless steel with smooth sliding rod and snug-fit socket. Lucknow home favorite for top/bottom latching.",
     hsn: "8302",
   },
@@ -147,7 +148,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Godrej",
     role: "Auto-Closing Hydraulic Closer",
     price: 1299,
-    image: "/images/products/door-hardware-locks/godrej-hercules-60kg-hydraulic-door-closer-en3-1lakh-cycles.webp",
+    image: "",
     desc: "Dual-speed adjustable hydraulic valve (closing & latching speed). Tested to 1,00,000 cycles for smooth self-closing.",
     hsn: "8302",
   },
@@ -157,7 +158,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Dorset",
     role: "Commercial Grade Door Closer",
     price: 927,
-    image: "/images/products/door-hardware-locks/dorset-dc60sm-60kg-overhead-hydraulic-door-closer-satin.webp",
+    image: "",
     desc: "Aluminium extruded body with rack-and-pinion control. Reversible for left and right hand opening doors.",
     hsn: "8302",
   },
@@ -167,7 +168,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Godrej",
     role: "Aldrop Heavy-Duty Brass Lock",
     price: 800,
-    image: "/images/products/door-hardware-locks/godrej-navtal-7lever-65mm-heavy-duty-brass-padlock-4keys.webp",
+    image: "",
     desc: "India's iconic 7-brass-lever padlock with hardened boron-steel shackle. Perfect companion for 12\" main door aldrops.",
     hsn: "8301",
   },
@@ -177,7 +178,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Cent Style",
     role: "12\" Main Door Security Aldrop",
     price: 1299,
-    image: "/images/products/door-hardware-locks/cent-style-12inch-heavy-duty-ss-aldrop-door-bolt-silver.webp",
+    image: "",
     desc: "14mm solid stainless steel rod with anti-cut hasp and heavy mounting brackets for maximum entrance security.",
     hsn: "8302",
   },
@@ -187,7 +188,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Bling Queen",
     role: "12\" Heavy-Duty Designer Aldrop",
     price: 2049,
-    image: "/images/products/door-hardware-locks/bling-queen-12inch-heavy-duty-stainless-steel-main-door-aldrop.webp",
+    image: "",
     desc: "Premium architectural matte finish 16mm thick aldrop with complete screw kit and heavy strike plate.",
     hsn: "8302",
   },
@@ -197,7 +198,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Godrej",
     role: "Vertical Interlocking Rim Lock",
     price: 2199,
-    image: "/images/products/door-hardware-locks/godrej-vertibolt-ultra-xl-plus-1ck-rim-lock-4291-satin-nickel.webp",
+    image: "",
     desc: "Vertical interlocking deadbolt prevents jimmying and prying door open. Dual-turn mechanism.",
     hsn: "8301",
   },
@@ -207,7 +208,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Godrej",
     role: "Triple Deadbolt Rim Lock",
     price: 3300,
-    image: "/images/products/door-hardware-locks/godrej-ultra-tribolt-1ck-latchbolt-lock-8111-antique-brass.webp",
+    image: "",
     desc: "3 steel deadbolts with integrated latchbolt and holdback button. 14-pin high security dimple cylinder.",
     hsn: "8301",
   },
@@ -217,7 +218,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Godrej",
     role: "Smart Digital Mortise Lock",
     price: 10900,
-    image: "/images/products/door-hardware-locks/godrej-catus-touch-plus-digital-mortise-lock-4200-black.webp",
+    image: "",
     desc: "Fingerprint, PIN, RFID card and manual key mortise lock. Auto-locking and spy-proof password keypad.",
     hsn: "8301",
   },
@@ -227,7 +228,7 @@ const DOOR_KIT_CROSS_SELL_CATALOG: Record<
     brand: "Falna SS",
     role: "Architectural Main Door Pull Handle",
     price: 500,
-    image: "/images/products/door-hardware-locks/falna-ss-main-door-pull-handle-12-18-inch-ss-304-matte-cp.webp",
+    image: "",
     desc: "Dual-tone mirror chrome and satin SS 304 architectural pull handle for main entrance doors and commercial glass partitions.",
     hsn: "8302",
   },
@@ -238,6 +239,7 @@ export function DoorHardwareStorefront({
   onBackToDirectory,
 }: DoorHardwareStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -289,7 +291,7 @@ export function DoorHardwareStorefront({
 
   // Filter Logic
   const filteredProducts = useMemo(() => {
-    return ALL_26_DOOR_HARDWARE_PRODUCTS.filter((prod) => {
+    return ALL_26_DOOR_HARDWARE_PRODUCTS.map((p) => resolveProduct(p)).filter((prod) => {
       // 1. Subcategory
       if (activeSubcat !== "ALL" && prod.doorSubcategory !== activeSubcat) {
         return false;
@@ -391,7 +393,7 @@ export function DoorHardwareStorefront({
 
       return true;
     });
-  }, [activeSubcat, selectedBrandTier, selectedBrand, doorTypeFilter, mechanismFilter, finishFilter]);
+  }, [activeSubcat, selectedBrandTier, selectedBrand, doorTypeFilter, mechanismFilter, finishFilter, resolveProduct]);
 
   // Cart Operations
   const handleAddToCart = (e: React.MouseEvent, prod: DoorHardwareProduct) => {

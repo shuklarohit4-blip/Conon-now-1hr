@@ -22,7 +22,7 @@ import { PaymentSheet } from "./PaymentSheet";
 import { AddressAutocomplete } from "./AddressAutocomplete";
 import { toast } from "sonner";
 import { categoryPhoto, onImgError } from "../lib/imgFallback";
-import { RealProductImage } from "./RealProductImage";
+import { CononProductMedia } from "./CononProductMedia";
 
 /* ── charges & tax ───────────────────────────────────────────── */
 const GST_RATE  = 0.18;            // 18% standard GST on materials + service
@@ -372,12 +372,14 @@ export function CheckoutDialog({ isOpen, onClose, categoryFilter, total }: Check
                 {allItems.map((item: any) => (
                   <div key={item.id} className="flex items-center gap-3 px-4 py-3 border-b border-gray-50 last:border-0">
                     <div className="w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
-                      <RealProductImage
+                      <CononProductMedia
                         product={item}
                         src={item.imageUrl}
                         title={item.name}
                         alt={item.name}
                         variant="thumb"
+                        showGalleryBadge={false}
+                        containerClassName="w-full h-full"
                         className="w-full h-full object-contain p-1"
                       />
                     </div>
@@ -423,13 +425,15 @@ export function CheckoutDialog({ isOpen, onClose, categoryFilter, total }: Check
                       <div key={m.id} className="w-32 shrink-0 bg-white rounded-2xl overflow-hidden" style={{ border: "1px solid #e5e7eb" }}>
                         <div className="relative">
                           <div className="h-24 bg-gray-100 flex items-center justify-center">
-                            <RealProductImage
+                            <CononProductMedia
                               product={m}
                               src={m.imageUrl}
                               category={m.category}
                               title={m.name}
                               alt={m.name}
                               variant="thumb"
+                              showGalleryBadge={false}
+                              containerClassName="w-full h-full"
                               className="h-full w-full object-contain p-2"
                             />
                           </div>

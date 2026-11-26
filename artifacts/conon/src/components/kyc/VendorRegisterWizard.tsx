@@ -21,14 +21,14 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useKyc, KycDocument } from "@/context/KycContext";
+import { useKyc, KycDocument, type PartnerKycApplication } from "@/context/KycContext";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import { useVendorTheme } from "@/context/VendorThemeContext";
 import { useVendorLang } from "@/context/VendorLanguageContext";
 
 interface VendorRegisterWizardProps {
-  onSuccess?: () => void;
+  onSuccess?: (app?: PartnerKycApplication) => void;
   onCancel?: () => void;
 }
 
@@ -61,57 +61,52 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
 
   // Step 1: Dukaan Identity
-  const [firmName, setFirmName] = useState("Awadh Building Solutions & Pipe Depot");
-  const [ownerName, setOwnerName] = useState("Anurag Mishra");
-  const [phone, setPhone] = useState("+91 94150 88219");
+  const [firmName, setFirmName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [phone, setPhone] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otpCode, setOtpCode] = useState("");
   const [otpVerified, setOtpVerified] = useState(false);
-  const [zone, setZone] = useState("Sushant Golf City / Shaheed Path");
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([
-    "CEMENT",
-    "STEEL",
-    "PIPES",
-    "BRICKS",
-  ]);
+  const [zone, setZone] = useState("Latouche Road Hardware Market");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(["CEMENT", "STEEL"]);
   const [loadingBayAccess, setLoadingBayAccess] = useState<"NARROW_LANE" | "LOADER_FRIENDLY">("LOADER_FRIENDLY");
-  const [gpsCaptured, setGpsCaptured] = useState(true);
+  const [gpsCaptured, setGpsCaptured] = useState(false);
   const [shopCoords, setShopCoords] = useState<{ lat: number; lng: number }>({
-    lat: 26.7812,
-    lng: 80.9981,
+    lat: 26.8467,
+    lng: 80.9462,
   });
 
   // Step 2: Papers with AI OCR
-  const [gstin, setGstin] = useState("09AAECB1289R1Z4");
+  const [gstin, setGstin] = useState("");
   const [gstScanning, setGstScanning] = useState(false);
-  const [gstVerified, setGstVerified] = useState(true);
+  const [gstVerified, setGstVerified] = useState(false);
 
-  const [pan, setPan] = useState("AAECB1289R");
+  const [pan, setPan] = useState("");
   const [panScanning, setPanScanning] = useState(false);
-  const [panVerified, setPanVerified] = useState(true);
+  const [panVerified, setPanVerified] = useState(false);
 
-  const [signPhoto, setSignPhoto] = useState("/images/kyc/sample-shop-sign.webp");
+  const [signPhoto, setSignPhoto] = useState("");
   const [signScanning, setSignScanning] = useState(false);
-  const [signVerified, setSignVerified] = useState(true);
+  const [signVerified, setSignVerified] = useState(false);
 
-  const [brandProof, setBrandProof] = useState("/images/kyc/sample-dealership.webp");
+  const [brandProof, setBrandProof] = useState("");
   const [brandScanning, setBrandScanning] = useState(false);
-  const [brandVerified, setBrandVerified] = useState(true);
+  const [brandVerified, setBrandVerified] = useState(false);
 
   // Step 3: Bank & ₹1 Penny-Drop
-  const [accountNumber, setAccountNumber] = useState("910283746182");
-  const [confirmAccount, setConfirmAccount] = useState("910283746182");
-  const [ifsc, setIfsc] = useState("HDFC0001824");
-  const [bankBranch, setBankBranch] = useState("HDFC Bank, Hazratganj Branch, Lucknow");
-  const [upiId, setUpiId] = useState("awadhpipe@okaxis");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [confirmAccount, setConfirmAccount] = useState("");
+  const [ifsc, setIfsc] = useState("");
+  const [bankBranch, setBankBranch] = useState("");
+  const [upiId, setUpiId] = useState("");
   const [pennyDropPending, setPennyDropPending] = useState(false);
-  const [pennyDropVerified, setPennyDropVerified] = useState(true);
-  const [pennyDropRef, setPennyDropRef] = useState("NPCI-IMPS-9982410");
+  const [pennyDropVerified, setPennyDropVerified] = useState(false);
+  const [pennyDropRef, setPennyDropRef] = useState("");
 
   // Step 4: Digital SLA & E-Sign
-  const [agreeSla, setAgreeSla] = useState(true);
-  const [agreeIsi, setAgreeIsi] = useState(true);
-  const [agreeHandshake, setAgreeHandshake] = useState(true);
+  const [agreeSla, setAgreeSla] = useState(false);
+  const [agreeIsi, setAgreeIsi] = useState(false);
+  const [agreeHandshake, setAgreeHandshake] = useState(false);
 
   // OTP Simulation
   const handleSendOtp = () => {
@@ -248,9 +243,9 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
       ],
     };
 
-    await submitVendorKyc(payload);
+    const created = await submitVendorKyc(payload);
     if (onSuccess) {
-      onSuccess();
+      onSuccess(created);
     } else {
       setLocation("/vendor");
     }

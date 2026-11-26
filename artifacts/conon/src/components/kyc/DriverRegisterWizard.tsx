@@ -14,14 +14,14 @@ import {
   CloudRain,
   RotateCcw,
 } from "lucide-react";
-import { useKyc } from "@/context/KycContext";
+import { useKyc, type PartnerKycApplication } from "@/context/KycContext";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import { useDriverTheme } from "@/context/DriverThemeContext";
 import { useDriverLang } from "@/context/DriverLanguageContext";
 
 interface DriverRegisterWizardProps {
-  onSuccess?: () => void;
+  onSuccess?: (app?: PartnerKycApplication) => void;
   onCancel?: () => void;
 }
 
@@ -43,49 +43,49 @@ export function DriverRegisterWizard({ onSuccess, onCancel }: DriverRegisterWiza
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
 
   // Step 1: Driver Profile
-  const [name, setName] = useState("Mohd. Rizwan Khan");
-  const [phone, setPhone] = useState("+91 98390 12398");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
   const [zone, setZone] = useState("Alambagh / Transport Nagar");
-  const [iceContact, setIceContact] = useState("Brother: Irfan Khan (+91 98390 99812)");
+  const [iceContact, setIceContact] = useState("");
   const [vehicleMode, setVehicleMode] = useState<"BIKE_EXPRESS" | "CHHOTA_HATHI">("CHHOTA_HATHI");
-  const [vehiclePlate, setVehiclePlate] = useState("UP 32 EL 7710");
+  const [vehiclePlate, setVehiclePlate] = useState("");
 
   // Step 2: Papers + Expiry + Selfie Liveness
-  const [dlNumber, setDlNumber] = useState("UP32 20180049120");
-  const [dlExpiry, setDlExpiry] = useState("2031-08-14");
-  const [dlVerified, setDlVerified] = useState(true);
+  const [dlNumber, setDlNumber] = useState("");
+  const [dlExpiry, setDlExpiry] = useState("");
+  const [dlVerified, setDlVerified] = useState(false);
   const [dlScanning, setDlScanning] = useState(false);
 
-  const [rcNumber, setRcNumber] = useState("UP 32 EL 7710");
-  const [rcVerified, setRcVerified] = useState(true);
+  const [rcNumber, setRcNumber] = useState("");
+  const [rcVerified, setRcVerified] = useState(false);
   const [rcScanning, setRcScanning] = useState(false);
 
-  const [insuranceNumber, setInsuranceNumber] = useState("NIC-COMM-9918231");
-  const [insuranceExpiry, setInsuranceExpiry] = useState("2026-11-20");
-  const [pucExpiry, setPucExpiry] = useState("2026-10-15");
-  const [insVerified, setInsVerified] = useState(true);
+  const [insuranceNumber, setInsuranceNumber] = useState("");
+  const [insuranceExpiry, setInsuranceExpiry] = useState("");
+  const [pucExpiry, setPucExpiry] = useState("");
+  const [insVerified, setInsVerified] = useState(false);
   const [insScanning, setInsScanning] = useState(false);
 
-  const [selfieVerified, setSelfieVerified] = useState(true);
+  const [selfieVerified, setSelfieVerified] = useState(false);
   const [selfieScanning, setSelfieScanning] = useState(false);
 
-  const [tarpaulinVerified, setTarpaulinVerified] = useState(true);
+  const [tarpaulinVerified, setTarpaulinVerified] = useState(false);
   const [tarpaulinScanning, setTarpaulinScanning] = useState(false);
 
   // Step 3: Bank & ₹1 Penny Drop
-  const [accountNumber, setAccountNumber] = useState("50100491823901");
-  const [ifsc, setIfsc] = useState("SBIN0001290");
-  const [upiId, setUpiId] = useState("rizwan.ace@upi");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [ifsc, setIfsc] = useState("");
+  const [upiId, setUpiId] = useState("");
   const [pennyDropPending, setPennyDropPending] = useState(false);
-  const [pennyDropVerified, setPennyDropVerified] = useState(true);
-  const [pennyDropRef, setPennyDropRef] = useState("NPCI-IMPS-8871029");
+  const [pennyDropVerified, setPennyDropVerified] = useState(false);
+  const [pennyDropRef, setPennyDropRef] = useState("");
 
   // Step 4: Pledge
-  const [agreeOverload, setAgreeOverload] = useState(true);
-  const [agreeRainCover, setAgreeRainCover] = useState(true);
-  const [agreeOtpProof, setAgreeOtpProof] = useState(true);
+  const [agreeOverload, setAgreeOverload] = useState(false);
+  const [agreeRainCover, setAgreeRainCover] = useState(false);
+  const [agreeOtpProof, setAgreeOtpProof] = useState(false);
 
   const handleSendOtp = () => {
     setOtpSent(true);
@@ -229,9 +229,9 @@ export function DriverRegisterWizard({ onSuccess, onCancel }: DriverRegisterWiza
       ],
     };
 
-    await submitDriverKyc(payload);
+    const created = await submitDriverKyc(payload);
     if (onSuccess) {
-      onSuccess();
+      onSuccess(created);
     } else {
       setLocation("/driver");
     }

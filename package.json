@@ -8,6 +8,7 @@
     "dev:frontend": "pnpm --filter @workspace/conon dev",
     "dev:backend": "pnpm --filter @workspace/api-server dev",
     "db:deploy": "tsx scripts/deploy-db.ts",
+    "media:sync": "node scripts/sync-real-media-manifest.mjs",
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",

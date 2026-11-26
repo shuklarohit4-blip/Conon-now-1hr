@@ -25,7 +25,7 @@ import {
 import { toast } from "sonner";
 import { resolveApiUrl } from "@/lib/apiBase";
 import { useLiveCatalog, type MasterCatalogSKU } from "@/context/LiveCatalogContext";
-import { ProductImage } from "../ProductImage";
+import { CononProductMedia } from "../CononProductMedia";
 import { ProductStudioDrawer } from "./ProductStudioDrawer";
 
 interface AdminCatalogTabProps {
@@ -668,10 +668,17 @@ export function AdminCatalogTab({ initialSelectedSkuId }: AdminCatalogTabProps =
                             title="Click to edit or upload packshot"
                             className="w-10 h-10 rounded-lg border border-slate-200 bg-white p-0.5 shrink-0 overflow-hidden shadow-xs cursor-pointer hover:border-amber-400 group relative"
                           >
-                            <ProductImage
+                            <CononProductMedia
+                              product={item}
                               src={item.imageUrl}
                               alt={item.name}
-                              sku={item.id}
+                              title={item.name}
+                              brand={item.brand}
+                              category={item.category}
+                              itemId={item.id}
+                              variant="thumb"
+                              showGalleryBadge={false}
+                              containerClassName="w-full h-full"
                               className="w-full h-full object-contain"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-[9px] font-bold transition">

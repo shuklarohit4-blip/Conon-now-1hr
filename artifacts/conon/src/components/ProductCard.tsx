@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import { QuantityStepper } from "./QuantityStepper";
 import { ProductImage } from "./ProductImage";
+import { useResolvedProduct } from "@/context/ProductMediaVaultContext";
 import { useSafeLiveCatalog } from "@/context/LiveCatalogContext";
 
 /* CONON-NOW brand tokens (kept local so the card is fully reusable). */
@@ -130,7 +131,8 @@ export function ProductCard({
   isAdding = false,
 }: ProductCardProps) {
   const liveCatalog = useSafeLiveCatalog();
-  const liveProduct = liveCatalog?.getLiveProduct(product) ?? product;
+  const baseLiveProduct = liveCatalog?.getLiveProduct(product) ?? product;
+  const liveProduct = useResolvedProduct(baseLiveProduct);
 
   const {
     image, tag, materialTag, title, rating, reviews,

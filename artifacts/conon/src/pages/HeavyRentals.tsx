@@ -1,392 +1,984 @@
-import React, { useMemo, useState } from "react";
-import { Layout } from "@/components/Layout";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
-import { useAddToCart, getGetCartQueryKey } from "@workspace/api-client-react";
 import {
-  Tractor, Shield, Star, Zap, Clock, MapPin, X, CheckCircle2,
-  CalendarDays, UserCheck, ShoppingCart, Construction,
+  Tractor,
+  Shield,
+  Clock,
+  CheckCircle2,
+  MapPin,
+  X,
+  Gauge,
+  Fuel,
+  PauseCircle,
+  PlayCircle,
+  Wallet,
+  CreditCard,
+  AlertTriangle,
+  Camera,
+  Lock,
+  Radio,
+  Sparkles,
+  FileText,
 } from "lucide-react";
-
-import jcbImg from "@assets/rentals/jcb-3dx.jpg";
-import excavatorImg from "@assets/rentals/excavator-pc210.jpg";
-import miniExcavatorImg from "@assets/rentals/mini-excavator.jpg";
-import tractorImg from "@assets/rentals/tractor-trolley.jpg";
-import tipperImg from "@assets/rentals/tipper-dumper.png";
-import mixerTruckImg from "@assets/rentals/transit-mixer.jpg";
-import concreteMixerImg from "@assets/rentals/concrete-mixer.jpg";
-import vibratorImg from "@assets/rentals/needle-vibrator.png";
-import scaffoldingImg from "@assets/rentals/scaffolding.jpg";
+import { Layout } from "@/components/Layout";
+import { CononProductMedia } from "@/components/CononProductMedia";
+import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { useWallet } from "@/context/WalletContext";
+import { useUser } from "@/context/UserContext";
+import {
+  servicesRentalsSync,
+  type MachineRentalCatalogItem,
+  type MachineRentalBookingRecord,
+  type RentalCategory,
+  FALLBACK_RENTAL_CATALOG,
+} from "@/services/servicesRentalsSync";
 
 const BRAND = "#1848a0";
 const AMBER = "#f59e0b";
-const NEON = "#84cc16";
+const inr = (n: number) => `₹${Math.round(n).toLocaleString("en-IN")}`;
 
-const inr = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
+type BillingUnit = "HOUR" | "SHIFT" | "WEEK";
+type FuelMode = "WET" | "DRY";
+type CatFilter = "ALL" | RentalCategory;
 
-const OPERATOR_ADD = { hour: 100, shift: 600, week: 3600 } as const;
-type RateType = keyof typeof OPERATOR_ADD;
-
-type Equipment = {
-  id: string;
-  name: string;
-  model: string;
-  category: "earthmoving" | "transport" | "light";
-  image: string;
-  tag: string;
-  availability: string;
-  needsOperator: boolean;
-  rates: { hour: number; shift: number; week: number };
-};
-
-const CATEGORIES = [
-  { id: "all", label: "All Machines" },
-  { id: "earthmoving", label: "Earthmoving" },
-  { id: "transport", label: "Transport" },
-  { id: "light", label: "Light Tools" },
-] as const;
-
-const EQUIPMENT: Equipment[] = [
-  {
-    id: "jcb-3dx", name: "JCB Backhoe Loader", model: "JCB 3DX Super",
-    category: "earthmoving", image: jcbImg, tag: "Most Booked",
-    availability: "Available in 2 Hours", needsOperator: true,
-    rates: { hour: 800, shift: 5500, week: 32000 },
-  },
-  {
-    id: "excavator-pc210", name: "Hydraulic Excavator", model: "Komatsu PC210",
-    category: "earthmoving", image: excavatorImg, tag: "Heavy Duty",
-    availability: "Available in 4 Hours", needsOperator: true,
-    rates: { hour: 2100, shift: 14000, week: 82000 },
-  },
-  {
-    id: "mini-excavator", name: "Mini Excavator", model: "Bobcat E20z",
-    category: "earthmoving", image: miniExcavatorImg, tag: "Compact Sites",
-    availability: "Available Now", needsOperator: true,
-    rates: { hour: 950, shift: 6500, week: 38000 },
-  },
-  {
-    id: "tractor-trolley", name: "Tractor with Trolley", model: "Mahindra 575 DI",
-    category: "transport", image: tractorImg, tag: "Short Haul",
-    availability: "Available Now", needsOperator: true,
-    rates: { hour: 500, shift: 3500, week: 21000 },
-  },
-  {
-    id: "tipper-dumper", name: "Tipper Dumper", model: "Tata 10-Wheel 16 m³",
-    category: "transport", image: tipperImg, tag: "Bulk Haul",
-    availability: "Available in 2 Hours", needsOperator: true,
-    rates: { hour: 1100, shift: 7500, week: 44000 },
-  },
-  {
-    id: "transit-mixer", name: "Transit Mixer", model: "Schwing Stetter 6 m³",
-    category: "transport", image: mixerTruckImg, tag: "RMC Delivery",
-    availability: "Available in 3 Hours", needsOperator: true,
-    rates: { hour: 1500, shift: 9500, week: 55000 },
-  },
-  {
-    id: "concrete-mixer", name: "Concrete Mixer", model: "10/7 Diesel Mixer",
-    category: "light", image: concreteMixerImg, tag: "Site Casting",
-    availability: "Available Now", needsOperator: false,
-    rates: { hour: 250, shift: 1500, week: 8500 },
-  },
-  {
-    id: "needle-vibrator", name: "Needle Vibrator Set", model: "40mm Electric Poker",
-    category: "light", image: vibratorImg, tag: "Slab & Column",
-    availability: "Available Now", needsOperator: false,
-    rates: { hour: 180, shift: 1100, week: 6000 },
-  },
-  {
-    id: "scaffolding", name: "Steel Scaffolding", model: "Cuplock · per 100 sqm",
-    category: "light", image: scaffoldingImg, tag: "Access & Support",
-    availability: "Available in 6 Hours", needsOperator: false,
-    rates: { hour: 120, shift: 800, week: 4500 },
-  },
+const CATEGORIES: { id: CatFilter; label: string }[] = [
+  { id: "ALL", label: "All Machines" },
+  { id: "EARTHMOVING", label: "Earthmoving" },
+  { id: "CONCRETE", label: "Concrete & Dhalai" },
+  { id: "TRANSPORT", label: "Transport" },
+  { id: "TOOLS", label: "Shuttering & Tools" },
 ];
 
-const RATE_META: { id: RateType; label: string; sub: string }[] = [
-  { id: "hour", label: "Per Hour", sub: "Min 4 hrs" },
-  { id: "shift", label: "Per Shift", sub: "8 Hrs" },
-  { id: "week", label: "Per Week", sub: "7 Days" },
+const LUCKNOW_ZONES = [
+  "Gomti Nagar Extension",
+  "Sushant Golf City",
+  "Indira Nagar",
+  "Alambagh / Transport Nagar",
+  "Hazratganj / Mahanagar",
+  "Shaheed Path Supply Corridor",
 ];
 
 export function HeavyRentals() {
-  const [activeCat, setActiveCat] = useState<string>("all");
-  const [booking, setBooking] = useState<Equipment | null>(null);
-  const [rateType, setRateType] = useState<RateType>("shift");
-  const [withOperator, setWithOperator] = useState(true);
+  const wallet = useWallet();
+  const { user } = useUser();
+  const vault = useSafeProductMediaVault();
+  const vaultVersion = vault?.version ?? 0;
 
-  const qc = useQueryClient();
-  const addToCart = useAddToCart({
-    mutation: { onSuccess: () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() }) },
-  });
+  const [catalog, setCatalog] = useState<MachineRentalCatalogItem[]>(FALLBACK_RENTAL_CATALOG);
+  const [detailMachine, setDetailMachine] = useState<MachineRentalCatalogItem | null>(null);
+  const [bookings, setBookings] = useState<MachineRentalBookingRecord[]>([]);
+  const [activeCat, setActiveCat] = useState<CatFilter>("ALL");
 
-  const list = useMemo(
-    () => (activeCat === "all" ? EQUIPMENT : EQUIPMENT.filter((e) => e.category === activeCat)),
-    [activeCat],
-  );
+  // Global 1-Tap Fuel & Billing Switchers
+  const [billingUnit, setBillingUnit] = useState<BillingUnit>("SHIFT");
+  const [fuelMode, setFuelMode] = useState<FuelMode>("WET");
 
-  const openBooking = (eq: Equipment) => {
-    setRateType("shift");
-    setWithOperator(eq.needsOperator);
-    setBooking(eq);
+  // Booking Drawer State
+  const [bookingMachine, setBookingMachine] = useState<MachineRentalCatalogItem | null>(null);
+  const [qtyUnits, setQtyUnits] = useState<number>(1);
+  const [customerName, setCustomerName] = useState(user?.name || "");
+  const [customerPhone, setCustomerPhone] = useState(user?.phone || "");
+  const [customerGstin, setCustomerGstin] = useState("");
+  const [siteAddress, setSiteAddress] = useState("");
+  const [lucknowZone, setLucknowZone] = useState(LUCKNOW_ZONES[0]);
+  const [paymentMode, setPaymentMode] = useState<"LIVING_VAULT" | "UPI">("LIVING_VAULT");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Live HMR Meter Tracker Drawer
+  const [activeTracker, setActiveTracker] = useState<MachineRentalBookingRecord | null>(null);
+  const [pauseReason, setPauseReason] = useState("Hydraulic line check / Heavy rain site halt");
+
+  const loadAll = async () => {
+    const [items, bks] = await Promise.all([
+      servicesRentalsSync.fetchRentalCatalog(),
+      servicesRentalsSync.fetchRentalBookings(),
+    ]);
+    setCatalog(items);
+    setBookings(bks);
   };
 
-  const operatorAdd = booking && withOperator && booking.needsOperator ? OPERATOR_ADD[rateType] : 0;
-  const baseRate = booking ? booking.rates[rateType] : 0;
-  const total = baseRate + operatorAdd;
-  const rateLabel = RATE_META.find((r) => r.id === rateType)?.label ?? "Per Shift";
+  useEffect(() => {
+    void loadAll();
+    const unsub = servicesRentalsSync.subscribe(() => {
+      void loadAll();
+    });
+    return () => unsub();
+  }, [vaultVersion]);
 
-  const confirmBooking = () => {
-    if (!booking) return;
-    const eq = booking;
-    addToCart.mutate(
-      {
-        data: {
-          materialId: `rent-${eq.id}-${rateType}`,
-          quantity: 1,
-          name: `${eq.model} · ${rateLabel}${operatorAdd ? " + Operator" : ""}`,
-          price: total,
-          unit: rateLabel,
-          vendor: "CONON-NOW Heavy Rentals",
-          category: "rental",
-        },
-      },
-      {
-        onSuccess: () => {
-          toast.success(`${eq.name} booked!`, {
-            description: `${rateLabel} @ ${inr(total)} added to your cart · ${eq.availability}.`,
-          });
-          setBooking(null);
-        },
-        onError: () => toast.error("Couldn't book this machine. Please try again."),
-      },
-    );
+  useEffect(() => {
+    if (activeTracker) {
+      const fresh = bookings.find((b) => b.id === activeTracker.id);
+      if (fresh) setActiveTracker(fresh);
+    }
+  }, [bookings]);
+
+  const filteredMachines = useMemo(
+    () => (activeCat === "ALL" ? catalog : catalog.filter((m) => m.category === activeCat)),
+    [catalog, activeCat]
+  );
+
+  const getRateFor = (m: MachineRentalCatalogItem, mode: FuelMode, unit: BillingUnit): number => {
+    const table = mode === "WET" ? m.wetRates : m.dryRates;
+    return unit === "HOUR" ? table.hour : unit === "WEEK" ? table.week : table.shift;
+  };
+
+  const unitSuffix = billingUnit === "HOUR" ? "/hr" : billingUnit === "WEEK" ? "/wk" : "/8-hr shift";
+
+  const drawerTotals = useMemo(() => {
+    if (!bookingMachine) return { unitRate: 0, subtotal: 0, gst: 0, total: 0 };
+    const unitRate = getRateFor(bookingMachine, fuelMode, billingUnit);
+    const subtotal = Math.round(unitRate * qtyUnits + bookingMachine.mobilizationFee);
+    const gst = Math.round(subtotal * 0.18);
+    return { unitRate, subtotal, gst, total: subtotal + gst };
+  }, [bookingMachine, fuelMode, billingUnit, qtyUnits]);
+
+  const openBookDrawer = (eq: MachineRentalCatalogItem) => {
+    setQtyUnits(billingUnit === "HOUR" ? 4 : 1);
+    setBookingMachine(eq);
+  };
+
+  const handleConfirmBooking = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!bookingMachine) return;
+    if (!customerName.trim() || !customerPhone.trim() || !siteAddress.trim()) {
+      toast.error("Please fill Contact Name, Phone & Lucknow Site Address");
+      return;
+    }
+
+    if (paymentMode === "LIVING_VAULT" && wallet.balance < drawerTotals.total) {
+      toast.warning(`Living Vault balance (${inr(wallet.balance)}) below ${inr(drawerTotals.total)} — switched to UPI Escrow Lock.`);
+      setPaymentMode("UPI");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const created = await servicesRentalsSync.createRentalBooking({
+        customerName: customerName.trim(),
+        customerPhone: customerPhone.trim(),
+        customerGstin: customerGstin.trim() || undefined,
+        siteAddress: siteAddress.trim(),
+        lucknowZone,
+        machineId: bookingMachine.id,
+        fuelMode,
+        billingUnit,
+        quantityUnits: qtyUnits,
+        paymentMode,
+      });
+
+      if (paymentMode === "LIVING_VAULT") {
+        wallet.spend(created.estimatedTotal, `HMR Escrow Lock • ${created.shortId} (${created.modelName})`);
+      }
+
+      setBookingMachine(null);
+      setActiveTracker(created);
+      toast.success(`Machine Booked with Digital HMR Lock • #${created.shortId}`, {
+        description: `Start OTP: ${created.startOtp} | End OTP: ${created.endOtp}. Synced live with Partner Yard & Admin Radar!`,
+      });
+      void loadAll();
+    } catch (err: any) {
+      toast.error(err.message || "Machine booking failed");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleBreakdownPause = async (booking: MachineRentalBookingRecord) => {
+    try {
+      const updated = await servicesRentalsSync.pauseRentalBreakdown(booking.id, pauseReason);
+      setActiveTracker(updated);
+      toast.error("RED Breakdown Pause Activated", {
+        description: "Meter billing frozen immediately. Breakdown SOS alert fired to CONON Command OS!",
+      });
+      void loadAll();
+    } catch (err: any) {
+      toast.error(err.message || "Could not pause meter");
+    }
+  };
+
+  const handleResumeMeter = async (booking: MachineRentalBookingRecord) => {
+    try {
+      const updated = await servicesRentalsSync.resumeRentalMeter(booking.id);
+      setActiveTracker(updated);
+      toast.success("Meter Resumed", {
+        description: `Paused downtime logged (${updated.breakdownPausedMins} mins excluded).`,
+      });
+      void loadAll();
+    } catch (err: any) {
+      toast.error(err.message || "Could not resume meter");
+    }
   };
 
   return (
     <Layout>
-      <div className="bg-slate-50 min-h-full pb-6">
-        {/* Hero */}
-        <div className="px-5 pt-7 pb-7 rounded-b-[36px] shadow-lg" style={{ background: BRAND }}>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="w-9 h-9 rounded-2xl flex items-center justify-center" style={{ background: "rgba(255,255,255,0.12)" }}>
-              <Tractor className="w-5 h-5 text-amber-300" strokeWidth={2.4} />
-            </span>
+      <div className="bg-slate-50 min-h-full pb-20">
+        {/* HERO BANNER */}
+        <section
+          className="px-4 sm:px-8 pt-7 pb-8 rounded-b-[32px] shadow-lg text-white"
+          style={{ background: `linear-gradient(135deg, ${BRAND} 0%, #0f2f70 100%)` }}
+        >
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-5">
             <div>
-              <h2 className="font-display font-black italic text-2xl text-white leading-none">Heavy Rentals</h2>
-              <p className="text-[10px] font-bold text-blue-200 uppercase tracking-[0.2em] mt-1">Machines On Rent · By the Hour</p>
-            </div>
-          </div>
-          <p className="text-sm text-blue-100/90 leading-snug mt-3">
-            JCBs, excavators, tippers &amp; site tools — delivered with certified operators.
-            Transparent hourly, shift &amp; weekly rates.
-          </p>
-          <div className="flex gap-2 mt-4">
-            <Trust icon={<Shield className="w-3 h-3" />} label="Insured Fleet" />
-            <Trust icon={<Clock className="w-3 h-3" />} label="2-Hr Dispatch" />
-            <Trust icon={<Star className="w-3 h-3" />} label="Verified Operators" />
-          </div>
-        </div>
-
-        {/* Category filter */}
-        <div className="px-4 mt-5">
-          <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1" style={{ scrollbarWidth: "none" }}>
-            {CATEGORIES.map((c) => {
-              const on = activeCat === c.id;
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => setActiveCat(c.id)}
-                  className="shrink-0 px-4 py-2 rounded-full text-xs font-black transition-all"
-                  style={{
-                    background: on ? BRAND : "#fff",
-                    color: on ? "#fff" : "#64748b",
-                    border: on ? "none" : "1px solid #e2e8f0",
-                  }}
-                >
-                  {c.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Equipment grid */}
-        <div className="px-4 mt-4 grid grid-cols-1 gap-4">
-          {list.map((eq, i) => (
-            <motion.div
-              key={eq.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.04 }}
-              className="bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-sm"
-            >
-              <div className="relative h-40 w-full bg-slate-100">
-                <img src={eq.image} alt={eq.model} className="h-full w-full object-cover" loading="lazy" />
-                <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3">
-                  <span
-                    className="text-[9px] font-black px-2.5 py-1 rounded-full text-white backdrop-blur"
-                    style={{ background: "rgba(27,67,102,0.82)" }}
-                  >
-                    {eq.tag}
-                  </span>
-                  <span className="text-[9px] font-black px-2.5 py-1 rounded-full bg-white/95 text-emerald-700 flex items-center gap-1 shadow-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> {eq.availability}
-                  </span>
+              <div className="flex items-center gap-2.5 mb-2">
+                <span className="w-10 h-10 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center">
+                  <Tractor className="w-5 h-5 text-amber-300" />
+                </span>
+                <div>
+                  <h1 className="font-display font-black text-2xl sm:text-3xl tracking-tight leading-none">
+                    Heavy Rentals • Machines On Rent
+                  </h1>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-blue-200 mt-1">
+                    Digital HMR Optical Lock • Wet/Dry Fuel Clarity • SAC 9973 Tax Invoice
+                  </p>
                 </div>
               </div>
+              <p className="text-xs sm:text-sm text-blue-100/90 max-w-2xl mt-2">
+                JCB 3DX Loaders, Komatsu Excavators, 10W Tippers, Transit Mixers &amp; Dhalai Equipment — zero meter disputes with Start/End Hour-Meter Optical Photos and 1-tap Breakdown Billing Freeze.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold">
+                  <Shield className="w-3.5 h-3.5 text-amber-300" /> Insured Commercial Fleet
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold">
+                  <Gauge className="w-3.5 h-3.5 text-amber-300" /> Digital HMR Optical Lock
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold">
+                  <PauseCircle className="w-3.5 h-3.5 text-amber-300" /> 1-Tap Breakdown Pause
+                </span>
+              </div>
+            </div>
 
-              <div className="p-4">
-                <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">{eq.name}</p>
-                <h3 className="font-display font-black text-slate-800 text-base leading-tight mt-0.5">{eq.model}</h3>
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:min-w-[260px]">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-blue-200 flex items-center justify-between">
+                <span>CONON Living Vault Balance</span>
+                <Wallet className="w-4 h-4 text-amber-300" />
+              </div>
+              <div className="text-2xl font-black text-white font-mono mt-1">
+                {inr(wallet.balance)}
+              </div>
+              <p className="text-[10px] text-emerald-300 font-bold mt-1">
+                ✓ Pay Only For Actual Optical HMR Hours
+              </p>
+            </div>
+          </div>
+        </section>
 
-                <div className="flex items-center justify-between mt-3">
-                  <div>
-                    <span className="font-black text-lg" style={{ color: BRAND }}>{inr(eq.rates.hour)}</span>
-                    <span className="text-[11px] text-slate-400 font-bold">/hr</span>
-                    <p className="text-[10px] text-slate-400 font-bold">{inr(eq.rates.shift)}/shift · {inr(eq.rates.week)}/wk</p>
-                    {eq.needsOperator && (
-                      <p className="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5 mt-0.5">
-                        <CheckCircle2 className="w-2.5 h-2.5" /> Operator available
-                      </p>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => openBooking(eq)}
-                    className="flex items-center gap-1.5 px-4 py-2.5 rounded-full text-white text-xs font-black active:scale-95 transition shadow-sm"
-                    style={{ background: `linear-gradient(135deg, ${AMBER} 0%, #f97316 100%)` }}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6 -mt-4">
+          {/* LIVE ACTIVE RENTAL HMR TRACKERS (Zero-Dummy: visible only when customer has organic bookings) */}
+          {bookings.length > 0 && (
+            <section className="bg-white rounded-3xl border border-amber-300 shadow-lg p-5">
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
+                  <h2 className="text-sm sm:text-base font-black text-slate-900">
+                    Active Machine Dispatches &amp; Live HMR Meters ({bookings.length})
+                  </h2>
+                </div>
+                <span className="text-[11px] font-mono font-bold text-slate-500">
+                  Click any card for Optical HMR Lock &amp; Breakdown Freeze
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                {bookings.map((b) => (
+                  <div
+                    key={b.id}
+                    onClick={() => setActiveTracker(b)}
+                    className={`p-4 rounded-2xl border transition cursor-pointer space-y-2.5 ${
+                      b.isBreakdownPaused
+                        ? "bg-rose-50 border-rose-400"
+                        : "bg-slate-50 border-slate-200 hover:border-blue-400"
+                    }`}
                   >
-                    <CalendarDays className="w-3.5 h-3.5" strokeWidth={2.6} /> Book Now
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-mono text-xs font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                            #{b.shortId}
+                          </span>
+                          <span
+                            className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
+                              b.isBreakdownPaused
+                                ? "bg-rose-600 text-white animate-pulse"
+                                : "bg-amber-100 text-amber-800"
+                            }`}
+                          >
+                            {b.isBreakdownPaused ? "PAUSED (BREAKDOWN SOS)" : b.status.replace(/_/g, " ")}
+                          </span>
+                        </div>
+                        <h3 className="text-sm font-black text-slate-900 mt-1">{b.modelName}</h3>
+                        <p className="text-[11px] text-slate-500">
+                          {b.fuelMode} Rate • {b.siteAddress} ({b.lucknowZone})
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-base font-black font-mono text-slate-900">
+                          {inr(b.netBillAmount || b.estimatedTotal)}
+                        </div>
+                        <div className="text-[10px] font-bold text-emerald-700">Escrow: {b.escrowStatus}</div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 text-[11px]">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded bg-slate-900 text-amber-300 font-mono font-bold">
+                          Start OTP: {b.startOtp}
+                        </span>
+                        <span className="px-2 py-0.5 rounded bg-slate-900 text-emerald-300 font-mono font-bold">
+                          End OTP: {b.endOtp}
+                        </span>
+                      </div>
+                      <span className="font-mono font-bold text-blue-700">
+                        {b.startHmr != null ? `Start HMR: ${b.startHmr} hrs` : "Awaiting Start HMR Lock"}
+                        {b.endHmr != null ? ` → End: ${b.endHmr} hrs` : ""}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* CATEGORY PILLS + GLOBAL 1-TAP FUEL & BILLING TOGGLES */}
+          <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-4 space-y-4">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              {/* Category Pills */}
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                {CATEGORIES.map((c) => {
+                  const on = activeCat === c.id;
+                  return (
+                    <button
+                      key={c.id}
+                      type="button"
+                      onClick={() => setActiveCat(c.id)}
+                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-black transition cursor-pointer ${
+                        on
+                          ? "bg-blue-700 text-white shadow-sm"
+                          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      }`}
+                    >
+                      {c.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Global 1-Tap Duration & Wet/Dry Switchers */}
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Duration Mode */}
+                <div className="inline-flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+                  {(
+                    [
+                      { id: "HOUR", label: "Hourly" },
+                      { id: "SHIFT", label: "8-Hr Shift" },
+                      { id: "WEEK", label: "Weekly" },
+                    ] as const
+                  ).map((u) => (
+                    <button
+                      key={u.id}
+                      type="button"
+                      onClick={() => setBillingUnit(u.id)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-black transition cursor-pointer ${
+                        billingUnit === u.id
+                          ? "bg-white text-blue-700 shadow-xs"
+                          : "text-slate-500 hover:text-slate-800"
+                      }`}
+                    >
+                      {u.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Wet vs Dry Fuel Mode */}
+                <div className="inline-flex bg-slate-900 p-1 rounded-xl">
+                  <button
+                    type="button"
+                    onClick={() => setFuelMode("WET")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-black transition cursor-pointer flex items-center gap-1 ${
+                      fuelMode === "WET"
+                        ? "bg-amber-400 text-slate-950"
+                        : "text-slate-300 hover:text-white"
+                    }`}
+                  >
+                    <Fuel className="w-3.5 h-3.5" />
+                    <span>Wet Rate (Diesel + Operator)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFuelMode("DRY")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-black transition cursor-pointer ${
+                      fuelMode === "DRY"
+                        ? "bg-emerald-400 text-slate-950"
+                        : "text-slate-300 hover:text-white"
+                    }`}
+                  >
+                    Dry Rate (No Diesel)
                   </button>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            </div>
+          </section>
+
+          {/* CLEAN MULTI-COLUMN RESPONSIVE EQUIPMENT GRID */}
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {filteredMachines.map((eq, i) => {
+              const liveRate = getRateFor(eq, fuelMode, billingUnit);
+              return (
+                <motion.div
+                  key={eq.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.03 }}
+                  className="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all overflow-hidden flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Real Studio Photograph */}
+                    <div
+                      onClick={() => setDetailMachine(eq)}
+                      className="relative aspect-[4/3] w-full bg-[#F7F8FA] overflow-hidden border-b border-slate-100 cursor-pointer"
+                      title="Tap to inspect photos & machine specifications"
+                    >
+                      <CononProductMedia
+                        mediaType="rental"
+                        itemId={eq.id}
+                        slug={eq.slug}
+                        src={eq.imageUrl}
+                        title={eq.modelName}
+                        brand={eq.category || "HEAVY FLEET"}
+                        categorySlug="heavy-machine-rentals"
+                        unit="Shift / Hr"
+                        variant="cover"
+                      />
+                      <div className="absolute inset-x-0 top-0 p-3 flex items-start justify-between gap-2">
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-slate-900/80 text-white backdrop-blur-xs">
+                          {eq.tag}
+                        </span>
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-white/95 text-emerald-700 shadow-xs flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                          {eq.isFleetOnline
+                            ? `${eq.activeFleetCount} Partner Live`
+                            : "Yard Dispatch Ready"}
+                        </span>
+                      </div>
+                      <span className="absolute bottom-2.5 right-3 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-900/80 text-amber-300">
+                        SAC {eq.sacCode}
+                      </span>
+                    </div>
+
+                    <div className="p-4 space-y-2.5">
+                      <div>
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+                          {eq.machineName}
+                        </span>
+                        <h3 className="text-base font-black text-slate-900 leading-tight mt-0.5">
+                          {eq.modelName}
+                        </h3>
+                        <p className="text-[11px] font-bold text-blue-700 mt-1">{eq.capacitySpec}</p>
+                      </div>
+
+                      <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                        {eq.description}
+                      </p>
+
+                      <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          ✓ Insured Fleet
+                        </span>
+                        {eq.needsOperator && (
+                          <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
+                            ✓ Verified Operator
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Rate & Booking Action */}
+                  <div className="px-4 pb-4 pt-3 border-t border-slate-100 space-y-3">
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase text-slate-400 block">
+                          {fuelMode === "WET" ? "Wet Rate (Incl. Diesel)" : "Dry Rate (Machine Only)"}
+                        </span>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-xl font-black font-mono" style={{ color: BRAND }}>
+                            {inr(liveRate)}
+                          </span>
+                          <span className="text-xs font-bold text-slate-500">{unitSuffix}</span>
+                        </div>
+                      </div>
+                      <div className="text-right text-[10px] font-bold text-slate-500">
+                        <div>Mob. Fee: {inr(eq.mobilizationFee)}</div>
+                        <div>+18% GST Invoice</div>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => openBookDrawer(eq)}
+                      className="w-full py-2.5 px-3 rounded-xl text-xs font-black text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-sm transition cursor-pointer flex items-center justify-center gap-1.5"
+                    >
+                      <Gauge className="w-4 h-4" />
+                      <span>Book Machine with Digital HMR Lock</span>
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </section>
         </div>
       </div>
 
-      {/* Booking modal */}
+      {/* DIGITAL HMR BOOKING DRAWER */}
       <AnimatePresence>
-        {booking && (
-          <motion.div
-            key="rental-backdrop"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/40 z-40" onClick={() => setBooking(null)}
-          />
-        )}
-        {booking && (
-          <motion.div
-            key="rental-sheet"
-            initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 28, stiffness: 300 }}
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[440px] z-50 bg-white rounded-t-[32px] overflow-hidden"
-          >
-              <div className="w-10 h-1 bg-slate-200 rounded-full mx-auto mt-3 mb-1" />
-              <div className="px-5 pt-3 pb-2 flex items-center justify-between">
-                <h3 className="font-display font-black text-lg" style={{ color: BRAND }}>Book Machine</h3>
-                <button onClick={() => setBooking(null)} className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 text-slate-500">
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
+        {bookingMachine && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50"
+              onClick={() => setBookingMachine(null)}
+            />
+            <motion.div
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              className="fixed bottom-0 sm:bottom-auto sm:top-1/2 left-0 right-0 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-lg w-full bg-white rounded-t-3xl sm:rounded-3xl z-50 shadow-2xl max-h-[92vh] overflow-y-auto"
+            >
+              <form onSubmit={handleConfirmBooking} className="p-5 sm:p-6 space-y-4">
+                <div className="flex items-start justify-between border-b border-slate-100 pb-3">
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-blue-700">
+                      DIGITAL HMR OPTICAL LOCK • SAC 9973
+                    </span>
+                    <h3 className="text-lg font-black text-slate-900 mt-0.5">
+                      {bookingMachine.modelName}
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setBookingMachine(null)}
+                    className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
 
-              <div className="px-5 pb-7 pt-2">
-                {/* Selected machine */}
-                <div className="flex items-center gap-3 p-2 bg-slate-50 rounded-[18px]">
-                  <img src={booking.image} alt={booking.model} className="w-16 h-16 rounded-[14px] object-cover" />
+                {/* Machine Summary Row */}
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-200">
+                  <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-slate-200 bg-white">
+                    <CononProductMedia
+                      mediaType="rental"
+                      itemId={bookingMachine.id}
+                      title={bookingMachine.machineName}
+                      categorySlug="heavy-machine-rentals"
+                      src={bookingMachine.imageUrl}
+                      variant="thumb"
+                      showGalleryBadge={false}
+                      containerClassName="w-full h-full"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div className="min-w-0">
-                    <p className="font-black text-slate-800 text-sm leading-tight">{booking.model}</p>
-                    <p className="text-[11px] text-slate-500">{booking.name}</p>
-                    <p className="text-[10px] font-bold text-emerald-600 flex items-center gap-1 mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> {booking.availability}
+                    <p className="text-xs font-black text-slate-900">{bookingMachine.machineName}</p>
+                    <p className="text-[11px] text-slate-500">{bookingMachine.capacitySpec}</p>
+                    <p className="text-[10px] font-bold text-emerald-700 mt-0.5">
+                      Start &amp; End Optical Hour-Meter Photo Lock Included
                     </p>
                   </div>
                 </div>
 
-                {/* Pricing toggle */}
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-4 mb-2">Choose Rate</p>
-                <div className="grid grid-cols-3 gap-2">
-                  {RATE_META.map((r) => {
-                    const on = rateType === r.id;
+                {/* Billing Unit & Fuel Mode */}
+                <div className="grid grid-cols-3 gap-2 text-xs">
+                  {(["HOUR", "SHIFT", "WEEK"] as BillingUnit[]).map((u) => {
+                    const rate = getRateFor(bookingMachine, fuelMode, u);
+                    const on = billingUnit === u;
                     return (
                       <button
-                        key={r.id}
-                        onClick={() => setRateType(r.id)}
-                        className="rounded-2xl py-2.5 px-1 text-center transition-all border-2"
-                        style={{
-                          borderColor: on ? AMBER : "#e2e8f0",
-                          background: on ? `${AMBER}12` : "#fff",
+                        key={u}
+                        type="button"
+                        onClick={() => {
+                          setBillingUnit(u);
+                          setQtyUnits(u === "HOUR" ? 4 : 1);
                         }}
+                        className={`p-2.5 rounded-2xl border-2 text-center transition cursor-pointer ${
+                          on ? "border-amber-500 bg-amber-50" : "border-slate-200 bg-white"
+                        }`}
                       >
-                        <p className="text-[11px] font-black" style={{ color: on ? "#b45309" : "#475569" }}>{r.label}</p>
-                        <p className="text-[8px] font-bold text-slate-400">{r.sub}</p>
-                        <p className="text-sm font-black mt-0.5" style={{ color: BRAND }}>{inr(booking.rates[r.id])}</p>
+                        <div className="text-[10px] font-black uppercase text-slate-500">
+                          {u === "HOUR" ? "Per Hour" : u === "SHIFT" ? "8-Hr Shift" : "Weekly"}
+                        </div>
+                        <div className="font-mono font-black text-sm text-slate-900 mt-0.5">
+                          {inr(rate)}
+                        </div>
                       </button>
                     );
                   })}
                 </div>
 
-                {/* Operator toggle */}
-                {booking.needsOperator && (
-                  <button
-                    onClick={() => setWithOperator((v) => !v)}
-                    className="w-full mt-3 flex items-center justify-between p-3 rounded-2xl border-2 transition-all"
-                    style={{ borderColor: withOperator ? `${NEON}66` : "#e2e8f0", background: withOperator ? `${NEON}10` : "#fff" }}
-                  >
-                    <span className="flex items-center gap-2 text-left">
-                      <UserCheck className="w-4 h-4" style={{ color: withOperator ? "#3f6212" : "#94a3b8" }} />
-                      <span>
-                        <span className="block text-[12px] font-black text-slate-700">Certified Operator / Driver</span>
-                        <span className="block text-[10px] font-bold text-slate-400">+{inr(OPERATOR_ADD.shift)}/shift · trained &amp; insured</span>
-                      </span>
-                    </span>
-                    <span
-                      className="w-11 h-6 rounded-full p-0.5 flex items-center transition-all shrink-0"
-                      style={{ background: withOperator ? NEON : "#cbd5e1", justifyContent: withOperator ? "flex-end" : "flex-start" }}
-                    >
-                      <span className="w-5 h-5 rounded-full bg-white shadow" />
-                    </span>
-                  </button>
-                )}
-
-                {/* Total */}
-                <div className="flex items-center justify-between mt-4 p-3 rounded-2xl bg-slate-50">
+                <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total · {rateLabel}</p>
-                    <span className="font-black text-2xl" style={{ color: BRAND }}>{inr(total)}</span>
-                    {operatorAdd > 0 && (
-                      <p className="text-[10px] font-bold text-slate-500">{inr(baseRate)} machine + {inr(operatorAdd)} operator</p>
-                    )}
+                    <label className="font-bold text-slate-600 block mb-1">
+                      Quantity ({billingUnit === "HOUR" ? "Hours" : billingUnit === "WEEK" ? "Weeks" : "Shifts"})
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={100}
+                      value={qtyUnits}
+                      onChange={(e) => setQtyUnits(Math.max(1, Number(e.target.value)))}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 font-mono font-black text-slate-900"
+                    />
                   </div>
-                  <span className="flex items-center gap-1 text-[11px] font-bold text-slate-500 text-right">
-                    <MapPin className="w-4 h-4" style={{ color: AMBER }} /> Delivered to site
-                  </span>
+                  <div>
+                    <label className="font-bold text-slate-600 block mb-1">Fuel Supply Mode</label>
+                    <select
+                      value={fuelMode}
+                      onChange={(e) => setFuelMode(e.target.value as FuelMode)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 font-bold text-slate-900 bg-white"
+                    >
+                      <option value="WET">Wet Rate (Diesel + Operator)</option>
+                      <option value="DRY">Dry Rate (Without Diesel)</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Contact & Site */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div>
+                    <label className="font-bold text-slate-600 block mb-1">Site Contact Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Site Incharge Name"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-600 block mb-1">Mobile Number *</label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="10-digit WhatsApp mobile"
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900 font-mono"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-600 block mb-1">Lucknow Zone</label>
+                    <select
+                      value={lucknowZone}
+                      onChange={(e) => setLucknowZone(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900 bg-white font-semibold"
+                    >
+                      {LUCKNOW_ZONES.map((z) => (
+                        <option key={z} value={z}>{z}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-600 block mb-1">B2B GSTIN (Optional)</label>
+                    <input
+                      type="text"
+                      placeholder="09AABCC1234F1Z5"
+                      value={customerGstin}
+                      onChange={(e) => setCustomerGstin(e.target.value.toUpperCase())}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900 font-mono uppercase"
+                    />
+                  </div>
+                </div>
+
+                <div className="text-xs">
+                  <label className="font-bold text-slate-600 block mb-1">Lucknow Site Location *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Site plot address / landmark"
+                    value={siteAddress}
+                    onChange={(e) => setSiteAddress(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900"
+                  />
+                </div>
+
+                {/* Totals Box */}
+                <div className="p-3.5 rounded-2xl bg-slate-900 text-white text-xs space-y-1.5">
+                  <div className="flex justify-between text-slate-300">
+                    <span>Machine ({qtyUnits} × {inr(drawerTotals.unitRate)}) + Mob. {inr(bookingMachine.mobilizationFee)}</span>
+                    <span className="font-mono">{inr(drawerTotals.subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between text-slate-400">
+                    <span>18% GST (SAC 9973 Tax Credit Ready)</span>
+                    <span className="font-mono">{inr(drawerTotals.gst)}</span>
+                  </div>
+                  <div className="flex justify-between font-black text-base pt-1.5 border-t border-slate-800 text-amber-300">
+                    <span>Escrow Lock Total</span>
+                    <span className="font-mono">{inr(drawerTotals.total)}</span>
+                  </div>
+                </div>
+
+                {/* Payment Mode */}
+                <div className="grid grid-cols-2 gap-2.5 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMode("LIVING_VAULT")}
+                    className={`p-3 rounded-2xl border-2 text-left transition cursor-pointer ${
+                      paymentMode === "LIVING_VAULT"
+                        ? "border-blue-700 bg-blue-50"
+                        : "border-slate-200 bg-white"
+                    }`}
+                  >
+                    <div className="font-black text-slate-900 flex items-center gap-1.5">
+                      <Wallet className="w-3.5 h-3.5 text-blue-700" />
+                      Living Vault
+                    </div>
+                    <div className="text-[10px] font-mono text-slate-500">Avail: {inr(wallet.balance)}</div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMode("UPI")}
+                    className={`p-3 rounded-2xl border-2 text-left transition cursor-pointer ${
+                      paymentMode === "UPI"
+                        ? "border-amber-500 bg-amber-50"
+                        : "border-slate-200 bg-white"
+                    }`}
+                  >
+                    <div className="font-black text-slate-900 flex items-center gap-1.5">
+                      <CreditCard className="w-3.5 h-3.5 text-amber-600" />
+                      UPI Escrow
+                    </div>
+                    <div className="text-[10px] text-slate-500">Instant Verify</div>
+                  </button>
                 </div>
 
                 <button
-                  onClick={confirmBooking}
-                  disabled={addToCart.isPending}
-                  className="w-full mt-3 py-3.5 rounded-2xl text-white font-black flex items-center justify-center gap-2 active:scale-[0.98] transition disabled:opacity-60"
-                  style={{ background: `linear-gradient(135deg, ${AMBER} 0%, #f97316 100%)` }}
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm shadow-lg transition cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
                 >
-                  <ShoppingCart className="w-4 h-4" /> {addToCart.isPending ? "Booking…" : `Book Machine · ${inr(total)}`}
+                  <Lock className="w-4 h-4" />
+                  <span>
+                    {isSubmitting
+                      ? "Locking Escrow..."
+                      : `Confirm & Lock Digital HMR Escrow (${inr(drawerTotals.total)})`}
+                  </span>
                 </button>
-                <p className="text-[10px] text-slate-400 text-center mt-2 flex items-center justify-center gap-1">
-                  <Zap className="w-3 h-3" style={{ color: NEON }} /> Free site inspection before dispatch
-                </p>
-              </div>
-          </motion.div>
+              </form>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
+
+      {/* LIVE DIGITAL HMR & BREAKDOWN TRACKER MODAL */}
+      <AnimatePresence>
+        {activeTracker && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/65 backdrop-blur-xs z-50"
+              onClick={() => setActiveTracker(null)}
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg w-[92%] bg-white rounded-3xl p-5 sm:p-6 z-50 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto"
+            >
+              <div className="flex items-start justify-between border-b border-slate-100 pb-3">
+                <div>
+                  <span className="text-[10px] font-mono font-black text-blue-700 uppercase">
+                    DIGITAL HMR TRACKER • #{activeTracker.shortId}
+                  </span>
+                  <h3 className="text-base font-black text-slate-900">{activeTracker.modelName}</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTracker(null)}
+                  className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Start & End OTPs */}
+              <div className="grid grid-cols-2 gap-3 text-center">
+                <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200">
+                  <div className="text-[10px] font-bold uppercase text-amber-800">Start HMR OTP</div>
+                  <div className="text-2xl font-black font-mono text-amber-700">{activeTracker.startOtp}</div>
+                  <div className="text-[10px] text-amber-600">Operator unlocks meter</div>
+                </div>
+                <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200">
+                  <div className="text-[10px] font-bold uppercase text-emerald-800">End HMR OTP</div>
+                  <div className="text-2xl font-black font-mono text-emerald-700">{activeTracker.endOtp}</div>
+                  <div className="text-[10px] text-emerald-600">Locks final optical bill</div>
+                </div>
+              </div>
+
+              {/* Start / End Optical HMR Photos & Readings */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+                  <div className="font-black text-slate-700 mb-1">Start HMR Optical Lock</div>
+                  {activeTracker.startHmr != null ? (
+                    <>
+                      <div className="font-mono font-black text-base text-blue-700">
+                        {activeTracker.startHmr} hrs
+                      </div>
+                      {activeTracker.startHmrPhoto && (
+                        <img
+                          src={activeTracker.startHmrPhoto}
+                          alt="Start HMR"
+                          className="w-full h-24 object-cover rounded-lg mt-1.5 border border-slate-200"
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <div className="text-[11px] text-slate-400 py-4 text-center">
+                      Awaiting operator dashboard capture
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+                  <div className="font-black text-slate-700 mb-1">End HMR Optical Lock</div>
+                  {activeTracker.endHmr != null ? (
+                    <>
+                      <div className="font-mono font-black text-base text-emerald-700">
+                        {activeTracker.endHmr} hrs
+                      </div>
+                      {activeTracker.endHmrPhoto && (
+                        <img
+                          src={activeTracker.endHmrPhoto}
+                          alt="End HMR"
+                          className="w-full h-24 object-cover rounded-lg mt-1.5 border border-slate-200"
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <div className="text-[11px] text-slate-400 py-4 text-center">
+                      Locks upon job completion
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* 1-Tap Breakdown / Rain Pause Control */}
+              {(activeTracker.status === "RUNNING_HMR" || activeTracker.status === "PAUSED_BREAKDOWN") && (
+                <div
+                  className={`p-4 rounded-2xl border space-y-2.5 ${
+                    activeTracker.isBreakdownPaused
+                      ? "bg-rose-50 border-rose-400"
+                      : "bg-amber-50/70 border-amber-300"
+                  }`}
+                >
+                  {activeTracker.isBreakdownPaused ? (
+                    <>
+                      <div className="flex items-center justify-between text-xs font-black text-rose-700">
+                        <span className="flex items-center gap-1.5">
+                          <AlertTriangle className="w-4 h-4 animate-pulse" />
+                          METER PAUSED (BILLING FROZEN)
+                        </span>
+                        <span className="font-mono">SOS Active</span>
+                      </div>
+                      <p className="text-[11px] text-rose-700">
+                        Reason: {activeTracker.breakdownReason}. Admin Command OS alerted for immediate mechanic/backup dispatch.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => handleResumeMeter(activeTracker)}
+                        className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <PlayCircle className="w-4 h-4" />
+                        <span>Resume Running Meter</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-xs font-bold text-slate-800">
+                        Machine Stalled or Rain Halt on Site?
+                      </div>
+                      <input
+                        type="text"
+                        value={pauseReason}
+                        onChange={(e) => setPauseReason(e.target.value)}
+                        className="w-full px-3 py-1.5 rounded-xl border border-amber-300 bg-white text-xs text-slate-900"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleBreakdownPause(activeTracker)}
+                        className="w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <PauseCircle className="w-4 h-4" />
+                        <span>⏸ Pause Meter (Breakdown / Rain SOS)</span>
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+
+              {/* Exact Optical Net Bill Box */}
+              <div className="p-3.5 rounded-2xl bg-slate-900 text-white text-xs space-y-1">
+                <div className="flex justify-between text-slate-300">
+                  <span>Taxable Optical Usage + Mob.</span>
+                  <span className="font-mono">{inr(activeTracker.taxableValue)}</span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>18% GST (SAC 9973)</span>
+                  <span className="font-mono">{inr(activeTracker.gstAmount)}</span>
+                </div>
+                <div className="flex justify-between font-black text-sm text-amber-300 pt-1 border-t border-slate-800">
+                  <span>Exact Net Bill (Escrow {activeTracker.escrowStatus})</span>
+                  <span className="font-mono">{inr(activeTracker.netBillAmount || activeTracker.estimatedTotal)}</span>
+                </div>
+                {activeTracker.settledUtr && (
+                  <div className="text-[10px] font-mono text-emerald-400 pt-1">
+                    ✓ Partner Paid via UTR: {activeTracker.settledUtr}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Multi-Image + Full Spec Inspection Modal for Heavy Machine Rentals */}
+      <ProductDetailModal
+        product={
+          detailMachine
+            ? {
+                id: detailMachine.id,
+                slug: detailMachine.slug,
+                title: detailMachine.machineName,
+                brand: detailMachine.modelName || "CONON Fleet",
+                categoryTag: "Heavy Machine Rentals (SAC 9973)",
+                price: getRateFor(detailMachine, fuelMode, billingUnit),
+                mrp: Math.round(getRateFor(detailMachine, fuelMode, billingUnit) * 1.15),
+                unit: billingUnit === "HOUR" ? "Hour" : billingUnit === "WEEK" ? "Week" : "8-Hr Shift",
+                image: detailMachine.imageUrl,
+                description: detailMachine.description,
+                highlights: [detailMachine.capacitySpec, detailMachine.fuelNote, detailMachine.tag].filter(Boolean),
+                hsnCode: detailMachine.sacCode || "9973",
+                gstRate: 18,
+              }
+            : null
+        }
+        open={Boolean(detailMachine)}
+        onClose={() => setDetailMachine(null)}
+        onAddToCart={() => {
+          if (detailMachine) {
+            openBookDrawer(detailMachine);
+            setDetailMachine(null);
+          }
+        }}
+      />
     </Layout>
   );
 }
 
-function Trust({ icon, label }: { icon: React.ReactNode; label: string }) {
-  return (
-    <div className="flex items-center gap-1 px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.12)" }}>
-      <span className="text-amber-300">{icon}</span>
-      <span className="text-[10px] font-bold text-white">{label}</span>
-    </div>
-  );
-}
+export default HeavyRentals;

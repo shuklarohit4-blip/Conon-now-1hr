@@ -122,96 +122,7 @@ export interface SSEClient {
 
 const STORE_PATH = ECOSYSTEM_STORE_PATH;
 
-export const PRESEEDED_LUCKNOW_DRIVERS: DriverPartner[] = [
-  {
-    id: "DRV-LKO-201",
-    name: "Rajesh Kumar",
-    phone: "9876543210",
-    vehicleType: "2W_BIKE",
-    vehicleLabel: "2-Wheeler (Express)",
-    vehicleModel: "Hero Splendor Pro (UP 32 BK 4819)",
-    vehiclePlate: "UP 32 BK 1234",
-    avatarUrl: "/images/drivers/rajesh.webp",
-    rating: 4.8,
-    totalTrips: 1240,
-    isOnline: true,
-    activeTripId: null,
-    currentZone: "Latouche Road / Charbagh",
-    currentLat: 26.832,
-    currentLng: 80.915,
-    walletBalance: 1450,
-    todayEarnings: 450,
-    tripsToday: 3,
-    bankAccountMasked: "State Bank of India ••••••4819",
-    upiId: "rajesh.splendor@upi",
-  },
-  {
-    id: "DRV-LKO-202",
-    name: "Mohd. Shakeel",
-    phone: "9415123456",
-    vehicleType: "3W_ELECTRIC_LOADER",
-    vehicleLabel: "3W E-Loader (500kg)",
-    vehicleModel: "Mahindra Treo Zor (UP 32 EL 9102)",
-    vehiclePlate: "UP 32 EL 9102",
-    avatarUrl: "/images/drivers/shakeel.webp",
-    rating: 4.9,
-    totalTrips: 890,
-    isOnline: true,
-    activeTripId: null,
-    currentZone: "Aminabad / Naka Hindola",
-    currentLat: 26.840,
-    currentLng: 80.925,
-    walletBalance: 2850,
-    todayEarnings: 720,
-    tripsToday: 2,
-    bankAccountMasked: "HDFC Bank ••••••9102",
-    upiId: "shakeel.treo@okaxis",
-  },
-  {
-    id: "DRV-LKO-203",
-    name: "Vikram Singh",
-    phone: "9839445566",
-    vehicleType: "4W_PICKUP",
-    vehicleLabel: "4W Mini-Truck (1.5 Ton)",
-    vehicleModel: "Tata Ace Gold (UP 32 PK 7744)",
-    vehiclePlate: "UP 32 PK 7744",
-    avatarUrl: "/images/drivers/vikram.webp",
-    rating: 4.7,
-    totalTrips: 1540,
-    isOnline: true,
-    activeTripId: null,
-    currentZone: "Chinhat Industrial Hub",
-    currentLat: 26.865,
-    currentLng: 81.010,
-    walletBalance: 4600,
-    todayEarnings: 1250,
-    tripsToday: 2,
-    bankAccountMasked: "Punjab National Bank ••••••7744",
-    upiId: "vikram.tataace@pnb",
-  },
-  {
-    id: "DRV-LKO-204",
-    name: "Gurpreet Singh",
-    phone: "9792556677",
-    vehicleType: "TRACTOR_DUMPER",
-    vehicleLabel: "Tractor Trolley / Dumper (4+ Ton)",
-    vehicleModel: "Mahindra 575 DI (UP 32 TR 3321)",
-    vehiclePlate: "UP 32 TR 3321",
-    avatarUrl: "/images/drivers/gurpreet.webp",
-    rating: 4.9,
-    totalTrips: 620,
-    isOnline: true,
-    activeTripId: null,
-    currentZone: "Shaheed Path / Sushant Golf City",
-    currentLat: 26.790,
-    currentLng: 80.995,
-    walletBalance: 7800,
-    todayEarnings: 2800,
-    tripsToday: 2,
-    bankAccountMasked: "Bank of Baroda ••••••3321",
-    upiId: "gurpreet.dumper@barodampay",
-  },
-];
+export const PRESEEDED_LUCKNOW_DRIVERS: DriverPartner[] = [];
 
 export class EcosystemEngine {
   private orders = new Map<string, EcosystemOrder>();
@@ -247,114 +158,22 @@ export class EcosystemEngine {
         }
         logger.info({ orderCount: this.orders.size, driverCount: this.drivers.size }, "Loaded ecosystem store from disk");
       } else {
-        this.seedInitialOrders();
         this.saveStore();
       }
     } catch (err) {
       logger.warn({ err }, "Failed reading ecosystem-store.json, creating initial store");
-      this.seedInitialOrders();
       this.saveStore();
     }
   }
 
   private seedInitialOrders() {
-    const showcaseOrder: EcosystemOrder = {
-      id: "CON-28471",
-      shortId: "CON-2847",
-      customerName: "Rohit Shukla (Hazratganj Villa Site)",
-      customerPhone: "+91 98765 43210",
-      deliveryAddress: "Plot 42, Hazratganj, Lucknow — 226001",
-      deliveryArea: "Hazratganj Central",
-      items: [
-        {
-          skuId: "sku-ultratech-ppc-50kg",
-          name: "UltraTech Super Cement PPC 50kg",
-          brand: "UltraTech",
-          category: "Cement & Civil Works",
-          unit: "50kg Bag",
-          qty: 20,
-          unitPrice: 385,
-          totalPrice: 7700,
-          dealerPayout: 345 * 20,
-          hsnCode: "2523",
-          weightKg: 1000,
-        },
-        {
-          skuId: "sku-tata-tiscon-12mm",
-          name: "Tata Tiscon 550D TMT Rebar 12mm",
-          brand: "Tata Tiscon",
-          category: "TMT Steel & Iron Bars",
-          unit: "Bundle (12m)",
-          qty: 5,
-          unitPrice: 1650,
-          totalPrice: 8250,
-          dealerPayout: 1490 * 5,
-          hsnCode: "7214",
-          weightKg: 500,
-        },
-        {
-          skuId: "sku-havells-lifeline-25",
-          name: "Havells Lifeline Plus HRFR Wire 2.5 sq mm",
-          brand: "Havells",
-          category: "Electricals & Modular Switches",
-          unit: "90m Coil",
-          qty: 2,
-          unitPrice: 1900,
-          totalPrice: 3800,
-          dealerPayout: 1680 * 2,
-          hsnCode: "8544",
-          weightKg: 8,
-        },
-      ],
-      category: "Cement & Civil Works",
-      subtotal: 19750,
-      gstAmount: 2370,
-      deliveryFee: 0,
-      labourFee: 0,
-      totalAmount: 22120,
-      dealerPayable: 17710,
-      driverPayable: 650,
-      cononNetMargin: 3760,
-      status: "PACKING_READY",
-      vehicleClass: "4W_PICKUP",
-      vehicleLabel: "4W Mini-Truck (1.5 Ton)",
-      pickupOtp: "4821",
-      deliveryOtp: "7390",
-      vendorId: "vnd-chinhat-cement",
-      vendorStore: "Shree Balaji Cement & Steel",
-      vendorPhone: "9415088771",
-      vendorAddress: "Plot 8B, Industrial Area Phase II, Chinhat, Lucknow",
-      driverId: "DRV-LKO-203",
-      driverName: "Vikram Singh",
-      driverPhone: "9839445566",
-      driverVehiclePlate: "UP 32 PK 7744",
-      driverVehicleModel: "Tata Ace Gold",
-      requiresEmm11: false,
-      placedAt: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-      estimatedDelivery: new Date(Date.now() + 45 * 60 * 1000).toISOString(),
-      timeline: [
-        {
-          status: "PLACED",
-          timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-          actor: "CUSTOMER",
-          note: "Order placed via Customer App (60-Min Express)",
-        },
-        {
-          status: "VENDOR_ACCEPTED",
-          timestamp: new Date(Date.now() - 12 * 60 * 1000).toISOString(),
-          actor: "VENDOR",
-          note: "Shree Balaji Cement confirmed stock readiness",
-        },
-        {
-          status: "PACKING_READY",
-          timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
-          actor: "VENDOR",
-          note: "Bags staged at loading dock. Waiting for driver pickup.",
-        },
-      ],
-      financialsPosted: false,
-    };
-    this.orders.set(showcaseOrder.id, showcaseOrder);
+    this.orders.clear();
+  }
+
+  public clearAll(): void {
+    this.orders.clear();
+    this.drivers.clear();
+    this.saveStore();
   }
 
   public saveStore() {
@@ -845,7 +664,7 @@ export class EcosystemEngine {
   }
 
   /**
-   * Complete Delivery with Customer OTP + PoD Photo + Financials Idempotency:
+   * Complete Delivery with Customer OTP + PoD Photo + Financial Idempotency:
    */
   public completeDelivery(
     orderId: string,

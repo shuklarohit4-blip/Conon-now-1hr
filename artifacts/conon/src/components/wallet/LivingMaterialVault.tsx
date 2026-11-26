@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useWallet, WalletTxn } from "@/context/WalletContext";
+import { CustomerDeliveryFeedbackModal } from "@/components/feedback/CustomerDeliveryFeedbackModal";
 
 /* ── Formatter Helpers ─────────────────────────────────────────────────── */
 const inr = (n: number) => `₹${Math.round(n).toLocaleString("en-IN")}`;
@@ -165,6 +166,7 @@ export function LivingMaterialVault() {
 
   /* ── Modals & Drawers State ── */
   const [showAddFunds, setShowAddFunds] = useState(false);
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [addAmount, setAddAmount] = useState<number>(2000);
   const [selectedPayMethod, setSelectedPayMethod] = useState("UPI");
 
@@ -998,6 +1000,18 @@ export function LivingMaterialVault() {
               >
                 <Zap className="w-3.5 h-3.5 text-rose-400 fill-rose-400" />
                 <span>{sosCredit.active ? "SOS Active" : "SOS Rescue Credit"}</span>
+              </button>
+
+              {/* Rate Last Delivery / Material X-Ray Feedback Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFeedbackModalOpen(true);
+                }}
+                className="py-3 px-4 rounded-2xl bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-600/50 hover:to-indigo-600/50 text-blue-200 border border-blue-500/40 font-black text-xs uppercase tracking-wider active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                <span>Rate Last Delivery</span>
               </button>
             </div>
 
@@ -2281,6 +2295,13 @@ export function LivingMaterialVault() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Customer Delivery & Material X-Ray Feedback Studio Modal */}
+      <CustomerDeliveryFeedbackModal
+        isOpen={feedbackModalOpen}
+        onClose={() => setFeedbackModalOpen(false)}
+        vaultBalance={cashBalance}
+      />
     </div>
   );
 }

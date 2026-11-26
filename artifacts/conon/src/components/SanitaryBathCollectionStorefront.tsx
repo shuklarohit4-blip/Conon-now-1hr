@@ -31,6 +31,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 import {
@@ -97,7 +98,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Jaquar",
     role: "Structural WC In-Wall Carrier (400kg)",
     price: 4850,
-    image: "/images/products/sanitary-bath-fittings/jaquar-in-wall-concealed-cistern-tank-structural-mounting-frame-dual-flush.webp",
+    image: "",
     desc: "Heavy galvanized steel chair frame with blow-molded HDPE cistern body. Dual flush 3L/6L valve with 180/230mm bolt pitch.",
     hsn: "3922",
   },
@@ -107,7 +108,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Jaquar",
     role: "Actuator Push Plate",
     price: 1450,
-    image: "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-mechanical-dual-flush-actuator-push-plate-gloss-chrome.webp",
+    image: "",
     desc: "ABS body with electroplated mirror chrome finish. Dual-button actuation for water-saving 3L and full 6L flushes.",
     hsn: "3922",
   },
@@ -117,7 +118,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Jaquar",
     role: "In-Wall Rough-In Brass Body",
     price: 3150,
-    image: "/images/products/sanitary-bath-fittings/jaquar-high-flow-single-lever-concealed-diverter-rough-in-brass-body.webp",
+    image: "",
     desc: "Forged dezincification resistant (DZR) brass body. 40mm high-flow cartridge delivering 45 LPM at 3 bar pressure.",
     hsn: "8481",
   },
@@ -127,7 +128,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Jaquar",
     role: "Overhead Rain Shower",
     price: 2850,
-    image: "/images/products/sanitary-bath-fittings/jaquar-ss-304-overhead-rain-shower-8inch-square-with-15inch-brass-arm.webp",
+    image: "",
     desc: "SS-304 slim mirror polished rain head with self-cleaning silicone nozzles and 15-inch heavy brass arm.",
     hsn: "8481",
   },
@@ -137,7 +138,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Jaquar",
     role: "Wall Spout with Neoperl Aerator",
     price: 1890,
-    image: "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-heavy-cast-brass-bathtub-spout-wall-flange-chrome.webp",
+    image: "",
     desc: "Solid brass casting with integrated high-efficiency foam flow aerator and square wall flange.",
     hsn: "8481",
   },
@@ -147,7 +148,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Jaquar",
     role: "Hygiene Jet Spray",
     price: 1120,
-    image: "/images/products/sanitary-bath-fittings/jaquar-health-faucet-abs-body-with-1-2m-ss-flexible-hose-wall-hook-chrome.webp",
+    image: "",
     desc: "High-impact ABS spray head with easy-press trigger, 1.2m braided stainless steel flexible hose and wall bracket.",
     hsn: "8481",
   },
@@ -157,7 +158,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Cera",
     role: "Odor-Proof Basin Waste Trap",
     price: 2016,
-    image: "/images/products/sanitary-bath-fittings/cera-heavy-brass-32mm-chrome-wash-basin-bottle-trap-250mm-pipe.webp",
+    image: "",
     desc: "Solid forged brass bottle trap body with 250mm horizontal discharge pipe and deep water seal to block sewer gases.",
     hsn: "8481",
   },
@@ -167,7 +168,7 @@ const SANITARY_KIT_ITEMS: Record<
     brand: "Jaquar",
     role: "Isolation Angle Valve",
     price: 850,
-    image: "/images/products/sanitary-bath-fittings/jaquar-florentine-prime-triangular-angular-stop-cock-with-wall-flange.webp",
+    image: "",
     desc: "Heavy forged brass body with ceramic disc cartridge for quarter-turn leak-free water control to cisterns & faucets.",
     hsn: "8481",
   },
@@ -178,6 +179,7 @@ export function SanitaryBathCollectionStorefront({
   onBackToDirectory,
 }: SanitaryBathCollectionStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -228,7 +230,7 @@ export function SanitaryBathCollectionStorefront({
 
   // Filter Logic
   const filteredProducts = useMemo(() => {
-    return ALL_28_SANITARY_BATH_PRODUCTS.filter((prod) => {
+    return ALL_28_SANITARY_BATH_PRODUCTS.map((p) => resolveProduct(p)).filter((prod) => {
       // Subcategory
       if (activeSubcat !== "ALL" && prod.sanitarySubcategory !== activeSubcat) {
         return false;
@@ -253,7 +255,7 @@ export function SanitaryBathCollectionStorefront({
 
       return true;
     });
-  }, [activeSubcat, selectedBrandTier, selectedBrand, selectedMounting, selectedVehicle]);
+  }, [activeSubcat, selectedBrandTier, selectedBrand, selectedMounting, selectedVehicle, resolveProduct]);
 
   // Cart operations
   const handleAddToCart = (prod: SanitaryBathProduct) => {

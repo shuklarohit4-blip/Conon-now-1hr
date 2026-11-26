@@ -49,9 +49,11 @@ import {
 } from "@/services/vendorCatalogSync";
 import { ProductImageUploader, optimizeImageFile } from "./ProductImageUploader";
 import { getSocket } from "@/services/socket";
-import { RealProductImage } from "../RealProductImage";
+import { CononProductMedia } from "../CononProductMedia";
 import { useVendorTheme, VendorThemeToggle } from "@/context/VendorThemeContext";
 import { useVendorLang, VendorLanguageToggle } from "@/context/VendorLanguageContext";
+import { isProductAdminLocked } from "@/services/adminMasterCatalog";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 
 // Map category slug to lucide icon component
 export const CATEGORY_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -90,6 +92,7 @@ export function VendorCatalogStudio({
 }: VendorCatalogStudioProps) {
   const { isDark } = useVendorTheme();
   const { t, lang } = useVendorLang();
+  const { resolveProduct } = useProductMediaVault();
 
   const [catalogState, setCatalogState] = useState<VendorCatalogState | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -671,9 +674,21 @@ export function VendorCatalogStudio({
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {items.map((prod) => {
+            {items.map((rawProd) => {
+              const prod = resolveProduct(rawProd) as typeof rawProd & {
+                isAdminVerifiedMedia?: boolean;
+                name?: string;
+                title?: string;
+              };
               const hasCustomPhoto = Boolean(prod.customImage || prod.imageUrl?.startsWith("data:"));
               const isEditing = editingId === prod.id;
+              const isVaultVerified = Boolean(prod.isAdminVerifiedMedia);
+              const isMasterLocked = Boolean(
+                (prod as any).adminLocked ||
+                  isVaultVerified ||
+                  isProductAdminLocked(prod.id) ||
+                  isProductAdminLocked(prod.name)
+              );
 
               return (
                 <div
@@ -699,14 +714,17 @@ export function VendorCatalogStudio({
                       isDark ? "bg-slate-900/80" : "bg-slate-100"
                     }`}
                   >
-                    <RealProductImage
+                    <CononProductMedia
                       product={prod}
                       src={prod.imageUrl}
                       title={prod.name}
                       brand={prod.brand}
                       category={prod.categorySlug || prod.categoryName}
+                      categorySlug={prod.categorySlug}
                       alt={prod.name}
                       variant="card"
+                      isDark={isDark}
+                      containerClassName="w-full h-full"
                       className={`w-full h-full object-contain transition-transform duration-200 group-hover:scale-105 ${
                         !prod.inStock ? "grayscale" : ""
                       }`}
@@ -716,7 +734,17 @@ export function VendorCatalogStudio({
                     <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-2">
                       <button
                         type="button"
-                        onClick={() => setActivePhotoProduct(prod)}
+                        onClick={() => {
+                          if (isMasterLocked) {
+                            toast.info(
+                              lang === "hi"
+                                ? "यह उत्पाद एडमिन वेरिफाइड मास्टर है। मूल फ़ोटो एडमिन द्वारा सुरक्षित है।"
+                                : "Admin Verified Master: Core photo is locked & protected by Conon Admin."
+                            );
+                            return;
+                          }
+                          setActivePhotoProduct(prod);
+                        }}
                         className="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black flex items-center gap-1.5 shadow-lg shadow-amber-400/20 cursor-pointer"
                       >
                         <Camera className="w-3.5 h-3.5" />
@@ -729,13 +757,23 @@ export function VendorCatalogStudio({
                       {prod.skuCode}
                     </span>
 
-                    {/* Custom Photo Badge */}
-                    {hasCustomPhoto && (
+                    {/* Admin Verified Media / Master Gold Badge */}
+                    {isVaultVerified ? (
+                      <span className="absolute top-2 right-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-[9px] font-black tracking-wide px-2 py-0.5 rounded-md shadow-md flex items-center gap-1 border border-emerald-300">
+                        <Lock className="w-2.5 h-2.5 text-white" />
+                        <span>{lang === "hi" ? "एडमिन वेरिफाइड मीडिया" : "Admin Verified Media"}</span>
+                      </span>
+                    ) : isMasterLocked ? (
+                      <span className="absolute top-2 right-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 text-[9px] font-black tracking-wide px-2 py-0.5 rounded-md shadow-md flex items-center gap-1 border border-amber-300">
+                        <Lock className="w-2.5 h-2.5 text-slate-950" />
+                        <span>{lang === "hi" ? "एडमिन वेरिफाइड मास्टर" : "Admin Verified Master"}</span>
+                      </span>
+                    ) : hasCustomPhoto ? (
                       <span className="absolute top-2 right-2 bg-purple-500/90 text-white text-[9px] font-bold px-2 py-0.5 rounded-md shadow-sm flex items-center gap-1">
                         <Sparkles className="w-2.5 h-2.5" />
                         {lang === "hi" ? "कस्टम" : "Custom"}
                       </span>
-                    )}
+                    ) : null}
                   </div>
 
                   {/* Card Content */}
@@ -773,7 +811,7 @@ export function VendorCatalogStudio({
                               onChange={(e) => setEditPrice(Number(e.target.value))}
                               className={`w-full rounded-lg px-2 py-1 text-xs font-bold border ${
                                 isDark
-                                  ? "bg-[#161F30] border-slate-700 text-white"
+                                  ? "bg-[#122444] border-slate-700 text-white"
                                   : "bg-white border-slate-300 text-slate-900"
                               }`}
                             />
@@ -788,7 +826,7 @@ export function VendorCatalogStudio({
                               onChange={(e) => setEditQty(Number(e.target.value))}
                               className={`w-full rounded-lg px-2 py-1 text-xs font-bold border ${
                                 isDark
-                                  ? "bg-[#161F30] border-slate-700 text-white"
+                                  ? "bg-[#172847] border-slate-700 text-white"
                                   : "bg-white border-slate-300 text-slate-900"
                               }`}
                             />
@@ -1128,11 +1166,13 @@ export function VendorCatalogStudio({
                     }`}
                   />
                   {newProdImage && (
-                    <RealProductImage
+                    <CononProductMedia
                       src={newProdImage}
                       alt="Preview"
                       variant="thumb"
-                      className="w-10 h-10 object-contain rounded-lg border border-slate-700"
+                      showGalleryBadge={false}
+                      containerClassName="w-10 h-10 rounded-lg border border-slate-700 overflow-hidden shrink-0"
+                      className="w-full h-full object-contain"
                     />
                   )}
                 </div>

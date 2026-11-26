@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import {
   Menu, Search, X, Mic, MapPin, ChevronDown,
   Wallet, User, ShoppingBag, ShieldCheck, Truck, Percent,
-  Package, FileText, Layers, LogOut, Radio
+  Package, FileText, Layers, LogOut, Radio, Sparkles
 } from "lucide-react";
 import { formatINR } from "@/lib/wallet";
 import { useUI } from "@/context/UIContext";
@@ -11,6 +11,7 @@ import { useUser } from "@/context/UserContext";
 import { useAuthContext } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
+import { CustomerDeliveryFeedbackModal } from "@/components/feedback/CustomerDeliveryFeedbackModal";
 
 interface HomeRunHeaderProps {
   searchTerm: string;
@@ -68,6 +69,7 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
   const { user, userProfile, logout } = useUser();
   const { user: authUser, isAuthenticated: isAuthed, isAdmin, openAuthModal, logout: authLogout } = useAuthContext();
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
   const logoClicksRef = useRef<number[]>([]);
 
@@ -221,6 +223,18 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
                 ₹{formatINR(walletBalance)}
               </span>
             </Link>
+
+            {/* 1-Tap Rate Last Delivery / Feedback Quick Trigger */}
+            <button
+              type="button"
+              onClick={() => setFeedbackModalOpen(true)}
+              title="Rate Last Delivery & Visual Material X-Ray"
+              className="flex items-center gap-1 sm:gap-1.5 h-8 px-2.5 sm:px-3 rounded-full bg-blue-50 hover:bg-blue-100 text-[#1848a0] border border-blue-200/80 active:scale-95 transition shadow-2xs font-bold text-[11px] sm:text-xs cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+              <span className="hidden xs:inline">Rate Delivery</span>
+              <span className="xs:hidden">Rate</span>
+            </button>
 
             {/* Glowing Indigo Admin Command OS Pill (Visible only when Local Admin) */}
             {IS_LOCAL_ADMIN && isAdmin && (
@@ -457,6 +471,13 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Customer Delivery & Material X-Ray Feedback Studio Modal */}
+      <CustomerDeliveryFeedbackModal
+        isOpen={feedbackModalOpen}
+        onClose={() => setFeedbackModalOpen(false)}
+        vaultBalance={walletBalance}
+      />
     </div>
   );
 };

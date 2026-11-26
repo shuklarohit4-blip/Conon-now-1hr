@@ -79,10 +79,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-neo-prime-digital-lock-9686-titanium-grey.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-neo-prime-digital-lock-9686-titanium-grey.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "4-in-1 Access · 35–65mm Wooden Door · Auto-Locking Mortise",
     "specChips": [
       "35–65mm Door Fit",
@@ -133,7 +131,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 12500,
         "discountPercent": 27,
         "stock": 18,
-        "image": "/images/products/door-hardware-locks/godrej-neo-prime-digital-lock-9686-titanium-grey.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -175,10 +173,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/yale-ydme-50nxt-biometric-smart-lock-brown.webp",
-    "images": [
-      "/images/products/door-hardware-locks/yale-ydme-50nxt-biometric-smart-lock-brown.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "35–65mm Door Fit · 100 Fingerprint Memory · Yale Global Security",
     "specChips": [
       "35–65mm Door Fit",
@@ -229,7 +225,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 13999,
         "discountPercent": 34,
         "stock": 14,
-        "image": "/images/products/door-hardware-locks/yale-ydme-50nxt-biometric-smart-lock-brown.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -271,10 +267,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-catus-touch-plus-digital-mortise-lock-4200-black.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-catus-touch-plus-digital-mortise-lock-4200-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Sleek Matte Black · 35–65mm Door Fit · Multi-Point Deadbolt",
     "specChips": [
       "35–65mm Door Fit",
@@ -325,7 +319,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 14500,
         "discountPercent": 25,
         "stock": 12,
-        "image": "/images/products/door-hardware-locks/godrej-catus-touch-plus-digital-mortise-lock-4200-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -367,10 +361,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-advantis-gsld1-7in1-smart-lock-4406-matte-black.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-advantis-gsld1-7in1-smart-lock-4406-matte-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "7-in-1 Access · Bluetooth BLE Mobile App · 35–65mm Door Fit",
     "specChips": [
       "35–65mm Door Fit",
@@ -421,7 +413,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 21500,
         "discountPercent": 25,
         "stock": 10,
-        "image": "/images/products/door-hardware-locks/godrej-advantis-gsld1-7in1-smart-lock-4406-matte-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -463,10 +455,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/yale-ydr-41a-biometric-smart-lock-double-sliding-doors.webp",
-    "images": [
-      "/images/products/door-hardware-locks/yale-ydr-41a-biometric-smart-lock-double-sliding-doors.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dual Interlocking Hook Bolt · Sliding & Double Door Specialist",
     "specChips": [
       "35–65mm Door Fit",
@@ -517,7 +507,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 42000,
         "discountPercent": 17,
         "stock": 6,
-        "image": "/images/products/door-hardware-locks/yale-ydr-41a-biometric-smart-lock-double-sliding-doors.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -558,10 +548,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-advantis-iot9-wifi-nfc-smart-main-door-lock.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-advantis-iot9-wifi-nfc-smart-main-door-lock.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "9-in-1 Ultra-Luxury IoT · Built-in Wi-Fi & NFC · Push-Pull Design",
     "specChips": [
       "35–65mm Door Fit",
@@ -612,7 +600,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 55000,
         "discountPercent": 22,
         "stock": 5,
-        "image": "/images/products/door-hardware-locks/godrej-advantis-iot9-wifi-nfc-smart-main-door-lock.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -653,10 +641,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-vertibolt-ultra-xl-plus-1ck-rim-lock-4291-satin-nickel.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-vertibolt-ultra-xl-plus-1ck-rim-lock-4291-satin-nickel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dual Vertical Deadbolts · 1CK Key/Knob · Crowbar Resistant",
     "specChips": [
       "30–60mm Door Fit",
@@ -707,7 +693,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 2800,
         "discountPercent": 21,
         "stock": 45,
-        "image": "/images/products/door-hardware-locks/godrej-vertibolt-ultra-xl-plus-1ck-rim-lock-4291-satin-nickel.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -749,10 +735,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-1ck-latchbolt-lock-8111-antique-brass.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-ultra-tribolt-1ck-latchbolt-lock-8111-antique-brass.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3 Brass Deadbolts + Latch · 1CK Operation · Antique Brass Finish",
     "specChips": [
       "30–60mm Door Fit",
@@ -803,7 +787,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 4150,
         "discountPercent": 20,
         "stock": 38,
-        "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-1ck-latchbolt-lock-8111-antique-brass.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -845,10 +829,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/europa-parma-v321-14pin-3deadbolt-main-door-lock-nickel-steel.webp",
-    "images": [
-      "/images/products/door-hardware-locks/europa-parma-v321-14pin-3deadbolt-main-door-lock-nickel-steel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "14-Pin Dimple Technology · 3-Deadbolt Rim Lock · ₹3 Lakh Theft Cover",
     "specChips": [
       "30–60mm Door Fit",
@@ -899,7 +881,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 4350,
         "discountPercent": 20,
         "stock": 26,
-        "image": "/images/products/door-hardware-locks/europa-parma-v321-14pin-3deadbolt-main-door-lock-nickel-steel.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -941,10 +923,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-2c-pin-cylinder-lock-8131-satin-nickel.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-ultra-tribolt-2c-pin-cylinder-lock-8131-satin-nickel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2C Key Inside & Outside · Grill-Gate Safe · Ultra XL+ Technology",
     "specChips": [
       "30–60mm Door Fit",
@@ -995,7 +975,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 4800,
         "discountPercent": 20,
         "stock": 30,
-        "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-2c-pin-cylinder-lock-8131-satin-nickel.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1037,10 +1017,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-centaur-ultra-xl-plus-dual-motion-lock-9143-satin.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-centaur-ultra-xl-plus-dual-motion-lock-9143-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dual-Motion 4 Deadbolts · Double Leaf Main Door Specialist",
     "specChips": [
       "30–60mm Door Fit",
@@ -1091,7 +1069,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 5100,
         "discountPercent": 21,
         "stock": 20,
-        "image": "/images/products/door-hardware-locks/godrej-centaur-ultra-xl-plus-dual-motion-lock-9143-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1133,10 +1111,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-stella-180mm-6lever-mortise-door-lock-handle-set-satin.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-stella-180mm-6lever-mortise-door-lock-handle-set-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "180mm Curved Handle · 6-Lever Brass Mortise · Bedroom & Balcony",
     "specChips": [
       "28–45mm Door Fit",
@@ -1187,7 +1163,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 2100,
         "discountPercent": 25,
         "stock": 50,
-        "image": "/images/products/door-hardware-locks/godrej-stella-180mm-6lever-mortise-door-lock-handle-set-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1228,10 +1204,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/europa-mortise-rose-handle-combo-set-m516961r692ab-antique-brass.webp",
-    "images": [
-      "/images/products/door-hardware-locks/europa-mortise-rose-handle-combo-set-m516961r692ab-antique-brass.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer Round Rose Handle · 60mm Dimple Cylinder · Antique Brass",
     "specChips": [
       "32–45mm Door Fit",
@@ -1282,7 +1256,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 2650,
         "discountPercent": 25,
         "stock": 22,
-        "image": "/images/products/door-hardware-locks/europa-mortise-rose-handle-combo-set-m516961r692ab-antique-brass.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1323,10 +1297,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/dorset-kaira-10in-mortise-handle-lockset-60mm-key-knob-antique.webp",
-    "images": [
-      "/images/products/door-hardware-locks/dorset-kaira-10in-mortise-handle-lockset-60mm-key-knob-antique.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "10-Inch Decorative Plate · 60mm Key & Thumbturn · Antique Brass",
     "specChips": [
       "32–45mm Door Fit",
@@ -1377,7 +1349,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 2690,
         "discountPercent": 25,
         "stock": 28,
-        "image": "/images/products/door-hardware-locks/dorset-kaira-10in-mortise-handle-lockset-60mm-key-knob-antique.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1418,10 +1390,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-cylindrical-door-lock-ss-keyless-60mm-5805.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-cylindrical-door-lock-ss-keyless-60mm-5805.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Bathroom & Toilet Specialist · Push-Button Privacy · Emergency Coin Slot",
     "specChips": [
       "25–45mm Door Fit",
@@ -1472,7 +1442,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 1100,
         "discountPercent": 22,
         "stock": 65,
-        "image": "/images/products/door-hardware-locks/godrej-cylindrical-door-lock-ss-keyless-60mm-5805.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1512,10 +1482,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-navtal-7lever-65mm-heavy-duty-brass-padlock-4keys.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-navtal-7lever-65mm-heavy-duty-brass-padlock-4keys.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "7 Precision Brass Levers · Hardened Steel Shackle · 4 Keys Included",
     "specChips": [
       "8–14mm Aldrop Fit",
@@ -1566,7 +1534,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 990,
         "discountPercent": 19,
         "stock": 100,
-        "image": "/images/products/door-hardware-locks/godrej-navtal-7lever-65mm-heavy-duty-brass-padlock-4keys.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1606,10 +1574,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/cent-style-12inch-heavy-duty-ss-aldrop-door-bolt-silver.webp",
-    "images": [
-      "/images/products/door-hardware-locks/cent-style-12inch-heavy-duty-ss-aldrop-door-bolt-silver.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "12-Inch Solid SS Rod · Heavy Through-Bolt Kit · Main Door Security",
     "specChips": [
       "Universal Door Fit",
@@ -1660,7 +1626,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 1699,
         "discountPercent": 24,
         "stock": 40,
-        "image": "/images/products/door-hardware-locks/cent-style-12inch-heavy-duty-ss-aldrop-door-bolt-silver.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1701,10 +1667,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/bling-queen-12inch-heavy-duty-stainless-steel-main-door-aldrop.webp",
-    "images": [
-      "/images/products/door-hardware-locks/bling-queen-12inch-heavy-duty-stainless-steel-main-door-aldrop.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "18mm Heavy-Gauge SS Rod · Integrated Drop Handle · Premium Matte Finish",
     "specChips": [
       "Universal Door Fit",
@@ -1755,7 +1719,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 2699,
         "discountPercent": 24,
         "stock": 25,
-        "image": "/images/products/door-hardware-locks/bling-queen-12inch-heavy-duty-stainless-steel-main-door-aldrop.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1796,10 +1760,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/apace-apstb89ss-8inch-ss-matte-tower-bolt.webp",
-    "images": [
-      "/images/products/door-hardware-locks/apace-apstb89ss-8inch-ss-matte-tower-bolt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "8-Inch Stainless Steel · 10mm Solid Shoot Bolt · Interior Door Security",
     "specChips": [
       "Universal Mount",
@@ -1850,7 +1812,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 140,
         "discountPercent": 30,
         "stock": 120,
-        "image": "/images/products/door-hardware-locks/apace-apstb89ss-8inch-ss-matte-tower-bolt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1890,10 +1852,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/met-craft-ss304-soft-close-magnetic-door-stopper-4-25in-silver.webp",
-    "images": [
-      "/images/products/door-hardware-locks/met-craft-ss304-soft-close-magnetic-door-stopper-4-25in-silver.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "SS 304 Body · Soft-Close Spring Damper · Powerful Neodymium Catch",
     "specChips": [
       "Floor / Wall Mount",
@@ -1944,7 +1904,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 600,
         "discountPercent": 28,
         "stock": 80,
-        "image": "/images/products/door-hardware-locks/met-craft-ss304-soft-close-magnetic-door-stopper-4-25in-silver.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1985,10 +1945,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/falna-ss-main-door-pull-handle-12-18-inch-ss-304-matte-cp.webp",
-    "images": [
-      "/images/products/door-hardware-locks/falna-ss-main-door-pull-handle-12-18-inch-ss-304-matte-cp.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "SS 304 Architectural Pull · Dual Tone Finish · Main & Glass Doors",
     "specChips": [
       "30–55mm Doors",
@@ -2039,7 +1997,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 750,
         "discountPercent": 33,
         "stock": 45,
-        "image": "/images/products/door-hardware-locks/falna-ss-main-door-pull-handle-12-18-inch-ss-304-matte-cp.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2080,10 +2038,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/door-hardware-locks/hafele-ss304-ball-bearing-butt-hinge-5x3x3in-fire-rated.webp",
-    "images": [
-      "/images/products/door-hardware-locks/hafele-ss304-ball-bearing-butt-hinge-5x3x3in-fire-rated.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "5×3×3mm Heavy Gauge · SS 304 Fire-Rated · 80kg Door Weight Capacity",
     "specChips": [
       "35–55mm Doors",
@@ -2134,7 +2090,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 480,
         "discountPercent": 27,
         "stock": 150,
-        "image": "/images/products/door-hardware-locks/hafele-ss304-ball-bearing-butt-hinge-5x3x3in-fire-rated.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2175,10 +2131,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-ss304-ball-bearing-butt-hinge-5in-12g-matte-black-2pcs.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-ss304-ball-bearing-butt-hinge-5in-12g-matte-black-2pcs.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "5-Inch 12-Gauge · Matte Black PVD · 1 Pair (2 Pcs) · 70kg Capacity",
     "specChips": [
       "35–55mm Doors",
@@ -2229,7 +2183,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 850,
         "discountPercent": 24,
         "stock": 45,
-        "image": "/images/products/door-hardware-locks/godrej-ss304-ball-bearing-butt-hinge-5in-12g-matte-black-2pcs.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2270,10 +2224,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/dorset-dc60sm-60kg-overhead-hydraulic-door-closer-satin.webp",
-    "images": [
-      "/images/products/door-hardware-locks/dorset-dc60sm-60kg-overhead-hydraulic-door-closer-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "60kg Capacity · Rack & Pinion Dual Valve · Tested to 5 Lakh Cycles",
     "specChips": [
       "Up to 60kg Doors",
@@ -2324,7 +2276,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 1250,
         "discountPercent": 26,
         "stock": 40,
-        "image": "/images/products/door-hardware-locks/dorset-dc60sm-60kg-overhead-hydraulic-door-closer-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2365,10 +2317,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-hercules-60kg-hydraulic-door-closer-en3-1lakh-cycles.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-hercules-60kg-hydraulic-door-closer-en3-1lakh-cycles.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "EN3 Fire-Rated Heavy Closer · 60kg Door Rating · Anti-Freeze Hydraulic Oil",
     "specChips": [
       "Up to 60kg Doors",
@@ -2419,7 +2369,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 1750,
         "discountPercent": 26,
         "stock": 35,
-        "image": "/images/products/door-hardware-locks/godrej-hercules-60kg-hydraulic-door-closer-en3-1lakh-cycles.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2460,10 +2410,8 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/door-hardware-locks/ozone-fs8400-80kg-heavy-duty-double-cylinder-floor-spring-en3.webp",
-    "images": [
-      "/images/products/door-hardware-locks/ozone-fs8400-80kg-heavy-duty-double-cylinder-floor-spring-en3.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "80kg Double Cylinder · 90° Hold-Open · Glass & Wooden Doors",
     "specChips": [
       "80kg Door Capacity",
@@ -2514,7 +2462,7 @@ export const ALL_26_DOOR_HARDWARE_PRODUCTS: DoorHardwareProduct[] = [
         "mrp": 11500,
         "discountPercent": 23,
         "stock": 15,
-        "image": "/images/products/door-hardware-locks/ozone-fs8400-80kg-heavy-duty-double-cylinder-floor-spring-en3.webp"
+        "image": ""
       }
     ],
     "inStock": true,

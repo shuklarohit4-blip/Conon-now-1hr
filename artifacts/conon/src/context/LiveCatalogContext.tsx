@@ -3,6 +3,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { resolveApiUrl } from "@/lib/apiBase";
 import { getSocket } from "@/services/socket";
 import { getLocalVendorCatalog, subscribeToCatalogBus } from "@/services/vendorCatalogSync";
+import { useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { resolveProductWithVault } from "@/services/productMediaVault";
 import type { MasterCatalogSKU } from "@/types/catalog";
 export type { MasterCatalogSKU };
 
@@ -31,6 +33,8 @@ const LiveCatalogContext = createContext<LiveCatalogContextValue | null>(null);
 
 export function LiveCatalogProvider({ children }: { children: React.ReactNode }) {
   const queryClient = useQueryClient();
+  const vault = useSafeProductMediaVault();
+  const vaultVersion = vault?.version ?? 0;
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["live-catalog"],
@@ -116,15 +120,16 @@ export function LiveCatalogProvider({ children }: { children: React.ReactNode })
     return itemMap.get(id) || itemMap.get(id.toLowerCase().trim());
   };
 
-  const getLiveProduct = <T extends { id?: string; price?: number; mrp?: number; inStock?: boolean }>(
+  const getLiveProduct = useCallback(<T extends { id?: string; price?: number; mrp?: number; inStock?: boolean }>(
     fallback: T
   ): T => {
-    if (!fallback?.id) return fallback;
-    const live = itemMap.get(fallback.id) || itemMap.get(fallback.id.toLowerCase().trim());
+    if (!fallback) return fallback;
+    const lookupKey = fallback.id || (fallback as any).slug || (fallback as any).title;
+    const live = lookupKey ? itemMap.get(lookupKey) || itemMap.get(String(lookupKey).toLowerCase().trim()) : undefined;
     const vendorOverrides = getLocalVendorCatalog();
-    const vendorOverride = vendorOverrides[fallback.id];
+    const vendorOverride = fallback.id ? vendorOverrides[fallback.id] : undefined;
 
-    // Priority: Local/Socket Vendor Override > Live Catalog API > Static Fallback
+    // Priority before Master Vault: Local/Socket Vendor Override > Live Catalog API > Static Fallback
     const resolvedInStock =
       vendorOverride?.inStock !== undefined
         ? vendorOverride.inStock
@@ -146,7 +151,7 @@ export function LiveCatalogProvider({ children }: { children: React.ReactNode })
     const resolvedMrp =
       vendorOverride?.mrp ?? live?.mrp ?? fallback.mrp;
 
-    return {
+    const merged = {
       ...fallback,
       price: resolvedPrice,
       mrp: resolvedMrp,
@@ -162,7 +167,10 @@ export function LiveCatalogProvider({ children }: { children: React.ReactNode })
       pairedProducts: live?.pairedProducts || (fallback as any).pairedProducts,
       isFeatured: live?.isFeatured ?? (fallback as any).isFeatured,
     };
-  };
+
+    // PRIORITY #1 OVERRIDE: Admin Master Media & Product Vault
+    return resolveProductWithVault(merged) as T;
+  }, [itemMap, vaultVersion]);
 
   const value = {
     items,

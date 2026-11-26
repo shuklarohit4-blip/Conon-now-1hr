@@ -2,6 +2,7 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "noEmit": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "preserve",
     "types": ["node"],
     "skipLibCheck": true,
@@ -17,5 +18,5 @@
       "@workspace/api-zod": ["../lib/api-zod/src"]
     }
   },
-  "include": ["*.ts", "**/*.ts"]
+  "include": ["*.ts", "**/*.ts", "../artifacts/conon/src/vite-env.d.ts"]
 }

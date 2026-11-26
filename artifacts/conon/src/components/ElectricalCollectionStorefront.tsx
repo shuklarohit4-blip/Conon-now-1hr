@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import { VariantSelectorSheet } from "@/components/VariantSelectorSheet";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
@@ -55,7 +56,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 2093,
     mrp: 3875,
     discountPct: 46,
-    image: "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "99.97% copper",
     deliveryTime: "60 Mins",
@@ -79,7 +80,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 1731,
     mrp: 2838,
     discountPct: 39,
-    image: "/images/products/electrical/finolex-silver-fr-wire.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Electrolytic Grade Copper",
     deliveryTime: "60 Mins",
@@ -103,7 +104,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 1958,
     mrp: 3765,
     discountPct: 48,
-    image: "/images/products/electrical/anchor-panasonic-advance-fr-wire.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "100% Electrolytic Copper",
     deliveryTime: "60 Mins",
@@ -127,7 +128,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 1853,
     mrp: 3706,
     discountPct: 50,
-    image: "/images/products/electrical/kei-homecab-fr-wire.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Multi-Strand",
     deliveryTime: "60 Mins",
@@ -151,7 +152,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 1640,
     mrp: 2980,
     discountPct: 45,
-    image: "/images/products/electrical/polycab-optima-fr-wire-row2.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Flame Retardant",
     deliveryTime: "60 Mins",
@@ -175,7 +176,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 2690,
     mrp: 4800,
     discountPct: 44,
-    image: "/images/products/electrical/finolex-flameguard-wire-row2.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Low Smoke Zero Halogen",
     deliveryTime: "60 Mins",
@@ -199,7 +200,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 1420,
     mrp: 3550,
     discountPct: 60,
-    image: "/images/products/electrical/anchor-zelect-wire-row2.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Anti-Termite Rodent Repellent",
     deliveryTime: "60 Mins",
@@ -223,7 +224,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 4120,
     mrp: 6650,
     discountPct: 38,
-    image: "/images/products/electrical/havells-flameguard-wire-row2.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "High Heat Resistant 85°C",
     deliveryTime: "60 Mins",
@@ -247,7 +248,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 2780,
     mrp: 4480,
     discountPct: 38,
-    image: "/images/products/electrical/havells-lifeline-2-5-sq-mm.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "101% Copper Conductivity",
     deliveryTime: "60 Mins",
@@ -271,7 +272,7 @@ export const ELECTRICAL_WIRES_PRODUCTS: ElectricalProduct[] = [
     price: 5850,
     mrp: 8200,
     discountPct: 29,
-    image: "/images/products/electrical/havells-3-core-flat-2-5mm.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Waterproof Sheathed",
     deliveryTime: "60 Mins",
@@ -294,7 +295,7 @@ export const MCB_PROTECTION_PRODUCTS: ElectricalProduct[] = [
     price: 480,
     mrp: 720,
     discountPct: 33,
-    image: "/images/products/electrical/schneider-32a-dp-mcb.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "10kA Breaking Capacity",
     deliveryTime: "60 Mins",
@@ -314,7 +315,7 @@ export const MCB_PROTECTION_PRODUCTS: ElectricalProduct[] = [
     price: 165,
     mrp: 245,
     discountPct: 33,
-    image: "/images/products/electrical/havells-mcb-sp-16a-c-type.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "ISI Certified 10kA",
     deliveryTime: "60 Mins",
@@ -334,7 +335,7 @@ export const MCB_PROTECTION_PRODUCTS: ElectricalProduct[] = [
     price: 2150,
     mrp: 2890,
     discountPct: 26,
-    image: "/images/products/electrical/legrand-rccb-40a-30ma-dp.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Human Shock Protection",
     deliveryTime: "60 Mins",
@@ -354,7 +355,7 @@ export const MCB_PROTECTION_PRODUCTS: ElectricalProduct[] = [
     price: 1250,
     mrp: 1850,
     discountPct: 32,
-    image: "/images/products/electrical/havells-spn-db-8-way-mcb.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Powder Coated CRCA Steel",
     deliveryTime: "60 Mins",
@@ -377,7 +378,7 @@ export const SWITCHES_SOCKETS_PRODUCTS: ElectricalProduct[] = [
     price: 380,
     mrp: 580,
     discountPct: 34,
-    image: "/images/products/electrical/anchor-roma-6a-1-way-switch.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Fire Retardant Polycarbonate",
     deliveryTime: "60 Mins",
@@ -397,7 +398,7 @@ export const SWITCHES_SOCKETS_PRODUCTS: ElectricalProduct[] = [
     price: 185,
     mrp: 265,
     discountPct: 30,
-    image: "/images/products/electrical/legrand-myrius-6a-socket-5-pin.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Child Safety Shutters",
     deliveryTime: "60 Mins",
@@ -417,7 +418,7 @@ export const SWITCHES_SOCKETS_PRODUCTS: ElectricalProduct[] = [
     price: 195,
     mrp: 290,
     discountPct: 33,
-    image: "/images/products/electrical/anchor-modular-plate-8m.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Glossy White Polycarbonate",
     deliveryTime: "60 Mins",
@@ -437,7 +438,7 @@ export const SWITCHES_SOCKETS_PRODUCTS: ElectricalProduct[] = [
     price: 285,
     mrp: 410,
     discountPct: 30,
-    image: "/images/products/electrical/anchor-roma-fan-regulator.webp",
+    image: "",
     cashbackPill: "Assured 1% cashback | Free Delivery on ₹1000+",
     specsPill: "Hum-Free Stepped Control",
     deliveryTime: "60 Mins",
@@ -516,6 +517,7 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
   const [variantProduct, setVariantProduct] = useState<any | null>(null);
 
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -551,6 +553,7 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
 
   const filteredProducts = useMemo(() => {
     return rawProducts
+      .map((p) => resolveProduct(p))
       .filter((p) => {
         if (selectedBrand !== "all" && p.brand.toLowerCase() !== selectedBrand.toLowerCase()) return false;
         if (selectedType !== "all" && !p.type.toLowerCase().includes(selectedType.toLowerCase())) return false;
@@ -569,7 +572,7 @@ export function ElectricalCollectionStorefront({ onOpenDetail }: ElectricalColle
         if (sortBy === "price-high") return b.price - a.price;
         return 0;
       });
-  }, [rawProducts, selectedBrand, selectedType, selectedSize, selectedColor, selectedPrice, selectedCores, sortBy]);
+  }, [rawProducts, selectedBrand, selectedType, selectedSize, selectedColor, selectedPrice, selectedCores, sortBy, resolveProduct]);
 
   const brands = useMemo(() => Array.from(new Set(rawProducts.map((p) => p.brand))), [rawProducts]);
   const types = useMemo(() => Array.from(new Set(rawProducts.map((p) => p.type))), [rawProducts]);

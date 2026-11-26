@@ -8,13 +8,18 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
   Share2,
   ShoppingCart,
   Boxes,
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
-import { CononImage } from "@/components/CononImage";
+import { CononProductMedia } from "@/components/CononProductMedia";
 import { QuantityStepper } from "@/components/QuantityStepper";
+import { useProductMedia, useProductMediaVault } from "@/context/ProductMediaVaultContext";
+import { getVaultOverrideForProduct, resolveVaultAssetUrl, type VaultImageEntry } from "@/services/productMediaVault";
 import {
   CATALOG_PRODUCTS,
   CATALOG_CATEGORIES,
@@ -38,11 +43,20 @@ export function ProductDetail() {
   const slug = params?.slug;
 
   // Fetch or find product
-  const [product, setProduct] = useState<IProduct | null>(null);
+  const { resolveProduct, version: vaultVersion } = useProductMediaVault();
+  const [rawProduct, setRawProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [descriptionExpanded, setDescriptionExpanded] = useState(true);
+
+  const product = useMemo(() => {
+    if (!rawProduct) return null;
+    return resolveProduct(rawProduct);
+  }, [rawProduct, resolveProduct]);
+
+  const media = useProductMedia(product);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   // Cart integration
   const qc = useQueryClient();
@@ -55,14 +69,38 @@ export function ProductDetail() {
   useEffect(() => {
     if (!slug) return;
     setLoading(true);
+    setActiveImgIndex(0);
 
     // Try finding in static catalogData first
     const staticMatch = CATALOG_PRODUCTS.find(
       (p) => p.slug === slug || p.id === slug
     );
     if (staticMatch) {
-      setProduct(staticMatch);
+      setRawProduct(staticMatch);
       setLoading(false);
+    } else {
+      const vaultMatch = getVaultOverrideForProduct(slug);
+      if (vaultMatch) {
+        setRawProduct({
+          id: vaultMatch.productId,
+          slug: vaultMatch.slug || vaultMatch.productId,
+          name: vaultMatch.title || vaultMatch.productId,
+          title: vaultMatch.title || vaultMatch.productId,
+          brand: vaultMatch.brand || "CONON Certified",
+          categorySlug: vaultMatch.categorySlug || "cement-civil-works",
+          categoryName: vaultMatch.subcategory || "Construction Materials",
+          price: vaultMatch.price || 0,
+          mrp: vaultMatch.mrp || vaultMatch.price || 0,
+          discountPercent: 0,
+          unit: vaultMatch.unit || "Unit",
+          description: vaultMatch.description || "",
+          image: vaultMatch.images?.[0]?.url || "",
+          highlights: vaultMatch.specBullets || [],
+          specifications: [],
+          inStock: vaultMatch.isInStock !== false,
+        } as unknown as IProduct);
+        setLoading(false);
+      }
     }
 
     // Also fetch fresh from API /api/products/:slug
@@ -73,7 +111,7 @@ export function ProductDetail() {
       })
       .then((data) => {
         if (data.product) {
-          setProduct(data.product);
+          setRawProduct(data.product);
         }
       })
       .catch((err) => {
@@ -82,14 +120,28 @@ export function ProductDetail() {
       .finally(() => {
         setLoading(false);
       });
-  }, [slug]);
+  }, [slug, vaultVersion]);
 
-  // Gallery images
-  const galleryImages = useMemo(() => {
+  // Gallery images (Single Source of Truth: Disk Manifest + Admin Media Vault)
+  const galleryEntries: VaultImageEntry[] = useMemo(() => {
     if (!product) return [];
-    if (product.images && product.images.length > 0) return product.images;
-    return product.image ? [product.image] : [];
-  }, [product]);
+    if (media.images.length > 0) {
+      return media.images.map((m, idx) => ({
+        id: `disk-${idx}`,
+        url: m.url,
+        fallbackDataUrl: m.fallbackDataUrl,
+        caption: m.caption,
+        isPrimary: idx === 0,
+        order: idx,
+      }));
+    }
+    if (Array.isArray(product.galleryImages) && product.galleryImages.length > 0) {
+      return product.galleryImages;
+    }
+    return [];
+  }, [product, media.images]);
+
+  const galleryImages = useMemo(() => galleryEntries.map((g) => g.url), [galleryEntries]);
 
   // Variants list
   const variants = useMemo(() => {
@@ -184,8 +236,10 @@ export function ProductDetail() {
     if (!product) return [];
     return CATALOG_PRODUCTS.filter(
       (p) => p.categorySlug === product.categorySlug && p.slug !== product.slug
-    ).slice(0, 5);
-  }, [product]);
+    )
+      .slice(0, 5)
+      .map((sp) => resolveProduct(sp));
+  }, [product, resolveProduct]);
 
   // Back navigation
   const handleBack = () => {
@@ -285,13 +339,73 @@ export function ProductDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Column: Image Gallery (5 cols) */}
             <div className="lg:col-span-5 bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs">
-              <div className="relative aspect-square w-full bg-[#F8FAFC] rounded-2xl flex items-center justify-center p-4 overflow-hidden border border-slate-100">
-                <CononImage
-                  src={heroImageSrc}
-                  alt={product.name || product.title}
+              <div
+                onClick={() => {
+                  if (galleryEntries.length > 0) setLightboxOpen(true);
+                }}
+                className={`relative aspect-square w-full bg-[#F8FAFC] rounded-2xl flex items-center justify-center p-4 overflow-hidden border border-slate-100 ${
+                  galleryEntries.length > 0 ? "cursor-zoom-in" : ""
+                }`}
+              >
+                <CononProductMedia
+                  product={product}
+                  src={
+                    galleryEntries[activeImgIndex]
+                      ? resolveVaultAssetUrl(
+                          galleryEntries[activeImgIndex].url,
+                          galleryEntries[activeImgIndex].fallbackDataUrl
+                        ) || galleryEntries[activeImgIndex].url
+                      : undefined
+                  }
+                  images={
+                    galleryEntries[activeImgIndex]
+                      ? [
+                          {
+                            url:
+                              resolveVaultAssetUrl(
+                                galleryEntries[activeImgIndex].url,
+                                galleryEntries[activeImgIndex].fallbackDataUrl
+                              ) || galleryEntries[activeImgIndex].url,
+                            caption: galleryEntries[activeImgIndex].caption,
+                            fallbackDataUrl: galleryEntries[activeImgIndex].fallbackDataUrl,
+                          },
+                        ]
+                      : undefined
+                  }
+                  variant="detail"
+                  showGalleryBadge={false}
                   className="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+                  containerClassName="w-full h-full"
                   loading="eager"
                 />
+                {galleryEntries[activeImgIndex]?.caption && (
+                  <div className="absolute bottom-3 left-3 bg-black/65 backdrop-blur-sm text-white text-[11px] font-bold px-2.5 py-1 rounded-full">
+                    {galleryEntries[activeImgIndex]?.caption}
+                  </div>
+                )}
+                {galleryEntries.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setActiveImgIndex((p) => (p - 1 + galleryEntries.length) % galleryEntries.length)}
+                      aria-label="Previous photo"
+                      className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-800 shadow-md flex items-center justify-center"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveImgIndex((p) => (p + 1) % galleryEntries.length)}
+                      aria-label="Next photo"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-800 shadow-md flex items-center justify-center"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                    <span className="absolute bottom-3 right-3 bg-black/60 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                      {activeImgIndex + 1} / {galleryEntries.length}
+                    </span>
+                  </>
+                )}
                 {currentDiscount > 0 && (
                   <div className="absolute top-3 left-3 bg-[#256FEF] text-white text-[11px] font-black px-2.5 py-1 rounded-md shadow-xs">
                     {currentDiscount}% OFF
@@ -300,19 +414,29 @@ export function ProductDetail() {
               </div>
 
               {/* Thumbnail Strip */}
-              {galleryImages.length > 1 && (
+              {galleryEntries.length > 1 && (
                 <div className="flex gap-3 mt-4 overflow-x-auto pb-1 scrollbar-hide">
-                  {galleryImages.map((img, idx) => (
+                  {galleryEntries.map((entry, idx) => (
                     <button
-                      key={idx}
+                      key={entry.id || idx}
                       onClick={() => setActiveImgIndex(idx)}
+                      title={entry.caption || `Photo ${idx + 1}`}
                       className={`relative shrink-0 w-16 h-16 rounded-xl border-2 overflow-hidden bg-[#F8FAFC] p-1 transition ${
                         idx === activeImgIndex
                           ? "border-[#16A34A] ring-2 ring-[#16A34A]/20"
                           : "border-slate-200 hover:border-slate-300"
                       }`}
                     >
-                      <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-contain" />
+                      <img
+                        src={resolveVaultAssetUrl(entry.url, entry.fallbackDataUrl) || entry.url}
+                        alt={entry.caption || `Thumbnail ${idx + 1}`}
+                        onError={(e) => {
+                          if (entry.fallbackDataUrl && e.currentTarget.src !== entry.fallbackDataUrl) {
+                            e.currentTarget.src = entry.fallbackDataUrl;
+                          }
+                        }}
+                        className="w-full h-full object-contain"
+                      />
                     </button>
                   ))}
                 </div>
@@ -335,10 +459,23 @@ export function ProductDetail() {
             <div className="lg:col-span-7 flex flex-col gap-6">
               <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs">
                 {/* Brand & ETA Row */}
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-black uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">
-                    {product.brand}
-                  </span>
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">
+                      {product.brand}
+                    </span>
+                    {product.isAdminVerifiedMedia && (
+                      <span className="inline-flex items-center gap-1 text-[11px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Conon Verified Media
+                      </span>
+                    )}
+                    {(product as any).hsnCode && (
+                      <span className="text-[11px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
+                        HSN {(product as any).hsnCode}
+                        {(product as any).gstRate !== undefined ? ` · ${(product as any).gstRate}% GST` : ""}
+                      </span>
+                    )}
+                  </div>
                   <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     {product.deliveryEta || "60 Mins"} Delivery
@@ -474,13 +611,19 @@ export function ProductDetail() {
               </div>
 
               {/* Key Highlights */}
-              {product.highlights && product.highlights.length > 0 && (
+              {(((product as any).specBullets && (product as any).specBullets.length > 0) ||
+                (product.highlights && product.highlights.length > 0)) && (
                 <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs">
                   <h2 className="text-sm font-black uppercase tracking-wider text-slate-900 mb-3.5">
-                    Key Highlights
+                    Key Highlights &amp; Engineering Specs
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {product.highlights.map((highlight, idx) => (
+                    {Array.from(
+                      new Set([
+                        ...(((product as any).specBullets as string[]) || []),
+                        ...(product.highlights || []),
+                      ])
+                    ).map((highlight, idx) => (
                       <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
                         <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
                           <Check className="w-3 h-3 stroke-[3]" />
@@ -537,7 +680,7 @@ export function ProductDetail() {
                   </button>
                 </div>
                 <div
-                  className={`text-sm text-slate-600 leading-relaxed ${
+                  className={`text-sm text-slate-600 leading-relaxed whitespace-pre-line ${
                     descriptionExpanded ? "" : "line-clamp-3 sm:line-clamp-none"
                   }`}
                 >
@@ -573,9 +716,11 @@ export function ProductDetail() {
                     className="bg-white rounded-2xl border border-slate-200 p-3.5 flex flex-col justify-between hover:shadow-md transition cursor-pointer group"
                   >
                     <div className="aspect-square bg-[#F8FAFC] rounded-xl p-2 mb-3 flex items-center justify-center overflow-hidden">
-                      <img
-                        src={sp.image}
-                        alt={sp.name}
+                      <CononProductMedia
+                        product={sp}
+                        variant="card"
+                        showGalleryBadge={false}
+                        containerClassName="w-full h-full"
                         className="w-full h-full object-contain group-hover:scale-105 transition"
                       />
                     </div>
@@ -604,6 +749,49 @@ export function ProductDetail() {
           )}
         </div>
       </div>
+
+      {lightboxOpen && galleryEntries[activeImgIndex] && (
+        <div
+          onClick={() => setLightboxOpen(false)}
+          className="fixed inset-0 z-[120] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center"
+          >
+            {galleryEntries.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setActiveImgIndex((p) => (p - 1 + galleryEntries.length) % galleryEntries.length)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center cursor-pointer"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveImgIndex((p) => (p + 1) % galleryEntries.length)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center cursor-pointer"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </>
+            )}
+            <img
+              src={
+                resolveVaultAssetUrl(
+                  galleryEntries[activeImgIndex].url,
+                  galleryEntries[activeImgIndex].fallbackDataUrl
+                ) || galleryEntries[activeImgIndex].url
+              }
+              alt={galleryEntries[activeImgIndex].caption || product.name || product.title}
+              className="max-w-full max-h-[80vh] object-contain rounded-xl bg-white p-2"
+            />
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

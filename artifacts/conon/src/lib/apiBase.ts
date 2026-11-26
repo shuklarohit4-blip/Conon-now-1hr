@@ -7,8 +7,8 @@ import { IS_LOCAL_ADMIN, MAC_ADMIN_KEY } from "@/config/adminGuard";
  * Falls back to http://localhost:5001 in dev to match backend PORT.
  */
 const rawConfiguredApi = (
-  import.meta.env.VITE_API_URL?.trim() ||
-  import.meta.env.VITE_API_BASE_URL?.trim()
+  import.meta.env?.VITE_API_URL?.trim() ||
+  import.meta.env?.VITE_API_BASE_URL?.trim()
 );
 const configuredApiOrigin = rawConfiguredApi ? rawConfiguredApi.replace(/\/api\/?$/, "") : undefined;
 

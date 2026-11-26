@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T11:42:24.378Z",
+  "updatedAt": "2026-11-25T12:23:51.389Z",
   "hubProducts": {
     "hub-naka": [
       {
@@ -18,7 +18,7 @@
         "categorySlug": "cctv-networking",
         "categoryName": "CCTV & Networking",
         "customImage": null,
-        "updatedAt": "2026-11-25T11:42:23.747Z"
+        "updatedAt": "2026-11-25T12:23:50.753Z"
       },
       {
         "id": "cctv-hikvision-4ch-dvr",
@@ -126,7 +126,7 @@
         "categorySlug": "cement-civil-works",
         "categoryName": "Cement, TMT Sariya & Chemicals",
         "customImage": null,
-        "updatedAt": "2026-11-25T11:42:24.378Z"
+        "updatedAt": "2026-11-25T12:23:51.389Z"
       },
       {
         "id": "steel-tata-tiscon-12mm",
@@ -144,7 +144,7 @@
         "categorySlug": "cement-civil-works",
         "categoryName": "Cement, TMT Sariya & Chemicals",
         "customImage": null,
-        "updatedAt": "2026-11-25T11:42:24.378Z"
+        "updatedAt": "2026-11-25T12:23:51.389Z"
       },
       {
         "id": "chem-dr-fixit-lw-plus",
@@ -162,7 +162,7 @@
         "categorySlug": "cement-civil-works",
         "categoryName": "Cement, TMT Sariya & Chemicals",
         "customImage": null,
-        "updatedAt": "2026-11-25T11:42:24.378Z"
+        "updatedAt": "2026-11-25T12:23:51.389Z"
       },
       {
         "id": "ply-century-club-prime-19mm",
@@ -798,6 +798,25 @@
         "stockQty": 30,
         "isCustom": true,
         "updatedAt": "2026-11-25T11:42:23.954Z"
+      },
+      {
+        "id": "vhp-mww3hs4t-ehds",
+        "hubId": "hub-naka",
+        "categorySlug": "cctv-networking",
+        "categoryName": "CCTV & Networking",
+        "skuCode": "SKU-MWW3HS4T",
+        "name": "CP Plus 4K UHD 8MP Bullet IP Camera (Night Color)",
+        "brand": "CP Plus",
+        "unit": "Piece",
+        "dealerPrice": 3200,
+        "mrp": 4600,
+        "sellingPrice": 3520,
+        "imageUrl": "/images/products/cctv/cp-plus-8mp-bullet.webp",
+        "customImage": "/images/products/cctv/cp-plus-8mp-bullet.webp",
+        "inStock": true,
+        "stockQty": 30,
+        "isCustom": true,
+        "updatedAt": "2026-11-25T12:23:50.957Z"
       }
     ],
     "hub-aminabad": [

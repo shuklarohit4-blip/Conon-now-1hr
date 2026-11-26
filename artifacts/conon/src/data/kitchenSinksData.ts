@@ -81,10 +81,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-grace-plain-single-bowl-ss-304-21x18.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-grace-plain-single-bowl-ss-304-21x18.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Compact 21x18\" Single Bowl · AISI 304 Grade · 600mm Base Fit",
     "specChips": [
       "AISI 304 Steel",
@@ -147,7 +145,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 4690,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-grace-plain-single-bowl-ss-304-21x18.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -189,10 +187,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-satin.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Popular 24x18\" Straight Bowl · Satin Finish · 700mm Base Fit",
     "specChips": [
       "24x18 Inch Size",
@@ -255,7 +251,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 5580,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -297,10 +293,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-glossy.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-glossy.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Mirror Glossy Finish · Extra Deep 8.5\" Bowl · 700mm Base Fit",
     "specChips": [
       "Mirror Glossy",
@@ -363,7 +357,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 7590,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-glossy.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -405,10 +399,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/parryware-eco-single-bowl-flat-edge-ss-304-sink.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/parryware-eco-single-bowl-flat-edge-ss-304-sink.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flat Edge Profile · Top/Flush Mount · 700mm Base Cabinet",
     "specChips": [
       "Flat Edge Lip",
@@ -471,7 +463,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 6500,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/parryware-eco-single-bowl-flat-edge-ss-304-sink.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -513,10 +505,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-elegance-esm-single-bowl-ss-304-24x18x8-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-elegance-esm-single-bowl-ss-304-24x18x8-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German-Design Matt SS 304 · Premium Hydraulic Press · 700mm Base",
     "specChips": [
       "German Design",
@@ -579,7 +569,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 8000,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-elegance-esm-single-bowl-ss-304-24x18x8-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -621,10 +611,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/parryware-new-coral-single-bowl-drainboard-ss-304.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/parryware-new-coral-single-bowl-drainboard-ss-304.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Integrated Sloped Drainboard · Reversible Setup · 900mm Base Fit",
     "specChips": [
       "With Drainboard",
@@ -687,7 +675,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 10250,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/parryware-new-coral-single-bowl-drainboard-ss-304.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -729,10 +717,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-vogue-single-bowl-drainboard-ss-304-36x20x8-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-vogue-single-bowl-drainboard-ss-304-36x20x8-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Full-Sized 36x20\" Drainboard Sink · Architectural Matt · 1000mm Base",
     "specChips": [
       "36x20 Large Sink",
@@ -795,7 +781,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 11950,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-vogue-single-bowl-drainboard-ss-304-36x20x8-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -837,10 +823,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/futura-dura-double-bowl-ss-304-37x18x8-satin.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/futura-dura-double-bowl-ss-304-37x18x8-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Twin Equal Bowls · Multi-Task Washing · 1000mm Base Cabinet",
     "specChips": [
       "Double Bowl",
@@ -903,7 +887,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 12200,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/futura-dura-double-bowl-ss-304-37x18x8-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -945,10 +929,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-popular-master-double-bowl-ss-304-37x18-glossy.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-popular-master-double-bowl-ss-304-37x18-glossy.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flagship Nirali Double Bowl · Mirror Glossy · 1000mm Base Fit",
     "specChips": [
       "Nirali Flagship",
@@ -1011,7 +993,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 15800,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-popular-master-double-bowl-ss-304-37x18-glossy.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1053,10 +1035,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-evan-bg-handmade-single-bowl-ss-304-21x18.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-evan-bg-handmade-single-bowl-ss-304-21x18.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.2mm Heavy-Gauge Handmade · R10 Tight Radius · 600mm Base",
     "specChips": [
       "1.2mm Heavy Gauge",
@@ -1119,7 +1099,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 8590,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-evan-bg-handmade-single-bowl-ss-304-21x18.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1161,10 +1141,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-evan-handmade-single-bowl-ss-304-24x18x9.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-evan-handmade-single-bowl-ss-304-24x18x9.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.2mm Fabricated SS 304 · Extra Deep 9\" Basin · 700mm Base Fit",
     "specChips": [
       "1.2mm Heavy Plate",
@@ -1227,7 +1205,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 10150,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-evan-handmade-single-bowl-ss-304-24x18x9.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1269,10 +1247,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-24x18x10-matt-basket.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-24x18x10-matt-basket.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Jumbo 10\" Deep Bowl · Includes SS Colander Basket · 700mm Base",
     "specChips": [
       "10\" Deep Basin",
@@ -1335,7 +1311,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 12100,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-24x18x10-matt-basket.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1377,10 +1353,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-32x18x10-matt-basket.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-32x18x10-matt-basket.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Expansive 32x18\" Single Bowl · 10\" Depth · 900mm Base Fit",
     "specChips": [
       "32x18\" Wide Basin",
@@ -1443,7 +1417,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 14450,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-32x18x10-matt-basket.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1485,10 +1459,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/kohler-strive-21-inch-top-flush-undermount-ss-sink-38778in-na.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/kohler-strive-21-inch-top-flush-undermount-ss-sink-38778in-na.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kohler SilentShield Sound Absorber · Triple Mount · 600mm Base",
     "specChips": [
       "Kohler Global",
@@ -1551,7 +1523,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 15350,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/kohler-strive-21-inch-top-flush-undermount-ss-sink-38778in-na.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1593,10 +1565,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-monet-sound-proof-double-bowl-square-ss-304-37x18-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-monet-sound-proof-double-bowl-square-ss-304-37x18-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flagship Luxury Handmade Double Bowl · Extra Heavy Sound-Proof · 1000mm Base",
     "specChips": [
       "Heavy Sound-Proof",
@@ -1659,7 +1629,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 27150,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-monet-sound-proof-double-bowl-square-ss-304-37x18-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1701,10 +1671,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-champagne.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-champagne.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German Quartz Composite (80% Granite) · Warm Champagne · 700mm Base",
     "specChips": [
       "80% Natural Quartz",
@@ -1767,7 +1735,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 8850,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-champagne.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1809,10 +1777,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-nera-black.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-nera-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Signature Nera Metallic Black · Turmeric Proof · 700mm Base Fit",
     "specChips": [
       "Nera Black Finish",
@@ -1875,7 +1841,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 11300,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-nera-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1917,10 +1883,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-new-ascend-single-bowl-quartz-sink-34x20x8-arena.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-new-ascend-single-bowl-quartz-sink-34x20x8-arena.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "34x20\" Wide Quartz Basin · Earthy Arena Grey · 900mm Base Cabinet",
     "specChips": [
       "34x20 Large Basin",
@@ -1983,7 +1947,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 16120,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-new-ascend-single-bowl-quartz-sink-34x20x8-arena.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2025,10 +1989,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-plus-noise-reduction-quartz-sink-24x18x8-nera.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-big-bowl-plus-noise-reduction-quartz-sink-24x18x8-nera.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Reinforced Heavy Rim · Advanced Acoustic Dampening · 700mm Base",
     "specChips": [
       "Big Bowl Plus",
@@ -2091,7 +2053,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 17550,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-plus-noise-reduction-quartz-sink-24x18x8-nera.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2133,10 +2095,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/essco-cosmo-wall-mounted-sink-cock-swinging-spout-cos-chr-103347n.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/essco-cosmo-wall-mounted-sink-cock-swinging-spout-cos-chr-103347n.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "360° Swivel Spout · 10-Year Warranty · Wall Mounted Cold Supply",
     "specChips": [
       "Wall Mounted",
@@ -2199,7 +2159,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 1720,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/essco-cosmo-wall-mounted-sink-cock-swinging-spout-cos-chr-103347n.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2241,10 +2201,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/parryware-claret-wall-mounted-brass-sink-cock-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/parryware-claret-wall-mounted-brass-sink-cock-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ergonomic Fluted Handle · Wall Mount · Aerated Water Stream",
     "specChips": [
       "Wall Mounted",
@@ -2307,7 +2265,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 1610,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/parryware-claret-wall-mounted-brass-sink-cock-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2349,10 +2307,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-darc-half-inch-wall-mounted-sink-cock-drc-37347.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-darc-half-inch-wall-mounted-sink-cock-drc-37347.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Jaquar Architectural Series · Soft Contour Swivel · 10-Yr Warranty",
     "specChips": [
       "Wall Mounted",
@@ -2415,7 +2371,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 1910,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-darc-half-inch-wall-mounted-sink-cock-drc-37347.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2457,10 +2413,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-tap-flp-5347pm-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-tap-flp-5347pm-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's #1 Kitchen Faucet · Florentine Prime Chrome · 360° Swivel",
     "specChips": [
       "Wall Mounted",
@@ -2523,7 +2477,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 2180,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-tap-flp-5347pm-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2565,10 +2519,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-continental-wall-mounted-sink-cock-con-347knm-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-continental-wall-mounted-sink-cock-con-347knm-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Classic Round Form · Cast Brass Body · 10-Year Warranty",
     "specChips": [
       "Wall Mounted",
@@ -2631,7 +2583,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 2315,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-continental-wall-mounted-sink-cock-con-347knm-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2673,10 +2625,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/cera-crayon-wall-mounted-sink-cock-170mm-spout-f2008251.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/cera-crayon-wall-mounted-sink-cock-170mm-spout-f2008251.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "170mm Projection Spout · Quarter Turn · CERA Ceramic Cartridge",
     "specChips": [
       "Wall Mounted",
@@ -2739,7 +2689,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 2450,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/cera-crayon-wall-mounted-sink-cock-170mm-spout-f2008251.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2781,10 +2731,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-sink-tap-flp-5357pm-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-sink-tap-flp-5357pm-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Deck Mounted on Sink Rim · Requires Under-Sink Angle Valve · Chrome",
     "specChips": [
       "Table / Deck Mounted",
@@ -2847,7 +2795,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 2680,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-sink-tap-flp-5357pm-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2889,10 +2837,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/cera-titanium-wall-mounted-sink-cock-200mm-spout-f1003261.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/cera-titanium-wall-mounted-sink-cock-200mm-spout-f1003261.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Extra-Long 200mm Spout · Ideal for 24\" Sinks · CERA Premium",
     "specChips": [
       "Wall Mounted",
@@ -2955,7 +2901,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 3035,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/cera-titanium-wall-mounted-sink-cock-200mm-spout-f1003261.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2997,10 +2943,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-cock-black-matt-flp-blm-5347pm.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-cock-black-matt-flp-blm-5347pm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Architectural Black Matt · Perfect for Nera Quartz Sinks · Wall Mounted",
     "specChips": [
       "Wall Mounted",
@@ -3063,7 +3007,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 3450,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-cock-black-matt-flp-blm-5347pm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3105,10 +3049,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/hindware-contessa-neo-wall-mounted-sink-cock-swivel-spout.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/hindware-contessa-neo-wall-mounted-sink-cock-swivel-spout.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contessa Classic Cross Handle · Solid Cast Brass · 12-Yr Warranty",
     "specChips": [
       "Wall Mounted",
@@ -3171,7 +3113,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 3520,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/hindware-contessa-neo-wall-mounted-sink-cock-swivel-spout.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3213,10 +3155,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/hindware-flora-wall-mounted-sink-cock-swivel-spout.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/hindware-flora-wall-mounted-sink-cock-swivel-spout.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Sculpted Floral Lever · High Arc Spout · Hindware Italian Collection",
     "specChips": [
       "Wall Mounted",
@@ -3279,7 +3219,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 4470,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/hindware-flora-wall-mounted-sink-cock-swivel-spout.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3321,10 +3261,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-single-lever-wall-mounted-kitchen-sink-mixer-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-single-lever-wall-mounted-kitchen-sink-mixer-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hot & Cold Single Lever · Wall Mount (Twin Inlets) · Swivel Spout",
     "specChips": [
       "Hot & Cold Mixer",
@@ -3387,7 +3325,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 7550,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-single-lever-wall-mounted-kitchen-sink-mixer-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3429,10 +3367,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/kohler-atom-pull-down-2-function-kitchen-faucet-chrome-25981in-4-cp.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/kohler-atom-pull-down-2-function-kitchen-faucet-chrome-25981in-4-cp.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Retractable Pull-Down Sprayer · Stream & Sweep Spray · Table Mount",
     "specChips": [
       "Table / Deck Mounted",
@@ -3495,7 +3431,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 8900,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/kohler-atom-pull-down-2-function-kitchen-faucet-chrome-25981in-4-cp.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3537,10 +3473,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-elbow-sink-mixer-black-flp-blm-5166pm.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-elbow-sink-mixer-black-flp-blm-5166pm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hot & Cold Wall Mixer · Black Matt Finish · Elbow Action Handles",
     "specChips": [
       "Wall Mounted",
@@ -3603,7 +3537,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 10500,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-elbow-sink-mixer-black-flp-blm-5166pm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3645,10 +3579,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-pull-out-mixer-black-flp-blm-5177bpm.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-pull-out-mixer-black-flp-blm-5177bpm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flagship Pull-Out Spray Faucet · Black Matt · Table Mounted Hot & Cold",
     "specChips": [
       "Table / Deck Mounted",
@@ -3711,7 +3643,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 11050,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-pull-out-mixer-black-flp-blm-5177bpm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3753,10 +3685,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "3917",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/ruhe-pvc-flexible-waste-pipe-35-inch-white-pack-of-2.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/ruhe-pvc-flexible-waste-pipe-35-inch-white-pack-of-2.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "35\" Expandable Flexible Pipe · Odor-Trap P-Bend · Pack of 2",
     "specChips": [
       "Pack of 2",
@@ -3811,7 +3741,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 350,
         "discountPercent": 19,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/ruhe-pvc-flexible-waste-pipe-35-inch-white-pack-of-2.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3853,10 +3783,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/plantex-304-grade-ss-round-kitchen-sink-waste-coupling-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/plantex-304-grade-ss-round-kitchen-sink-waste-coupling-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Universal 3.5\" Waste Coupling · Removable Strainer Basket · SS 304",
     "specChips": [
       "Universal 3.5\"",
@@ -3911,7 +3839,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 420,
         "discountPercent": 19,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/plantex-304-grade-ss-round-kitchen-sink-waste-coupling-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -3953,10 +3881,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/fossa-brushed-nickel-built-in-kitchen-soap-dispenser-300-ml.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/fossa-brushed-nickel-built-in-kitchen-soap-dispenser-300-ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Deck-Mounted Built-In Pump · Refill From Above · 300ml Under Bottle",
     "specChips": [
       "Built-In Countertop",
@@ -4015,7 +3941,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 690,
         "discountPercent": 19,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/fossa-brushed-nickel-built-in-kitchen-soap-dispenser-300-ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -4057,10 +3983,8 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/backline-304-ss-under-sink-ro-drinking-water-faucet-360-swivel.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/backline-304-ss-under-sink-ro-drinking-water-faucet-360-swivel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Food-Safe Lead-Free RO Tap · 1/4\" Push Fit · 360° Swivel Gooseneck",
     "specChips": [
       "100% Lead-Free",
@@ -4123,7 +4047,7 @@ export const ALL_38_KITCHEN_PRODUCTS: KitchenSinkProduct[] = [
         "mrp": 1250,
         "discountPercent": 20,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/backline-304-ss-under-sink-ro-drinking-water-faucet-360-swivel.webp"
+        "image": ""
       }
     ],
     "inStock": true,

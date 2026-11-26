@@ -28,6 +28,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import { ProductImage } from "@/components/ProductImage";
 import type { Product } from "@/components/ProductCard";
 
@@ -150,10 +151,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 4350,
     "bulkSlabText": "\u20b94,350/sheet on 10+ Sheets",
-    "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-marine-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-club-prime-bwp-marine-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.9,
     "reviewsCount": 142,
     "deliveryTime": "60 Mins Express",
@@ -198,10 +197,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 4820,
     "bulkSlabText": "\u20b94,820/sheet on 10+ Sheets",
-    "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-plywood-19mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-club-prime-bwp-plywood-19mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.9,
     "reviewsCount": 118,
     "deliveryTime": "60 Mins Express",
@@ -246,10 +243,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 3780,
     "bulkSlabText": "\u20b93,780/sheet on 10+ Sheets",
-    "image": "/images/products/wood-hardware/centuryply-sainik-710-marine-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-sainik-710-marine-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 165,
     "deliveryTime": "60 Mins Express",
@@ -294,10 +289,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 3720,
     "bulkSlabText": "\u20b93,720/sheet on 10+ Sheets",
-    "image": "/images/products/wood-hardware/centuryply-sainik-710-plywood-19mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-sainik-710-plywood-19mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 194,
     "deliveryTime": "60 Mins Express",
@@ -342,10 +335,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 2520,
     "bulkSlabText": "\u20b92,520/sheet on 10+ Sheets",
-    "image": "/images/products/wood-hardware/greenply-green-gold-2-0-marine-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-green-gold-2-0-marine-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 89,
     "deliveryTime": "60 Mins Express",
@@ -390,10 +381,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 2380,
     "bulkSlabText": "\u20b92,380/sheet on 10+ Sheets",
-    "image": "/images/products/wood-hardware/greenply-ecotec-bwr-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-ecotec-bwr-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.7,
     "reviewsCount": 112,
     "deliveryTime": "60 Mins Express",
@@ -438,10 +427,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 5250,
     "bulkSlabText": "\u20b95,250/door on 5+ Doors",
-    "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-flush-door-30mm-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-club-prime-bwp-flush-door-30mm-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.9,
     "reviewsCount": 78,
     "deliveryTime": "60 Mins Express",
@@ -486,10 +473,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 3740,
     "bulkSlabText": "\u20b93,740/door on 5+ Doors",
-    "image": "/images/products/wood-hardware/centuryply-bond-flush-door-30mm-solid-core-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-bond-flush-door-30mm-solid-core-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 94,
     "deliveryTime": "60 Mins Express",
@@ -534,10 +519,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 3450,
     "bulkSlabText": "\u20b93,450/door on 5+ Doors",
-    "image": "/images/products/wood-hardware/greenply-green-ecotech-platinum-flush-door-30mm-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-green-ecotech-platinum-flush-door-30mm-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 65,
     "deliveryTime": "60 Mins Express",
@@ -582,10 +565,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 3690,
     "bulkSlabText": "\u20b93,690/door on 5+ Doors",
-    "image": "/images/products/wood-hardware/greenply-optima-g-flush-door-30mm-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-optima-g-flush-door-30mm-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.7,
     "reviewsCount": 82,
     "deliveryTime": "60 Mins Express",
@@ -630,10 +611,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 2180,
     "bulkSlabText": "\u20b92,180/sheet on 5+ Sheets",
-    "image": "/images/products/wood-hardware/century-1mm-laminate-3846-white-marble-8x4.webp",
-    "images": [
-      "/images/products/wood-hardware/century-1mm-laminate-3846-white-marble-8x4.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.9,
     "reviewsCount": 54,
     "deliveryTime": "60 Mins Express",
@@ -678,10 +657,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 1810,
     "bulkSlabText": "\u20b91,810/sheet on 5+ Sheets",
-    "image": "/images/products/wood-hardware/century-1mm-laminate-449-urban-teak-8x4.webp",
-    "images": [
-      "/images/products/wood-hardware/century-1mm-laminate-449-urban-teak-8x4.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 67,
     "deliveryTime": "60 Mins Express",
@@ -726,10 +703,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 1520,
     "bulkSlabText": "\u20b91,520/set on 5+ Sets",
-    "image": "/images/products/wood-hardware/godrej-stella-180mm-mortise-door-lock-handle-set.webp",
-    "images": [
-      "/images/products/wood-hardware/godrej-stella-180mm-mortise-door-lock-handle-set.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.9,
     "reviewsCount": 210,
     "deliveryTime": "30 Mins Express",
@@ -774,10 +749,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 1930,
     "bulkSlabText": "\u20b91,930/set on 5+ Sets",
-    "image": "/images/products/wood-hardware/europa-mortise-rose-handle-combo-set-m516961r692ab.webp",
-    "images": [
-      "/images/products/wood-hardware/europa-mortise-rose-handle-combo-set-m516961r692ab.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 135,
     "deliveryTime": "30 Mins Express",
@@ -822,10 +795,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 890,
     "bulkSlabText": "\u20b9890/piece on 4+ Pieces",
-    "image": "/images/products/wood-hardware/dorset-dc60sm-60kg-overhead-door-closer.webp",
-    "images": [
-      "/images/products/wood-hardware/dorset-dc60sm-60kg-overhead-door-closer.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 98,
     "deliveryTime": "30 Mins Express",
@@ -870,10 +841,8 @@ export const ALL_WOOD_HARDWARE_PRODUCTS: WoodHardwareProduct[] = [
     ],
     "bulkPrice": 210,
     "bulkSlabText": "\u20b9210/pair on 10+ Pairs",
-    "image": "/images/products/wood-hardware/hettich-onsys-4447i-soft-close-hinges-105-1-pair.webp",
-    "images": [
-      "/images/products/wood-hardware/hettich-onsys-4447i-soft-close-hinges-105-1-pair.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.9,
     "reviewsCount": 240,
     "deliveryTime": "30 Mins Express",
@@ -894,6 +863,7 @@ export const PlywoodCollectionStorefront: React.FC<PlywoodCollectionStorefrontPr
   onBackToDirectory,
 }) => {
   const queryClient = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const { data: cartData } = useGetCart();
   const addToCartMutation = useAddToCart();
   const updateCartItemMutation = useUpdateCartItem();
@@ -961,7 +931,7 @@ export const PlywoodCollectionStorefront: React.FC<PlywoodCollectionStorefrontPr
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    return ALL_WOOD_HARDWARE_PRODUCTS.filter((p) => {
+    return ALL_WOOD_HARDWARE_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       // Subcategory filter
       if (selectedSubcat !== "all" && p.subcategory !== selectedSubcat) {
         return false;
@@ -1003,7 +973,7 @@ export const PlywoodCollectionStorefront: React.FC<PlywoodCollectionStorefrontPr
 
       return true;
     });
-  }, [selectedSubcat, selectedBrand, tierFilter, selectedThickness, selectedVehicle, searchQuery]);
+  }, [selectedSubcat, selectedBrand, tierFilter, selectedThickness, selectedVehicle, searchQuery, resolveProduct]);
 
   // Cart operations
   const handleAddToCart = (product: WoodHardwareProduct) => {

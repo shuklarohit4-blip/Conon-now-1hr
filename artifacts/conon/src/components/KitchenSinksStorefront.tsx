@@ -26,6 +26,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 import {
@@ -97,6 +98,7 @@ export function KitchenSinksStorefront({
   onBackToDirectory,
 }: KitchenSinksStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -150,7 +152,7 @@ export function KitchenSinksStorefront({
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    return ALL_38_KITCHEN_PRODUCTS.filter((prod) => {
+    return ALL_38_KITCHEN_PRODUCTS.map((p) => resolveProduct(p)).filter((prod) => {
       // Subcategory
       if (activeSubcat !== "ALL" && prod.kitchenSubcategory !== activeSubcat) {
         return false;
@@ -204,7 +206,7 @@ export function KitchenSinksStorefront({
 
       return true;
     });
-  }, [activeSubcat, selectedBrandTier, selectedBrand, cabinetFilter, mountFilter, sinkMaterialFilter, sinkSizeFilter, finishFilter]);
+  }, [activeSubcat, selectedBrandTier, selectedBrand, cabinetFilter, mountFilter, sinkMaterialFilter, sinkSizeFilter, finishFilter, resolveProduct]);
 
   // Cart operations
   const handleAdd = (prod: KitchenSinkProduct) => {

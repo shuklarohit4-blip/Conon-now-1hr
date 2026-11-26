@@ -9,7 +9,7 @@ import { logger } from "./lib/logger";
 import { sessionMiddleware } from "./middleware/session";
 import { authMiddleware } from "./middleware/authMiddleware";
 import { errorHandler } from "./middleware/errorHandler";
-import { CONON_IMAGES_DIR, CONON_PUBLIC_DIR } from "./lib/paths";
+import { CONON_IMAGES_DIR, CONON_PUBLIC_DIR, UPLOADS_DIR } from "./lib/paths";
 import { pingDatabase } from "@workspace/db";
 
 const app: Express = express();
@@ -113,14 +113,20 @@ if (fs.existsSync(CONON_IMAGES_DIR)) {
   app.use("/images", express.static(CONON_PUBLIC_DIR));
 }
 
+// Serve uploaded admin product images permanently from uploads/
+if (fs.existsSync(UPLOADS_DIR)) {
+  app.use("/uploads", express.static(UPLOADS_DIR, { maxAge: "7d" }));
+  app.use("/api/uploads", express.static(UPLOADS_DIR, { maxAge: "7d" }));
+}
+
 // Razorpay webhook requires raw body for HMAC signature verification
 app.use(
   "/api/wallet/razorpay/webhook",
   express.raw({ type: "application/json" })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "25mb" }));
+app.use(express.urlencoded({ extended: true, limit: "25mb" }));
 app.use(cookieParser());
 app.use(sessionMiddleware);
 app.use(authMiddleware);

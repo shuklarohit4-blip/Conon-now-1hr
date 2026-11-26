@@ -27,6 +27,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 import {
@@ -40,6 +41,7 @@ export interface PowerToolsSafetyStorefrontProps {
 
 export function PowerToolsSafetyStorefront({ onOpenDetail }: PowerToolsSafetyStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -169,7 +171,7 @@ export function PowerToolsSafetyStorefront({ onOpenDetail }: PowerToolsSafetySto
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    return ALL_9_TOOLS_SAFETY_PRODUCTS.filter((p) => {
+    return ALL_9_TOOLS_SAFETY_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       if (activeSubcat !== "ALL" && p.subCategory !== activeSubcat) return false;
       if (selectedBrand !== "ALL" && p.brand !== selectedBrand) return false;
       return true;
@@ -178,7 +180,7 @@ export function PowerToolsSafetyStorefront({ onOpenDetail }: PowerToolsSafetySto
       if (sortBy === "price-desc") return b.price - a.price;
       return 0;
     });
-  }, [activeSubcat, selectedBrand, sortBy]);
+  }, [activeSubcat, selectedBrand, sortBy, resolveProduct]);
 
   // Site-Safe Cross-Sell Bundles
   const crossSellBundles = [

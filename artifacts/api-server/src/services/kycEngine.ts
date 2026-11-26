@@ -72,6 +72,7 @@ export interface PartnerKycApplication {
   pennyDropRef?: string;
   aiAuthenticityScore: number;
   status: KycOverallStatus;
+  partnerId?: string;
   slaSignedAt?: string;
   insuranceExpiry?: string;
   dlExpiry?: string;
@@ -86,223 +87,11 @@ class KycEngine {
   private applications: Map<string, PartnerKycApplication> = new Map();
 
   constructor() {
-    this.seedDefaultApplications();
+    // Zero-Dummy Clean Slate: Starts 100% empty. Applications are created purely via real partner submissions.
   }
 
-  private seedDefaultApplications() {
-    const now = new Date().toISOString();
-
-    // 1. Initial Vendor Applicant: Awadh Building Solutions
-    const vendorApp: PartnerKycApplication = {
-      id: "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
-      applicantType: "VENDOR",
-      applicantId: "VND-APP-7712",
-      firmOrName: "Awadh Building Solutions & Pipe Depot",
-      ownerOrDriverName: "Anurag Mishra",
-      phone: "+91 94500 11289",
-      zone: "Sushant Golf City",
-      loadingBayAccess: "LOADER_FRIENDLY",
-      categories: ["Cement", "TMT Steel", "CPVC Plumbing", "Paints & Putty"],
-      shopLat: 26.7824,
-      shopLng: 80.9892,
-      bankAccount: "50100482190123",
-      bankIfsc: "HDFC0001234",
-      bankUpi: "awadhbuild@okaxis",
-      pennyDropStatus: "VERIFIED",
-      pennyDropHolderName: "ANURAG MISHRA",
-      pennyDropRef: "PENNY-HDFC-991204",
-      aiAuthenticityScore: 98,
-      status: "PENDING_VERIFICATION",
-      slaSignedAt: now,
-      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-      updatedAt: now,
-      documents: [
-        {
-          docId: "doc-v1-gst",
-          docType: "GSTIN_CERTIFICATE",
-          docName: "GST Registration Certificate",
-          docUrl: "/images/kyc/sample-gstin.webp",
-          extractedNumber: "09AAECB1289R1Z4",
-          extractedName: "AWADH BUILDING SOLUTIONS",
-          ocrAuthenticityScore: 99,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-v1-pan",
-          docType: "PAN_CARD",
-          docName: "Proprietor PAN Card",
-          docUrl: "/images/kyc/sample-pan.webp",
-          extractedNumber: "AAECB1289R",
-          extractedName: "ANURAG MISHRA",
-          ocrAuthenticityScore: 97,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-v1-sign",
-          docType: "SIGNBOARD_PHOTO",
-          docName: "GPS Shop Front Signboard",
-          docUrl: "/images/kyc/sample-shop-front.webp",
-          extractedNumber: "GPS: 26.7824, 80.9892",
-          extractedName: "AWADH BUILDING SOLUTIONS",
-          ocrAuthenticityScore: 96,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-v1-brand",
-          docType: "BRAND_DEALERSHIP",
-          docName: "UltraTech Authorized Dealership Certificate",
-          docUrl: "/images/kyc/sample-ultratech-dealership.webp",
-          extractedNumber: "AUTH-UT-LKO-2026-88",
-          extractedName: "AWADH BUILDING SOLUTIONS",
-          ocrAuthenticityScore: 98,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-      ],
-      auditLogs: [
-        {
-          logId: `log-${Date.now()}-1`,
-          action: "APPLICATION_SUBMITTED",
-          actor: "ANURAG MISHRA",
-          note: "Registered via /vendor/register with 4 documents & verified bank account",
-          timestamp: new Date(Date.now() - 3600000 * 2).toISOString(),
-        },
-      ],
-    };
-    this.applications.set(vendorApp.applicantId, vendorApp);
-
-    // 2. Initial Driver Applicant: Mohd. Rizwan Khan
-    const future214 = new Date(Date.now() + 214 * 86400000).toISOString();
-    const future1120 = new Date(Date.now() + 1120 * 86400000).toISOString();
-
-    const driverApp: PartnerKycApplication = {
-      id: "b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e",
-      applicantType: "DRIVER",
-      applicantId: "DRV-APP-4401",
-      firmOrName: "Mohd. Rizwan Khan (Tata Ace)",
-      ownerOrDriverName: "Mohd. Rizwan Khan",
-      phone: "+91 98394 55102",
-      zone: "Alambagh / Transport Nagar",
-      vehicleMode: "CHHOTA_HATHI",
-      vehiclePlate: "UP 32 EL 7710",
-      categories: ["Chhota Hathi / 1,500 kg Loader"],
-      bankAccount: "919839455102",
-      bankIfsc: "PYTM0123456",
-      bankUpi: "rizwankhan@paytm",
-      pennyDropStatus: "VERIFIED",
-      pennyDropHolderName: "MOHD RIZWAN KHAN",
-      pennyDropRef: "PENNY-PYTM-881290",
-      aiAuthenticityScore: 97,
-      status: "PENDING_VERIFICATION",
-      insuranceExpiry: future214,
-      dlExpiry: future1120,
-      slaSignedAt: now,
-      createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-      updatedAt: now,
-      documents: [
-        {
-          docId: "doc-d1-aadhaar",
-          docType: "AADHAAR_FRONT_BACK",
-          docName: "Aadhaar Card (Masked)",
-          docUrl: "/images/kyc/sample-aadhaar.webp",
-          extractedNumber: "XXXX-XXXX-4821",
-          extractedName: "MOHD RIZWAN KHAN",
-          ocrAuthenticityScore: 99,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-d1-dl",
-          docType: "DRIVING_LICENCE",
-          docName: "Commercial Driving Licence",
-          docUrl: "/images/kyc/sample-dl.webp",
-          extractedNumber: "UP32 20180049120",
-          extractedName: "MOHD RIZWAN KHAN",
-          extractedExpiry: future1120,
-          ocrAuthenticityScore: 98,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-d1-rc",
-          docType: "VEHICLE_RC",
-          docName: "Tata Ace Commercial Yellow Plate RC",
-          docUrl: "/images/kyc/sample-rc.webp",
-          extractedNumber: "UP 32 EL 7710",
-          extractedName: "MOHD RIZWAN KHAN",
-          ocrAuthenticityScore: 96,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-d1-ins",
-          docType: "INSURANCE_PUC",
-          docName: "Commercial Vehicle Comprehensive Policy",
-          docUrl: "/images/kyc/sample-insurance.webp",
-          extractedNumber: "POL-HDFC-99120412",
-          extractedName: "UP 32 EL 7710",
-          extractedExpiry: future214,
-          ocrAuthenticityScore: 97,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-d1-selfie",
-          docType: "SELFIE_LIVENESS",
-          docName: "Live Selfie Liveness Scan",
-          docUrl: "/images/kyc/sample-selfie.webp",
-          extractedNumber: "Face Match 98% with DL",
-          extractedName: "MOHD RIZWAN KHAN",
-          ocrAuthenticityScore: 98,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          docId: "doc-d1-tirpal",
-          docType: "TIRPAL_WATERPROOF",
-          docName: "Heavy Waterproof Tarpaulin on Loader",
-          docUrl: "/images/kyc/sample-tirpal.webp",
-          extractedNumber: "Heavy Duty PVC Tarpaulin 18x12",
-          extractedName: "Verified Ready",
-          ocrAuthenticityScore: 99,
-          ocrReadQuality: "HIGH",
-          status: "PENDING",
-          createdAt: now,
-          updatedAt: now,
-        },
-      ],
-      auditLogs: [
-        {
-          logId: `log-${Date.now()}-2`,
-          action: "APPLICATION_SUBMITTED",
-          actor: "MOHD RIZWAN KHAN",
-          note: "Registered via /driver/register with 6 RTO documents & Tarpaulin photo",
-          timestamp: new Date(Date.now() - 3600000 * 4).toISOString(),
-        },
-      ],
-    };
-    this.applications.set(driverApp.applicantId, driverApp);
+  public clearAll(): void {
+    this.applications.clear();
   }
 
   public getAllApplications(): PartnerKycApplication[] {
@@ -314,6 +103,18 @@ class KycEngine {
   public getApplication(idOrApplicantId: string): PartnerKycApplication | undefined {
     for (const app of this.applications.values()) {
       if (app.id === idOrApplicantId || app.applicantId === idOrApplicantId) {
+        return app;
+      }
+    }
+    return undefined;
+  }
+
+  public findByPhone(phone: string, applicantType?: ApplicantType): PartnerKycApplication | undefined {
+    const clean = phone.replace(/\D/g, "").slice(-10);
+    if (!clean) return undefined;
+    for (const app of this.applications.values()) {
+      const appClean = app.phone.replace(/\D/g, "").slice(-10);
+      if (appClean === clean && (!applicantType || app.applicantType === applicantType)) {
         return app;
       }
     }
@@ -465,6 +266,10 @@ class KycEngine {
     const now = new Date().toISOString();
     if (decision === "APPROVE") {
       app.status = "APPROVED";
+      if (!app.partnerId) {
+        const num = Math.floor(100 + Math.random() * 900);
+        app.partnerId = app.applicantType === "VENDOR" ? `CN-VND-LKO-${num}` : `CN-DRV-LKO-${num}`;
+      }
       // Mark all pending docs as verified
       app.documents.forEach((d) => {
         if (d.status !== "REJECTED") d.status = "VERIFIED";
@@ -473,7 +278,7 @@ class KycEngine {
         logId: `log-${Date.now()}`,
         action: "APPLICATION_APPROVED",
         actor: reviewer,
-        note: "Partner compliance verified. Account approved for 60-min live operations.",
+        note: `Partner compliance verified. Account approved for 60-min live operations. Assigned Partner ID: ${app.partnerId}`,
         timestamp: now,
       });
     } else if (decision === "REUPLOAD") {

@@ -30,6 +30,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { ALL_37_MASONRY_PRODUCTS, type MasonryProduct } from "@/data/masonryData";
 
@@ -39,6 +40,7 @@ export interface BricksMasonryStorefrontProps {
 
 export function BricksMasonryStorefront({ onOpenDetail }: BricksMasonryStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -158,7 +160,7 @@ export function BricksMasonryStorefront({ onOpenDetail }: BricksMasonryStorefron
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    let list = ALL_37_MASONRY_PRODUCTS.filter((p) => {
+    let list = ALL_37_MASONRY_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       // Subcategory filter
       if (activeSubcat !== "ALL" && p.masonrySubcategory !== activeSubcat) {
         return false;
@@ -198,6 +200,7 @@ export function BricksMasonryStorefront({ onOpenDetail }: BricksMasonryStorefron
     selectedGittiSize,
     selectedDeliveryMode,
     sortBy,
+    resolveProduct,
   ]);
 
   // Subcategory Counts

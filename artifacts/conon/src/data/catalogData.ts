@@ -837,7 +837,7 @@ export const CATALOG_CATEGORIES: ICategory[] = [
     "slug": "power-tools-safety",
     "title": "Power Tools, Hand Tools & Site Safety",
     "department": "Tools",
-    "image": "/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp",
+    "image": "/images/home-categories/tools-hardware.webp",
     "dbCategory": "tools",
     "route": "/collections/power-tools-safety",
     "badge": "60-Min Express · 2-Wheeler",
@@ -871,10 +871,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cctv-networking",
     "categoryName": "CCTV & Networking",
     "subCategory": "Cameras",
-    "image": "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp",
-    "images": [
-      "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "360\u00b0 Pan-Tilt \u00b7 4MP Full Color Night Vision \u00b7 Two-Way Talk",
     "specChips": [
       "4MP Ultra HD",
@@ -937,7 +935,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7200,
         "discountPercent": 45,
         "stock": 50,
-        "image": "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp"
+        "image": ""
       },
       {
         "id": "var-cp-z43q-2",
@@ -947,7 +945,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14400,
         "discountPercent": 46,
         "stock": 25,
-        "image": "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp"
+        "image": ""
       },
       {
         "id": "var-cp-z43q-4",
@@ -957,7 +955,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 28800,
         "discountPercent": 47,
         "stock": 15,
-        "image": "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp"
+        "image": ""
       }
     ],
     "price": 3984,
@@ -979,10 +977,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cctv-networking",
     "categoryName": "CCTV & Networking",
     "subCategory": "Cameras",
-    "image": "/images/products/cctv/cp-plus-3mp-4g-sim-camera-ez-r33t.webp",
-    "images": [
-      "/images/products/cctv/cp-plus-3mp-4g-sim-camera-ez-r33t.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Direct 4G SIM Slot \u00b7 No Wi-Fi Needed \u00b7 Outdoor Waterproof IP66",
     "specChips": [
       "4G SIM Connectivity",
@@ -1045,7 +1041,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5200,
         "discountPercent": 46,
         "stock": 40,
-        "image": "/images/products/cctv/cp-plus-3mp-4g-sim-camera-ez-r33t.webp"
+        "image": ""
       },
       {
         "id": "var-ez-r33t-sd",
@@ -1055,7 +1051,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5999,
         "discountPercent": 47,
         "stock": 30,
-        "image": "/images/products/cctv/cp-plus-3mp-4g-sim-camera-ez-r33t.webp"
+        "image": ""
       },
       {
         "id": "var-ez-r33t-128",
@@ -1065,7 +1061,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6699,
         "discountPercent": 46,
         "stock": 20,
-        "image": "/images/products/cctv/cp-plus-3mp-4g-sim-camera-ez-r33t.webp"
+        "image": ""
       }
     ],
     "price": 2784,
@@ -1087,10 +1083,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cctv-networking",
     "categoryName": "CCTV & Networking",
     "subCategory": "Cameras",
-    "image": "/images/products/cctv/cp-plus-2mp-ip-dome-camera-cp-unc-da21l3c-q.webp",
-    "images": [
-      "/images/products/cctv/cp-plus-2mp-ip-dome-camera-cp-unc-da21l3c-q.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "PoE Powered \u00b7 Commercial Ceiling Dome \u00b7 H.265+ Compression",
     "specChips": [
       "2MP Full HD",
@@ -1153,7 +1147,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7300,
         "discountPercent": 52,
         "stock": 35,
-        "image": "/images/products/cctv/cp-plus-2mp-ip-dome-camera-cp-unc-da21l3c-q.webp"
+        "image": ""
       },
       {
         "id": "var-unc-da21-36",
@@ -1163,7 +1157,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7300,
         "discountPercent": 52,
         "stock": 40,
-        "image": "/images/products/cctv/cp-plus-2mp-ip-dome-camera-cp-unc-da21l3c-q.webp"
+        "image": ""
       }
     ],
     "price": 3505,
@@ -1185,10 +1179,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cctv-networking",
     "categoryName": "CCTV & Networking",
     "subCategory": "Cameras",
-    "image": "/images/products/cctv/cp-plus-3mp-wifi-pt-camera-cp-e38q.webp",
-    "images": [
-      "/images/products/cctv/cp-plus-3mp-wifi-pt-camera-cp-e38q.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3MP 2K Smart Home & Office Pan-Tilt Camera with Auto-Tracking",
     "specChips": [
       "3MP 2K Resolution",
@@ -1251,7 +1243,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4200,
         "discountPercent": 44,
         "stock": 60,
-        "image": "/images/products/cctv/cp-plus-3mp-wifi-pt-camera-cp-e38q.webp"
+        "image": ""
       },
       {
         "id": "var-e38q-2",
@@ -1261,7 +1253,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8400,
         "discountPercent": 45,
         "stock": 30,
-        "image": "/images/products/cctv/cp-plus-3mp-wifi-pt-camera-cp-e38q.webp"
+        "image": ""
       }
     ],
     "price": 2350,
@@ -1283,10 +1275,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cctv-networking",
     "categoryName": "CCTV & Networking",
     "subCategory": "Cameras",
-    "image": "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-bullet-camera-cp-vac-t24l2.webp",
-    "images": [
-      "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-bullet-camera-cp-vac-t24l2.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Outdoor Heavy Weatherproof Bullet \u00b7 20m IR \u00b7 Metal-Polymer Body",
     "specChips": [
       "2.4MP HD Clarity",
@@ -1349,7 +1339,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2600,
         "discountPercent": 44,
         "stock": 45,
-        "image": "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-bullet-camera-cp-vac-t24l2.webp"
+        "image": ""
       },
       {
         "id": "var-t24l2-4",
@@ -1359,7 +1349,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 10400,
         "discountPercent": 46,
         "stock": 20,
-        "image": "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-bullet-camera-cp-vac-t24l2.webp"
+        "image": ""
       }
     ],
     "price": 1450,
@@ -1381,10 +1371,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cctv-networking",
     "categoryName": "CCTV & Networking",
     "subCategory": "Cameras",
-    "image": "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-dome-camera-cp-vac-d24l2.webp",
-    "images": [
-      "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-dome-camera-cp-vac-d24l2.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Indoor Ceiling Dome Camera \u00b7 2.4MP 1080p \u00b7 Smart Night Vision",
     "specChips": [
       "2.4MP Full HD",
@@ -1447,7 +1435,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2500,
         "discountPercent": 44,
         "stock": 50,
-        "image": "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-dome-camera-cp-vac-d24l2.webp"
+        "image": ""
       },
       {
         "id": "var-d24l2-4",
@@ -1457,7 +1445,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 10000,
         "discountPercent": 46,
         "stock": 25,
-        "image": "/images/products/cctv/cp-plus-2-4mp-full-hd-ir-dome-camera-cp-vac-d24l2.webp"
+        "image": ""
       }
     ],
     "price": 1390,
@@ -1479,10 +1467,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cpvc-plumbing-tanks",
     "categoryName": "CPVC Plumbing & Overhead Tanks",
     "subCategory": "CPVC Pipes SDR 11",
-    "image": "/images/products/plumbing/ashirvad-cpvc-flowguard-plus-pipe.webp",
-    "images": [
-      "/images/products/plumbing/ashirvad-cpvc-flowguard-plus-pipe.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "SDR 11 \u00b7 93\u00b0C Hot & Cold Water \u00b7 NSF/ANSI 61 Certified",
     "specChips": [
       "SDR-11 Standard",
@@ -1541,7 +1527,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 635,
         "discountPercent": 52,
         "stock": 100,
-        "image": "/images/products/plumbing/ashirvad-cpvc-flowguard-plus-pipe.webp"
+        "image": ""
       },
       {
         "id": "var-cpvc-34",
@@ -1551,7 +1537,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 890,
         "discountPercent": 50,
         "stock": 100,
-        "image": "/images/products/plumbing/ashirvad-cpvc-flowguard-plus-pipe.webp"
+        "image": ""
       },
       {
         "id": "var-cpvc-1in",
@@ -1561,7 +1547,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1280,
         "discountPercent": 47,
         "stock": 80,
-        "image": "/images/products/plumbing/ashirvad-cpvc-flowguard-plus-pipe.webp"
+        "image": ""
       },
       {
         "id": "var-cpvc-125in",
@@ -1571,7 +1557,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 46,
         "stock": 50,
-        "image": "/images/products/plumbing/ashirvad-cpvc-flowguard-plus-pipe.webp"
+        "image": ""
       }
     ],
     "price": 305,
@@ -1593,10 +1579,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cpvc-plumbing-tanks",
     "categoryName": "CPVC Plumbing & Overhead Tanks",
     "subCategory": "Solvent Cements & Primers",
-    "image": "/images/products/plumbing/ashirvad-flowguard-plus-solvent-cement.webp",
-    "images": [
-      "/images/products/plumbing/ashirvad-flowguard-plus-solvent-cement.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Fast 1-Step Chemical Fusion \u00b7 Zero Leaks \u00b7 Low VOC",
     "specChips": [
       "1-Step Fast Fusion",
@@ -1651,7 +1635,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 147,
         "discountPercent": 39,
         "stock": 120,
-        "image": "/images/products/plumbing/ashirvad-flowguard-plus-solvent-cement.webp"
+        "image": ""
       },
       {
         "id": "var-sol-100ml",
@@ -1661,7 +1645,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 260,
         "discountPercent": 38,
         "stock": 100,
-        "image": "/images/products/plumbing/ashirvad-flowguard-plus-solvent-cement.webp"
+        "image": ""
       },
       {
         "id": "var-sol-250ml",
@@ -1671,7 +1655,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 540,
         "discountPercent": 37,
         "stock": 80,
-        "image": "/images/products/plumbing/ashirvad-flowguard-plus-solvent-cement.webp"
+        "image": ""
       },
       {
         "id": "var-sol-500ml",
@@ -1681,7 +1665,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 980,
         "discountPercent": 37,
         "stock": 50,
-        "image": "/images/products/plumbing/ashirvad-flowguard-plus-solvent-cement.webp"
+        "image": ""
       }
     ],
     "price": 90,
@@ -1703,10 +1687,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cpvc-plumbing-tanks",
     "categoryName": "CPVC Plumbing & Overhead Tanks",
     "subCategory": "CPVC Elbows, Tees & Couplers",
-    "image": "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp",
-    "images": [
-      "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Powder Coated Metal Strap \u00b7 Prevents Pipe Sagging \u00b7 Heavy Gauge",
     "specChips": [
       "Heavy Gauge Metal",
@@ -1761,7 +1743,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14,
         "discountPercent": 43,
         "stock": 300,
-        "image": "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp"
+        "image": ""
       },
       {
         "id": "var-clamp-34",
@@ -1771,7 +1753,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 20,
         "discountPercent": 40,
         "stock": 300,
-        "image": "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp"
+        "image": ""
       },
       {
         "id": "var-clamp-1in",
@@ -1781,7 +1763,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 26,
         "discountPercent": 38,
         "stock": 200,
-        "image": "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp"
+        "image": ""
       },
       {
         "id": "var-clamp-125in",
@@ -1791,7 +1773,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 36,
         "discountPercent": 39,
         "stock": 150,
-        "image": "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp"
+        "image": ""
       },
       {
         "id": "var-clamp-150in",
@@ -1801,7 +1783,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 45,
         "discountPercent": 38,
         "stock": 100,
-        "image": "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp"
+        "image": ""
       },
       {
         "id": "var-clamp-200in",
@@ -1811,7 +1793,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 58,
         "discountPercent": 38,
         "stock": 80,
-        "image": "/images/products/plumbing/ashirvad-flowguard-metal-pipe-clamp.webp"
+        "image": ""
       }
     ],
     "price": 8,
@@ -1833,10 +1815,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cpvc-plumbing-tanks",
     "categoryName": "CPVC Plumbing & Overhead Tanks",
     "subCategory": "Solvent Cements & Primers",
-    "image": "/images/products/plumbing/pidilite-m-seal-phataphat-90g.webp",
-    "images": [
-      "/images/products/plumbing/pidilite-m-seal-phataphat-90g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Fast Setting Epoxy Putty \u00b7 Seals Leaks in 30 Mins \u00b7 High Adhesion",
     "specChips": [
       "30 Mins Setting",
@@ -1891,7 +1871,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 35,
         "discountPercent": 14,
         "stock": 250,
-        "image": "/images/products/plumbing/pidilite-m-seal-phataphat-90g.webp"
+        "image": ""
       }
     ],
     "price": 30,
@@ -1913,10 +1893,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cpvc-plumbing-tanks",
     "categoryName": "CPVC Plumbing & Overhead Tanks",
     "subCategory": "Overhead Water Tanks",
-    "image": "/images/products/plumbing/ashirvad-3-layer-tank-1000l.webp",
-    "images": [
-      "/images/products/plumbing/ashirvad-3-layer-tank-1000l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100% Virgin Food-Grade HDPE \u00b7 UV Protected \u00b7 Anti-Bacterial Inner Layer",
     "specChips": [
       "3-Layer Construction",
@@ -1971,7 +1949,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4600,
         "discountPercent": 25,
         "stock": 20,
-        "image": "/images/products/plumbing/ashirvad-3-layer-tank-1000l.webp"
+        "image": ""
       },
       {
         "id": "var-tank-1000",
@@ -1981,7 +1959,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7800,
         "discountPercent": 25,
         "stock": 18,
-        "image": "/images/products/plumbing/ashirvad-3-layer-tank-1000l.webp"
+        "image": ""
       },
       {
         "id": "var-tank-2000",
@@ -1991,7 +1969,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 15500,
         "discountPercent": 26,
         "stock": 10,
-        "image": "/images/products/plumbing/ashirvad-3-layer-tank-1000l.webp"
+        "image": ""
       }
     ],
     "price": 3450,
@@ -2013,10 +1991,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "cpvc-plumbing-tanks",
     "categoryName": "CPVC Plumbing & Overhead Tanks",
     "subCategory": "CPVC Elbows, Tees & Couplers",
-    "image": "/images/products/plumbing/ashirvad-cpvc-elbow-half-inch.webp",
-    "images": [
-      "/images/products/plumbing/ashirvad-cpvc-elbow-half-inch.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Precision Molded 90\u00b0 Elbow \u00b7 SDR 11 Class \u00b7 Leak Proof Fusion",
     "specChips": [
       "90\u00b0 Angle Turn",
@@ -2067,7 +2043,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 28,
         "discountPercent": 36,
         "stock": 250,
-        "image": "/images/products/plumbing/ashirvad-cpvc-elbow-half-inch.webp"
+        "image": ""
       },
       {
         "id": "var-elb-34",
@@ -2077,7 +2053,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 42,
         "discountPercent": 38,
         "stock": 250,
-        "image": "/images/products/plumbing/ashirvad-cpvc-elbow-half-inch.webp"
+        "image": ""
       },
       {
         "id": "var-elb-1in",
@@ -2087,7 +2063,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 68,
         "discountPercent": 38,
         "stock": 180,
-        "image": "/images/products/plumbing/ashirvad-cpvc-elbow-half-inch.webp"
+        "image": ""
       }
     ],
     "price": 18,
@@ -2109,10 +2085,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-ppc-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-ppc-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "India's No. 1 Portland Pozzolana Cement \u2022 High Slump Retention",
   "specChips": [
     "IS 1489 (Part 1)",
@@ -2194,10 +2168,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-opc-43-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-opc-43-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Engineered OPC 43 for Rapid Formwork Stripping",
   "specChips": [
     "IS 8112 Certified",
@@ -2279,10 +2251,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-opc-53-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-opc-53-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "High-Strength Structural Cement \u2022 Optimum Fineness",
   "specChips": [
     "IS 12269 Certified",
@@ -2364,10 +2334,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-weather-plus-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-weather-plus-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Advanced Hydrophobic Cement for Damp-Proof Construction",
   "specChips": [
     "Hydrophobic Tech",
@@ -2449,10 +2417,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/prism-champion-ppc-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/prism-champion-ppc-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "High Durability Champion PPC \u2022 Optimum Water Demand",
   "specChips": [
     "IS 1489 Part 1",
@@ -2534,10 +2500,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/prism-champion-plus-duratech-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/prism-champion-plus-duratech-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Engineered Duratech PPC for Long-Life Concrete",
   "specChips": [
     "Duratech Particles",
@@ -2619,10 +2583,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/prism-champion-all-weather-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/prism-champion-all-weather-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "All-Weather Moisture Barrier Protective Cement",
   "specChips": [
     "All-Weather Shield",
@@ -2704,10 +2666,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/acc-suraksha-f2r-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/acc-suraksha-f2r-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "ACC Heritage Quality \u2022 Solid Early Strength",
   "specChips": [
     "IS 1489 Part 1",
@@ -2789,10 +2749,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/acc-gold-water-shield-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/acc-gold-water-shield-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Water Shield Formula \u2022 Permanent Seepage Protection",
   "specChips": [
     "Silicone Infused",
@@ -2874,10 +2832,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/ambuja-compocem-ppc-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ambuja-compocem-ppc-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Giant Compressive Strength \u2022 Optimum Cohesion",
   "specChips": [
     "IS 1489 Part 1",
@@ -2959,10 +2915,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/ambuja-plus-kawach-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ambuja-plus-kawach-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Kawach Water Repellent Armor for Structural RCC",
   "specChips": [
     "Kawach Shield",
@@ -3044,10 +2998,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/mp-birla-samrat-ppc-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/mp-birla-samrat-ppc-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Birla Samrat Trusted Quality for Awadh Region",
   "specChips": [
     "IS 1489 Part 1",
@@ -3129,10 +3081,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/shree-cement-rockstrong-ppc-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/shree-cement-rockstrong-ppc-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Rockstrong Tough Durability for Columns & Foundations",
   "specChips": [
     "IS 1489 Part 1",
@@ -3214,10 +3164,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/shree-cement-bangur-opc-53-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/shree-cement-bangur-opc-53-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Bangur High Performance OPC 53 Grade",
   "specChips": [
     "IS 12269 Certified",
@@ -3299,10 +3247,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/dalmia-dsp-opc-53-cement-50kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dalmia-dsp-opc-53-cement-50kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Dalmia DSP Ultra-Dense Foundation Strength",
   "specChips": [
     "IS 12269 Certified",
@@ -3384,10 +3330,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "cement-white-cement",
-  "image": "/images/products/cement-tmt-chemicals/birla-white-cement-5kg-pack.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/birla-white-cement-5kg-pack.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Pinnacle of Pure White Architecture \u2022 89%+ Whiteness Index",
   "specChips": [
     "IS 8042 Certified",
@@ -3469,10 +3413,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-8mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-8mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Tata Tiscon Pure Virgin Iron Ore Fe 500D \u2022 \u20b970.89/kg",
   "specChips": [
     "8mm Dia",
@@ -3566,10 +3508,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-10mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-10mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Tata Tiscon Pure Virgin Steel \u2022 \u20b970.85/kg",
   "specChips": [
     "10mm Dia",
@@ -3663,10 +3603,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-12mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-12mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Primary Tata Tiscon Slab & Beam Specialist \u2022 \u20b970.85/kg",
   "specChips": [
     "12mm Dia",
@@ -3760,10 +3698,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-16mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-16mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Tata Tiscon High-Capacity Column Rebar \u2022 \u20b971.00/kg",
   "specChips": [
     "16mm Dia",
@@ -3857,10 +3793,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-20mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-20mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Tata Tiscon Mega Foundation Rebar \u2022 \u20b970.91/kg",
   "specChips": [
     "20mm Dia",
@@ -3954,10 +3888,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-8mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-8mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "JSW Pure Primary Steel Fe 550D \u2022 \u20b969.83/kg",
   "specChips": [
     "8mm Dia",
@@ -4051,10 +3983,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-10mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-10mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "JSW High Yield Strength Rebar \u2022 \u20b969.91/kg",
   "specChips": [
     "10mm Dia",
@@ -4148,10 +4078,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-12mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-12mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Core Structural 12mm JSW Neosteel \u2022 \u20b969.92/kg",
   "specChips": [
     "12mm Dia",
@@ -4245,10 +4173,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-16mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-16mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "High-Load Column Reinforcement JSW \u2022 \u20b969.99/kg",
   "specChips": [
     "16mm Dia",
@@ -4342,10 +4268,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-20mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-20mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Heavy Duty Foundation JSW 20mm \u2022 \u20b969.93/kg",
   "specChips": [
     "20mm Dia",
@@ -4439,10 +4363,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-8mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-8mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "SAIL PSU Trusted Structural Steel \u2022 \u20b977.00/kg",
   "specChips": [
     "8mm Dia",
@@ -4536,10 +4458,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-10mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-10mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "SAIL SeQR High Resilience Steel \u2022 \u20b976.92/kg",
   "specChips": [
     "10mm Dia",
@@ -4633,10 +4553,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-12mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-12mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "SAIL SeQR Heavy Structural Sariya \u2022 \u20b976.85/kg",
   "specChips": [
     "12mm Dia",
@@ -4730,10 +4648,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-16mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-16mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "SAIL High Load Bearing 16mm Rebar \u2022 \u20b977.00/kg",
   "specChips": [
     "16mm Dia",
@@ -4827,10 +4743,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-8mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-8mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Value Double-Rib Steel \u2022 \u20b962.87/kg",
   "specChips": [
     "8mm Dia",
@@ -4924,10 +4838,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-10mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-10mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "High Performance Regional Steel \u2022 \u20b963.02/kg",
   "specChips": [
     "10mm Dia",
@@ -5021,10 +4933,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-12mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-12mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Lucknow Running Regional Best-Seller \u2022 \u20b962.89/kg",
   "specChips": [
     "12mm Dia",
@@ -5118,10 +5028,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-16mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-16mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Heavy Duty Value Rebar 16mm \u2022 \u20b962.97/kg",
   "specChips": [
     "16mm Dia",
@@ -5215,10 +5123,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/rhl-gold-fe-500-12mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/rhl-gold-fe-500-12mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "UP Running RHL Gold Trusted Brand \u2022 \u20b959.98/kg",
   "specChips": [
     "12mm Dia",
@@ -5312,10 +5218,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tmt-sariya",
-  "image": "/images/products/cement-tmt-chemicals/gallantt-fe-500-12mm-12m.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/gallantt-fe-500-12mm-12m.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "High Value Gallantt Structural Sariya \u2022 \u20b953.98/kg",
   "specChips": [
     "12mm Dia",
@@ -5409,10 +5313,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "binding-wire-accessories",
-  "image": "/images/products/cement-tmt-chemicals/tata-wiron-18-swg-binding-wire-1kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/tata-wiron-18-swg-binding-wire-1kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Tata Wiron Zero-Snap Soft Annealed Rebar Binding Wire",
   "specChips": [
     "18 SWG",
@@ -5484,10 +5386,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "binding-wire-accessories",
-  "image": "/images/products/cement-tmt-chemicals/kamdhenu-22-gauge-ms-binding-wire-1kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/kamdhenu-22-gauge-ms-binding-wire-1kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Flexible 22 Gauge MS Annealed Wire for Mesh & Rings",
   "specChips": [
     "22 SWG / Gauge",
@@ -5559,10 +5459,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "binding-wire-accessories",
-  "image": "/images/products/cement-tmt-chemicals/local-isi-18-20-swg-binding-wire-25kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/local-isi-18-20-swg-binding-wire-25kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Wholesale 25 kg Slab Contractor Bundle \u2022 \u20b971/kg",
   "specChips": [
     "18/20 SWG",
@@ -5634,10 +5532,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "binding-wire-accessories",
-  "image": "/images/products/cement-tmt-chemicals/local-isi-gi-binding-wire-14-swg-1kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/local-isi-gi-binding-wire-14-swg-1kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Hot-Dipped Galvanized Anti-Rust Wire 14 SWG",
   "specChips": [
     "14 SWG GI",
@@ -5709,10 +5605,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-200ml.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-200ml.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "1 Bag = 1 Bottle (200ml) Integral Waterproofing",
   "specChips": [
     "IS 2645",
@@ -5794,10 +5688,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-1l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-1l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Integral Waterproofing Liquid for 5 Bags of Cement",
   "specChips": [
     "IS 2645",
@@ -5879,10 +5771,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-5l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-5l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Contractor Choice for Slab Casting \u2022 Treats 25 Bags",
   "specChips": [
     "IS 2645",
@@ -5964,10 +5854,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-20l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-20l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Commercial Drum for Full Slab Casting (100 Bags)",
   "specChips": [
     "IS 2645",
@@ -6049,10 +5937,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-1kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-1kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Universal SBR Latex Bonding Agent & Repair Polymer",
   "specChips": [
     "SBR Copolymer",
@@ -6134,10 +6020,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-5kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-5kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Heavy Duty 5 kg SBR Bonding & Waterproof Slurry Polymer",
   "specChips": [
     "SBR Latex",
@@ -6219,10 +6103,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-3kg-kit.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-3kg-kit.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "2-Component Elastomeric Bathroom Waterproofing Kit",
   "specChips": [
     "2K Polymer",
@@ -6304,10 +6186,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-15kg-kit.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-15kg-kit.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Commercial 2K Kit for Underground Sumps & Wet Areas",
   "specChips": [
     "2K System",
@@ -6389,10 +6269,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-4l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-4l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Solar Reflective Heat-Reducing Terrace Waterproofing",
   "specChips": [
     "Elastomeric Acrylic",
@@ -6474,10 +6352,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-10l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-10l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Seamless Terrace Waterproofing Coating 10L",
   "specChips": [
     "UV Resistant",
@@ -6559,10 +6435,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-20l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-20l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Master Contractor Drum for Full Roof Waterproofing (600 sq ft)",
   "specChips": [
     "600 sq ft Coverage",
@@ -6644,10 +6518,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-201-crack-x-paste-1kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-201-crack-x-paste-1kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Non-Shrink Flexible Plaster Crack Filler (up to 5mm)",
   "specChips": [
     "Non-Shrink",
@@ -6729,10 +6601,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/dr-fixit-raincoat-wpc-exterior-4l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/dr-fixit-raincoat-wpc-exterior-4l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Heavy Rain Protective Exterior Elastomeric Coating",
   "specChips": [
     "Exterior Raincoat",
@@ -6814,10 +6684,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-1l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-1l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "UltraTech Active Pore-Blocking Liquid Waterproofing",
   "specChips": [
     "IS 2645",
@@ -6899,10 +6767,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-5l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-5l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Slab & Plaster 5L WP+200 Pore-Blocking Liquid",
   "specChips": [
     "IS 2645",
@@ -6984,10 +6850,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-20l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-20l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Commercial Bulk Drum WP+200 (100 Bags)",
   "specChips": [
     "Commercial 20L",
@@ -7069,10 +6933,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/sika-sikalatex-power-sbr-1kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/sika-sikalatex-power-sbr-1kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Swiss Engineered SBR Bonding & High-Strength Screed Polymer",
   "specChips": [
     "Swiss Standard",
@@ -7154,10 +7016,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/sika-sikatop-seal-107-2k-25kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/sika-sikatop-seal-107-2k-25kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Potable Water Safe 2K Polymer Mortar Coating (25 kg)",
   "specChips": [
     "Potable Water Safe",
@@ -7239,10 +7099,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/fosroc-conplast-wl-xtra-1l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/fosroc-conplast-wl-xtra-1l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Industrial Slump Enhancing Integral Waterproofing",
   "specChips": [
     "IS 2645",
@@ -7324,10 +7182,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/fosroc-brushbond-rfx-2k-kit.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/fosroc-brushbond-rfx-2k-kit.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Commercial Heavy-Duty Elastomeric Brushbond Kit",
   "specChips": [
     "Heavy Duty RFX",
@@ -7409,10 +7265,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-white-4l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-white-4l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Fiber-Reinforced Terrace Waterproofing (8-Year Warranty)",
   "specChips": [
     "Glass Fiber Tech",
@@ -7494,10 +7348,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "waterproofing-chemicals",
-  "image": "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-advanced-20l.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-advanced-20l.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "PU-Acrylic Hybrid 20L Drum (10-Year Waterproofing Warranty)",
   "specChips": [
     "PU-Acrylic Hybrid",
@@ -7579,10 +7431,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-tilefixo-ct-ceramic-20kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-tilefixo-ct-ceramic-20kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Type 1 Polymer Modified Ceramic Tile Floor Adhesive",
   "specChips": [
     "IS 15477 Type 1",
@@ -7664,10 +7514,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-tilefixo-vt-vitrified-20kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-tilefixo-vt-vitrified-20kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Type 2 Vitrified & Large Format Porcelain Tile Adhesive",
   "specChips": [
     "IS 15477 Type 2",
@@ -7749,10 +7597,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-tilefixo-nt-stone-wall-20kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-tilefixo-nt-stone-wall-20kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Type 3 Heavy Granite, Marble & External Wall Adhesive",
   "specChips": [
     "IS 15477 Type 3",
@@ -7834,10 +7680,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/ultratech-fixoblock-aac-jointing-40kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/ultratech-fixoblock-aac-jointing-40kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Thin-Joint High Bond Adhesive for AAC & Fly Ash Blocks",
   "specChips": [
     "3mm Thin Joint",
@@ -7919,10 +7763,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/roff-t01-new-construction-adhesive-20kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/roff-t01-new-construction-adhesive-20kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Pidilite Roff Type 1 New Construction Tile Adhesive",
   "specChips": [
     "IS 15477 Type 1",
@@ -8004,10 +7846,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/roff-t02-non-skid-tile-adhesive-20kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/roff-t02-non-skid-tile-adhesive-20kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "Pidilite Roff Thixotropic Non-Skid Wall & Floor Adhesive",
   "specChips": [
     "IS 15477 Type 2",
@@ -8089,10 +7929,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/myk-laticrete-305-floor-adhesive-20kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/myk-laticrete-305-floor-adhesive-20kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "MYK Laticrete Polymer-Modified Floor & Wall Adhesive",
   "specChips": [
     "IS 15477 Type 1",
@@ -8174,10 +8012,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
   "categorySlug": "cement-civil-works",
   "categoryName": "Cement, TMT Sariya & Chemicals",
   "subCategory": "tile-adhesives-block-mortar",
-  "image": "/images/products/cement-tmt-chemicals/myk-laticrete-315-plus-adhesive-20kg.webp",
-  "images": [
-    "/images/products/cement-tmt-chemicals/myk-laticrete-315-plus-adhesive-20kg.webp"
-  ],
+  "image": "",
+  "images": [],
   "shortTagline": "MYK Laticrete Premium Vitrified & Natural Stone Adhesive",
   "specChips": [
     "IS 15477 Type 2",
@@ -8279,10 +8115,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub \u00b7 D3 Water Resistant \u00b7 Handling 2h",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's #1 Carpenter Adhesive \u00b7 High PVAc Resin Content \u00b7 Unbeatable Bond Strength",
     "specChips": [
       "1 kg Tub",
@@ -8346,7 +8180,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 340,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -8389,10 +8223,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "2 kg Tub \u00b7 \u20b9282/kg \u00b7 D3 Grade",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2 kg Value Tub \u00b7 \u20b9282/kg Rate \u00b7 Proven Wood & Laminate Bonding",
     "specChips": [
       "2 kg Tub",
@@ -8452,7 +8284,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 650,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-2kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -8495,10 +8327,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 kg Bucket \u00b7 Bonds ~7 Laminate Sheets \u00b7 \u20b9257/kg",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor 5 kg Bucket \u00b7 Bonds ~7 Laminate Sheets (8x4 ft) \u00b7 \u20b9257.2/kg",
     "specChips": [
       "5 kg Bucket",
@@ -8558,7 +8388,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1520,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-5kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -8601,10 +8431,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum \u00b7 Bonds ~28 Sheets \u00b7 E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy Commercial 20 kg Drum \u00b7 Bonds ~28 Sheets \u00b7 \u20b9242.5/kg Wholesale",
     "specChips": [
       "20 kg Drum",
@@ -8664,7 +8492,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5750,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -8707,10 +8535,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "E-Loader / Pickup",
     "keySpecBadge": "50 kg Barrel \u00b7 Lowest \u20b9224/kg \u00b7 E-Loader/Pickup",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master Contractor 50 kg Drum \u00b7 Lowest \u20b9224/kg Bulk Rate \u00b7 Direct Bhatta/Dealer Wholesale",
     "specChips": [
       "50 kg Drum",
@@ -8770,7 +8596,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 13200,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sh-synthetic-resin-wood-adhesive-50kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -8813,10 +8639,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub \u00b7 100% Waterproof \u00b7 Kitchen & Bath",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100% Waterproof Adhesive \u00b7 Withstands 48 Hrs Boiling Water \u00b7 Kitchen & Bathroom Cabinets",
     "specChips": [
       "1 kg Tub",
@@ -8876,7 +8700,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 428,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -8919,10 +8743,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "2 kg Tub \u00b7 \u20b9349.5/kg \u00b7 BWP Grade",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2 kg Waterproof Tub \u00b7 \u20b9349.5/kg Rate \u00b7 Kitchen Carcass Specialist",
     "specChips": [
       "2 kg Tub",
@@ -8978,7 +8800,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 820,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-2kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9020,10 +8842,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 kg Bucket \u00b7 Bonds ~7 Marine Sheets \u00b7 \u20b9310/kg",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor 5 kg Bucket \u00b7 Bonds ~7 BWP Sheets \u00b7 \u20b9310/kg Commercial Rate",
     "specChips": [
       "5 kg Bucket",
@@ -9083,7 +8903,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-5kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9126,10 +8946,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum \u00b7 Bonds ~28 Marine Sheets \u00b7 E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Commercial 20 kg Drum \u00b7 Bonds ~28 Waterproof Sheets \u00b7 \u20b9305/kg",
     "specChips": [
       "20 kg Drum",
@@ -9189,7 +9007,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7200,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9231,10 +9049,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "E-Loader / Pickup",
     "keySpecBadge": "50 kg Barrel \u00b7 Lowest \u20b9290/kg \u00b7 E-Loader/Pickup",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master Contractor 50 kg Drum \u00b7 Lowest \u20b9290/kg BWP Rate \u00b7 Commercial Projects",
     "specChips": [
       "50 kg Drum",
@@ -9290,7 +9106,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 17200,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-marine-waterproof-wood-adhesive-50kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9332,10 +9148,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub \u00b7 Zero Bubbles \u00b7 High-Gloss Laminates",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Premium Anti-Bubble Technology \u00b7 Zero Wave Marks on Acrylic & High-Gloss Laminates",
     "specChips": [
       "1 kg Tub",
@@ -9391,7 +9205,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 495,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-anti-bubble-waterproof-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9433,10 +9247,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "2 kg Tub \u00b7 Star Grade \u00b7 Luxury Acrylic Panels",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Star Grade Acrylic Adhesive \u00b7 2 kg Pack \u00b7 Zero Telegraphing on Gloss Surfaces",
     "specChips": [
       "2 kg Tub",
@@ -9488,7 +9300,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1060,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-star-anti-bubble-adhesive-2kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9530,10 +9342,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum \u00b7 Bonds ~28 Acrylic Sheets \u00b7 E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Commercial 20 kg Drum \u00b7 Bonds ~28 Acrylic & Gloss Sheets \u00b7 \u20b9377.5/kg",
     "specChips": [
       "20 kg Drum",
@@ -9589,7 +9399,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8900,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-hi-per-high-performance-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9631,10 +9441,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub \u00b7 Sets in 30 Mins \u00b7 Urgent Turnaround",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "30-Minute Rapid Setting Adhesive \u00b7 Clamp Release in Half Hour \u00b7 Urgent Turnarounds",
     "specChips": [
       "1 kg Tub",
@@ -9690,7 +9498,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 395,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9732,10 +9540,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 kg Bucket \u00b7 30-Min Set \u00b7 \u20b9311.6/kg",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "5 kg Rapid Bucket \u00b7 30-Min Setting \u00b7 \u20b9311.6/kg Commercial Rate",
     "specChips": [
       "5 kg Bucket",
@@ -9791,7 +9597,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1820,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-speedx-fast-setting-wood-adhesive-5kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9833,10 +9639,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Bottle \u00b7 PVC to Plywood & Edgeband",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Specialist PVC Adhesive \u00b7 Bonds PVC Sheets, Charcoal Panels & Edge Bands to Plywood",
     "specChips": [
       "1 kg Bottle",
@@ -9892,7 +9696,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 480,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-probond-pvc-laminate-edge-band-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -9934,10 +9738,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 L Tin \u00b7 170\u00b0C Heatproof \u00b7 Near Gas Stoves",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "170\u00b0C Heatproof Contact Adhesive \u00b7 Zero Spring-Back \u00b7 Kitchen Counter & Stove Wall Specialist",
     "specChips": [
       "1 L Tin",
@@ -9997,7 +9799,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 540,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-heatx-heatproof-kitchen-adhesive-1l.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10039,10 +9841,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Tub \u00b7 Economical \u20b9250 \u00b7 All Rounder",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Value Wood Adhesive \u00b7 High Spreadability \u00b7 Lucknow Contractor Value Choice",
     "specChips": [
       "1 kg Tub",
@@ -10094,7 +9894,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 295,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10136,10 +9936,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "E-Loader",
     "keySpecBadge": "20 kg Drum \u00b7 \u20b9217.75/kg \u00b7 E-Loader",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "20 kg Bulk Drum \u00b7 \u20b9217.75/kg Value Rate \u00b7 Commercial Projects",
     "specChips": [
       "20 kg Drum",
@@ -10195,7 +9993,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5100,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-20kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10237,10 +10035,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "E-Loader / Pickup",
     "keySpecBadge": "50 kg Barrel \u00b7 \u20b9204.28/kg \u00b7 E-Loader/Pickup",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master Contractor 50 kg Barrel \u00b7 \u20b9204.28/kg Lowest Wood Adhesive Rate in Lucknow",
     "specChips": [
       "50 kg Drum",
@@ -10296,7 +10092,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 12000,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/jivanjor-all-rounder-wood-adhesive-50kg-drum.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10338,10 +10134,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 L Tin \u00b7 Rubber Contact \u00b7 Foam & Leather",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy Duty Synthetic Rubber Adhesive \u00b7 Instant Contact Grab \u00b7 Foam, Leather & Plywood",
     "specChips": [
       "1 L Tin",
@@ -10397,7 +10191,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 600,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-1l.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10439,10 +10233,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "5 L Tin \u00b7 \u20b9430/L Rate \u00b7 Bulk Upholstery",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Commercial 5 L Tin \u00b7 \u20b9430/L Rate \u00b7 Upholstery & Acoustic Paneling",
     "specChips": [
       "5 L Tin",
@@ -10498,7 +10290,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2500,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevicol-sr-998-synthetic-rubber-contact-adhesive-5l.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10540,10 +10332,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 L Tin \u00b7 Value Contact \u00b7 Rexine & Rubber",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Classic Yellow Contact Cement \u00b7 Reliable Rubber & Leather Bonding \u00b7 Value Pricing",
     "specChips": [
       "1 L Tin",
@@ -10599,7 +10389,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 410,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/dendrite-pc-65-synthetic-rubber-contact-adhesive-1l-tin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10641,10 +10431,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "90 g Twin Tube \u00b7 High Strength Epoxy \u00b7 Glass/Metal/Stone",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "The World's Strongest Epoxy Bond \u00b7 Resin & Hardener Twin Pack \u00b7 Waterproof & Gap-Filling",
     "specChips": [
       "90 g Pack",
@@ -10704,7 +10492,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 205,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-90g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10746,10 +10534,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "180 g Twin Tube \u00b7 Contractor Pack \u00b7 High Strength",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "180 g Contractor Twin Pack \u00b7 Structural Bonding \u00b7 Granite & Marble Counter Jointing",
     "specChips": [
       "180 g Pack",
@@ -10801,7 +10587,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 360,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-180g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10843,10 +10629,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "450 g Pack \u00b7 Large Stone Jointing \u00b7 Structural",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "450 g Medium Commercial Pack \u00b7 Marble & Granite Cladding \u00b7 Heavy Duty",
     "specChips": [
       "450 g Pack",
@@ -10897,7 +10681,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 785,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-450g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -10939,10 +10723,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "900 g Kit \u00b7 Masonry Contractor Tin \u00b7 High Value",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "900 g Contractor Metal Can Set \u00b7 Commercial Stone & Metal Fabrication",
     "specChips": [
       "900 g Kit",
@@ -10993,7 +10775,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1450,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-900g-kit.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11035,10 +10817,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1.8 kg Industrial Kit \u00b7 Lowest \u20b90.88/g \u00b7 Contractor Tins",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.8 kg Industrial Mega Kit \u00b7 Lowest \u20b90.88/g Rate \u00b7 Factory & Stone Fabrication",
     "specChips": [
       "1.8 kg Kit",
@@ -11093,7 +10873,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1880,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/araldite-standard-2-part-epoxy-adhesive-1-8kg-industrial-kit.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11135,10 +10915,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "180 g Pack \u00b7 4-Hour Set \u00b7 High Impact Resistance",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Pidilite 4-Hour Epoxy System \u00b7 Heavy Impact & Vibration Proof \u00b7 Industrial Repair",
     "specChips": [
       "180 g Pack",
@@ -11190,7 +10968,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 475,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/fevitite-standard-4-hour-heavy-duty-epoxy-180g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11232,10 +11010,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "500 g Pack \u00b7 Stops Plumbing Leaks \u00b7 Moldable Putty",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's #1 Epoxy Putty \u00b7 Seal, Join, Fix & Insulate \u00b7 Stops Pipe Leaks & Crack Sealing",
     "specChips": [
       "500 g Pack",
@@ -11291,7 +11067,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 180,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-500g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11333,10 +11109,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "1 kg Mega Pack \u00b7 Plumbing Contractor Size",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1 kg Contractor Mega Pack \u00b7 High Value Bulk M-Seal \u00b7 Commercial Plumbing Repairs",
     "specChips": [
       "1 kg Pack",
@@ -11388,7 +11162,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 330,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-m-seal-regular-epoxy-putty-compound-1kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11430,10 +11204,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "20 g Tube \u00b7 Non-Drip Gel \u00b7 5-Sec Instant Bond",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Non-Drip Instant Cyanoacrylate Gel \u00b7 5-Second Grab \u00b7 Precision Vertical Repairs",
     "specChips": [
       "20 g Tube",
@@ -11493,7 +11265,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 55,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-gel-non-drip-instant-adhesive-20g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11535,10 +11307,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "20 g Bottle \u00b7 Industrial Grade \u00b7 High Tensile",
     "brandTier": 1,
-    "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Industrial Strength Instant Adhesive \u00b7 High Tensile & Shear Resistance \u00b7 Factory Grade",
     "specChips": [
       "20 g Bottle",
@@ -11590,7 +11360,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 95,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/pidilite-fevikwik-one-drop-industrial-instant-adhesive-20g.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11632,10 +11402,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml \u00b7 Acetoxy GP \u00b7 \u26a0\ufe0f Not for Mirrors/Marble",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "General Purpose Glazing Silicone \u00b7 Glass, Ceramic & Aluminum \u00b7 \u26a0\ufe0f Not for Mirrors/Marble",
     "specChips": [
       "280 ml Cartridge",
@@ -11699,7 +11467,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 345,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/dowsil-gp-general-purpose-acetoxy-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11742,10 +11510,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "300 ml \u00b7 Neutral Cure \u00b7 \ud83d\udee1\ufe0f Mirror & Stone Safe",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Architectural Neutral Silicone \u00b7 Mirror, ACP & Stone Safe \u00b7 \u00b150% Joint Movement",
     "specChips": [
       "300 ml Cartridge",
@@ -11809,7 +11575,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 490,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/dowsil-789-weatherproofing-neutral-silicone-sealant-300ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11852,10 +11618,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml \u00b7 German Quality \u00b7 \u26a0\ufe0f Not for Mirrors",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German-Engineered Silicone Sealant \u00b7 Sanitary & Glazing \u00b7 \u26a0\ufe0f Not for Mirrors/Marble",
     "specChips": [
       "280 ml Cartridge",
@@ -11911,7 +11675,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 395,
         "discountPercent": 14,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/wacker-gp-general-purpose-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -11954,10 +11718,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml \u00b7 Best Value Neutral \u00b7 \ud83d\udee1\ufe0f Mirror & UPVC Safe",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Best Value Neutral Silicone \u00b7 \ud83d\udee1\ufe0f Mirror, UPVC & Stone Safe \u00b7 \u20b9240 Wholesale Rate",
     "specChips": [
       "280 ml Cartridge",
@@ -12017,7 +11779,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 285,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/wacker-wn-weatherseal-neutral-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12060,10 +11822,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml \u00b7 Anti-Fungal Pro \u00b7 \ud83d\udee1\ufe0f Mirror & Bath Safe",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Anti-Fungal Neutral Silicone \u00b7 \ud83d\udee1\ufe0f Safe for Mirrors & Granite \u00b7 Sanitary & Kitchen Pro",
     "specChips": [
       "280 ml Cartridge",
@@ -12119,7 +11879,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 355,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/feviseal-neutral-pro-anti-fungal-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12162,10 +11922,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "280 ml \u00b7 Weatherproof Pro \u00b7 Exterior Facade & ACP",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy Duty Architectural Weatherseal \u00b7 ACP & Glass Facades \u00b7 \ud83d\udee1\ufe0f Stone & UPVC Safe",
     "specChips": [
       "280 ml Cartridge",
@@ -12221,7 +11979,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 410,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/feviseal-weatherproof-pro-neutral-silicone-sealant-280ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12264,10 +12022,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "600 ml Foil Sausage \u00b7 PU Expansion Joint \u00b7 Overpaintable",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High Modulus Polyurethane Sealant \u00b7 Concrete Floor Expansion Joints \u00b7 \u26a0\ufe0f Requires 600ml Sausage Gun",
     "specChips": [
       "600 ml Sausage",
@@ -12327,7 +12083,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 535,
         "discountPercent": 15,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/mccoy-soudal-soudaflex-40fc-construction-pu-sealant-grey-600ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12368,10 +12124,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "750 ml Aerosol Can \u00b7 Expands 30x \u00b7 Door & Window Gap Filling",
     "brandTier": 2,
-    "image": "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "30x Expanding Polyurethane Foam \u00b7 Door Frame & AC Pipe Gap Filler \u00b7 Thermal & Acoustic Barrier",
     "specChips": [
       "750 ml Can",
@@ -12427,7 +12181,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 420,
         "discountPercent": 16,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/aipl-abro-pu-foam-insulation-gap-filling-spray-750ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12469,10 +12223,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "9-Inch / 235mm \u00b7 Smooth Thrust Rod \u00b7 Anti-Drip",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty Pressed Steel Half-Barrel Gun \u00b7 Smooth Ratchet Rod \u00b7 Fits Standard 280-310ml Cartridges",
     "specChips": [
       "9-Inch Gun",
@@ -12532,7 +12284,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 380,
         "discountPercent": 17,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/ingco-hcg1809-9-inch-metal-half-barrel-silicone-caulking-gun.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12575,10 +12327,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "9-Inch / 320ml \u00b7 Skeleton Frame \u00b7 Contractor Grade",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "9-Inch Skeleton Sealant Gun \u00b7 High Mechanical Advantage \u00b7 Fits 280ml-320ml Tubes",
     "specChips": [
       "9-Inch Skeleton",
@@ -12634,7 +12384,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 370,
         "discountPercent": 17,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/tomahawk-tcg-18-9-inch-heavy-duty-silicone-sealant-gun-320ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12677,10 +12427,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "24mm / 1-Inch \u00b7 Razor-Sharp Bead Lines \u00b7 Zero Residue",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1-Inch Crepe Paper Masking Tape \u00b7 Clean Release \u00b7 Razor-Sharp Sealant & Paint Edges",
     "specChips": [
       "24mm (1 Inch)",
@@ -12736,7 +12484,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 45,
         "discountPercent": 20,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-24mm-1-inch-roll.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12779,10 +12527,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "deliveryVehicleType": "2-Wheeler",
     "keySpecBadge": "48mm / 2-Inch \u00b7 Holds Laminate Edges \u00b7 Wide Masking",
     "brandTier": 3,
-    "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp",
-    "images": [
-      "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2-Inch Wide Crepe Tape \u00b7 High Tensile Holding \u00b7 Laminate Clamping & Facade Protection",
     "specChips": [
       "48mm (2 Inch)",
@@ -12838,7 +12584,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 80,
         "discountPercent": 18,
         "stock": 50,
-        "image": "/images/products/fevicol-adhesives-sealants/abro-masking-tape-48mm-2-inch-wide-roll.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -12861,10 +12607,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "wires-mcb-electrical",
     "categoryName": "Wires, MCB & Electrical Supplies",
     "subCategory": "Flame Retardant House Wires",
-    "image": "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp",
-    "images": [
-      "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "99.97% Pure Electrolytic Copper \u00b7 Heat Resistant \u00b7 Low Smoke Halogen Free",
     "specChips": [
       "99.97% Copper",
@@ -12923,7 +12667,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2150,
         "discountPercent": 42,
         "stock": 80,
-        "image": "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp"
+        "image": ""
       },
       {
         "id": "var-poly-10",
@@ -12933,7 +12677,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2890,
         "discountPercent": 44,
         "stock": 100,
-        "image": "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp"
+        "image": ""
       },
       {
         "id": "var-poly-15",
@@ -12943,7 +12687,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3950,
         "discountPercent": 47,
         "stock": 120,
-        "image": "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp"
+        "image": ""
       },
       {
         "id": "var-poly-25",
@@ -12953,7 +12697,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5990,
         "discountPercent": 44,
         "stock": 90,
-        "image": "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp"
+        "image": ""
       },
       {
         "id": "var-poly-40",
@@ -12963,7 +12707,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8900,
         "discountPercent": 42,
         "stock": 50,
-        "image": "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp"
+        "image": ""
       },
       {
         "id": "var-poly-60",
@@ -12973,7 +12717,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 12900,
         "discountPercent": 41,
         "stock": 40,
-        "image": "/images/products/electrical/polycab-maxima-green-wire-hr-fr-lsh.webp"
+        "image": ""
       }
     ],
     "price": 1240,
@@ -12995,10 +12739,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "wires-mcb-electrical",
     "categoryName": "Wires, MCB & Electrical Supplies",
     "subCategory": "Flame Retardant House Wires",
-    "image": "/images/products/electrical/finolex-silver-fr-wire.webp",
-    "images": [
-      "/images/products/electrical/finolex-silver-fr-wire.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flame Retardant (FR) PVC \u00b7 High Oxygen Index \u00b7 100% Annealed Copper",
     "specChips": [
       "High Oxygen Index",
@@ -13057,7 +12799,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 39,
         "stock": 70,
-        "image": "/images/products/electrical/finolex-silver-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-fino-10",
@@ -13067,7 +12809,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2350,
         "discountPercent": 39,
         "stock": 80,
-        "image": "/images/products/electrical/finolex-silver-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-fino-15",
@@ -13077,7 +12819,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2840,
         "discountPercent": 39,
         "stock": 100,
-        "image": "/images/products/electrical/finolex-silver-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-fino-25",
@@ -13087,7 +12829,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4500,
         "discountPercent": 38,
         "stock": 75,
-        "image": "/images/products/electrical/finolex-silver-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-fino-40",
@@ -13097,7 +12839,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6800,
         "discountPercent": 38,
         "stock": 50,
-        "image": "/images/products/electrical/finolex-silver-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-fino-60",
@@ -13107,7 +12849,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 10200,
         "discountPercent": 38,
         "stock": 35,
-        "image": "/images/products/electrical/finolex-silver-fr-wire.webp"
+        "image": ""
       }
     ],
     "price": 1120,
@@ -13129,10 +12871,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "wires-mcb-electrical",
     "categoryName": "Wires, MCB & Electrical Supplies",
     "subCategory": "Flame Retardant House Wires",
-    "image": "/images/products/electrical/anchor-panasonic-advance-fr-wire.webp",
-    "images": [
-      "/images/products/electrical/anchor-panasonic-advance-fr-wire.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100% Electrolytic Copper \u00b7 Japanese Quality Assurance \u00b7 Flame Retardant",
     "specChips": [
       "Panasonic Tech",
@@ -13187,7 +12927,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2980,
         "discountPercent": 50,
         "stock": 60,
-        "image": "/images/products/electrical/anchor-panasonic-advance-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-anc-15",
@@ -13197,7 +12937,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3765,
         "discountPercent": 48,
         "stock": 80,
-        "image": "/images/products/electrical/anchor-panasonic-advance-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-anc-25",
@@ -13207,7 +12947,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6200,
         "discountPercent": 49,
         "stock": 65,
-        "image": "/images/products/electrical/anchor-panasonic-advance-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-anc-40",
@@ -13217,7 +12957,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 9500,
         "discountPercent": 49,
         "stock": 40,
-        "image": "/images/products/electrical/anchor-panasonic-advance-fr-wire.webp"
+        "image": ""
       }
     ],
     "price": 1490,
@@ -13239,10 +12979,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "wires-mcb-electrical",
     "categoryName": "Wires, MCB & Electrical Supplies",
     "subCategory": "Flame Retardant House Wires",
-    "image": "/images/products/electrical/kei-homecab-fr-wire.webp",
-    "images": [
-      "/images/products/electrical/kei-homecab-fr-wire.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Multi-Strand Flexible Conductor \u00b7 100% Conductivity \u00b7 Flame Retardant",
     "specChips": [
       "Multi-Strand",
@@ -13297,7 +13035,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2840,
         "discountPercent": 50,
         "stock": 60,
-        "image": "/images/products/electrical/kei-homecab-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-kei-15",
@@ -13307,7 +13045,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3705,
         "discountPercent": 50,
         "stock": 80,
-        "image": "/images/products/electrical/kei-homecab-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-kei-25",
@@ -13317,7 +13055,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5990,
         "discountPercent": 50,
         "stock": 60,
-        "image": "/images/products/electrical/kei-homecab-fr-wire.webp"
+        "image": ""
       },
       {
         "id": "var-kei-40",
@@ -13327,7 +13065,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 9100,
         "discountPercent": 49,
         "stock": 35,
-        "image": "/images/products/electrical/kei-homecab-fr-wire.webp"
+        "image": ""
       }
     ],
     "price": 1420,
@@ -13349,10 +13087,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "wires-mcb-electrical",
     "categoryName": "Wires, MCB & Electrical Supplies",
     "subCategory": "Modular Switches & Sockets",
-    "image": "/images/products/electrical/anchor-roma-6a-1-way-switch.webp",
-    "images": [
-      "/images/products/electrical/anchor-roma-6a-1-way-switch.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Silver Inlay Contacts \u00b7 Smooth Tactile Click \u00b7 Tested for 100,000 Clicks",
     "specChips": [
       "Silver Inlay Contacts",
@@ -13407,7 +13143,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 65,
         "discountPercent": 35,
         "stock": 300,
-        "image": "/images/products/electrical/anchor-roma-6a-1-way-switch.webp"
+        "image": ""
       },
       {
         "id": "var-roma-16a",
@@ -13417,7 +13153,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 145,
         "discountPercent": 32,
         "stock": 200,
-        "image": "/images/products/electrical/anchor-roma-6a-1-way-switch.webp"
+        "image": ""
       },
       {
         "id": "var-roma-sock",
@@ -13427,7 +13163,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 210,
         "discountPercent": 31,
         "stock": 150,
-        "image": "/images/products/electrical/anchor-roma-6a-1-way-switch.webp"
+        "image": ""
       }
     ],
     "price": 42,
@@ -13449,10 +13185,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "wires-mcb-electrical",
     "categoryName": "Wires, MCB & Electrical Supplies",
     "subCategory": "Modular Switches & Sockets",
-    "image": "/images/products/electrical/anchor-modular-plate-8m.webp",
-    "images": [
-      "/images/products/electrical/anchor-modular-plate-8m.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High Gloss Pure White \u00b7 UV Stabilized Polycarbonate \u00b7 Concealed Fixing",
     "specChips": [
       "High Gloss White",
@@ -13503,7 +13237,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 75,
         "discountPercent": 36,
         "stock": 150,
-        "image": "/images/products/electrical/anchor-modular-plate-8m.webp"
+        "image": ""
       },
       {
         "id": "var-plt-4m",
@@ -13513,7 +13247,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 105,
         "discountPercent": 35,
         "stock": 120,
-        "image": "/images/products/electrical/anchor-modular-plate-8m.webp"
+        "image": ""
       },
       {
         "id": "var-plt-6m",
@@ -13523,7 +13257,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 130,
         "discountPercent": 35,
         "stock": 100,
-        "image": "/images/products/electrical/anchor-modular-plate-8m.webp"
+        "image": ""
       },
       {
         "id": "var-plt-8m",
@@ -13533,7 +13267,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 145,
         "discountPercent": 34,
         "stock": 120,
-        "image": "/images/products/electrical/anchor-modular-plate-8m.webp"
+        "image": ""
       },
       {
         "id": "var-plt-12m",
@@ -13543,7 +13277,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 210,
         "discountPercent": 33,
         "stock": 80,
-        "image": "/images/products/electrical/anchor-modular-plate-8m.webp"
+        "image": ""
       }
     ],
     "price": 48,
@@ -13566,10 +13300,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/crompton-instabliss-3l-3000w-instant-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/crompton-instabliss-3l-3000w-instant-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3000W copper heating element with high grade SS 304 inner tank for instant hot water in 60 seconds",
     "specChips": [
       "3L Instant",
@@ -13652,7 +13384,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3800,
         "discountPercent": 46,
         "stock": 50,
-        "image": "/images/products/home-appliances/crompton-instabliss-3l-3000w-instant-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -13666,10 +13398,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/racold-pronto-neo-3l-4500w-instant-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/racold-pronto-neo-3l-4500w-instant-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-speed 4.5kW heating with 8-bar pressure rating suitable for multi-storey high-rises",
     "specChips": [
       "3L Instant",
@@ -13752,7 +13482,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5499,
         "discountPercent": 39,
         "stock": 50,
-        "image": "/images/products/home-appliances/racold-pronto-neo-3l-4500w-instant-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -13766,10 +13496,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/bajaj-shield-series-new-shakti-15l-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/bajaj-shield-series-new-shakti-15l-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "DuraAce glass-lined tank with Marine Grade non-stick heating element and 8 bar pressure rating",
     "specChips": [
       "15L Storage",
@@ -13852,7 +13580,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 12450,
         "discountPercent": 40,
         "stock": 50,
-        "image": "/images/products/home-appliances/bajaj-shield-series-new-shakti-15l-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -13866,10 +13594,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/racold-eterno-pro-15l-4-star-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/racold-eterno-pro-15l-4-star-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Titanium Ultracore coating with Smart Bath Logic energy saver and high-rise 8-bar rating",
     "specChips": [
       "15L Vertical",
@@ -13952,7 +13678,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 13999,
         "discountPercent": 43,
         "stock": 50,
-        "image": "/images/products/home-appliances/racold-eterno-pro-15l-4-star-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -13966,10 +13692,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/v-guard-victo-dg-15l-digital-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/v-guard-victo-dg-15l-digital-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Digital display with temperature dial, Antiscalant anode, 8-bar tank and complimentary connection pipes",
     "specChips": [
       "15L Digital",
@@ -14052,7 +13776,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14750,
         "discountPercent": 34,
         "stock": 50,
-        "image": "/images/products/home-appliances/v-guard-victo-dg-15l-digital-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -14066,10 +13790,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3000W fast heating with Blue Diamond glass lining and 5-Star BEE energy efficiency",
     "specChips": [
       "15L 5-Star",
@@ -14152,7 +13874,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 17800,
         "discountPercent": 29,
         "stock": 50,
-        "image": "/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -14166,10 +13888,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/ao-smith-finesse-25l-5-star-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/ao-smith-finesse-25l-5-star-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "25L luxury bathroom volume with Blue Diamond glass lining and BEE 5-Star energy rating",
     "specChips": [
       "25L Large Volume",
@@ -14252,7 +13972,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 19500,
         "discountPercent": 32,
         "stock": 50,
-        "image": "/images/products/home-appliances/ao-smith-finesse-25l-5-star-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -14266,10 +13986,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/elica-wd-tbf-hac-60-ms-nero-filterless-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/elica-wd-tbf-hac-60-ms-nero-filterless-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1425 m³/hr heavy suction with heat auto-clean, motion sensor and black curved glass finish",
     "specChips": [
       "60cm Width",
@@ -14352,7 +14070,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 23990,
         "discountPercent": 43,
         "stock": 50,
-        "image": "/images/products/home-appliances/elica-wd-tbf-hac-60-ms-nero-filterless-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -14366,10 +14084,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "90cm wide coverage for 3–4 burner hobs with filterless auto-clean, LED strip and motion controls",
     "specChips": [
       "90cm Width",
@@ -14452,7 +14168,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 24990,
         "discountPercent": 44,
         "stock": 50,
-        "image": "/images/products/home-appliances/elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -14466,10 +14182,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/faber-hood-polo-in-hc-sc-bk-60-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/faber-hood-polo-in-hc-sc-bk-60-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Italian design 60cm chimney with I-Clean auto-clean technology, gesture controls and 1200 m³/hr suction",
     "specChips": [
       "60cm Width",
@@ -14552,7 +14266,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 23990,
         "discountPercent": 41,
         "stock": 50,
-        "image": "/images/products/home-appliances/faber-hood-polo-in-hc-sc-bk-60-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -14566,10 +14280,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/faber-hood-primus-plus-energy-90cm-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/faber-hood-primus-plus-energy-90cm-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-power 1500 m³/hr heavy suction with BLDC motor, 90cm wide canopy and smart thermal autoclean",
     "specChips": [
       "90cm Width",
@@ -14652,7 +14364,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 31990,
         "discountPercent": 45,
         "stock": 50,
-        "image": "/images/products/home-appliances/faber-hood-primus-plus-energy-90cm-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -14666,10 +14378,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/crompton-brisk-air-neo-200mm-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/crompton-brisk-air-neo-200mm-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "40W high air delivery ventilation fan with rust-proof plastic blades for 8-inch cutouts",
     "specChips": [
       "200mm / 8-Inch",
@@ -14752,7 +14462,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 32,
         "stock": 50,
-        "image": "/images/products/home-appliances/crompton-brisk-air-neo-200mm-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -14766,10 +14476,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/atomberg-efficio-200mm-bldc-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/atomberg-efficio-200mm-bldc-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Energy-saving BLDC motor consuming only 20W with 500 m³/hr air delivery for 8-inch cutouts",
     "specChips": [
       "200mm / 8-Inch",
@@ -14852,7 +14560,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2290,
         "discountPercent": 35,
         "stock": 50,
-        "image": "/images/products/home-appliances/atomberg-efficio-200mm-bldc-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -14866,10 +14574,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/havells-ventil-air-dx-150mm-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/havells-ventil-air-dx-150mm-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Compact 150mm (6-inch) exhaust fan with gravity louvre shutter for modern bathroom glass cutouts",
     "specChips": [
       "150mm / 6-Inch",
@@ -14952,7 +14658,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2325,
         "discountPercent": 30,
         "stock": 50,
-        "image": "/images/products/home-appliances/havells-ventil-air-dx-150mm-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -14966,10 +14672,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/atomberg-studio-plus-150mm-bldc-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/atomberg-studio-plus-150mm-bldc-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ultra-low 6.8W power consumption with whisper-silent operation for premium 6-inch bathroom cutouts",
     "specChips": [
       "150mm / 6-Inch",
@@ -15052,7 +14756,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3100,
         "discountPercent": 32,
         "stock": 50,
-        "image": "/images/products/home-appliances/atomberg-studio-plus-150mm-bldc-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -15066,10 +14770,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Desert Air Coolers",
     "applianceSubcategory": "DESERT_COOLER",
-    "image": "/images/products/home-appliances/crompton-ozone-75l-desert-air-cooler.webp",
-    "images": [
-      "/images/products/home-appliances/crompton-ozone-75l-desert-air-cooler.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "75L tank with high density honeycomb pads, 52 ft powerful air throw and inverter compatibility",
     "specChips": [
       "75L Tank",
@@ -15152,7 +14854,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 17500,
         "discountPercent": 43,
         "stock": 50,
-        "image": "/images/products/home-appliances/crompton-ozone-75l-desert-air-cooler.webp"
+        "image": ""
       }
     ]
   },
@@ -15166,10 +14868,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Desert Air Coolers",
     "applianceSubcategory": "DESERT_COOLER",
-    "image": "/images/products/home-appliances/symphony-sumo-75-xl-desert-air-cooler.webp",
-    "images": [
-      "/images/products/home-appliances/symphony-sumo-75-xl-desert-air-cooler.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "75L heavy-duty desert cooler with multi-stage i-Pure air purification filters and commercial fan throw",
     "specChips": [
       "75L Volume",
@@ -15252,7 +14952,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 19999,
         "discountPercent": 33,
         "stock": 50,
-        "image": "/images/products/home-appliances/symphony-sumo-75-xl-desert-air-cooler.webp"
+        "image": ""
       }
     ]
   },
@@ -15266,10 +14966,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Inverters & Tubular Batteries",
     "applianceSubcategory": "INVERTER_BATTERY",
-    "image": "/images/products/home-appliances/microtek-luxe-1200-inverter-150ah-battery-combo.webp",
-    "images": [
-      "/images/products/home-appliances/microtek-luxe-1200-inverter-150ah-battery-combo.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "950VA pure sine wave inverter paired with 150Ah tall tubular battery for whole-home handover backup",
     "specChips": [
       "950VA / 760W",
@@ -15353,7 +15051,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 26500,
         "discountPercent": 35,
         "stock": 50,
-        "image": "/images/products/home-appliances/microtek-luxe-1200-inverter-150ah-battery-combo.webp"
+        "image": ""
       }
     ]
   },
@@ -15367,10 +15065,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Inverters & Tubular Batteries",
     "applianceSubcategory": "INVERTER_BATTERY",
-    "image": "/images/products/home-appliances/luminous-zelio-plus-1100-inverter-150ah-battery-combo.webp",
-    "images": [
-      "/images/products/home-appliances/luminous-zelio-plus-1100-inverter-150ah-battery-combo.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Smart LED screen inverter showing exact remaining backup time in hours, paired with Red Charge 150Ah battery",
     "specChips": [
       "900VA / 756W",
@@ -15454,7 +15150,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 32900,
         "discountPercent": 36,
         "stock": 50,
-        "image": "/images/products/home-appliances/luminous-zelio-plus-1100-inverter-150ah-battery-combo.webp"
+        "image": ""
       }
     ]
   },
@@ -15467,10 +15163,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "lighting",
     "categoryName": "Lighting",
     "subCategory": "Recessed Round & Square Panels",
-    "image": "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp",
-    "images": [
-      "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Frameless Edge-to-Edge Glow \u00b7 3.5 kV Surge Protection \u00b7 Eye Soft Optics",
     "specChips": [
       "Edge-to-Edge Glow",
@@ -15529,7 +15223,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 550,
         "discountPercent": 55,
         "stock": 100,
-        "image": "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp"
+        "image": ""
       },
       {
         "id": "var-wip-9w",
@@ -15539,7 +15233,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 690,
         "discountPercent": 57,
         "stock": 120,
-        "image": "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp"
+        "image": ""
       },
       {
         "id": "var-wip-12w",
@@ -15549,7 +15243,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 790,
         "discountPercent": 56,
         "stock": 150,
-        "image": "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp"
+        "image": ""
       },
       {
         "id": "var-wip-15w",
@@ -15559,7 +15253,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 890,
         "discountPercent": 56,
         "stock": 140,
-        "image": "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp"
+        "image": ""
       },
       {
         "id": "var-wip-18w",
@@ -15569,7 +15263,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1050,
         "discountPercent": 56,
         "stock": 90,
-        "image": "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp"
+        "image": ""
       },
       {
         "id": "var-wip-22w",
@@ -15579,7 +15273,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1250,
         "discountPercent": 57,
         "stock": 60,
-        "image": "/images/products/lighting/wipro-garnet-rimless-round-led-surface-panel-light.webp"
+        "image": ""
       }
     ],
     "price": 245,
@@ -15601,10 +15295,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "lighting",
     "categoryName": "Lighting",
     "subCategory": "Recessed Round & Square Panels",
-    "image": "/images/products/lighting/philips-full-glow-led-surface-light-round.webp",
-    "images": [
-      "/images/products/lighting/philips-full-glow-led-surface-light-round.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ultra-Slim 2.9 cm Profile \u00b7 Full Glow Diffuser \u00b7 EyeComfort Technology",
     "specChips": [
       "Full Glow Diffuser",
@@ -15663,7 +15355,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 650,
         "discountPercent": 32,
         "stock": 80,
-        "image": "/images/products/lighting/philips-full-glow-led-surface-light-round.webp"
+        "image": ""
       },
       {
         "id": "var-phil-10w-ww",
@@ -15673,7 +15365,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 650,
         "discountPercent": 32,
         "stock": 60,
-        "image": "/images/products/lighting/philips-full-glow-led-surface-light-round.webp"
+        "image": ""
       },
       {
         "id": "var-phil-15w-cdl",
@@ -15683,7 +15375,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 775,
         "discountPercent": 33,
         "stock": 100,
-        "image": "/images/products/lighting/philips-full-glow-led-surface-light-round.webp"
+        "image": ""
       },
       {
         "id": "var-phil-15w-ww",
@@ -15693,7 +15385,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 775,
         "discountPercent": 33,
         "stock": 70,
-        "image": "/images/products/lighting/philips-full-glow-led-surface-light-round.webp"
+        "image": ""
       },
       {
         "id": "var-phil-20w-cdl",
@@ -15703,7 +15395,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 990,
         "discountPercent": 32,
         "stock": 50,
-        "image": "/images/products/lighting/philips-full-glow-led-surface-light-round.webp"
+        "image": ""
       }
     ],
     "price": 440,
@@ -15725,10 +15417,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "lighting",
     "categoryName": "Lighting",
     "subCategory": "Recessed Round & Square Panels",
-    "image": "/images/products/lighting/sturlite-lexxo-trimless-surface-mount-led-downlight.webp",
-    "images": [
-      "/images/products/lighting/sturlite-lexxo-trimless-surface-mount-led-downlight.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Value Leader \u00b7 Trimless Flush Design \u00b7 2-Year Warranty \u00b7 High Efficacy",
     "specChips": [
       "Trimless Design",
@@ -15783,7 +15473,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 499,
         "discountPercent": 52,
         "stock": 100,
-        "image": "/images/products/lighting/sturlite-lexxo-trimless-surface-mount-led-downlight.webp"
+        "image": ""
       },
       {
         "id": "var-stur-12w",
@@ -15793,7 +15483,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 650,
         "discountPercent": 51,
         "stock": 90,
-        "image": "/images/products/lighting/sturlite-lexxo-trimless-surface-mount-led-downlight.webp"
+        "image": ""
       },
       {
         "id": "var-stur-18w",
@@ -15803,7 +15493,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 820,
         "discountPercent": 50,
         "stock": 60,
-        "image": "/images/products/lighting/sturlite-lexxo-trimless-surface-mount-led-downlight.webp"
+        "image": ""
       }
     ],
     "price": 242,
@@ -15825,10 +15515,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "lighting",
     "categoryName": "Lighting",
     "subCategory": "Recessed Round & Square Panels",
-    "image": "/images/products/lighting/wipro-garnet-rimless-3in1-cct-surface-mounted-led-panel.webp",
-    "images": [
-      "/images/products/lighting/wipro-garnet-rimless-3in1-cct-surface-mounted-led-panel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3 Colors in 1 Light \u00b7 Cool White, Warm White & Natural \u00b7 Toggle via Wall Switch",
     "specChips": [
       "3-in-1 Color CCT",
@@ -15883,7 +15571,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 990,
         "discountPercent": 42,
         "stock": 80,
-        "image": "/images/products/lighting/wipro-garnet-rimless-3in1-cct-surface-mounted-led-panel.webp"
+        "image": ""
       },
       {
         "id": "var-wip-3in1-18w",
@@ -15893,7 +15581,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1250,
         "discountPercent": 44,
         "stock": 60,
-        "image": "/images/products/lighting/wipro-garnet-rimless-3in1-cct-surface-mounted-led-panel.webp"
+        "image": ""
       }
     ],
     "price": 579,
@@ -15915,10 +15603,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "lighting",
     "categoryName": "Lighting",
     "subCategory": "Recessed Round & Square Panels",
-    "image": "/images/products/lighting/philips-stellar-bright-rimless-surface-downlight-15w.webp",
-    "images": [
-      "/images/products/lighting/philips-stellar-bright-rimless-surface-downlight-15w.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "15W Ultra Bright 1500 Lumens \u00b7 Rimless Edge Design \u00b7 2 Years Warranty",
     "specChips": [
       "1500 Lumens Output",
@@ -15973,7 +15659,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 750,
         "discountPercent": 35,
         "stock": 80,
-        "image": "/images/products/lighting/philips-stellar-bright-rimless-surface-downlight-15w.webp"
+        "image": ""
       },
       {
         "id": "var-phil-sb-nw",
@@ -15983,7 +15669,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 750,
         "discountPercent": 35,
         "stock": 60,
-        "image": "/images/products/lighting/philips-stellar-bright-rimless-surface-downlight-15w.webp"
+        "image": ""
       }
     ],
     "price": 485,
@@ -16005,10 +15691,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "lighting",
     "categoryName": "Lighting",
     "subCategory": "Recessed Round & Square Panels",
-    "image": "/images/products/lighting/wipro-garnet-wave-led-slim-panel-square-18w.webp",
-    "images": [
-      "/images/products/lighting/wipro-garnet-wave-led-slim-panel-square-18w.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Sleek Square Profile \u00b7 False Ceiling Spring Clips \u00b7 18W High Output",
     "specChips": [
       "Square Profile",
@@ -16063,7 +15747,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 720,
         "discountPercent": 45,
         "stock": 70,
-        "image": "/images/products/lighting/wipro-garnet-wave-led-slim-panel-square-18w.webp"
+        "image": ""
       },
       {
         "id": "var-wip-sq-18w",
@@ -16073,7 +15757,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 850,
         "discountPercent": 42,
         "stock": 80,
-        "image": "/images/products/lighting/wipro-garnet-wave-led-slim-panel-square-18w.webp"
+        "image": ""
       }
     ],
     "price": 395,
@@ -16114,10 +15798,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-grace-plain-single-bowl-ss-304-21x18.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-grace-plain-single-bowl-ss-304-21x18.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Compact 21x18\" Single Bowl \u00b7 AISI 304 Grade \u00b7 600mm Base Fit",
     "specChips": [
       "AISI 304 Steel",
@@ -16180,7 +15862,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4690,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-grace-plain-single-bowl-ss-304-21x18.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16222,10 +15904,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-satin.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Popular 24x18\" Straight Bowl \u00b7 Satin Finish \u00b7 700mm Base Fit",
     "specChips": [
       "24x18 Inch Size",
@@ -16288,7 +15968,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5580,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16330,10 +16010,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-glossy.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-glossy.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Mirror Glossy Finish \u00b7 Extra Deep 8.5\" Bowl \u00b7 700mm Base Fit",
     "specChips": [
       "Mirror Glossy",
@@ -16396,7 +16074,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7590,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-orra-rectangular-straight-ss-304-24x18-glossy.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16438,10 +16116,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/parryware-eco-single-bowl-flat-edge-ss-304-sink.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/parryware-eco-single-bowl-flat-edge-ss-304-sink.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flat Edge Profile \u00b7 Top/Flush Mount \u00b7 700mm Base Cabinet",
     "specChips": [
       "Flat Edge Lip",
@@ -16504,7 +16180,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6500,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/parryware-eco-single-bowl-flat-edge-ss-304-sink.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16546,10 +16222,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-elegance-esm-single-bowl-ss-304-24x18x8-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-elegance-esm-single-bowl-ss-304-24x18x8-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German-Design Matt SS 304 \u00b7 Premium Hydraulic Press \u00b7 700mm Base",
     "specChips": [
       "German Design",
@@ -16612,7 +16286,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8000,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-elegance-esm-single-bowl-ss-304-24x18x8-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16654,10 +16328,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/parryware-new-coral-single-bowl-drainboard-ss-304.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/parryware-new-coral-single-bowl-drainboard-ss-304.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Integrated Sloped Drainboard \u00b7 Reversible Setup \u00b7 900mm Base Fit",
     "specChips": [
       "With Drainboard",
@@ -16720,7 +16392,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 10250,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/parryware-new-coral-single-bowl-drainboard-ss-304.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16762,10 +16434,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-vogue-single-bowl-drainboard-ss-304-36x20x8-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-vogue-single-bowl-drainboard-ss-304-36x20x8-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Full-Sized 36x20\" Drainboard Sink \u00b7 Architectural Matt \u00b7 1000mm Base",
     "specChips": [
       "36x20 Large Sink",
@@ -16828,7 +16498,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 11950,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-vogue-single-bowl-drainboard-ss-304-36x20x8-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16870,10 +16540,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/futura-dura-double-bowl-ss-304-37x18x8-satin.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/futura-dura-double-bowl-ss-304-37x18x8-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Twin Equal Bowls \u00b7 Multi-Task Washing \u00b7 1000mm Base Cabinet",
     "specChips": [
       "Double Bowl",
@@ -16936,7 +16604,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 12200,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/futura-dura-double-bowl-ss-304-37x18x8-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -16978,10 +16646,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-bg-popular-master-double-bowl-ss-304-37x18-glossy.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-bg-popular-master-double-bowl-ss-304-37x18-glossy.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flagship Nirali Double Bowl \u00b7 Mirror Glossy \u00b7 1000mm Base Fit",
     "specChips": [
       "Nirali Flagship",
@@ -17044,7 +16710,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 15800,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-bg-popular-master-double-bowl-ss-304-37x18-glossy.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17086,10 +16752,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-evan-bg-handmade-single-bowl-ss-304-21x18.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-evan-bg-handmade-single-bowl-ss-304-21x18.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.2mm Heavy-Gauge Handmade \u00b7 R10 Tight Radius \u00b7 600mm Base",
     "specChips": [
       "1.2mm Heavy Gauge",
@@ -17152,7 +16816,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8590,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-evan-bg-handmade-single-bowl-ss-304-21x18.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17194,10 +16858,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-evan-handmade-single-bowl-ss-304-24x18x9.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-evan-handmade-single-bowl-ss-304-24x18x9.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.2mm Fabricated SS 304 \u00b7 Extra Deep 9\" Basin \u00b7 700mm Base Fit",
     "specChips": [
       "1.2mm Heavy Plate",
@@ -17260,7 +16922,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 10150,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-evan-handmade-single-bowl-ss-304-24x18x9.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17302,10 +16964,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-24x18x10-matt-basket.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-24x18x10-matt-basket.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Jumbo 10\" Deep Bowl \u00b7 Includes SS Colander Basket \u00b7 700mm Base",
     "specChips": [
       "10\" Deep Basin",
@@ -17368,7 +17028,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 12100,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-24x18x10-matt-basket.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17410,10 +17070,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-32x18x10-matt-basket.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-32x18x10-matt-basket.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Expansive 32x18\" Single Bowl \u00b7 10\" Depth \u00b7 900mm Base Fit",
     "specChips": [
       "32x18\" Wide Basin",
@@ -17476,7 +17134,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14450,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/ruhe-handmade-1-2mm-ss-304-single-bowl-32x18x10-matt-basket.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17518,10 +17176,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/kohler-strive-21-inch-top-flush-undermount-ss-sink-38778in-na.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/kohler-strive-21-inch-top-flush-undermount-ss-sink-38778in-na.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kohler SilentShield Sound Absorber \u00b7 Triple Mount \u00b7 600mm Base",
     "specChips": [
       "Kohler Global",
@@ -17584,7 +17240,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 15350,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/kohler-strive-21-inch-top-flush-undermount-ss-sink-38778in-na.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17626,10 +17282,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/nirali-monet-sound-proof-double-bowl-square-ss-304-37x18-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/nirali-monet-sound-proof-double-bowl-square-ss-304-37x18-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flagship Luxury Handmade Double Bowl \u00b7 Extra Heavy Sound-Proof \u00b7 1000mm Base",
     "specChips": [
       "Heavy Sound-Proof",
@@ -17692,7 +17346,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 27150,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/nirali-monet-sound-proof-double-bowl-square-ss-304-37x18-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17734,10 +17388,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-champagne.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-champagne.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German Quartz Composite (80% Granite) \u00b7 Warm Champagne \u00b7 700mm Base",
     "specChips": [
       "80% Natural Quartz",
@@ -17800,7 +17452,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8850,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-champagne.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17842,10 +17494,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-nera-black.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-nera-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Signature Nera Metallic Black \u00b7 Turmeric Proof \u00b7 700mm Base Fit",
     "specChips": [
       "Nera Black Finish",
@@ -17908,7 +17558,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 11300,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-single-bowl-quartz-sink-24x18x8-nera-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -17950,10 +17600,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-new-ascend-single-bowl-quartz-sink-34x20x8-arena.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-new-ascend-single-bowl-quartz-sink-34x20x8-arena.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "34x20\" Wide Quartz Basin \u00b7 Earthy Arena Grey \u00b7 900mm Base Cabinet",
     "specChips": [
       "34x20 Large Basin",
@@ -18016,7 +17664,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 16120,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-new-ascend-single-bowl-quartz-sink-34x20x8-arena.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18058,10 +17706,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6810",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-plus-noise-reduction-quartz-sink-24x18x8-nera.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/carysil-big-bowl-plus-noise-reduction-quartz-sink-24x18x8-nera.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Reinforced Heavy Rim \u00b7 Advanced Acoustic Dampening \u00b7 700mm Base",
     "specChips": [
       "Big Bowl Plus",
@@ -18124,7 +17770,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 17550,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/carysil-big-bowl-plus-noise-reduction-quartz-sink-24x18x8-nera.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18166,10 +17812,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/essco-cosmo-wall-mounted-sink-cock-swinging-spout-cos-chr-103347n.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/essco-cosmo-wall-mounted-sink-cock-swinging-spout-cos-chr-103347n.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "360\u00b0 Swivel Spout \u00b7 10-Year Warranty \u00b7 Wall Mounted Cold Supply",
     "specChips": [
       "Wall Mounted",
@@ -18232,7 +17876,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1720,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/essco-cosmo-wall-mounted-sink-cock-swinging-spout-cos-chr-103347n.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18274,10 +17918,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/parryware-claret-wall-mounted-brass-sink-cock-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/parryware-claret-wall-mounted-brass-sink-cock-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ergonomic Fluted Handle \u00b7 Wall Mount \u00b7 Aerated Water Stream",
     "specChips": [
       "Wall Mounted",
@@ -18340,7 +17982,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1610,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/parryware-claret-wall-mounted-brass-sink-cock-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18382,10 +18024,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-darc-half-inch-wall-mounted-sink-cock-drc-37347.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-darc-half-inch-wall-mounted-sink-cock-drc-37347.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Jaquar Architectural Series \u00b7 Soft Contour Swivel \u00b7 10-Yr Warranty",
     "specChips": [
       "Wall Mounted",
@@ -18448,7 +18088,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1910,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-darc-half-inch-wall-mounted-sink-cock-drc-37347.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18490,10 +18130,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-tap-flp-5347pm-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-tap-flp-5347pm-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's #1 Kitchen Faucet \u00b7 Florentine Prime Chrome \u00b7 360\u00b0 Swivel",
     "specChips": [
       "Wall Mounted",
@@ -18556,7 +18194,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2180,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-tap-flp-5347pm-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18598,10 +18236,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-continental-wall-mounted-sink-cock-con-347knm-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-continental-wall-mounted-sink-cock-con-347knm-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Classic Round Form \u00b7 Cast Brass Body \u00b7 10-Year Warranty",
     "specChips": [
       "Wall Mounted",
@@ -18664,7 +18300,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2315,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-continental-wall-mounted-sink-cock-con-347knm-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18706,10 +18342,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/cera-crayon-wall-mounted-sink-cock-170mm-spout-f2008251.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/cera-crayon-wall-mounted-sink-cock-170mm-spout-f2008251.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "170mm Projection Spout \u00b7 Quarter Turn \u00b7 CERA Ceramic Cartridge",
     "specChips": [
       "Wall Mounted",
@@ -18772,7 +18406,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2450,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/cera-crayon-wall-mounted-sink-cock-170mm-spout-f2008251.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18814,10 +18448,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-sink-tap-flp-5357pm-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-sink-tap-flp-5357pm-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Deck Mounted on Sink Rim \u00b7 Requires Under-Sink Angle Valve \u00b7 Chrome",
     "specChips": [
       "Table / Deck Mounted",
@@ -18880,7 +18512,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2680,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-sink-tap-flp-5357pm-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -18922,10 +18554,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/cera-titanium-wall-mounted-sink-cock-200mm-spout-f1003261.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/cera-titanium-wall-mounted-sink-cock-200mm-spout-f1003261.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Extra-Long 200mm Spout \u00b7 Ideal for 24\" Sinks \u00b7 CERA Premium",
     "specChips": [
       "Wall Mounted",
@@ -18988,7 +18618,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3035,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/cera-titanium-wall-mounted-sink-cock-200mm-spout-f1003261.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19030,10 +18660,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-cock-black-matt-flp-blm-5347pm.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-cock-black-matt-flp-blm-5347pm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Architectural Black Matt \u00b7 Perfect for Nera Quartz Sinks \u00b7 Wall Mounted",
     "specChips": [
       "Wall Mounted",
@@ -19096,7 +18724,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3450,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-sink-cock-black-matt-flp-blm-5347pm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19138,10 +18766,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/hindware-contessa-neo-wall-mounted-sink-cock-swivel-spout.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/hindware-contessa-neo-wall-mounted-sink-cock-swivel-spout.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contessa Classic Cross Handle \u00b7 Solid Cast Brass \u00b7 12-Yr Warranty",
     "specChips": [
       "Wall Mounted",
@@ -19204,7 +18830,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3520,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/hindware-contessa-neo-wall-mounted-sink-cock-swivel-spout.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19246,10 +18872,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/kitchen-sinks-faucets/hindware-flora-wall-mounted-sink-cock-swivel-spout.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/hindware-flora-wall-mounted-sink-cock-swivel-spout.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Sculpted Floral Lever \u00b7 High Arc Spout \u00b7 Hindware Italian Collection",
     "specChips": [
       "Wall Mounted",
@@ -19312,7 +18936,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4470,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/hindware-flora-wall-mounted-sink-cock-swivel-spout.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19354,10 +18978,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-single-lever-wall-mounted-kitchen-sink-mixer-chrome.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-single-lever-wall-mounted-kitchen-sink-mixer-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hot & Cold Single Lever \u00b7 Wall Mount (Twin Inlets) \u00b7 Swivel Spout",
     "specChips": [
       "Hot & Cold Mixer",
@@ -19420,7 +19042,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7550,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-single-lever-wall-mounted-kitchen-sink-mixer-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19462,10 +19084,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/kohler-atom-pull-down-2-function-kitchen-faucet-chrome-25981in-4-cp.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/kohler-atom-pull-down-2-function-kitchen-faucet-chrome-25981in-4-cp.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Retractable Pull-Down Sprayer \u00b7 Stream & Sweep Spray \u00b7 Table Mount",
     "specChips": [
       "Table / Deck Mounted",
@@ -19528,7 +19148,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8900,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/kohler-atom-pull-down-2-function-kitchen-faucet-chrome-25981in-4-cp.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19570,10 +19190,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-elbow-sink-mixer-black-flp-blm-5166pm.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-elbow-sink-mixer-black-flp-blm-5166pm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hot & Cold Wall Mixer \u00b7 Black Matt Finish \u00b7 Elbow Action Handles",
     "specChips": [
       "Wall Mounted",
@@ -19636,7 +19254,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 10500,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-wall-mounted-elbow-sink-mixer-black-flp-blm-5166pm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19678,10 +19296,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-pull-out-mixer-black-flp-blm-5177bpm.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-pull-out-mixer-black-flp-blm-5177bpm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flagship Pull-Out Spray Faucet \u00b7 Black Matt \u00b7 Table Mounted Hot & Cold",
     "specChips": [
       "Table / Deck Mounted",
@@ -19744,7 +19360,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 11050,
         "discountPercent": 15,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/jaquar-florentine-prime-table-mounted-pull-out-mixer-black-flp-blm-5177bpm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19786,10 +19402,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3917",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/ruhe-pvc-flexible-waste-pipe-35-inch-white-pack-of-2.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/ruhe-pvc-flexible-waste-pipe-35-inch-white-pack-of-2.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "35\" Expandable Flexible Pipe \u00b7 Odor-Trap P-Bend \u00b7 Pack of 2",
     "specChips": [
       "Pack of 2",
@@ -19844,7 +19458,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 350,
         "discountPercent": 19,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/ruhe-pvc-flexible-waste-pipe-35-inch-white-pack-of-2.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19886,10 +19500,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/plantex-304-grade-ss-round-kitchen-sink-waste-coupling-matt.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/plantex-304-grade-ss-round-kitchen-sink-waste-coupling-matt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Universal 3.5\" Waste Coupling \u00b7 Removable Strainer Basket \u00b7 SS 304",
     "specChips": [
       "Universal 3.5\"",
@@ -19944,7 +19556,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 420,
         "discountPercent": 19,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/plantex-304-grade-ss-round-kitchen-sink-waste-coupling-matt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -19986,10 +19598,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/fossa-brushed-nickel-built-in-kitchen-soap-dispenser-300-ml.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/fossa-brushed-nickel-built-in-kitchen-soap-dispenser-300-ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Deck-Mounted Built-In Pump \u00b7 Refill From Above \u00b7 300ml Under Bottle",
     "specChips": [
       "Built-In Countertop",
@@ -20048,7 +19658,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 690,
         "discountPercent": 19,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/fossa-brushed-nickel-built-in-kitchen-soap-dispenser-300-ml.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20090,10 +19700,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/kitchen-sinks-faucets/backline-304-ss-under-sink-ro-drinking-water-faucet-360-swivel.webp",
-    "images": [
-      "/images/products/kitchen-sinks-faucets/backline-304-ss-under-sink-ro-drinking-water-faucet-360-swivel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Food-Safe Lead-Free RO Tap \u00b7 1/4\" Push Fit \u00b7 360\u00b0 Swivel Gooseneck",
     "specChips": [
       "100% Lead-Free",
@@ -20156,7 +19764,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1250,
         "discountPercent": 20,
         "stock": 45,
-        "image": "/images/products/kitchen-sinks-faucets/backline-304-ss-under-sink-ro-drinking-water-faucet-360-swivel.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20193,10 +19801,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/ebco-regular-drawer-channel-stds-i-35-20in.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/ebco-regular-drawer-channel-stds-i-35-20in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-grade cold rolled steel telescopic slide for modular drawers",
     "specChips": [
       "20\" (500mm)",
@@ -20254,7 +19860,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 490,
         "discountPercent": 29,
         "stock": 65,
-        "image": "/images/products/furniture-wardrobe-hardware/ebco-regular-drawer-channel-stds-i-35-20in.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20292,10 +19898,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-regular-close.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-regular-close.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Slim profile 12.7mm clearance runner with silent solid ball bearings",
     "specChips": [
       "20\" (500mm)",
@@ -20353,7 +19957,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 690,
         "discountPercent": 25,
         "stock": 45,
-        "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-regular-close.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20390,10 +19994,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-soft-close.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-soft-close.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hydraulic damper cushion for silent, slam-proof soft drawer closure",
     "specChips": [
       "20\" (500mm)",
@@ -20447,7 +20049,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1390,
         "discountPercent": 23,
         "stock": 40,
-        "image": "/images/products/furniture-wardrobe-hardware/ebco-sleek-telescopic-channel-20in-soft-close.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20484,10 +20086,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4532-telescopic-channel-18in-soft-close-zinc.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-ka-4532-telescopic-channel-18in-soft-close-zinc.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German engineered ball bearing slide with integrated Silent System cushion",
     "specChips": [
       "18\" (450mm)",
@@ -20541,7 +20141,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1250,
         "discountPercent": 21,
         "stock": 55,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4532-telescopic-channel-18in-soft-close-zinc.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20578,10 +20178,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-18in-soft-close-black.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-18in-soft-close-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Luxury black electrophoretic coating for dark interior modular cabinetry",
     "specChips": [
       "18\" (450mm)",
@@ -20635,7 +20233,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1450,
         "discountPercent": 21,
         "stock": 35,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-18in-soft-close-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20672,10 +20270,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-20in-soft-close-black.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-20in-soft-close-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "20-inch deep drawer luxury runner in matte black with fluid deceleration",
     "specChips": [
       "20\" (500mm)",
@@ -20729,7 +20325,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1520,
         "discountPercent": 21,
         "stock": 40,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-ka-4732-telescopic-channel-20in-soft-close-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20766,10 +20362,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-0-crank.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-0-crank.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "0-Crank full overlay concealed hinge with integrated hydraulic soft-close",
     "specChips": [
       "105° Opening",
@@ -20827,7 +20421,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 280,
         "discountPercent": 25,
         "stock": 120,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-0-crank.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20864,10 +20458,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-8-crank.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-8-crank.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "8-Crank cranked arm hinge for twin doors meeting on a shared center partition",
     "specChips": [
       "105° Opening",
@@ -20921,7 +20513,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 295,
         "discountPercent": 25,
         "stock": 85,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-onsys-4447i-soft-close-hinge-105-8-crank.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -20958,10 +20550,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-full-overlay-soft-close-hinge-315-07-075.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-full-overlay-soft-close-hinge-315-07-075.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury architectural clip-on hinge with wider 110° clear access",
     "specChips": [
       "110° Wide Angle",
@@ -21015,7 +20605,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4490,
         "discountPercent": 19,
         "stock": 25,
-        "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-full-overlay-soft-close-hinge-315-07-075.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21052,10 +20642,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-half-overlay-soft-close-hinge-315-07-076.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-half-overlay-soft-close-hinge-315-07-076.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Luxury clip-on half-overlay hinge for shared middle cabinet partition gables",
     "specChips": [
       "110° Wide Angle",
@@ -21105,7 +20693,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4550,
         "discountPercent": 19,
         "stock": 20,
-        "image": "/images/products/furniture-wardrobe-hardware/hafele-metalla-110-clip-on-half-overlay-soft-close-hinge-315-07-076.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21142,10 +20730,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/decoranddecor-sliding-wardrobe-door-track-kit-2-doors-1-2m.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/decoranddecor-sliding-wardrobe-door-track-kit-2-doors-1-2m.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-duty aluminum sliding door system for 2-door wardrobe closets up to 75kg/door",
     "specChips": [
       "1.2 Meter Track",
@@ -21199,7 +20785,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14500,
         "discountPercent": 21,
         "stock": 15,
-        "image": "/images/products/furniture-wardrobe-hardware/decoranddecor-sliding-wardrobe-door-track-kit-2-doors-1-2m.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21236,10 +20822,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hydraulic-lift-ottoman-bed-mechanism-1200n-gas-strut-set.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hydraulic-lift-ottoman-bed-mechanism-1200n-gas-strut-set.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy pneumatic gas spring ottoman bed lifting mechanism for effortless mattress storage access",
     "specChips": [
       "1200N High Pressure",
@@ -21293,7 +20877,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 17500,
         "discountPercent": 22,
         "stock": 18,
-        "image": "/images/products/furniture-wardrobe-hardware/hydraulic-lift-ottoman-bed-mechanism-1200n-gas-strut-set.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21330,10 +20914,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-storage-lifter-900mm.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-storage-lifter-900mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "900mm heavy-duty hydraulic bed frame lifter for single and queen box beds",
     "specChips": [
       "900mm Frame Length",
@@ -21387,7 +20969,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 19800,
         "discountPercent": 21,
         "stock": 14,
-        "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-storage-lifter-900mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21424,10 +21006,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-lift-kit-1500mm.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-lift-kit-1500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1500mm full-length master king bed storage lift mechanism with dual high-tonnage gas dampers",
     "specChips": [
       "1500mm Master Length",
@@ -21481,7 +21061,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 52000,
         "discountPercent": 20,
         "stock": 10,
-        "image": "/images/products/furniture-wardrobe-hardware/pneumatic-lift-heavy-duty-hydraulic-bed-lift-kit-1500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21518,10 +21098,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/furniture-wardrobe-hardware/hettich-hydraulic-pull-down-wardrobe-garment-lift-540-690mm-grey.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hettich-hydraulic-pull-down-wardrobe-garment-lift-540-690mm-grey.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Telescopic pull-down wardrobe hanger lift brings high hanging clothes down to eye level",
     "specChips": [
       "540–690mm Width",
@@ -21575,7 +21153,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4990,
         "discountPercent": 21,
         "stock": 22,
-        "image": "/images/products/furniture-wardrobe-hardware/hettich-hydraulic-pull-down-wardrobe-garment-lift-540-690mm-grey.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21612,10 +21190,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/rigwell-soft-close-pull-down-closet-rod-850-1150mm-15kg-silver.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/rigwell-soft-close-pull-down-closet-rod-850-1150mm-15kg-silver.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Wide-span 850–1150mm heavy-duty pull-down wardrobe rod with soft-closing return",
     "specChips": [
       "850–1150mm Extra Wide",
@@ -21665,7 +21241,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5600,
         "discountPercent": 21,
         "stock": 28,
-        "image": "/images/products/furniture-wardrobe-hardware/rigwell-soft-close-pull-down-closet-rod-850-1150mm-15kg-silver.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21702,10 +21278,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7306",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/heavy-duty-ss-304-stainless-steel-32mm-closet-rod-flanges-36in-set-of-2.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/heavy-duty-ss-304-stainless-steel-32mm-closet-rod-flanges-36in-set-of-2.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Solid 32mm AISI-304 heavy-gauge closet hanging rod kit with cast heavy wall flanges",
     "specChips": [
       "32mm Outer Diameter",
@@ -21759,7 +21333,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 9200,
         "discountPercent": 19,
         "stock": 30,
-        "image": "/images/products/furniture-wardrobe-hardware/heavy-duty-ss-304-stainless-steel-32mm-closet-rod-flanges-36in-set-of-2.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21796,10 +21370,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-knurled-pvd-cabinet-handle-96mm-ss-304-matte-black-9409.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-knurled-pvd-cabinet-handle-96mm-ss-304-matte-black-9409.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Diamond knurled tactile grip with industrial matte black PVD coating",
     "specChips": [
       "96mm Hole Pitch (C.C.)",
@@ -21857,7 +21429,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 750,
         "discountPercent": 26,
         "stock": 90,
-        "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-knurled-pvd-cabinet-handle-96mm-ss-304-matte-black-9409.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21895,10 +21467,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-160mm-ss-304-z-black-9401.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-160mm-ss-304-z-black-9401.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "160mm C.C. sleek minimalist bar handle in deep Z-Black PVD finish",
     "specChips": [
       "160mm Hole Pitch (C.C.)",
@@ -21956,7 +21526,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 860,
         "discountPercent": 26,
         "stock": 110,
-        "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-160mm-ss-304-z-black-9401.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -21994,10 +21564,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-224mm-ss-304-z-black-9401.webp",
-    "images": [
-      "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-224mm-ss-304-z-black-9401.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Long 224mm C.C. grand pull handle for 7-foot and 8-foot wardrobe shutters",
     "specChips": [
       "224mm Hole Pitch (C.C.)",
@@ -22059,7 +21627,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1100,
         "discountPercent": 25,
         "stock": 80,
-        "image": "/images/products/furniture-wardrobe-hardware/hardware-depot-luxury-pvd-cabinet-handle-224mm-ss-304-z-black-9401.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22102,10 +21670,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-slim-s3-pro-motion-tandem-box-500mm-122mm-black.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-slim-s3-pro-motion-tandem-box-500mm-122mm-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Slim 13mm straight double-walled metal drawer system with synchronized soft close",
     "specChips": [
       "500mm Depth",
@@ -22163,7 +21729,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3450,
         "discountPercent": 22,
         "stock": 45,
-        "image": "/images/products/modular-kitchen-systems/ebco-slim-s3-pro-motion-tandem-box-500mm-122mm-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22204,10 +21770,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cutlery-height-m-70mm-500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cutlery-height-m-70mm-500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Low profile 70mm height double-walled drawer kit with precision Quadro undermount runners",
     "specChips": [
       "70mm Height (M)",
@@ -22261,7 +21825,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3600,
         "discountPercent": 21,
         "stock": 50,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cutlery-height-m-70mm-500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22302,10 +21866,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cup-saucer-height-d-144mm-500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cup-saucer-height-d-144mm-500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Mid-height 144mm tandem drawer with longitudinal gallery rails for cups and bowls",
     "specChips": [
       "144mm Height (D)",
@@ -22355,7 +21917,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3950,
         "discountPercent": 22,
         "stock": 40,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cup-saucer-height-d-144mm-500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22396,10 +21958,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-pot-pan-tandem-box-176mm-500mm-50kg-9249744.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-atira-pot-pan-tandem-box-176mm-500mm-50kg-9249744.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy 50kg Quadro V6 rated deep pot and pan tandem drawer with square designer railings",
     "specChips": [
       "176mm Height",
@@ -22453,7 +22013,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4490,
         "discountPercent": 21,
         "stock": 35,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-pot-pan-tandem-box-176mm-500mm-50kg-9249744.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22494,10 +22054,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-tandem-box-6in-anthracite-soft-close.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-atira-tandem-box-6in-anthracite-soft-close.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer dark anthracite double-walled drawer for contemporary modular kitchens",
     "specChips": [
       "6\" Height (150mm)",
@@ -22551,7 +22109,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5100,
         "discountPercent": 21,
         "stock": 30,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-tandem-box-6in-anthracite-soft-close.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22592,10 +22150,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-heavy-thali-pantry-tandem-box-200mm-500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-atira-heavy-thali-pantry-tandem-box-200mm-500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Deep 200mm extra-high tandem drawer for heavy Indian stainless steel thalis and grocery sacks",
     "specChips": [
       "200mm Extra Deep",
@@ -22649,7 +22205,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5400,
         "discountPercent": 21,
         "stock": 25,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-heavy-thali-pantry-tandem-box-200mm-500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22690,10 +22246,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hafele-matrixbox-slim-ss-tandem-drawer-500mm-88mm-40kg.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hafele-matrixbox-slim-ss-tandem-drawer-500mm-88mm-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury 13mm slimline tandem drawer finished in authentic brushed stainless steel",
     "specChips": [
       "88mm Slim Height",
@@ -22747,7 +22301,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 13500,
         "discountPercent": 20,
         "stock": 15,
-        "image": "/images/products/modular-kitchen-systems/hafele-matrixbox-slim-ss-tandem-drawer-500mm-88mm-40kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22788,10 +22342,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-frameless-side-pull-out-2-tier-ss-304-150mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-frameless-side-pull-out-2-tier-ss-304-150mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Economical 2-tier side mounted bottle & spice basket in genuine 304 grade stainless steel",
     "specChips": [
       "150mm Carcass",
@@ -22841,7 +22393,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2350,
         "discountPercent": 25,
         "stock": 45,
-        "image": "/images/products/modular-kitchen-systems/ebco-frameless-side-pull-out-2-tier-ss-304-150mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22882,10 +22434,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-150mm-bpo2sc2-150.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-150mm-bpo2sc2-150.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Bottom undermount soft-close bottle pull-out for 200mm modular kitchen base cabinets",
     "specChips": [
       "Fits 200mm Cabinet",
@@ -22939,7 +22489,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7800,
         "discountPercent": 21,
         "stock": 25,
-        "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-150mm-bpo2sc2-150.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -22980,10 +22530,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-200mm-bpo2sc2-200.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-200mm-bpo2sc2-200.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "200mm wide 2-tier bottle & condiment pullout for 250mm external modular cabinets",
     "specChips": [
       "Fits 250mm Cabinet",
@@ -23033,7 +22581,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8400,
         "discountPercent": 20,
         "stock": 22,
-        "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-200mm-bpo2sc2-200.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23074,10 +22622,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-250mm-bpo2sc2-250.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-250mm-bpo2sc2-250.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Wide-format 250mm 2-tier bottle & sauce pullout for 300mm modular kitchen base units",
     "specChips": [
       "Fits 300mm Cabinet",
@@ -23127,7 +22673,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 9100,
         "discountPercent": 21,
         "stock": 18,
-        "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-250mm-bpo2sc2-250.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23168,10 +22714,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-corner-carousel-polymer-white-2-shelf-rotating-unit.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-corner-carousel-polymer-white-2-shelf-rotating-unit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "270-degree three-quarter revolving carousel for 900×900mm L-shaped corner kitchen cabinets",
     "specChips": [
       "Fits 900×900mm Corner",
@@ -23221,7 +22765,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14000,
         "discountPercent": 21,
         "stock": 16,
-        "image": "/images/products/modular-kitchen-systems/ebco-corner-carousel-polymer-white-2-shelf-rotating-unit.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23262,10 +22806,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-magic-corner-double-pullout-anthracite-fits-850-910mm-mcdp90.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-magic-corner-double-pullout-anthracite-fits-850-910mm-mcdp90.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Synchronized dual-stage magic corner mechanism pulling hidden rear baskets forward into full view",
     "specChips": [
       "Fits 850–910mm Blind Corner",
@@ -23315,7 +22857,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 29800,
         "discountPercent": 20,
         "stock": 12,
-        "image": "/images/products/modular-kitchen-systems/ebco-magic-corner-double-pullout-anthracite-fits-850-910mm-mcdp90.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23356,10 +22898,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-magic-corner-soft-close-iron-grey-fits-900-1000mm-cabinet.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-magic-corner-soft-close-iron-grey-fits-900-1000mm-cabinet.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury iron grey blind corner pullout with synchronized Silent System motion",
     "specChips": [
       "Fits 900–1000mm Cabinet",
@@ -23409,7 +22949,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 30500,
         "discountPercent": 21,
         "stock": 14,
-        "image": "/images/products/modular-kitchen-systems/hettich-magic-corner-soft-close-iron-grey-fits-900-1000mm-cabinet.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23450,10 +22990,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/kings-nimbus-6-layer-12-basket-glass-tall-pantry-unit-600mm-60kg.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/kings-nimbus-6-layer-12-basket-glass-tall-pantry-unit-600mm-60kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Grand 6-layer dual-shelf tall pantry mechanism with 12 tempered glass-rim baskets and soft close",
     "specChips": [
       "Fits 600mm Tall Cabinet",
@@ -23507,7 +23045,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 19500,
         "discountPercent": 23,
         "stock": 10,
-        "image": "/images/products/modular-kitchen-systems/kings-nimbus-6-layer-12-basket-glass-tall-pantry-unit-600mm-60kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23548,10 +23086,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-cargoplus-ss-304-modular-kitchen-thali-utility-basket.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-cargoplus-ss-304-modular-kitchen-thali-utility-basket.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy gauge genuine 304 stainless steel wire partition basket for upright Indian thalis",
     "specChips": [
       "Fits 450mm (18\") Carcass",
@@ -23605,7 +23141,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 22,
         "stock": 60,
-        "image": "/images/products/modular-kitchen-systems/hettich-cargoplus-ss-304-modular-kitchen-thali-utility-basket.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23646,10 +23182,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/quba-symetry-plain-kitchen-basket-ss-304-15x20x4-in.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/quba-symetry-plain-kitchen-basket-ss-304-15x20x4-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flat base stainless steel wire basket for bowls, utensils, and general food prep storage",
     "specChips": [
       "15×20×4 in (380×500×100mm)",
@@ -23695,7 +23229,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2150,
         "discountPercent": 22,
         "stock": 35,
-        "image": "/images/products/modular-kitchen-systems/quba-symetry-plain-kitchen-basket-ss-304-15x20x4-in.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23736,10 +23270,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/zinc-plus-perforated-ss-plate-thali-basket-15x20x6-in.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/zinc-plus-perforated-ss-plate-thali-basket-15x20x6-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Laser-cut perforated stainless steel sheet base prevents water pooling on freshly washed thalis",
     "specChips": [
       "15×20×6 in",
@@ -23785,7 +23317,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2700,
         "discountPercent": 22,
         "stock": 28,
-        "image": "/images/products/modular-kitchen-systems/zinc-plus-perforated-ss-plate-thali-basket-15x20x6-in.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23826,10 +23358,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3924",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-orgatray-560-adjustable-pvc-cutlery-tray-600mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-orgatray-560-adjustable-pvc-cutlery-tray-600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Custom trimmable food-grade plastic cutlery organizer with partitioned compartments for spoons and knives",
     "specChips": [
       "Fits 600mm Drawer",
@@ -23883,7 +23413,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3750,
         "discountPercent": 22,
         "stock": 45,
-        "image": "/images/products/modular-kitchen-systems/hettich-orgatray-560-adjustable-pvc-cutlery-tray-600mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -23924,10 +23454,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3924",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-pull-out-under-sink-dual-waste-bin-40l-2x20l-anthracite.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-pull-out-under-sink-dual-waste-bin-40l-2x20l-anthracite.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Twin 20-liter bottom slide pull-out bins for wet and dry organic household waste segregation",
     "specChips": [
       "40L Total Capacity (2×20L)",
@@ -23977,7 +23505,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6800,
         "discountPercent": 22,
         "stock": 20,
-        "image": "/images/products/modular-kitchen-systems/ebco-pull-out-under-sink-dual-waste-bin-40l-2x20l-anthracite.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24018,10 +23546,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-livsmart-wicker-basket-soft-close-beech-wood-450mm-150mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-livsmart-wicker-basket-soft-close-beech-wood-450mm-150mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Traditional woven wicker basket with solid European steamed beech wood frame and soft-close slides",
     "specChips": [
       "Fits 450mm Carcass",
@@ -24075,7 +23601,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6990,
         "discountPercent": 21,
         "stock": 15,
-        "image": "/images/products/modular-kitchen-systems/ebco-livsmart-wicker-basket-soft-close-beech-wood-450mm-150mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24116,10 +23642,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-pro-lift-hydraulic-gas-spring-100n-for-loft-cabinets-1-pair.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-pro-lift-hydraulic-gas-spring-100n-for-loft-cabinets-1-pair.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Pneumatic 100N nitrogen gas strut for upward-opening overhead modular kitchen loft doors",
     "specChips": [
       "100N Force (~10kg)",
@@ -24169,7 +23693,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 320,
         "discountPercent": 25,
         "stock": 120,
-        "image": "/images/products/modular-kitchen-systems/ebco-pro-lift-hydraulic-gas-spring-100n-for-loft-cabinets-1-pair.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24210,10 +23734,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-100n-hydraulic-gas-piston-shock-absorber-0062316.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-100n-hydraulic-gas-piston-shock-absorber-0062316.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German industrial nitrogen gas piston flap stay with multi-angle position hold",
     "specChips": [
       "Model 0062316",
@@ -24263,7 +23785,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 9600,
         "discountPercent": 20,
         "stock": 18,
-        "image": "/images/products/modular-kitchen-systems/hettich-100n-hydraulic-gas-piston-shock-absorber-0062316.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24304,10 +23826,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7604",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-gola-profile-l-type-handleless-aluminium-3000mm-black-9299225.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-gola-profile-l-type-handleless-aluminium-3000mm-black-9299225.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3-meter continuous L-shape anodized aluminium extrusion for seamless handleless kitchen base cabinets",
     "specChips": [
       "3000mm Length (10 ft)",
@@ -24361,7 +23881,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2990,
         "discountPercent": 20,
         "stock": 40,
-        "image": "/images/products/modular-kitchen-systems/hettich-gola-profile-l-type-handleless-aluminium-3000mm-black-9299225.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24402,10 +23922,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7604",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-roll-top-pro-vertical-rolling-shutter-600mm-anthracite-rtpv.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-roll-top-pro-vertical-rolling-shutter-600mm-anthracite-rtpv.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Smooth rolling vertical aluminum tambours to conceal microwave, toaster, and coffee makers",
     "specChips": [
       "Fits 600mm Width",
@@ -24459,7 +23977,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 15200,
         "discountPercent": 21,
         "stock": 14,
-        "image": "/images/products/modular-kitchen-systems/ebco-roll-top-pro-vertical-rolling-shutter-600mm-anthracite-rtpv.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24500,10 +24018,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7604",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/rehau-rauvolet-vetroline-toughened-glass-rolling-shutter-600x1500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/rehau-rauvolet-vetroline-toughened-glass-rolling-shutter-600x1500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury safety glass tambour door system with flush metallic black glass slats",
     "specChips": [
       "50mm Toughened Safety Glass",
@@ -24553,7 +24069,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 95000,
         "discountPercent": 19,
         "stock": 6,
-        "image": "/images/products/modular-kitchen-systems/rehau-rauvolet-vetroline-toughened-glass-rolling-shutter-600x1500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24593,10 +24109,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-neo-prime-digital-lock-9686-titanium-grey.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-neo-prime-digital-lock-9686-titanium-grey.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "4-in-1 Access · 35–65mm Wooden Door · Auto-Locking Mortise",
     "specChips": [
       "35–65mm Door Fit",
@@ -24647,7 +24161,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 12500,
         "discountPercent": 27,
         "stock": 18,
-        "image": "/images/products/door-hardware-locks/godrej-neo-prime-digital-lock-9686-titanium-grey.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24689,10 +24203,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/yale-ydme-50nxt-biometric-smart-lock-brown.webp",
-    "images": [
-      "/images/products/door-hardware-locks/yale-ydme-50nxt-biometric-smart-lock-brown.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "35–65mm Door Fit · 100 Fingerprint Memory · Yale Global Security",
     "specChips": [
       "35–65mm Door Fit",
@@ -24743,7 +24255,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 13999,
         "discountPercent": 34,
         "stock": 14,
-        "image": "/images/products/door-hardware-locks/yale-ydme-50nxt-biometric-smart-lock-brown.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24785,10 +24297,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-catus-touch-plus-digital-mortise-lock-4200-black.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-catus-touch-plus-digital-mortise-lock-4200-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Sleek Matte Black · 35–65mm Door Fit · Multi-Point Deadbolt",
     "specChips": [
       "35–65mm Door Fit",
@@ -24839,7 +24349,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14500,
         "discountPercent": 25,
         "stock": 12,
-        "image": "/images/products/door-hardware-locks/godrej-catus-touch-plus-digital-mortise-lock-4200-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24881,10 +24391,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-advantis-gsld1-7in1-smart-lock-4406-matte-black.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-advantis-gsld1-7in1-smart-lock-4406-matte-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "7-in-1 Access · Bluetooth BLE Mobile App · 35–65mm Door Fit",
     "specChips": [
       "35–65mm Door Fit",
@@ -24935,7 +24443,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 21500,
         "discountPercent": 25,
         "stock": 10,
-        "image": "/images/products/door-hardware-locks/godrej-advantis-gsld1-7in1-smart-lock-4406-matte-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -24977,10 +24485,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/yale-ydr-41a-biometric-smart-lock-double-sliding-doors.webp",
-    "images": [
-      "/images/products/door-hardware-locks/yale-ydr-41a-biometric-smart-lock-double-sliding-doors.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dual Interlocking Hook Bolt · Sliding & Double Door Specialist",
     "specChips": [
       "35–65mm Door Fit",
@@ -25031,7 +24537,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 42000,
         "discountPercent": 17,
         "stock": 6,
-        "image": "/images/products/door-hardware-locks/yale-ydr-41a-biometric-smart-lock-double-sliding-doors.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25072,10 +24578,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-advantis-iot9-wifi-nfc-smart-main-door-lock.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-advantis-iot9-wifi-nfc-smart-main-door-lock.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "9-in-1 Ultra-Luxury IoT · Built-in Wi-Fi & NFC · Push-Pull Design",
     "specChips": [
       "35–65mm Door Fit",
@@ -25126,7 +24630,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 55000,
         "discountPercent": 22,
         "stock": 5,
-        "image": "/images/products/door-hardware-locks/godrej-advantis-iot9-wifi-nfc-smart-main-door-lock.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25167,10 +24671,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-vertibolt-ultra-xl-plus-1ck-rim-lock-4291-satin-nickel.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-vertibolt-ultra-xl-plus-1ck-rim-lock-4291-satin-nickel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dual Vertical Deadbolts · 1CK Key/Knob · Crowbar Resistant",
     "specChips": [
       "30–60mm Door Fit",
@@ -25221,7 +24723,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2800,
         "discountPercent": 21,
         "stock": 45,
-        "image": "/images/products/door-hardware-locks/godrej-vertibolt-ultra-xl-plus-1ck-rim-lock-4291-satin-nickel.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25263,10 +24765,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-1ck-latchbolt-lock-8111-antique-brass.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-ultra-tribolt-1ck-latchbolt-lock-8111-antique-brass.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3 Brass Deadbolts + Latch · 1CK Operation · Antique Brass Finish",
     "specChips": [
       "30–60mm Door Fit",
@@ -25317,7 +24817,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4150,
         "discountPercent": 20,
         "stock": 38,
-        "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-1ck-latchbolt-lock-8111-antique-brass.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25359,10 +24859,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/europa-parma-v321-14pin-3deadbolt-main-door-lock-nickel-steel.webp",
-    "images": [
-      "/images/products/door-hardware-locks/europa-parma-v321-14pin-3deadbolt-main-door-lock-nickel-steel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "14-Pin Dimple Technology · 3-Deadbolt Rim Lock · ₹3 Lakh Theft Cover",
     "specChips": [
       "30–60mm Door Fit",
@@ -25413,7 +24911,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4350,
         "discountPercent": 20,
         "stock": 26,
-        "image": "/images/products/door-hardware-locks/europa-parma-v321-14pin-3deadbolt-main-door-lock-nickel-steel.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25455,10 +24953,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-2c-pin-cylinder-lock-8131-satin-nickel.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-ultra-tribolt-2c-pin-cylinder-lock-8131-satin-nickel.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2C Key Inside & Outside · Grill-Gate Safe · Ultra XL+ Technology",
     "specChips": [
       "30–60mm Door Fit",
@@ -25509,7 +25005,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4800,
         "discountPercent": 20,
         "stock": 30,
-        "image": "/images/products/door-hardware-locks/godrej-ultra-tribolt-2c-pin-cylinder-lock-8131-satin-nickel.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25551,10 +25047,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-centaur-ultra-xl-plus-dual-motion-lock-9143-satin.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-centaur-ultra-xl-plus-dual-motion-lock-9143-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dual-Motion 4 Deadbolts · Double Leaf Main Door Specialist",
     "specChips": [
       "30–60mm Door Fit",
@@ -25605,7 +25099,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5100,
         "discountPercent": 21,
         "stock": 20,
-        "image": "/images/products/door-hardware-locks/godrej-centaur-ultra-xl-plus-dual-motion-lock-9143-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25647,10 +25141,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-stella-180mm-6lever-mortise-door-lock-handle-set-satin.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-stella-180mm-6lever-mortise-door-lock-handle-set-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "180mm Curved Handle · 6-Lever Brass Mortise · Bedroom & Balcony",
     "specChips": [
       "28–45mm Door Fit",
@@ -25701,7 +25193,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2100,
         "discountPercent": 25,
         "stock": 50,
-        "image": "/images/products/door-hardware-locks/godrej-stella-180mm-6lever-mortise-door-lock-handle-set-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25742,10 +25234,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/europa-mortise-rose-handle-combo-set-m516961r692ab-antique-brass.webp",
-    "images": [
-      "/images/products/door-hardware-locks/europa-mortise-rose-handle-combo-set-m516961r692ab-antique-brass.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer Round Rose Handle · 60mm Dimple Cylinder · Antique Brass",
     "specChips": [
       "32–45mm Door Fit",
@@ -25796,7 +25286,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2650,
         "discountPercent": 25,
         "stock": 22,
-        "image": "/images/products/door-hardware-locks/europa-mortise-rose-handle-combo-set-m516961r692ab-antique-brass.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25837,10 +25327,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/dorset-kaira-10in-mortise-handle-lockset-60mm-key-knob-antique.webp",
-    "images": [
-      "/images/products/door-hardware-locks/dorset-kaira-10in-mortise-handle-lockset-60mm-key-knob-antique.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "10-Inch Decorative Plate · 60mm Key & Thumbturn · Antique Brass",
     "specChips": [
       "32–45mm Door Fit",
@@ -25891,7 +25379,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2690,
         "discountPercent": 25,
         "stock": 28,
-        "image": "/images/products/door-hardware-locks/dorset-kaira-10in-mortise-handle-lockset-60mm-key-knob-antique.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -25932,10 +25420,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-cylindrical-door-lock-ss-keyless-60mm-5805.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-cylindrical-door-lock-ss-keyless-60mm-5805.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Bathroom & Toilet Specialist · Push-Button Privacy · Emergency Coin Slot",
     "specChips": [
       "25–45mm Door Fit",
@@ -25986,7 +25472,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1100,
         "discountPercent": 22,
         "stock": 65,
-        "image": "/images/products/door-hardware-locks/godrej-cylindrical-door-lock-ss-keyless-60mm-5805.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26026,10 +25512,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8301",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-navtal-7lever-65mm-heavy-duty-brass-padlock-4keys.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-navtal-7lever-65mm-heavy-duty-brass-padlock-4keys.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "7 Precision Brass Levers · Hardened Steel Shackle · 4 Keys Included",
     "specChips": [
       "8–14mm Aldrop Fit",
@@ -26080,7 +25564,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 990,
         "discountPercent": 19,
         "stock": 100,
-        "image": "/images/products/door-hardware-locks/godrej-navtal-7lever-65mm-heavy-duty-brass-padlock-4keys.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26120,10 +25604,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/cent-style-12inch-heavy-duty-ss-aldrop-door-bolt-silver.webp",
-    "images": [
-      "/images/products/door-hardware-locks/cent-style-12inch-heavy-duty-ss-aldrop-door-bolt-silver.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "12-Inch Solid SS Rod · Heavy Through-Bolt Kit · Main Door Security",
     "specChips": [
       "Universal Door Fit",
@@ -26174,7 +25656,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1699,
         "discountPercent": 24,
         "stock": 40,
-        "image": "/images/products/door-hardware-locks/cent-style-12inch-heavy-duty-ss-aldrop-door-bolt-silver.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26215,10 +25697,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/bling-queen-12inch-heavy-duty-stainless-steel-main-door-aldrop.webp",
-    "images": [
-      "/images/products/door-hardware-locks/bling-queen-12inch-heavy-duty-stainless-steel-main-door-aldrop.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "18mm Heavy-Gauge SS Rod · Integrated Drop Handle · Premium Matte Finish",
     "specChips": [
       "Universal Door Fit",
@@ -26269,7 +25749,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2699,
         "discountPercent": 24,
         "stock": 25,
-        "image": "/images/products/door-hardware-locks/bling-queen-12inch-heavy-duty-stainless-steel-main-door-aldrop.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26310,10 +25790,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/apace-apstb89ss-8inch-ss-matte-tower-bolt.webp",
-    "images": [
-      "/images/products/door-hardware-locks/apace-apstb89ss-8inch-ss-matte-tower-bolt.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "8-Inch Stainless Steel · 10mm Solid Shoot Bolt · Interior Door Security",
     "specChips": [
       "Universal Mount",
@@ -26364,7 +25842,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 140,
         "discountPercent": 30,
         "stock": 120,
-        "image": "/images/products/door-hardware-locks/apace-apstb89ss-8inch-ss-matte-tower-bolt.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26404,10 +25882,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/met-craft-ss304-soft-close-magnetic-door-stopper-4-25in-silver.webp",
-    "images": [
-      "/images/products/door-hardware-locks/met-craft-ss304-soft-close-magnetic-door-stopper-4-25in-silver.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "SS 304 Body · Soft-Close Spring Damper · Powerful Neodymium Catch",
     "specChips": [
       "Floor / Wall Mount",
@@ -26458,7 +25934,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 600,
         "discountPercent": 28,
         "stock": 80,
-        "image": "/images/products/door-hardware-locks/met-craft-ss304-soft-close-magnetic-door-stopper-4-25in-silver.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26499,10 +25975,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 3,
-    "image": "/images/products/door-hardware-locks/falna-ss-main-door-pull-handle-12-18-inch-ss-304-matte-cp.webp",
-    "images": [
-      "/images/products/door-hardware-locks/falna-ss-main-door-pull-handle-12-18-inch-ss-304-matte-cp.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "SS 304 Architectural Pull · Dual Tone Finish · Main & Glass Doors",
     "specChips": [
       "30–55mm Doors",
@@ -26553,7 +26027,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 750,
         "discountPercent": 33,
         "stock": 45,
-        "image": "/images/products/door-hardware-locks/falna-ss-main-door-pull-handle-12-18-inch-ss-304-matte-cp.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26594,10 +26068,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/door-hardware-locks/hafele-ss304-ball-bearing-butt-hinge-5x3x3in-fire-rated.webp",
-    "images": [
-      "/images/products/door-hardware-locks/hafele-ss304-ball-bearing-butt-hinge-5x3x3in-fire-rated.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "5×3×3mm Heavy Gauge · SS 304 Fire-Rated · 80kg Door Weight Capacity",
     "specChips": [
       "35–55mm Doors",
@@ -26648,7 +26120,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 480,
         "discountPercent": 27,
         "stock": 150,
-        "image": "/images/products/door-hardware-locks/hafele-ss304-ball-bearing-butt-hinge-5x3x3in-fire-rated.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26689,10 +26161,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-ss304-ball-bearing-butt-hinge-5in-12g-matte-black-2pcs.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-ss304-ball-bearing-butt-hinge-5in-12g-matte-black-2pcs.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "5-Inch 12-Gauge · Matte Black PVD · 1 Pair (2 Pcs) · 70kg Capacity",
     "specChips": [
       "35–55mm Doors",
@@ -26743,7 +26213,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 850,
         "discountPercent": 24,
         "stock": 45,
-        "image": "/images/products/door-hardware-locks/godrej-ss304-ball-bearing-butt-hinge-5in-12g-matte-black-2pcs.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26784,10 +26254,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/dorset-dc60sm-60kg-overhead-hydraulic-door-closer-satin.webp",
-    "images": [
-      "/images/products/door-hardware-locks/dorset-dc60sm-60kg-overhead-hydraulic-door-closer-satin.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "60kg Capacity · Rack & Pinion Dual Valve · Tested to 5 Lakh Cycles",
     "specChips": [
       "Up to 60kg Doors",
@@ -26838,7 +26306,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1250,
         "discountPercent": 26,
         "stock": 40,
-        "image": "/images/products/door-hardware-locks/dorset-dc60sm-60kg-overhead-hydraulic-door-closer-satin.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26879,10 +26347,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/door-hardware-locks/godrej-hercules-60kg-hydraulic-door-closer-en3-1lakh-cycles.webp",
-    "images": [
-      "/images/products/door-hardware-locks/godrej-hercules-60kg-hydraulic-door-closer-en3-1lakh-cycles.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "EN3 Fire-Rated Heavy Closer · 60kg Door Rating · Anti-Freeze Hydraulic Oil",
     "specChips": [
       "Up to 60kg Doors",
@@ -26933,7 +26399,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1750,
         "discountPercent": 26,
         "stock": 35,
-        "image": "/images/products/door-hardware-locks/godrej-hercules-60kg-hydraulic-door-closer-en3-1lakh-cycles.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -26974,10 +26440,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/door-hardware-locks/ozone-fs8400-80kg-heavy-duty-double-cylinder-floor-spring-en3.webp",
-    "images": [
-      "/images/products/door-hardware-locks/ozone-fs8400-80kg-heavy-duty-double-cylinder-floor-spring-en3.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "80kg Double Cylinder · 90° Hold-Open · Glass & Wooden Doors",
     "specChips": [
       "80kg Door Capacity",
@@ -27028,7 +26492,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 11500,
         "discountPercent": 23,
         "stock": 15,
-        "image": "/images/products/door-hardware-locks/ozone-fs8400-80kg-heavy-duty-double-cylinder-floor-spring-en3.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27069,10 +26533,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-rimless-wall-hung-wc-soft-close-uf-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-rimless-wall-hung-wc-soft-close-uf-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rimless Flush · Anti-Bacterial Glaze · Soft-Close UF Seat Cover",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -27131,7 +26593,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 12600,
         "discountPercent": 25,
         "stock": 18,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-rimless-wall-hung-wc-soft-close-uf-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27174,10 +26636,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-victor-one-piece-s-trap-300mm-ceramic-commode-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-victor-one-piece-s-trap-300mm-ceramic-commode-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Single Piece Floor Mount · Syphonic S-Trap 300mm · Soft Close Seat",
     "specChips": [
       "S-Trap 300mm",
@@ -27236,7 +26696,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 9980,
         "discountPercent": 30,
         "stock": 22,
-        "image": "/images/products/sanitary-bath-fittings/cera-victor-one-piece-s-trap-300mm-ceramic-commode-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27278,10 +26738,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/parryware-cruz-rimless-wall-mounted-ceramic-closet-slim-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/parryware-cruz-rimless-wall-mounted-ceramic-closet-slim-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rimless Clean · Slim Duroplast Cover · 180mm P-Trap Standard",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -27340,7 +26798,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 10700,
         "discountPercent": 30,
         "stock": 15,
-        "image": "/images/products/sanitary-bath-fittings/parryware-cruz-rimless-wall-mounted-ceramic-closet-slim-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27382,10 +26840,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/hindware-element-one-piece-s-trap-300mm-dual-flush-commode-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/hindware-element-one-piece-s-trap-300mm-dual-flush-commode-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "360° Whirlpool Flush · Dual Flush Syphonic · Pre-fitted Valve",
     "specChips": [
       "S-Trap 300mm",
@@ -27444,7 +26900,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 11215,
         "discountPercent": 30,
         "stock": 14,
-        "image": "/images/products/sanitary-bath-fittings/hindware-element-one-piece-s-trap-300mm-dual-flush-commode-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27485,10 +26941,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 2,
-    "image": "/images/products/sanitary-bath-fittings/kohler-veil-rimless-wall-hung-toilet-quiet-close-slim-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/kohler-veil-rimless-wall-hung-toilet-quiet-close-slim-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Luxury Sculpted Curves · CleanCoat Glaze · Quiet-Close Slim Seat",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -27547,7 +27001,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 28750,
         "discountPercent": 20,
         "stock": 8,
-        "image": "/images/products/sanitary-bath-fittings/kohler-veil-rimless-wall-hung-toilet-quiet-close-slim-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27588,10 +27042,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-calisto-rimless-wall-hung-ceramic-wc-antibacterial-seat-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-calisto-rimless-wall-hung-ceramic-wc-antibacterial-seat-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rimless Hydro-Clean · Silent Vortex Wash · UF Antibacterial Seat",
     "specChips": [
       "Wall-Hung P-Trap",
@@ -27650,7 +27102,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 11700,
         "discountPercent": 30,
         "stock": 16,
-        "image": "/images/products/sanitary-bath-fittings/cera-calisto-rimless-wall-hung-ceramic-wc-antibacterial-seat-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27692,10 +27144,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-in-wall-concealed-cistern-tank-structural-mounting-frame-dual-flush.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-in-wall-concealed-cistern-tank-structural-mounting-frame-dual-flush.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "400kg Load Tested Chair · Seamless Blow-Molded Tank · Dual Flush 3/6L",
     "specChips": [
       "400kg Load Tested",
@@ -27750,7 +27200,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6500,
         "discountPercent": 25,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-in-wall-concealed-cistern-tank-structural-mounting-frame-dual-flush.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27792,10 +27242,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-slim-80mm-concealed-cistern-tank-galvanized-steel-frame-dual-flush.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-slim-80mm-concealed-cistern-tank-galvanized-steel-frame-dual-flush.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ultra Slim 80mm Depth · Fits 4-Inch Thin Brick Walls · 400kg Rated",
     "specChips": [
       "Slim 80mm Depth",
@@ -27850,7 +27298,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5950,
         "discountPercent": 28,
         "stock": 20,
-        "image": "/images/products/sanitary-bath-fittings/cera-slim-80mm-concealed-cistern-tank-galvanized-steel-frame-dual-flush.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27891,10 +27339,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-mechanical-dual-flush-actuator-push-plate-gloss-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-mechanical-dual-flush-actuator-push-plate-gloss-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kubix Geometric Lines · Mirror Chrome Finish · Smooth Mechanical Touch",
     "specChips": [
       "Mirror Chrome",
@@ -27949,7 +27395,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1950,
         "discountPercent": 26,
         "stock": 35,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-mechanical-dual-flush-actuator-push-plate-gloss-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -27990,10 +27436,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-alive-pneumatic-dual-flush-actuator-plate-matte-black.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-alive-pneumatic-dual-flush-actuator-plate-matte-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Architectural Matte Black · Feather-Light Pneumatic Push · Fingerprint Free",
     "specChips": [
       "Matte Black",
@@ -28048,7 +27492,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2990,
         "discountPercent": 23,
         "stock": 20,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-alive-pneumatic-dual-flush-actuator-plate-matte-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28089,10 +27533,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "3922",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-q-type-dual-flush-actuator-push-plate-mirror-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-q-type-dual-flush-actuator-push-plate-mirror-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Q-Type Circular Buttons · Mirror Chrome Plating · Fits Cera Tanks",
     "specChips": [
       "Mirror Chrome",
@@ -28147,7 +27589,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1650,
         "discountPercent": 30,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/cera-q-type-dual-flush-actuator-push-plate-mirror-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28188,10 +27630,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-careo-sleek-rim-500mm-ceramic-tabletop-counter-wash-basin-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-careo-sleek-rim-500mm-ceramic-tabletop-counter-wash-basin-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ultra-Thin Rim · 500×400mm Countertop · Anti-Bacterial Nano Glaze",
     "specChips": [
       "500×400mm Vessel",
@@ -28250,7 +27690,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4350,
         "discountPercent": 25,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/cera-careo-sleek-rim-500mm-ceramic-tabletop-counter-wash-basin-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28291,10 +27731,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-continental-thin-rim-oval-550mm-table-top-ceramic-basin-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-continental-thin-rim-oval-550mm-table-top-ceramic-basin-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Organic Oval Form · 550×400mm Countertop · Anti-Splash Deep Bowl",
     "specChips": [
       "550×400mm Oval",
@@ -28353,7 +27791,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5500,
         "discountPercent": 25,
         "stock": 18,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-continental-thin-rim-oval-550mm-table-top-ceramic-basin-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28394,10 +27832,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/parryware-jordon-480mm-rectangular-tabletop-basin-with-faucet-hole-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/parryware-jordon-480mm-rectangular-tabletop-basin-with-faucet-hole-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Pre-Punched Tap Hole · 480×370mm · No Need for Tall Body Tap",
     "specChips": [
       "480×370mm Rectangular",
@@ -28456,7 +27892,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4100,
         "discountPercent": 30,
         "stock": 22,
-        "image": "/images/products/sanitary-bath-fittings/parryware-jordon-480mm-rectangular-tabletop-basin-with-faucet-hole-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28497,10 +27933,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/hindware-venice-round-410mm-countertop-ceramic-vessel-basin-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/hindware-venice-round-410mm-countertop-ceramic-vessel-basin-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Circular Vessel · 410mm Diameter · Space-Saving Vanity Fit",
     "specChips": [
       "410mm Round",
@@ -28559,7 +27993,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4900,
         "discountPercent": 30,
         "stock": 14,
-        "image": "/images/products/sanitary-bath-fittings/hindware-venice-round-410mm-countertop-ceramic-vessel-basin-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28600,10 +28034,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 2,
-    "image": "/images/products/sanitary-bath-fittings/kohler-forefront-580mm-rectangular-vessel-basin-with-faucet-hole-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/kohler-forefront-580mm-rectangular-vessel-basin-with-faucet-hole-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer Rectangular · Wide 580mm Deck · Integrated Overflow & Tap Hole",
     "specChips": [
       "580×460mm Luxury",
@@ -28662,7 +28094,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 14990,
         "discountPercent": 20,
         "stock": 9,
-        "image": "/images/products/sanitary-bath-fittings/kohler-forefront-580mm-rectangular-vessel-basin-with-faucet-hole-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28703,10 +28135,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "6910",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-victor-wall-hung-compact-corner-ceramic-basin-400x300mm-white.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-victor-wall-hung-compact-corner-ceramic-basin-400x300mm-white.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Wall-Hung Corner · 400×300mm · Perfect for Powder Rooms & Small Baths",
     "specChips": [
       "400×300mm Corner",
@@ -28765,7 +28195,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2100,
         "discountPercent": 29,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/cera-victor-wall-hung-compact-corner-ceramic-basin-400x300mm-white.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28806,10 +28236,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-high-flow-single-lever-concealed-diverter-rough-in-brass-body.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-high-flow-single-lever-concealed-diverter-rough-in-brass-body.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "In-Wall Rough-In · 24 LPM High Flow · Forged Brass CW617N Body",
     "specChips": [
       "In-Wall Rough-In",
@@ -28864,7 +28292,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4200,
         "discountPercent": 25,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-high-flow-single-lever-concealed-diverter-rough-in-brass-body.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -28907,10 +28335,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-concealed-diverter-exposed-upper-trim-kit-joystick-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-concealed-diverter-exposed-upper-trim-kit-joystick-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kubix Prime Styling · Solid Brass Chrome Flange · Smooth Single Lever Joystick",
     "specChips": [
       "Exposed Trim Kit",
@@ -28965,7 +28391,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2945,
         "discountPercent": 25,
         "stock": 28,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-concealed-diverter-exposed-upper-trim-kit-joystick-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29007,10 +28433,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-alive-high-flow-concealed-diverter-upper-trim-kit-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-alive-high-flow-concealed-diverter-upper-trim-kit-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Alive Fluid Curvature · Solid Brass Faceplate · Ergonomic Control",
     "specChips": [
       "Exposed Trim Kit",
@@ -29065,7 +28489,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3320,
         "discountPercent": 25,
         "stock": 20,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-alive-high-flow-concealed-diverter-upper-trim-kit-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29107,10 +28531,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-maze-120mm-square-multi-flow-abs-hand-shower-rubit-nozzles.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-maze-120mm-square-multi-flow-abs-hand-shower-rubit-nozzles.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3 Spray Patterns · Rubit Silicone De-scaling · 120mm Square Face",
     "specChips": [
       "120mm Square",
@@ -29165,7 +28587,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2375,
         "discountPercent": 23,
         "stock": 35,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-maze-120mm-square-multi-flow-abs-hand-shower-rubit-nozzles.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29206,10 +28628,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-ss-304-overhead-rain-shower-8inch-square-with-15inch-brass-arm.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-ss-304-overhead-rain-shower-8inch-square-with-15inch-brass-arm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "200mm SS 304 Head · 15\" Heavy Brass Arm · Rubit Descaling Nozzles",
     "specChips": [
       "200mm Square",
@@ -29264,7 +28684,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3800,
         "discountPercent": 25,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-ss-304-overhead-rain-shower-8inch-square-with-15inch-brass-arm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29305,10 +28725,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-heavy-cast-brass-bathtub-spout-wall-flange-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-heavy-cast-brass-bathtub-spout-wall-flange-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Kubix Geometric Form · Solid Brass Casting · Neoperl Aerator",
     "specChips": [
       "Solid Brass Spout",
@@ -29367,7 +28785,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2520,
         "discountPercent": 25,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-kubix-prime-heavy-cast-brass-bathtub-spout-wall-flange-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29408,10 +28826,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-health-faucet-abs-body-with-1-2m-ss-flexible-hose-wall-hook-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-health-faucet-abs-body-with-1-2m-ss-flexible-hose-wall-hook-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-Pressure Jet · 1.2m SS Flexible Hose · Ergonomic Thumb Trigger",
     "specChips": [
       "ABS Chrome Body",
@@ -29466,7 +28882,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1450,
         "discountPercent": 23,
         "stock": 50,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-health-faucet-abs-body-with-1-2m-ss-flexible-hose-wall-hook-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29507,10 +28923,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-garnet-2-way-bib-cock-with-wall-flange-chrome.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-garnet-2-way-bib-cock-with-wall-flange-chrome.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2-Way Dual Control · Solid Forged Brass · Independent Ceramic Discs",
     "specChips": [
       "2-Way Dual Outlet",
@@ -29565,7 +28979,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1680,
         "discountPercent": 25,
         "stock": 35,
-        "image": "/images/products/sanitary-bath-fittings/cera-garnet-2-way-bib-cock-with-wall-flange-chrome.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29606,10 +29020,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/jaquar-florentine-prime-triangular-angular-stop-cock-with-wall-flange.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/jaquar-florentine-prime-triangular-angular-stop-cock-with-wall-flange.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Triangular Knob · High-Purity Brass · Quarter-Turn Ceramic Cartridge",
     "specChips": [
       "Triangular Knob",
@@ -29664,7 +29076,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1135,
         "discountPercent": 25,
         "stock": 60,
-        "image": "/images/products/sanitary-bath-fittings/jaquar-florentine-prime-triangular-angular-stop-cock-with-wall-flange.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29705,10 +29117,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "8481",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/sanitary-bath-fittings/cera-heavy-brass-32mm-chrome-wash-basin-bottle-trap-250mm-pipe.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/cera-heavy-brass-32mm-chrome-wash-basin-bottle-trap-250mm-pipe.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "32mm Heavy Brass · Anti-Odor Water Barrier · 250mm Outlet Pipe",
     "specChips": [
       "32mm Brass Trap",
@@ -29763,7 +29173,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2690,
         "discountPercent": 25,
         "stock": 30,
-        "image": "/images/products/sanitary-bath-fittings/cera-heavy-brass-32mm-chrome-wash-basin-bottle-trap-250mm-pipe.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29804,10 +29214,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "hsnCode": "7324",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/sanitary-bath-fittings/futura-ss-304-linear-floor-drain-with-tile-insert-grating-100x600mm.webp",
-    "images": [
-      "/images/products/sanitary-bath-fittings/futura-ss-304-linear-floor-drain-with-tile-insert-grating-100x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Tile-Insert Invisible Look · 600mm SS 304 Channel · Removable Hair Trap",
     "specChips": [
       "100×600mm SS 304",
@@ -29862,7 +29270,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3500,
         "discountPercent": 30,
         "stock": 25,
-        "image": "/images/products/sanitary-bath-fittings/futura-ss-304-linear-floor-drain-with-tile-insert-grating-100x600mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -29895,10 +29303,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/kajaria-eternity-zion-marfil-gvt-vitrified-floor-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-eternity-zion-marfil-gvt-vitrified-floor-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Premium Ivory Marfil Glazed Vitrified Tile for Living & Bedrooms",
     "specChips": [
       "\u20b966/sq ft",
@@ -29979,7 +29385,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1250,
         "discountPercent": 18,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kajaria-eternity-zion-marfil-gvt-vitrified-floor-tile-600x600mm.webp"
+        "image": ""
       }
     ],
     "price": 1022,
@@ -30018,10 +29424,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/kajaria-polished-vitrified-tile-k6209-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-polished-vitrified-tile-k6209-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Classic Ultra-White High Gloss Soluble Salt Vitrified Tile",
     "specChips": [
       "\u20b955/sq ft",
@@ -30102,7 +29506,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1050,
         "discountPercent": 19,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kajaria-polished-vitrified-tile-k6209-600x600mm.webp"
+        "image": ""
       }
     ],
     "price": 853,
@@ -30141,10 +29545,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/kajaria-eternity-jade-green-gvt-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-eternity-jade-green-gvt-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Large Format 2x4 ft Exotic Green Onyx Luxury Tile",
     "specChips": [
       "\u20b967/sq ft",
@@ -30225,7 +29627,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1300,
         "discountPercent": 20,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kajaria-eternity-jade-green-gvt-vitrified-tile-600x1200mm.webp"
+        "image": ""
       }
     ],
     "price": 1046,
@@ -30264,10 +29666,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/kajaria-rave-gris-dry-granula-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-rave-gris-dry-granula-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Architectural Dry Granula Matte Textured Vitrified Slab",
     "specChips": [
       "\u20b9181/sq ft",
@@ -30348,7 +29748,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3400,
         "discountPercent": 18,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kajaria-rave-gris-dry-granula-vitrified-tile-600x1200mm.webp"
+        "image": ""
       }
     ],
     "price": 2800,
@@ -30387,10 +29787,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/somany-glossy-vitrified-floor-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/somany-glossy-vitrified-floor-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Best Value Lucknow Floor Tile with VC Shield Coating",
     "specChips": [
       "\u20b951/sq ft",
@@ -30471,7 +29869,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 980,
         "discountPercent": 19,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/somany-glossy-vitrified-floor-tile-600x600mm.webp"
+        "image": ""
       }
     ],
     "price": 791,
@@ -30510,10 +29908,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/somany-valor-liston-grey-dark-matt-vitrified-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/somany-valor-liston-grey-dark-matt-vitrified-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Modern Cement Grey Anti-Skid Matte Floor Tile",
     "specChips": [
       "\u20b989/sq ft",
@@ -30594,7 +29990,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1650,
         "discountPercent": 16,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/somany-valor-liston-grey-dark-matt-vitrified-tile-600x600mm.webp"
+        "image": ""
       }
     ],
     "price": 1380,
@@ -30633,10 +30029,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/somany-pgvt-polished-glazed-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/somany-pgvt-polished-glazed-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Italian Onyx Pattern High Gloss PGVT 2x4 ft Slab",
     "specChips": [
       "\u20b995/sq ft",
@@ -30717,7 +30111,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 20,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/somany-pgvt-polished-glazed-vitrified-tile-600x1200mm.webp"
+        "image": ""
       }
     ],
     "price": 1473,
@@ -30756,10 +30150,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/orientbell-pgvt-emperador-marble-finish-floor-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/orientbell-pgvt-emperador-marble-finish-floor-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Royal Spanish Emperador Dark Brown Marble Texture Tile",
     "specChips": [
       "\u20b975/sq ft",
@@ -30840,7 +30232,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1420,
         "discountPercent": 18,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/orientbell-pgvt-emperador-marble-finish-floor-tile-600x600mm.webp"
+        "image": ""
       }
     ],
     "price": 1163,
@@ -30879,10 +30271,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/orientbell-gvt-glossy-matte-designer-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/orientbell-gvt-glossy-matte-designer-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2x4 ft Large Format Rectified Glazed Vitrified Tile",
     "specChips": [
       "\u20b990/sq ft",
@@ -30963,7 +30353,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1750,
         "discountPercent": 20,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/orientbell-gvt-glossy-matte-designer-vitrified-tile-600x1200mm.webp"
+        "image": ""
       }
     ],
     "price": 1395,
@@ -31002,10 +30392,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/asian-granito-agl-double-charge-vitrified-floor-tile-800x800mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/asian-granito-agl-double-charge-vitrified-floor-tile-800x800mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Extra Large 32x32 inch Double Layer Wear-Resistant Tile",
     "specChips": [
       "\u20b975/sq ft",
@@ -31086,7 +30474,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1950,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/asian-granito-agl-double-charge-vitrified-floor-tile-800x800mm.webp"
+        "image": ""
       }
     ],
     "price": 1550,
@@ -31125,10 +30513,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/simpolo-gvt-statuario-matte-glossy-vitrified-tile-600x1200mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/simpolo-gvt-statuario-matte-glossy-vitrified-tile-600x1200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Iconic Italian Statuario White Marble Aesthetic GVT",
     "specChips": [
       "\u20b992/sq ft",
@@ -31209,7 +30595,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1800,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/simpolo-gvt-statuario-matte-glossy-vitrified-tile-600x1200mm.webp"
+        "image": ""
       }
     ],
     "price": 1426,
@@ -31248,10 +30634,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/h-r-johnson-marbonite-double-charge-vitrified-tile-600x600mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/h-r-johnson-marbonite-double-charge-vitrified-tile-600x600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Legendary Marbonite High Gloss Double Charge Floor Tile",
     "specChips": [
       "\u20b980/sq ft",
@@ -31332,7 +30716,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1520,
         "discountPercent": 18,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/h-r-johnson-marbonite-double-charge-vitrified-tile-600x600mm.webp"
+        "image": ""
       }
     ],
     "price": 1240,
@@ -31371,10 +30755,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/kajaria-ceramic-glossy-bathroom-kitchen-wall-tile-300x450mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-ceramic-glossy-bathroom-kitchen-wall-tile-300x450mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Easy-Clean Glossy Wall Tile for Bathrooms & Kitchens",
     "specChips": [
       "\u20b941/sq ft",
@@ -31455,7 +30837,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 460,
         "discountPercent": 20,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kajaria-ceramic-glossy-bathroom-kitchen-wall-tile-300x450mm.webp"
+        "image": ""
       }
     ],
     "price": 369,
@@ -31494,10 +30876,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/orientbell-dyna-grey-dk-glossy-ceramic-wall-tile-300x450mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/orientbell-dyna-grey-dk-glossy-ceramic-wall-tile-300x450mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-Definition Dark Grey Marble Pattern Wall Tile",
     "specChips": [
       "\u20b939/sq ft",
@@ -31578,7 +30958,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 435,
         "discountPercent": 20,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/orientbell-dyna-grey-dk-glossy-ceramic-wall-tile-300x450mm.webp"
+        "image": ""
       }
     ],
     "price": 348,
@@ -31617,10 +30997,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/h-r-johnson-ceramic-digital-wall-tile-300x450mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/h-r-johnson-ceramic-digital-wall-tile-300x450mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Durable Water-Resistant Digital Ceramic Wall Tile",
     "specChips": [
       "\u20b938/sq ft",
@@ -31701,7 +31079,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 425,
         "discountPercent": 20,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/h-r-johnson-ceramic-digital-wall-tile-300x450mm.webp"
+        "image": ""
       }
     ],
     "price": 342,
@@ -31740,10 +31118,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/morbi-heavy-duty-green-diamond-rustic-anti-skid-parking-tile-300x300mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/morbi-heavy-duty-green-diamond-rustic-anti-skid-parking-tile-300x300mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty Embossed Anti-Skid Vehicle Parking Tile",
     "specChips": [
       "\u20b928/sq ft",
@@ -31824,7 +31200,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 310,
         "discountPercent": 27,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/morbi-heavy-duty-green-diamond-rustic-anti-skid-parking-tile-300x300mm.webp"
+        "image": ""
       }
     ],
     "price": 227,
@@ -31863,10 +31239,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/morbi-heavy-duty-blue-grey-checked-rustic-parking-tile-300x300mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/morbi-heavy-duty-blue-grey-checked-rustic-parking-tile-300x300mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Checkerboard Anti-Slip Driveway & Porch Parking Tile",
     "specChips": [
       "\u20b928/sq ft",
@@ -31947,7 +31321,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 310,
         "discountPercent": 27,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/morbi-heavy-duty-blue-grey-checked-rustic-parking-tile-300x300mm.webp"
+        "image": ""
       }
     ],
     "price": 227,
@@ -31986,10 +31360,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": true,
-    "image": "/images/products/tiles-marble-granite/kajaria-endura-heavy-duty-outdoor-parking-tile-300x300mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kajaria-endura-heavy-duty-outdoor-parking-tile-300x300mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Industrial Grade Full-Body Vitrified Outdoor Paver Tile",
     "specChips": [
       "\u20b945/sq ft",
@@ -32070,7 +31442,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 450,
         "discountPercent": 20,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kajaria-endura-heavy-duty-outdoor-parking-tile-300x300mm.webp"
+        "image": ""
       }
     ],
     "price": 360,
@@ -32109,10 +31481,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 17,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/rajasthan-black-r-black-polished-granite-slab-16-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/rajasthan-black-r-black-polished-granite-slab-16-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Lucknow's #1 Kitchen Countertop & Staircase Natural Black Granite",
     "specChips": [
       "\u20b995/sq ft",
@@ -32184,7 +31554,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 125,
         "discountPercent": 24,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/rajasthan-black-r-black-polished-granite-slab-16-18mm.webp"
+        "image": ""
       }
     ],
     "price": 95,
@@ -32223,10 +31593,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/black-galaxy-polished-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/black-galaxy-polished-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Iconic Ongole South Indian Black Galaxy Granite with Gold Bronzite Flecks",
     "specChips": [
       "\u20b9160/sq ft",
@@ -32298,7 +31666,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 210,
         "discountPercent": 24,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/black-galaxy-polished-granite-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 160,
@@ -32337,10 +31705,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/z-black-absolute-black-premium-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/z-black-absolute-black-premium-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Purest Deep Pitch Jet Black Granite with Zero Pores",
     "specChips": [
       "\u20b9190/sq ft",
@@ -32412,7 +31778,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 240,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/z-black-absolute-black-premium-granite-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 190,
@@ -32451,10 +31817,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/lakha-red-polished-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/lakha-red-polished-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Vibrant Red Natural Granite for Mandir Platforms, Steps & Borders",
     "specChips": [
       "\u20b9190/sq ft",
@@ -32526,7 +31890,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 240,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/lakha-red-polished-granite-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 190,
@@ -32565,10 +31929,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/hassan-green-polished-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/hassan-green-polished-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rich Forest Green Natural Granite for Vanity Counters & Flooring",
     "specChips": [
       "\u20b9110/sq ft",
@@ -32640,7 +32002,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 145,
         "discountPercent": 24,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/hassan-green-polished-granite-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 110,
@@ -32679,10 +32041,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 17,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/p-white-platinum-white-granite-slab-16-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/p-white-platinum-white-granite-slab-16-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Budget-Friendly Platinum White Granite for Staircases & Corridors",
     "specChips": [
       "\u20b960/sq ft",
@@ -32754,7 +32114,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 80,
         "discountPercent": 25,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/p-white-platinum-white-granite-slab-16-18mm.webp"
+        "image": ""
       }
     ],
     "price": 60,
@@ -32793,10 +32153,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/alaska-white-exotic-granite-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/alaska-white-exotic-granite-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer Silver-White Exotic Veined Quartz & Feldspar Granite",
     "specChips": [
       "\u20b9165/sq ft",
@@ -32868,7 +32226,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 215,
         "discountPercent": 23,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/alaska-white-exotic-granite-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 165,
@@ -32907,10 +32265,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/katni-beige-polished-marble-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/katni-beige-polished-marble-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Warm Beige Natural Indian Marble for Living Hall Flooring",
     "specChips": [
       "\u20b975/sq ft",
@@ -32982,7 +32338,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 98,
         "discountPercent": 23,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/katni-beige-polished-marble-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 75,
@@ -33021,10 +32377,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/morwad-banswara-white-marble-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/morwad-banswara-white-marble-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Classic Banswara White Indian Marble with Elegant Veining",
     "specChips": [
       "\u20b985/sq ft",
@@ -33096,7 +32450,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 110,
         "discountPercent": 23,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/morwad-banswara-white-marble-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 85,
@@ -33135,10 +32489,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 18,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/makrana-dungri-albeta-white-marble-slab-18mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/makrana-dungri-albeta-white-marble-slab-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Historic 98% Pure Calcite Makrana Dungri Marble",
     "specChips": [
       "\u20b9160/sq ft",
@@ -33210,7 +32562,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 210,
         "discountPercent": 24,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/makrana-dungri-albeta-white-marble-slab-18mm.webp"
+        "image": ""
       }
     ],
     "price": 160,
@@ -33249,10 +32601,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 20,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/makrana-pure-white-premium-marble-slab-20mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/makrana-pure-white-premium-marble-slab-20mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Taj Mahal Grade Flawless Pure White Heritage Marble 20mm",
     "specChips": [
       "\u20b9280/sq ft",
@@ -33324,7 +32674,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 360,
         "discountPercent": 22,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/makrana-pure-white-premium-marble-slab-20mm.webp"
+        "image": ""
       }
     ],
     "price": 280,
@@ -33363,10 +32713,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 20,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/botticino-carrara-polished-italian-marble-slab-20mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/botticino-carrara-polished-italian-marble-slab-20mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Direct Imported Italian Botticino Classico Marble 20mm",
     "specChips": [
       "\u20b9380/sq ft",
@@ -33438,7 +32786,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 480,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/botticino-carrara-polished-italian-marble-slab-20mm.webp"
+        "image": ""
       }
     ],
     "price": 380,
@@ -33477,10 +32825,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 20,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/statuario-polished-italian-marble-slab-20mm.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/statuario-polished-italian-marble-slab-20mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Masterpiece Italian Statuario Marble with Dramatic Book-Match Veins",
     "specChips": [
       "\u20b9550/sq ft",
@@ -33552,7 +32898,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 700,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/statuario-polished-italian-marble-slab-20mm.webp"
+        "image": ""
       }
     ],
     "price": 550,
@@ -33591,10 +32937,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 22,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/kota-grey-unpolished-cut-flooring-stone-22x22-in.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kota-grey-unpolished-cut-flooring-stone-22x22-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Natural Unpolished Kota Stone (5% GST HSN 2515) for Basements & Pathways",
     "specChips": [
       "\u20b926/sq ft",
@@ -33666,7 +33010,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 35,
         "discountPercent": 26,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kota-grey-unpolished-cut-flooring-stone-22x22-in.webp"
+        "image": ""
       }
     ],
     "price": 26,
@@ -33705,10 +33049,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 22,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/kota-high-polished-flooring-slab-22x22-in.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/kota-high-polished-flooring-slab-22x22-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Factory Machine-Polished Kota Green Stone Slab (18% GST HSN 6802)",
     "specChips": [
       "\u20b934/sq ft",
@@ -33780,7 +33122,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 45,
         "discountPercent": 24,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/kota-high-polished-flooring-slab-22x22-in.webp"
+        "image": ""
       }
     ],
     "price": 34,
@@ -33819,10 +33161,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": 20,
     "minOrderSqFt": 25,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/cuddapah-kadappa-black-polished-stone-slab.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/cuddapah-kadappa-black-polished-stone-slab.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dense Jet Black Cuddapah Limestone Slab for Kitchen Shelves & Base Plinths",
     "specChips": [
       "\u20b945/sq ft",
@@ -33894,7 +33234,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 60,
         "discountPercent": 25,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/cuddapah-kadappa-black-polished-stone-slab.webp"
+        "image": ""
       }
     ],
     "price": 45,
@@ -33933,10 +33273,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/roff-rainbow-tile-mate-cementitious-grout-1kg-ivory-terracotta.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/roff-rainbow-tile-mate-cementitious-grout-1kg-ivory-terracotta.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Water-Resistant Polymer-Modified Cementitious Tile Joint Grout",
     "specChips": [
       "1 kg Pack",
@@ -33990,7 +33328,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 95,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/roff-rainbow-tile-mate-cementitious-grout-1kg-ivory-terracotta.webp"
+        "image": ""
       }
     ],
     "price": 75,
@@ -34029,10 +33367,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/roff-t13-rainbow-tile-mate-epoxy-grout-1kg-kit.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/roff-t13-rainbow-tile-mate-epoxy-grout-1kg-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100% Waterproof Stain-Proof 3-Part Epoxy Tile Joint Grout",
     "specChips": [
       "1 kg Kit (Resin + Hardener + Filler)",
@@ -34086,7 +33422,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 850,
         "discountPercent": 16,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/roff-t13-rainbow-tile-mate-epoxy-grout-1kg-kit.webp"
+        "image": ""
       }
     ],
     "price": 710,
@@ -34125,10 +33461,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/myk-laticrete-sp-100-stainfree-3-component-epoxy-tile-grout-1kg.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/myk-laticrete-sp-100-stainfree-3-component-epoxy-tile-grout-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "World's Benchmark Stainfree 100% Solid Epoxy Joint Filler",
     "specChips": [
       "1 kg Kit",
@@ -34182,7 +33516,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 950,
         "discountPercent": 17,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/myk-laticrete-sp-100-stainfree-3-component-epoxy-tile-grout-1kg.webp"
+        "image": ""
       }
     ],
     "price": 791,
@@ -34221,10 +33555,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/roff-t16-cera-clean-tile-ceramic-cleaner-1l.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/roff-t16-cera-clean-tile-ceramic-cleaner-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty Tile, Ceramic & Sanitary Ware Chemical Cleaner",
     "specChips": [
       "1 Litre Bottle",
@@ -34278,7 +33610,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 230,
         "discountPercent": 18,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/roff-t16-cera-clean-tile-ceramic-cleaner-1l.webp"
+        "image": ""
       }
     ],
     "price": 189,
@@ -34317,10 +33649,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/leqwell-3mm-reusable-tile-spacers-pack-of-100.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/leqwell-3mm-reusable-tile-spacers-pack-of-100.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Precision Cross Spacers for Uniform Tile Grout Lines",
     "specChips": [
       "Pack of 100 pcs (3mm Cross)",
@@ -34374,7 +33704,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 180,
         "discountPercent": 28,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/leqwell-3mm-reusable-tile-spacers-pack-of-100.webp"
+        "image": ""
       }
     ],
     "price": 130,
@@ -34413,10 +33743,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/fastobond-tile-leveling-system-kit-50-clips-50-wedges.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/fastobond-tile-leveling-system-kit-50-clips-50-wedges.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Anti-Lippage Tile Leveling Kit for Seamless Flat Floors",
     "specChips": [
       "50 Clips + 50 Reusable Wedges",
@@ -34470,7 +33798,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 450,
         "discountPercent": 22,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/fastobond-tile-leveling-system-kit-50-clips-50-wedges.webp"
+        "image": ""
       }
     ],
     "price": 350,
@@ -34509,10 +33837,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/flamingo-pro-tile-leveling-system-300-clips-100-wedges.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/flamingo-pro-tile-leveling-system-300-clips-100-wedges.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor-Grade Anti-Lippage Leveling System for Large Projects",
     "specChips": [
       "300 Clips + 100 Reusable Wedges",
@@ -34566,7 +33892,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 950,
         "discountPercent": 21,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/flamingo-pro-tile-leveling-system-300-clips-100-wedges.webp"
+        "image": ""
       }
     ],
     "price": 751,
@@ -34605,10 +33931,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "thicknessMm": null,
     "minOrderSqFt": null,
     "batchLockRequired": false,
-    "image": "/images/products/tiles-marble-granite/bosch-4-inch-110mm-continuous-rim-diamond-tile-blade-2607019471.webp",
-    "images": [
-      "/images/products/tiles-marble-granite/bosch-4-inch-110mm-continuous-rim-diamond-tile-blade-2607019471.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German-Engineered Chip-Free Diamond Blade for Vitrified Tiles & Granite",
     "specChips": [
       "110mm x 20/16mm Bore",
@@ -34662,7 +33986,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 550,
         "discountPercent": 23,
         "stock": 100,
-        "image": "/images/products/tiles-marble-granite/bosch-4-inch-110mm-continuous-rim-diamond-tile-blade-2607019471.webp"
+        "image": ""
       }
     ],
     "price": 421,
@@ -34691,10 +34015,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/birla-white-wallcare-putty-20kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/birla-white-wallcare-putty-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "White Portland Cement Base \u00b7 Extra High Whiteness \u00b7 Anti-Flaking Polymer Matrix",
     "specChips": [
       "HP Polymers",
@@ -34769,7 +34091,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 420,
         "discountPercent": 14,
         "stock": 150,
-        "image": "/images/products/paints-putty-primer/birla-white-wallcare-putty-20kg.webp"
+        "image": ""
       }
     ],
     "price": 360,
@@ -34804,10 +34126,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/birla-white-wallcare-putty-40kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/birla-white-wallcare-putty-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor Bulk Pack \u00b7 Economical Per-Kg Rate \u00b7 Mirror Smooth Base",
     "specChips": [
       "40kg Contractor Pack",
@@ -34878,7 +34198,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 780,
         "discountPercent": 15,
         "stock": 300,
-        "image": "/images/products/paints-putty-primer/birla-white-wallcare-putty-40kg.webp"
+        "image": ""
       }
     ],
     "price": 660,
@@ -34913,10 +34233,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/birla-white-wallseal-waterproof-putty-40kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/birla-white-wallseal-waterproof-putty-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2x Active Hydrophobic Silicones \u00b7 Stops Severe Seepage & Efflorescence",
     "specChips": [
       "2x Hydrophobic",
@@ -34987,7 +34305,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1420,
         "discountPercent": 15,
         "stock": 180,
-        "image": "/images/products/paints-putty-primer/birla-white-wallseal-waterproof-putty-40kg.webp"
+        "image": ""
       }
     ],
     "price": 1200,
@@ -35022,10 +34340,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/jk-cement-wallmaxx-putty-20kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/jk-cement-wallmaxx-putty-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Micro-Fine Particles \u00b7 Maximum Coverage \u00b7 Ultra-Silky Smooth Base",
     "specChips": [
       "Micro-Fine Technology",
@@ -35096,7 +34412,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 450,
         "discountPercent": 13,
         "stock": 140,
-        "image": "/images/products/paints-putty-primer/jk-cement-wallmaxx-putty-20kg.webp"
+        "image": ""
       }
     ],
     "price": 390,
@@ -35131,10 +34447,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/jk-cement-wallmaxx-putty-40kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/jk-cement-wallmaxx-putty-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor Master Sack \u00b7 Micro-Particle Precision \u00b7 \u20b917.25/kg Rate",
     "specChips": [
       "40kg Bulk Sack",
@@ -35205,7 +34519,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 810,
         "discountPercent": 15,
         "stock": 250,
-        "image": "/images/products/paints-putty-primer/jk-cement-wallmaxx-putty-40kg.webp"
+        "image": ""
       }
     ],
     "price": 690,
@@ -35240,10 +34554,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/jk-cement-waterproof-putty-40kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/jk-cement-waterproof-putty-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Active Silicone Hydrophobic Barrier \u00b7 Repels Moisture \u00b7 Prevents Efflorescence",
     "specChips": [
       "Active Silicone",
@@ -35314,7 +34626,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1490,
         "discountPercent": 16,
         "stock": 160,
-        "image": "/images/products/paints-putty-primer/jk-cement-waterproof-putty-40kg.webp"
+        "image": ""
       }
     ],
     "price": 1250,
@@ -35349,10 +34661,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-acrylic-wall-putty-20kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-acrylic-wall-putty-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ready-to-Use Paste \u00b7 Ultra-Smooth Acrylic Resin \u00b7 Mirror Foundation for Royale",
     "specChips": [
       "Ready-to-Use Paste",
@@ -35423,7 +34733,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1590,
         "discountPercent": 13,
         "stock": 110,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-acrylic-wall-putty-20kg.webp"
+        "image": ""
       }
     ],
     "price": 1380,
@@ -35458,10 +34768,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall Putty",
-    "image": "/images/products/paints-putty-primer/berger-bison-white-cement-putty-40kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-bison-white-cement-putty-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German Polymer Anti-Efflorescence \u00b7 Breathable Matrix \u00b7 Great Value 40kg",
     "specChips": [
       "German Polymers",
@@ -35532,7 +34840,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 800,
         "discountPercent": 15,
         "stock": 210,
-        "image": "/images/products/paints-putty-primer/berger-bison-white-cement-putty-40kg.webp"
+        "image": ""
       }
     ],
     "price": 680,
@@ -35567,10 +34875,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-interior-primer-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-interior-primer-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Water-Thinnable Acrylic Primer \u00b7 Seals Plaster Porosity \u00b7 High Opacity Base",
     "specChips": [
       "Water Thinnable",
@@ -35641,7 +34947,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 860,
         "discountPercent": 15,
         "stock": 180,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-interior-primer-4l.webp"
+        "image": ""
       }
     ],
     "price": 732,
@@ -35676,10 +34982,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-interior-primer-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-interior-primer-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 Low \u20b9147.50/L Rate \u00b7 Deep Sealing & High Whiteness",
     "specChips": [
       "20L Master Drum",
@@ -35750,7 +35054,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3450,
         "discountPercent": 14,
         "stock": 190,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-interior-primer-20l.webp"
+        "image": ""
       }
     ],
     "price": 2950,
@@ -35785,10 +35089,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-exterior-primer-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-exterior-primer-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Weather-Resistant Acrylic Primer \u00b7 Superior Alkali Resistance \u00b7 Exterior Facades",
     "specChips": [
       "Weather-Resistant",
@@ -35859,7 +35161,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 960,
         "discountPercent": 15,
         "stock": 130,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-exterior-primer-4l.webp"
+        "image": ""
       }
     ],
     "price": 820,
@@ -35894,10 +35196,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-exterior-primer-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-exterior-primer-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master Exterior Drum \u00b7 Commercial Facade Pack \u00b7 \u20b9172.50/L Rate",
     "specChips": [
       "20L Facade Drum",
@@ -35968,7 +35268,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4050,
         "discountPercent": 15,
         "stock": 160,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-exterior-primer-20l.webp"
+        "image": ""
       }
     ],
     "price": 3450,
@@ -36003,10 +35303,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-red-oxide-metal-primer-1l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-red-oxide-metal-primer-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Solvent-Based Anti-Corrosive Primer \u00b7 Pure Red Oxide \u00b7 Protects Iron Grills & Gates",
     "specChips": [
       "Anti-Rust",
@@ -36077,7 +35375,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 275,
         "discountPercent": 14,
         "stock": 220,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-red-oxide-metal-primer-1l.webp"
+        "image": ""
       }
     ],
     "price": 236,
@@ -36112,10 +35410,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/berger-bp-white-wall-primer-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-bp-white-wall-primer-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High Opacity Water-Thinnable Primer \u00b7 Deep Penetration \u00b7 Seals Porous Plaster",
     "specChips": [
       "High Opacity",
@@ -36186,7 +35482,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 830,
         "discountPercent": 14,
         "stock": 140,
-        "image": "/images/products/paints-putty-primer/berger-bp-white-wall-primer-4l.webp"
+        "image": ""
       }
     ],
     "price": 710,
@@ -36221,10 +35517,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/berger-bp-white-wall-primer-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-bp-white-wall-primer-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Contractor Master Drum \u00b7 \u20b9142.50/L Bulk Economy \u00b7 Anti-Alkaline Matrix",
     "specChips": [
       "20L Master Drum",
@@ -36295,7 +35589,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3350,
         "discountPercent": 15,
         "stock": 170,
-        "image": "/images/products/paints-putty-primer/berger-bp-white-wall-primer-20l.webp"
+        "image": ""
       }
     ],
     "price": 2850,
@@ -36330,10 +35624,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Wall & Metal Primers",
-    "image": "/images/products/paints-putty-primer/nerolac-popular-interior-primer-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/nerolac-popular-interior-primer-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Smooth Sealer Undercoat \u00b7 Excellent Plaster Adhesion \u00b7 Water-Thinnable",
     "specChips": [
       "Smooth Sealer",
@@ -36404,7 +35696,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 790,
         "discountPercent": 14,
         "stock": 120,
-        "image": "/images/products/paints-putty-primer/nerolac-popular-interior-primer-4l.webp"
+        "image": ""
       }
     ],
     "price": 680,
@@ -36439,10 +35731,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/asian-paints-tractor-uno-distemper-white-20kg.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-tractor-uno-distemper-white-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Acrylic Copolymer Distemper \u00b7 Smooth Matte Finish \u00b7 Cost-Effective Economy",
     "specChips": [
       "Acrylic Distemper",
@@ -36513,7 +35803,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1150,
         "discountPercent": 15,
         "stock": 200,
-        "image": "/images/products/paints-putty-primer/asian-paints-tractor-uno-distemper-white-20kg.webp"
+        "image": ""
       }
     ],
     "price": 980,
@@ -36548,10 +35838,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/asian-paints-tractor-emulsion-white-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-tractor-emulsion-white-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's #1 Interior Emulsion \u00b7 Smart Upgrade from Distemper \u00b7 Soft Sheen",
     "specChips": [
       "Tractor Emulsion",
@@ -36626,7 +35914,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 990,
         "discountPercent": 13,
         "stock": 250,
-        "image": "/images/products/paints-putty-primer/asian-paints-tractor-emulsion-white-4l.webp"
+        "image": ""
       }
     ],
     "price": 860,
@@ -36661,10 +35949,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/asian-paints-tractor-emulsion-white-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-tractor-emulsion-white-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 Unbeatable \u20b9193.45/L Rate \u00b7 Covers Entire 2BHK/3BHK",
     "specChips": [
       "20L Master Drum",
@@ -36735,7 +36021,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4450,
         "discountPercent": 13,
         "stock": 210,
-        "image": "/images/products/paints-putty-primer/asian-paints-tractor-emulsion-white-20l.webp"
+        "image": ""
       }
     ],
     "price": 3869,
@@ -36770,10 +36056,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-emulsion-white-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apcolite-premium-emulsion-white-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Rich Matt Finish \u00b7 Highly Washable \u00b7 Stain Resistant Polymer Shield",
     "specChips": [
       "Rich Matt",
@@ -36848,7 +36132,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1580,
         "discountPercent": 13,
         "stock": 190,
-        "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-emulsion-white-4l.webp"
+        "image": ""
       }
     ],
     "price": 1376,
@@ -36883,10 +36167,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-emulsion-white-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apcolite-premium-emulsion-white-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 \u20b9322.50/L Bulk Rate \u00b7 High Washability Luxury Matrix",
     "specChips": [
       "20L Master Drum",
@@ -36957,7 +36239,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7450,
         "discountPercent": 13,
         "stock": 160,
-        "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-emulsion-white-20l.webp"
+        "image": ""
       }
     ],
     "price": 6450,
@@ -36992,10 +36274,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/asian-paints-royale-luxury-emulsion-base-white-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-royale-luxury-emulsion-base-white-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Teflon\u2122 Surface Protector \u00b7 Ultra-Luxury Silky Sheen \u00b7 Stain Free Walls",
     "specChips": [
       "Teflon\u2122 Protected",
@@ -37066,7 +36346,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2799,
         "discountPercent": 13,
         "stock": 140,
-        "image": "/images/products/paints-putty-primer/asian-paints-royale-luxury-emulsion-base-white-4l.webp"
+        "image": ""
       }
     ],
     "price": 2439,
@@ -37101,10 +36381,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/asian-paints-royale-luxury-emulsion-base-white-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-royale-luxury-emulsion-base-white-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Royale Drum \u00b7 \u20b9590/L Rate \u00b7 Supreme Teflon\u2122 Protection",
     "specChips": [
       "20L Royale Drum",
@@ -37175,7 +36453,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 13500,
         "discountPercent": 13,
         "stock": 90,
-        "image": "/images/products/paints-putty-primer/asian-paints-royale-luxury-emulsion-base-white-20l.webp"
+        "image": ""
       }
     ],
     "price": 11800,
@@ -37210,10 +36488,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/berger-bison-acrylic-emulsion-interior-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-bison-acrylic-emulsion-interior-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 Low \u20b9172.50/L Rate \u00b7 Smooth Silk Matt Finish",
     "specChips": [
       "20L Master Drum",
@@ -37284,7 +36560,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3990,
         "discountPercent": 14,
         "stock": 170,
-        "image": "/images/products/paints-putty-primer/berger-bison-acrylic-emulsion-interior-20l.webp"
+        "image": ""
       }
     ],
     "price": 3450,
@@ -37319,10 +36595,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/berger-easy-clean-washable-interior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-easy-clean-washable-interior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Cross-Linking Polymers \u00b7 Washable Luxury Sheen \u00b7 High Stain Resistance",
     "specChips": [
       "Cross-Linking Polymers",
@@ -37393,7 +36667,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2050,
         "discountPercent": 14,
         "stock": 130,
-        "image": "/images/products/paints-putty-primer/berger-easy-clean-washable-interior-4l.webp"
+        "image": ""
       }
     ],
     "price": 1770,
@@ -37428,10 +36702,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/berger-easy-clean-fresh-interior-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-easy-clean-fresh-interior-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 \u20b9385/L Bulk Rate \u00b7 Active Odor Neutralizer & Washability",
     "specChips": [
       "20L Master Drum",
@@ -37502,7 +36774,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 8900,
         "discountPercent": 13,
         "stock": 110,
-        "image": "/images/products/paints-putty-primer/berger-easy-clean-fresh-interior-20l.webp"
+        "image": ""
       }
     ],
     "price": 7700,
@@ -37537,10 +36809,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/nerolac-beauty-gold-classic-interior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/nerolac-beauty-gold-classic-interior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Soft Glow Finish \u00b7 Washable Acrylic Film \u00b7 Rich Vibrant Color Retention",
     "specChips": [
       "Soft Glow Finish",
@@ -37611,7 +36881,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2050,
         "discountPercent": 13,
         "stock": 140,
-        "image": "/images/products/paints-putty-primer/nerolac-beauty-gold-classic-interior-4l.webp"
+        "image": ""
       }
     ],
     "price": 1782,
@@ -37646,10 +36916,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/nerolac-impressions-ultra-hd-interior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/nerolac-impressions-ultra-hd-interior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Micro Embedded Crystals \u00b7 Ultra HD High Sheen \u00b7 Luxurious Wall Reflection",
     "specChips": [
       "Micro Crystals",
@@ -37720,7 +36988,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2250,
         "discountPercent": 13,
         "stock": 115,
-        "image": "/images/products/paints-putty-primer/nerolac-impressions-ultra-hd-interior-4l.webp"
+        "image": ""
       }
     ],
     "price": 1950,
@@ -37755,10 +37023,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/birla-opus-calista-ever-clear-matte-interior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/birla-opus-calista-ever-clear-matte-interior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Aditya Birla Precision Emulsion \u00b7 Ever-Clear Anti-Stain \u00b7 Elegant Dead Matte",
     "specChips": [
       "Aditya Birla Tech",
@@ -37829,7 +37095,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1600,
         "discountPercent": 13,
         "stock": 125,
-        "image": "/images/products/paints-putty-primer/birla-opus-calista-ever-clear-matte-interior-4l.webp"
+        "image": ""
       }
     ],
     "price": 1389,
@@ -37864,10 +37130,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Interior Paints & Distempers",
-    "image": "/images/products/paints-putty-primer/birla-opus-one-pure-elegance-shine-interior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/birla-opus-one-pure-elegance-shine-interior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flagship Luxury Emulsion \u00b7 Pure Elegance High Sheen \u00b7 Ultra-Rich Depth",
     "specChips": [
       "Flagship Luxury",
@@ -37938,7 +37202,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2680,
         "discountPercent": 13,
         "stock": 105,
-        "image": "/images/products/paints-putty-primer/birla-opus-one-pure-elegance-shine-interior-4l.webp"
+        "image": ""
       }
     ],
     "price": 2320,
@@ -37973,10 +37237,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/asian-paints-ace-exterior-emulsion-white-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-ace-exterior-emulsion-white-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Economical Exterior Emulsion \u00b7 Anti-Algal Formula \u00b7 Replaces Cement Paint",
     "specChips": [
       "Ace Exterior",
@@ -38051,7 +37313,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1220,
         "discountPercent": 13,
         "stock": 210,
-        "image": "/images/products/paints-putty-primer/asian-paints-ace-exterior-emulsion-white-4l.webp"
+        "image": ""
       }
     ],
     "price": 1060,
@@ -38086,10 +37348,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/asian-paints-ace-exterior-emulsion-white-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-ace-exterior-emulsion-white-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 Wholesale \u20b9247.50/L Rate \u00b7 External Facade Coverage",
     "specChips": [
       "20L Master Drum",
@@ -38164,7 +37424,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5700,
         "discountPercent": 13,
         "stock": 190,
-        "image": "/images/products/paints-putty-primer/asian-paints-ace-exterior-emulsion-white-20l.webp"
+        "image": ""
       }
     ],
     "price": 4950,
@@ -38199,10 +37459,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/asian-paints-apex-weatherproof-exterior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apex-weatherproof-exterior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100% Pure Acrylic \u00b7 Silicon Weatherproof Polymers \u00b7 5-Year Protection",
     "specChips": [
       "100% Pure Acrylic",
@@ -38277,7 +37535,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2010,
         "discountPercent": 13,
         "stock": 175,
-        "image": "/images/products/paints-putty-primer/asian-paints-apex-weatherproof-exterior-4l.webp"
+        "image": ""
       }
     ],
     "price": 1750,
@@ -38312,10 +37570,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/asian-paints-apex-weatherproof-exterior-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apex-weatherproof-exterior-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 \u20b9410/L Bulk Rate \u00b7 5-Year Weatherproof Exterior Armor",
     "specChips": [
       "20L Master Drum",
@@ -38390,7 +37646,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 9450,
         "discountPercent": 13,
         "stock": 160,
-        "image": "/images/products/paints-putty-primer/asian-paints-apex-weatherproof-exterior-20l.webp"
+        "image": ""
       }
     ],
     "price": 8200,
@@ -38425,10 +37681,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/asian-paints-apex-ultima-exterior-base-white-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apex-ultima-exterior-base-white-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Advanced Fluoropolymers \u00b7 Dirt Pick-Up Resistance \u00b7 7-Year Warranty",
     "specChips": [
       "Fluoropolymers",
@@ -38503,7 +37757,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2480,
         "discountPercent": 13,
         "stock": 140,
-        "image": "/images/products/paints-putty-primer/asian-paints-apex-ultima-exterior-base-white-4l.webp"
+        "image": ""
       }
     ],
     "price": 2150,
@@ -38538,10 +37792,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/asian-paints-apex-ultima-exterior-base-white-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apex-ultima-exterior-base-white-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 \u20b9492.50/L Bulk Rate \u00b7 7-Year Luxury Facade Protection",
     "specChips": [
       "20L Ultima Drum",
@@ -38616,7 +37868,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 11300,
         "discountPercent": 13,
         "stock": 120,
-        "image": "/images/products/paints-putty-primer/asian-paints-apex-ultima-exterior-base-white-20l.webp"
+        "image": ""
       }
     ],
     "price": 9850,
@@ -38651,10 +37903,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/berger-weathercoat-anti-dustt-exterior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-weathercoat-anti-dustt-exterior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dust Guard Technology \u00b7 Prevents Dust Adhesion \u00b7 Rich Exterior Sheen",
     "specChips": [
       "Dust Guard Tech",
@@ -38725,7 +37975,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1360,
         "discountPercent": 13,
         "stock": 160,
-        "image": "/images/products/paints-putty-primer/berger-weathercoat-anti-dustt-exterior-4l.webp"
+        "image": ""
       }
     ],
     "price": 1180,
@@ -38760,10 +38010,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/berger-weathercoat-anti-dustt-exterior-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-weathercoat-anti-dustt-exterior-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Master 20L Drum \u00b7 \u20b9249/L Bulk Rate \u00b7 Dust Guard Roadside Facade Armor",
     "specChips": [
       "20L Master Drum",
@@ -38834,7 +38082,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5750,
         "discountPercent": 13,
         "stock": 180,
-        "image": "/images/products/paints-putty-primer/berger-weathercoat-anti-dustt-exterior-20l.webp"
+        "image": ""
       }
     ],
     "price": 4980,
@@ -38869,10 +38117,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/nerolac-excel-everlast-exterior-20l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/nerolac-excel-everlast-exterior-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Micro Gel Technology \u00b7 Anti-Fungal Heavy Weatherproof \u00b7 8-Year Armor",
     "specChips": [
       "Micro Gel Tech",
@@ -38947,7 +38193,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 13200,
         "discountPercent": 13,
         "stock": 95,
-        "image": "/images/products/paints-putty-primer/nerolac-excel-everlast-exterior-20l.webp"
+        "image": ""
       }
     ],
     "price": 11420,
@@ -38982,10 +38228,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Exterior Paints",
-    "image": "/images/products/paints-putty-primer/dulux-weathershield-powerflexx-exterior-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/dulux-weathershield-powerflexx-exterior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Elastomeric Powerflexx\u2122 \u00b7 Bridges Hairline Cracks up to 1mm \u00b7 AkzoNobel Tech",
     "specChips": [
       "Powerflexx\u2122 Elastomeric",
@@ -39060,7 +38304,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2980,
         "discountPercent": 13,
         "stock": 110,
-        "image": "/images/products/paints-putty-primer/dulux-weathershield-powerflexx-exterior-4l.webp"
+        "image": ""
       }
     ],
     "price": 2585,
@@ -39095,10 +38339,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-gloss-enamel-1l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apcolite-premium-gloss-enamel-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Mirror Gloss Finish \u00b7 Oil-Based Alkyd Resin \u00b7 Heavy Metal & Wood Protection",
     "specChips": [
       "Mirror Gloss",
@@ -39169,7 +38411,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 360,
         "discountPercent": 14,
         "stock": 240,
-        "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-gloss-enamel-1l.webp"
+        "image": ""
       }
     ],
     "price": 310,
@@ -39204,10 +38446,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-gloss-enamel-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-apcolite-premium-gloss-enamel-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Economical 4L Can \u00b7 \u20b9295/L Bulk Rate \u00b7 Mirror Gloss for Doors & Grills",
     "specChips": [
       "4L Contractor Can",
@@ -39278,7 +38518,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1360,
         "discountPercent": 13,
         "stock": 170,
-        "image": "/images/products/paints-putty-primer/asian-paints-apcolite-premium-gloss-enamel-4l.webp"
+        "image": ""
       }
     ],
     "price": 1180,
@@ -39313,10 +38553,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/berger-luxol-hi-gloss-enamel-1l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-luxol-hi-gloss-enamel-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Mirror Sheen Alkyd Enamel \u00b7 Non-Yellowing Formula \u00b7 Protective Metal & Wood Barrier",
     "specChips": [
       "Mirror Sheen",
@@ -39387,7 +38625,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 335,
         "discountPercent": 14,
         "stock": 210,
-        "image": "/images/products/paints-putty-primer/berger-luxol-hi-gloss-enamel-1l.webp"
+        "image": ""
       }
     ],
     "price": 288,
@@ -39422,10 +38660,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/berger-luxol-hi-gloss-enamel-4l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/berger-luxol-hi-gloss-enamel-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Economical 4L Pack \u00b7 \u20b9277.50/L Bulk Rate \u00b7 Heavy-Duty Alkyd Mirror Gloss",
     "specChips": [
       "4L Contractor Can",
@@ -39496,7 +38732,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1280,
         "discountPercent": 13,
         "stock": 150,
-        "image": "/images/products/paints-putty-primer/berger-luxol-hi-gloss-enamel-4l.webp"
+        "image": ""
       }
     ],
     "price": 1110,
@@ -39531,10 +38767,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-roller-800-9-inch.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-roller-800-9-inch.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Professional 9-Inch High-Density Felt \u00b7 Lint-Free \u00b7 Ultra-Smooth Emulsion Roll",
     "specChips": [
       "9-Inch Felt Roller",
@@ -39601,7 +38835,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 170,
         "discountPercent": 16,
         "stock": 350,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-roller-800-9-inch.webp"
+        "image": ""
       }
     ],
     "price": 143,
@@ -39636,10 +38870,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/asian-paints-trucare-4-inch-synthetic-brush.webp",
-    "images": [
-      "/images/products/paints-putty-primer/asian-paints-trucare-4-inch-synthetic-brush.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "4-Inch Flagged Synthetic Bristles \u00b7 Razor Sharp Edging \u00b7 No Bristle Loss",
     "specChips": [
       "4-Inch Wide",
@@ -39706,7 +38938,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 190,
         "discountPercent": 16,
         "stock": 380,
-        "image": "/images/products/paints-putty-primer/asian-paints-trucare-4-inch-synthetic-brush.webp"
+        "image": ""
       }
     ],
     "price": 160,
@@ -39741,10 +38973,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/standard-isi-mineral-turpentine-oil-thinner-1l.webp",
-    "images": [
-      "/images/products/paints-putty-primer/standard-isi-mineral-turpentine-oil-thinner-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Pure Solvent Grade \u00b7 Low Odor Mineral Turpentine Oil \u00b7 Enamel Thinner & Tool Cleaner",
     "specChips": [
       "Pure Solvent",
@@ -39811,7 +39041,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 180,
         "discountPercent": 17,
         "stock": 310,
-        "image": "/images/products/paints-putty-primer/standard-isi-mineral-turpentine-oil-thinner-1l.webp"
+        "image": ""
       }
     ],
     "price": 150,
@@ -39846,10 +39076,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "painting",
     "categoryName": "Paints, Putty & Primer",
     "subCategory": "Enamels, Thinners & Painting Tools",
-    "image": "/images/products/paints-putty-primer/standard-isi-waterproof-sandpaper-180-grit-pack-10.webp",
-    "images": [
-      "/images/products/paints-putty-primer/standard-isi-waterproof-sandpaper-180-grit-pack-10.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Silicon Carbide 180-Grit \u00b7 Electro-Coated Waterproof \u00b7 Essential Putty Sanding",
     "specChips": [
       "180-Grit",
@@ -39916,7 +39144,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 150,
         "discountPercent": 20,
         "stock": 450,
-        "image": "/images/products/paints-putty-primer/standard-isi-waterproof-sandpaper-180-grit-pack-10.webp"
+        "image": ""
       }
     ],
     "price": 120,
@@ -39951,10 +39179,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "safety-workwear",
     "categoryName": "Safety & Workwear",
     "subCategory": "ISI Construction Helmets",
-    "image": "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp",
-    "images": [
-      "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "200 Joules Steel Toe Cap \u00b7 Oil & Acid Resistant PU Sole \u00b7 Anti-Slip",
     "specChips": [
       "200J Steel Toe",
@@ -40009,7 +39235,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 950,
         "discountPercent": 48,
         "stock": 50,
-        "image": "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp"
+        "image": ""
       },
       {
         "id": "var-sh-uk7",
@@ -40019,7 +39245,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 950,
         "discountPercent": 48,
         "stock": 60,
-        "image": "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp"
+        "image": ""
       },
       {
         "id": "var-sh-uk8",
@@ -40029,7 +39255,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 950,
         "discountPercent": 48,
         "stock": 80,
-        "image": "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp"
+        "image": ""
       },
       {
         "id": "var-sh-uk9",
@@ -40039,7 +39265,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 950,
         "discountPercent": 48,
         "stock": 70,
-        "image": "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp"
+        "image": ""
       },
       {
         "id": "var-sh-uk10",
@@ -40049,7 +39275,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 950,
         "discountPercent": 48,
         "stock": 40,
-        "image": "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp"
+        "image": ""
       }
     ],
     "price": 490,
@@ -40071,10 +39297,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "safety-workwear",
     "categoryName": "Safety & Workwear",
     "subCategory": "ISI Construction Helmets",
-    "image": "/images/products/safety/hillson-dragon-steel-toe-gumboots-15-high.webp",
-    "images": [
-      "/images/products/safety/hillson-dragon-steel-toe-gumboots-15-high.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "15 Inch Tall Waterproof Shaft \u00b7 Steel Toe Protection \u00b7 Mud & Concrete Ready",
     "specChips": [
       "15-Inch Shaft",
@@ -40125,7 +39349,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 850,
         "discountPercent": 35,
         "stock": 50,
-        "image": "/images/products/safety/hillson-dragon-steel-toe-gumboots-15-high.webp"
+        "image": ""
       },
       {
         "id": "var-gum-uk8",
@@ -40135,7 +39359,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 850,
         "discountPercent": 35,
         "stock": 60,
-        "image": "/images/products/safety/hillson-dragon-steel-toe-gumboots-15-high.webp"
+        "image": ""
       },
       {
         "id": "var-gum-uk9",
@@ -40145,7 +39369,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 850,
         "discountPercent": 35,
         "stock": 50,
-        "image": "/images/products/safety/hillson-dragon-steel-toe-gumboots-15-high.webp"
+        "image": ""
       },
       {
         "id": "var-gum-uk10",
@@ -40155,7 +39379,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 850,
         "discountPercent": 35,
         "stock": 40,
-        "image": "/images/products/safety/hillson-dragon-steel-toe-gumboots-15-high.webp"
+        "image": ""
       }
     ],
     "price": 550,
@@ -40177,10 +39401,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "safety-workwear",
     "categoryName": "Safety & Workwear",
     "subCategory": "ISI Construction Helmets",
-    "image": "/images/products/safety/karam-pn-521-helmet-isi.webp",
-    "images": [
-      "/images/products/safety/karam-pn-521-helmet-isi.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "UV Stabilized Polymer Shell \u00b7 6-Point Textile Suspension \u00b7 ISI Marked",
     "specChips": [
       "6-Point Suspension",
@@ -40231,7 +39453,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 320,
         "discountPercent": 39,
         "stock": 100,
-        "image": "/images/products/safety/karam-pn-521-helmet-isi.webp"
+        "image": ""
       },
       {
         "id": "var-helm-wht",
@@ -40241,7 +39463,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 320,
         "discountPercent": 39,
         "stock": 100,
-        "image": "/images/products/safety/karam-pn-521-helmet-isi.webp"
+        "image": ""
       },
       {
         "id": "var-helm-blu",
@@ -40251,7 +39473,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 320,
         "discountPercent": 39,
         "stock": 60,
-        "image": "/images/products/safety/karam-pn-521-helmet-isi.webp"
+        "image": ""
       },
       {
         "id": "var-helm-grn",
@@ -40261,7 +39483,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 320,
         "discountPercent": 39,
         "stock": 50,
-        "image": "/images/products/safety/karam-pn-521-helmet-isi.webp"
+        "image": ""
       }
     ],
     "price": 195,
@@ -40283,10 +39505,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "safety-workwear",
     "categoryName": "Safety & Workwear",
     "subCategory": "Full-Body Fall Arrest Harness",
-    "image": "/images/products/safety/karam-fs-51-full-harness.webp",
-    "images": [
-      "/images/products/safety/karam-fs-51-full-harness.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Full Body Fall Arrest \u00b7 Dorsal D-Ring \u00b7 High-Strength Polyester Webbing",
     "specChips": [
       "Dorsal D-Ring",
@@ -40341,7 +39561,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 32,
         "stock": 40,
-        "image": "/images/products/safety/karam-fs-51-full-harness.webp"
+        "image": ""
       },
       {
         "id": "var-har-double",
@@ -40351,7 +39571,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2650,
         "discountPercent": 30,
         "stock": 30,
-        "image": "/images/products/safety/karam-fs-51-full-harness.webp"
+        "image": ""
       }
     ],
     "price": 1250,
@@ -40373,10 +39593,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "safety-workwear",
     "categoryName": "Safety & Workwear",
     "subCategory": "Protective Goggles & Dust Masks",
-    "image": "/images/products/safety/karam-es-01-safety-goggles.webp",
-    "images": [
-      "/images/products/safety/karam-es-01-safety-goggles.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hard-Coated Polycarbonate Lens \u00b7 99.9% UV Protection \u00b7 Panoramic Vision",
     "specChips": [
       "Anti-Scratch Lens",
@@ -40427,7 +39645,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 160,
         "discountPercent": 40,
         "stock": 100,
-        "image": "/images/products/safety/karam-es-01-safety-goggles.webp"
+        "image": ""
       },
       {
         "id": "var-gog-smk",
@@ -40437,7 +39655,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 185,
         "discountPercent": 38,
         "stock": 80,
-        "image": "/images/products/safety/karam-es-01-safety-goggles.webp"
+        "image": ""
       }
     ],
     "price": 95,
@@ -40459,10 +39677,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "safety-workwear",
     "categoryName": "Safety & Workwear",
     "subCategory": "Protective Goggles & Dust Masks",
-    "image": "/images/products/safety/karam-dust-mask-pack-50.webp",
-    "images": [
-      "/images/products/safety/karam-dust-mask-pack-50.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Multi-Layer Electrostatic Filter \u00b7 Filters Fine Cement & Plaster Dust \u00b7 FFP2",
     "specChips": [
       "Multi-Layer Filter",
@@ -40513,7 +39729,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 750,
         "discountPercent": 40,
         "stock": 60,
-        "image": "/images/products/safety/karam-dust-mask-pack-50.webp"
+        "image": ""
       },
       {
         "id": "var-msk-carb",
@@ -40523,7 +39739,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1150,
         "discountPercent": 37,
         "stock": 40,
-        "image": "/images/products/safety/karam-dust-mask-pack-50.webp"
+        "image": ""
       }
     ],
     "price": 450,
@@ -40545,10 +39761,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "tools-hardware",
     "categoryName": "Tools, Power Tools & General Hardware",
     "subCategory": "Professional Impact Drills",
-    "image": "/images/products/tools/bosch-gsb-550-professional-impact-drill-machine-550w-with-13mm-chuck.webp",
-    "images": [
-      "/images/products/tools/bosch-gsb-550-professional-impact-drill-machine-550w-with-13mm-chuck.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "550W Powerful Copper Motor \u00b7 Forward/Reverse \u00b7 Dual Rotary & Hammer Modes",
     "specChips": [
       "550W Motor",
@@ -40607,7 +39821,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4100,
         "discountPercent": 40,
         "stock": 50,
-        "image": "/images/products/tools/bosch-gsb-550-professional-impact-drill-machine-550w-with-13mm-chuck.webp"
+        "image": ""
       },
       {
         "id": "var-gsb-kit",
@@ -40617,7 +39831,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5990,
         "discountPercent": 36,
         "stock": 40,
-        "image": "/images/products/tools/bosch-gsb-550-professional-impact-drill-machine-550w-with-13mm-chuck.webp"
+        "image": ""
       }
     ],
     "price": 2450,
@@ -40639,10 +39853,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "tools-hardware",
     "categoryName": "Tools, Power Tools & General Hardware",
     "subCategory": "Heavy-Duty Angle Grinders",
-    "image": "/images/products/tools/bosch-gws-600-angle-grinder.webp",
-    "images": [
-      "/images/products/tools/bosch-gws-600-angle-grinder.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "670W High Power \u00b7 Slim Barrel Grip \u00b7 Cutting Metal, Granite & Tiles",
     "specChips": [
       "670W High Power",
@@ -40701,7 +39913,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3600,
         "discountPercent": 38,
         "stock": 50,
-        "image": "/images/products/tools/bosch-gws-600-angle-grinder.webp"
+        "image": ""
       },
       {
         "id": "var-gws-disc",
@@ -40711,7 +39923,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3990,
         "discountPercent": 38,
         "stock": 40,
-        "image": "/images/products/tools/bosch-gws-600-angle-grinder.webp"
+        "image": ""
       }
     ],
     "price": 2250,
@@ -40733,10 +39945,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "tools-hardware",
     "categoryName": "Tools, Power Tools & General Hardware",
     "subCategory": "Professional Impact Drills",
-    "image": "/images/products/tools/bosch-gbh-220-rotary-hammer.webp",
-    "images": [
-      "/images/products/tools/bosch-gbh-220-rotary-hammer.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "720W Powerful Motor \u00b7 2.0 Joules Impact Energy \u00b7 3-Mode Versatility",
     "specChips": [
       "720W Motor",
@@ -40791,7 +40001,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7200,
         "discountPercent": 33,
         "stock": 35,
-        "image": "/images/products/tools/bosch-gbh-220-rotary-hammer.webp"
+        "image": ""
       },
       {
         "id": "var-gbh-bits",
@@ -40801,7 +40011,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 7950,
         "discountPercent": 32,
         "stock": 25,
-        "image": "/images/products/tools/bosch-gbh-220-rotary-hammer.webp"
+        "image": ""
       }
     ],
     "price": 4850,
@@ -40823,10 +40033,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "tools-hardware",
     "categoryName": "Tools, Power Tools & General Hardware",
     "subCategory": "Heavy-Duty Angle Grinders",
-    "image": "/images/products/tools/dewalt-dw801-grinder-4.webp",
-    "images": [
-      "/images/products/tools/dewalt-dw801-grinder-4.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "850W High-Torque Motor \u00b7 Epoxy Coated Field Coils \u00b7 Metal Fabrication",
     "specChips": [
       "850W High Torque",
@@ -40877,7 +40085,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4200,
         "discountPercent": 35,
         "stock": 35,
-        "image": "/images/products/tools/dewalt-dw801-grinder-4.webp"
+        "image": ""
       },
       {
         "id": "var-dw801-hnd",
@@ -40887,7 +40095,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4450,
         "discountPercent": 35,
         "stock": 30,
-        "image": "/images/products/tools/dewalt-dw801-grinder-4.webp"
+        "image": ""
       }
     ],
     "price": 2750,
@@ -40909,10 +40117,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "tools-hardware",
     "categoryName": "Tools, Power Tools & General Hardware",
     "subCategory": "Professional Impact Drills",
-    "image": "/images/products/tools/dewalt-dwd024-drill-13mm.webp",
-    "images": [
-      "/images/products/tools/dewalt-dwd024-drill-13mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "650W High Output \u00b7 Variable Speed Trigger \u00b7 Sealed Ball Bearings",
     "specChips": [
       "650W Motor",
@@ -40963,7 +40169,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4400,
         "discountPercent": 35,
         "stock": 35,
-        "image": "/images/products/tools/dewalt-dwd024-drill-13mm.webp"
+        "image": ""
       },
       {
         "id": "var-dwd-hnd",
@@ -40973,7 +40179,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4650,
         "discountPercent": 36,
         "stock": 30,
-        "image": "/images/products/tools/dewalt-dwd024-drill-13mm.webp"
+        "image": ""
       }
     ],
     "price": 2850,
@@ -40995,10 +40201,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "tools-hardware",
     "categoryName": "Tools, Power Tools & General Hardware",
     "subCategory": "Heavy-Duty Angle Grinders",
-    "image": "/images/products/tools/bosch-gst-650-jigsaw.webp",
-    "images": [
-      "/images/products/tools/bosch-gst-650-jigsaw.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "450W Motor \u00b7 Smooth Curve Cutting \u00b7 Adjustable Base Bevel \u00b7 Wood & Metal",
     "specChips": [
       "450W Motor",
@@ -41053,7 +40257,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4600,
         "discountPercent": 36,
         "stock": 30,
-        "image": "/images/products/tools/bosch-gst-650-jigsaw.webp"
+        "image": ""
       },
       {
         "id": "var-gst-blades",
@@ -41063,7 +40267,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4990,
         "discountPercent": 35,
         "stock": 25,
-        "image": "/images/products/tools/bosch-gst-650-jigsaw.webp"
+        "image": ""
       }
     ],
     "price": 2950,
@@ -41085,10 +40289,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "waterproofing-repairing",
     "categoryName": "Waterproofing & Repairing",
     "subCategory": "Integral Liquid Waterproofing",
-    "image": "/images/products/waterproofing/dr-fixit-lw-plus-waterproofing-5l.webp",
-    "images": [
-      "/images/products/waterproofing/dr-fixit-lw-plus-waterproofing-5l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Essential for Concrete & Plaster \u00b7 Inhibits Rusting of TMT Steel \u00b7 IS 2645",
     "specChips": [
       "Integral Waterproofing",
@@ -41143,7 +40345,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 210,
         "discountPercent": 17,
         "stock": 100,
-        "image": "/images/products/waterproofing/dr-fixit-lw-plus-waterproofing-5l.webp"
+        "image": ""
       },
       {
         "id": "var-lw-wp-5l",
@@ -41153,7 +40355,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 890,
         "discountPercent": 19,
         "stock": 80,
-        "image": "/images/products/waterproofing/dr-fixit-lw-plus-waterproofing-5l.webp"
+        "image": ""
       },
       {
         "id": "var-lw-wp-10l",
@@ -41163,7 +40365,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1720,
         "discountPercent": 20,
         "stock": 50,
-        "image": "/images/products/waterproofing/dr-fixit-lw-plus-waterproofing-5l.webp"
+        "image": ""
       },
       {
         "id": "var-lw-wp-20l",
@@ -41173,7 +40375,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3250,
         "discountPercent": 20,
         "stock": 35,
-        "image": "/images/products/waterproofing/dr-fixit-lw-plus-waterproofing-5l.webp"
+        "image": ""
       }
     ],
     "price": 175,
@@ -41195,10 +40397,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "waterproofing-repairing",
     "categoryName": "Waterproofing & Repairing",
     "subCategory": "Polymer Bonding Agents (URP)",
-    "image": "/images/products/waterproofing/dr-fixit-urp-302-bonding-agent-5kg.webp",
-    "images": [
-      "/images/products/waterproofing/dr-fixit-urp-302-bonding-agent-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "SBR Latex Polymer \u00b7 Bridges Old-to-New Concrete \u00b7 Structural Repairs",
     "specChips": [
       "SBR Polymer",
@@ -41253,7 +40453,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 380,
         "discountPercent": 18,
         "stock": 70,
-        "image": "/images/products/waterproofing/dr-fixit-urp-302-bonding-agent-5kg.webp"
+        "image": ""
       },
       {
         "id": "var-urp-5kg",
@@ -41263,7 +40463,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1720,
         "discountPercent": 22,
         "stock": 60,
-        "image": "/images/products/waterproofing/dr-fixit-urp-302-bonding-agent-5kg.webp"
+        "image": ""
       },
       {
         "id": "var-urp-10kg",
@@ -41273,7 +40473,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3250,
         "discountPercent": 22,
         "stock": 40,
-        "image": "/images/products/waterproofing/dr-fixit-urp-302-bonding-agent-5kg.webp"
+        "image": ""
       },
       {
         "id": "var-urp-20kg",
@@ -41283,7 +40483,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6200,
         "discountPercent": 22,
         "stock": 25,
-        "image": "/images/products/waterproofing/dr-fixit-urp-302-bonding-agent-5kg.webp"
+        "image": ""
       }
     ],
     "price": 310,
@@ -41305,10 +40505,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "waterproofing-repairing",
     "categoryName": "Waterproofing & Repairing",
     "subCategory": "Elastomeric Terrace Coatings",
-    "image": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit.webp",
-    "images": [
-      "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "2-Part Acrylic Cementitious Elastomeric Membrane \u00b7 100% Waterproof",
     "specChips": [
       "2-Component Kit",
@@ -41363,7 +40561,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1600,
         "discountPercent": 22,
         "stock": 35,
-        "image": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit.webp"
+        "image": ""
       },
       {
         "id": "var-pid-20kg",
@@ -41373,7 +40571,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3100,
         "discountPercent": 21,
         "stock": 45,
-        "image": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit.webp"
+        "image": ""
       },
       {
         "id": "var-pid-40kg",
@@ -41383,7 +40581,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5900,
         "discountPercent": 21,
         "stock": 25,
-        "image": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit.webp"
+        "image": ""
       }
     ],
     "price": 1250,
@@ -41405,10 +40603,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "waterproofing-repairing",
     "categoryName": "Waterproofing & Repairing",
     "subCategory": "Damp-Proof Surface Barriers",
-    "image": "/images/products/waterproofing/dr-fixit-raincoat-waterproof-coating-20l.webp",
-    "images": [
-      "/images/products/waterproofing/dr-fixit-raincoat-waterproof-coating-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "110 Micron Thick Dry Film \u00b7 2x Thicker Than Exterior Paint \u00b7 10-Yr Guarantee",
     "specChips": [
       "Elastomeric Coating",
@@ -41463,7 +40659,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1500,
         "discountPercent": 23,
         "stock": 40,
-        "image": "/images/products/waterproofing/dr-fixit-raincoat-waterproof-coating-20l.webp"
+        "image": ""
       },
       {
         "id": "var-rain-20l",
@@ -41473,7 +40669,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6200,
         "discountPercent": 22,
         "stock": 30,
-        "image": "/images/products/waterproofing/dr-fixit-raincoat-waterproof-coating-20l.webp"
+        "image": ""
       }
     ],
     "price": 1150,
@@ -41495,10 +40691,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "waterproofing-repairing",
     "categoryName": "Waterproofing & Repairing",
     "subCategory": "Crack Sealants & Putty",
-    "image": "/images/products/waterproofing/dr-fixit-crack-x-paste-1kg.webp",
-    "images": [
-      "/images/products/waterproofing/dr-fixit-crack-x-paste-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Fills Cracks up to 5mm \u00b7 Flexible & Non-Shrink \u00b7 Paintable in 24 Hrs",
     "specChips": [
       "Fills up to 5mm",
@@ -41549,7 +40743,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 150,
         "discountPercent": 23,
         "stock": 70,
-        "image": "/images/products/waterproofing/dr-fixit-crack-x-paste-1kg.webp"
+        "image": ""
       },
       {
         "id": "var-crk-1kg",
@@ -41559,7 +40753,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 250,
         "discountPercent": 22,
         "stock": 80,
-        "image": "/images/products/waterproofing/dr-fixit-crack-x-paste-1kg.webp"
+        "image": ""
       },
       {
         "id": "var-crk-5kg",
@@ -41569,7 +40763,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1150,
         "discountPercent": 26,
         "stock": 40,
-        "image": "/images/products/waterproofing/dr-fixit-crack-x-paste-1kg.webp"
+        "image": ""
       }
     ],
     "price": 115,
@@ -41591,10 +40785,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "waterproofing-repairing",
     "categoryName": "Waterproofing & Repairing",
     "subCategory": "Elastomeric Terrace Coatings",
-    "image": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit-2-component-waterproofing-coating-for-terrace-bathroom.webp",
-    "images": [
-      "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit-2-component-waterproofing-coating-for-terrace-bathroom.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "CFRI Certified Food Grade Safe \u00b7 High Hydrostatic Head \u00b7 Zero Water Leakage",
     "specChips": [
       "CFRI Food Safe",
@@ -41645,7 +40837,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3250,
         "discountPercent": 22,
         "stock": 40,
-        "image": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit-2-component-waterproofing-coating-for-terrace-bathroom.webp"
+        "image": ""
       },
       {
         "id": "var-pidsump-40",
@@ -41655,7 +40847,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6200,
         "discountPercent": 23,
         "stock": 25,
-        "image": "/images/products/waterproofing/dr-fixit-pidifin-2k-20kg-kit-2-component-waterproofing-coating-for-terrace-bathroom.webp"
+        "image": ""
       }
     ],
     "price": 2550,
@@ -41692,9 +40884,9 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "Burst-Proof Guard / Double Insulated",
     "keySpecBadge": "670W \u00b7 100mm \u00b7 11,000 RPM",
     "brandTier": 1,
-    "image": "/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp",
+    "image": "/images/home-categories/tools-hardware.webp",
     "images": [
-      "/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp"
+      "/images/home-categories/tools-hardware.webp"
     ],
     "shortTagline": "670W High-Torque Motor \u00b7 Ultra-Slim Grip \u00b7 11,000 RPM Cutting Speed",
     "specChips": [
@@ -41763,7 +40955,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 3600,
         "discountPercent": 33,
         "stock": 50,
-        "image": "/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp"
+        "image": "/images/home-categories/tools-hardware.webp"
       }
     ],
     "inStock": true,
@@ -41800,10 +40992,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "Overload Safety Clutch / IS 60745",
     "keySpecBadge": "800W \u00b7 SDS-Plus \u00b7 0\u2013900 RPM",
     "brandTier": 1,
-    "image": "/images/products/power-tools-safety/bosch-gbh-2-26-re-800w-sds-plus-rotary-hammer.webp",
-    "images": [
-      "/images/products/power-tools-safety/bosch-gbh-2-26-re-800w-sds-plus-rotary-hammer.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "800W High Drilling Rate \u00b7 0\u20132.7J Impact Energy \u00b7 Reversible Rotation",
     "specChips": [
       "800W Motor",
@@ -41875,7 +41065,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 19500,
         "discountPercent": 23,
         "stock": 25,
-        "image": "/images/products/power-tools-safety/bosch-gbh-2-26-re-800w-sds-plus-rotary-hammer.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -41912,10 +41102,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "Rotation Stop / Overload Clutch / IS 60745",
     "keySpecBadge": "800W \u00b7 SDS-Plus \u00b7 0\u20133J Impact",
     "brandTier": 1,
-    "image": "/images/products/power-tools-safety/bosch-gbh-2-26-dre-800w-3-mode-sds-plus-rotary-hammer.webp",
-    "images": [
-      "/images/products/power-tools-safety/bosch-gbh-2-26-dre-800w-3-mode-sds-plus-rotary-hammer.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3-Mode Selector with Rotation Stop \u00b7 Light Chiseling & Tile Stripping \u00b7 800W",
     "specChips": [
       "800W Motor",
@@ -41983,7 +41171,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 17800,
         "discountPercent": 24,
         "stock": 30,
-        "image": "/images/products/power-tools-safety/bosch-gbh-2-26-dre-800w-3-mode-sds-plus-rotary-hammer.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -42020,10 +41208,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "1000V Insulated / IS 5571",
     "keySpecBadge": "1000V Insulated \u00b7 3-in-1 Blade Set",
     "brandTier": 1,
-    "image": "/images/products/power-tools-safety/taparia-tk-052-insulated-screwdriver-set.webp",
-    "images": [
-      "/images/products/power-tools-safety/taparia-tk-052-insulated-screwdriver-set.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-Grade Alloy Steel \u00b7 1000V Shock Protection \u00b7 Precision Ground Tips",
     "specChips": [
       "1000V Insulated",
@@ -42087,7 +41273,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 340,
         "discountPercent": 27,
         "stock": 120,
-        "image": "/images/products/power-tools-safety/taparia-tk-052-insulated-screwdriver-set.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -42124,10 +41310,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "Class II Accuracy / Tylon Anti-Glare Coat",
     "keySpecBadge": "5m x 19mm \u00b7 Tylon Coated \u00b7 Lock",
     "brandTier": 1,
-    "image": "/images/products/power-tools-safety/stanley-5m-x-19mm-tylon-measuring-tape-lock-stht37519-812.webp",
-    "images": [
-      "/images/products/power-tools-safety/stanley-5m-x-19mm-tylon-measuring-tape-lock-stht37519-812.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Tylon Matt Finish Blade \u00b7 Class II Accuracy \u00b7 Tru-Zero Hook",
     "specChips": [
       "5m Length",
@@ -42191,7 +41375,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 180,
         "discountPercent": 44,
         "stock": 200,
-        "image": "/images/products/power-tools-safety/stanley-5m-x-19mm-tylon-measuring-tape-lock-stht37519-812.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -42228,10 +41412,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "IS 2925:1984 BIS Certified",
     "keySpecBadge": "ISI Marked \u00b7 PN501 \u00b7 Polyethylene",
     "brandTier": 2,
-    "image": "/images/products/power-tools-safety/karam-pn501-isi-shelmet-safety-helmet-grey.webp",
-    "images": [
-      "/images/products/power-tools-safety/karam-pn501-isi-shelmet-safety-helmet-grey.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "IS 2925 BIS Certified \u00b7 High Density Polymer Shell \u00b7 Nape Strap Adjustment",
     "specChips": [
       "ISI Marked",
@@ -42295,7 +41477,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 375,
         "discountPercent": 30,
         "stock": 150,
-        "image": "/images/products/power-tools-safety/karam-pn501-isi-shelmet-safety-helmet-grey.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -42332,10 +41514,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "IS 3521:1999 & EN 361 Certified",
     "keySpecBadge": "ISI Full Body \u00b7 2m Lanyard \u00b7 2 Hooks",
     "brandTier": 2,
-    "image": "/images/products/power-tools-safety/karam-ki01-pn-351-isi-full-body-safety-harness-lanyard-2-hooks.webp",
-    "images": [
-      "/images/products/power-tools-safety/karam-ki01-pn-351-isi-full-body-safety-harness-lanyard-2-hooks.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dorsal D-Ring \u00b7 2m Twin Twisted Lanyard \u00b7 2 Scaffold Hooks (50mm Opening)",
     "specChips": [
       "ISI Marked",
@@ -42403,7 +41583,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2650,
         "discountPercent": 32,
         "stock": 45,
-        "image": "/images/products/power-tools-safety/karam-ki01-pn-351-isi-full-body-safety-harness-lanyard-2-hooks.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -42440,10 +41620,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "EN 166 1.F / ANSI Z87.1 Splash Guard",
     "keySpecBadge": "Anti-Fog \u00b7 Chemical Splash \u00b7 EN 166",
     "brandTier": 2,
-    "image": "/images/products/power-tools-safety/3m-fahrenheit-7136013-chemical-resistant-safety-goggles.webp",
-    "images": [
-      "/images/products/power-tools-safety/3m-fahrenheit-7136013-chemical-resistant-safety-goggles.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Acetate Anti-Fog Lens \u00b7 Chemical Splash & Flying Particle Proof \u00b7 EN 166 Certified",
     "specChips": [
       "3M Optical Class 1",
@@ -42507,7 +41685,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5800,
         "discountPercent": 30,
         "stock": 35,
-        "image": "/images/products/power-tools-safety/3m-fahrenheit-7136013-chemical-resistant-safety-goggles.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -42544,10 +41722,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "safetyStandard": "ANSI/ISEA 107-2020 Class 3 / EN ISO 20471",
     "keySpecBadge": "ANSI Class 3 \u00b7 6-in-1 Multi-Weather \u00b7 360\u00b0 Reflective",
     "brandTier": 2,
-    "image": "/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp",
-    "images": [
-      "/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "All-Weather Waterproof \u00b7 360\u00b0 High-Vis Reflective Band \u00b7 ANSI Class 3 Certified",
     "specChips": [
       "ANSI Class 3",
@@ -42611,7 +41787,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 35000,
         "discountPercent": 21,
         "stock": 15,
-        "image": "/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp"
+        "image": ""
       },
       {
         "id": "var-smasys-xl",
@@ -42621,7 +41797,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 35000,
         "discountPercent": 21,
         "stock": 20,
-        "image": "/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -42643,10 +41819,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Plywood (8x4 ft)",
-    "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-marine-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-club-prime-bwp-marine-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's No. 1 Premium Calibrated Marine Plywood \u2022 30-Year Warranty",
     "specChips": [
       "IS:710 Marine",
@@ -42703,7 +41877,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5115,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-marine-plywood-18mm.webp"
+        "image": ""
       }
     ],
     "price": 4448,
@@ -42738,10 +41912,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Plywood (8x4 ft)",
-    "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-plywood-19mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-club-prime-bwp-plywood-19mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy Duty 19mm Calibrated Structural Marine Plywood",
     "specChips": [
       "IS:710 Marine",
@@ -42798,7 +41970,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 5667,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-plywood-19mm.webp"
+        "image": ""
       }
     ],
     "price": 4928,
@@ -42833,10 +42005,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Plywood (8x4 ft)",
-    "image": "/images/products/wood-hardware/centuryply-sainik-710-marine-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-sainik-710-marine-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Sainik 710 Asli Waterproof Marine Plywood \u2022 Lucknow Favourited",
     "specChips": [
       "IS:710 Certified",
@@ -42893,7 +42063,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4450,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/centuryply-sainik-710-marine-plywood-18mm.webp"
+        "image": ""
       }
     ],
     "price": 3872,
@@ -42928,10 +42098,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Plywood (8x4 ft)",
-    "image": "/images/products/wood-hardware/centuryply-sainik-710-plywood-19mm.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-sainik-710-plywood-19mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "19mm Heavy Sainik 710 Waterproof Sheet \u2022 High Screw Holding",
     "specChips": [
       "IS:710 Certified",
@@ -42988,7 +42156,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4380,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/centuryply-sainik-710-plywood-19mm.webp"
+        "image": ""
       }
     ],
     "price": 3808,
@@ -43023,10 +42191,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Plywood (8x4 ft)",
-    "image": "/images/products/wood-hardware/greenply-green-gold-2-0-marine-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-green-gold-2-0-marine-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Green Gold 2.0 Quadra-Pro Calibrated Marine Plywood",
     "specChips": [
       "IS:710 Marine",
@@ -43083,7 +42249,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2980,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/greenply-green-gold-2-0-marine-plywood-18mm.webp"
+        "image": ""
       }
     ],
     "price": 2592,
@@ -43118,10 +42284,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Plywood (8x4 ft)",
-    "image": "/images/products/wood-hardware/greenply-ecotec-bwr-plywood-18mm.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-ecotec-bwr-plywood-18mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ecotec BWR Moisture Resistant Commercial Woodworking Sheet",
     "specChips": [
       "IS:303 BWR",
@@ -43178,7 +42342,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2818,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/greenply-ecotec-bwr-plywood-18mm.webp"
+        "image": ""
       }
     ],
     "price": 2450,
@@ -43213,10 +42377,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Flush Doors (30mm)",
-    "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-flush-door-30mm-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-club-prime-bwp-flush-door-30mm-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Premium 30mm BWP Phenolic Flush Door with 25-Year Warranty",
     "specChips": [
       "30mm Solid Core",
@@ -43273,7 +42435,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 6170,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/centuryply-club-prime-bwp-flush-door-30mm-7x3.webp"
+        "image": ""
       }
     ],
     "price": 5367,
@@ -43308,10 +42470,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Flush Doors (30mm)",
-    "image": "/images/products/wood-hardware/centuryply-bond-flush-door-30mm-solid-core-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/centuryply-bond-flush-door-30mm-solid-core-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Reliable 30mm Seasoned Hardwood Solid Core Flush Door",
     "specChips": [
       "30mm Solid Core",
@@ -43368,7 +42528,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4395,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/centuryply-bond-flush-door-30mm-solid-core-7x3.webp"
+        "image": ""
       }
     ],
     "price": 3822,
@@ -43403,10 +42563,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Flush Doors (30mm)",
-    "image": "/images/products/wood-hardware/greenply-green-ecotech-platinum-flush-door-30mm-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-green-ecotech-platinum-flush-door-30mm-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Greenply Platinum Seasoned Timber Solid Core Flush Door",
     "specChips": [
       "30mm Solid Core",
@@ -43463,7 +42621,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4057,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/greenply-green-ecotech-platinum-flush-door-30mm-7x3.webp"
+        "image": ""
       }
     ],
     "price": 3528,
@@ -43498,10 +42656,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Flush Doors (30mm)",
-    "image": "/images/products/wood-hardware/greenply-optima-g-flush-door-30mm-7x3.webp",
-    "images": [
-      "/images/products/wood-hardware/greenply-optima-g-flush-door-30mm-7x3.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Optima G Heavy Duty Dimensional Stable Solid Flush Door",
     "specChips": [
       "30mm Solid Core",
@@ -43558,7 +42714,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 4347,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/greenply-optima-g-flush-door-30mm-7x3.webp"
+        "image": ""
       }
     ],
     "price": 3780,
@@ -43593,10 +42749,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Laminates (1mm)",
-    "image": "/images/products/wood-hardware/century-1mm-laminate-3846-white-marble-8x4.webp",
-    "images": [
-      "/images/products/wood-hardware/century-1mm-laminate-3846-white-marble-8x4.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.0mm Ultra-Gloss Italian Carrara Marble High Pressure Laminate",
     "specChips": [
       "1.0mm HPL",
@@ -43653,7 +42807,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2575,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/century-1mm-laminate-3846-white-marble-8x4.webp"
+        "image": ""
       }
     ],
     "price": 2239,
@@ -43688,10 +42842,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Laminates (1mm)",
-    "image": "/images/products/wood-hardware/century-1mm-laminate-449-urban-teak-8x4.webp",
-    "images": [
-      "/images/products/wood-hardware/century-1mm-laminate-449-urban-teak-8x4.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1.0mm Natural Burma Woodgrain Textured Urban Teak Sheet",
     "specChips": [
       "1.0mm HPL",
@@ -43748,7 +42900,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2147,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/century-1mm-laminate-449-urban-teak-8x4.webp"
+        "image": ""
       }
     ],
     "price": 1867,
@@ -43783,10 +42935,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Hardware (Locks, Closers & Hinges)",
-    "image": "/images/products/wood-hardware/godrej-stella-180mm-mortise-door-lock-handle-set.webp",
-    "images": [
-      "/images/products/wood-hardware/godrej-stella-180mm-mortise-door-lock-handle-set.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Solid Zinc Alloy Satin Handle with 6-Lever Anti-Pick Mortise Lock",
     "specChips": [
       "6-Lever Brass",
@@ -43843,7 +42993,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1813,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/godrej-stella-180mm-mortise-door-lock-handle-set.webp"
+        "image": ""
       }
     ],
     "price": 1577,
@@ -43878,10 +43028,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Hardware (Locks, Closers & Hinges)",
-    "image": "/images/products/wood-hardware/europa-mortise-rose-handle-combo-set-m516961r692ab.webp",
-    "images": [
-      "/images/products/wood-hardware/europa-mortise-rose-handle-combo-set-m516961r692ab.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer Antique Rose Handle with Computerized Dimple Cylinder",
     "specChips": [
       "Computerized Key",
@@ -43938,7 +43086,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 2288,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/europa-mortise-rose-handle-combo-set-m516961r692ab.webp"
+        "image": ""
       }
     ],
     "price": 1990,
@@ -43973,10 +43121,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Hardware (Locks, Closers & Hinges)",
-    "image": "/images/products/wood-hardware/dorset-dc60sm-60kg-overhead-door-closer.webp",
-    "images": [
-      "/images/products/wood-hardware/dorset-dc60sm-60kg-overhead-door-closer.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Dual-Valve Hydraulic Rack & Pinion Door Closer for Doors \u2264 60kg",
     "specChips": [
       "Up to 60kg",
@@ -44033,7 +43179,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 1066,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/dorset-dc60sm-60kg-overhead-door-closer.webp"
+        "image": ""
       }
     ],
     "price": 927,
@@ -44068,10 +43214,8 @@ export const CATALOG_PRODUCTS: IProduct[] = [
     "categorySlug": "plywood-boards",
     "categoryName": "Plywood, Doors & Hardware",
     "subCategory": "Hardware (Locks, Closers & Hinges)",
-    "image": "/images/products/wood-hardware/hettich-onsys-4447i-soft-close-hinges-105-1-pair.webp",
-    "images": [
-      "/images/products/wood-hardware/hettich-onsys-4447i-soft-close-hinges-105-1-pair.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German Engineered Concealed Soft-Close Silent Cabinet Hinges",
     "specChips": [
       "105\u00b0 Opening",
@@ -44128,7 +43272,7 @@ export const CATALOG_PRODUCTS: IProduct[] = [
         "mrp": 255,
         "discountPercent": 13,
         "stock": 50,
-        "image": "/images/products/wood-hardware/hettich-onsys-4447i-soft-close-hinges-105-1-pair.webp"
+        "image": ""
       }
     ],
     "price": 222,

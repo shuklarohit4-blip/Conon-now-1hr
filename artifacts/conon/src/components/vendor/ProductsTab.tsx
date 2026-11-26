@@ -18,7 +18,7 @@ import { useVendor } from "@/context/VendorContext";
 import { type MasterCatalogSKU } from "@/lib/vendorApi";
 import { GREEN, inr } from "./theme";
 import { resolveVendorImg } from "@/context/VendorContext";
-import { RealProductImage } from "../RealProductImage";
+import { CononProductMedia } from "../CononProductMedia";
 
 export function ProductsTab({ onAdded }: { onAdded?: () => void }) {
   const { t, lang } = useVendorLanguage();
@@ -185,7 +185,7 @@ export function ProductsTab({ onAdded }: { onAdded?: () => void }) {
               }`}
             >
               <div className="flex items-start gap-3">
-                <RealProductImage
+                <CononProductMedia
                   product={p}
                   src={resolveVendorImg(p.name, p.imageUrl)}
                   title={p.name}
@@ -193,7 +193,9 @@ export function ProductsTab({ onAdded }: { onAdded?: () => void }) {
                   category={p.category}
                   alt={p.name}
                   variant="thumb"
-                  className="w-16 h-16 object-contain rounded-2xl bg-white p-1.5 border border-slate-200 shrink-0"
+                  showGalleryBadge={false}
+                  containerClassName="w-16 h-16 rounded-2xl border border-slate-200 shrink-0"
+                  className="w-full h-full object-contain p-1.5"
                 />
 
                 <div className="min-w-0 flex-1">

@@ -11,10 +11,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/crompton-instabliss-3l-3000w-instant-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/crompton-instabliss-3l-3000w-instant-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3000W copper heating element with high grade SS 304 inner tank for instant hot water in 60 seconds",
     "specChips": [
       "3L Instant",
@@ -97,7 +95,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 3800,
         "discountPercent": 46,
         "stock": 50,
-        "image": "/images/products/home-appliances/crompton-instabliss-3l-3000w-instant-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -111,10 +109,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/racold-pronto-neo-3l-4500w-instant-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/racold-pronto-neo-3l-4500w-instant-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-speed 4.5kW heating with 8-bar pressure rating suitable for multi-storey high-rises",
     "specChips": [
       "3L Instant",
@@ -197,7 +193,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 5499,
         "discountPercent": 39,
         "stock": 50,
-        "image": "/images/products/home-appliances/racold-pronto-neo-3l-4500w-instant-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -211,10 +207,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/bajaj-shield-series-new-shakti-15l-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/bajaj-shield-series-new-shakti-15l-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "DuraAce glass-lined tank with Marine Grade non-stick heating element and 8 bar pressure rating",
     "specChips": [
       "15L Storage",
@@ -297,7 +291,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 12450,
         "discountPercent": 40,
         "stock": 50,
-        "image": "/images/products/home-appliances/bajaj-shield-series-new-shakti-15l-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -311,10 +305,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/racold-eterno-pro-15l-4-star-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/racold-eterno-pro-15l-4-star-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Titanium Ultracore coating with Smart Bath Logic energy saver and high-rise 8-bar rating",
     "specChips": [
       "15L Vertical",
@@ -397,7 +389,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 13999,
         "discountPercent": 43,
         "stock": 50,
-        "image": "/images/products/home-appliances/racold-eterno-pro-15l-4-star-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -411,10 +403,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/v-guard-victo-dg-15l-digital-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/v-guard-victo-dg-15l-digital-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Digital display with temperature dial, Antiscalant anode, 8-bar tank and complimentary connection pipes",
     "specChips": [
       "15L Digital",
@@ -497,7 +487,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 14750,
         "discountPercent": 34,
         "stock": 50,
-        "image": "/images/products/home-appliances/v-guard-victo-dg-15l-digital-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -511,10 +501,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3000W fast heating with Blue Diamond glass lining and 5-Star BEE energy efficiency",
     "specChips": [
       "15L 5-Star",
@@ -597,7 +585,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 17800,
         "discountPercent": 29,
         "stock": 50,
-        "image": "/images/products/home-appliances/ao-smith-xpress-15l-5-star-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -611,10 +599,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Water Heaters & Geysers",
     "applianceSubcategory": "WATER_HEATER",
-    "image": "/images/products/home-appliances/ao-smith-finesse-25l-5-star-storage-geyser.webp",
-    "images": [
-      "/images/products/home-appliances/ao-smith-finesse-25l-5-star-storage-geyser.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "25L luxury bathroom volume with Blue Diamond glass lining and BEE 5-Star energy rating",
     "specChips": [
       "25L Large Volume",
@@ -697,7 +683,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 19500,
         "discountPercent": 32,
         "stock": 50,
-        "image": "/images/products/home-appliances/ao-smith-finesse-25l-5-star-storage-geyser.webp"
+        "image": ""
       }
     ]
   },
@@ -711,10 +697,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/elica-wd-tbf-hac-60-ms-nero-filterless-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/elica-wd-tbf-hac-60-ms-nero-filterless-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "1425 m³/hr heavy suction with heat auto-clean, motion sensor and black curved glass finish",
     "specChips": [
       "60cm Width",
@@ -797,7 +781,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 23990,
         "discountPercent": 43,
         "stock": 50,
-        "image": "/images/products/home-appliances/elica-wd-tbf-hac-60-ms-nero-filterless-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -811,10 +795,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "90cm wide coverage for 3–4 burner hobs with filterless auto-clean, LED strip and motion controls",
     "specChips": [
       "90cm Width",
@@ -897,7 +879,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 24990,
         "discountPercent": 44,
         "stock": 50,
-        "image": "/images/products/home-appliances/elica-wdfl-906-hac-ltw-ms-nero-90cm-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -911,10 +893,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/faber-hood-polo-in-hc-sc-bk-60-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/faber-hood-polo-in-hc-sc-bk-60-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Italian design 60cm chimney with I-Clean auto-clean technology, gesture controls and 1200 m³/hr suction",
     "specChips": [
       "60cm Width",
@@ -997,7 +977,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 23990,
         "discountPercent": 41,
         "stock": 50,
-        "image": "/images/products/home-appliances/faber-hood-polo-in-hc-sc-bk-60-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -1011,10 +991,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Modular Kitchen Chimneys",
     "applianceSubcategory": "KITCHEN_CHIMNEY",
-    "image": "/images/products/home-appliances/faber-hood-primus-plus-energy-90cm-chimney.webp",
-    "images": [
-      "/images/products/home-appliances/faber-hood-primus-plus-energy-90cm-chimney.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "High-power 1500 m³/hr heavy suction with BLDC motor, 90cm wide canopy and smart thermal autoclean",
     "specChips": [
       "90cm Width",
@@ -1097,7 +1075,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 31990,
         "discountPercent": 45,
         "stock": 50,
-        "image": "/images/products/home-appliances/faber-hood-primus-plus-energy-90cm-chimney.webp"
+        "image": ""
       }
     ]
   },
@@ -1111,10 +1089,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/crompton-brisk-air-neo-200mm-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/crompton-brisk-air-neo-200mm-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "40W high air delivery ventilation fan with rust-proof plastic blades for 8-inch cutouts",
     "specChips": [
       "200mm / 8-Inch",
@@ -1197,7 +1173,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 1850,
         "discountPercent": 32,
         "stock": 50,
-        "image": "/images/products/home-appliances/crompton-brisk-air-neo-200mm-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -1211,10 +1187,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/atomberg-efficio-200mm-bldc-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/atomberg-efficio-200mm-bldc-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Energy-saving BLDC motor consuming only 20W with 500 m³/hr air delivery for 8-inch cutouts",
     "specChips": [
       "200mm / 8-Inch",
@@ -1297,7 +1271,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 2290,
         "discountPercent": 35,
         "stock": 50,
-        "image": "/images/products/home-appliances/atomberg-efficio-200mm-bldc-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -1311,10 +1285,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/havells-ventil-air-dx-150mm-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/havells-ventil-air-dx-150mm-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Compact 150mm (6-inch) exhaust fan with gravity louvre shutter for modern bathroom glass cutouts",
     "specChips": [
       "150mm / 6-Inch",
@@ -1397,7 +1369,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 2325,
         "discountPercent": 30,
         "stock": 50,
-        "image": "/images/products/home-appliances/havells-ventil-air-dx-150mm-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -1411,10 +1383,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Exhaust & Ventilation Fans",
     "applianceSubcategory": "EXHAUST_FAN",
-    "image": "/images/products/home-appliances/atomberg-studio-plus-150mm-bldc-exhaust-fan.webp",
-    "images": [
-      "/images/products/home-appliances/atomberg-studio-plus-150mm-bldc-exhaust-fan.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Ultra-low 6.8W power consumption with whisper-silent operation for premium 6-inch bathroom cutouts",
     "specChips": [
       "150mm / 6-Inch",
@@ -1497,7 +1467,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 3100,
         "discountPercent": 32,
         "stock": 50,
-        "image": "/images/products/home-appliances/atomberg-studio-plus-150mm-bldc-exhaust-fan.webp"
+        "image": ""
       }
     ]
   },
@@ -1511,10 +1481,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Desert Air Coolers",
     "applianceSubcategory": "DESERT_COOLER",
-    "image": "/images/products/home-appliances/crompton-ozone-75l-desert-air-cooler.webp",
-    "images": [
-      "/images/products/home-appliances/crompton-ozone-75l-desert-air-cooler.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "75L tank with high density honeycomb pads, 52 ft powerful air throw and inverter compatibility",
     "specChips": [
       "75L Tank",
@@ -1597,7 +1565,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 17500,
         "discountPercent": 43,
         "stock": 50,
-        "image": "/images/products/home-appliances/crompton-ozone-75l-desert-air-cooler.webp"
+        "image": ""
       }
     ]
   },
@@ -1611,10 +1579,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Desert Air Coolers",
     "applianceSubcategory": "DESERT_COOLER",
-    "image": "/images/products/home-appliances/symphony-sumo-75-xl-desert-air-cooler.webp",
-    "images": [
-      "/images/products/home-appliances/symphony-sumo-75-xl-desert-air-cooler.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "75L heavy-duty desert cooler with multi-stage i-Pure air purification filters and commercial fan throw",
     "specChips": [
       "75L Volume",
@@ -1697,7 +1663,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 19999,
         "discountPercent": 33,
         "stock": 50,
-        "image": "/images/products/home-appliances/symphony-sumo-75-xl-desert-air-cooler.webp"
+        "image": ""
       }
     ]
   },
@@ -1711,10 +1677,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Inverters & Tubular Batteries",
     "applianceSubcategory": "INVERTER_BATTERY",
-    "image": "/images/products/home-appliances/microtek-luxe-1200-inverter-150ah-battery-combo.webp",
-    "images": [
-      "/images/products/home-appliances/microtek-luxe-1200-inverter-150ah-battery-combo.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "950VA pure sine wave inverter paired with 150Ah tall tubular battery for whole-home handover backup",
     "specChips": [
       "950VA / 760W",
@@ -1798,7 +1762,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 26500,
         "discountPercent": 35,
         "stock": 50,
-        "image": "/images/products/home-appliances/microtek-luxe-1200-inverter-150ah-battery-combo.webp"
+        "image": ""
       }
     ]
   },
@@ -1812,10 +1776,8 @@ export const homeAppliancesProducts: IProduct[] = [
     "categoryName": "Home Appliances",
     "subCategory": "Inverters & Tubular Batteries",
     "applianceSubcategory": "INVERTER_BATTERY",
-    "image": "/images/products/home-appliances/luminous-zelio-plus-1100-inverter-150ah-battery-combo.webp",
-    "images": [
-      "/images/products/home-appliances/luminous-zelio-plus-1100-inverter-150ah-battery-combo.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Smart LED screen inverter showing exact remaining backup time in hours, paired with Red Charge 150Ah battery",
     "specChips": [
       "900VA / 756W",
@@ -1899,7 +1861,7 @@ export const homeAppliancesProducts: IProduct[] = [
         "mrp": 32900,
         "discountPercent": 36,
         "stock": 50,
-        "image": "/images/products/home-appliances/luminous-zelio-plus-1100-inverter-150ah-battery-combo.webp"
+        "image": ""
       }
     ]
   }

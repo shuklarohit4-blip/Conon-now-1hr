@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 
@@ -43,7 +44,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 490,
     mrp: 490,
     discountPct: 0,
-    image: "/images/products/safety/pitbull-mirage-low-ankle-steel-toe-safety-shoes.webp",
+    image: "",
     spec: "Anti-slip",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -59,7 +60,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 550,
     mrp: 550,
     discountPct: 0,
-    image: "/images/products/safety/hillson-dragon-steel-toe-gumboots-15-high.webp",
+    image: "",
     spec: "Anti-slip",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -77,7 +78,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 180,
     mrp: 260,
     discountPct: 30,
-    image: "/images/products/safety/safari-safety-vest-reflective.webp",
+    image: "",
     spec: "EN 471 Standard",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -93,7 +94,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 220,
     mrp: 320,
     discountPct: 31,
-    image: "/images/subcategories/hi-vis-jackets-icon.webp",
+    image: "",
     spec: "Class 2 Reflective",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -111,7 +112,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 1250,
     mrp: 1650,
     discountPct: 24,
-    image: "/images/products/safety/karam-fs-51-full-harness.webp",
+    image: "",
     spec: "IS 3521:1999 Certified",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -127,7 +128,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 980,
     mrp: 1350,
     discountPct: 27,
-    image: "/images/products/safety/udyogi-full-body-harness.webp",
+    image: "",
     spec: "Dual Dorsal D-Ring",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -143,7 +144,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 1850,
     mrp: 2400,
     discountPct: 23,
-    image: "/images/products/safety/construction-safety-net-green.webp",
+    image: "",
     spec: "UV Stabilized HDPE",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -159,7 +160,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 2150,
     mrp: 2900,
     discountPct: 25,
-    image: "/images/products/safety/scaffolding-net-black.webp",
+    image: "",
     spec: "Fire Retardant",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -177,7 +178,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 290,
     mrp: 390,
     discountPct: 25,
-    image: "/images/products/safety/safari-helmet-white-isi.webp",
+    image: "",
     spec: "IS 2925 Certified",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -193,7 +194,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 110,
     mrp: 160,
     discountPct: 31,
-    image: "/images/products/safety/karam-es-01-safety-goggles.webp",
+    image: "",
     spec: "Anti-Fog & UV Protect",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -209,7 +210,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 360,
     mrp: 480,
     discountPct: 25,
-    image: "/images/products/safety/karam-pn-521-helmet-isi.webp",
+    image: "",
     spec: "6-Point Cradle",
     deliveryTime: "60 Mins",
     dotsCount: 4,
@@ -225,7 +226,7 @@ export const SAFETY_PRODUCTS: SafetyProduct[] = [
     price: 320,
     mrp: 450,
     discountPct: 29,
-    image: "/images/products/safety/karam-dust-mask-pack-50.webp",
+    image: "",
     spec: "FFP1 S Certified",
     deliveryTime: "60 Mins",
     dotsCount: 3,
@@ -252,6 +253,7 @@ export function SafetyCollectionStorefront({
   );
 
   const queryClient = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const { data: cartData } = useGetCart();
   const addToCart = useAddToCart({
     mutation: {
@@ -381,7 +383,7 @@ export function SafetyCollectionStorefront({
   }, [activeSubcategory]);
 
   const filteredProducts = useMemo(() => {
-    return SAFETY_PRODUCTS.filter((p) => {
+    return SAFETY_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       if (activeSubcategory && p.subcategory !== activeSubcategory)
         return false;
       if (selectedBrand !== "All" && p.brand !== selectedBrand) return false;
@@ -408,6 +410,7 @@ export function SafetyCollectionStorefront({
     selectedSize,
     selectedPrice,
     selectedSort,
+    resolveProduct,
   ]);
 
   const openModal = (p: SafetyProduct) => {

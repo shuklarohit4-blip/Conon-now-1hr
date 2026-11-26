@@ -73,8 +73,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "Burst-Proof Guard / Double Insulated",
     keySpecBadge: "670W · 100mm · 11,000 RPM",
     brandTier: 1,
-    image: "/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp",
-    images: ["/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp"],
+    image: "",
+    images: [],
     shortTagline: "670W High-Torque Motor · Ultra-Slim Grip · 11,000 RPM Cutting Speed",
     specChips: ["670W Motor", "100mm / 4-Inch", "11,000 RPM", "Burst-Proof Guard", "18% GST HSN 8467"],
     description: "Bosch GWS 600 Professional is Lucknow's #1 contractor-grade 4-inch angle grinder for rebar slicing, masonry chasing, granite grinding, and weld deburring. Equipped with a compact, ultra-slim barrel grip and heat-resistant copper armature.",
@@ -106,7 +106,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 3600,
         discountPercent: 33,
         stock: 50,
-        image: "/images/products/power-tools-safety/bosch-gws-600-angle-grinder-4-inch-670w.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -143,8 +143,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "Overload Safety Clutch / IS 60745",
     keySpecBadge: "800W · SDS-Plus · 0–900 RPM",
     brandTier: 1,
-    image: "/images/products/power-tools-safety/bosch-gbh-2-26-re-800w-sds-plus-rotary-hammer.webp",
-    images: ["/images/products/power-tools-safety/bosch-gbh-2-26-re-800w-sds-plus-rotary-hammer.webp"],
+    image: "",
+    images: [],
     shortTagline: "800W High Drilling Rate · 0–2.7J Impact Energy · Reversible Rotation",
     specChips: ["800W Motor", "SDS-Plus 26mm", "0–2.7J Impact", "Forward/Reverse", "18% GST HSN 8467"],
     description: "Bosch GBH 2-26 RE is the heavy-duty civil contractor hammer drill engineered for fast drilling through high-grade M25/M30 RCC slabs, brick lintels, and stone foundation walls. Equipped with an overload safety clutch that disengages drive if the bit catches on rebar.",
@@ -177,7 +177,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 19500,
         discountPercent: 23,
         stock: 25,
-        image: "/images/products/power-tools-safety/bosch-gbh-2-26-re-800w-sds-plus-rotary-hammer.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -214,8 +214,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "Rotation Stop / Overload Clutch / IS 60745",
     keySpecBadge: "800W · SDS-Plus · 0–3J Impact",
     brandTier: 1,
-    image: "/images/products/power-tools-safety/bosch-gbh-2-26-dre-800w-3-mode-sds-plus-rotary-hammer.webp",
-    images: ["/images/products/power-tools-safety/bosch-gbh-2-26-dre-800w-3-mode-sds-plus-rotary-hammer.webp"],
+    image: "",
+    images: [],
     shortTagline: "3-Mode Selector with Rotation Stop · Light Chiseling & Tile Stripping · 800W",
     specChips: ["800W Motor", "3-Mode Versatility", "SDS-Plus Chisel", "Rotation Stop", "18% GST HSN 8467"],
     description: "Bosch GBH 2-26 DRE is Lucknow's most versatile contractor hammer drill featuring 3 operating modes: hammer drilling, straight drilling without impact, and dedicated rotation-stop chiseling for removing old bathroom floor tiles and masonry wall channels.",
@@ -247,7 +247,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 17800,
         discountPercent: 24,
         stock: 30,
-        image: "/images/products/power-tools-safety/bosch-gbh-2-26-dre-800w-3-mode-sds-plus-rotary-hammer.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -286,8 +286,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "1000V Insulated / IS 5571",
     keySpecBadge: "1000V Insulated · 3-in-1 Blade Set",
     brandTier: 1,
-    image: "/images/products/power-tools-safety/taparia-tk-052-insulated-screwdriver-set.webp",
-    images: ["/images/products/power-tools-safety/taparia-tk-052-insulated-screwdriver-set.webp"],
+    image: "",
+    images: [],
     shortTagline: "High-Grade Alloy Steel · 1000V Shock Protection · Precision Ground Tips",
     specChips: ["1000V Insulated", "Alloy Steel", "3-in-1 Blade Set", "Shockproof Handle", "18% GST HSN 8205"],
     description: "Taparia TK-052 is an electrician-certified 1000V insulated interchangeable screwdriver set containing three running blade models (822I, 936I, and 824I). Manufactured from high-tensile chrome vanadium alloy steel hardened to 55–58 HRC.",
@@ -318,7 +318,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 340,
         discountPercent: 27,
         stock: 120,
-        image: "/images/products/power-tools-safety/taparia-tk-052-insulated-screwdriver-set.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -355,8 +355,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "Class II Accuracy / Tylon Anti-Glare Coat",
     keySpecBadge: "5m x 19mm · Tylon Coated · Lock",
     brandTier: 1,
-    image: "/images/products/power-tools-safety/stanley-5m-x-19mm-tylon-measuring-tape-lock-stht37519-812.webp",
-    images: ["/images/products/power-tools-safety/stanley-5m-x-19mm-tylon-measuring-tape-lock-stht37519-812.webp"],
+    image: "",
+    images: [],
     shortTagline: "Tylon Matt Finish Blade · Class II Accuracy · Tru-Zero Hook",
     specChips: ["5m Length", "19mm Width", "Tylon Anti-Glare", "Tru-Zero Hook", "18% GST HSN 9017"],
     description: "Stanley 5m x 19mm Tylon Measuring Tape (STHT37519-812) is the benchmark job site tape for civil engineers, site foremen, and interior designers. Features a non-glare matte Tylon nylon blade coating for 1.5x enhanced blade life and crisp numeric readability.",
@@ -387,7 +387,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 180,
         discountPercent: 44,
         stock: 200,
-        image: "/images/products/power-tools-safety/stanley-5m-x-19mm-tylon-measuring-tape-lock-stht37519-812.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -426,8 +426,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "IS 2925:1984 BIS Certified",
     keySpecBadge: "ISI Marked · PN501 · Polyethylene",
     brandTier: 2,
-    image: "/images/products/power-tools-safety/karam-pn501-isi-shelmet-safety-helmet-grey.webp",
-    images: ["/images/products/power-tools-safety/karam-pn501-isi-shelmet-safety-helmet-grey.webp"],
+    image: "",
+    images: [],
     shortTagline: "IS 2925 BIS Certified · High Density Polymer Shell · Nape Strap Adjustment",
     specChips: ["ISI Marked", "IS 2925 Certified", "High Density Polymer", "Grey Shell", "18% GST HSN 6506"],
     description: "Karam Shelmet PN501 is the official BIS IS 2925:1984 certified industrial hard hat designed for site engineers, technicians, and project supervisors. Molded from premium UV-stabilized virgin polymer with reinforced deflection ridges.",
@@ -458,7 +458,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 375,
         discountPercent: 30,
         stock: 150,
-        image: "/images/products/power-tools-safety/karam-pn501-isi-shelmet-safety-helmet-grey.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -495,8 +495,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "IS 3521:1999 & EN 361 Certified",
     keySpecBadge: "ISI Full Body · 2m Lanyard · 2 Hooks",
     brandTier: 2,
-    image: "/images/products/power-tools-safety/karam-ki01-pn-351-isi-full-body-safety-harness-lanyard-2-hooks.webp",
-    images: ["/images/products/power-tools-safety/karam-ki01-pn-351-isi-full-body-safety-harness-lanyard-2-hooks.webp"],
+    image: "",
+    images: [],
     shortTagline: "Dorsal D-Ring · 2m Twin Twisted Lanyard · 2 Scaffold Hooks (50mm Opening)",
     specChips: ["ISI Marked", "IS 3521:1999", "2 Scaffold Hooks", "2m Twin Lanyard", "18% GST HSN 6307"],
     description: "Karam KI01 PN 351 is an industrial full-body fall-arrest harness with integrated twin 2-meter shock lanyard and two high-strength steel scaffold hooks. Mandatory for scaffolding erection, exterior tower plastering, and high-rise roof work.",
@@ -528,7 +528,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 2650,
         discountPercent: 32,
         stock: 45,
-        image: "/images/products/power-tools-safety/karam-ki01-pn-351-isi-full-body-safety-harness-lanyard-2-hooks.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -565,8 +565,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "EN 166 1.F / ANSI Z87.1 Splash Guard",
     keySpecBadge: "Anti-Fog · Chemical Splash · EN 166",
     brandTier: 2,
-    image: "/images/products/power-tools-safety/3m-fahrenheit-7136013-chemical-resistant-safety-goggles.webp",
-    images: ["/images/products/power-tools-safety/3m-fahrenheit-7136013-chemical-resistant-safety-goggles.webp"],
+    image: "",
+    images: [],
     shortTagline: "Acetate Anti-Fog Lens · Chemical Splash & Flying Particle Proof · EN 166 Certified",
     specChips: ["3M Optical Class 1", "Anti-Fog Acetate", "Chemical Splash", "EN 166 1.F", "18% GST HSN 9004"],
     description: "3M Fahrenheit 7136013 is the industry benchmark wide-vision chemical and high-impact safety goggle. Built with an aerodynamic clear acetate lens featuring premium anti-fog coating and indirect liquid venting for acid washing and angle grinding.",
@@ -597,7 +597,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 5800,
         discountPercent: 30,
         stock: 35,
-        image: "/images/products/power-tools-safety/3m-fahrenheit-7136013-chemical-resistant-safety-goggles.webp"
+        image: ""
       }
     ],
     inStock: true,
@@ -634,8 +634,8 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
     safetyStandard: "ANSI/ISEA 107-2020 Class 3 / EN ISO 20471",
     keySpecBadge: "ANSI Class 3 · 6-in-1 Multi-Weather · 360° Reflective",
     brandTier: 2,
-    image: "/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp",
-    images: ["/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp"],
+    image: "",
+    images: [],
     shortTagline: "All-Weather Waterproof · 360° High-Vis Reflective Band · ANSI Class 3 Certified",
     specChips: ["ANSI Class 3", "6-in-1 Multi-Configuration", "360° Reflective", "Waterproof Oxford", "18% GST HSN 6211"],
     description: "SMASYS High-Visibility 6-in-1 Parka is the premium executive safety jacket for highway concessionaires, bridge project managers, and night-shift civil supervisors. Features 6 wearable configurations with removable inner reversible high-vis fleece jacket and detachable sleeves.",
@@ -666,7 +666,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 35000,
         discountPercent: 21,
         stock: 15,
-        image: "/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp"
+        image: ""
       },
       {
         id: "var-smasys-xl",
@@ -676,7 +676,7 @@ export const ALL_9_TOOLS_SAFETY_PRODUCTS: ToolsSafetyProduct[] = [
         mrp: 35000,
         discountPercent: 21,
         stock: 20,
-        image: "/images/products/power-tools-safety/smasys-high-visibility-6-in-1-reflective-safety-jacket.webp"
+        image: ""
       }
     ],
     inStock: true,

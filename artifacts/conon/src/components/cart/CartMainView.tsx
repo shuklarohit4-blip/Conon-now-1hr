@@ -26,8 +26,7 @@ import {
   getGetOrdersQueryKey,
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { resolveProductImage } from "@/lib/productImages";
-import { RealProductImage } from "../RealProductImage";
+import { CononProductMedia } from "../CononProductMedia";
 import {
   SelectLocationModal,
   AddAddressModal,
@@ -408,12 +407,14 @@ export function CartMainView({ onBack, isStandalonePage = false }: CartMainViewP
                     <div key={item.id} className="p-4 flex items-center gap-3">
                       {/* Product Thumbnail (Screenshot 1: Square with border) */}
                       <div className="w-16 h-16 rounded-xl border border-slate-200 bg-white p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
-                        <RealProductImage
+                        <CononProductMedia
                           product={item}
                           category={item.category}
                           title={item.name}
                           alt={item.name}
                           variant="thumb"
+                          showGalleryBadge={false}
+                          containerClassName="w-full h-full"
                           className="w-full h-full object-contain"
                         />
                       </div>

@@ -33,6 +33,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import { RealProductImage } from "@/components/RealProductImage";
 import type { Product } from "@/components/ProductCard";
 import {
@@ -154,6 +155,7 @@ export function AppliancesCollectionStorefront({
   onBackToDirectory,
 }: AppliancesCollectionStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
 
   // Filter States
   const [activeSubcategory, setActiveSubcategory] = useState("ALL");
@@ -211,7 +213,7 @@ export function AppliancesCollectionStorefront({
 
   // Filtering Logic
   const filteredProducts = useMemo(() => {
-    return homeAppliancesProducts.filter((prod) => {
+    return homeAppliancesProducts.map((p) => resolveProduct(p)).filter((prod) => {
       // Subcategory filter
       if (activeSubcategory !== "ALL" && prod.applianceSubcategory !== activeSubcategory) {
         return false;
@@ -256,6 +258,7 @@ export function AppliancesCollectionStorefront({
     selectedMotorType,
     selectedVehicle,
     searchQuery,
+    resolveProduct,
   ]);
 
   // Handle Add to Cart

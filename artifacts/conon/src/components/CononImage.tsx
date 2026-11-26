@@ -1,61 +1,61 @@
-import { useEffect, useState } from "react";
-import { resolveRealProductImage } from "@/utils/realMediaResolver";
+import React from "react";
+import { CononProductMedia } from "./CononProductMedia";
+import type { MediaResolvableProduct } from "@/utils/realMediaResolver";
 
-/* ─────────────────────────────────────────────────────────────────────
-   CononImage — Universal Real Product Image Wrapper
-
-   Ensures 100% of product images render real studio photography.
-   Guarantees ZERO placeholder icons, procedural SVG boxes, or
-   empty frames ever appear anywhere across the storefront.
-   ──────────────────────────────────────────────────────────────────── */
-type Props = {
+/**
+ * CononImage — Backward-compatible wrapper delegating 100% to CononProductMedia.
+ */
+export interface CononImageProps {
   src?: string | null;
   alt: string;
-  category?: string;
   brand?: string;
-  /** Classes for the wrapper element (sizing, rounding, positioning). */
+  category?: string;
+  categorySlug?: string;
+  product?: MediaResolvableProduct | null;
+  mediaType?: "product" | "service" | "rental";
+  variant?: "card" | "cover" | "tile" | "thumb" | "modal" | "detail" | "banner";
   className?: string;
-  /** Extra classes for the <img> element itself. */
   imgClassName?: string;
   dark?: boolean;
+  isDark?: boolean;
   loading?: "lazy" | "eager";
-};
+  onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void;
+}
 
 export function CononImage({
   src,
   alt,
-  category,
   brand,
+  category,
+  categorySlug,
+  product,
+  mediaType = "product",
+  variant = "card",
   className = "",
   imgClassName = "",
   dark = false,
+  isDark,
   loading = "lazy",
-}: Props) {
-  const resolved = resolveRealProductImage(src, alt, brand, category);
-  const [currentSrc, setCurrentSrc] = useState(resolved);
-  const [hasFallenBack, setHasFallenBack] = useState(false);
-
-  useEffect(() => {
-    setCurrentSrc(resolveRealProductImage(src, alt, brand, category));
-    setHasFallenBack(false);
-  }, [src, alt, brand, category]);
-
-  const handleError = () => {
-    if (!hasFallenBack) {
-      setHasFallenBack(true);
-      setCurrentSrc(resolveRealProductImage(null, alt, brand, category));
-    }
-  };
-
+  onClick,
+}: CononImageProps) {
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <img
-        src={currentSrc}
-        alt={alt}
-        loading={loading}
-        className={`w-full h-full object-contain p-2 bg-white ${imgClassName}`}
-        onError={handleError}
-      />
-    </div>
+    <CononProductMedia
+      product={product}
+      src={src ?? undefined}
+      alt={alt}
+      title={alt}
+      brand={brand}
+      category={category}
+      categorySlug={categorySlug}
+      mediaType={mediaType}
+      variant={variant}
+      isDark={isDark ?? dark}
+      loading={loading}
+      containerClassName={className}
+      className={imgClassName || "w-full h-full object-contain"}
+      onClick={onClick}
+    />
   );
 }
+
+export default CononImage;

@@ -28,6 +28,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { ProductImage } from "@/components/ProductImage";
 
@@ -161,10 +162,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 385,
     "bulkSlabText": "\u20b9385/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-ppc-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-ppc-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -206,10 +205,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 402,
     "bulkSlabText": "\u20b9402/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-opc-43-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-opc-43-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -251,10 +248,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 420,
     "bulkSlabText": "\u20b9420/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-opc-53-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-opc-53-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -296,10 +291,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 412,
     "bulkSlabText": "\u20b9412/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-weather-plus-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-weather-plus-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -341,10 +334,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 350,
     "bulkSlabText": "\u20b9350/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/prism-champion-ppc-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/prism-champion-ppc-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -386,10 +377,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 370,
     "bulkSlabText": "\u20b9370/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/prism-champion-plus-duratech-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/prism-champion-plus-duratech-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -431,10 +420,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 435,
     "bulkSlabText": "\u20b9435/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/prism-champion-all-weather-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/prism-champion-all-weather-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -476,10 +463,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 378,
     "bulkSlabText": "\u20b9378/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/acc-suraksha-f2r-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/acc-suraksha-f2r-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -521,10 +506,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 408,
     "bulkSlabText": "\u20b9408/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/acc-gold-water-shield-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/acc-gold-water-shield-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -566,10 +549,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 374,
     "bulkSlabText": "\u20b9374/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ambuja-compocem-ppc-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ambuja-compocem-ppc-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -611,10 +592,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 410,
     "bulkSlabText": "\u20b9410/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ambuja-plus-kawach-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ambuja-plus-kawach-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -656,10 +635,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 355,
     "bulkSlabText": "\u20b9355/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/mp-birla-samrat-ppc-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/mp-birla-samrat-ppc-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -701,10 +678,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 360,
     "bulkSlabText": "\u20b9360/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/shree-cement-rockstrong-ppc-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/shree-cement-rockstrong-ppc-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -746,10 +721,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 382,
     "bulkSlabText": "\u20b9382/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/shree-cement-bangur-opc-53-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/shree-cement-bangur-opc-53-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -791,10 +764,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 376,
     "bulkSlabText": "\u20b9376/bag on 50+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/dalmia-dsp-opc-53-cement-50kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dalmia-dsp-opc-53-cement-50kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -836,10 +807,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 130,
     "bulkSlabText": "\u20b9130/pack on 10+ Packs",
-    "image": "/images/products/cement-tmt-chemicals/birla-white-cement-5kg-pack.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/birla-white-cement-5kg-pack.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -885,10 +854,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 328,
     "bulkSlabText": "\u20b9328/bar on 25+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-8mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-8mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -934,10 +901,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 512,
     "bulkSlabText": "\u20b9512/bar on 20+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-10mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-10mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -983,10 +948,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 738,
     "bulkSlabText": "\u20b9738/bar on 15+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-12mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-12mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1032,10 +995,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1315,
     "bulkSlabText": "\u20b91315/bar on 10+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-16mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-16mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1081,10 +1042,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 2050,
     "bulkSlabText": "\u20b92050/bar on 10+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-20mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/tata-tiscon-fe-500d-20mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1130,10 +1089,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 323,
     "bulkSlabText": "\u20b9323/bar on 25+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-8mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-8mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1179,10 +1136,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 505,
     "bulkSlabText": "\u20b9505/bar on 20+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-10mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-10mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1228,10 +1183,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 728,
     "bulkSlabText": "\u20b9728/bar on 15+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-12mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-12mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1277,10 +1230,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1295,
     "bulkSlabText": "\u20b91295/bar on 10+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-16mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-16mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1326,10 +1277,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 2020,
     "bulkSlabText": "\u20b92020/bar on 10+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-20mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/jsw-neosteel-fe-550d-20mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1375,10 +1324,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 355,
     "bulkSlabText": "\u20b9355/bar on 25+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-8mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-8mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1424,10 +1371,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 556,
     "bulkSlabText": "\u20b9556/bar on 20+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-10mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-10mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1473,10 +1418,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 800,
     "bulkSlabText": "\u20b9800/bar on 15+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-12mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-12mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1522,10 +1465,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1425,
     "bulkSlabText": "\u20b91425/bar on 10+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-16mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/sail-seqr-fe-550-16mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1571,10 +1512,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 290,
     "bulkSlabText": "\u20b9290/bar on 25+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-8mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-8mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1620,10 +1559,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 455,
     "bulkSlabText": "\u20b9455/bar on 20+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-10mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-10mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1669,10 +1606,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 655,
     "bulkSlabText": "\u20b9655/bar on 15+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-12mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-12mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1718,10 +1653,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1165,
     "bulkSlabText": "\u20b91165/bar on 10+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-16mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/kamdhenu-nxt-fe-550-16mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1767,10 +1700,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 625,
     "bulkSlabText": "\u20b9625/bar on 15+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/rhl-gold-fe-500-12mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/rhl-gold-fe-500-12mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1816,10 +1747,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 560,
     "bulkSlabText": "\u20b9560/bar on 15+ Bars",
-    "image": "/images/products/cement-tmt-chemicals/gallantt-fe-500-12mm-12m.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/gallantt-fe-500-12mm-12m.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1859,10 +1788,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 88,
     "bulkSlabText": "\u20b988/kg on 10+ kg",
-    "image": "/images/products/cement-tmt-chemicals/tata-wiron-18-swg-binding-wire-1kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/tata-wiron-18-swg-binding-wire-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1902,10 +1829,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 82,
     "bulkSlabText": "\u20b982/kg on 10+ kg",
-    "image": "/images/products/cement-tmt-chemicals/kamdhenu-22-gauge-ms-binding-wire-1kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/kamdhenu-22-gauge-ms-binding-wire-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1945,10 +1870,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1725,
     "bulkSlabText": "\u20b91725/bundle on 4+ Bundles",
-    "image": "/images/products/cement-tmt-chemicals/local-isi-18-20-swg-binding-wire-25kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/local-isi-18-20-swg-binding-wire-25kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -1988,10 +1911,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 78,
     "bulkSlabText": "\u20b978/kg on 10+ kg",
-    "image": "/images/products/cement-tmt-chemicals/local-isi-gi-binding-wire-14-swg-1kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/local-isi-gi-binding-wire-14-swg-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2033,10 +1954,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 52,
     "bulkSlabText": "\u20b952/bottle on 10+ Bottles",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-200ml.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-200ml.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2078,10 +1997,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 185,
     "bulkSlabText": "\u20b9185/can on 6+ Cans",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-1l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2123,10 +2040,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 660,
     "bulkSlabText": "\u20b9660/can on 4+ Cans",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-5l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-5l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2168,10 +2083,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 2380,
     "bulkSlabText": "\u20b92380/drum on 2+ Drums",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-20l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-101-pidiproof-lw-plus-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2212,10 +2125,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 335,
     "bulkSlabText": "\u20b9335/can on 6+ Cans",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-1kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2256,10 +2167,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1490,
     "bulkSlabText": "\u20b91490/can on 3+ Cans",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-5kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-301-pidicrete-urp-5kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2300,10 +2209,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 520,
     "bulkSlabText": "\u20b9520/kit on 4+ Kits",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-3kg-kit.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-3kg-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2344,10 +2251,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1775,
     "bulkSlabText": "\u20b91775/kit on 2+ Kits",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-15kg-kit.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-112-pidifin-2k-15kg-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2388,10 +2293,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1300,
     "bulkSlabText": "\u20b91300/can on 3+ Cans",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-4l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2432,10 +2335,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 2780,
     "bulkSlabText": "\u20b92780/bucket on 2+ Buckets",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-10l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-10l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2476,10 +2377,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 5250,
     "bulkSlabText": "\u20b95250/drum on 2+ Drums",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-20l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-roofseal-classic-white-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2520,10 +2419,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 420,
     "bulkSlabText": "\u20b9420/tub on 5+ Tubs",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-201-crack-x-paste-1kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-201-crack-x-paste-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2564,10 +2461,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1310,
     "bulkSlabText": "\u20b91310/bucket on 3+ Buckets",
-    "image": "/images/products/cement-tmt-chemicals/dr-fixit-raincoat-wpc-exterior-4l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/dr-fixit-raincoat-wpc-exterior-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2609,10 +2504,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 135,
     "bulkSlabText": "\u20b9135/can on 6+ Cans",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-1l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2654,10 +2547,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 545,
     "bulkSlabText": "\u20b9545/can on 4+ Cans",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-5l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-5l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2699,10 +2590,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1890,
     "bulkSlabText": "\u20b91890/drum on 2+ Drums",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-20l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-weather-pro-wp200-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2743,10 +2632,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 535,
     "bulkSlabText": "\u20b9535/bottle on 5+ Bottles",
-    "image": "/images/products/cement-tmt-chemicals/sika-sikalatex-power-sbr-1kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/sika-sikalatex-power-sbr-1kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2787,10 +2674,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1350,
     "bulkSlabText": "\u20b91350/kit on 3+ Kits",
-    "image": "/images/products/cement-tmt-chemicals/sika-sikatop-seal-107-2k-25kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/sika-sikatop-seal-107-2k-25kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2832,10 +2717,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 158,
     "bulkSlabText": "\u20b9158/bottle on 6+ Bottles",
-    "image": "/images/products/cement-tmt-chemicals/fosroc-conplast-wl-xtra-1l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/fosroc-conplast-wl-xtra-1l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2876,10 +2759,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 2200,
     "bulkSlabText": "\u20b92200/kit on 2+ Kits",
-    "image": "/images/products/cement-tmt-chemicals/fosroc-brushbond-rfx-2k-kit.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/fosroc-brushbond-rfx-2k-kit.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2920,10 +2801,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 1280,
     "bulkSlabText": "\u20b91280/bucket on 3+ Buckets",
-    "image": "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-white-4l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-white-4l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -2964,10 +2843,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 5150,
     "bulkSlabText": "\u20b95150/drum on 2+ Drums",
-    "image": "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-advanced-20l.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/asian-paints-smartcare-damp-proof-advanced-20l.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3008,10 +2885,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 285,
     "bulkSlabText": "\u20b9285/bag on 10+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-tilefixo-ct-ceramic-20kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-tilefixo-ct-ceramic-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3052,10 +2927,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 378,
     "bulkSlabText": "\u20b9378/bag on 10+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-tilefixo-vt-vitrified-20kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-tilefixo-vt-vitrified-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3096,10 +2969,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 430,
     "bulkSlabText": "\u20b9430/bag on 10+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-tilefixo-nt-stone-wall-20kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-tilefixo-nt-stone-wall-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3140,10 +3011,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 365,
     "bulkSlabText": "\u20b9365/bag on 20+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/ultratech-fixoblock-aac-jointing-40kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/ultratech-fixoblock-aac-jointing-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3184,10 +3053,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 265,
     "bulkSlabText": "\u20b9265/bag on 10+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/roff-t01-new-construction-adhesive-20kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/roff-t01-new-construction-adhesive-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3228,10 +3095,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 475,
     "bulkSlabText": "\u20b9475/bag on 10+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/roff-t02-non-skid-tile-adhesive-20kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/roff-t02-non-skid-tile-adhesive-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3272,10 +3137,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 272,
     "bulkSlabText": "\u20b9272/bag on 10+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/myk-laticrete-305-floor-adhesive-20kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/myk-laticrete-305-floor-adhesive-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3316,10 +3179,8 @@ export const ALL_STRUCTURAL_PRODUCTS: StructuralProduct[] = [
     ],
     "bulkPrice": 525,
     "bulkSlabText": "\u20b9525/bag on 10+ Bags",
-    "image": "/images/products/cement-tmt-chemicals/myk-laticrete-315-plus-adhesive-20kg.webp",
-    "images": [
-      "/images/products/cement-tmt-chemicals/myk-laticrete-315-plus-adhesive-20kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "rating": 4.8,
     "reviewsCount": 120,
     "deliveryTime": "60 Mins Express",
@@ -3356,6 +3217,7 @@ export function CementCollectionStorefront({
   const [detailOptions, setDetailOptions] = useState<{ scrollToBulk?: boolean; variantId?: string }>({});
 
   const queryClient = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const { data: cartData } = useGetCart();
   const addToCart = useAddToCart();
   const updateCartItem = useUpdateCartItem();
@@ -3426,7 +3288,7 @@ export function CementCollectionStorefront({
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    return ALL_STRUCTURAL_PRODUCTS.filter((p) => {
+    return ALL_STRUCTURAL_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
       if (selectedSubcat !== "all" && p.subcategory !== selectedSubcat) return false;
       if (selectedBrand !== "all" && p.brand !== selectedBrand) return false;
       if (tierFilter !== "all" && p.brandTier !== tierFilter) return false;
@@ -3454,6 +3316,7 @@ export function CementCollectionStorefront({
     selectedGrade,
     selectedChemicalType,
     searchQuery,
+    resolveProduct,
   ]);
 
   // Unique list of brands in current category

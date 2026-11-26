@@ -2,7 +2,8 @@ import React, { useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ShieldCheck, ShoppingCart } from "lucide-react";
 import { CATALOG_PRODUCTS, type IProduct, type IProductVariant } from "@/data/catalogData";
-import { RealProductImage } from "./RealProductImage";
+import { CononProductMedia } from "./CononProductMedia";
+import { useResolvedProduct } from "@/context/ProductMediaVaultContext";
 import {
   useAddToCart,
   useUpdateCartItem,
@@ -22,12 +23,13 @@ interface VariantSelectorSheetProps {
 }
 
 export const VariantSelectorSheet: React.FC<VariantSelectorSheetProps> = ({
-  product,
+  product: rawProduct,
   isOpen: isOpenProp,
   open,
   onClose,
   onSelectVariant,
 }) => {
+  const product = useResolvedProduct(rawProduct);
   const isSheetOpen = Boolean((open ?? isOpenProp ?? (product !== null)) && product !== null);
 
   // Keyboard Esc dismiss
@@ -110,7 +112,7 @@ export const VariantSelectorSheet: React.FC<VariantSelectorSheetProps> = ({
 
   const productTitle = product.title || product.name || catalogItem?.title || "";
   const productBrand = product.brand || catalogItem?.brand || "CONON-NOW";
-  const productThumb = product.image || catalogItem?.image || "/images/home-categories/cement-civil-works.webp";
+  const productThumb = product.image || catalogItem?.image || "";
   const productSlug = product.slug || catalogItem?.slug || product.id;
 
   const getVariantQty = (v: IProductVariant) => {
@@ -189,13 +191,15 @@ export const VariantSelectorSheet: React.FC<VariantSelectorSheetProps> = ({
             {/* Header row */}
             <div className="flex items-start justify-between gap-3 pb-3.5 border-b border-slate-100">
               <div className="flex items-center gap-3.5 min-w-0">
-                <RealProductImage
+                <CononProductMedia
                   product={product}
                   src={productThumb}
                   alt={productTitle}
                   title={productTitle}
                   brand={productBrand}
                   variant="thumb"
+                  showGalleryBadge={false}
+                  containerClassName="w-12 h-12 rounded-xl shrink-0"
                   className="w-full h-full object-contain p-1"
                 />
                 <div className="min-w-0">
@@ -243,15 +247,19 @@ export const VariantSelectorSheet: React.FC<VariantSelectorSheetProps> = ({
                     className="p-3.5 rounded-2xl border border-slate-200 hover:border-slate-300 bg-white shadow-xs flex items-center justify-between gap-3 transition"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      {v.image && (
-                        <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 p-1 shrink-0 flex items-center justify-center">
-                          <img
-                            src={v.image}
-                            alt={v.label}
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                      )}
+                      <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 p-1 shrink-0 flex items-center justify-center overflow-hidden">
+                        <CononProductMedia
+                          product={{ ...product, id: v.id, title: `${productTitle} ${v.label}`, unit: v.unit, image: v.image }}
+                          src={v.image || productThumb}
+                          alt={v.label}
+                          title={v.label}
+                          brand={productBrand}
+                          variant="thumb"
+                          showGalleryBadge={false}
+                          containerClassName="w-full h-full"
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <p className="text-[13px] font-bold text-slate-900 leading-tight">

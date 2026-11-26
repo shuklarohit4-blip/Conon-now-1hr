@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { BellRing } from "lucide-react";
@@ -15,6 +15,9 @@ import { DriverNav } from "@/components/driver/DriverNav";
 import { LanguageToggle } from "@/components/driver/LanguageToggle";
 import { GREEN, RED, type DriverTab } from "@/components/driver/theme";
 import { LoaderRiderCockpit } from "@/components/driver/LoaderRiderCockpit";
+import { PartnerAccessGate, type PartnerSession } from "@/components/kyc/PartnerAccessGate";
+import { PartnerWaitingRoom } from "@/components/kyc/PartnerWaitingRoom";
+import { useKyc, type PartnerKycApplication } from "@/context/KycContext";
 
 /* ──────────────────────────────────────────────────────────────────────────
    CONON-NOW Fleet — Driver Partner App shell.
@@ -158,39 +161,146 @@ function DriverShell() {
 
 export function DriverApp() {
   const [viewMode, setViewMode] = useState<"cockpit" | "classic">("cockpit");
+  const { applications, setActiveApplicantId } = useKyc();
 
-  if (viewMode === "cockpit") {
-    return (
-      <div className="relative">
-        <div className="fixed bottom-4 right-4 z-50">
-          <button
-            type="button"
-            onClick={() => setViewMode("classic")}
-            className="px-3.5 py-2 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold shadow-xl transition flex items-center gap-1.5 cursor-pointer backdrop-blur"
-          >
-            <span>Switch to Classic Duty View</span>
-          </button>
+  // Active Approved Session State
+  const [session, setSession] = useState<PartnerSession | null>(() => {
+    try {
+      const stored = localStorage.getItem("conon_driver_session");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.status === "APPROVED") return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return null;
+  });
+
+  // Pending KYC Application State (Waiting Room)
+  const [pendingApp, setPendingApp] = useState<PartnerKycApplication | null>(() => {
+    try {
+      const storedPending = localStorage.getItem("conon_driver_pending_app");
+      if (storedPending) {
+        return JSON.parse(storedPending);
+      }
+    } catch {
+      // ignore
+    }
+    return null;
+  });
+
+  // Keep pendingApp in sync if status changes in KycContext
+  useEffect(() => {
+    if (pendingApp) {
+      const found = applications.find(
+        (a) =>
+          a.id === pendingApp.id ||
+          a.applicantId === pendingApp.applicantId ||
+          (a.phone &&
+            pendingApp.phone &&
+            a.phone.replace(/\D/g, "").slice(-10) === pendingApp.phone.replace(/\D/g, "").slice(-10))
+      );
+
+      if (found) {
+        if (found.status === "APPROVED") {
+          const newSession: PartnerSession = {
+            partnerId: found.partnerId || "CN-DRV-LKO-204",
+            phone: found.phone,
+            firmOrName: found.firmOrName,
+            role: "driver",
+            status: "APPROVED",
+          };
+          localStorage.setItem("conon_driver_session", JSON.stringify(newSession));
+          localStorage.removeItem("conon_driver_pending_app");
+          setSession(newSession);
+          setPendingApp(null);
+        } else {
+          setPendingApp(found);
+        }
+      }
+    }
+  }, [applications, pendingApp]);
+
+  // Handle successful login or waiting room unlock
+  const handleAuthenticated = (newSession: PartnerSession) => {
+    setSession(newSession);
+    setPendingApp(null);
+    localStorage.setItem("conon_driver_session", JSON.stringify(newSession));
+    localStorage.removeItem("conon_driver_pending_app");
+  };
+
+  // Handle pending or re-upload required application
+  const handlePending = (app: PartnerKycApplication) => {
+    setPendingApp(app);
+    setActiveApplicantId(app.id);
+    localStorage.setItem("conon_driver_pending_app", JSON.stringify(app));
+  };
+
+  // Handle Logout / Switch Partner
+  const handleLogout = () => {
+    localStorage.removeItem("conon_driver_session");
+    localStorage.removeItem("conon_driver_pending_app");
+    setSession(null);
+    setPendingApp(null);
+  };
+
+  // State C: Approved Driver Live Dashboard
+  if (session && session.status === "APPROVED") {
+    if (viewMode === "cockpit") {
+      return (
+        <div className="relative">
+          <div className="fixed bottom-4 right-4 z-50">
+            <button
+              type="button"
+              onClick={() => setViewMode("classic")}
+              className="px-3.5 py-2 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold shadow-xl transition flex items-center gap-1.5 cursor-pointer backdrop-blur"
+            >
+              <span>Switch to Classic Duty View</span>
+            </button>
+          </div>
+          <LoaderRiderCockpit onLogout={handleLogout} session={session} />
         </div>
-        <LoaderRiderCockpit />
-      </div>
+      );
+    }
+
+    return (
+      <DriverLanguageProvider>
+        <DriverProvider>
+          <div className="fixed bottom-4 right-4 z-50">
+            <button
+              type="button"
+              onClick={() => setViewMode("cockpit")}
+              className="px-4 py-2 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs shadow-xl transition flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>⚡ Open Loader & Rider Cockpit</span>
+            </button>
+          </div>
+          <DriverShell />
+        </DriverProvider>
+      </DriverLanguageProvider>
     );
   }
 
+  // State B: Waiting Room / Re-upload Required
+  if (pendingApp && pendingApp.status !== "APPROVED") {
+    return (
+      <PartnerWaitingRoom
+        role="driver"
+        application={pendingApp}
+        onUnlocked={handleAuthenticated}
+        onLogout={handleLogout}
+      />
+    );
+  }
+
+  // State A: Access Gate (Login / Register)
   return (
-    <DriverLanguageProvider>
-      <DriverProvider>
-        <div className="fixed bottom-4 right-4 z-50">
-          <button
-            type="button"
-            onClick={() => setViewMode("cockpit")}
-            className="px-4 py-2 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs shadow-xl transition flex items-center gap-1.5 cursor-pointer"
-          >
-            <span>⚡ Open Loader & Rider Cockpit</span>
-          </button>
-        </div>
-        <DriverShell />
-      </DriverProvider>
-    </DriverLanguageProvider>
+    <PartnerAccessGate
+      role="driver"
+      onAuthenticated={handleAuthenticated}
+      onPending={handlePending}
+    />
   );
 }
 

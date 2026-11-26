@@ -19,11 +19,17 @@ import driverRouter from "./driver";
 import eventsRouter from "./events";
 import kycRouter from "./kyc";
 import feedbackRouter from "./feedback";
+import adminCatalogAccountsRouter from "./adminCatalogAccounts";
+import servicesRentalsRouter from "./servicesRentals";
+import mediaVaultRouter from "./mediaVault";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
 router.use(feedbackRouter);
+router.use(adminCatalogAccountsRouter);
+router.use(servicesRentalsRouter);
+router.use(mediaVaultRouter);
 router.use(eventsRouter);
 router.use(kycRouter);
 router.use(driverRouter);

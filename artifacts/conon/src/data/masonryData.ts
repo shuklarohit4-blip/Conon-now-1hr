@@ -69,10 +69,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-1000-pcs.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-1000-pcs.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "First Class Kiln-Fired Deep Red Bricks • High Compressive Strength",
     "specChips": [
       "1,000 Pcs Load",
@@ -149,10 +147,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-single-piece.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/lucknow-avval-red-clay-brick-single-piece.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Single Piece Top-Up • Express Site Delivery for Minor Masonry & Repairs",
     "specChips": [
       "Per Piece",
@@ -221,10 +217,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/lucknow-doyam-red-clay-brick-1000-pcs.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/lucknow-doyam-red-clay-brick-1000-pcs.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Doyam Class Bricks • Ideal for Internal Partition Walls & Boundary Enclosures",
     "specChips": [
       "1,000 Pcs Load",
@@ -297,10 +291,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/lucknow-broken-red-brick-ballast-roda-trolley.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/lucknow-broken-red-brick-ballast-roda-trolley.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hand-Broken Overburnt Brick Roda • Sub-Base Foundation & Soling",
     "specChips": [
       "100 CFT Brass Trolley",
@@ -369,10 +361,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-1000-pcs.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-1000-pcs.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Hydraulically Compressed Cement-Fly Ash Bricks • Zero Plaster Waviness",
     "specChips": [
       "1,000 Pcs Load",
@@ -445,10 +435,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-single-piece.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/acc-local-isi-fly-ash-brick-single-piece.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Single Piece Fly Ash Brick • Fast E-Loader Dispatch for Small Jobs",
     "specChips": [
       "Per Piece",
@@ -510,10 +498,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-4-inch-600x200x100mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-4-inch-600x200x100mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Premium High-Precision 4\" Autoclaved Aerated Concrete Partition Blocks",
     "specChips": [
       "4\" (100mm)",
@@ -592,10 +578,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-6-inch-600x200x150mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-6-inch-600x200x150mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "6\" External & Common Wall Block • 55 pcs/m³ • Exceptional Thermal Shield",
     "specChips": [
       "6\" (150mm)",
@@ -670,10 +654,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-8-inch-600x200x200mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-8-inch-600x200x200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty 8\" External Envelope Block • Maximum Insulation & Strength",
     "specChips": [
       "8\" (200mm)",
@@ -746,10 +728,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-bulk-supply-cbm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/birla-aerocon-aac-block-bulk-supply-cbm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Wholesale Contractor Volume Pricing • Delivered in Palletized Truckloads",
     "specChips": [
       "Per CBM (m³)",
@@ -820,10 +800,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-4-inch-625x200x100mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-4-inch-625x200x100mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Extended 625mm Format • Speeds Up Laying by 4% • High Strength AAC",
     "specChips": [
       "4\" (100mm)",
@@ -894,10 +872,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-6-inch-600x200x150mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-6-inch-600x200x150mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty 6\" Magic Blox • Ideal for External Walls & Boundary Structures",
     "specChips": [
       "6\" (150mm)",
@@ -964,10 +940,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-8-inch-600x200x200mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-block-8-inch-600x200x200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Solid 8\" Solid Envelope AAC Block • Maximum Loadbearing Infill Rating",
     "specChips": [
       "8\" (200mm)",
@@ -1028,10 +1002,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-bulk-supply-cbm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/magicrete-magic-blox-aac-bulk-supply-cbm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Commercial Bulk Contract Supply • German Autoclaved Precision",
     "specChips": [
       "Per CBM (m³)",
@@ -1093,10 +1065,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-4-inch-600x200x100mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-4-inch-600x200x100mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "India's No. 1 Cement Brand • UltraTech Xtralite Aerated Autoclaved Blocks",
     "specChips": [
       "4\" (100mm)",
@@ -1163,10 +1133,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-6-inch-600x200x150mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-6-inch-600x200x150mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "6\" External & Common Wall Block • 55 pcs/m³ • UltraTech Engineered",
     "specChips": [
       "6\" (150mm)",
@@ -1228,10 +1196,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-8-inch-600x200x200mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/ultratech-xtralite-lightweight-aac-block-8-inch-600x200x200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty 8\" Facade Infill AAC Block • Peak Load & Heat Resistance",
     "specChips": [
       "8\" (200mm)",
@@ -1293,10 +1259,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/adani-acc-cool-walls-aac-block-4-inch-600x200x100mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/adani-acc-cool-walls-aac-block-4-inch-600x200x100mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Adani Cement / ACC Cool Walls • Advanced Micro-Cellular Thermal AAC",
     "specChips": [
       "4\" (100mm)",
@@ -1356,10 +1320,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 2,
-    "image": "/images/products/bricks-sand-gitti-aac/jkm-a-plus-grade-1-solid-aac-block-bulk-cbm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/jkm-a-plus-grade-1-solid-aac-block-bulk-cbm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Value Leader AAC Block Bulk Supply • Dependable Density & Smooth Cuts",
     "specChips": [
       "Per CBM (m³)",
@@ -1420,10 +1382,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 3,
-    "image": "/images/products/bricks-sand-gitti-aac/local-precast-solid-concrete-block-8-inch-400x200x200mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/local-precast-solid-concrete-block-8-inch-400x200x200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty Solid Concrete Masonry Block • High Load Bearing Capacity",
     "specChips": [
       "8\" (200mm)",
@@ -1488,10 +1448,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 3,
-    "image": "/images/products/bricks-sand-gitti-aac/local-precast-hollow-concrete-block-8-inch-400x200x200mm.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/local-precast-hollow-concrete-block-8-inch-400x200x200mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Vibro-Pressed 2-Core Hollow Concrete Block • Faster Build & Lighter Deadload",
     "specChips": [
       "8\" (200mm)",
@@ -1555,10 +1513,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-red-brown-morang-sand-rcc-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-red-brown-morang-sand-rcc-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Authentic Ken/Betwa River Red Morang • Silt-Free Zone-II for Structural RCC",
     "specChips": [
       "Zone-II Coarse",
@@ -1635,10 +1591,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-morang-sand-100-cft-trolley.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/banda-hamirpur-coarse-morang-sand-100-cft-trolley.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100 CFT Brass Trolley Load • Complete with eMM-11 Mining Transit Pass",
     "specChips": [
       "100 CFT Brass",
@@ -1707,10 +1661,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 2,
-    "image": "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-p-sand-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-p-sand-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Fine Screened Plaster Morang • Smooth Mirror Wall Finish with Zero Cracks",
     "specChips": [
       "Zone-III Fine",
@@ -1775,10 +1727,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 2,
-    "image": "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-100-cft-trolley.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/yamuna-local-fine-plastering-morang-sand-100-cft-trolley.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100 CFT Fine Plaster Sand Trolley • Direct Site Tipping with eMM-11",
     "specChips": [
       "100 CFT Brass",
@@ -1842,10 +1792,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 2,
-    "image": "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Natural Fine White Balu • Basement Backfilling, Paver Bedding & Plaster",
     "specChips": [
       "Natural White Balu",
@@ -1910,10 +1858,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 2,
-    "image": "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-100-cft-trolley.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/ghaghara-ganga-white-grey-river-balu-sand-100-cft-trolley.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100 CFT Full Trolley White Balu • Bulk Foundation & Plinth Filling",
     "specChips": [
       "100 CFT Brass",
@@ -1973,10 +1919,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/kabrai-crusher-concrete-stone-dust-crushed-m-sand-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/kabrai-crusher-concrete-stone-dust-crushed-m-sand-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Crushed Black Granite M-Sand • Ideal for Concrete Blocks & Paver Bedding",
     "specChips": [
       "Crushed 0-4.75mm",
@@ -2046,10 +1990,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-rcc-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-rcc-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Authentic Kabrai Jet-Black Granite Gitti • 20mm Cubical Shape for Heavy RCC",
     "specChips": [
       "20mm Kali Gitti",
@@ -2123,10 +2065,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-100-cft-trolley.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-20mm-kali-crushed-stone-gitti-100-cft-trolley.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100 CFT Brass Trolley • Kabrai Black Granite Gitti • Verified eMM-11 Pass",
     "specChips": [
       "100 CFT Brass",
@@ -2192,10 +2132,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-finishing-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-finishing-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "10mm Black Granite Chips • Ideal for Dense Rebar Columns, Lintels & Chhajjas",
     "specChips": [
       "10mm Chips",
@@ -2257,10 +2195,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-100-cft-trolley.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-10mm-crushed-stone-gitti-100-cft-trolley.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "100 CFT Brass Trolley Load • 10mm Black Granite Aggregate • eMM-11 Slip",
     "specChips": [
       "100 CFT Brass",
@@ -2325,10 +2261,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-6mm-jeera-gitti-flooring-precast-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-6mm-jeera-gitti-flooring-precast-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "6mm Micro-Aggregate (Jeera) • IPS Flooring, Paver Tops & Precast Concrete",
     "specChips": [
       "6mm Jeera Gitti",
@@ -2393,10 +2327,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": true,
     "requiresUnloadingLabour": false,
     "brandTier": 1,
-    "image": "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-40mm-heavy-crushed-gitti-soling-per-cft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/kabrai-mahoba-40mm-heavy-crushed-gitti-soling-per-cft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy 40mm Soling Aggregate • Mass Foundation Concrete & Road Sub-Base",
     "specChips": [
       "40mm Soling",
@@ -2457,10 +2389,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 3,
-    "image": "/images/products/bricks-sand-gitti-aac/local-precast-60mm-m30-zigzag-interlocking-paver-block-sqft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/local-precast-60mm-m30-zigzag-interlocking-paver-block-sqft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "M30 Grade Interlocking Pavers • Residential Driveways, Walkways & Patios",
     "specChips": [
       "60mm M30",
@@ -2530,10 +2460,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": true,
     "brandTier": 3,
-    "image": "/images/products/bricks-sand-gitti-aac/local-precast-80mm-m35-heavy-duty-driveway-paver-block-sqft.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/local-precast-80mm-m35-heavy-duty-driveway-paver-block-sqft.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy-Duty 80mm M35 Paver • Truck Driveways, Petrol Pumps & Warehouses",
     "specChips": [
       "80mm M35",
@@ -2601,10 +2529,8 @@ export const ALL_37_MASONRY_PRODUCTS: MasonryProduct[] =
     "requiresMiningTransitPass": false,
     "requiresUnloadingLabour": false,
     "brandTier": 3,
-    "image": "/images/products/bricks-sand-gitti-aac/standard-precast-multi-size-concrete-cover-blocks-pack-100.webp",
-    "images": [
-      "/images/products/bricks-sand-gitti-aac/standard-precast-multi-size-concrete-cover-blocks-pack-100.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Multi-Cover Fiber Reinforced Concrete Spacers • Express 60-Min 2-Wheeler Dispatch",
     "specChips": [
       "Pack of 100",

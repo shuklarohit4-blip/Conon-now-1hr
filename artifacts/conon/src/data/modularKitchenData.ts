@@ -81,10 +81,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-slim-s3-pro-motion-tandem-box-500mm-122mm-black.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-slim-s3-pro-motion-tandem-box-500mm-122mm-black.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Slim 13mm straight double-walled metal drawer system with synchronized soft close",
     "specChips": [
       "500mm Depth",
@@ -142,7 +140,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 3450,
         "discountPercent": 22,
         "stock": 45,
-        "image": "/images/products/modular-kitchen-systems/ebco-slim-s3-pro-motion-tandem-box-500mm-122mm-black.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -183,10 +181,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cutlery-height-m-70mm-500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cutlery-height-m-70mm-500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Low profile 70mm height double-walled drawer kit with precision Quadro undermount runners",
     "specChips": [
       "70mm Height (M)",
@@ -240,7 +236,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 3600,
         "discountPercent": 21,
         "stock": 50,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cutlery-height-m-70mm-500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -281,10 +277,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cup-saucer-height-d-144mm-500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cup-saucer-height-d-144mm-500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Mid-height 144mm tandem drawer with longitudinal gallery rails for cups and bowls",
     "specChips": [
       "144mm Height (D)",
@@ -334,7 +328,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 3950,
         "discountPercent": 22,
         "stock": 40,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-tandem-box-cup-saucer-height-d-144mm-500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -375,10 +369,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-pot-pan-tandem-box-176mm-500mm-50kg-9249744.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-atira-pot-pan-tandem-box-176mm-500mm-50kg-9249744.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy 50kg Quadro V6 rated deep pot and pan tandem drawer with square designer railings",
     "specChips": [
       "176mm Height",
@@ -432,7 +424,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 4490,
         "discountPercent": 21,
         "stock": 35,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-pot-pan-tandem-box-176mm-500mm-50kg-9249744.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -473,10 +465,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-tandem-box-6in-anthracite-soft-close.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-atira-tandem-box-6in-anthracite-soft-close.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Designer dark anthracite double-walled drawer for contemporary modular kitchens",
     "specChips": [
       "6\" Height (150mm)",
@@ -530,7 +520,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 5100,
         "discountPercent": 21,
         "stock": 30,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-tandem-box-6in-anthracite-soft-close.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -571,10 +561,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-heavy-thali-pantry-tandem-box-200mm-500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-innotech-atira-heavy-thali-pantry-tandem-box-200mm-500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Deep 200mm extra-high tandem drawer for heavy Indian stainless steel thalis and grocery sacks",
     "specChips": [
       "200mm Extra Deep",
@@ -628,7 +616,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 5400,
         "discountPercent": 21,
         "stock": 25,
-        "image": "/images/products/modular-kitchen-systems/hettich-innotech-atira-heavy-thali-pantry-tandem-box-200mm-500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -669,10 +657,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hafele-matrixbox-slim-ss-tandem-drawer-500mm-88mm-40kg.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hafele-matrixbox-slim-ss-tandem-drawer-500mm-88mm-40kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury 13mm slimline tandem drawer finished in authentic brushed stainless steel",
     "specChips": [
       "88mm Slim Height",
@@ -726,7 +712,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 13500,
         "discountPercent": 20,
         "stock": 15,
-        "image": "/images/products/modular-kitchen-systems/hafele-matrixbox-slim-ss-tandem-drawer-500mm-88mm-40kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -767,10 +753,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-frameless-side-pull-out-2-tier-ss-304-150mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-frameless-side-pull-out-2-tier-ss-304-150mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Economical 2-tier side mounted bottle & spice basket in genuine 304 grade stainless steel",
     "specChips": [
       "150mm Carcass",
@@ -820,7 +804,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 2350,
         "discountPercent": 25,
         "stock": 45,
-        "image": "/images/products/modular-kitchen-systems/ebco-frameless-side-pull-out-2-tier-ss-304-150mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -861,10 +845,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-150mm-bpo2sc2-150.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-150mm-bpo2sc2-150.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Bottom undermount soft-close bottle pull-out for 200mm modular kitchen base cabinets",
     "specChips": [
       "Fits 200mm Cabinet",
@@ -918,7 +900,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 7800,
         "discountPercent": 21,
         "stock": 25,
-        "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-150mm-bpo2sc2-150.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -959,10 +941,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-200mm-bpo2sc2-200.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-200mm-bpo2sc2-200.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "200mm wide 2-tier bottle & condiment pullout for 250mm external modular cabinets",
     "specChips": [
       "Fits 250mm Cabinet",
@@ -1012,7 +992,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 8400,
         "discountPercent": 20,
         "stock": 22,
-        "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-200mm-bpo2sc2-200.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1053,10 +1033,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-250mm-bpo2sc2-250.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-250mm-bpo2sc2-250.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Wide-format 250mm 2-tier bottle & sauce pullout for 300mm modular kitchen base units",
     "specChips": [
       "Fits 300mm Cabinet",
@@ -1106,7 +1084,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 9100,
         "discountPercent": 21,
         "stock": 18,
-        "image": "/images/products/modular-kitchen-systems/ebco-bottle-pullout-soft-close-2-tier-250mm-bpo2sc2-250.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1147,10 +1125,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-corner-carousel-polymer-white-2-shelf-rotating-unit.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-corner-carousel-polymer-white-2-shelf-rotating-unit.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "270-degree three-quarter revolving carousel for 900×900mm L-shaped corner kitchen cabinets",
     "specChips": [
       "Fits 900×900mm Corner",
@@ -1200,7 +1176,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 14000,
         "discountPercent": 21,
         "stock": 16,
-        "image": "/images/products/modular-kitchen-systems/ebco-corner-carousel-polymer-white-2-shelf-rotating-unit.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1241,10 +1217,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-magic-corner-double-pullout-anthracite-fits-850-910mm-mcdp90.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-magic-corner-double-pullout-anthracite-fits-850-910mm-mcdp90.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Synchronized dual-stage magic corner mechanism pulling hidden rear baskets forward into full view",
     "specChips": [
       "Fits 850–910mm Blind Corner",
@@ -1294,7 +1268,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 29800,
         "discountPercent": 20,
         "stock": 12,
-        "image": "/images/products/modular-kitchen-systems/ebco-magic-corner-double-pullout-anthracite-fits-850-910mm-mcdp90.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1335,10 +1309,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-magic-corner-soft-close-iron-grey-fits-900-1000mm-cabinet.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-magic-corner-soft-close-iron-grey-fits-900-1000mm-cabinet.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury iron grey blind corner pullout with synchronized Silent System motion",
     "specChips": [
       "Fits 900–1000mm Cabinet",
@@ -1388,7 +1360,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 30500,
         "discountPercent": 21,
         "stock": 14,
-        "image": "/images/products/modular-kitchen-systems/hettich-magic-corner-soft-close-iron-grey-fits-900-1000mm-cabinet.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1429,10 +1401,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/kings-nimbus-6-layer-12-basket-glass-tall-pantry-unit-600mm-60kg.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/kings-nimbus-6-layer-12-basket-glass-tall-pantry-unit-600mm-60kg.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Grand 6-layer dual-shelf tall pantry mechanism with 12 tempered glass-rim baskets and soft close",
     "specChips": [
       "Fits 600mm Tall Cabinet",
@@ -1486,7 +1456,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 19500,
         "discountPercent": 23,
         "stock": 10,
-        "image": "/images/products/modular-kitchen-systems/kings-nimbus-6-layer-12-basket-glass-tall-pantry-unit-600mm-60kg.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1527,10 +1497,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-cargoplus-ss-304-modular-kitchen-thali-utility-basket.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-cargoplus-ss-304-modular-kitchen-thali-utility-basket.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Heavy gauge genuine 304 stainless steel wire partition basket for upright Indian thalis",
     "specChips": [
       "Fits 450mm (18\") Carcass",
@@ -1584,7 +1552,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 1850,
         "discountPercent": 22,
         "stock": 60,
-        "image": "/images/products/modular-kitchen-systems/hettich-cargoplus-ss-304-modular-kitchen-thali-utility-basket.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1625,10 +1593,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/quba-symetry-plain-kitchen-basket-ss-304-15x20x4-in.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/quba-symetry-plain-kitchen-basket-ss-304-15x20x4-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Flat base stainless steel wire basket for bowls, utensils, and general food prep storage",
     "specChips": [
       "15×20×4 in (380×500×100mm)",
@@ -1674,7 +1640,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 2150,
         "discountPercent": 22,
         "stock": 35,
-        "image": "/images/products/modular-kitchen-systems/quba-symetry-plain-kitchen-basket-ss-304-15x20x4-in.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1715,10 +1681,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7323",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/zinc-plus-perforated-ss-plate-thali-basket-15x20x6-in.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/zinc-plus-perforated-ss-plate-thali-basket-15x20x6-in.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Laser-cut perforated stainless steel sheet base prevents water pooling on freshly washed thalis",
     "specChips": [
       "15×20×6 in",
@@ -1764,7 +1728,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 2700,
         "discountPercent": 22,
         "stock": 28,
-        "image": "/images/products/modular-kitchen-systems/zinc-plus-perforated-ss-plate-thali-basket-15x20x6-in.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1805,10 +1769,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "3924",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-orgatray-560-adjustable-pvc-cutlery-tray-600mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-orgatray-560-adjustable-pvc-cutlery-tray-600mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Custom trimmable food-grade plastic cutlery organizer with partitioned compartments for spoons and knives",
     "specChips": [
       "Fits 600mm Drawer",
@@ -1862,7 +1824,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 3750,
         "discountPercent": 22,
         "stock": 45,
-        "image": "/images/products/modular-kitchen-systems/hettich-orgatray-560-adjustable-pvc-cutlery-tray-600mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1903,10 +1865,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "3924",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-pull-out-under-sink-dual-waste-bin-40l-2x20l-anthracite.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-pull-out-under-sink-dual-waste-bin-40l-2x20l-anthracite.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Twin 20-liter bottom slide pull-out bins for wet and dry organic household waste segregation",
     "specChips": [
       "40L Total Capacity (2×20L)",
@@ -1956,7 +1916,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 6800,
         "discountPercent": 22,
         "stock": 20,
-        "image": "/images/products/modular-kitchen-systems/ebco-pull-out-under-sink-dual-waste-bin-40l-2x20l-anthracite.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -1997,10 +1957,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-livsmart-wicker-basket-soft-close-beech-wood-450mm-150mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-livsmart-wicker-basket-soft-close-beech-wood-450mm-150mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Traditional woven wicker basket with solid European steamed beech wood frame and soft-close slides",
     "specChips": [
       "Fits 450mm Carcass",
@@ -2054,7 +2012,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 6990,
         "discountPercent": 21,
         "stock": 15,
-        "image": "/images/products/modular-kitchen-systems/ebco-livsmart-wicker-basket-soft-close-beech-wood-450mm-150mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2095,10 +2053,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-pro-lift-hydraulic-gas-spring-100n-for-loft-cabinets-1-pair.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-pro-lift-hydraulic-gas-spring-100n-for-loft-cabinets-1-pair.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Pneumatic 100N nitrogen gas strut for upward-opening overhead modular kitchen loft doors",
     "specChips": [
       "100N Force (~10kg)",
@@ -2148,7 +2104,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 320,
         "discountPercent": 25,
         "stock": 120,
-        "image": "/images/products/modular-kitchen-systems/ebco-pro-lift-hydraulic-gas-spring-100n-for-loft-cabinets-1-pair.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2189,10 +2145,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "8302",
     "deliveryVehicleType": "2-Wheeler",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-100n-hydraulic-gas-piston-shock-absorber-0062316.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-100n-hydraulic-gas-piston-shock-absorber-0062316.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German industrial nitrogen gas piston flap stay with multi-angle position hold",
     "specChips": [
       "Model 0062316",
@@ -2242,7 +2196,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 9600,
         "discountPercent": 20,
         "stock": 18,
-        "image": "/images/products/modular-kitchen-systems/hettich-100n-hydraulic-gas-piston-shock-absorber-0062316.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2283,10 +2237,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7604",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/hettich-gola-profile-l-type-handleless-aluminium-3000mm-black-9299225.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/hettich-gola-profile-l-type-handleless-aluminium-3000mm-black-9299225.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "3-meter continuous L-shape anodized aluminium extrusion for seamless handleless kitchen base cabinets",
     "specChips": [
       "3000mm Length (10 ft)",
@@ -2340,7 +2292,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 2990,
         "discountPercent": 20,
         "stock": 40,
-        "image": "/images/products/modular-kitchen-systems/hettich-gola-profile-l-type-handleless-aluminium-3000mm-black-9299225.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2381,10 +2333,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7604",
     "deliveryVehicleType": "E-Loader",
     "brandTier": 1,
-    "image": "/images/products/modular-kitchen-systems/ebco-roll-top-pro-vertical-rolling-shutter-600mm-anthracite-rtpv.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/ebco-roll-top-pro-vertical-rolling-shutter-600mm-anthracite-rtpv.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "Smooth rolling vertical aluminum tambours to conceal microwave, toaster, and coffee makers",
     "specChips": [
       "Fits 600mm Width",
@@ -2438,7 +2388,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 15200,
         "discountPercent": 21,
         "stock": 14,
-        "image": "/images/products/modular-kitchen-systems/ebco-roll-top-pro-vertical-rolling-shutter-600mm-anthracite-rtpv.webp"
+        "image": ""
       }
     ],
     "inStock": true,
@@ -2479,10 +2429,8 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
     "hsnCode": "7604",
     "deliveryVehicleType": "E-Loader / Pickup",
     "brandTier": 2,
-    "image": "/images/products/modular-kitchen-systems/rehau-rauvolet-vetroline-toughened-glass-rolling-shutter-600x1500mm.webp",
-    "images": [
-      "/images/products/modular-kitchen-systems/rehau-rauvolet-vetroline-toughened-glass-rolling-shutter-600x1500mm.webp"
-    ],
+    "image": "",
+    "images": [],
     "shortTagline": "German luxury safety glass tambour door system with flush metallic black glass slats",
     "specChips": [
       "50mm Toughened Safety Glass",
@@ -2532,7 +2480,7 @@ export const ALL_26_MODULAR_KITCHEN_PRODUCTS: ModularKitchenProduct[] = [
         "mrp": 95000,
         "discountPercent": 19,
         "stock": 6,
-        "image": "/images/products/modular-kitchen-systems/rehau-rauvolet-vetroline-toughened-glass-rolling-shutter-600x1500mm.webp"
+        "image": ""
       }
     ],
     "inStock": true,

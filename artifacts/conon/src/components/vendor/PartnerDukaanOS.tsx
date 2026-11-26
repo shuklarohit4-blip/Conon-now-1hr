@@ -39,6 +39,7 @@ import {
   Grid,
   Search,
   Filter,
+  LogOut,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -56,12 +57,19 @@ import { KycSandboxPendingBanner } from "@/components/kyc/KycSandboxPendingBanne
 import { VendorRegisterWizard } from "@/components/kyc/VendorRegisterWizard";
 import { VendorCatalogStudio, CATEGORY_ICON_MAP } from "./VendorCatalogStudio";
 import { ProductImageUploader } from "./ProductImageUploader";
+import { VendorServicesFleetWorkspace } from "./VendorServicesFleetWorkspace";
 import { HOME_CATEGORIES } from "@/data/homeCategories";
 import { updateProductImageApi, resetProductImageApi, toggleCategoryApi } from "@/services/vendorCatalogSync";
 import { useVendorTheme, VendorThemeToggle } from "@/context/VendorThemeContext";
 import { useVendorLang, VendorLanguageToggle } from "@/context/VendorLanguageContext";
+import { feedbackSync, type DisputeTicket } from "@/services/feedbackSync";
 
-export function PartnerDukaanOS() {
+export interface PartnerDukaanOSProps {
+  onLogout?: () => void;
+  session?: any;
+}
+
+export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}) {
   const { isDark } = useVendorTheme();
   const { t, lang } = useVendorLang();
 
@@ -96,7 +104,7 @@ export function PartnerDukaanOS() {
   } | null>(null);
   const [hubDropdownOpen, setHubDropdownOpen] = useState(false);
   const [activeVoiceOrder, setActiveVoiceOrder] = useState<string | null>(null);
-  const [mobileTab, setMobileTab] = useState<"buzzer" | "stock" | "payouts">("buzzer");
+  const [mobileTab, setMobileTab] = useState<"buzzer" | "stock" | "payouts" | "services_fleet">("buzzer");
 
   // Voice Command Bar State
   const [isListening, setIsListening] = useState(false);
@@ -116,6 +124,22 @@ export function PartnerDukaanOS() {
       LUCKNOW_PARTNER_HUBS[0]
     );
   }, [state.vendorHub]);
+
+  // Live Shop Quality Pulse & Escrow Dispute Sync
+  const [activeDisputes, setActiveDisputes] = useState<DisputeTicket[]>(() => feedbackSync.getDisputes());
+
+  useEffect(() => {
+    const unsub = feedbackSync.subscribe((event) => {
+      if (event.type === "DISPUTE_ALERT" || event.type === "DISPUTE_RESOLVED" || event.type === "CUSTOMER_FEEDBACK") {
+        setActiveDisputes(feedbackSync.getDisputes());
+      }
+    });
+    return () => unsub();
+  }, []);
+
+  const openDamageDispute = useMemo(() => {
+    return activeDisputes.find((d) => d.status === "ESCROW_DISPUTE_HOLD");
+  }, [activeDisputes]);
 
   // Derived metrics
   const activeIncomingOrders = useMemo(
@@ -263,6 +287,11 @@ export function PartnerDukaanOS() {
                   <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                   {currentHubInfo.verifiedBadge}
                 </span>
+                {session?.partnerId && (
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[9px] font-mono font-black px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 border border-amber-300">
+                    {session.partnerId}
+                  </span>
+                )}
               </div>
 
               {/* 1-Click Hub Switcher Dropdown */}
@@ -540,6 +569,34 @@ export function PartnerDukaanOS() {
             {/* Live Socket Status Pill */}
             <SocketStatusPill />
 
+            {/* Shop Quality Pulse Badge */}
+            <div
+              className={`px-2.5 py-1 rounded-xl border text-left transition-all ${
+                openDamageDispute
+                  ? "bg-rose-500/15 border-rose-500/50 text-rose-500 animate-pulse"
+                  : isDark
+                  ? "bg-emerald-950/30 border-emerald-500/30 text-emerald-400"
+                  : "bg-emerald-50 border-emerald-200 text-emerald-800 shadow-xs"
+              }`}
+            >
+              <span className={`text-[8px] uppercase tracking-wider block font-bold opacity-80`}>
+                {lang === "hi" ? "दुकान क्वालिटी पल्स" : "Shop Quality Pulse"}
+              </span>
+              <span className="text-xs font-black font-mono flex items-center gap-1">
+                {openDamageDispute ? (
+                  <>
+                    <AlertCircle className="w-3.5 h-3.5 text-rose-500" />
+                    <span>{lang === "hi" ? "1 कटी बोरी अलर्ट (होल्ड)" : "1 Torn Bag Alert (Hold)"}</span>
+                  </>
+                ) : (
+                  <>
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>{lang === "hi" ? "98% ताज़ा स्टॉक स्कोर • 0 कटी बोरी" : "98% Fresh Stock Score • 0 Torn Bags"}</span>
+                  </>
+                )}
+              </span>
+            </div>
+
             {/* KPI 1: Active Orders */}
             <div
               className={`px-2.5 py-1 rounded-xl border text-left ${
@@ -625,6 +682,22 @@ export function PartnerDukaanOS() {
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               )}
+
+              {onLogout && (
+                <button
+                  type="button"
+                  onClick={onLogout}
+                  className={`px-2.5 py-1.5 rounded-xl border text-xs font-bold transition flex items-center gap-1 cursor-pointer ${
+                    isDark
+                      ? "bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border-rose-500/30"
+                      : "bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs"
+                  }`}
+                  title={lang === "hi" ? "लॉगआउट / पार्टनर बदलें" : "Logout / Switch Partner"}
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{lang === "hi" ? "लॉगआउट" : "Logout"}</span>
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -684,21 +757,65 @@ export function PartnerDukaanOS() {
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>{t("col3Title", "Escrow-to-UPI Pipeline & Driver Radar")}</span>
           </button>
+
+          <button
+            type="button"
+            onClick={() => setMobileTab("services_fleet")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 shrink-0 ${
+              mobileTab === "services_fleet"
+                ? "bg-amber-400 text-slate-950 shadow-md shadow-amber-400/20"
+                : isDark
+                ? "text-slate-400 hover:bg-slate-800"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
+          >
+            <Truck className="w-3.5 h-3.5" />
+            <span>{t("col4Title", "Services & Fleet")}</span>
+          </button>
         </div>
       </header>
 
       {/* KYC SANDBOX PENDING BANNER / REUPLOAD ALERT */}
       <KycSandboxPendingBanner
         type="VENDOR"
-        onSwitchToVerifiedDemo={() =>
-          setVendorHub("Katawala Hardware & Locks — Latouche Road Hub")
-        }
+        onSwitchToVerifiedDemo={() => {
+          const approved = applications.find(
+            (a) => a.applicantType === "VENDOR" && a.status === "APPROVED"
+          );
+          if (approved) setVendorHub(approved.firmOrName);
+        }}
       />
 
       {/* ─────────────────────────────────────────────────────────────
           2. MASTERPIECE 3-ZONE OPERATIONS COMMAND LAYOUT
       ────────────────────────────────────────────────────────────── */}
-      <main className="max-w-[1680px] mx-auto w-full px-4 sm:px-6 mt-6 flex-1">
+      <main className="max-w-[1680px] mx-auto w-full px-4 sm:px-6 mt-6 flex-1 space-y-4">
+        {/* Quality Dispute Warning Banner */}
+        {openDamageDispute && (
+          <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/40 text-rose-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md animate-in fade-in">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-rose-500/20 flex items-center justify-center text-rose-500 shrink-0">
+                <AlertCircle className="w-5 h-5 text-rose-500" />
+              </div>
+              <div>
+                <p className="text-xs font-black">
+                  {lang === "hi"
+                    ? `गुणवत्ता अलर्ट: आर्डर #${openDamageDispute.orderId.slice(-4)} पर ${openDamageDispute.affectedQty} कटी/भीगी बोरी की रिपोर्ट दर्ज हुई!`
+                    : `Quality Alert: Customer reported ${openDamageDispute.affectedQty} Torn/Wet Bags on Order #${openDamageDispute.orderId.slice(-4)}!`}
+                </p>
+                <p className="text-[11px] opacity-80">
+                  {lang === "hi"
+                    ? "एस्क्रो भुगतान होल्ड पर है। एडमिन द्वारा रिफंड या रिप्लेसमेंट अप्रूव होने पर समाधान होगा।"
+                    : `Escrow payout of ₹${openDamageDispute.claimAmount} is in Dispute Hold. Awaiting Admin clearance.`}
+                </p>
+              </div>
+            </div>
+            <span className="text-[10px] font-black uppercase px-2.5 py-1 rounded-lg bg-rose-500 text-white">
+              ESCROW DISPUTE HOLD
+            </span>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
           {/* ═════════════════════════════════════════════════════════
               COLUMN 1 (LEFT ZONE) — 180s FLASH BUZZER & INVISIBLE WAREHOUSE
@@ -730,23 +847,91 @@ export function PartnerDukaanOS() {
               </span>
             </div>
 
-            {/* Empty State */}
+            {/* Empty State / Magical Live Zero-State */}
             {activeIncomingOrders.length === 0 ? (
-              <div className={`p-8 text-center rounded-3xl border transition-colors ${themeCardClass}`}>
-                <Store className={`w-12 h-12 mx-auto mb-3 ${isDark ? "text-slate-600" : "text-slate-300"}`} />
-                <h3 className={`text-sm font-bold ${themeTitleClass}`}>
-                  {t("noActiveOrdersTitle", "No Incoming Orders in Queue")}
+              <div
+                className={`p-6 sm:p-8 text-center rounded-3xl border transition-all relative overflow-hidden ${
+                  isDark
+                    ? "bg-gradient-to-b from-[#161F32] to-[#0E1524] border-amber-400/30 shadow-2xl shadow-amber-400/5 ring-1 ring-amber-400/20"
+                    : "bg-gradient-to-b from-amber-50/60 to-white border-amber-300 shadow-xl ring-1 ring-amber-400/30"
+                }`}
+              >
+                {/* Glowing status badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-xs font-bold font-mono mb-4">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>
+                    {lang === "hi"
+                      ? "आपकी दुकान CONON-NOW पर लाइव है"
+                      : "Aapki Dukaan CONON-NOW par Live Hai"}
+                  </span>
+                </div>
+
+                <div className="w-16 h-16 rounded-3xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center mx-auto mb-3 text-amber-500 shadow-lg shadow-amber-400/10">
+                  <Store className="w-8 h-8 text-amber-500" />
+                </div>
+
+                <h3 className={`text-base sm:text-lg font-black ${themeTitleClass}`}>
+                  {lang === "hi"
+                    ? "नए कंस्ट्रक्शन ऑर्डर्स के लिए तैयार"
+                    : "Ready for First Site Order"}
                 </h3>
-                <p className={`text-xs max-w-sm mx-auto mt-1 mb-4 ${themeSubtextClass}`}>
-                  {t("noActiveOrdersDesc", "Your dukaan is live on Lucknow express dispatch radar. New site orders will ring buzzer instantly.")}
+
+                <p className={`text-xs max-w-sm mx-auto mt-1 mb-5 ${themeSubtextClass}`}>
+                  {lang === "hi"
+                    ? "लखनऊ एक्सप्रेस 60-मिनट डिलीवरी कॉरिडोर एक्टिव है। ठेकेदार का ऑर्डर आते ही 180s लाउड बजर बजेगा।"
+                    : "Your hardware counter is live on Lucknow 60-min express radar. Incoming site orders will trigger the 180-second loud buzzer."}
                 </p>
-                <button
-                  type="button"
-                  onClick={() => simulateIncomingExpressOrder()}
-                  className="px-4 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs rounded-xl shadow-lg shadow-amber-400/20 transition cursor-pointer"
-                >
-                  {t("simulateOrderBtn", "⚡ Simulate Live Contractor Order")}
-                </button>
+
+                {/* Live System Feature Badges */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-md mx-auto mb-6 text-left">
+                  <div className={`p-2.5 rounded-xl border text-xs ${isDark ? "bg-[#090D18] border-slate-800" : "bg-white border-slate-200"}`}>
+                    <div className="text-[10px] font-bold text-amber-500">16 CATEGORIES</div>
+                    <div className={`font-bold mt-0.5 truncate ${themeTitleClass}`}>Catalog Active</div>
+                    <div className="text-[10px] text-emerald-500 font-bold mt-1">✓ 753+ Base SKUs</div>
+                  </div>
+
+                  <div className={`p-2.5 rounded-xl border text-xs ${isDark ? "bg-[#090D18] border-slate-800" : "bg-white border-slate-200"}`}>
+                    <div className="text-[10px] font-bold text-cyan-400">RAIN SHIELD</div>
+                    <div className={`font-bold mt-0.5 truncate ${themeTitleClass}`}>Tirpal Guard</div>
+                    <div className="text-[10px] text-cyan-400 font-bold mt-1">✓ Auto-Armed</div>
+                  </div>
+
+                  <div className={`p-2.5 rounded-xl border text-xs col-span-2 sm:col-span-1 ${isDark ? "bg-[#090D18] border-slate-800" : "bg-white border-slate-200"}`}>
+                    <div className="text-[10px] font-bold text-emerald-400">ESCROW SETTLEMENT</div>
+                    <div className={`font-bold mt-0.5 truncate ${themeTitleClass}`}>UPI Payout</div>
+                    <div className="text-[10px] text-emerald-400 font-bold mt-1">✓ Instant Payouts</div>
+                  </div>
+                </div>
+
+                {/* Action Buttons: Buzzer Audio Test & Order Simulation */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playOrderChime();
+                      toast.info("Counter Buzzer Test: Sound Active", {
+                        description: "High-pitch 180s alert will sound here whenever site contractors place orders.",
+                      });
+                    }}
+                    className={`w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-2 cursor-pointer ${
+                      isDark
+                        ? "bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700"
+                        : "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-200"
+                    }`}
+                  >
+                    <Volume2 className="w-4 h-4 text-amber-500" />
+                    <span>{lang === "hi" ? "🔔 बजर साउंड टेस्ट करें" : "🔔 Test 180s Buzzer Audio"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => simulateIncomingExpressOrder()}
+                    className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs rounded-xl shadow-lg shadow-amber-400/20 transition cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <Zap className="w-4 h-4" />
+                    <span>{t("simulateOrderBtn", "⚡ Simulate Live Contractor Order")}</span>
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="space-y-4">
@@ -1668,6 +1853,17 @@ export function PartnerDukaanOS() {
             </div>
           </section>
         </div>
+
+        {/* ── SERVICES & FLEET WORKSPACE (4th panel, mobile + desktop) ── */}
+        {mobileTab === "services_fleet" && (
+          <section className="max-w-[1680px] mx-auto w-full p-4 xl:p-6">
+            <VendorServicesFleetWorkspace
+              vendorHubId={currentHubInfo.id || "hub-naka"}
+              vendorName={currentHubInfo.name || "CONON Partner Hub"}
+              vendorZone={currentHubInfo.zone || "Lucknow"}
+            />
+          </section>
+        )}
       </main>
 
       {/* VENDOR REGISTRATION WIZARD MODAL */}
@@ -1676,9 +1872,9 @@ export function PartnerDukaanOS() {
           <div className="my-8 w-full max-w-4xl">
             <VendorRegisterWizard
               onCancel={() => setRegisterModalOpen(false)}
-              onSuccess={() => {
+              onSuccess={(app) => {
                 setRegisterModalOpen(false);
-                setVendorHub("Awadh Building Solutions & Pipe Depot");
+                if (app?.firmOrName) setVendorHub(app.firmOrName);
               }}
             />
           </div>
@@ -1709,7 +1905,7 @@ export function PartnerDukaanOS() {
           productName={inlinePhotoProduct.name}
           categoryName={inlinePhotoProduct.category}
           dealerPrice={inlinePhotoProduct.price}
-          currentImageUrl={inlinePhotoProduct.image || "/images/products/cement/ultratech-weatherplus.webp"}
+          currentImageUrl={inlinePhotoProduct.image || ""}
           onSaveImage={async (id, dataUrl) => {
             await updateProductImageApi(currentHubInfo.id || "hub-naka", id, dataUrl);
             setInlinePhotoProduct(null);

@@ -27,6 +27,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
 import {
@@ -82,6 +83,7 @@ export function FurnitureHardwareStorefront({
   onBackToDirectory,
 }: FurnitureHardwareStorefrontProps) {
   const qc = useQueryClient();
+  const { resolveProduct } = useProductMediaVault();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
@@ -133,7 +135,7 @@ export function FurnitureHardwareStorefront({
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
-    return ALL_20_FURNITURE_HARDWARE_PRODUCTS.filter((prod) => {
+    return ALL_20_FURNITURE_HARDWARE_PRODUCTS.map((p) => resolveProduct(p)).filter((prod) => {
       // Subcategory
       if (activeSubcat !== "ALL" && prod.furnitureSubcategory !== activeSubcat) {
         return false;
@@ -168,7 +170,7 @@ export function FurnitureHardwareStorefront({
 
       return true;
     });
-  }, [activeSubcat, selectedBrandTier, selectedBrand, closingFilter, lengthPitchFilter, vehicleFilter]);
+  }, [activeSubcat, selectedBrandTier, selectedBrand, closingFilter, lengthPitchFilter, vehicleFilter, resolveProduct]);
 
   // Cart operations
   const handleAdd = (prod: FurnitureHardwareProduct) => {

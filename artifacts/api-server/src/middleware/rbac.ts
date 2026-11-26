@@ -11,18 +11,23 @@ export function requireDriver(req: Request, res: Response, next: NextFunction) {
     if (payload && (payload.role === "driver" || payload.role === "admin")) {
       const driverId = String(payload.sub || "DRV-LKO-201");
       const driver = ecosystemEngine.getDriver(driverId);
-      (req as any).driver = driver || ecosystemEngine.getAllDrivers()[0];
-      (req as any).driverId = driver ? driver.id : "DRV-LKO-201";
+      (req as any).driver = driver || ecosystemEngine.getAllDrivers()[0] || null;
+      (req as any).driverId = driver ? driver.id : driverId;
       return next();
     }
   }
 
-  // Dev / local sandbox fallback: auto-assign default driver Rajesh Kumar (2W) or query driverId
+  // Dev / local sandbox fallback: auto-assign driver or safe clean-slate fallback
   if (process.env.NODE_ENV !== "production") {
     const queryDriverId = (req.query.driverId as string) || (req.headers["x-driver-id"] as string) || "DRV-LKO-201";
     const driver = ecosystemEngine.getDriver(queryDriverId) || ecosystemEngine.getAllDrivers()[0];
-    (req as any).driver = driver;
-    (req as any).driverId = driver.id;
+    if (driver) {
+      (req as any).driver = driver;
+      (req as any).driverId = driver.id;
+      return next();
+    }
+    (req as any).driver = null;
+    (req as any).driverId = queryDriverId;
     return next();
   }
 

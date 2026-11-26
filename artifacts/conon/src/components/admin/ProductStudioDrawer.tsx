@@ -24,7 +24,7 @@ import {
 import { toast } from "sonner";
 import { resolveApiUrl } from "@/lib/apiBase";
 import { useLiveCatalog, type MasterCatalogSKU } from "@/context/LiveCatalogContext";
-import { ProductImage } from "../ProductImage";
+import { CononProductMedia } from "../CononProductMedia";
 
 interface ProductStudioDrawerProps {
   sku: MasterCatalogSKU | null; // null means adding a new SKU
@@ -788,7 +788,7 @@ export function ProductStudioDrawer({
                 <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-lg bg-white border border-slate-200 overflow-hidden flex items-center justify-center p-1">
-                      <ProductImage src={imageUrl} alt={name} className="w-full h-full object-contain" />
+                      <CononProductMedia src={imageUrl} title={name || "Product"} brand={brand} alt={name} variant="thumb" containerClassName="w-full h-full" className="w-full h-full object-contain" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs font-bold text-slate-800 truncate max-w-[280px]">{imageUrl}</p>
@@ -1215,9 +1215,13 @@ export function ProductStudioDrawer({
               {/* Exact Storefront Product Card Preview */}
               <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-md space-y-3 max-w-[320px] mx-auto">
                 <div className="relative aspect-square w-full rounded-xl bg-white border border-slate-100 overflow-hidden flex items-center justify-center p-2">
-                  <ProductImage
-                    src={imageUrl || "/placeholder.svg"}
+                  <CononProductMedia
+                    src={imageUrl}
+                    title={name || "Product Preview"}
+                    brand={brand}
                     alt={name || "Product Preview"}
+                    variant="card"
+                    containerClassName="w-full h-full"
                     className="w-full h-full object-contain"
                   />
                   {express60Min && (

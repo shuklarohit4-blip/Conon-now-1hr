@@ -163,7 +163,7 @@ const INITIAL_STOCK: Record<string, StockItem> = {
     quantityLabel: "450 Bags in Yard",
     dealerRate: 352,
     retailRate: 390,
-    img: "/images/products/cement/ultratech-weatherplus.webp",
+    img: "",
   },
   "steel-tmt550d": {
     id: "steel-tmt550d",
@@ -174,7 +174,7 @@ const INITIAL_STOCK: Record<string, StockItem> = {
     quantityLabel: "3.2 Ton Bundles",
     dealerRate: 49.5,
     retailRate: 54.5,
-    img: "/images/products/steel/tata-tiscon-12mm-tmt-fe500d.webp",
+    img: "",
   },
   "bricks-avval": {
     id: "bricks-avval",
@@ -185,7 +185,7 @@ const INITIAL_STOCK: Record<string, StockItem> = {
     quantityLabel: "14,000 Pcs Stacked",
     dealerRate: 7.2,
     retailRate: 8.5,
-    img: "/images/products/bricks/first-class-red-brick.webp",
+    img: "",
   },
   "aac-blocks": {
     id: "aac-blocks",
@@ -196,7 +196,7 @@ const INITIAL_STOCK: Record<string, StockItem> = {
     quantityLabel: "540 Blocks",
     dealerRate: 49,
     retailRate: 58,
-    img: "/images/products/aggregate/gitti-20mm-cft.webp",
+    img: "",
   },
   "cpvc-pipes": {
     id: "cpvc-pipes",
@@ -207,7 +207,7 @@ const INITIAL_STOCK: Record<string, StockItem> = {
     quantityLabel: "85 Pipes in Rack",
     dealerRate: 285,
     retailRate: 340,
-    img: "/images/products/plumbing/astral-cpvc-pro-1-inch.webp",
+    img: "",
   },
   "wall-putty": {
     id: "wall-putty",
@@ -218,143 +218,13 @@ const INITIAL_STOCK: Record<string, StockItem> = {
     quantityLabel: "65 Bags",
     dealerRate: 720,
     retailRate: 830,
-    img: "/images/products/paints/asian-paints-royale-luxury-emulsion-white-4l.webp",
+    img: "",
   },
 };
 
-const INITIAL_HEDGE_OFFERS: BulkHedgeOffer[] = [
-  {
-    id: "hedge-101",
-    material: "UltraTech Super OPC 53 Cement",
-    quantity: "50 Bags (2.5 Ton)",
-    lockedLandingRate: 362,
-    instantAdvance: 5000,
-    corridor: "Shaheed Path / Sushant Golf City Dhalai Corridor",
-    status: "PENDING",
-  },
-  {
-    id: "hedge-102",
-    material: "Kamdhenu Fe 550D TMT Steel (12mm)",
-    quantity: "1.5 Ton Bundles",
-    lockedLandingRate: 53.2,
-    instantAdvance: 12000,
-    corridor: "Vibhuti Khand Gomti Nagar Foundation Pour",
-    status: "PENDING",
-  },
-];
+const INITIAL_HEDGE_OFFERS: BulkHedgeOffer[] = [];
 
-const INITIAL_ORDERS: RelayOrder[] = [
-  {
-    id: "ORD-LKO-9241",
-    shortId: "9241",
-    customerName: "Er. Vikram Malhotra (Shree Balaji)",
-    customerPhone: "+91 98390 41209",
-    siteName: "Sushant Golf City Site — Villa 108",
-    siteAddress: "Pocket 4, Sector C, Near Medanta Hospital, Shaheed Path, Lucknow",
-    hubName: "Katawala Hardware & Locks — Latouche Road Hub",
-    itemsSummary: "UltraTech Super OPC 53 (20 Bags) + Astral CPVC Pipes (4 pcs)",
-    weightKg: 1040,
-    vehicleTag: "Chhota Hathi Loader • 1,040 kg",
-    vehicleType: "LOADER",
-    netDealerPayout: 8420,
-    totalAmount: 9650,
-    deliveryFee: 480,
-    palledariBonus: 120,
-    status: "NEW_INCOMING",
-    incomingSecondsLeft: 168,
-    customerOtp: "2026",
-    pickupOtp: "4912",
-    driverName: "Suresh S. (Loader UP 32 EL 8901)",
-    driverPhone: "+91 94500 23411",
-    driverVehiclePlate: "UP 32 EL 8901",
-    escrowProgress: "LOADED",
-    checklist: [
-      { id: "c1", label: "UltraTech Super OPC 53 — 20 Bags (Fresh Batch)", checked: false },
-      { id: "c2", label: "Astral CPVC Pro Pipes 1\" — 4 Lengths Verified", checked: false },
-      { id: "c3", label: "ISI Mark Stamped & Batch Date Inspected", checked: false },
-      { id: "c4", label: "Loading Slip Attached with Vehicle Number", checked: false },
-    ],
-    stops: [
-      {
-        stopId: "stop-9241-1",
-        hubId: "hub-latouche",
-        hubName: "Katawala Hardware & Locks — Latouche Road Hub",
-        sequenceNo: 1,
-        pickupQrToken: "CON-PICKUP-9241-STOP1",
-        isLoaded: true,
-        materialSummary: "UltraTech Super OPC 53 Cement (20 Bags)",
-      },
-      {
-        stopId: "stop-9241-2",
-        hubId: "hub-aminabad",
-        hubName: "Shri Balaji Traders — Aminabad Mandi (1.2 km away)",
-        sequenceNo: 2,
-        pickupQrToken: "CON-PICKUP-9241-STOP2",
-        isLoaded: false,
-        materialSummary: "Astral CPVC Pro Pipes 1\" (4 Lengths)",
-      },
-    ],
-    createdAt: Date.now() - 12000,
-  },
-  {
-    id: "ORD-LKO-7719",
-    shortId: "7719",
-    customerName: "Rameshwar P. (Om Infracon)",
-    customerPhone: "+91 98391 77211",
-    siteName: "Vibhuti Khand Tower B Footing",
-    siteAddress: "Plot 14, Vibhuti Khand, Behind Kisan Bazar, Gomti Nagar",
-    hubName: "Katawala Hardware & Locks — Latouche Road Hub",
-    itemsSummary: "Kamdhenu Fe-550D TMT Sariya 12mm (15 Bundles)",
-    weightKg: 750,
-    vehicleTag: "Chhota Hathi Loader • 750 kg",
-    vehicleType: "LOADER",
-    netDealerPayout: 39500,
-    totalAmount: 43200,
-    deliveryFee: 550,
-    palledariBonus: 120,
-    status: "OUT_FOR_DELIVERY",
-    incomingSecondsLeft: 0,
-    customerOtp: "2026",
-    pickupOtp: "8821",
-    driverName: "Ravi Kumar (UP 32 BK 4012)",
-    driverPhone: "+91 98380 99124",
-    driverVehiclePlate: "UP 32 BK 4012",
-    escrowProgress: "EN_ROUTE",
-    checklist: [
-      { id: "c1", label: "Kamdhenu 12mm TMT Bundles (15 Counted)", checked: true },
-      { id: "c2", label: "eMM-11 Mining & Commercial Pass OK", checked: true },
-      { id: "c3", label: "Loaded & Tied on Chhota Hathi", checked: true },
-    ],
-    createdAt: Date.now() - 1800000,
-  },
-  {
-    id: "ORD-LKO-5510",
-    shortId: "5510",
-    customerName: "Mohd. Aslam (Aminabad Contractor)",
-    customerPhone: "+91 94150 33812",
-    siteName: "Latouche Rd Renovation Site",
-    siteAddress: "Plot 3, Near Kaiserbagh Crossing, Aminabad",
-    hubName: "Katawala Hardware & Locks — Latouche Road Hub",
-    itemsSummary: "Birla White Putty (10 Bags) + Asian Paints Royale (4 Cans)",
-    weightKg: 440,
-    vehicleTag: "Chhota Hathi Loader • 440 kg",
-    vehicleType: "LOADER",
-    netDealerPayout: 12400,
-    totalAmount: 14100,
-    deliveryFee: 320,
-    palledariBonus: 120,
-    status: "ESCROW_SETTLED",
-    incomingSecondsLeft: 0,
-    customerOtp: "2026",
-    pickupOtp: "3310",
-    driverName: "Kartik K. (UP 32 PK 1928)",
-    escrowProgress: "SETTLED",
-    settledUtr: "HDFC9021882194",
-    checklist: [],
-    createdAt: Date.now() - 7200000,
-    deliveredAt: Date.now() - 3600000,
-  },
-];
+const INITIAL_ORDERS: RelayOrder[] = [];
 
 const INITIAL_REVERSE_BUYBACK: ReverseBuybackTrip = {
   active: false,
@@ -414,7 +284,7 @@ export interface FourPanelRelayContextType {
 
 const FourPanelRelayContext = createContext<FourPanelRelayContextType | null>(null);
 
-export const DEFAULT_LUCKNOW_HUB = "Katawala Hardware & Locks — Latouche Road Hub";
+export const DEFAULT_LUCKNOW_HUB = "Lucknow Partner Hub";
 
 export interface LucknowPartnerHubInfo {
   id: string;
@@ -427,62 +297,21 @@ export interface LucknowPartnerHubInfo {
   verifiedBadge: string;
 }
 
-export const LUCKNOW_PARTNER_HUBS: LucknowPartnerHubInfo[] = [
-  {
-    id: "hub-latouche",
-    name: "Katawala Hardware & Locks — Latouche Road Hub",
-    shortName: "Latouche Road Hub",
-    owner: "Manoj Katawala",
-    phone: "+91 98390 11223",
-    zone: "Latouche Road / Central Lucknow",
-    rating: "4.9 ★",
-    verifiedBadge: "Verified A-Class Hub",
-  },
-  {
-    id: "hub-aminabad",
-    name: "Shri Balaji Traders — Aminabad Hardware Mandi",
-    shortName: "Aminabad Mandi",
-    owner: "Rajesh Agarwal",
-    phone: "+91 98390 44556",
-    zone: "Aminabad Market",
-    rating: "4.8 ★",
-    verifiedBadge: "Verified A-Class Hub",
-  },
-  {
-    id: "hub-gomti-nagar",
-    name: "Gomti Nagar Express Depot — Vibhuti Khand",
-    shortName: "Gomti Nagar Depot",
-    owner: "Ramesh Gupta",
-    phone: "+91 98390 77889",
-    zone: "Vibhuti Khand / Gomti Nagar",
-    rating: "4.9 ★",
-    verifiedBadge: "Verified Super Hub",
-  },
-  {
-    id: "hub-alambagh",
-    name: "Alambagh Heavy Yard — Transport Nagar",
-    shortName: "Alambagh Heavy Yard",
-    owner: "Suresh Sharma",
-    phone: "+91 98390 55443",
-    zone: "Kanpur Road / Transport Nagar",
-    rating: "4.8 ★",
-    verifiedBadge: "Verified Heavy Depot",
-  },
-];
+export const LUCKNOW_PARTNER_HUBS: LucknowPartnerHubInfo[] = [];
 
 function loadSavedState(): FourPanelRelayState {
   if (typeof window === "undefined") {
     return {
       vendorHub: DEFAULT_LUCKNOW_HUB,
       vendorOnline: true,
-      vendorTodayEarnings: 18450,
+      vendorTodayEarnings: 0,
       vendorStock: INITIAL_STOCK,
       hedgeOffers: INITIAL_HEDGE_OFFERS,
       orders: INITIAL_ORDERS,
       driverVehicle: "LOADER",
       driverOnline: true,
-      driverTodayKamai: 2840,
-      driverTotalTrips: 5,
+      driverTodayKamai: 0,
+      driverTotalTrips: 0,
       driverSosAlerts: [],
       reverseBuyback: INITIAL_REVERSE_BUYBACK,
       isRainModeActive: false,
@@ -507,14 +336,14 @@ function loadSavedState(): FourPanelRelayState {
   return {
     vendorHub: DEFAULT_LUCKNOW_HUB,
     vendorOnline: true,
-    vendorTodayEarnings: 18450,
+    vendorTodayEarnings: 0,
     vendorStock: INITIAL_STOCK,
     hedgeOffers: INITIAL_HEDGE_OFFERS,
     orders: INITIAL_ORDERS,
     driverVehicle: "LOADER",
     driverOnline: true,
-    driverTodayKamai: 2840,
-    driverTotalTrips: 5,
+    driverTodayKamai: 0,
+    driverTotalTrips: 0,
     driverSosAlerts: [],
     reverseBuyback: INITIAL_REVERSE_BUYBACK,
     isRainModeActive: false,

@@ -518,23 +518,44 @@ function EmptyState({ hasOrders, onClear }: { hasOrders: boolean; onClear: () =>
     );
   }
   return (
-    <div className="text-center py-14">
+    <div className="text-center py-12 max-w-lg mx-auto">
       <div
-        className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4"
-        style={{ background: `${BRAND_DARK}10`, color: BRAND_DARK }}
+        className="w-20 h-20 mx-auto rounded-3xl flex items-center justify-center mb-4 shadow-sm"
+        style={{ background: `${BRAND_DARK}12`, color: BRAND_DARK }}
       >
-        <ShoppingBag className="w-9 h-9" />
+        <ShoppingBag className="w-10 h-10" />
       </div>
-      <p className="font-black text-slate-800 text-base">Your inventory is empty</p>
-      <p className="text-xs text-slate-500 mt-1 mb-5 max-w-[260px] mx-auto">
-        Order materials and they'll show up here with live tracking, totals, and one-tap reorder.
+      <p className="font-black text-slate-900 text-lg">No Orders Placed Yet</p>
+      <p className="text-xs text-slate-500 mt-1 mb-6 max-w-sm mx-auto">
+        Your job-site inventory is a clean slate. Order materials from 16 verified categories with 60-minute express site delivery across Lucknow.
       </p>
+
+      {/* Quick Category Launch Pills */}
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+        {[
+          { name: "Cement & Aggregates", slug: "cement" },
+          { name: "TMT Steel & Iron", slug: "steel" },
+          { name: "Electricals & Lighting", slug: "electrical" },
+          { name: "Plumbing & Pipes", slug: "plumbing" },
+          { name: "Sanitaryware & Bath", slug: "sanitary" },
+          { name: "Paints & Waterproofing", slug: "paint" },
+        ].map((c) => (
+          <Link
+            key={c.slug}
+            href={`/category/${c.slug}`}
+            className="px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition"
+          >
+            {c.name}
+          </Link>
+        ))}
+      </div>
+
       <Link
         href="/home"
-        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-black text-white shadow-sm hover:shadow-md hover:brightness-110 transition-all"
+        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-black text-white shadow-lg hover:shadow-xl hover:brightness-110 transition-all"
         style={{ background: BRAND_DARK }}
       >
-        Browse Materials
+        <span>Explore All 16 Categories</span>
         <ChevronRight className="w-4 h-4" />
       </Link>
     </div>
