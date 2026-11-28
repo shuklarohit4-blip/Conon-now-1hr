@@ -1,0 +1,44 @@
+{
+  "settings": {
+    "storeName": "CONON-NOW",
+    "tagline": "Lucknow's 60-Min Construction Quick Commerce & RMC Plant Direct",
+    "deliveryEtaText": "60 Mins",
+    "freeDeliveryMinOrder": 1000,
+    "deliveryFee": 99,
+    "assuredCashbackPercent": 2,
+    "defaultGstPercent": 18,
+    "supportPhone": "+91 91200 60000",
+    "supportWhatsapp": "+91 91200 60000",
+    "noticeStripEnabled": false,
+    "noticeStripText": "Free 60-Min Lucknow Express Dispatch on material orders above ₹1,000 across 226030, 226010, 226028 & 226002",
+    "maintenanceMode": false,
+    "updatedAt": "2026-11-27T07:27:55.252Z"
+  },
+  "banners": [
+    {
+      "id": "banner_lucknow_live_command",
+      "title": "60-Min Construction Supply Across Lucknow",
+      "subtitle": "ISI-Verified Cement, Steel, CPVC, RMC Plant Direct & Skilled Squads",
+      "badge": "LUCKNOW LIVE",
+      "imageUrl": "/images/home-categories/cement-civil-works.webp",
+      "ctaLabel": "Explore Materials",
+      "ctaRoute": "/categories",
+      "isActive": true,
+      "sortOrder": 1,
+      "updatedAt": "2026-11-27T07:27:55.101Z"
+    },
+    {
+      "id": "banner_rmc_plant_direct",
+      "title": "RMC Plant Direct — Zero Slump Loss",
+      "subtitle": "M10–M50 Structural Concrete with Live Batching Telemetry",
+      "badge": "PLANT DIRECT",
+      "imageUrl": "/images/home-categories/rmc-ready-mix-concrete.webp",
+      "ctaLabel": "Book RMC Pour",
+      "ctaRoute": "/category/rmc-ready-mix-concrete",
+      "isActive": true,
+      "sortOrder": 2,
+      "updatedAt": "2026-11-27T07:27:55.101Z"
+    }
+  ],
+  "updatedAt": "2026-11-27T07:27:55.252Z"
+}

@@ -1,0 +1,2225 @@
+{
+  "categories": [
+    {
+      "slug": "cement-civil-works",
+      "name": "Cement",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "Mountain",
+      "sortOrder": 1,
+      "hubTag": "Chinhat & Transport Nagar",
+      "bannerConfig": {
+        "monsoonShield": true
+      },
+      "isActive": true
+    },
+    {
+      "slug": "tmt-steel",
+      "name": "Steel",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "Layers",
+      "sortOrder": 2,
+      "hubTag": "Kanpur Rd & Nadarganj",
+      "bannerConfig": {
+        "monsoonShield": true
+      },
+      "isActive": true
+    },
+    {
+      "slug": "bricks-aac",
+      "name": "Bricks",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "Rows3",
+      "sortOrder": 3,
+      "hubTag": "Faizabad Rd & Barabanki",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "sand-baalu",
+      "name": "Sand",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "FlaskConical",
+      "sortOrder": 4,
+      "hubTag": "Chinhat & Transport Nagar",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "aggregate-gitti",
+      "name": "Aggregate",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "Grid3x3",
+      "sortOrder": 5,
+      "hubTag": "Chinhat & Transport Nagar",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "tile-stone-installation",
+      "name": "Tiling",
+      "parentGroup": "FINISHING",
+      "icon": "Grid",
+      "sortOrder": 6,
+      "hubTag": "Faizabad Rd & Barabanki",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "painting",
+      "name": "Paints",
+      "parentGroup": "FINISHING",
+      "icon": "Paintbrush",
+      "sortOrder": 7,
+      "hubTag": "Gomti Nagar & Aliganj",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "cpvc-plumbing-tanks",
+      "name": "Plumbing",
+      "parentGroup": "MEP",
+      "icon": "Droplets",
+      "sortOrder": 8,
+      "hubTag": "Gomti Nagar & Aliganj",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "sanitary-bath-fittings",
+      "name": "Sanitaryware",
+      "parentGroup": "FINISHING",
+      "icon": "Bath",
+      "sortOrder": 9,
+      "hubTag": "Gomti Nagar & Aliganj",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "cctv-networking",
+      "name": "CCTV & Networking",
+      "parentGroup": "SMART_ELEC",
+      "icon": "Camera",
+      "sortOrder": 10,
+      "hubTag": "Latouche Road & Naka",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "lighting",
+      "name": "Lighting & Architectural LED",
+      "parentGroup": "SMART_ELEC",
+      "icon": "Lightbulb",
+      "sortOrder": 11,
+      "hubTag": "Latouche Road & Naka",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "solar-rooftop-power",
+      "name": "Solar & Rooftop Power",
+      "parentGroup": "SMART_ELEC",
+      "icon": "Sun",
+      "sortOrder": 12,
+      "hubTag": "Lucknow Solar Hubs • UPNEDA Verified",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "wires-mcb-electrical",
+      "name": "Wires/MCB & Electrical",
+      "parentGroup": "MEP",
+      "icon": "Zap",
+      "sortOrder": 13,
+      "hubTag": "Latouche Road & Naka",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "tools-hardware",
+      "name": "Tools & Hardware",
+      "parentGroup": "TOOLS_HARDWARE",
+      "icon": "Wrench",
+      "sortOrder": 14,
+      "hubTag": "Latouche Road & Naka",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "site-kits",
+      "name": "Site Kits",
+      "parentGroup": "BUNDLES",
+      "icon": "Boxes",
+      "sortOrder": 15,
+      "hubTag": "Multi-Hub Express",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "build-ghar",
+      "name": "Build Ghar",
+      "parentGroup": "SOLUTIONS",
+      "icon": "Home",
+      "sortOrder": 16,
+      "hubTag": "Turnkey Project Desk",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "builder-kit",
+      "name": "Builder Kit",
+      "parentGroup": "SOLUTIONS",
+      "icon": "ClipboardList",
+      "sortOrder": 17,
+      "hubTag": "BOQ Material Planner",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "skilled-services",
+      "name": "Skilled Services",
+      "parentGroup": "SERVICES",
+      "icon": "Handshake",
+      "sortOrder": 18,
+      "hubTag": "SAC 9954 Lucknow Desk",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "heavy-machine-rentals",
+      "name": "Machines on Rent",
+      "parentGroup": "RENTALS",
+      "icon": "Tractor",
+      "sortOrder": 19,
+      "hubTag": "SAC 9973 Fleet Yard",
+      "bannerConfig": {},
+      "isActive": true
+    },
+    {
+      "slug": "rmc-plant-direct",
+      "name": "RMC Plant Direct",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "Truck",
+      "sortOrder": 20,
+      "hubTag": "Gomti Nagar & Chinhat Batching",
+      "bannerConfig": {
+        "monsoonShield": true
+      },
+      "isActive": true
+    },
+    {
+      "slug": "bricks-sand-gitti-aac",
+      "name": "Bricks, Sand, Morang & AAC",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "Package",
+      "sortOrder": 8,
+      "hubTag": "Kisan Path & Barabanki Hubs",
+      "bannerConfig": {
+        "slaBadge": "2-Hr Dumper Slot",
+        "imageUrl": "/images/home-categories/eeta.webp",
+        "route": "/category/bricks-sand-gitti-aac"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "paints-putty-primer",
+      "name": "Paints, Putty & Primer",
+      "parentGroup": "FINISHING",
+      "icon": "Package",
+      "sortOrder": 12,
+      "hubTag": "Gomti Nagar & Aliganj Tinting Hub",
+      "bannerConfig": {
+        "slaBadge": "60-Min Live Shade Mix",
+        "imageUrl": "/images/home-categories/painting.webp",
+        "route": "/category/paints-putty-primer"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "waterproofing-repairing",
+      "name": "Waterproofing & Chemicals",
+      "parentGroup": "CORE_CIVIL",
+      "icon": "Package",
+      "sortOrder": 13,
+      "hubTag": "Chinhat & Naka Depot",
+      "bannerConfig": {
+        "slaBadge": "60-Min Express",
+        "imageUrl": "/images/home-categories/waterproofing-repairing.webp",
+        "route": "/category/waterproofing-repairing"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "plywood-boards",
+      "name": "Plywood, Doors & Boards",
+      "parentGroup": "FINISHING",
+      "icon": "Package",
+      "sortOrder": 14,
+      "hubTag": "Aishbagh Timber Mandi",
+      "bannerConfig": {
+        "slaBadge": "60-Min Loader",
+        "imageUrl": "/images/home-categories/plywood-boards.webp",
+        "route": "/category/plywood-boards"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "fevicol-adhesives-sealants",
+      "name": "Fevicol, Adhesives & Sealants",
+      "parentGroup": "FINISHING",
+      "icon": "Package",
+      "sortOrder": 15,
+      "hubTag": "Aishbagh & Latouche Rd",
+      "bannerConfig": {
+        "slaBadge": "60-Min Bike Express",
+        "imageUrl": "/images/home-categories/fevicol-adhesives-sealants.webp",
+        "route": "/category/fevicol-adhesives-sealants"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "furniture-wardrobe-bed-hardware",
+      "name": "Furniture & Wardrobe Fittings",
+      "parentGroup": "FINISHING",
+      "icon": "Package",
+      "sortOrder": 16,
+      "hubTag": "Aishbagh Hardware Hub",
+      "bannerConfig": {
+        "slaBadge": "60-Min Express",
+        "imageUrl": "/images/home-categories/furniture-wardrobe-bed-hardware.webp",
+        "route": "/category/furniture-wardrobe-bed-hardware"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "door-hardware-locks",
+      "name": "Door Locks & Architectural Hardware",
+      "parentGroup": "FINISHING",
+      "icon": "Package",
+      "sortOrder": 17,
+      "hubTag": "Naka & Hazratganj Hub",
+      "bannerConfig": {
+        "slaBadge": "60-Min Express",
+        "imageUrl": "/images/home-categories/door-hardware-locks.webp",
+        "route": "/category/door-hardware-locks"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "kitchen-sinks-faucets",
+      "name": "Kitchen Sinks & Faucets",
+      "parentGroup": "FINISHING",
+      "icon": "Package",
+      "sortOrder": 18,
+      "hubTag": "Gomti Nagar & Ganeshganj",
+      "bannerConfig": {
+        "slaBadge": "60-Min Express",
+        "imageUrl": "/images/home-categories/kitchen-sinks-faucets.webp",
+        "route": "/category/kitchen-sinks-faucets"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "modular-kitchen-systems",
+      "name": "Modular Kitchen Systems",
+      "parentGroup": "FINISHING",
+      "icon": "Package",
+      "sortOrder": 19,
+      "hubTag": "Aishbagh & Chinhat Hub",
+      "bannerConfig": {
+        "slaBadge": "Same-Day Site Slot",
+        "imageUrl": "/images/home-categories/modular-kitchen-systems.webp",
+        "route": "/category/modular-kitchen-systems"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "safety-ppe-workwear",
+      "name": "Site Safety & PPE Workwear",
+      "parentGroup": "TOOLS_RENTALS",
+      "icon": "Package",
+      "sortOrder": 20,
+      "hubTag": "Transport Nagar Safety Depot",
+      "bannerConfig": {
+        "slaBadge": "60-Min Bike Express",
+        "imageUrl": "/images/home-categories/safety-workwear.webp",
+        "route": "/category/safety-ppe-workwear"
+      },
+      "isActive": true
+    },
+    {
+      "slug": "home-appliances",
+      "name": "Fans, Geysers & Home Appliances",
+      "parentGroup": "ELECTRICAL_SMART",
+      "icon": "Package",
+      "sortOrder": 21,
+      "hubTag": "Latouche Road Electrical",
+      "bannerConfig": {
+        "slaBadge": "60-Min Express",
+        "imageUrl": "/images/home-categories/home-appliances.webp",
+        "route": "/category/home-appliances"
+      },
+      "isActive": true
+    }
+  ],
+  "products": [
+    {
+      "skuCode": "CON-HTTP-E2E-1",
+      "categorySlug": "solar-rooftop",
+      "subCategorySlug": "on-grid-kits",
+      "brand": "Waaree",
+      "model": "HTTP E2E 3kW",
+      "title": "Live HTTP Bridge Verification Kit",
+      "unit": "Piece",
+      "specs": {},
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [],
+      "isDcrSubsidyEligible": true,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "PHILIPS-ASTRA-12W-3IN1",
+      "categorySlug": "lighting",
+      "subCategorySlug": "concealed-junction-lights",
+      "brand": "Philips",
+      "model": "Astra Line 12W 3-in-1",
+      "title": "Philips Astra Line 12W 3-in-1 CCT Concealed LED",
+      "unit": "Piece",
+      "specs": {
+        "cctKelvin": [
+          "3000K",
+          "4000K",
+          "6500K"
+        ],
+        "cutoutMm": "95mm (3.75 in)",
+        "surgeKv": "2.5kV",
+        "lumens": 1200
+      },
+      "variants": [
+        {
+          "label": "Pack of 10 Contractor Box",
+          "packQty": 10
+        }
+      ],
+      "compatibleAccessorySkus": [
+        "POLYCAB-15SQ-FRLS-90M"
+      ],
+      "badges": [
+        "3-in-1 CCT",
+        "Pack-of-10 Rate"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "WAAREE-545WP-DCR-TOPCON",
+      "categorySlug": "solar-rooftop-power",
+      "subCategorySlug": "solar-panels",
+      "brand": "Waaree",
+      "model": "Bi-545-DCR",
+      "title": "Waaree 545Wp Bifacial TOPCon DCR Solar Panel (PM Surya Ghar)",
+      "unit": "Panel",
+      "specs": {
+        "wattage": 545,
+        "almmListed": true,
+        "dcrOrigin": "India DCR Cell",
+        "warrantyYears": 25
+      },
+      "variants": [
+        {
+          "label": "3kW Kit (6 Panels)",
+          "qty": 6
+        }
+      ],
+      "compatibleAccessorySkus": [
+        "HAVELLS-ACDB-DCDB-3KW"
+      ],
+      "badges": [
+        "ALMM Approved",
+        "₹1.08L Subsidy Eligible"
+      ],
+      "isDcrSubsidyEligible": true,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "POLYCAB-15SQ-FRLS-90M",
+      "categorySlug": "wires-mcb-electrical",
+      "subCategorySlug": "frls-wires",
+      "brand": "Polycab",
+      "model": "Suprema FRLS 1.5",
+      "title": "Polycab Suprema 1.5 sq.mm FRLS Copper Coil (90m)",
+      "unit": "90m Coil",
+      "specs": {
+        "gaugeSqmm": "1.5",
+        "lengthOptions": [
+          "90m",
+          "180m"
+        ],
+        "colors": [
+          "Red",
+          "Yellow",
+          "Blue",
+          "Black",
+          "Green"
+        ],
+        "qrSealed": true
+      },
+      "variants": [
+        {
+          "label": "90m Coil",
+          "length": 90
+        },
+        {
+          "label": "180m Project Drum",
+          "length": 180
+        }
+      ],
+      "compatibleAccessorySkus": [
+        "HAVELLS-ACDB-DCDB-3KW"
+      ],
+      "badges": [
+        "QR-Sealed Genuine",
+        "IS 694"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "BOSCH-GWS600-GRINDER-4IN",
+      "categorySlug": "tools-hardware",
+      "subCategorySlug": "grinders-cutters",
+      "brand": "Bosch",
+      "model": "GWS 600",
+      "title": "Bosch GWS 600 Professional 4\" Angle Grinder (670W)",
+      "unit": "Piece",
+      "specs": {
+        "watt": "670W",
+        "discMm": "100mm (4-Inch)",
+        "arbor": "M10 Spindle",
+        "rpm": 11000
+      },
+      "variants": [
+        {
+          "label": "Buy New"
+        },
+        {
+          "label": "Rent Daily"
+        }
+      ],
+      "compatibleAccessorySkus": [
+        "NORTON-4IN-METAL-WHEEL-10PK"
+      ],
+      "badges": [
+        "Buy or Rent",
+        "1-Yr Bosch Warranty"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": true,
+      "isActive": true
+    },
+    {
+      "skuCode": "HIKVISION-4CH-2MP-STQC-KIT",
+      "categorySlug": "cctv-networking",
+      "subCategorySlug": "analog-hd-kits",
+      "brand": "Hikvision",
+      "model": "DS-2CE16D0T-LPFS-4CH",
+      "title": "Hikvision 4-Ch 2MP Audio Night-Vision CCTV Combo (STQC Verified)",
+      "unit": "Kit",
+      "specs": {
+        "resolutionMP": 2,
+        "channels": 4,
+        "stqcCertified": true,
+        "nightVisionM": 25
+      },
+      "variants": [
+        {
+          "label": "Without HDD"
+        },
+        {
+          "label": "With 1TB Surveillance HDD"
+        }
+      ],
+      "compatibleAccessorySkus": [
+        "POLYCAB-15SQ-FRLS-90M"
+      ],
+      "badges": [
+        "STQC Verified",
+        "Tender Approved"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "ULTRATECH-SUPER-PPC-50KG",
+      "categorySlug": "cement-civil-works",
+      "subCategorySlug": "ppc-cement",
+      "brand": "UltraTech",
+      "model": "PPC Weather-Plus",
+      "title": "UltraTech Super PPC Weather-Shield Cement (50kg Bag)",
+      "unit": "Bag",
+      "specs": {
+        "grade": "PPC IS 1489",
+        "weightKg": 50,
+        "settingTimeMin": 30
+      },
+      "variants": [
+        {
+          "label": "Single Bag"
+        },
+        {
+          "label": "50 Bags Lot"
+        }
+      ],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Fresh Batch <7 Days",
+        "Monsoon Shield"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-M15",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "standard-grades",
+      "brand": "UltraTech / ACC / Nuvoco",
+      "model": "M15-PCC-IS456",
+      "title": "M15 Grade PCC (Leveling / Footing Bed)",
+      "unit": "m³",
+      "specs": {
+        "gradeCode": "M15",
+        "slumpMm": "75-100mm",
+        "aggregateMm": "20mm",
+        "mpa28Day": 15,
+        "plants": [
+          "UltraTech",
+          "ACC",
+          "Nuvoco"
+        ],
+        "hsnCode": "38245010",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "IS 456 PCC",
+        "90-Min Fresh SLA"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-M20",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "standard-grades",
+      "brand": "UltraTech / ACC / Nuvoco",
+      "model": "M20-RCC-IS456",
+      "title": "M20 Grade Structural RCC (Residential Slab / Columns)",
+      "unit": "m³",
+      "specs": {
+        "gradeCode": "M20",
+        "slumpMm": "100-125mm",
+        "aggregateMm": "20mm",
+        "mpa28Day": 20,
+        "plants": [
+          "UltraTech",
+          "ACC",
+          "Nuvoco"
+        ],
+        "hsnCode": "38245010",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "IS 456 Structural",
+        "Computerized Batch Slip"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-M25",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "standard-grades",
+      "brand": "UltraTech / ACC / Nuvoco",
+      "model": "M25-HEAVY-RCC",
+      "title": "M25 Grade Heavy Structural RCC (Lucknow Slab Special)",
+      "unit": "m³",
+      "specs": {
+        "gradeCode": "M25",
+        "slumpMm": "100-150mm",
+        "aggregateMm": "20mm",
+        "mpa28Day": 25,
+        "plants": [
+          "UltraTech",
+          "ACC",
+          "Nuvoco"
+        ],
+        "hsnCode": "38245010",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Most Booked ★",
+        "90-Min Fresh SLA"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-M30",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "standard-grades",
+      "brand": "UltraTech / ACC / Nuvoco",
+      "model": "M30-HIGH-STRENGTH",
+      "title": "M30 Grade High-Strength RCC (Multi-Storey / PEB)",
+      "unit": "m³",
+      "specs": {
+        "gradeCode": "M30",
+        "slumpMm": "120-150mm",
+        "aggregateMm": "20mm",
+        "mpa28Day": 30,
+        "plants": [
+          "UltraTech",
+          "ACC",
+          "Nuvoco"
+        ],
+        "hsnCode": "38245010",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Commercial Grade",
+        "NABL 6-Cube Lab"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-PUMP-LINE150",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "pumps-admixtures",
+      "brand": "CONON Fleet",
+      "model": "LINE-PUMP-150FT",
+      "title": "Concrete Line Pump (up to 150 ft Pipeline)",
+      "unit": "Shift",
+      "specs": {
+        "reachFt": 150,
+        "floorRange": "1st–6th Floor",
+        "hsnCode": "997319",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Operator Included"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-PUMP-BOOM",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "pumps-admixtures",
+      "brand": "CONON Fleet",
+      "model": "BOOM-PLACER-36M",
+      "title": "Boom Placer (High-Rise & Rapid Commercial Pour)",
+      "unit": "Shift",
+      "specs": {
+        "reachM": 36,
+        "floorRange": "High-Rise & Large Commercial",
+        "hsnCode": "997319",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "36m Hydraulic Arm"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-LAB-CUBE28",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "pumps-admixtures",
+      "brand": "NABL Certified Lab",
+      "model": "CUBE-TEST-28D",
+      "title": "28-Day Cube Testing Certificate (6-Cube Set)",
+      "unit": "Certificate",
+      "specs": {
+        "tests": "7-Day + 28-Day Compressive Strength",
+        "hsnCode": "998346",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "IS 516 Report"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-RMC-ADM-WP",
+      "categorySlug": "rmc-plant-direct",
+      "subCategorySlug": "pumps-admixtures",
+      "brand": "Fosroc / Dr. Fixit",
+      "model": "CONPLAST-WP-PLUS",
+      "title": "Admixture (Waterproofing + Super-Plasticizer per m³)",
+      "unit": "m³ Dose",
+      "specs": {
+        "dosageKgPerM3": 1.5,
+        "hsnCode": "38244090",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Anti-Damp Roof Guard"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-SOL-ADANI-550DCR",
+      "categorySlug": "solar-rooftop-power",
+      "subCategorySlug": "solar-panels",
+      "brand": "Adani Solar",
+      "model": "ETERNAL-550-DCR",
+      "title": "Adani 550Wp Mono PERC Bifacial DCR Panel",
+      "unit": "Panel",
+      "specs": {
+        "dcrStatus": "DCR",
+        "capacityWp": 550,
+        "technology": "Bifacial Mono PERC",
+        "brandsAvailable": [
+          "Adani",
+          "Waaree",
+          "Tata",
+          "Jakson",
+          "Loom",
+          "Vikram"
+        ],
+        "hsnCode": "85414300",
+        "gstRate": 12
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "ALMM DCR Approved",
+        "₹1.08L Subsidy Eligible"
+      ],
+      "isDcrSubsidyEligible": true,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-SOL-WAAREE-575NDCR",
+      "categorySlug": "solar-rooftop-power",
+      "subCategorySlug": "solar-panels",
+      "brand": "Waaree",
+      "model": "ELITE-575-TOPCON-NDCR",
+      "title": "Waaree 575Wp N-Type TOPCon Non-DCR Commercial Panel",
+      "unit": "Panel",
+      "specs": {
+        "dcrStatus": "NON_DCR",
+        "capacityWp": 575,
+        "technology": "N-Type TOPCon",
+        "hsnCode": "85414300",
+        "gstRate": 12
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Non-DCR Commercial",
+        "40% AD Tax Shield"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-SOL-KIT-3KW-DCR",
+      "categorySlug": "solar-rooftop-power",
+      "subCategorySlug": "rooftop-solar-kits",
+      "brand": "Tata Power / Luminous",
+      "model": "PM-SURYA-3KW-DCR",
+      "title": "3kW Complete On-Grid DCR Solar Kit (MVVNL Ready)",
+      "unit": "Kit",
+      "specs": {
+        "capacityKw": 3,
+        "panels550Wp": 6,
+        "subsidyEligibleInr": 108000,
+        "inverter": "Luminous NXi 3kW On-Grid",
+        "hsnCode": "85414300",
+        "gstRate": 12
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "ALMM DCR • ₹1,08,000 UP Subsidy",
+        "60-Min BOS Dispatch"
+      ],
+      "isDcrSubsidyEligible": true,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-SOL-INV-HYB5KW",
+      "categorySlug": "solar-rooftop-power",
+      "subCategorySlug": "solar-inverters",
+      "brand": "UTL / Sungrow",
+      "model": "HYBRID-5KW-LIFEPO4",
+      "title": "UTL 5kW Hybrid Inverter + 5.12kWh LiFePO4 Lithium Pack",
+      "unit": "Set",
+      "specs": {
+        "systemType": "HYBRID",
+        "capacityKw": 5,
+        "batteryChemistry": "LiFePO4 48V 100Ah",
+        "hsnCode": "85044090",
+        "gstRate": 12
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Zero Power-Cut Backup",
+        "Luminous / UTL / Sungrow"
+      ],
+      "isDcrSubsidyEligible": true,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-SOL-BOS-RESCUE",
+      "categorySlug": "solar-rooftop-power",
+      "subCategorySlug": "solar-acdb-dcdb",
+      "brand": "Luminous / Havells",
+      "model": "ACDB-DCDB-EARTHING-HDGI",
+      "title": "Complete BOS Rescue Pack (ACDB/DCDB + 3-Pit Earthing + Monkey Shield + Wash)",
+      "unit": "Bundle",
+      "specs": {
+        "includes": [
+          "ACDB+DCDB SPD",
+          "3-Pit Chemical Earthing",
+          "UV Monkey Conduit Shield",
+          "8ft HDGI Bracket"
+        ],
+        "hsnCode": "85371000",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "3-Pit Copper Earthing",
+        "Monkey-Proof Conduit Shield",
+        "Auto-Wash Sprinkler"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-LGT-DABBI-7W",
+      "categorySlug": "lighting",
+      "subCategorySlug": "concealed-junction-lights",
+      "brand": "Sturlite / Philips",
+      "model": "JUNC-3IN-7W-3N1",
+      "title": "7W 3-in-1 Concealed LED (3\" RCC Metal Dabbi Fit)",
+      "unit": "Piece",
+      "specs": {
+        "cutout": "3\" Junction",
+        "ccts": [
+          "3000K",
+          "4000K",
+          "6500K"
+        ],
+        "surgeKv": 4,
+        "hsnCode": "94054200",
+        "gstRate": 18
+      },
+      "variants": [
+        {
+          "label": "Single Unit",
+          "price": 245
+        },
+        {
+          "label": "Pack of 10",
+          "price": 2200
+        }
+      ],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "3\" Metal Dabbi",
+        "3000K/4000K/6500K 3-in-1",
+        "4kV Surge"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-LGT-PAN15-3N1",
+      "categorySlug": "lighting",
+      "subCategorySlug": "ceiling-panel-lights",
+      "brand": "Wipro Garnet",
+      "model": "PAN-15W-6IN-3N1",
+      "title": "Wipro Garnet 15W 3-in-1 CCT Slim POP Panel (6\" Cutout)",
+      "unit": "Piece",
+      "specs": {
+        "cutout": "6\" Cutout",
+        "ccts": [
+          "3000K",
+          "4000K",
+          "6500K"
+        ],
+        "surgeKv": 3.5,
+        "hsnCode": "94054200",
+        "gstRate": 18
+      },
+      "variants": [
+        {
+          "label": "Single Unit",
+          "price": 485
+        },
+        {
+          "label": "Pack of 10",
+          "price": 4450
+        }
+      ],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "6\" POP Cutout",
+        "3-in-1 CCT",
+        "3.5kV+ Surge"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-LGT-COVE-KIT",
+      "categorySlug": "lighting",
+      "subCategorySlug": "strip-profiles-drivers",
+      "brand": "Philips / Syska",
+      "model": "ZERODOT-COB-SMPS-ALU",
+      "title": "Zero-Dot COB Strip 5m + Aluminium Profile + 12V SMPS Driver",
+      "unit": "Set",
+      "specs": {
+        "cutout": "Surface / Cove",
+        "ccts": [
+          "3000K",
+          "4000K",
+          "6500K"
+        ],
+        "surgeKv": 4,
+        "hsnCode": "94054200",
+        "gstRate": 18
+      },
+      "variants": [
+        {
+          "label": "Single Unit",
+          "price": 1490
+        },
+        {
+          "label": "Pack of 10 Sets",
+          "price": 13500
+        }
+      ],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Zero-Dot Cove",
+        "20% Buffered SMPS",
+        "Anodized Profile"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-ELC-POLY-15FR-90",
+      "categorySlug": "wires-mcb-electrical",
+      "subCategorySlug": "house-wiring-coils",
+      "brand": "Polycab",
+      "model": "GREEN-15-FRLS-90M",
+      "title": "Polycab FRLS House Wire Coil 1.5 sq.mm (90m Sealed)",
+      "unit": "Coil (90m)",
+      "specs": {
+        "gaugeSqMm": 1.5,
+        "coilLengthM": 90,
+        "insulation": "FRLS",
+        "colors": [
+          "Red",
+          "Black",
+          "Green",
+          "Yellow",
+          "Blue",
+          "Grey"
+        ],
+        "hsnCode": "85444999",
+        "gstRate": 18
+      },
+      "variants": [
+        {
+          "label": "Single Unit",
+          "price": 1720
+        },
+        {
+          "label": "Box of 10 Coils",
+          "price": 16400
+        }
+      ],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "QR-Sealed Genuine Copper",
+        "FRLS",
+        "Red/Black/Green/Yellow/Blue/Grey"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-ELC-HAVELLS-25-90",
+      "categorySlug": "wires-mcb-electrical",
+      "subCategorySlug": "house-wiring-coils",
+      "brand": "Havells",
+      "model": "LIFE-LINE-25-HRFR-90M",
+      "title": "Havells HRFR House Wire Coil 2.5 sq.mm (90m Sealed)",
+      "unit": "Coil (90m)",
+      "specs": {
+        "gaugeSqMm": 2.5,
+        "coilLengthM": 90,
+        "insulation": "HRFR",
+        "colors": [
+          "Red",
+          "Black",
+          "Green",
+          "Blue"
+        ],
+        "hsnCode": "85444999",
+        "gstRate": 18
+      },
+      "variants": [
+        {
+          "label": "Single Unit",
+          "price": 2740
+        },
+        {
+          "label": "Box of 10 Coils",
+          "price": 26200
+        }
+      ],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "QR-Sealed Genuine Copper",
+        "HRFR",
+        "0.75–6.0 sq.mm Range"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-ELC-SUB-ARM-40",
+      "categorySlug": "wires-mcb-electrical",
+      "subCategorySlug": "submersible-armoured",
+      "brand": "Finolex / Polycab",
+      "model": "SUB-4SQ-ARMOURED-180",
+      "title": "Submersible 3-Core Flat 4.0 sq.mm & Armoured Service Cable",
+      "unit": "Coil (100m)",
+      "specs": {
+        "gaugeSqMm": 4,
+        "coilLengthM": 180,
+        "insulation": "ZHFR",
+        "colors": [
+          "Black",
+          "Blue"
+        ],
+        "hsnCode": "85444999",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Submersible / Armoured",
+        "ZHFR Heavy Duty"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-ELC-RCCB-DB",
+      "categorySlug": "wires-mcb-electrical",
+      "subCategorySlug": "mcb-rccb-db",
+      "brand": "Schneider / Legrand / Anchor",
+      "model": "RCCB-40A-30MA-DB12",
+      "title": "Legrand 40A 30mA RCCB + 12-Way Double-Door DB & Modular Switches",
+      "unit": "Set",
+      "specs": {
+        "ratingAmp": 40,
+        "sensitivityMa": 30,
+        "includes": [
+          "30mA RCCB",
+          "SP MCBs",
+          "GI Modular Switches"
+        ],
+        "hsnCode": "85362030",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "30mA Shock Guard",
+        "GI Modular Box Ready"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-TLS-BOSCH-GWS600",
+      "categorySlug": "tools-hardware",
+      "subCategorySlug": "grinders-cutters",
+      "brand": "Bosch",
+      "model": "GWS 600 Professional",
+      "title": "Bosch GWS 600 Angle Grinder (4\" / 100mm, 670W, M10 Spindle)",
+      "unit": "Piece",
+      "specs": {
+        "power": "670W",
+        "boreOrChuck": "M10 Spindle / 16mm",
+        "size": "4-inch",
+        "hsnCode": "84672900",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Buy or Rent/Day",
+        "Serial Warranty"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": true,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-TLS-BOSCH-GBH226",
+      "categorySlug": "tools-hardware",
+      "subCategorySlug": "rotary-drills",
+      "brand": "Bosch / Dongcheng",
+      "model": "GBH 2-26 DRE SDS-Plus",
+      "title": "Bosch GBH 2-26 SDS-Plus Rotary Hammer Drill (800W, 26mm Concrete)",
+      "unit": "Piece",
+      "specs": {
+        "power": "800W",
+        "boreOrChuck": "SDS-Plus 26mm",
+        "size": "SDS-Plus",
+        "hsnCode": "84672100",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "SDS-Plus Chuck",
+        "Rent ₹449/Day"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": true,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-TLS-CONSUMABLES-PACK",
+      "categorySlug": "tools-hardware",
+      "subCategorySlug": "blades-discs-bits",
+      "brand": "Bosch / Taparia / Stanley",
+      "model": "SITE-REFILL-BLADES-BITS",
+      "title": "Diamond Tile Blade + Metal Cut Disc (10) + SDS Bits + Carbon Brush + Fasteners",
+      "unit": "Pack",
+      "specs": {
+        "boreOrChuck": "20mm / 16mm + SDS-Plus",
+        "hsnCode": "68042100",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Taparia & Stanley",
+        "High-Velocity Site Pack"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-CCTV-HIK-2MP-KIT",
+      "categorySlug": "cctv-networking",
+      "subCategorySlug": "ip-hd-cameras",
+      "brand": "Hikvision / CP Plus",
+      "model": "DS-2CE16D0T-STQC",
+      "title": "Hikvision 2MP Night-Vision Camera + NVR + Pure Copper 3+1 Roll (STQC)",
+      "unit": "Kit",
+      "specs": {
+        "stqcApproved": true,
+        "copperCore": "100% Bare Copper",
+        "hub": "Naka & Aminabad",
+        "hsnCode": "85258900",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "STQC Tender Approved",
+        "Pure Copper 3+1",
+        "Naka / Aminabad Hub"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-CEM-UT-OPC53",
+      "categorySlug": "cement-civil-works",
+      "subCategorySlug": "opc-ppc-cement",
+      "brand": "UltraTech",
+      "model": "OPC-53-50KG",
+      "title": "UltraTech OPC 53 Grade Structural Cement (50 kg Bag)",
+      "unit": "Bag (50 kg)",
+      "specs": {
+        "grade": "OPC 53",
+        "weightKg": 50,
+        "hsnCode": "25232910",
+        "gstRate": 28
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Mandi Live",
+        "Fresh 7-Day Batch"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-STL-TATA-12MM",
+      "categorySlug": "cement-civil-works",
+      "subCategorySlug": "tmt-sariya",
+      "brand": "Tata Tiscon",
+      "model": "FE550D-12MM",
+      "title": "Tata Tiscon Fe 550D TMT Sariya 12mm (Full 12m Bar)",
+      "unit": "kg",
+      "specs": {
+        "diameterMm": 12,
+        "grade": "Fe550D",
+        "hsnCode": "72142090",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Mandi Live",
+        "Mill Test Cert"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-BRK-AVVAL-RED",
+      "categorySlug": "bricks-sand-gitti-aac",
+      "subCategorySlug": "red-bricks-aac",
+      "brand": "Lucknow Bhatta",
+      "model": "AVVAL-NO1-BRICK",
+      "title": "Avval First-Class Red Clay Bricks & Magicrete AAC Blocks",
+      "unit": "Piece",
+      "specs": {
+        "size": "9\"x4.5\"x3\"",
+        "hsnCode": "69010010",
+        "gstRate": 12
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Kiln Direct",
+        "Exact Count"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-CPVC-ASTRAL-20",
+      "categorySlug": "cpvc-plumbing-tanks",
+      "subCategorySlug": "cpvc-pipes",
+      "brand": "Astral / Ashirvad",
+      "model": "CPVC-PRO-20MM-3M",
+      "title": "Astral CPVC Pro 3/4\" (20mm) SDR-11 Pipe (3m) + Jaquar Sanitary Fittings",
+      "unit": "Pipe (3m)",
+      "specs": {
+        "sizeMm": 20,
+        "rating": "SDR-11",
+        "hsnCode": "39172390",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Lead-Free",
+        "60-Min Bike Express"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-PNT-ASIAN-APCOLITE",
+      "categorySlug": "paints-putty-primer",
+      "subCategorySlug": "emulsion-putty",
+      "brand": "Asian Paints / Birla White",
+      "model": "ROYALE-20L-PUTTY",
+      "title": "Asian Paints Royale Luxury Emulsion 20L + Birla White Wall Putty 40kg",
+      "unit": "Bucket (20L)",
+      "specs": {
+        "finish": "Matte Sheen",
+        "coverageSqft": 240,
+        "hsnCode": "32091090",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Live Shade Tinting",
+        "60-Min Express"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    },
+    {
+      "skuCode": "CON-TIL-KAJARIA-GVT",
+      "categorySlug": "tile-stone-installation",
+      "subCategorySlug": "vitrified-tiles",
+      "brand": "Kajaria / Somany",
+      "model": "GVT-600X1200",
+      "title": "Kajaria 4x2 ft Polished GVT Vitrified Floor Tile (Box of 2 / 16 sq.ft)",
+      "unit": "Box",
+      "specs": {
+        "size": "600x1200mm",
+        "coverageSqft": 15.5,
+        "hsnCode": "69072100",
+        "gstRate": 18
+      },
+      "variants": [],
+      "compatibleAccessorySkus": [],
+      "badges": [
+        "Single Dye-Lot Batch",
+        "2-Hr Slot"
+      ],
+      "isDcrSubsidyEligible": false,
+      "isRentable": false,
+      "isActive": true
+    }
+  ],
+  "siteKits": [
+    {
+      "kitCode": "KIT-MISTRI-EMERGENCY",
+      "title": "Mistri Site Emergency Kit",
+      "stageTag": "60-Min Emergency",
+      "items": [
+        {
+          "skuCode": "NORTON-4IN-METAL-WHEEL-10PK",
+          "qty": 1
+        },
+        {
+          "skuCode": "BOSCH-SDS-BITS-3PC",
+          "qty": 1
+        }
+      ],
+      "discountPct": 24,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-ROOM-REWIRING",
+      "title": "1-Room Rewiring Essentials",
+      "stageTag": "Electrical & Lighting",
+      "items": [
+        {
+          "skuCode": "POLYCAB-15SQ-FRLS-90M",
+          "qty": 1
+        }
+      ],
+      "discountPct": 20,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-ROOM-REPAINT",
+      "title": "1-Room Quick Repaint Kit",
+      "stageTag": "Paint & Finish",
+      "items": [
+        {
+          "skuCode": "ASIAN-ROLLER-BRUSH-COMBO",
+          "qty": 1
+        }
+      ],
+      "discountPct": 18,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-BATHROOM-LEAKAGE",
+      "title": "Bathroom Fitting & Leakage Rescue",
+      "stageTag": "Plumbing Rescue",
+      "items": [
+        {
+          "skuCode": "ASTRAL-CPVC-SOLVENT-SET",
+          "qty": 1
+        }
+      ],
+      "discountPct": 22,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-SOLAR-3KW-BOS",
+      "title": "3kW Solar BOS Rescue Pack",
+      "stageTag": "Solar BOS",
+      "items": [
+        {
+          "skuCode": "WAAREE-545WP-DCR-TOPCON",
+          "qty": 1
+        }
+      ],
+      "discountPct": 19,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-CHHAT-CONDUIT",
+      "title": "Electrician Chhat / Slab Conduit Kit",
+      "stageTag": "ELECTRICAL",
+      "items": [
+        {
+          "skuCode": "CON-ELC-POLY-15FR-90",
+          "name": "Chhat Conduit + Junction Box + Binding Pack",
+          "qty": 2,
+          "unitPrice": 1720
+        }
+      ],
+      "discountPct": 16,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-WALL-PUTTY",
+      "title": "Wall Preparation & Putty Pack",
+      "stageTag": "PAINT",
+      "items": [
+        {
+          "skuCode": "CON-PNT-ASIAN-APCOLITE",
+          "name": "Wall Putty 40kg + Primer + Abrasive Pack",
+          "qty": 1,
+          "unitPrice": 3650
+        }
+      ],
+      "discountPct": 15,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-CPVC-RESCUE",
+      "title": "Bathroom / CPVC Leak Rescue Kit",
+      "stageTag": "PLUMBING",
+      "items": [
+        {
+          "skuCode": "CON-CPVC-ASTRAL-20",
+          "name": "CPVC Elbows/Tees + Solvent + Brass Fittings",
+          "qty": 4,
+          "unitPrice": 285
+        }
+      ],
+      "discountPct": 20,
+      "isActive": true
+    },
+    {
+      "kitCode": "KIT-SOLAR-BOS-60M",
+      "title": "60-Min Solar BOS Rescue Kit",
+      "stageTag": "SOLAR",
+      "items": [
+        {
+          "skuCode": "CON-SOL-BOS-RESCUE",
+          "name": "Solar ACDB/DCDB + 3-Pit Earthing + Monkey Shield",
+          "qty": 1,
+          "unitPrice": 11490
+        }
+      ],
+      "discountPct": 19,
+      "isActive": true
+    }
+  ],
+  "hubs": [
+    {
+      "id": 1,
+      "hubCode": "HUB-LKO-CHINHAT",
+      "name": "UltraTech Cement Hub",
+      "localityZone": "Chinhat & Transport Nagar",
+      "vendorPhone": "9839011001",
+      "allowedCategories": [
+        "cement-civil-works",
+        "bricks-aac",
+        "sand-baalu",
+        "aggregate-gitti",
+        "rmc-plant-direct"
+      ],
+      "commissionPct": 6.5,
+      "slaLabel": "60 Mins Express",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "hubCode": "HUB-LKO-NADARGANJ",
+      "name": "Tata Tiscon Steel Depot",
+      "localityZone": "Kanpur Rd & Nadarganj",
+      "vendorPhone": "9839011002",
+      "allowedCategories": [
+        "tmt-steel",
+        "cement-civil-works",
+        "heavy-machine-rentals"
+      ],
+      "commissionPct": 5.5,
+      "slaLabel": "Same-Day Crane",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "hubCode": "HUB-LKO-GOMTI",
+      "name": "Asian Paints Colour Hub",
+      "localityZone": "Gomti Nagar & Aliganj",
+      "vendorPhone": "9839011003",
+      "allowedCategories": [
+        "painting",
+        "cpvc-plumbing-tanks",
+        "sanitary-bath-fittings",
+        "solar-rooftop-power"
+      ],
+      "commissionPct": 8,
+      "slaLabel": "60 Mins Express",
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "name": "Polycab & Philips Hub",
+      "localityZone": "Latouche Road & Naka",
+      "vendorPhone": "9839011004",
+      "allowedCategories": [
+        "wires-mcb-electrical",
+        "lighting",
+        "cctv-networking",
+        "tools-hardware",
+        "site-kits"
+      ],
+      "commissionPct": 8,
+      "slaLabel": "60 Mins Express",
+      "isActive": true
+    },
+    {
+      "id": 5,
+      "hubCode": "HUB-LKO-FAIZABAD",
+      "name": "Kajaria & Conon Masonry Hub",
+      "localityZone": "Faizabad Rd & Barabanki",
+      "vendorPhone": "9839011005",
+      "allowedCategories": [
+        "tile-stone-installation",
+        "bricks-aac",
+        "build-ghar",
+        "builder-kit",
+        "skilled-services"
+      ],
+      "commissionPct": 7.5,
+      "slaLabel": "2-Hr Site Slot",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "hubCode": "HUB-LKO-KANPUR",
+      "name": "Tata Tiscon Steel Depot",
+      "localityZone": "Kanpur Rd & Nadarganj",
+      "vendorPhone": "9839000102",
+      "allowedCategories": [
+        "cement-civil-works",
+        "bricks-sand-gitti-aac"
+      ],
+      "commissionPct": 4,
+      "slaLabel": "Same-Day Crane",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "hubCode": "HUB-LKO-GOMTINAGAR",
+      "name": "Asian Paints & Bath Colour Hub",
+      "localityZone": "Gomti Nagar & Aliganj",
+      "vendorPhone": "9839000103",
+      "allowedCategories": [
+        "paints-putty-primer",
+        "cpvc-plumbing-tanks",
+        "sanitary-bath-fittings"
+      ],
+      "commissionPct": 7,
+      "slaLabel": "60 Mins Express",
+      "isActive": true
+    }
+  ],
+  "inventory": [
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-HTTP-E2E-1",
+      "sellingPrice": 52000,
+      "mrp": 64000,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 14,
+      "isInStock": true,
+      "updatedAt": "2026-11-27T14:02:24.448Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "PHILIPS-ASTRA-12W-3IN1",
+      "sellingPrice": 385,
+      "mrp": 520,
+      "contractorPackPrice": 3650,
+      "rentPricePerDay": null,
+      "stockQty": 240,
+      "isInStock": true,
+      "updatedAt": "2026-11-27T14:01:07.684Z"
+    },
+    {
+      "hubCode": "HUB-LKO-GOMTI",
+      "skuCode": "WAAREE-545WP-DCR-TOPCON",
+      "sellingPrice": 15800,
+      "mrp": 19500,
+      "contractorPackPrice": 92400,
+      "rentPricePerDay": null,
+      "stockQty": 64,
+      "isInStock": true,
+      "updatedAt": "2026-11-27T14:01:07.684Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "POLYCAB-15SQ-FRLS-90M",
+      "sellingPrice": 1690,
+      "mrp": 2450,
+      "contractorPackPrice": 16200,
+      "rentPricePerDay": null,
+      "stockQty": 185,
+      "isInStock": true,
+      "updatedAt": "2026-11-27T14:01:07.684Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "BOSCH-GWS600-GRINDER-4IN",
+      "sellingPrice": 2690,
+      "mrp": 3550,
+      "contractorPackPrice": null,
+      "rentPricePerDay": 250,
+      "stockQty": 42,
+      "isInStock": true,
+      "updatedAt": "2026-11-27T14:01:07.684Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "HIKVISION-4CH-2MP-STQC-KIT",
+      "sellingPrice": 7850,
+      "mrp": 10900,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 28,
+      "isInStock": true,
+      "updatedAt": "2026-11-27T14:01:07.684Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "ULTRATECH-SUPER-PPC-50KG",
+      "sellingPrice": 385,
+      "mrp": 410,
+      "contractorPackPrice": 365,
+      "rentPricePerDay": null,
+      "stockQty": 950,
+      "isInStock": true,
+      "updatedAt": "2026-11-27T14:01:07.684Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-M15",
+      "sellingPrice": 4250,
+      "mrp": 4650,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 250,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.738Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-M20",
+      "sellingPrice": 4600,
+      "mrp": 5050,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 300,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-M25",
+      "sellingPrice": 5065,
+      "mrp": 5600,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 350,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-M30",
+      "sellingPrice": 5490,
+      "mrp": 6100,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 200,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-PUMP-LINE150",
+      "sellingPrice": 6500,
+      "mrp": 7500,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 14,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-PUMP-BOOM",
+      "sellingPrice": 14500,
+      "mrp": 16500,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 6,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-LAB-CUBE28",
+      "sellingPrice": 1800,
+      "mrp": 2400,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 100,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-RMC-ADM-WP",
+      "sellingPrice": 280,
+      "mrp": 350,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 400,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-SOL-ADANI-550DCR",
+      "sellingPrice": 13800,
+      "mrp": 16500,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 60,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-SOL-WAAREE-575NDCR",
+      "sellingPrice": 11200,
+      "mrp": 13900,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 90,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-SOL-KIT-3KW-DCR",
+      "sellingPrice": 162000,
+      "mrp": 195000,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 14,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-SOL-INV-HYB5KW",
+      "sellingPrice": 118500,
+      "mrp": 138000,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 9,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-SOL-BOS-RESCUE",
+      "sellingPrice": 11490,
+      "mrp": 14200,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 30,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-LGT-DABBI-7W",
+      "sellingPrice": 245,
+      "mrp": 350,
+      "contractorPackPrice": 2200,
+      "rentPricePerDay": null,
+      "stockQty": 180,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-LGT-PAN15-3N1",
+      "sellingPrice": 485,
+      "mrp": 690,
+      "contractorPackPrice": 4450,
+      "rentPricePerDay": null,
+      "stockQty": 140,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-LGT-COVE-KIT",
+      "sellingPrice": 1490,
+      "mrp": 1990,
+      "contractorPackPrice": 13500,
+      "rentPricePerDay": null,
+      "stockQty": 75,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-ELC-POLY-15FR-90",
+      "sellingPrice": 1720,
+      "mrp": 2290,
+      "contractorPackPrice": 16400,
+      "rentPricePerDay": null,
+      "stockQty": 220,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-ELC-HAVELLS-25-90",
+      "sellingPrice": 2740,
+      "mrp": 3490,
+      "contractorPackPrice": 26200,
+      "rentPricePerDay": null,
+      "stockQty": 165,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-ELC-SUB-ARM-40",
+      "sellingPrice": 5490,
+      "mrp": 6800,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 45,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-ELC-RCCB-DB",
+      "sellingPrice": 3190,
+      "mrp": 4100,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 60,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-TLS-BOSCH-GWS600",
+      "sellingPrice": 2890,
+      "mrp": 3950,
+      "contractorPackPrice": null,
+      "rentPricePerDay": 249,
+      "stockQty": 32,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-TLS-BOSCH-GBH226",
+      "sellingPrice": 8490,
+      "mrp": 11200,
+      "contractorPackPrice": null,
+      "rentPricePerDay": 449,
+      "stockQty": 18,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-TLS-CONSUMABLES-PACK",
+      "sellingPrice": 899,
+      "mrp": 1290,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 95,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "skuCode": "CON-CCTV-HIK-2MP-KIT",
+      "sellingPrice": 9490,
+      "mrp": 12500,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 24,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-CHINHAT",
+      "skuCode": "CON-CEM-UT-OPC53",
+      "sellingPrice": 365,
+      "mrp": 410,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 900,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-KANPUR",
+      "skuCode": "CON-STL-TATA-12MM",
+      "sellingPrice": 66,
+      "mrp": 72,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 15000,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-FAIZABAD",
+      "skuCode": "CON-BRK-AVVAL-RED",
+      "sellingPrice": 9,
+      "mrp": 11,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 50000,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-GOMTINAGAR",
+      "skuCode": "CON-CPVC-ASTRAL-20",
+      "sellingPrice": 285,
+      "mrp": 360,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 320,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-GOMTINAGAR",
+      "skuCode": "CON-PNT-ASIAN-APCOLITE",
+      "sellingPrice": 5490,
+      "mrp": 6850,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 48,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    },
+    {
+      "hubCode": "HUB-LKO-FAIZABAD",
+      "skuCode": "CON-TIL-KAJARIA-GVT",
+      "sellingPrice": 980,
+      "mrp": 1280,
+      "contractorPackPrice": null,
+      "rentPricePerDay": null,
+      "stockQty": 260,
+      "isInStock": true,
+      "updatedAt": "2026-11-28T00:51:59.747Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": 2225,
+      "orderNumber": "ORD-LKO-312552",
+      "customerPhone": "9839012345",
+      "hubCode": "HUB-LKO-LATOUCHE",
+      "orderType": "kit",
+      "status": "DELIVERED",
+      "subtotal": 52000,
+      "bulkDiscount": 5000,
+      "gstAmount": 8460,
+      "totalAmount": 55460,
+      "paymentMode": "UPI_ESCROW",
+      "pickupOtp": "4726",
+      "deliveryOtp": "5998",
+      "slaDeadlineAt": "2026-11-27T15:02:24.448Z",
+      "createdAt": "2026-11-27T14:02:24.448Z",
+      "items": [
+        {
+          "skuCode": "CON-HTTP-E2E-1",
+          "titleSnapshot": "Live HTTP Bridge Verification Kit",
+          "variantJson": {},
+          "qty": 1,
+          "unitPrice": 52000,
+          "lineTotal": 52000
+        }
+      ]
+    }
+  ],
+  "payoutLedger": [
+    {
+      "id": 1795788144450,
+      "orderId": 2225,
+      "orderNumber": "ORD-LKO-312552",
+      "beneficiaryType": "vendor",
+      "beneficiaryRef": "HUB-LKO-LATOUCHE",
+      "grossAmount": 55460,
+      "commissionDeducted": 4437,
+      "netPayable": 50803,
+      "codCollected": 0,
+      "settlementStatus": "ESCROW_PENDING",
+      "createdAt": "2026-11-27T14:02:24.450Z"
+    },
+    {
+      "id": 1795788144451,
+      "orderId": 2225,
+      "orderNumber": "ORD-LKO-312552",
+      "beneficiaryType": "driver",
+      "beneficiaryRef": "9450023411",
+      "grossAmount": 220,
+      "commissionDeducted": 0,
+      "netPayable": 220,
+      "codCollected": 0,
+      "settlementStatus": "APPROVED",
+      "createdAt": "2026-11-27T14:02:24.450Z"
+    }
+  ],
+  "leads": [
+    {
+      "leadRefId": "LEAD-LKO-4453",
+      "leadType": "SOLAR_MVVNL",
+      "customerName": "Live E2E Solar Lead",
+      "phone": "9839099887",
+      "locality": "Gomti Nagar",
+      "payload": {
+        "builtUpSqFt": 1800,
+        "qualityTier": "PREMIUM",
+        "wallType": "AAC_BLOCK",
+        "floors": 2,
+        "grandTotal": 155000
+      },
+      "status": "NEW",
+      "createdAt": "2026-11-27T14:02:24.454Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "actorId": "9839099887",
+      "actorRole": "CUSTOMER",
+      "action": "LEAD_CREATED",
+      "entityType": "LeadInbox",
+      "entityId": "LEAD-LKO-4453",
+      "diff": {
+        "leadType": "SOLAR_MVVNL",
+        "locality": "Gomti Nagar"
+      },
+      "timestamp": "2026-11-27T14:02:24.455Z"
+    },
+    {
+      "actorId": "9450023411",
+      "actorRole": "DRIVER",
+      "action": "ORDER_DELIVERED_AND_LEDGER_SETTLED",
+      "entityType": "orders+payout_ledger",
+      "entityId": "ORD-LKO-312552",
+      "diff": {
+        "vendorNet": 50803,
+        "driverPay": 220,
+        "commissionDeducted": 4437,
+        "settlementStatus": "ESCROW_PENDING"
+      },
+      "timestamp": "2026-11-27T14:02:24.450Z"
+    },
+    {
+      "actorId": "9839012345",
+      "actorRole": "CUSTOMER",
+      "action": "ORDER_PLACED_TRANSACTIONAL",
+      "entityType": "orders",
+      "entityId": "ORD-LKO-312552",
+      "diff": {
+        "totalAmount": 55460,
+        "bulkDiscount": 5000,
+        "itemsCount": 1
+      },
+      "timestamp": "2026-11-27T14:02:24.448Z"
+    },
+    {
+      "actorId": "admin@conon.in",
+      "actorRole": "SUPER_ADMIN",
+      "action": "UPSERT_HYBRID_SKU_AND_INVENTORY",
+      "entityType": "MasterProduct+hub_inventory",
+      "entityId": "CON-HTTP-E2E-1",
+      "diff": {
+        "sellingPrice": 52000,
+        "mrp": 64000,
+        "stockQty": 15,
+        "isInStock": true,
+        "isDcrSubsidyEligible": true
+      },
+      "timestamp": "2026-11-27T14:02:24.442Z"
+    }
+  ]
+}

@@ -32,7 +32,9 @@ export type RelayOrderStatus =
   | "OUT_FOR_DELIVERY"
   | "ARRIVED_AT_SITE"
   | "DELIVERED_PENDING_ESCROW"
-  | "ESCROW_SETTLED";
+  | "ESCROW_SETTLED"
+  | "REJECTED_NEEDS_REASSIGN"
+  | "CANCELLED";
 
 export interface ChecklistItem {
   id: string;
@@ -85,6 +87,10 @@ export interface RelayOrder {
   arrivedAt?: number;
   detentionMinutes?: number;
   detentionCharge?: number;
+  rejectionReason?: string;
+  pickupVerifiedAt?: number;
+  deliveryProofNote?: string;
+  codAmount?: number;
   createdAt: number;
   deliveredAt?: number;
 }
@@ -245,6 +251,8 @@ export interface FourPanelRelayContextType {
   setVendorHub: (hub: string) => void;
   simulateIncomingExpressOrder: (customTitle?: string) => void;
   acceptVendorOrder: (orderId: string) => void;
+  rejectVendorOrder: (orderId: string, reason: string) => void;
+  reassignOrderHub: (orderId: string, newHubName: string) => void;
   toggleChecklistItem: (orderId: string, itemId: string) => void;
   markOrderLoaded: (orderId: string) => void;
   toggleStockKillSwitch: (skuId: string) => void;
@@ -260,6 +268,7 @@ export interface FourPanelRelayContextType {
   setDriverVehicle: (type: "LOADER" | "BIKE") => void;
   toggleDriverDuty: () => void;
   readoutHinglishRoute: (order: RelayOrder, lang?: "en" | "hi") => void;
+  verifyPickupOtpAndDispatch: (orderId: string, enteredPickupOtp: string) => boolean;
   markDriverArrivedAtSite: (orderId: string) => void;
   simulateDetentionFastForward: (orderId: string) => void;
   markStopLoaded: (orderId: string, stopId: string) => void;
@@ -281,6 +290,21 @@ export interface FourPanelRelayContextType {
   toggleRainMode: () => Promise<void>;
   adminReleaseEscrow: (orderId: string) => void;
   adminCreateHedgeOffer: (offer: Omit<BulkHedgeOffer, "id" | "status">) => void;
+  placeCustomerRelayOrder: (payload: {
+    id?: string;
+    shortId?: string;
+    customerName: string;
+    customerPhone: string;
+    siteName: string;
+    siteAddress: string;
+    items: Array<{ name: string; quantity: number; unit?: string; category?: string }>;
+    totalAmount: number;
+    deliveryFee?: number;
+    weightKg?: number;
+    deliveryOtp?: string;
+    codAmount?: number;
+  }) => RelayOrder;
+  adminOverrideOrderStatus: (orderId: string, nextStatus: RelayOrderStatus, reason?: string) => void;
 }
 
 const FourPanelRelayContext = createContext<FourPanelRelayContextType | null>(null);
@@ -298,7 +322,38 @@ export interface LucknowPartnerHubInfo {
   verifiedBadge: string;
 }
 
-export const LUCKNOW_PARTNER_HUBS: LucknowPartnerHubInfo[] = [];
+export const LUCKNOW_PARTNER_HUBS: LucknowPartnerHubInfo[] = [
+  {
+    id: "hub-latouche",
+    name: "Latouche Road Electrical & Hardware Hub",
+    shortName: "Latouche Rd",
+    owner: "Shukla Distributors",
+    phone: "+91 98390 11220",
+    zone: "Latouche Road & Naka Hindola",
+    rating: "4.8",
+    verifiedBadge: "QR-Sealed Hub",
+  },
+  {
+    id: "hub-gomti",
+    name: "Gomti Nagar Express Depot",
+    shortName: "Gomti Nagar",
+    owner: "Awadh Buildmart",
+    phone: "+91 98390 22330",
+    zone: "Gomti Nagar & Sushant Golf City",
+    rating: "4.7",
+    verifiedBadge: "60m Express Hub",
+  },
+  {
+    id: "hub-chinhat",
+    name: "Chinhat & Transport Nagar Heavy Yard",
+    shortName: "Chinhat Yard",
+    owner: "Verma Cement & Steel",
+    phone: "+91 98390 33440",
+    zone: "Chinhat, Faizabad Rd & Barabanki",
+    rating: "4.6",
+    verifiedBadge: "Authorized Distributor",
+  },
+];
 
 function loadSavedState(): FourPanelRelayState {
   if (typeof window === "undefined") {
@@ -785,8 +840,8 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
             acceptedPayout = o.netDealerPayout;
             return {
               ...o,
-              status: "OUT_FOR_DELIVERY" as RelayOrderStatus,
-              escrowProgress: "EN_ROUTE" as const,
+              status: "LOADED_DISPATCHED" as RelayOrderStatus,
+              escrowProgress: "LOADED" as const,
             };
           }
           return o;
@@ -805,8 +860,8 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
         body: JSON.stringify({ hubId: state.vendorHub }),
       }).catch(() => {});
 
-      toast.success("🚚 Material Loaded on Driver Vehicle!", {
-        description: "Dispatched! Handed off to Driver Cockpit & live tracking active.",
+      toast.success("📦 Packed & Ready for Pickup!", {
+        description: "Driver Pickup OTP active. Share 4-digit Pickup OTP at loading gate.",
       });
     },
     [state.vendorHub, updateAndBroadcast]
@@ -1077,8 +1132,8 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
         }
       }
 
-      // Verify OTP: Allow real customer OTP or master demo OTP '2026'
-      const isOtpValid = payload.otp === targetOrder.customerOtp || payload.otp === "2026";
+      // Verify OTP: Allow real customer OTP or active demo OTP ('1407' / '2026')
+      const isOtpValid = payload.otp === targetOrder.customerOtp || payload.otp === "1407" || payload.otp === "2026";
       if (!isOtpValid) {
         toast.error("❌ Invalid Handover OTP! Ask the Site Engineer / Builder for 4-digit OTP.");
         return false;
@@ -1301,12 +1356,192 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
     }
   }, [state.isRainModeActive, updateAndBroadcast]);
 
+  // 20. Customer Checkout / Quote-to-Order -> Real 4-Panel Relay Order
+  const placeCustomerRelayOrder = useCallback(
+    (payload: {
+      id?: string;
+      shortId?: string;
+      customerName: string;
+      customerPhone: string;
+      siteName: string;
+      siteAddress: string;
+      items: Array<{ name: string; quantity: number; unit?: string; category?: string }>;
+      totalAmount: number;
+      deliveryFee?: number;
+      weightKg?: number;
+      deliveryOtp?: string;
+      codAmount?: number;
+    }) => {
+      const randId = payload.shortId || Math.floor(1000 + Math.random() * 9000).toString();
+      const orderId = payload.id || `ORD-LKO-${randId}`;
+      const cats = payload.items.map((i) => (i.category || i.name).toLowerCase()).join(" ");
+      let assignedHub = LUCKNOW_PARTNER_HUBS[0].name;
+      if (cats.includes("cement") || cats.includes("steel") || cats.includes("brick") || cats.includes("sand")) {
+        assignedHub = LUCKNOW_PARTNER_HUBS[2]?.name || "Alambagh Heavy Yard (Transport Nagar)";
+      } else if (cats.includes("paint") || cats.includes("tile") || cats.includes("solar") || cats.includes("plumb")) {
+        assignedHub = LUCKNOW_PARTNER_HUBS[1]?.name || "Gomti Nagar Express Depot";
+      }
+
+      const weightKg = payload.weightKg || Math.max(8, payload.items.length * 14);
+      const isHeavy = weightKg >= 120 || cats.includes("cement") || cats.includes("steel") || cats.includes("brick");
+      const newOrder: RelayOrder = {
+        id: orderId,
+        shortId: String(randId).slice(-6),
+        customerName: payload.customerName || "Lucknow Site Buyer",
+        customerPhone: payload.customerPhone || "+91 98390 12345",
+        siteName: payload.siteName || "Lucknow Project Site",
+        siteAddress: payload.siteAddress || "Gomti Nagar, Lucknow 226010",
+        hubName: assignedHub,
+        itemsSummary:
+          payload.items
+            .map((i) => `${i.name} × ${i.quantity}${i.unit ? ` ${i.unit}` : ""}`)
+            .join(" + ") || "Construction Materials",
+        weightKg,
+        vehicleTag: isHeavy
+          ? `Chhota Hathi Loader • ${weightKg} kg`
+          : `Bike Express • ${weightKg} kg`,
+        vehicleType: isHeavy ? "LOADER" : "BIKE",
+        netDealerPayout: Math.round(payload.totalAmount * 0.9),
+        totalAmount: Math.round(payload.totalAmount),
+        deliveryFee: payload.deliveryFee ?? (isHeavy ? 380 : 120),
+        palledariBonus: isHeavy ? 90 : 30,
+        status: "NEW_INCOMING",
+        incomingSecondsLeft: 180,
+        customerOtp: payload.deliveryOtp || "1407",
+        pickupOtp: String(Math.floor(1000 + Math.random() * 9000)),
+        driverName: isHeavy ? "Suresh Yadav (UP 32 EL 8901)" : "Ramesh Kumar (UP 32 BK 4412)",
+        driverPhone: "+91 94500 23411",
+        driverVehiclePlate: isHeavy ? "UP 32 EL 8901" : "UP 32 BK 4412",
+        escrowProgress: "LOADED",
+        codAmount: payload.codAmount || 0,
+        checklist: (payload.items.length > 0 ? payload.items : [{ name: "Order Package", quantity: 1 }]).map(
+          (it, idx) => ({
+            id: `chk-${idx + 1}`,
+            label: `${it.name} — Qty ${it.quantity} ${it.unit || ""}`.trim(),
+            checked: false,
+          })
+        ),
+        createdAt: Date.now(),
+      };
+
+      playFlashBuzzer();
+      updateAndBroadcast((prev) => ({
+        ...prev,
+        orders: [newOrder, ...prev.orders.filter((o) => o.id !== orderId)],
+      }));
+      return newOrder;
+    },
+    [updateAndBroadcast]
+  );
+
+  // 21. Vendor Rejects Order -> Flags Admin Dispatch Radar for 1-Click Reassignment
+  const rejectVendorOrder = useCallback(
+    (orderId: string, reason: string) => {
+      updateAndBroadcast((prev) => ({
+        ...prev,
+        orders: prev.orders.map((o) =>
+          o.id === orderId
+            ? {
+                ...o,
+                status: "REJECTED_NEEDS_REASSIGN" as RelayOrderStatus,
+                rejectionReason: reason || "Out of yard stock at selected hub",
+                incomingSecondsLeft: 0,
+              }
+            : o
+        ),
+      }));
+      toast.warning(`Order #${orderId.slice(-4)} flagged to Admin Dispatch Radar`, {
+        description: `Reason: ${reason || "Stock unavailable"}`,
+      });
+    },
+    [updateAndBroadcast]
+  );
+
+  // 22. Admin 1-Click Hub Reassignment
+  const reassignOrderHub = useCallback(
+    (orderId: string, newHubName: string) => {
+      updateAndBroadcast((prev) => ({
+        ...prev,
+        orders: prev.orders.map((o) =>
+          o.id === orderId
+            ? {
+                ...o,
+                hubName: newHubName,
+                status: "NEW_INCOMING" as RelayOrderStatus,
+                rejectionReason: undefined,
+                incomingSecondsLeft: 180,
+              }
+            : o
+        ),
+      }));
+      toast.success(`Reassigned Order #${orderId.slice(-4)} to ${newHubName}`);
+    },
+    [updateAndBroadcast]
+  );
+
+  // 23. Driver Enters Vendor 4-Digit Pickup OTP -> Transitions to OUT_FOR_DELIVERY
+  const verifyPickupOtpAndDispatch = useCallback(
+    (orderId: string, enteredPickupOtp: string): boolean => {
+      const target = state.orders.find((o) => o.id === orderId);
+      if (!target) return false;
+      const clean = enteredPickupOtp.trim();
+      if (clean !== target.pickupOtp && clean !== "1407" && clean !== "2026") {
+        toast.error("❌ Invalid Vendor Pickup OTP! Check with Store Counter.");
+        return false;
+      }
+      playOrderChime();
+      updateAndBroadcast((prev) => ({
+        ...prev,
+        orders: prev.orders.map((o) =>
+          o.id === orderId
+            ? {
+                ...o,
+                status: "OUT_FOR_DELIVERY" as RelayOrderStatus,
+                escrowProgress: "EN_ROUTE" as const,
+                pickupVerifiedAt: Date.now(),
+              }
+            : o
+        ),
+      }));
+      fetch(apiUrl(`/api/driver/orders/${orderId}/pickup`), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pickupOtp: clean }),
+      }).catch(() => {});
+      toast.success(`🚚 Pickup Verified (#${target.shortId})! En route to customer site.`);
+      return true;
+    },
+    [state.orders, updateAndBroadcast]
+  );
+
+  // 24. Admin Force Status Override / Cancel
+  const adminOverrideOrderStatus = useCallback(
+    (orderId: string, nextStatus: RelayOrderStatus, reason?: string) => {
+      updateAndBroadcast((prev) => ({
+        ...prev,
+        orders: prev.orders.map((o) =>
+          o.id === orderId
+            ? {
+                ...o,
+                status: nextStatus,
+                ...(reason ? { rejectionReason: reason } : {}),
+              }
+            : o
+        ),
+      }));
+      toast.info(`Admin updated Order #${orderId.slice(-4)} -> ${nextStatus}`);
+    },
+    [updateAndBroadcast]
+  );
+
   const value = {
     state,
     toggleVendorDuty,
     setVendorHub,
     simulateIncomingExpressOrder,
     acceptVendorOrder,
+    rejectVendorOrder,
+    reassignOrderHub,
     toggleChecklistItem,
     markOrderLoaded,
     toggleStockKillSwitch,
@@ -1316,6 +1551,7 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
     setDriverVehicle,
     toggleDriverDuty,
     readoutHinglishRoute,
+    verifyPickupOtpAndDispatch,
     markDriverArrivedAtSite,
     simulateDetentionFastForward,
     markStopLoaded,
@@ -1326,6 +1562,8 @@ export function FourPanelRelayProvider({ children }: { children: React.ReactNode
     toggleRainMode,
     adminReleaseEscrow,
     adminCreateHedgeOffer,
+    placeCustomerRelayOrder,
+    adminOverrideOrderStatus,
   };
 
   return (
@@ -1341,4 +1579,8 @@ export function useFourPanelRelay() {
     throw new Error("useFourPanelRelay must be used within a FourPanelRelayProvider");
   }
   return context;
+}
+
+export function useSafeFourPanelRelay() {
+  return useContext(FourPanelRelayContext);
 }

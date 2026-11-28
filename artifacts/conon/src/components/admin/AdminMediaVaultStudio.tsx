@@ -18,6 +18,8 @@ import {
   Copy,
   RotateCcw,
   Eye,
+  EyeOff,
+  Pencil,
   X,
   Layers,
   Check,
@@ -27,6 +29,8 @@ import {
 import { toast } from "sonner";
 import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { CategoryBuilderModal } from "@/components/admin/CategoryBuilderModal";
+import type { HomeCategory } from "@/data/homeCategories";
 import {
   VAULT_CAPTION_OPTIONS,
   resolveProductWithVault,
@@ -50,6 +54,7 @@ import {
 } from "@/services/adminMediaCatalogIndex";
 import { CononProductMedia } from "@/components/CononProductMedia";
 import { sanitizeFolderSlug } from "@/services/productMediaVault";
+import { appendAdminAuditLog } from "@/services/adminAuditLog";
 
 export interface AdminMediaVaultStudioProps {
   isDark?: boolean;
@@ -74,6 +79,9 @@ interface DraftEditorState {
   unit: string;
   hsnCode: string;
   gstRate: number;
+  rentPricePerDay: number | "";
+  dcrSubsidyEligible: boolean;
+  stqcCompliant: boolean;
   isInStock: boolean;
   isCustomItem?: boolean;
 }
@@ -115,6 +123,14 @@ function buildDraftFromItem(
     unit: override?.unit || item.unit,
     hsnCode: override?.hsnCode || item.hsnCode,
     gstRate: override?.gstRate !== undefined ? override.gstRate : item.gstRate,
+    rentPricePerDay:
+      override?.rentPricePerDay !== undefined
+        ? override.rentPricePerDay
+        : item.rentPricePerDay !== undefined
+        ? item.rentPricePerDay
+        : "",
+    dcrSubsidyEligible: Boolean(override?.dcrSubsidyEligible ?? item.dcrSubsidyEligible),
+    stqcCompliant: Boolean(override?.stqcCompliant ?? item.stqcCompliant),
     isInStock: override?.isInStock !== undefined ? override.isInStock : item.isInStock,
     isCustomItem: Boolean(override?.isCustomItem),
   };
@@ -123,6 +139,10 @@ function buildDraftFromItem(
 export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioProps) {
   const { version, overridesMap, getOverride } = useProductMediaVault();
   const masterSync = useSafeCononMasterSync();
+  const [catBuilderOpen, setCatBuilderOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState<HomeCategory | null>(null);
+  const customCats = (masterSync?.state.categories?.customCategories || []) as HomeCategory[];
+  const hiddenCatSlugs = new Set(masterSync?.state.categories?.hiddenCategorySlugs || []);
 
   const allItems = useMemo(() => getUnifiedVaultItems(), [version]);
 
@@ -441,6 +461,9 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
         unit: draft.unit.trim(),
         hsnCode: draft.hsnCode.trim(),
         gstRate: Number(draft.gstRate) || 0,
+        rentPricePerDay: draft.rentPricePerDay === "" ? undefined : Number(draft.rentPricePerDay),
+        dcrSubsidyEligible: draft.dcrSubsidyEligible,
+        stqcCompliant: draft.stqcCompliant,
         isInStock: draft.isInStock,
         isAdminVerifiedMedia: draft.images.length > 0,
         isCustomItem: draft.isCustomItem,
@@ -448,6 +471,14 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
       };
 
       const res = await saveProductMediaVault(payload);
+      appendAdminAuditLog({
+        category: payload.isInStock ? "CATALOG_RATE" : "STOCK_TOGGLE",
+        action: draft.isCustomItem ? "Created / Updated Custom SKU" : "Updated Master SKU & Media",
+        target: `${payload.title || payload.productId} (${payload.categorySlug})`,
+        details: `Price ₹${payload.price} / MRP ₹${payload.mrp} • Stock: ${payload.isInStock ? "ON" : "OFF"}${
+          payload.rentPricePerDay ? ` • Rent ₹${payload.rentPricePerDay}/day` : ""
+        }`,
+      });
       masterSync?.refreshFromSources().catch(() => {});
       setDraft((prev) => (prev ? { ...prev, images: res.override.images } : prev));
       setLastSavedDiskInfo({ folderPath: res.folderPath, savedFiles: res.savedFiles });
@@ -728,11 +759,98 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         {/* PANE 1: LEFT CATEGORY RAIL */}
         <div className={`lg:col-span-3 rounded-2xl border p-3 space-y-2 max-h-[780px] overflow-y-auto ${panelBg}`}>
-          <div className="px-1.5 pb-1 flex items-center justify-between">
+          <div className="px-1.5 pb-1 flex items-center justify-between gap-2">
             <span className={`text-[11px] font-black uppercase tracking-wider ${mutedText}`}>
-              Categories ({VAULT_CATEGORIES.length})
+              Categories ({VAULT_CATEGORIES.length + customCats.length})
             </span>
+            <button
+              type="button"
+              onClick={() => {
+                setEditingCategory(null);
+                setCatBuilderOpen(true);
+              }}
+              className="px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 text-[10px] font-black flex items-center gap-1 cursor-pointer"
+            >
+              <Plus className="w-3 h-3" />
+              New Category
+            </button>
           </div>
+
+          {/* Custom Admin-Created Categories */}
+          {customCats.length > 0 && (
+            <div className="space-y-1 pt-1 pb-2 border-b border-slate-800/30">
+              <div className={`text-[10px] font-black uppercase tracking-wider px-1.5 ${mutedText}`}>
+                Custom Categories ({customCats.length})
+              </div>
+              {customCats.map((cat) => {
+                const isHidden = hiddenCatSlugs.has(cat.slug);
+                const active = selectedCategorySlug === cat.slug;
+                return (
+                  <div
+                    key={cat.slug}
+                    className={`px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between gap-1 ${
+                      active
+                        ? "bg-amber-400/20 border border-amber-400/40"
+                        : isDark
+                        ? "bg-slate-900/60"
+                        : "bg-slate-50"
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCategorySlug(cat.slug)}
+                      className="flex-1 text-left font-bold truncate cursor-pointer"
+                    >
+                      {cat.title} {isHidden && "(Hidden)"}
+                    </button>
+                    <div className="flex items-center gap-1 shrink-0">
+                      <button
+                        type="button"
+                        title="Edit Category"
+                        onClick={() => {
+                          setEditingCategory(cat);
+                          setCatBuilderOpen(true);
+                        }}
+                        className="p-1 rounded hover:bg-slate-700/30 cursor-pointer"
+                      >
+                        <Pencil className="w-3 h-3" />
+                      </button>
+                      <button
+                        type="button"
+                        title={isHidden ? "Show on Storefront" : "Hide from Storefront"}
+                        onClick={() => {
+                          if (!masterSync) return;
+                          const nextHidden = new Set(hiddenCatSlugs);
+                          if (isHidden) nextHidden.delete(cat.slug);
+                          else nextHidden.add(cat.slug);
+                          masterSync.patchMasterState(
+                            { categories: { hiddenCategorySlugs: Array.from(nextHidden) } },
+                            "categories"
+                          );
+                        }}
+                        className="p-1 rounded hover:bg-slate-700/30 cursor-pointer"
+                      >
+                        {isHidden ? <EyeOff className="w-3 h-3 text-rose-400" /> : <Eye className="w-3 h-3 text-emerald-500" />}
+                      </button>
+                      <button
+                        type="button"
+                        title="Delete Custom Category"
+                        onClick={() => {
+                          if (!masterSync) return;
+                          const next = customCats.filter((c) => c.slug !== cat.slug);
+                          masterSync.patchMasterState({ categories: { customCategories: next } }, "categories");
+                          toast.info(`Deleted category "${cat.title}"`);
+                        }}
+                        className="p-1 rounded hover:bg-rose-500/20 text-rose-400 cursor-pointer"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <button
             type="button"
@@ -1610,9 +1728,27 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
                       ))}
                     </select>
                   </div>
+
+                  <div>
+                    <label className={`block text-[11px] font-bold mb-1 ${mutedText}`}>Rent Price / Day (₹)</label>
+                    <input
+                      type="number"
+                      min={0}
+                      value={draft.rentPricePerDay}
+                      onChange={(e) => {
+                        setDraft({
+                          ...draft,
+                          rentPricePerDay: e.target.value === "" ? "" : Number(e.target.value),
+                        });
+                        setIsDirty(true);
+                      }}
+                      placeholder="Tools Rental Optional"
+                      className={`w-full px-2.5 py-1.5 rounded-xl border text-xs font-bold outline-none ${inputCls}`}
+                    />
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-2">
+                <div className="flex flex-wrap items-center gap-4 pt-2">
                   <label className="flex items-center gap-2 text-xs font-bold cursor-pointer">
                     <input
                       type="checkbox"
@@ -1624,6 +1760,32 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
                       className="w-4 h-4 accent-emerald-600 rounded"
                     />
                     <span>Available &amp; Active on Storefront</span>
+                  </label>
+
+                  <label className="flex items-center gap-2 text-xs font-bold cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={draft.dcrSubsidyEligible}
+                      onChange={(e) => {
+                        setDraft({ ...draft, dcrSubsidyEligible: e.target.checked });
+                        setIsDirty(true);
+                      }}
+                      className="w-4 h-4 accent-amber-500 rounded"
+                    />
+                    <span>DCR Subsidy Eligible</span>
+                  </label>
+
+                  <label className="flex items-center gap-2 text-xs font-bold cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={draft.stqcCompliant}
+                      onChange={(e) => {
+                        setDraft({ ...draft, stqcCompliant: e.target.checked });
+                        setIsDirty(true);
+                      }}
+                      className="w-4 h-4 accent-sky-600 rounded"
+                    />
+                    <span>STQC / Tender Verified</span>
                   </label>
 
                   {isDirty && (
@@ -1948,6 +2110,17 @@ export function AdminMediaVaultStudio({ isDark = false }: AdminMediaVaultStudioP
             </div>
           </form>
         </div>
+      )}
+      {catBuilderOpen && (
+        <CategoryBuilderModal
+          isDark={isDark}
+          editingCategory={editingCategory}
+          onClose={() => setCatBuilderOpen(false)}
+          onSaved={(savedSlug) => {
+            setCatBuilderOpen(false);
+            setSelectedCategorySlug(savedSlug);
+          }}
+        />
       )}
     </div>
   );

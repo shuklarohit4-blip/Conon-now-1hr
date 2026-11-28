@@ -1,48 +1,23 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { fetchReverseGeocode } from "@/lib/mapsApi";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import {
+  checkPincodeServiceability,
+  DEFAULT_SERVICEABLE_ZONES,
+} from "@/utils/serviceabilityPolicy";
 
 export const SERVICEABLE_PINS: Record<string, string> = {
-  "226001": "Hazratganj",
-  "226002": "Lucknow Cantt",
-  "226003": "Chowk",
-  "226004": "Charbagh",
-  "226005": "Alambagh",
-  "226006": "Mahanagar",
-  "226009": "Amausi (Airport)",
-  "226010": "Gomti Nagar",
-  "226016": "Indira Nagar",
-  "226017": "Rajajipuram",
-  "226018": "Aminabad",
-  "226020": "Aishbagh",
-  "226021": "Jankipuram",
-  "226022": "Vikas Nagar",
-  "226024": "Aliganj",
-  "226025": "Krishna Nagar",
-  "226028": "Gomti Nagar Extension",
-  "226029": "Telibagh",
-  "226030": "Sushant Golf City (Ansal API)",
+  "226030": "Sushant Golf City & Sultanpur Road",
+  "226010": "Gomti Nagar & Gomti Nagar Extension",
+  "226028": "Faizabad Road (Chinhat / Kamta / BBD)",
+  "226002": "Sultanpur Road (Arjunganj / Shaheed Path)",
 };
 
 export const SERVICEABLE_PIN_COORDS: Record<string, { lat: number; lng: number }> = {
-  "226001": { lat: 26.8512, lng: 80.9462 },
-  "226002": { lat: 26.8124, lng: 80.9521 },
-  "226003": { lat: 26.8682, lng: 80.9061 },
-  "226004": { lat: 26.8276, lng: 80.9072 },
-  "226005": { lat: 26.8138, lng: 80.8986 },
-  "226006": { lat: 26.8778, lng: 80.9522 },
-  "226009": { lat: 26.7606, lng: 80.8893 },
-  "226010": { lat: 26.8547, lng: 80.9992 },
-  "226016": { lat: 26.8834, lng: 80.9882 },
-  "226017": { lat: 26.8372, lng: 80.8794 },
-  "226018": { lat: 26.8458, lng: 80.9275 },
-  "226020": { lat: 26.8329, lng: 80.9168 },
-  "226021": { lat: 26.9189, lng: 80.9507 },
-  "226022": { lat: 26.8911, lng: 80.9634 },
-  "226024": { lat: 26.8867, lng: 80.9416 },
-  "226025": { lat: 26.7924, lng: 80.8973 },
-  "226028": { lat: 26.8398, lng: 81.0264 },
-  "226029": { lat: 26.7915, lng: 80.9412 },
   "226030": { lat: 26.7824, lng: 81.0112 },
+  "226010": { lat: 26.8547, lng: 80.9992 },
+  "226028": { lat: 26.8398, lng: 81.0264 },
+  "226002": { lat: 26.8124, lng: 80.9521 },
 };
 
 export interface DeliveryLocation {
@@ -55,17 +30,14 @@ export interface DeliveryLocation {
   confirmed: boolean;
 }
 
-// Default delivery location covers all of Lucknow so the app is usable
-// out-of-the-box without forcing the location gate. Pincode 226001
-// (Hazratganj, central Lucknow) is serviceable; users can still narrow it
-// down to a specific locality from the header.
+// Default delivery location strictly locked to Launch Zone #1 (226030 - Sushant Golf City).
 const DEFAULT_LOC: DeliveryLocation = {
-  pincode: "226001",
-  area: "Hazratganj",
+  pincode: "226030",
+  area: "Sushant Golf City & Sultanpur Road",
   city: "Lucknow",
-  fullLabel: "Lucknow — Hazratganj",
-  lat: 26.8512,
-  lng: 80.9462,
+  fullLabel: "Lucknow — Sushant Golf City & Sultanpur Road",
+  lat: 26.7824,
+  lng: 81.0112,
   confirmed: true,
 };
 
@@ -156,7 +128,13 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
   const openLocationSheet  = useCallback(() => setShowLocationSheet(true), []);
   const closeLocationSheet = useCallback(() => setShowLocationSheet(false), []);
 
-  const isServiceable = useCallback((pin: string) => pin in SERVICEABLE_PINS, []);
+  const masterSync = useSafeCononMasterSync();
+
+  const isServiceable = useCallback(
+    (pin: string) =>
+      checkPincodeServiceability(pin, masterSync?.state.globalControls?.serviceability).serviceable,
+    [masterSync?.state.globalControls?.serviceability]
+  );
 
   const reverseGeocode = useCallback(async (lat: number, lng: number) => {
     // 1. Try our Google Maps reverse geocoding proxy first

@@ -14,6 +14,10 @@ import {
 } from "lucide-react";
 import { useDriverLanguage } from "@/context/DriverLanguageContext";
 import { useDriver } from "@/context/DriverContext";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { generateUtr } from "@/services/treasuryEngine";
+import { evaluateDispatchCompliance } from "@/utils/lucknowTrafficPolicy";
+import { PoliceCheckingFolderModal } from "./PoliceCheckingFolderModal";
 import { playOrderChime } from "@/lib/sound";
 import { GREEN, GREEN_DARK, YELLOW, inr } from "./theme";
 
@@ -147,13 +151,41 @@ function BigButton({
   );
 }
 
-/* ── Step 1: Pickup ─────────────────────────────────────────────────────── */
+/* ── Step 1: Pickup + Mandatory 10-Second Zero-Challan Pre-Trip Gate ────── */
 function PickupStep() {
-  const { t } = useDriverLanguage();
-  const { activeTrip, markLoaded } = useDriver();
+  const { t, lang } = useDriverLanguage();
+  const { activeTrip, driverProfile, markLoaded } = useDriver();
+  const masterSync = useSafeCononMasterSync();
   const [navigated, setNavigated] = useState(false);
   const [scanning, setScanning] = useState(false);
+  const [docsOpen, setDocsOpen] = useState(false);
+  const [safetyChecked, setSafetyChecked] = useState(false);
+  const [routeAckChecked, setRouteAckChecked] = useState(false);
+  const [overhangChecked, setOverhangChecked] = useState(false);
+  const [tirpalChecked, setTirpalChecked] = useState(false);
   const scanTimer = useRef<number | null>(null);
+
+  const trafficCompliance = evaluateDispatchCompliance({
+    items: activeTrip ? [{ name: activeTrip.material, quantity: 1, weightKg: 420 }] : [],
+    totalWeightKg: 420,
+    pincode: "226030",
+    domain: "MATERIAL",
+    rules: masterSync?.state.globalControls?.trafficPolicy,
+  });
+
+  useEffect(() => {
+    if (trafficCompliance.vipDiversionActive && typeof window !== "undefined" && "speechSynthesis" in window) {
+      try {
+        const msg =
+          lang === "hi"
+            ? "चेतावनी: लखनऊ में VIP डायवर्जन चालू है। शहीद पथ के ऊपर न चढ़ें, सर्विस लेन या किसान पथ का उपयोग करें।"
+            : "Alert: Lucknow VIP Diversion is active. Use Service Lane or Kisan Path crossings only.";
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(msg));
+      } catch {
+        // ignore speech errors
+      }
+    }
+  }, [trafficCompliance.vipDiversionActive, lang]);
 
   useEffect(() => {
     return () => {
@@ -163,8 +195,21 @@ function PickupStep() {
 
   if (!activeTrip) return null;
 
+  const isHeavyVehicle = (driverProfile?.vehicleLabel || "").toLowerCase().includes("truck") ||
+    (driverProfile?.vehicleLabel || "").toLowerCase().includes("tipper");
+  const maxRcKg = isHeavyVehicle ? 18000 : (driverProfile?.vehicleLabel || "").toLowerCase().includes("3") ? 700 : 1500;
+  const orderLoadKg = trafficCompliance.totalWeightKg;
+  const isOverloaded = orderLoadKg > maxRcKg;
+
+  const preTripReady =
+    !isOverloaded &&
+    safetyChecked &&
+    routeAckChecked &&
+    (!trafficCompliance.requiresLongLoadFolding || overhangChecked) &&
+    (!trafficCompliance.requiresTarpaulinCover || tirpalChecked);
+
   const startScan = () => {
-    if (scanning) return;
+    if (scanning || !preTripReady) return;
     setScanning(true);
     scanTimer.current = window.setTimeout(() => {
       setScanning(false);
@@ -174,12 +219,65 @@ function PickupStep() {
   };
 
   return (
-    <div className="space-y-5">
-      <div>
-        <p className="text-[13px] font-black uppercase tracking-wider" style={{ color: GREEN }}>
-          {t("warehouse")}
+    <div className="space-y-4">
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <p className="text-[13px] font-black uppercase tracking-wider" style={{ color: GREEN }}>
+            {t("warehouse")}
+          </p>
+          <h2 className="text-[22px] font-black text-slate-900 leading-tight mt-0.5">{t("pickupStep")}</h2>
+        </div>
+        <button
+          type="button"
+          onClick={() => setDocsOpen(true)}
+          className="px-3 py-1.5 rounded-xl bg-emerald-700 text-white text-[11px] font-black flex items-center gap-1.5 shadow-sm cursor-pointer shrink-0"
+        >
+          <ShieldCheck className="w-4 h-4 text-emerald-200" />
+          <span>Police Docs</span>
+        </button>
+      </div>
+
+      {/* Zero-Challan Pre-Trip Gate */}
+      <div className="p-3.5 rounded-2xl bg-amber-50 border-2 border-amber-300 space-y-2.5 text-xs">
+        <div className="flex items-center justify-between">
+          <span className="font-black text-amber-950 uppercase tracking-wide text-[11px]">
+            {lang === "hi" ? "🛡️ जीरो-चालान प्री-ट्रिप चेक" : "🛡️ Zero-Challan Pre-Trip Gate"}
+          </span>
+          <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${isOverloaded ? "bg-rose-600 text-white" : "bg-emerald-100 text-emerald-800"}`}>
+            {isOverloaded ? "OVERLOAD BLOCKED" : `${orderLoadKg} / ${maxRcKg} kg OK ✓`}
+          </span>
+        </div>
+
+        <p className="text-[11px] font-bold text-amber-900 leading-snug">
+          {lang === "hi" ? trafficCompliance.routeWarningHi : trafficCompliance.routeWarningEn}
         </p>
-        <h2 className="text-[24px] font-black text-slate-900 leading-tight mt-1">{t("pickupStep")}</h2>
+
+        <div className="space-y-1.5 pt-1">
+          <label className="flex items-center gap-2 text-[11px] font-bold text-slate-900 cursor-pointer">
+            <input type="checkbox" checked={routeAckChecked} onChange={(e) => setRouteAckChecked(e.target.checked)} className="rounded" />
+            <span>
+              {lang === "hi"
+                ? "शहीद पथ के ऊपर नहीं जाऊंगा — केवल सर्विस लेन / अंडरपास उपयोग करूंगा ✓"
+                : "No-Entry Route Shield: Service Lane / Underpass only (Saves ₹20,000 fine) ✓"}
+            </span>
+          </label>
+          <label className="flex items-center gap-2 text-[11px] font-bold text-slate-900 cursor-pointer">
+            <input type="checkbox" checked={safetyChecked} onChange={(e) => setSafetyChecked(e.target.checked)} className="rounded" />
+            <span>{lang === "hi" ? "हेलमेट / सीटबेल्ट पहन लिया है ✓" : "Helmet / Seatbelt Worn ✓"}</span>
+          </label>
+          {trafficCompliance.requiresLongLoadFolding && (
+            <label className="flex items-center gap-2 text-[11px] font-bold text-amber-950 cursor-pointer">
+              <input type="checkbox" checked={overhangChecked} onChange={(e) => setOverhangChecked(e.target.checked)} className="rounded" />
+              <span>12m Sariya/Pipes folded &amp; Red Warning Cloth tied (Saves ₹20,000) ✓</span>
+            </label>
+          )}
+          {trafficCompliance.requiresTarpaulinCover && (
+            <label className="flex items-center gap-2 text-[11px] font-bold text-blue-950 cursor-pointer">
+              <input type="checkbox" checked={tirpalChecked} onChange={(e) => setTirpalChecked(e.target.checked)} className="rounded" />
+              <span>Tirpal / Tarpaulin Dust Cover Tied ✓</span>
+            </label>
+          )}
+        </div>
       </div>
 
       <FauxMap label={activeTrip.pickup} sub={activeTrip.pickupArea} tone="green" />
@@ -191,11 +289,13 @@ function PickupStep() {
       <AnimatePresence>
         {navigated && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-            <BigButton onClick={startScan} icon={scanning ? undefined : QrCode} color={GREEN_DARK} disabled={scanning}>
+            <BigButton onClick={startScan} icon={scanning ? undefined : QrCode} color={GREEN_DARK} disabled={scanning || !preTripReady}>
               {scanning ? (
                 <span className="flex items-center gap-2">
                   <Loader2 className="w-6 h-6 animate-spin" /> {t("scanning")}
                 </span>
+              ) : !preTripReady ? (
+                lang === "hi" ? "पहले ऊपर दिए चेकबॉक्स कन्फर्म करें" : "Complete Zero-Challan Gate Above"
               ) : (
                 t("scanToLoad")
               )}
@@ -203,6 +303,8 @@ function PickupStep() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <PoliceCheckingFolderModal open={docsOpen} onClose={() => setDocsOpen(false)} />
     </div>
   );
 }
@@ -252,10 +354,50 @@ function TransitStep() {
 
 /* ── Step 3: Drop & Proof of Delivery ───────────────────────────────────── */
 function DropStep({ onComplete }: { onComplete: () => void }) {
-  const { t } = useDriverLanguage();
-  const { pod, podComplete } = useDriver();
+  const { t, lang } = useDriverLanguage();
+  const { activeTrip, pod, podComplete } = useDriver();
+  const masterSync = useSafeCononMasterSync();
   const [showCamera, setShowCamera] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
+  const [podCollectMethod, setPodCollectMethod] = useState<"POD_SITE_UPI" | "POD_CASH" | null>(null);
+  const [podConfirmed, setPodConfirmed] = useState(false);
+
+  const isPodOrder =
+    activeTrip?.paymentStatus === "PAY_ON_DELIVERY" ||
+    activeTrip?.paymentMode === "PAY_ON_DELIVERY" ||
+    activeTrip?.paymentMode === "COD";
+
+  const collectAmount = Number(activeTrip?.collectAmount || activeTrip?.earn || 0);
+  const canComplete = podComplete && (!isPodOrder || podConfirmed);
+
+  const handleCompleteWithPodSync = () => {
+    if (isPodOrder && podConfirmed && masterSync && activeTrip) {
+      masterSync
+        .recordTreasuryEntry({
+          id: `tr_pod_${activeTrip.id}_${Date.now()}`,
+          orderId: activeTrip.shortId || activeTrip.id,
+          entryType: "CUSTOMER_INFLOW",
+          direction: "CREDIT",
+          fromAccountLabel: `Site POD (${podCollectMethod || "POD_CASH"})`,
+          fromAccountRef: activeTrip.dropArea,
+          toAccountLabel: "CONON Driver Site Collection",
+          toAccountRef: "POD_SITE_COLLECTED",
+          toIfsc: "",
+          beneficiaryName: "CONON INFRABUILT PVT LTD",
+          paymentMode: podCollectMethod || "POD_CASH",
+          utrNumber: podCollectMethod === "POD_SITE_UPI" ? generateUtr("5") : `POD-CASH-${Date.now().toString().slice(-6)}`,
+          grossAmount: collectAmount,
+          platformMargin: Math.round(collectAmount * 0.08),
+          taxAmount: Math.round(collectAmount * 0.14),
+          netAmount: collectAmount,
+          status: "SETTLED",
+          createdAt: new Date().toISOString(),
+          customerName: activeTrip.drop,
+        })
+        .catch(() => {});
+    }
+    onComplete();
+  };
 
   return (
     <div className="space-y-4">
@@ -265,6 +407,72 @@ function DropStep({ onComplete }: { onComplete: () => void }) {
         </p>
         <h2 className="text-[24px] font-black text-slate-900 leading-tight mt-1">{t("dropStep")}</h2>
       </div>
+
+      {/* Payment Status Gate Banner (Bilingual EN/HI) */}
+      {isPodOrder ? (
+        <div className="p-4 rounded-3xl border-2 border-amber-400 bg-amber-50 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-black uppercase text-amber-900">
+              {lang === "hi"
+                ? `साइट पर ${inr(collectAmount)} वसूलें (POD)`
+                : `Collect ${inr(collectAmount)} at Site (POD)`}
+            </span>
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-200 text-amber-950">
+              POD &lt; ₹10K
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => setPodCollectMethod("POD_SITE_UPI")}
+              className={`py-2 px-3 rounded-xl border-2 text-xs font-black cursor-pointer ${
+                podCollectMethod === "POD_SITE_UPI"
+                  ? "border-emerald-700 bg-emerald-600 text-white"
+                  : "border-amber-300 bg-white text-slate-800"
+              }`}
+            >
+              {lang === "hi" ? "साइट UPI QR" : "Site UPI QR"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setPodCollectMethod("POD_CASH")}
+              className={`py-2 px-3 rounded-xl border-2 text-xs font-black cursor-pointer ${
+                podCollectMethod === "POD_CASH"
+                  ? "border-emerald-700 bg-emerald-600 text-white"
+                  : "border-amber-300 bg-white text-slate-800"
+              }`}
+            >
+              {lang === "hi" ? "नकद लिया (Cash)" : "Cash Collected"}
+            </button>
+          </div>
+          <button
+            type="button"
+            disabled={!podCollectMethod}
+            onClick={() => {
+              setPodConfirmed(true);
+              toast.success("POD payment logged to Khata & Bank Passbook!");
+            }}
+            className="w-full py-2.5 rounded-xl bg-emerald-700 text-white text-xs font-black disabled:opacity-40 cursor-pointer"
+          >
+            {podConfirmed
+              ? lang === "hi"
+                ? "✓ पेमेंट प्राप्त कन्फर्म"
+                : "✓ Site Payment Confirmed"
+              : lang === "hi"
+              ? "पेमेंट कन्फर्म करें"
+              : "Confirm Site Payment Received"}
+          </button>
+        </div>
+      ) : (
+        <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-300 flex items-center gap-2.5 text-emerald-950">
+          <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0" />
+          <span className="text-xs font-black">
+            {lang === "hi"
+              ? "PREPAID ✓ — साइट पर नकद बिल्कुल न लें"
+              : "PREPAID ✓ — Do NOT collect cash at site"}
+          </span>
+        </div>
+      )}
 
       {/* PoD checklist */}
       <PodRow
@@ -280,11 +488,17 @@ function DropStep({ onComplete }: { onComplete: () => void }) {
         onClick={() => !pod.otp && setShowOtp(true)}
       />
 
-      <BigButton onClick={onComplete} icon={CheckCircle2} disabled={!podComplete} color={GREEN}>
+      <BigButton onClick={handleCompleteWithPodSync} icon={CheckCircle2} disabled={!canComplete} color={GREEN}>
         {t("completeTrip")}
       </BigButton>
-      {!podComplete && (
-        <p className="text-center text-[13px] font-bold text-amber-600">{t("finishPodFirst")}</p>
+      {!canComplete && (
+        <p className="text-center text-[13px] font-bold text-amber-600">
+          {isPodOrder && !podConfirmed
+            ? lang === "hi"
+              ? "पहले साइट पेमेंट कन्फर्म करें"
+              : "Confirm POD site collection before completing trip"
+            : t("finishPodFirst")}
+        </p>
       )}
 
       <CameraModal open={showCamera} onClose={() => setShowCamera(false)} />

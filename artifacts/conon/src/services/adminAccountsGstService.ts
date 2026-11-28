@@ -2,7 +2,7 @@
  * CONON ACCOUNTS & GST REPORT SERVICE
  * Daily Financial Accounting Ledger, GSTR-1 Table 12 HSN Summary & 1-Click CA-Ready PDF Generator
  */
-import { resolveApiUrl } from "@/lib/apiBase";
+import { resolveApiUrl, getAdminHeaders } from "@/lib/apiBase";
 
 export interface CompanyGstSettings {
   companyName: string;
@@ -254,35 +254,25 @@ export const FALLBACK_HSN_SUMMARY: GstHsnSummaryRow[] = [
 /* ────────────────────────────────────────────────────────────────────────────
  * SETTINGS HELPER
  * ──────────────────────────────────────────────────────────────────────────── */
+let cachedCompanySettings: CompanyGstSettings = { ...DEFAULT_COMPANY_SETTINGS };
+
 export function getCompanyGstSettings(): CompanyGstSettings {
-  if (typeof window === "undefined") return DEFAULT_COMPANY_SETTINGS;
-  try {
-    const raw = localStorage.getItem(STORAGE_SETTINGS_KEY);
-    if (!raw) {
-      localStorage.setItem(STORAGE_SETTINGS_KEY, JSON.stringify(DEFAULT_COMPANY_SETTINGS));
-      return DEFAULT_COMPANY_SETTINGS;
-    }
-    return JSON.parse(raw);
-  } catch {
-    return DEFAULT_COMPANY_SETTINGS;
-  }
+  return cachedCompanySettings;
 }
 
-export function saveCompanyGstSettings(settings: CompanyGstSettings): void {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.setItem(STORAGE_SETTINGS_KEY, JSON.stringify(settings));
-
-    // Background push to API
-    const adminKey = localStorage.getItem("x-admin-key") || "conon_mac_secret_9988";
-    fetch(resolveApiUrl("/api/admin/accounts/settings"), {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-admin-key": adminKey },
-      body: JSON.stringify(settings),
-    }).catch(() => {});
-  } catch {
-    // Graceful
+export async function saveCompanyGstSettings(settings: CompanyGstSettings): Promise<CompanyGstSettings> {
+  cachedCompanySettings = { ...settings };
+  const res = await fetch(resolveApiUrl("/api/admin/accounts/settings"), {
+    method: "POST",
+    credentials: "include",
+    headers: getAdminHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(settings),
+  });
+  const data = await res.json().catch(() => null);
+  if (res.ok && data?.company) {
+    cachedCompanySettings = data.company;
   }
+  return cachedCompanySettings;
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
@@ -303,13 +293,13 @@ export async function fetchGstReport(
   else if (period === "custom" && startDate) dateLabel = `${startDate} to ${endDate || todayStr}`;
 
   try {
-    const adminKey = localStorage.getItem("x-admin-key") || "conon_mac_secret_9988";
     const params = new URLSearchParams({ period });
     if (startDate) params.append("startDate", startDate);
     if (endDate) params.append("endDate", endDate);
 
     const res = await fetch(resolveApiUrl(`/api/admin/accounts/gst-report?${params.toString()}`), {
-      headers: { "x-admin-key": adminKey },
+      credentials: "include",
+      headers: getAdminHeaders(),
     });
 
     if (res.ok) {

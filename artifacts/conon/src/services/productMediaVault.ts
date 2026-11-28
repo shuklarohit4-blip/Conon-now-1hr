@@ -10,8 +10,9 @@
  *
  * ZERO legacy `/images/products/`, ZERO `@assets/`, ZERO inline SVG product drawings.
  */
-import { resolveApiUrl } from "@/lib/apiBase";
+import { normalizeRelativeAssetUrl, resolveApiUrl } from "@/lib/apiBase";
 import { getSocket } from "@/services/socket";
+import { subscribeSseSync } from "@/services/sseSyncClient";
 import {
   REAL_MEDIA_MANIFEST,
   REAL_MEDIA_ENTRIES,
@@ -69,6 +70,9 @@ export interface ProductMediaOverride {
   hsnCode?: string;
   gstRate?: number;
   unit?: string;
+  rentPricePerDay?: number;
+  dcrSubsidyEligible?: boolean;
+  stqcCompliant?: boolean;
   isInStock?: boolean;
   isAdminVerifiedMedia: boolean;
   isCustomItem?: boolean;
@@ -441,8 +445,13 @@ export async function hydrateMediaVault(): Promise<void> {
 
     if (!socketBound && typeof window !== "undefined") {
       socketBound = true;
+      subscribeSseSync((msg) => {
+        if (msg.type === "CATALOG_UPDATED" || msg.type === "FORCE_SYNC") {
+          void refreshVaultFromBackend();
+        }
+      });
       try {
-        const socket = getSocket();
+        const socket = getSocket() as any;
         socket.on("media_vault:product_updated", (payload: { productId?: string; override?: ProductMediaOverride }) => {
           if (payload?.override) {
             clearedItemKeys.delete(payload.override.productId);
@@ -471,9 +480,16 @@ export async function hydrateMediaVault(): Promise<void> {
     }
   }
 
+  await refreshVaultFromBackend();
+}
+
+async function refreshVaultFromBackend(): Promise<void> {
   // Sync valid real-product overrides from Express backend if active
   try {
-    const res = await fetch(resolveApiUrl("/api/media-vault/overrides"));
+    const res = await fetch(resolveApiUrl("/api/media-vault/overrides"), {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" },
+    });
     if (res.ok) {
       const json = await res.json();
       const serverList: ProductMediaOverride[] = Array.isArray(json?.items)
@@ -687,8 +703,8 @@ export function getVaultOverrideForProduct(
 }
 
 export function resolveVaultAssetUrl(url?: string, fallbackDataUrl?: string): string {
-  const rawUrl = (url || "").trim();
-  const rawFallback = (fallbackDataUrl || "").trim();
+  const rawUrl = normalizeRelativeAssetUrl(url);
+  const rawFallback = normalizeRelativeAssetUrl(fallbackDataUrl);
 
   const chosen = !isLegacyBrokenImageUrl(rawUrl)
     ? rawUrl
@@ -705,7 +721,7 @@ export function resolveVaultAssetUrl(url?: string, fallbackDataUrl?: string): st
   ) {
     return chosen;
   }
-  if (chosen.startsWith("/uploads/")) {
+  if (chosen.startsWith("/uploads/") || chosen.startsWith("/api/uploads/")) {
     return resolveApiUrl(chosen);
   }
   if (chosen.startsWith("/")) {
@@ -826,6 +842,11 @@ export function resolveProductWithVault<T extends Record<string, any>>(
     gstRate: ov.gstRate !== undefined ? ov.gstRate : baseProduct.gstRate ?? baseProduct.gstPercent,
     gstPercent: ov.gstRate !== undefined ? ov.gstRate : baseProduct.gstPercent ?? baseProduct.gstRate,
     unit: ov.unit || baseProduct.unit,
+    ...(ov.rentPricePerDay !== undefined ? { rentPricePerDay: ov.rentPricePerDay } : {}),
+    ...(ov.dcrSubsidyEligible !== undefined
+      ? { dcrSubsidyEligible: ov.dcrSubsidyEligible, dcrEligible: ov.dcrSubsidyEligible }
+      : {}),
+    ...(ov.stqcCompliant !== undefined ? { stqcCompliant: ov.stqcCompliant } : {}),
     inStock: ov.isInStock !== undefined ? ov.isInStock : baseProduct.inStock,
     image: primaryImage,
     imageUrl: primaryImage,

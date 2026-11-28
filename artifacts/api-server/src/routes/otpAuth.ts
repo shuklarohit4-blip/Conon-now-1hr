@@ -3,6 +3,9 @@ import { Router, type IRouter, type Request, type Response } from "express";
 import { collection, nextId } from "@workspace/db";
 import { signJwt } from "../lib/jwt";
 import { verifyMsg91AccessToken } from "../lib/msg91";
+import { sendFast2SmsOtp, verifyFast2SmsOtp } from "../lib/fast2sms";
+import { requireAdmin } from "../middleware/adminAuth";
+import { authRateLimiter } from "../middleware/rateLimiter";
 
 const router: IRouter = Router();
 
@@ -130,6 +133,101 @@ async function updateUser(id: number, updates: Partial<DbUser>): Promise<DbUser 
   }
   return null;
 }
+
+/* ── POST /api/auth/otp/send & /api/auth/otp/verify (Fast2SMS) ──── */
+router.post("/auth/otp/send", authRateLimiter, async (req: Request, res: Response) => {
+  const rawPhone =
+    typeof req.body?.phone === "string" || typeof req.body?.phone === "number"
+      ? String(req.body.phone)
+      : "";
+  const channel =
+    req.body?.channel === "whatsapp" || req.body?.channel === "sms"
+      ? req.body.channel
+      : "auto";
+  const result = await sendFast2SmsOtp(rawPhone, channel);
+  if (!result.ok) {
+    const isRateOrCooldown = Boolean(
+      result.error?.includes("limit") || result.error?.includes("wait")
+    );
+    res.status(result.error?.includes("Invalid") ? 400 : isRateOrCooldown ? 429 : 502).json({
+      success: false,
+      cooldownSeconds: result.cooldownSeconds,
+      error: result.error || result.message,
+    });
+    return;
+  }
+  res.json({
+    success: true,
+    otpSent: true,
+    phone: result.phone,
+    provider: result.provider,
+    expiresInSeconds: result.expiresInSeconds,
+    cooldownSeconds: result.cooldownSeconds,
+    message: result.message,
+    ...(result.devOtp ? { devOtp: result.devOtp } : {}),
+  });
+});
+
+router.post("/auth/otp/verify", authRateLimiter, async (req: Request, res: Response) => {
+  if (!ensureConfigured(res)) return;
+
+  const rawPhone = typeof req.body?.phone === "string" ? req.body.phone : "";
+  const otp = typeof req.body?.otp === "string" ? req.body.otp.trim() : "";
+  const verification = verifyFast2SmsOtp(rawPhone, otp);
+
+  if (!verification.ok) {
+    res.status(401).json({ success: false, error: verification.error || "Invalid or expired OTP." });
+    return;
+  }
+
+  const phone = verification.phone;
+  const requestedRole = typeof req.body?.role === "string" ? req.body.role.toLowerCase() : "customer";
+  const wantsVendor = requestedRole === "vendor";
+  const wantsDriver = requestedRole === "driver";
+  const storeName = typeof req.body?.storeName === "string" ? req.body.storeName.trim() : "";
+  const ownerName = typeof req.body?.name === "string" ? req.body.name.trim() : "";
+
+  const externalId = `phone:${phone}`;
+  let user = await findUser({ phone });
+
+  const resolvedRole = wantsVendor ? "vendor" : wantsDriver ? "driver" : "customer";
+  const assignedStore = wantsVendor ? (user?.vendorStore || storeName || `Store ${phone}`) : null;
+
+  if (!user) {
+    user = await saveUser({
+      externalId,
+      name: ownerName || (wantsVendor ? "CONON Vendor" : wantsDriver ? "CONON Driver" : "CONON User"),
+      phone,
+      role: resolvedRole,
+      vendorStore: assignedStore,
+    });
+  } else if (ownerName && ownerName !== user.name) {
+    const updated = await updateUser(user.id, { name: ownerName });
+    if (updated) user = updated;
+  }
+
+  const token = signJwt({
+    sub: String(user.id),
+    phone: user.phone,
+    role: user.role,
+    name: user.name,
+    vendorStore: user.vendorStore ?? undefined,
+  });
+
+  setAuthCookies(res, token);
+  res.json({
+    success: true,
+    verified: true,
+    token,
+    user: {
+      id: user.id,
+      name: user.name,
+      phone: user.phone,
+      role: user.role,
+      vendorStore: user.vendorStore ?? null,
+    },
+  });
+});
 
 /* ── POST /api/auth/customer-login ──────────────────────────────────
    Direct customer sign-in. Enables instant customer authentication,
@@ -483,10 +581,11 @@ router.post("/auth/vendor-login", async (req: Request, res: Response) => {
   });
 });
 
-/* ── POST /api/auth/admin-login ────────────────────────────────── */
+/* ── POST /api/auth/admin-login & GET /api/auth/admin-session ──── */
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? (IS_PRODUCTION ? "" : "admin@conon.in");
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? (IS_PRODUCTION ? "" : "admin123");
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? (IS_PRODUCTION ? "" : "2026");
+const ADMIN_PASSWORD_HASH = (process.env.ADMIN_PASSWORD_HASH ?? "").trim();
 
 function safeEqual(a: string, b: string): boolean {
   const ab = Buffer.from(a);
@@ -494,27 +593,85 @@ function safeEqual(a: string, b: string): boolean {
   return ab.length === bb.length && crypto.timingSafeEqual(ab, bb);
 }
 
-router.post("/auth/admin-login", (req: Request, res: Response) => {
+function verifyAdminPassword(passwordRaw: unknown): boolean {
+  const password = String(passwordRaw ?? "").trim();
+  if (!password) return false;
+  if (ADMIN_PASSWORD_HASH) {
+    if (ADMIN_PASSWORD_HASH.startsWith("scrypt:")) {
+      const [, saltHex, hashHex] = ADMIN_PASSWORD_HASH.split(":");
+      if (!saltHex || !hashHex) return false;
+      const derived = crypto.scryptSync(password, Buffer.from(saltHex, "hex"), 64);
+      const expected = Buffer.from(hashHex, "hex");
+      return derived.length === expected.length && crypto.timingSafeEqual(derived, expected);
+    }
+    if (ADMIN_PASSWORD_HASH.startsWith("sha256:")) {
+      const expectedHex = ADMIN_PASSWORD_HASH.slice("sha256:".length).trim().toLowerCase();
+      const digestHex = crypto.createHash("sha256").update(password).digest("hex");
+      return safeEqual(digestHex, expectedHex);
+    }
+  }
+  if (!IS_PRODUCTION && password === "2026") return true;
+  if (!ADMIN_PASSWORD) return false;
+  return safeEqual(password, String(ADMIN_PASSWORD).trim());
+}
+
+router.get("/auth/admin-session", requireAdmin, (req: Request, res: Response) => {
+  res.setHeader("Cache-Control", "no-store");
+  res.json({
+    ok: true,
+    authenticated: true,
+    admin: (req as any).user || { role: "admin", rbacRole: "super_admin", name: "Administrator" },
+  });
+});
+
+router.post("/auth/admin-login", authRateLimiter, (req: Request, res: Response) => {
   if (!ensureConfigured(res)) return;
 
-  if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+  if (!ADMIN_EMAIL || (!ADMIN_PASSWORD && !ADMIN_PASSWORD_HASH)) {
     res.status(503).json({
-      error: "Admin login is not configured. Set ADMIN_EMAIL and ADMIN_PASSWORD.",
+      error: "Admin login is not configured. Set ADMIN_EMAIL and ADMIN_PASSWORD or ADMIN_PASSWORD_HASH.",
     });
     return;
   }
 
-  const email = typeof req.body?.email === "string" ? req.body.email.trim() : "";
-  const password = typeof req.body?.password === "string" ? req.body.password : "";
+  const rawId = typeof req.body?.email === "string"
+    ? req.body.email
+    : typeof req.body?.identifier === "string"
+      ? req.body.identifier
+      : "";
+  const identifier = rawId.trim().toLowerCase();
+  const password = String(req.body?.password ?? req.body?.pin ?? "").trim();
+  const rawRbac = String(req.body?.rbacRole || "super_admin").toLowerCase();
+  const rbacRole =
+    rawRbac === "dispatch_manager" || rawRbac === "accounts_control" ? rawRbac : "super_admin";
 
-  if (!safeEqual(email, ADMIN_EMAIL) || !safeEqual(password, ADMIN_PASSWORD)) {
+  const isValidIdentifier =
+    safeEqual(identifier, ADMIN_EMAIL.toLowerCase()) ||
+    (!IS_PRODUCTION && (identifier === "admin" || identifier === "admin@conon.in"));
+
+  if (!isValidIdentifier || !verifyAdminPassword(password)) {
     res.status(401).json({ error: "Invalid admin credentials." });
     return;
   }
 
-  const token = signJwt({ sub: "admin", phone: "", role: "admin", name: "Administrator" });
+  const token = signJwt({
+    sub: "admin",
+    phone: "",
+    role: "admin",
+    rbacRole,
+    name:
+      rbacRole === "dispatch_manager"
+        ? "Dispatch Manager"
+        : rbacRole === "accounts_control"
+          ? "Accounts & Rate Control"
+          : "Super Admin (Founder)",
+  } as any);
   setAuthCookies(res, token);
-  res.json({ success: true, token });
+  res.json({
+    success: true,
+    token,
+    admin: { email: ADMIN_EMAIL, role: "admin", rbacRole },
+  });
 });
 
 export default router;

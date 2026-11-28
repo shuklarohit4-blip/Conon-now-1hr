@@ -22,10 +22,14 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useKyc, KycDocument, type PartnerKycApplication } from "@/context/KycContext";
+import { sendOtp, verifyOtp } from "@/lib/authApi";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import { useVendorTheme } from "@/context/VendorThemeContext";
 import { useVendorLang } from "@/context/VendorLanguageContext";
+import { LUCKNOW_18_SKILLED_TRADES } from "@/data/lucknowSkilledServices";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { checkBlacklistMatch } from "@/utils/complianceEvaluator";
 
 interface VendorRegisterWizardProps {
   onSuccess?: (app?: PartnerKycApplication) => void;
@@ -57,6 +61,7 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
   const { isDark } = useVendorTheme();
   const { t, lang } = useVendorLang();
   const { submitVendorKyc, verifyPennyDrop, isSubmitting } = useKyc();
+  const masterSync = useSafeCononMasterSync();
 
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
 
@@ -68,7 +73,14 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
   const [otpCode, setOtpCode] = useState("");
   const [otpVerified, setOtpVerified] = useState(false);
   const [zone, setZone] = useState("Latouche Road Hardware Market");
+  const [partnerMode, setPartnerMode] = useState<
+    "MATERIAL_SUPPLIER" | "SKILLED_CONTRACTOR" | "RMC_PLANT" | "HEAVY_FLEET"
+  >("MATERIAL_SUPPLIER");
+  const [rmcPlantCapacity, setRmcPlantCapacity] = useState("60");
+  const [rmcTmCount, setRmcTmCount] = useState("4");
   const [selectedCategories, setSelectedCategories] = useState<string[]>(["CEMENT", "STEEL"]);
+  const [selectedSkilledTrades, setSelectedSkilledTrades] = useState<string[]>(["plumber-cpvc-fitter"]);
+  const [toolkitSelfDeclared, setToolkitSelfDeclared] = useState(true);
   const [loadingBayAccess, setLoadingBayAccess] = useState<"NARROW_LANE" | "LOADER_FRIENDLY">("LOADER_FRIENDLY");
   const [gpsCaptured, setGpsCaptured] = useState(false);
   const [shopCoords, setShopCoords] = useState<{ lat: number; lng: number }>({
@@ -108,17 +120,36 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
   const [agreeIsi, setAgreeIsi] = useState(false);
   const [agreeHandshake, setAgreeHandshake] = useState(false);
 
-  // OTP Simulation
-  const handleSendOtp = () => {
+  // Real Fast2SMS OTP Flow
+  const handleSendOtp = async () => {
+    const clean = phone.replace(/\D/g, "").slice(-10);
+    if (clean.length !== 10) {
+      toast.error(lang === "hi" ? "कृपया मान्य 10 अंकों का नंबर दर्ज करें" : "Enter a valid 10-digit mobile number");
+      return;
+    }
+    const res = await sendOtp(clean);
+    if (!res.ok) {
+      toast.error(res.error || "Failed to send SMS OTP");
+      return;
+    }
     setOtpSent(true);
-    toast.info("Demo OTP: 1234", {
-      description: lang === "hi" ? "परीक्षण हेतु स्वतः भरा जा रहा है।" : "Auto-filling for test convenience.",
-    });
-    setOtpCode("1234");
-    setTimeout(() => {
-      setOtpVerified(true);
-      toast.success(lang === "hi" ? "ओटीपी से मोबाइल सत्यापित!" : "Phone verified via OTP!");
-    }, 800);
+    if (res.devOtp) {
+      setOtpCode(res.devOtp);
+      toast.info(res.message || `Dev OTP ready: ${res.devOtp}`);
+    } else {
+      toast.success(res.message || `OTP sent via SMS to +91 ${clean}`);
+    }
+  };
+
+  const handleVerifyWizardOtp = async () => {
+    const clean = phone.replace(/\D/g, "").slice(-10);
+    const res = await verifyOtp(clean, otpCode.trim(), { role: "vendor", name: ownerName, storeName: firmName });
+    if (!res.ok) {
+      toast.error(res.error || "Invalid OTP");
+      return;
+    }
+    setOtpVerified(true);
+    toast.success(lang === "hi" ? "ओटीपी से मोबाइल सत्यापित!" : "Phone verified via Fast2SMS OTP!");
   };
 
   // GPS Simulation
@@ -206,13 +237,29 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
       return;
     }
 
+    const blkMatch = checkBlacklistMatch(
+      masterSync?.state.compliance?.blacklistRegistry || [],
+      { phone, pan, gstin }
+    );
+    if (blkMatch) {
+      toast.error("This mobile/PAN/GSTIN/vehicle is permanently restricted under CONON Safety Policy.");
+      return;
+    }
+
     const payload = {
       firmName,
       ownerName,
       phone,
       zone,
       loadingBayAccess,
-      categories: selectedCategories,
+      categories:
+        partnerMode === "SKILLED_CONTRACTOR"
+          ? ["SKILLED_SERVICES", ...selectedSkilledTrades]
+          : partnerMode === "RMC_PLANT"
+          ? ["RMC_PLANT_DIRECT", `CAP_${rmcPlantCapacity}M3HR`, `TM_FLEET_${rmcTmCount}`]
+          : partnerMode === "HEAVY_FLEET"
+          ? ["HEAVY_MACHINE_RENTALS"]
+          : selectedCategories,
       shopLat: shopCoords.lat,
       shopLng: shopCoords.lng,
       bankAccount: accountNumber,
@@ -423,6 +470,25 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
                     {otpVerified ? (lang === "hi" ? "✓ सत्यापित" : "✓ Verified") : t("sendOtpBtn", "Send OTP")}
                   </button>
                 </div>
+                {otpSent && !otpVerified && (
+                  <div className="flex gap-2 mt-2">
+                    <input
+                      type="text"
+                      maxLength={6}
+                      value={otpCode}
+                      onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ""))}
+                      placeholder="Enter 4-digit SMS OTP"
+                      className={`flex-1 px-3 py-2 rounded-xl text-sm font-bold tracking-widest border outline-none ${themeInputClass}`}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleVerifyWizardOtp}
+                      className="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black cursor-pointer"
+                    >
+                      Verify OTP
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -443,7 +509,143 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
               </div>
             </div>
 
-            {/* Supply Categories Multi-Select */}
+            {/* Partner Role Selector */}
+            <div>
+              <label className={`block text-xs font-bold mb-2 ${themeTitleClass}`}>
+                {lang === "hi" ? "पार्टनर का प्रकार चुनें *" : "Partner Role *"}
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+                <button
+                  type="button"
+                  onClick={() => setPartnerMode("MATERIAL_SUPPLIER")}
+                  className={`p-3 rounded-2xl text-left text-xs font-black border cursor-pointer transition ${
+                    partnerMode === "MATERIAL_SUPPLIER"
+                      ? "bg-amber-400/20 border-amber-400 text-amber-500"
+                      : isDark
+                      ? "bg-slate-900 border-slate-800 text-slate-300"
+                      : "bg-slate-50 border-slate-200 text-slate-700"
+                  }`}
+                >
+                  🏪 Material Supplier / Dealer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPartnerMode("SKILLED_CONTRACTOR")}
+                  className={`p-3 rounded-2xl text-left text-xs font-black border cursor-pointer transition ${
+                    partnerMode === "SKILLED_CONTRACTOR"
+                      ? "bg-amber-400/20 border-amber-400 text-amber-500"
+                      : isDark
+                      ? "bg-slate-900 border-slate-800 text-slate-300"
+                      : "bg-slate-50 border-slate-200 text-slate-700"
+                  }`}
+                >
+                  🛠️ Skilled Contractor / Karigar Team (18 Trades)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPartnerMode("RMC_PLANT")}
+                  className={`p-3 rounded-2xl text-left text-xs font-black border cursor-pointer transition ${
+                    partnerMode === "RMC_PLANT"
+                      ? "bg-amber-400/20 border-amber-400 text-amber-500"
+                      : isDark
+                      ? "bg-slate-900 border-slate-800 text-slate-300"
+                      : "bg-slate-50 border-slate-200 text-slate-700"
+                  }`}
+                >
+                  🏭 RMC Batching Plant Partner (30/60/90 m³/hr)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPartnerMode("HEAVY_FLEET")}
+                  className={`p-3 rounded-2xl text-left text-xs font-black border cursor-pointer transition ${
+                    partnerMode === "HEAVY_FLEET"
+                      ? "bg-amber-400/20 border-amber-400 text-amber-500"
+                      : isDark
+                      ? "bg-slate-900 border-slate-800 text-slate-300"
+                      : "bg-slate-50 border-slate-200 text-slate-700"
+                  }`}
+                >
+                  🚜 Heavy Fleet Owner (20 Machine Types)
+                </button>
+              </div>
+              {partnerMode === "RMC_PLANT" && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-3 rounded-2xl border border-amber-400/30 bg-amber-400/10 text-xs mb-3">
+                  <div>
+                    <label className="font-bold block mb-1">Plant Capacity (m³/hr)</label>
+                    <select
+                      value={rmcPlantCapacity}
+                      onChange={(e) => setRmcPlantCapacity(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-white"
+                    >
+                      <option value="30">30 m³/hr Batching Plant</option>
+                      <option value="60">60 m³/hr Batching Plant</option>
+                      <option value="90">90 m³/hr Twin-Shaft Plant</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-bold block mb-1">Transit Mixer Fleet Count</label>
+                    <input
+                      type="number"
+                      min={1}
+                      value={rmcTmCount}
+                      onChange={(e) => setRmcTmCount(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-white font-mono"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {partnerMode === "SKILLED_CONTRACTOR" ? (
+              <div className="space-y-3">
+                <label className={`block text-xs font-bold ${themeTitleClass}`}>
+                  {lang === "hi" ? "अपने 18 स्किल्ड ट्रेड चुनें *" : "Select Your Skilled Trades (18 Lucknow Trades) *"}
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto pr-1">
+                  {LUCKNOW_18_SKILLED_TRADES.map((tr) => {
+                    const checked = selectedSkilledTrades.includes(tr.slug);
+                    return (
+                      <button
+                        key={tr.slug}
+                        type="button"
+                        onClick={() =>
+                          setSelectedSkilledTrades((prev) =>
+                            prev.includes(tr.slug)
+                              ? prev.filter((x) => x !== tr.slug)
+                              : [...prev, tr.slug]
+                          )
+                        }
+                        className={`p-2.5 rounded-xl text-left text-xs font-bold border flex items-center justify-between gap-2 cursor-pointer ${
+                          checked
+                            ? isDark
+                              ? "bg-amber-400/15 border-amber-400 text-white"
+                              : "bg-amber-50 border-amber-400 text-amber-950"
+                            : isDark
+                            ? "bg-slate-900 border-slate-800 text-slate-400"
+                            : "bg-slate-50 border-slate-200 text-slate-700"
+                        }`}
+                      >
+                        <span className="truncate">{lang === "hi" ? tr.nameHi : tr.nameEn}</span>
+                        <span className="text-[10px] font-mono shrink-0">₹{tr.shiftRate8Hr}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <label className="flex items-center gap-2 text-xs font-bold cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={toolkitSelfDeclared}
+                    onChange={(e) => setToolkitSelfDeclared(e.target.checked)}
+                  />
+                  <span className={themeTitleClass}>
+                    {lang === "hi"
+                      ? "मैं घोषित करता हूँ कि मेरी टीम के पास अनिवार्य टूल-किट व सुरक्षा उपकरण उपलब्ध हैं"
+                      : "I self-declare my Karigar crew carries CONON Mandatory Tool-Kit & PPE"}
+                  </span>
+                </label>
+              </div>
+            ) : (
+            /* Supply Categories Multi-Select */
             <div>
               <label className={`block text-xs font-bold mb-2 ${themeTitleClass}`}>
                 {t("categoriesSelectLabel", "Product Categories Handled")} (Select all that apply) *
@@ -482,6 +684,7 @@ export function VendorRegisterWizard({ onSuccess, onCancel }: VendorRegisterWiza
                 })}
               </div>
             </div>
+            )}
 
             {/* GPS Geo-Pin & Loading Bay Access */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">

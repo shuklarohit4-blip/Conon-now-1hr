@@ -17,6 +17,7 @@ import {
   Truck,
   Sparkles,
   Zap,
+  Camera,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -31,6 +32,7 @@ import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
 import { RealProductImage } from "@/components/RealProductImage";
+import { CategoryHeader, FloatingReorderLast } from "@/components/storefront/UnifiedStorefrontPrimitives";
 
 export interface CCTVProduct {
   id: string;
@@ -1824,28 +1826,14 @@ export function CCTVCollectionStorefront({
   const activeSubcatObj = CCTV_SUBCATEGORIES.find((s) => s.id === activeSubcat);
 
   return (
-    <div className="w-full bg-[#F4F6F8] min-h-screen pb-20">
-      {/* ── Top Header & Breadcrumb ─────────────────────────────────────── */}
-      <div className="bg-white border-b border-gray-200 px-4 py-3 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <div className="flex items-center gap-1.5 text-xs text-gray-500 overflow-x-auto">
-            <span>Home</span>
-            <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-            <span>CCTV & Networking</span>
-            <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-            <span className="font-semibold text-gray-900">{activeSubcatObj?.name}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              <Zap className="w-3 h-3 text-emerald-600" />
-              60-Min Lucknow Express Delivery
-            </span>
-            <span className="text-xs font-medium text-gray-500">
-              Naza Market & Aminabad Distributors
-            </span>
-          </div>
-        </div>
-      </div>
+    <div className="w-full bg-[#F4F6F8] dark:bg-slate-950 min-h-screen pb-20">
+      <CategoryHeader
+        title="CCTV & Networking"
+        breadcrumbCategory="CCTV & Networking"
+        activeSubCategoryName={activeSubcatObj?.name || "CCTV Cameras"}
+        hubSubtitle="Naza Market & Aminabad Distributors"
+        icon={<Camera className="w-5 h-5" />}
+      />
 
       {/* ── Main Storefront Content ────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
@@ -2236,6 +2224,13 @@ export function CCTVCollectionStorefront({
           })}
         </div>
       </div>
+
+      <FloatingReorderLast
+        onReorderLast={() => {
+          const starter = CCTV_PRODUCTS[0];
+          if (starter) handleAdd(starter);
+        }}
+      />
 
       {/* ── Quick Detail Modal / Bottom Sheet ─────────────────────────── */}
       {quickDetailProduct && (

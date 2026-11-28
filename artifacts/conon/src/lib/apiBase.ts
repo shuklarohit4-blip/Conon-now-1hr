@@ -2,22 +2,39 @@ import { setBaseUrl, setAuthTokenGetter } from "@workspace/api-client-react";
 import { IS_LOCAL_ADMIN, MAC_ADMIN_KEY } from "@/config/adminGuard";
 
 /**
- * Shared API origin for the Vercel frontend and Render API service.
- * Supports VITE_API_URL and VITE_API_BASE_URL.
- * Falls back to http://localhost:5001 in dev to match backend PORT.
+ * Network-agnostic API origin resolver:
+ * - In local/LAN/DevTunnel browser sessions served via Vite, ALWAYS prefers relative
+ *   same-origin URLs (`window.location.origin`), so Vite proxies `/api` & `/uploads`
+ *   cleanly across `localhost`, `http://192.168.x.x:xxxx`, and `*.devtunnels.ms`.
+ * - In remote static deployments (Netlify/Vercel) where `VITE_API_URL` is a public
+ *   HTTPS API origin (non-localhost), routes to that remote API origin.
  */
 const rawConfiguredApi = (
   import.meta.env?.VITE_API_URL?.trim() ||
   import.meta.env?.VITE_API_BASE_URL?.trim()
 );
-const configuredApiOrigin = rawConfiguredApi ? rawConfiguredApi.replace(/\/api\/?$/, "") : undefined;
+const configuredApiOrigin = rawConfiguredApi
+  ? rawConfiguredApi.replace(/\/api\/?$/, "").replace(/\/+$/, "")
+  : undefined;
 
-const defaultDevOrigin = "http://localhost:5001";
+const LOCAL_HOST_RE = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?$/i;
 
-const currentOrigin =
-  typeof window === "undefined" ? defaultDevOrigin : window.location.origin;
+function resolveEffectiveOrigin(): string {
+  if (typeof window === "undefined") {
+    return configuredApiOrigin && !LOCAL_HOST_RE.test(configuredApiOrigin)
+      ? configuredApiOrigin
+      : "";
+  }
+  const currentOrigin = window.location.origin.replace(/\/+$/, "");
+  // Never honor a baked localhost API override when running in the browser;
+  // Vite proxy (/api, /uploads) handles localhost, LAN Wi-Fi IPs, and *.devtunnels.ms identically.
+  if (configuredApiOrigin && !LOCAL_HOST_RE.test(configuredApiOrigin)) {
+    return configuredApiOrigin;
+  }
+  return currentOrigin;
+}
 
-export const API_ORIGIN = (configuredApiOrigin || currentOrigin).replace(/\/+$/, "");
+export const API_ORIGIN = resolveEffectiveOrigin();
 
 if (API_ORIGIN) {
   setBaseUrl(API_ORIGIN);
@@ -42,8 +59,27 @@ setAuthTokenGetter(() => {
   );
 });
 
+/**
+ * Strips any legacy hardcoded localhost:xxxx prefix so asset/API URLs stay network-agnostic.
+ */
+export function normalizeRelativeAssetUrl(pathOrUrl?: string | null): string {
+  const raw = String(pathOrUrl || "").trim();
+  if (!raw) return "";
+  if (raw.startsWith("data:") || raw.startsWith("blob:")) return raw;
+  return raw.replace(/^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?/i, "");
+}
+
 export function apiUrl(path: string): string {
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const clean = normalizeRelativeAssetUrl(path);
+  if (/^https?:\/\//i.test(clean)) return clean;
+  const normalizedPath = clean.startsWith("/") ? clean : `/${clean}`;
+  if (typeof window !== "undefined") {
+    // Same-origin relative path in dev / proxy mode; explicit API_ORIGIN only when cross-origin HTTPS
+    if (configuredApiOrigin && !LOCAL_HOST_RE.test(configuredApiOrigin)) {
+      return `${configuredApiOrigin}${normalizedPath}`;
+    }
+    return normalizedPath;
+  }
   return `${API_ORIGIN}${normalizedPath}`;
 }
 
@@ -73,5 +109,5 @@ export function getAdminHeaders(extra: HeadersInit = {}): Record<string, string>
 export async function adminFetch(path: string, init: RequestInit = {}): Promise<Response> {
   const url = resolveApiUrl(path);
   const headers = getAdminHeaders(init.headers || {});
-  return fetch(url, { ...init, headers });
+  return fetch(url, { cache: "no-store", ...init, headers });
 }

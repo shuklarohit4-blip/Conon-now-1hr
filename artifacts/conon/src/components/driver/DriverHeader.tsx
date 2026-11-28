@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import { Truck, ChevronDown, Check } from "lucide-react";
+import { Truck, ChevronDown, Check, ShieldCheck } from "lucide-react";
 import { useDriverLanguage } from "@/context/DriverLanguageContext";
 import { useDriver } from "@/context/DriverContext";
 import { LanguageToggle } from "./LanguageToggle";
 import { GREEN, RED } from "./theme";
 import { resolveApiUrl } from "@/lib/apiBase";
 import { SocketStatusPill } from "@/services/socket";
+import { PoliceCheckingFolderModal } from "./PoliceCheckingFolderModal";
 
 export function DriverHeader() {
   const { t } = useDriverLanguage();
   const { isOnline, driverProfile, switchDriver } = useDriver();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [docsOpen, setDocsOpen] = useState(false);
   const [roster, setRoster] = useState<any[]>([]);
 
   useEffect(() => {
@@ -60,12 +62,23 @@ export function DriverHeader() {
           </div>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={() => setDocsOpen(true)}
+            className="px-2.5 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-[10px] font-black flex items-center gap-1 shadow-sm cursor-pointer"
+            title="Open Police Checking Folder (RC, DL, Insurance, PUC, GST Invoice)"
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-200" />
+            <span>Police Docs</span>
+          </button>
           <SocketStatusPill />
           {/* English | हिंदी toggle */}
           <LanguageToggle />
         </div>
       </div>
+
+      <PoliceCheckingFolderModal open={docsOpen} onClose={() => setDocsOpen(false)} />
 
       {/* Roster Switcher Dropdown */}
       {dropdownOpen && (

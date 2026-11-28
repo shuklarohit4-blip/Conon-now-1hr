@@ -1,0 +1,442 @@
+{
+  "config": {
+    "placeholders": [
+      "Search \"UltraTech Cement\"",
+      "Search \"12mm TMT Sariya\"",
+      "Search \"Morang 50 Kg\"",
+      "Search \"Dr. Fixit Seelan\"",
+      "Search \"CPVC Pipe\"",
+      "Search \"Birla White Putty\""
+    ],
+    "trendingSearches": [
+      "UltraTech PPC",
+      "ACC Suraksha",
+      "Dr. Fixit LW+",
+      "12mm Sariya",
+      "Birla Putty",
+      "Astral CPVC",
+      "Fevicol SH",
+      "Kajaria Vitrified Tiles"
+    ],
+    "stageShortcuts": [
+      {
+        "id": "stage-foundation",
+        "label": "Foundation & RCC",
+        "icon": "layers",
+        "description": "Cement, TMT Steel, Morang & Gitti",
+        "keywords": [
+          "cement",
+          "sariya",
+          "tmt",
+          "morang",
+          "gitti",
+          "rmc",
+          "concrete"
+        ],
+        "categorySlugs": [
+          "cement-civil-works",
+          "bricks-sand-gitti-aac",
+          "rmc-ready-mix-concrete"
+        ],
+        "isActive": true,
+        "order": 1
+      },
+      {
+        "id": "stage-brickwork",
+        "label": "Brickwork & Plaster",
+        "icon": "grid",
+        "description": "Red Bricks, AAC Blocks, Sand & White Cement",
+        "keywords": [
+          "brick",
+          "eent",
+          "aac",
+          "sand",
+          "baalu",
+          "plaster",
+          "mortar"
+        ],
+        "categorySlugs": [
+          "bricks-sand-gitti-aac",
+          "cement-civil-works"
+        ],
+        "isActive": true,
+        "order": 2
+      },
+      {
+        "id": "stage-waterproofing",
+        "label": "Waterproofing",
+        "icon": "shield",
+        "description": "Seelan Prevention, LW+, SBR Latex & Coatings",
+        "keywords": [
+          "dr fixit",
+          "waterproof",
+          "seelan",
+          "leakage",
+          "chemical",
+          "lw+"
+        ],
+        "categorySlugs": [
+          "cement-civil-works",
+          "paints-putty-primer",
+          "tile-stone-installation"
+        ],
+        "isActive": true,
+        "order": 3
+      },
+      {
+        "id": "stage-plumbing",
+        "label": "Plumbing Setup",
+        "icon": "droplets",
+        "description": "CPVC / UPVC Pipes, Tanks & Sanitaryware",
+        "keywords": [
+          "cpvc",
+          "pipe",
+          "nal",
+          "toti",
+          "tank",
+          "bath",
+          "sanitary",
+          "faucet"
+        ],
+        "categorySlugs": [
+          "cpvc-plumbing-tanks",
+          "sanitary-bath-fittings",
+          "kitchen-sinks-faucets"
+        ],
+        "isActive": true,
+        "order": 4
+      },
+      {
+        "id": "stage-electrical",
+        "label": "Electrical Wiring",
+        "icon": "zap",
+        "description": "FR Wires, MCBs, Switches & Ceiling Lights",
+        "keywords": [
+          "wire",
+          "taar",
+          "mcb",
+          "switch",
+          "light",
+          "bijli",
+          "cable",
+          "fan"
+        ],
+        "categorySlugs": [
+          "wires-mcb-electrical",
+          "lighting",
+          "home-appliances"
+        ],
+        "isActive": true,
+        "order": 5
+      },
+      {
+        "id": "stage-painting",
+        "label": "Painting & Finishing",
+        "icon": "paintbrush",
+        "description": "Putty, Primers, Emulsions & Plywood/Fevicol",
+        "keywords": [
+          "paint",
+          "putty",
+          "putti",
+          "primer",
+          "rang",
+          "fevicol",
+          "plywood"
+        ],
+        "categorySlugs": [
+          "paints-putty-primer",
+          "plywood-boards",
+          "fevicol-adhesives-sealants"
+        ],
+        "isActive": true,
+        "order": 6
+      }
+    ],
+    "voiceSearchEnabled": true,
+    "siteParchiEnabled": true,
+    "updatedAt": "2026-11-27T12:19:33.936Z"
+  },
+  "synonyms": [
+    {
+      "id": "syn-sariya",
+      "keywords": [
+        "sariya",
+        "saria",
+        "loha",
+        "rod",
+        "tmt",
+        "sariyaa",
+        "steel bar"
+      ],
+      "mapsTo": "TMT Bars / Steel",
+      "categorySlug": "cement-civil-works",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-morang",
+      "keywords": [
+        "morang",
+        "balu",
+        "baalu",
+        "reti",
+        "river sand",
+        "moram",
+        "maurang"
+      ],
+      "mapsTo": "Sand & Aggregates",
+      "categorySlug": "bricks-sand-gitti-aac",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-gitti",
+      "keywords": [
+        "gitti",
+        "bajri",
+        "stone dust",
+        "aggregate",
+        "rodi",
+        "20mm"
+      ],
+      "mapsTo": "Coarse Aggregates / Grit",
+      "categorySlug": "bricks-sand-gitti-aac",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-seelan",
+      "keywords": [
+        "seelan",
+        "leakage",
+        "dampness",
+        "waterproof",
+        "waterproofing",
+        "chemical",
+        "tar"
+      ],
+      "mapsTo": "Waterproofing & Chemicals",
+      "categorySlug": "cement-civil-works",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-putti",
+      "keywords": [
+        "putti",
+        "putty",
+        "safed cement",
+        "white",
+        "birla wite",
+        "wall putty"
+      ],
+      "mapsTo": "Wall Putty / White Cement",
+      "categorySlug": "paints-putty-primer",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-bijli",
+      "keywords": [
+        "taar",
+        "bijli",
+        "wire",
+        "switch",
+        "mcb",
+        "cable",
+        "board"
+      ],
+      "mapsTo": "Wires, MCB & Electricals",
+      "categorySlug": "wires-mcb-electrical",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-plumbing",
+      "keywords": [
+        "nal",
+        "toti",
+        "pipe",
+        "tanki",
+        "cpvc",
+        "upvc",
+        "sink"
+      ],
+      "mapsTo": "CPVC Plumbing & Sanitaryware",
+      "categorySlug": "cpvc-plumbing-tanks",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-bricks",
+      "keywords": [
+        "eent",
+        "eenta",
+        "int",
+        "brick",
+        "bricks",
+        "block",
+        "masala",
+        "aac"
+      ],
+      "mapsTo": "Bricks / Mortars / Plaster",
+      "categorySlug": "bricks-sand-gitti-aac",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-ply",
+      "keywords": [
+        "ply",
+        "plywood",
+        "darwaza",
+        "chaukhat",
+        "fevicol",
+        "chipkana",
+        "hinge",
+        "lock"
+      ],
+      "mapsTo": "Plywood, Doors & Adhesives",
+      "categorySlug": "plywood-boards",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    },
+    {
+      "id": "syn-paint",
+      "keywords": [
+        "rang",
+        "paint",
+        "paints",
+        "primer",
+        "distemper",
+        "emulsion"
+      ],
+      "mapsTo": "Paints, Putty & Primer",
+      "categorySlug": "paints-putty-primer",
+      "isActive": true,
+      "updatedAt": "2026-11-27T12:19:33.936Z"
+    }
+  ],
+  "logs": [
+    {
+      "id": "slog-1795856962668-c3f6",
+      "query": "Fe",
+      "normalizedQuery": "fe",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:22.668Z"
+    },
+    {
+      "id": "slog-1795856959278-ce5a",
+      "query": "Ul",
+      "normalizedQuery": "ul",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:19.278Z"
+    },
+    {
+      "id": "slog-1795856958903-d036",
+      "query": "Ult",
+      "normalizedQuery": "ult",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:18.903Z"
+    },
+    {
+      "id": "slog-1795856958660-d3a4",
+      "query": "Ultr",
+      "normalizedQuery": "ultr",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:18.660Z"
+    },
+    {
+      "id": "slog-1795856955922-1cb2",
+      "query": "Ultra",
+      "normalizedQuery": "ultra",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:15.922Z"
+    },
+    {
+      "id": "slog-1795856955587-5044",
+      "query": "Ultr",
+      "normalizedQuery": "ultr",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:15.587Z"
+    },
+    {
+      "id": "slog-1795856955347-400f",
+      "query": "Ult",
+      "normalizedQuery": "ult",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:15.347Z"
+    },
+    {
+      "id": "slog-1795856953789-9731",
+      "query": "Ul",
+      "normalizedQuery": "ul",
+      "resultCount": 60,
+      "createdAt": "2026-11-28T09:09:13.789Z"
+    },
+    {
+      "id": "slog-1795781974346-fcb9",
+      "query": "xyznonexistentmaterial999",
+      "normalizedQuery": "xyznonexistentmaterial999",
+      "resultCount": 0,
+      "createdAt": "2026-11-27T12:19:34.346Z"
+    },
+    {
+      "id": "slog-1795781974163-3c60",
+      "query": "cement under 450",
+      "normalizedQuery": "cement under 450",
+      "resultCount": 53,
+      "createdAt": "2026-11-27T12:19:34.163Z"
+    },
+    {
+      "id": "slog-1795781974135-3433",
+      "query": "IS 1489",
+      "normalizedQuery": "is 1489",
+      "resultCount": 60,
+      "createdAt": "2026-11-27T12:19:34.135Z"
+    },
+    {
+      "id": "slog-1795781974107-feab",
+      "query": "ultratek cemnt",
+      "normalizedQuery": "ultratek cemnt",
+      "resultCount": 60,
+      "createdAt": "2026-11-27T12:19:34.107Z"
+    },
+    {
+      "id": "slog-1795781974064-c7aa",
+      "query": "morang",
+      "normalizedQuery": "morang",
+      "resultCount": 12,
+      "matchedSynonym": "Sand & Aggregates",
+      "createdAt": "2026-11-27T12:19:34.064Z"
+    },
+    {
+      "id": "slog-1795781974030-6985",
+      "query": "seelan",
+      "normalizedQuery": "seelan",
+      "resultCount": 60,
+      "matchedSynonym": "Waterproofing & Chemicals",
+      "createdAt": "2026-11-27T12:19:34.030Z"
+    },
+    {
+      "id": "slog-1795781973995-d558",
+      "query": "sariya",
+      "normalizedQuery": "sariya",
+      "resultCount": 60,
+      "matchedSynonym": "TMT Bars / Steel",
+      "createdAt": "2026-11-27T12:19:33.995Z"
+    }
+  ],
+  "requests": [
+    {
+      "id": "sreq-1795781974347-05c0",
+      "itemName": "Bosch 18V Masonry Hammer Drill",
+      "quantityText": "2 units",
+      "phone": "9876543210",
+      "pincode": "226030",
+      "status": "NEW",
+      "createdAt": "2026-11-27T12:19:34.347Z",
+      "updatedAt": "2026-11-27T12:19:34.347Z"
+    }
+  ]
+}

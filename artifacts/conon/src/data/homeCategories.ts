@@ -5,14 +5,31 @@ export interface HomeSubcategory {
 }
 
 export interface HomeCategory {
-  id: number;
+  id: number | string;
+  catId?: number;
   slug: string;
   title: string;
+  titleHi?: string;
+  name?: string;
+  nameHi?: string;
   department: string;
   image: string;
+  imageUrl?: string;
   dbCategory: string;
   route: string;
   badge?: string;
+  badgeColor?: string;
+  categoryType?: "MATERIAL" | "RMC" | "SERVICE" | "RENTAL";
+  defaultHsn?: string;
+  defaultGst?: number;
+  defaultGstRate?: number;
+  vehicleClass?: string;
+  vehicleType?: "BIKE" | "LOADER";
+  displayOrder?: number;
+  sortOrder?: number;
+  isActive?: boolean;
+  productCount?: number;
+  updatedAt?: string;
   subcategories: HomeSubcategory[];
 }
 
@@ -35,6 +52,7 @@ export const HOME_DEPARTMENTS: DepartmentNav[] = [
     label: "Civil & Interiors",
     hasDropdown: true,
     categorySlugs: [
+      "rmc-ready-mix-concrete",
       "cement-civil-works",
       "plywood-boards",
       "tile-stone-installation",
@@ -42,6 +60,12 @@ export const HOME_DEPARTMENTS: DepartmentNav[] = [
       "waterproofing-repairing",
       "bricks-sand-gitti-aac",
     ],
+  },
+  {
+    id: "rmc-plant",
+    label: "RMC Plant",
+    hasDropdown: true,
+    categorySlugs: ["rmc-ready-mix-concrete"],
   },
   {
     id: "furniture-hardware",
@@ -61,6 +85,7 @@ export const HOME_DEPARTMENTS: DepartmentNav[] = [
     categorySlugs: [
       "wires-mcb-electrical",
       "lighting",
+      "solar-rooftop-power",
       "cctv-networking",
       "home-appliances",
     ],
@@ -80,7 +105,9 @@ export const HOME_DEPARTMENTS: DepartmentNav[] = [
     label: "New Launches",
     hasDropdown: true,
     categorySlugs: [
+      "solar-rooftop-power",
       "cctv-networking",
+      "lighting",
       "modular-kitchen-systems",
       "home-appliances",
       "door-hardware-locks",
@@ -88,12 +115,11 @@ export const HOME_DEPARTMENTS: DepartmentNav[] = [
   },
   {
     id: "tools",
-    label: "Tools",
+    label: "Tools & Safety",
     hasDropdown: true,
     categorySlugs: [
-      "power-tools-safety",
       "tools-hardware",
-      "safety-workwear",
+      "safety-ppe-workwear",
     ],
   },
 ];
@@ -102,6 +128,28 @@ export const HOME_CATEGORIES: HomeCategory[] = [
   /* ── Row 1 ───────────────────────────────────────────────────────────── */
   {
     id: 1,
+    slug: "rmc-ready-mix-concrete",
+    title: "RMC (Ready Mix Concrete)",
+    titleHi: "रेडी मिक्स कंक्रीट (प्लांट डायरेक्ट)",
+    department: "Civil & Structural",
+    image: "/images/home-categories/rmc-ready-mix-concrete.webp",
+    dbCategory: "rmc",
+    route: "/category/rmc-ready-mix-concrete",
+    badge: "PLANT DIRECT",
+    badgeColor: "#F2B705",
+    categoryType: "RMC",
+    defaultHsn: "38245010",
+    defaultGst: 18,
+    vehicleClass: "Transit Mixer (6 m³) / Loader",
+    subcategories: [
+      { name: "M10–M50 Structural Grades", slug: "standard-grades", itemCount: 8 },
+      { name: "SCC, Waterproof & Green RMC", slug: "speciality-mixes", itemCount: 9 },
+      { name: "Narrow-Lane Dry Mix Bags (40kg)", slug: "dry-mix-bags", itemCount: 1 },
+      { name: "Boom Placer & Line Pumps", slug: "pumps-admixtures", itemCount: 6 },
+    ],
+  },
+  {
+    id: 101,
     slug: "cctv-networking",
     title: "CCTV & Networking",
     department: "Electrical",
@@ -319,17 +367,47 @@ export const HOME_CATEGORIES: HomeCategory[] = [
   {
     id: 14,
     slug: "lighting",
-    title: "Lighting",
+    title: "Lighting & Architectural LED",
+    titleHi: "लाइटिंग और एलईडी फिक्स्चर",
     department: "Electrical",
     image: "/images/home-categories/lighting.webp",
     dbCategory: "electrical",
-    route: "/categories?cat=lighting",
+    route: "/collections/lighting",
+    badge: "KELVIN SIMULATOR",
+    badgeColor: "#1D4ED8",
     subcategories: [
-      { name: "Slim LED Battens & Tubes", slug: "led-battens", itemCount: 24 },
-      { name: "Recessed Round & Square Panels", slug: "panel-lights", itemCount: 38 },
-      { name: "COB Focus & Spotlights", slug: "cob-spotlights", itemCount: 26 },
-      { name: "Outdoor LED Flood Lights", slug: "flood-lights", itemCount: 14 },
-      { name: "Profile & Strip Lights", slug: "strip-lights", itemCount: 20 },
+      { name: 'Concealed & Junction (3" Box)', slug: "concealed-junction-lights", itemCount: 6 },
+      { name: "Ceiling Panels (Rimless & 3-in-1)", slug: "ceiling-panel-lights", itemCount: 8 },
+      { name: "Anti-Glare COB & Spotlights", slug: "cob-spot-lights", itemCount: 6 },
+      { name: "Zero-Dot Strips, Profiles & SMPS", slug: "strip-profiles-drivers", itemCount: 7 },
+      { name: "LED Battens (Tubelights)", slug: "led-battens", itemCount: 4 },
+      { name: "Bulbs & Inverter Emergency", slug: "bulbs-inverter-emergency", itemCount: 5 },
+      { name: "Staircase, Cabinet & Track", slug: "cabinet-track-commercial", itemCount: 6 },
+      { name: "Outdoor, Flood & Gate Elevation", slug: "outdoor-flood-gate-lights", itemCount: 5 },
+    ],
+  },
+  {
+    id: 20,
+    slug: "solar-rooftop-power",
+    title: "Solar & Rooftop Power",
+    titleHi: "सोलर पैनल और रूफटॉप पावर",
+    department: "Electrical",
+    image: "/images/home-categories/solar-rooftop-power.webp",
+    dbCategory: "solar",
+    route: "/collections/solar-rooftop-power",
+    badge: "₹1.08L SUBSIDY",
+    badgeColor: "#F59E0B",
+    defaultHsn: "85414300",
+    defaultGst: 12,
+    vehicleClass: "Pickup / E-Loader",
+    subcategories: [
+      { name: "Solar Panels (DCR & Non-DCR)", slug: "solar-panels", itemCount: 8 },
+      { name: "Complete Rooftop Kits (1kW–10kW)", slug: "rooftop-solar-kits", itemCount: 7 },
+      { name: "On-Grid & Hybrid Inverters", slug: "solar-inverters", itemCount: 6 },
+      { name: "Lithium & Solar Batteries", slug: "solar-batteries", itemCount: 4 },
+      { name: "ACDB, DCDB & Protection", slug: "solar-acdb-dcdb", itemCount: 5 },
+      { name: "DC Cables, Earthing & Site Shield", slug: "solar-cables-earthing", itemCount: 8 },
+      { name: "HDGI Structures & Waterproofing", slug: "solar-structures-lights", itemCount: 7 },
     ],
   },
   {
@@ -351,18 +429,25 @@ export const HOME_CATEGORIES: HomeCategory[] = [
   },
   {
     id: 16,
-    slug: "safety-workwear",
-    title: "Safety & Workwear",
-    department: "Tools",
+    slug: "safety-ppe-workwear",
+    title: "Site Safety & PPE",
+    titleHi: "साइट सेफ्टी और सुरक्षा गियर",
+    department: "Tools & Safety",
     image: "/images/home-categories/safety-workwear.webp",
     dbCategory: "safety",
-    route: "/categories?cat=safety-workwear",
+    route: "/category/safety-ppe-workwear",
+    badge: "ISI / RERA Compliant",
+    defaultHsn: "6506",
+    defaultGst: 18,
     subcategories: [
-      { name: "ISI Construction Helmets", slug: "safety-helmets", itemCount: 16 },
-      { name: "High-Vis Reflective Safety Vests", slug: "safety-vests", itemCount: 14 },
-      { name: "Full-Body Fall Arrest Harness", slug: "safety-harnesses", itemCount: 10 },
-      { name: "Industrial Work Gloves", slug: "safety-gloves", itemCount: 20 },
-      { name: "Protective Goggles & Dust Masks", slug: "goggles-masks", itemCount: 18 },
+      { name: "Head, Eye & Face Protection", slug: "head-eye-face", itemCount: 5 },
+      { name: "Safety Shoes & Gumboots", slug: "shoes-gumboots", itemCount: 5 },
+      { name: "Fall Protection & Harnesses", slug: "fall-protection", itemCount: 5 },
+      { name: "Industrial Hand Gloves", slug: "hand-gloves", itemCount: 5 },
+      { name: "Hi-Vis Jackets & Rainwear", slug: "hivis-rainwear", itemCount: 3 },
+      { name: "Respiratory & Ear Protection", slug: "respiratory-ear", itemCount: 3 },
+      { name: "Site Barricading & Signboards", slug: "barricading-signs", itemCount: 3 },
+      { name: "Fire, Electrical Mat & First-Aid", slug: "fire-first-aid", itemCount: 3 },
     ],
   },
   {
@@ -372,13 +457,18 @@ export const HOME_CATEGORIES: HomeCategory[] = [
     department: "Tools",
     image: "/images/home-categories/tools-hardware.webp",
     dbCategory: "tools",
-    route: "/categories?cat=tools-hardware",
+    route: "/collections/tools-hardware",
+    badge: "BUY OR RENT",
+    badgeColor: "#1D4ED8",
     subcategories: [
-      { name: "Professional Impact Drills", slug: "impact-drills", itemCount: 16 },
-      { name: "Heavy-Duty Angle Grinders", slug: "angle-grinders", itemCount: 14 },
-      { name: "Spanners, Wrenches & Pliers", slug: "hand-tools-wrenches", itemCount: 38 },
-      { name: "Stanley Measuring Tapes & Levels", slug: "measuring-tapes", itemCount: 18 },
-      { name: "Fasteners, Screws & Wall Plugs", slug: "screws-fasteners", itemCount: 44 },
+      { name: "Angle Grinders & Marble Cutters", slug: "grinders-cutters", itemCount: 6 },
+      { name: "Rotary Hammers & Impact Drills", slug: "rotary-drills", itemCount: 6 },
+      { name: "Cutting Blades, Discs & Drill Bits", slug: "blades-discs-bits", itemCount: 8 },
+      { name: "Hand Tools & Masonry Essentials", slug: "hand-masonry-tools", itemCount: 7 },
+      { name: "Measuring, Levelling & Marking", slug: "measuring-levelling", itemCount: 5 },
+      { name: "Fasteners, Screws & Anchors", slug: "fasteners-anchors", itemCount: 6 },
+      { name: "Safety Gear & Site Utility", slug: "safety-utility", itemCount: 5 },
+      { name: "Ladders, Wheelbarrows & Tapes", slug: "ladders-tapes-utility", itemCount: 4 },
     ],
   },
   {
@@ -415,31 +505,4 @@ export const HOME_CATEGORIES: HomeCategory[] = [
       { name: "Paver Blocks & Concrete Cover Blocks", slug: "paver-blocks-cover-blocks", itemCount: 3 },
     ],
   },
-  {
-    "id": 20,
-    "slug": "power-tools-safety",
-    "title": "Power Tools, Hand Tools & Site Safety",
-    "department": "Tools",
-    "image": "/images/home-categories/tools-hardware.webp",
-    "dbCategory": "tools",
-    "route": "/collections/power-tools-safety",
-    "badge": "60-Min Express · 2-Wheeler",
-    "subcategories": [
-      {
-        "name": "Power Tools",
-        "slug": "power-tools",
-        "itemCount": 3
-      },
-      {
-        "name": "Hand & Measuring Tools",
-        "slug": "hand-measuring-tools",
-        "itemCount": 2
-      },
-      {
-        "name": "Site Safety & PPE",
-        "slug": "site-safety-ppe",
-        "itemCount": 4
-      }
-    ]
-  }
 ];

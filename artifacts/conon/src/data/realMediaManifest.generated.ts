@@ -49,6 +49,44 @@ export const REAL_MEDIA_ENTRIES: RealMediaManifestEntry[] = [
       "categorySlug": "cement",
       "updatedAt": "2026-11-26T09:04:18.204Z"
     }
+  },
+  {
+    "itemKey": "astral-cpvc-pro-15mm-sdr11-3m",
+    "productId": "astral-cpvc-pro-15mm-sdr11-3m",
+    "slug": "astral-cpvc-pro-15mm-sdr11-3m",
+    "categorySlug": "cpvc-plumbing-tanks",
+    "images": [
+      {
+        "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/01.webp",
+        "caption": "Front View"
+      },
+      {
+        "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/02.webp",
+        "caption": "Front Pack"
+      },
+      {
+        "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/03.webp",
+        "caption": "ISI / Grade Mark"
+      }
+    ],
+    "overrides": {
+      "title": "Astral CPVC Pro 1/2\" (15mm) SDR-11, 3m (10ft)",
+      "brand": "Astral",
+      "subcategory": "cpvc-pipes",
+      "description": "Astral CPVC Pro 1/2\" (15mm) SDR-11, 3m (10ft) — Authentic construction supply with 60-minute express site dispatch across Lucknow.",
+      "specBullets": [
+        "3m / 10ft • SDR-11 • 28.1 kg/cm²"
+      ],
+      "price": 210,
+      "mrp": 270,
+      "bulkPrice": 188,
+      "hsnCode": "39172390",
+      "gstRate": 18,
+      "unit": "Pipe (3m / 10ft)",
+      "isInStock": true,
+      "categorySlug": "cpvc-plumbing-tanks",
+      "updatedAt": "2026-11-27T01:32:05.394Z"
+    }
   }
 ];
 
@@ -66,6 +104,44 @@ export const REAL_MEDIA_MANIFEST: Record<string, RealMediaManifestEntry> = {
     "overrides": {
       "categorySlug": "cement",
       "updatedAt": "2026-11-26T09:04:18.204Z"
+    }
+  },
+  "astral-cpvc-pro-15mm-sdr11-3m": {
+    "itemKey": "astral-cpvc-pro-15mm-sdr11-3m",
+    "productId": "astral-cpvc-pro-15mm-sdr11-3m",
+    "slug": "astral-cpvc-pro-15mm-sdr11-3m",
+    "categorySlug": "cpvc-plumbing-tanks",
+    "images": [
+      {
+        "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/01.webp",
+        "caption": "Front View"
+      },
+      {
+        "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/02.webp",
+        "caption": "Front Pack"
+      },
+      {
+        "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/03.webp",
+        "caption": "ISI / Grade Mark"
+      }
+    ],
+    "overrides": {
+      "title": "Astral CPVC Pro 1/2\" (15mm) SDR-11, 3m (10ft)",
+      "brand": "Astral",
+      "subcategory": "cpvc-pipes",
+      "description": "Astral CPVC Pro 1/2\" (15mm) SDR-11, 3m (10ft) — Authentic construction supply with 60-minute express site dispatch across Lucknow.",
+      "specBullets": [
+        "3m / 10ft • SDR-11 • 28.1 kg/cm²"
+      ],
+      "price": 210,
+      "mrp": 270,
+      "bulkPrice": 188,
+      "hsnCode": "39172390",
+      "gstRate": 18,
+      "unit": "Pipe (3m / 10ft)",
+      "isInStock": true,
+      "categorySlug": "cpvc-plumbing-tanks",
+      "updatedAt": "2026-11-27T01:32:05.394Z"
     }
   }
 };

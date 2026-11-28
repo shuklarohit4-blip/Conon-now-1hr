@@ -5,6 +5,7 @@
  */
 
 import { resolveProductWithVault, type VaultImageEntry } from "@/services/productMediaVault";
+import { normalizeRelativeAssetUrl } from "@/lib/apiBase";
 
 export interface HighlightItem {
   label: string;
@@ -447,20 +448,24 @@ export function enrichProduct(rawInput: any): EnrichedProductData {
   // Check if we have curated specs
   const curated = PRODUCT_SPEC_DATABASE[id] || PRODUCT_SPEC_DATABASE[slug];
 
-  // 1. Build Multi-Image Array STRICTLY from Verified Disk Manifest / Vault / Valid Images (NO fake 2-back..5-bulk stubs!)
+  // 1. Build Multi-Image Array STRICTLY from Verified Disk Manifest / Vault / Valid Images
   let images: string[] = [];
   const rawGallery: VaultImageEntry[] = Array.isArray(raw.galleryImages) ? raw.galleryImages : [];
   if (rawGallery.length > 0) {
-    images = rawGallery.map((g: any) => g.url).filter(Boolean);
+    images = rawGallery.map((g: any) => normalizeRelativeAssetUrl(g.url)).filter(Boolean);
   } else if (Array.isArray(raw.images) && raw.images.length > 0) {
-    images = raw.images.filter(Boolean);
+    images = raw.images.map((u: string) => normalizeRelativeAssetUrl(u)).filter(Boolean);
   } else if (image) {
-    images = [image];
+    images = [normalizeRelativeAssetUrl(image)];
   }
 
-  // 2. Build 6-Item Highlights Grid (Exactly 6 key-value pairs)
+  // 2. Build 6-Item Highlights Grid (Admin highlightTiles take first priority)
   let highlights: HighlightItem[] = [];
-  if (raw.highlights && Array.isArray(raw.highlights) && raw.highlights.length > 0) {
+  if (Array.isArray(raw.highlightTiles) && raw.highlightTiles.length > 0) {
+    highlights = raw.highlightTiles
+      .slice(0, 6)
+      .map((h: any) => ({ label: String(h.label || "Spec"), value: String(h.value || "") }));
+  } else if (raw.highlights && Array.isArray(raw.highlights) && raw.highlights.length > 0) {
     highlights = raw.highlights.map((h: any, idx: number) => {
       if (typeof h === "string") {
         return { label: `Highlight ${idx + 1}`, value: h };
@@ -555,8 +560,11 @@ export function enrichProduct(rawInput: any): EnrichedProductData {
     }
   }
 
-  // 3. Build Key Information Table (8-12 Rows)
-  let keyInformation: KeyInfoRow[] = curated?.keyInformation || [];
+  // 3. Build Key Information Table (Admin keyInfo takes top priority)
+  let keyInformation: KeyInfoRow[] =
+    Array.isArray(raw.keyInfo) && raw.keyInfo.length > 0
+      ? raw.keyInfo.map((k: any) => ({ label: String(k.label || "Spec"), value: String(k.value || "") }))
+      : curated?.keyInformation || [];
   if (raw.specs && Array.isArray(raw.specs) && raw.specs.length > 0) {
     const rawSpecs: KeyInfoRow[] = raw.specs.map((s: any) => ({
       label: s.key || s.label || "Specification",
@@ -596,8 +604,11 @@ export function enrichProduct(rawInput: any): EnrichedProductData {
     }
   }
 
-  // 4. Usage Tips
-  const usageTips = curated?.usageTips || (
+  // 4. Usage Tips (Admin usageTips override)
+  const usageTips =
+    Array.isArray(raw.usageTips) && raw.usageTips.length > 0
+      ? raw.usageTips
+      : curated?.usageTips || (
     cat.includes("cctv") || cat.includes("network") || cat.includes("camera") || cat.includes("surveillance")
       ? [
           "Ensure proper earth grounding on the DVR/NVR rack to prevent lightning power surges through video cables.",
@@ -611,8 +622,22 @@ export function enrichProduct(rawInput: any): EnrichedProductData {
         ]
   );
 
-  // 5. Bulk Pricing Tiers (Strict Rule: MRP > Selling Price > Tier 1 > Tier 2)
-  let bulkPricingTiers: BulkTier[] = curated?.bulkPricingTiers || [];
+  // 5. Bulk Pricing Tiers (Admin slabs or Strict Rule: MRP > Selling Price > Tier 1 > Tier 2)
+  let bulkPricingTiers: BulkTier[] = [];
+  if (Array.isArray(raw.bulkPricingTiers) && raw.bulkPricingTiers.length > 0) {
+    bulkPricingTiers = raw.bulkPricingTiers.map((t: any) => {
+      const tierPrice = Number(t.pricePerUnit ?? t.price ?? price);
+      const savingsPerUnit = Math.max(0, price - tierPrice);
+      return {
+        minQty: Number(t.minQty || 10),
+        price: tierPrice,
+        savingsPerUnit,
+        label: t.label || `${t.minQty}+ Units (Save ₹${savingsPerUnit}/unit)`,
+      };
+    });
+  } else {
+    bulkPricingTiers = curated?.bulkPricingTiers || [];
+  }
   if (bulkPricingTiers.length === 0) {
     if (raw.bulkPrice && raw.bulkPrice < price) {
       const diff = price - raw.bulkPrice;

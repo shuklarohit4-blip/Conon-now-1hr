@@ -3,6 +3,7 @@ import { collection, decimal, decimalToNumber } from "@workspace/db";
 import { requireAdmin } from "../middleware/adminAuth";
 import { vendorEngine } from "../services/vendorEngine";
 import { ecosystemEngine, type CanonicalOrderStatus } from "../services/ecosystemEngine";
+import { syncBus } from "../services/syncBus";
 import {
   getIo,
   vendorRoom,
@@ -466,7 +467,36 @@ router.post("/admin/orders/:id/override-status", (req, res) => {
     res.status(400).json({ error: result.message });
     return;
   }
+  syncBus.publish({
+    type: "ORDERS_UPDATED",
+    entityId: req.params.id,
+    action: "STATUS_UPDATE",
+    summary: `Order ${req.params.id} moved to ${status}`,
+    socketEvent: "order:status_updated",
+    socketPayload: { orderId: req.params.id, status, note },
+  });
   res.json({ success: true, order: result.order });
+});
+
+/**
+ * POST /admin/orders/:id/assign
+ * Assign partner vendor store & delivery driver to an order.
+ */
+router.post("/admin/orders/:id/assign", (req, res) => {
+  const result = ecosystemEngine.assignOrderPartnerDriver(String(req.params.id), req.body || {});
+  if (!result.success) {
+    res.status(404).json({ ok: false, error: result.message });
+    return;
+  }
+  syncBus.publish({
+    type: "ORDERS_UPDATED",
+    entityId: String(req.params.id),
+    action: "ASSIGN",
+    summary: `Assigned Partner/Driver for Order ${req.params.id}`,
+    socketEvent: "order:status_updated",
+    socketPayload: { orderId: req.params.id, order: result.order },
+  });
+  res.json({ ok: true, success: true, order: result.order });
 });
 
 /**

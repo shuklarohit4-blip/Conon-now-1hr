@@ -72,24 +72,28 @@ export function PartnerAccessGate({ role, onAuthenticated, onPending }: PartnerA
         }),
       });
 
-      if (res.ok) {
+      const resData = await res.json().catch(() => ({}));
+      if (res.ok && resData.success) {
         setOtpSent(true);
-        toast.success(
-          lang === "hi"
-            ? `+91 ${cleanPhone} पर OTP भेजा गया (परीक्षण कोड: 1234)`
-            : `OTP sent to +91 ${cleanPhone} (Test Code: 1234)`,
-          { icon: "📱" }
-        );
+        if (resData.devOtp) {
+          toast.info(resData.message || `Dev OTP ready: ${resData.devOtp}`, { icon: "📱" });
+        } else {
+          toast.success(
+            resData.message ||
+              (lang === "hi"
+                ? `+91 ${cleanPhone} पर SMS OTP भेजा गया`
+                : `OTP sent via SMS to +91 ${cleanPhone}`),
+            { icon: "📱" }
+          );
+        }
       } else {
-        setOtpSent(true);
+        toast.error(resData.error || "Could not send OTP. Check mobile number and try again.");
       }
     } catch {
-      // Fallback in offline / sandbox
-      setOtpSent(true);
-      toast.success(
+      toast.error(
         lang === "hi"
-          ? `+91 ${cleanPhone} पर OTP भेजा गया (परीक्षण कोड: 1234)`
-          : `OTP sent to +91 ${cleanPhone} (Test Code: 1234)`
+          ? "नेटवर्क त्रुटि — कृपया पुनः प्रयास करें"
+          : "Network error — could not send OTP."
       );
     } finally {
       setIsSubmitting(false);

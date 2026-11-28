@@ -9,6 +9,17 @@ import {
   logDispatchEvent,
 } from "../socket";
 import { logger } from "../lib/logger";
+import {
+  evaluatePaymentPolicy,
+  isPodRequested,
+  isVerifiedPrepaidEscrow,
+} from "../utils/paymentPolicy";
+import {
+  checkPincodeServiceability,
+  extractPincodeFromText,
+} from "../utils/serviceabilityPolicy";
+import { evaluateDispatchCompliance } from "../utils/lucknowTrafficPolicy";
+import { getLiveServiceabilityConfig } from "./serviceability";
 
 const router: IRouter = Router();
 
@@ -191,6 +202,53 @@ router.post("/services/bookings", async (req: Request, res: Response) => {
       return;
     }
 
+    const rawPin = body.sitePincode || body.deliveryPincode || extractPincodeFromText(body.siteAddress);
+    const pinCheck = checkPincodeServiceability(rawPin, getLiveServiceabilityConfig());
+    if (!pinCheck.serviceable) {
+      res.status(400).json({
+        ok: false,
+        code: "PINCODE_NOT_SERVICEABLE",
+        allowedPincodes: pinCheck.allowedPincodes,
+        error: pinCheck.messageEn,
+      });
+      return;
+    }
+    const rentalTraffic = evaluateDispatchCompliance({
+      domain: "RENTAL",
+      totalWeightKg: 7500,
+      pincode: pinCheck.pincode,
+      dispatchMode: body.dispatchMode,
+    });
+    if (rentalTraffic.illegalDaytimeHeavy) {
+      res.status(400).json({
+        ok: false,
+        code: "NO_ENTRY_BLOCKED",
+        error: "Lucknow Daytime Heavy No-Entry Active (06:00–23:00) for Heavy Machine mobilization. Select Legal Night Window (11 PM – 6 AM).",
+      });
+      return;
+    }
+
+    const policy = evaluatePaymentPolicy({
+      domain: "SERVICE",
+      grandTotal: Number(body.totalAmount || 1),
+    });
+    if (!policy.allowPod && isPodRequested(body.paymentMode)) {
+      res.status(400).json({
+        ok: false,
+        code: "PREPAID_REQUIRED",
+        error: "Upfront prepaid payment is mandatory for RMC, Services, Machine Rentals, and orders of ₹10,000 or above.",
+      });
+      return;
+    }
+    if (policy.requirePrepaid && !isVerifiedPrepaidEscrow(body.paymentStatus, body.paymentRef)) {
+      res.status(402).json({
+        ok: false,
+        code: "PAYMENT_REQUIRED",
+        error: "Verified upfront escrow payment is required before service booking.",
+      });
+      return;
+    }
+
     const booking = await servicesRentalsEngine.createServiceBooking({
       customerId: body.customerId,
       customerName: body.customerName || "Lucknow Site Contractor",
@@ -330,6 +388,53 @@ router.post("/rentals/bookings", async (req: Request, res: Response) => {
     const body = req.body || {};
     if (!body.machineId) {
       res.status(400).json({ success: false, error: "machineId is required" });
+      return;
+    }
+
+    const rawPin = body.sitePincode || body.deliveryPincode || extractPincodeFromText(body.siteAddress);
+    const pinCheck = checkPincodeServiceability(rawPin, getLiveServiceabilityConfig());
+    if (!pinCheck.serviceable) {
+      res.status(400).json({
+        ok: false,
+        code: "PINCODE_NOT_SERVICEABLE",
+        allowedPincodes: pinCheck.allowedPincodes,
+        error: pinCheck.messageEn,
+      });
+      return;
+    }
+    const rentalTraffic = evaluateDispatchCompliance({
+      domain: "RENTAL",
+      totalWeightKg: 7500,
+      pincode: pinCheck.pincode,
+      dispatchMode: body.dispatchMode,
+    });
+    if (rentalTraffic.illegalDaytimeHeavy) {
+      res.status(400).json({
+        ok: false,
+        code: "NO_ENTRY_BLOCKED",
+        error: "Lucknow Daytime Heavy No-Entry Active (06:00–23:00) for Heavy Machine mobilization. Select Legal Night Window (11 PM – 6 AM).",
+      });
+      return;
+    }
+
+    const policy = evaluatePaymentPolicy({
+      domain: "RENTAL",
+      grandTotal: Number(body.estimatedTotal || 1),
+    });
+    if (!policy.allowPod && isPodRequested(body.paymentMode)) {
+      res.status(400).json({
+        ok: false,
+        code: "PREPAID_REQUIRED",
+        error: "Upfront prepaid payment is mandatory for RMC, Services, Machine Rentals, and orders of ₹10,000 or above.",
+      });
+      return;
+    }
+    if (policy.requirePrepaid && !isVerifiedPrepaidEscrow(body.paymentStatus, body.paymentRef)) {
+      res.status(402).json({
+        ok: false,
+        code: "PAYMENT_REQUIRED",
+        error: "Verified upfront escrow payment is required before machine rental booking.",
+      });
       return;
     }
 

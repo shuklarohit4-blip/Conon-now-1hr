@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
 import { useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
-import { HOME_CATEGORIES, type HomeCategory } from "@/data/homeCategories";
+import { getAllVaultOverridesList, sanitizeFolderSlug } from "@/services/productMediaVault";
+import { type HomeCategory } from "@/data/homeCategories";
+import { useLiveCategoriesStore } from "@/services/liveCategoriesStore";
+import { useLiveProductsStore } from "@/services/liveProductsStore";
 import { CATALOG_PRODUCTS, type IProduct } from "@/data/catalogData";
 import {
   FALLBACK_SERVICE_CATALOG,
@@ -9,7 +12,7 @@ import {
   type ServiceCatalogItem,
   type MachineRentalCatalogItem,
 } from "@/services/servicesRentalsSync";
-import { sanitizeFolderSlug } from "@/services/productMediaVault";
+import { LUCKNOW_RMC_GRADES, type RmcGradeItem } from "@/data/lucknowRmcCatalog";
 
 function buildCandidateKeys(item: {
   id?: string;
@@ -34,27 +37,12 @@ function buildCandidateKeys(item: {
 }
 
 /**
- * Returns base 16 categories merged with Admin customCategories, overrides, and hiddenCategorySlugs.
+ * Returns authoritative backend categories from `GET /api/categories`,
+ * automatically synced in real time with Admin Panel edits & uploads.
  */
-export function useLiveCategories(): HomeCategory[] {
-  const sync = useSafeCononMasterSync();
-  const catState = sync?.state.categories;
-
-  return useMemo(() => {
-    const hidden = new Set(catState?.hiddenCategorySlugs || []);
-    const overrides = catState?.overrides || {};
-    const custom = (catState?.customCategories || []) as HomeCategory[];
-
-    const mergedBase = HOME_CATEGORIES.filter((c) => !hidden.has(c.slug)).map((c) => ({
-      ...c,
-      ...(overrides[c.slug] || {}),
-    }));
-
-    const existingSlugs = new Set(mergedBase.map((c) => c.slug));
-    const extras = custom.filter((c) => c?.slug && !existingSlugs.has(c.slug) && !hidden.has(c.slug));
-
-    return [...mergedBase, ...extras];
-  }, [catState]);
+export function useLiveCategories(options?: { includeInactive?: boolean }): HomeCategory[] {
+  const { categories } = useLiveCategoriesStore(options);
+  return categories;
 }
 
 /**
@@ -64,6 +52,7 @@ export function useLiveCategories(): HomeCategory[] {
 export function useLiveProducts(categorySlug?: string): IProduct[] {
   const sync = useSafeCononMasterSync();
   const vault = useSafeProductMediaVault();
+  const liveBackendProducts = useLiveProductsStore();
   const prodState = sync?.state.products;
   const mandiRates = sync?.state.mandiRates;
 
@@ -72,13 +61,49 @@ export function useLiveProducts(categorySlug?: string): IProduct[] {
     const overrides = prodState?.overrides || {};
     const custom = (prodState?.customProducts || []) as IProduct[];
 
-    const source = [...CATALOG_PRODUCTS, ...custom].filter((p) => {
+    const baseList =
+      liveBackendProducts.loadedFromBackend && liveBackendProducts.products.length > 0
+        ? (liveBackendProducts.products as unknown as IProduct[])
+        : CATALOG_PRODUCTS;
+
+    const existingIds = new Set(baseList.map((p) => p.id));
+    const vaultCustomProducts: IProduct[] = vault
+      ? getAllVaultOverridesList()
+          .filter((ov) => ov.isCustomItem && !existingIds.has(ov.productId))
+          .map((ov) => ({
+            id: ov.productId,
+            slug: ov.slug || ov.productId,
+            title: ov.title || ov.productId,
+            name: ov.title || ov.productId,
+            brand: ov.brand || "CONON",
+            categorySlug: ov.categorySlug || "cement-civil-works",
+            subCategory: ov.subcategory,
+            price: ov.price ?? 0,
+            mrp: ov.mrp ?? ov.price ?? 0,
+            unit: ov.unit || "Unit",
+            inStock: ov.isInStock !== false,
+            image: ov.images?.[0]?.url || "",
+            description: ov.description || "",
+            gstRate: ov.gstRate ?? 18,
+            hsnCode: ov.hsnCode || "38245010",
+            rentPricePerDay: ov.rentPricePerDay,
+            dcrEligible: ov.dcrSubsidyEligible,
+          } as unknown as IProduct))
+      : [];
+
+    const allWithVault = [...baseList, ...vaultCustomProducts];
+    const seenIds = new Set(allWithVault.map((p) => p.id));
+    const mergedSource = [
+      ...allWithVault,
+      ...custom.filter((c) => c?.id && !seenIds.has(c.id)),
+    ].filter((p) => {
       if (!p || hidden.has(p.id)) return false;
       if (categorySlug && p.categorySlug !== categorySlug) return false;
       return true;
     });
 
-    return source.map((p) => {
+    return mergedSource.map((p) => {
+      const be = liveBackendProducts.byId.get(p.id) || (p.slug ? liveBackendProducts.byId.get(p.slug) : undefined);
       const keys = buildCandidateKeys(p);
       let matchedOv = undefined;
       for (const k of keys) {
@@ -96,41 +121,45 @@ export function useLiveProducts(categorySlug?: string): IProduct[] {
 
       const vaultResolved = vault ? vault.resolveProduct(p) : p;
       const mergedImages =
-        matchedOv?.images && matchedOv.images.length > 0
+        be?.galleryImages && be.galleryImages.length > 0
+          ? be.galleryImages
+          : matchedOv?.images && matchedOv.images.length > 0
           ? matchedOv.images
           : (vaultResolved as any).galleryImages || [];
 
       const primaryImage =
-        mergedImages[0]?.url || (vaultResolved as any).primaryImage || p.image || "";
+        mergedImages[0]?.url || be?.imageUrl || (vaultResolved as any).primaryImage || p.image || "";
 
       return {
         ...vaultResolved,
+        ...(be || {}),
         ...(matchedOv?.title ? { title: matchedOv.title, name: matchedOv.title } : {}),
         ...(matchedOv?.brand ? { brand: matchedOv.brand } : {}),
         ...(matchedOv?.description !== undefined ? { description: matchedOv.description } : {}),
         ...(matchedOv?.specBullets?.length ? { highlights: matchedOv.specBullets } : {}),
-        ...(matchedOv?.price !== undefined ? { price: matchedOv.price } : mandiHit ? { price: mandiHit.price } : {}),
-        ...(matchedOv?.mrp !== undefined ? { mrp: matchedOv.mrp } : {}),
+        ...(matchedOv?.price !== undefined ? { price: matchedOv.price } : be?.sellingPrice !== undefined ? { price: be.sellingPrice } : mandiHit ? { price: mandiHit.price } : {}),
+        ...(matchedOv?.mrp !== undefined ? { mrp: matchedOv.mrp } : be?.mrp !== undefined ? { mrp: be.mrp } : {}),
         ...(matchedOv?.unit ? { unit: matchedOv.unit } : {}),
-        ...(matchedOv?.inStock !== undefined ? { inStock: matchedOv.inStock } : {}),
+        ...(matchedOv?.inStock !== undefined ? { inStock: matchedOv.inStock } : be?.isInStock !== undefined ? { inStock: be.isInStock } : {}),
         ...(matchedOv?.isInStock !== undefined ? { inStock: matchedOv.isInStock } : {}),
         image: primaryImage,
         primaryImage,
         galleryImages: mergedImages,
         images: mergedImages.map((m: any) => m.url).filter(Boolean),
         isAdminVerifiedMedia: mergedImages.length > 0,
-      } as IProduct;
+      } as unknown as IProduct;
     });
-  }, [prodState, mandiRates, vault, categorySlug]);
+  }, [prodState, mandiRates, vault, categorySlug, liveBackendProducts.products, liveBackendProducts.loadedFromBackend]);
 }
 
 /**
  * Generic product-list merger hook that preserves the caller's exact item type (e.g. `Product` or `IProduct`)
- * while applying Admin hiddenProductIds, product overrides, Mandi rates, and Media Vault photos.
+ * while applying Admin hiddenProductIds, product overrides, DB backend edits, Mandi rates, and Media Vault photos.
  */
 export function useLiveProductMerger() {
   const sync = useSafeCononMasterSync();
   const vault = useSafeProductMediaVault();
+  const liveBackendProducts = useLiveProductsStore();
   const prodState = sync?.state.products;
   const mandiRates = sync?.state.mandiRates;
 
@@ -138,7 +167,7 @@ export function useLiveProductMerger() {
     const hidden = new Set(prodState?.hiddenProductIds || []);
     const overrides = prodState?.overrides || {};
 
-    return <T extends { id: string; title?: string; name?: string; brand?: string; categorySlug?: string; image?: string }>(
+    return <T extends { id: string; slug?: string; title?: string; name?: string; brand?: string; categorySlug?: string; image?: string }>(
       items: T[]
     ): (T & {
       primaryImage: string;
@@ -149,6 +178,7 @@ export function useLiveProductMerger() {
       return items
         .filter((p) => p && !hidden.has(p.id))
         .map((p) => {
+          const be = liveBackendProducts.byId.get(p.id) || (p.slug ? liveBackendProducts.byId.get(p.slug) : undefined);
           const keys = buildCandidateKeys(p);
           let matchedOv = undefined;
           for (const k of keys) {
@@ -164,21 +194,38 @@ export function useLiveProductMerger() {
 
           const vaultResolved: any = vault ? vault.resolveProduct(p as any) : p;
           const mergedImages =
-            matchedOv?.images && matchedOv.images.length > 0
+            be?.galleryImages && be.galleryImages.length > 0
+              ? be.galleryImages
+              : matchedOv?.images && matchedOv.images.length > 0
               ? matchedOv.images
               : vaultResolved.galleryImages || [];
 
           const primaryImage =
-            mergedImages[0]?.url || vaultResolved.primaryImage || p.image || "";
+            mergedImages[0]?.url || be?.imageUrl || vaultResolved.primaryImage || p.image || "";
 
           return {
             ...p,
             ...vaultResolved,
+            ...(be ? {
+              title: be.title,
+              name: be.title,
+              brand: be.brand,
+              price: be.sellingPrice,
+              mrp: be.mrp,
+              unit: be.unit,
+              description: be.description,
+              inStock: be.isInStock,
+              highlightTiles: be.highlightTiles,
+              keyInfo: be.keyInfo,
+              usageTips: be.usageTips,
+              variants: be.variants,
+              bulkPricingTiers: be.bulkPricingTiers,
+            } : {}),
             ...(matchedOv?.title ? { title: matchedOv.title } : {}),
             ...(matchedOv?.brand ? { brand: matchedOv.brand } : {}),
             ...(matchedOv?.description !== undefined ? { description: matchedOv.description } : {}),
             ...(matchedOv?.specBullets?.length ? { specBullets: matchedOv.specBullets } : {}),
-            ...(matchedOv?.price !== undefined ? { price: matchedOv.price } : mandiHit ? { price: mandiHit.price } : {}),
+            ...(matchedOv?.price !== undefined ? { price: matchedOv.price } : be?.sellingPrice !== undefined ? { price: be.sellingPrice } : mandiHit ? { price: mandiHit.price } : {}),
             ...(matchedOv?.mrp !== undefined ? { mrp: matchedOv.mrp } : {}),
             ...(matchedOv?.unit ? { unit: matchedOv.unit } : {}),
             ...(matchedOv?.inStock !== undefined ? { inStock: matchedOv.inStock } : {}),
@@ -190,7 +237,7 @@ export function useLiveProductMerger() {
           };
         });
     };
-  }, [prodState, mandiRates, vault]);
+  }, [prodState, mandiRates, vault, liveBackendProducts.byId, liveBackendProducts.products]);
 }
 
 /**
@@ -243,6 +290,27 @@ export function useLiveRentals(): MachineRentalCatalogItem[] {
       };
     });
   }, [srState, prodOverrides]);
+}
+
+/**
+ * Returns live RMC Plant Direct grades merged with Admin Media Vault & price overrides.
+ */
+export function useLiveRmcGrades(): (RmcGradeItem & { imageUrl: string })[] {
+  const sync = useSafeCononMasterSync();
+  const prodOverrides = sync?.state.products.overrides;
+
+  return useMemo(() => {
+    return LUCKNOW_RMC_GRADES.map((g) => {
+      const ov = prodOverrides?.[g.id] || prodOverrides?.[g.slug];
+      return {
+        ...g,
+        ...(ov?.price !== undefined ? { ratePerM3: ov.price } : {}),
+        ...(ov?.title ? { nameEn: ov.title } : {}),
+        ...(ov?.description ? { description: ov.description } : {}),
+        imageUrl: ov?.images?.[0]?.url || "",
+      };
+    });
+  }, [prodOverrides]);
 }
 
 /**

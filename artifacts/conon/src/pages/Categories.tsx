@@ -9,8 +9,7 @@ import { ProductCard, type Product } from "@/components/ProductCard";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { VariantSelectorSheet } from "@/components/VariantSelectorSheet";
 import { ALL_CATALOG_PRODUCTS } from "@/components/ProductFeed";
-import { useLiveProductMerger } from "@/hooks/useCononLiveData";
-import { HOME_CATEGORIES } from "@/data/homeCategories";
+import { useLiveProductMerger, useLiveCategories } from "@/hooks/useCononLiveData";
 import { CementCollectionStorefront } from "@/components/CementCollectionStorefront";
 import { PlywoodCollectionStorefront } from "@/components/PlywoodCollectionStorefront";
 import { FevicolCollectionStorefront } from "@/components/FevicolCollectionStorefront";
@@ -23,6 +22,7 @@ import { PaintingCollectionStorefront } from "@/components/PaintingCollectionSto
 import { CCTVCollectionStorefront } from "@/components/CCTVCollectionStorefront";
 import { TilesCollectionStorefront } from "@/components/TilesCollectionStorefront";
 import { LightingCollectionStorefront } from "@/components/LightingCollectionStorefront";
+import { SolarCollectionStorefront } from "@/components/SolarCollectionStorefront";
 import { SafetyCollectionStorefront } from "@/components/SafetyCollectionStorefront";
 import { CPVCPlumbingStorefront } from "@/components/CPVCPlumbingStorefront";
 import { SanitaryBathCollectionStorefront } from "@/components/SanitaryBathCollectionStorefront";
@@ -68,6 +68,9 @@ const CATEGORIES: string[] = [
 ];
 
 export function Categories() {
+  const liveCategories = useLiveCategories({ includeInactive: true });
+  const liveCategoriesRef = React.useRef(liveCategories);
+  liveCategoriesRef.current = liveCategories;
   const [active, setActive] = React.useState<string>(CATEGORIES[0] ?? "Cement");
   const [detailProduct, setDetailProduct] = React.useState<Product | null>(null);
   const [variantSheetProduct, setVariantSheetProduct] = React.useState<Product | null>(null);
@@ -116,9 +119,37 @@ export function Categories() {
     }
     if (
       window.location.pathname.includes("ceiling-panel-lights") ||
+      window.location.pathname.includes("concealed-junction-lights") ||
+      window.location.pathname.includes("cob-spot-lights") ||
+      window.location.pathname.includes("strip-profiles-drivers") ||
+      window.location.pathname.includes("led-battens") ||
+      window.location.pathname.includes("bulbs-inverter-emergency") ||
+      window.location.pathname.includes("cabinet-track-commercial") ||
+      window.location.pathname.includes("outdoor-flood-gate-lights") ||
       window.location.pathname.includes("lighting")
     ) {
       setActive("Lighting");
+      return;
+    }
+    if (window.location.pathname.includes("solar")) {
+      setActive("Solar");
+      return;
+    }
+    if (
+      window.location.pathname.includes("tools-hardware") ||
+      window.location.pathname.includes("power-tools") ||
+      window.location.pathname.includes("hand-measuring-tools") ||
+      window.location.pathname.includes("masonry-tools-hardware") ||
+      window.location.pathname.includes("grinders-cutters") ||
+      window.location.pathname.includes("rotary-drills") ||
+      window.location.pathname.includes("blades-discs-bits") ||
+      window.location.pathname.includes("hand-masonry-tools") ||
+      window.location.pathname.includes("measuring-levelling") ||
+      window.location.pathname.includes("fasteners-anchors") ||
+      window.location.pathname.includes("safety-utility") ||
+      window.location.pathname.includes("ladders-tapes-utility")
+    ) {
+      setActive("Power Tools");
       return;
     }
     if (
@@ -307,9 +338,17 @@ export function Categories() {
       }
       if (
         lower.includes("ceiling-panel") ||
+        lower.includes("concealed-junction") ||
+        lower.includes("cob-spot") ||
+        lower.includes("strip-profile") ||
+        lower.includes("batten") ||
         lower.includes("lighting")
       ) {
         setActive("Lighting");
+        return;
+      }
+      if (lower.includes("solar")) {
+        setActive("Solar");
         return;
       }
       if (
@@ -487,9 +526,17 @@ export function Categories() {
       }
       if (
         lower.includes("ceiling-panel") ||
+        lower.includes("concealed-junction") ||
+        lower.includes("cob-spot") ||
+        lower.includes("strip-profile") ||
+        lower.includes("batten") ||
         lower.includes("lighting")
       ) {
         setActive("Lighting");
+        return;
+      }
+      if (lower.includes("solar")) {
+        setActive("Solar");
         return;
       }
       if (
@@ -515,7 +562,7 @@ export function Categories() {
         setActive("Tiles");
         return;
       }
-      const homeMatch = HOME_CATEGORIES.find(
+      const homeMatch = liveCategoriesRef.current.find(
         (c) =>
           c.slug.toLowerCase() === catParam.toLowerCase() ||
           c.dbCategory.toLowerCase() === catParam.toLowerCase(),
@@ -725,6 +772,10 @@ export function Categories() {
             setActive("Lighting");
             return;
           }
+          if (cat.slug.includes("solar")) {
+            setActive("Solar");
+            return;
+          }
           const matched = CATEGORIES.find(
             (c) =>
               c.toLowerCase() === cat.dbCategory.toLowerCase() ||
@@ -734,7 +785,9 @@ export function Categories() {
         }}
       />
 
-      {active === "Power Tools" || active === "Tools" || active === "Safety" || active.toLowerCase().includes("power tool") || active.toLowerCase().includes("hand tool") || active.toLowerCase().includes("safety") || active.toLowerCase().includes("tool") ? (
+      {active === "Safety" || active.toLowerCase().includes("safety") || active.toLowerCase().includes("shoes") ? (
+        <SafetyCollectionStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "Power Tools" || active === "Tools" || active.toLowerCase().includes("power tool") || active.toLowerCase().includes("hand tool") || active.toLowerCase().includes("tool") ? (
         <PowerToolsSafetyStorefront onOpenDetail={setDetailProduct} />
       ) : active === "Bricks" || active === "Sand" || active === "Aggregates" || active.toLowerCase().includes("brick") || active.toLowerCase().includes("morang") || active.toLowerCase().includes("gitti") || active.toLowerCase().includes("aac") || active.toLowerCase().includes("paver") ? (
         <BricksMasonryStorefront onOpenDetail={setDetailProduct} />
@@ -762,6 +815,8 @@ export function Categories() {
         <TilesCollectionStorefront onOpenDetail={setDetailProduct} />
       ) : active === "Lighting" || active.toLowerCase().includes("light") ? (
         <LightingCollectionStorefront onOpenDetail={setDetailProduct} />
+      ) : active === "Solar" || active.toLowerCase().includes("solar") ? (
+        <SolarCollectionStorefront onOpenDetail={setDetailProduct} />
       ) : active === "Safety" || active.toLowerCase().includes("safety") || active.toLowerCase().includes("shoes") ? (
         <SafetyCollectionStorefront onOpenDetail={setDetailProduct} />
       ) : active === "Plumbing" || active.toLowerCase().includes("plumb") || active.toLowerCase().includes("cpvc") ? (

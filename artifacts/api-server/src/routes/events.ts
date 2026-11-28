@@ -1,5 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { ecosystemEngine } from "../services/ecosystemEngine";
+import { syncBus } from "../services/syncBus";
 import { verifyJwt } from "../lib/jwt";
 import { requireAdmin } from "../middleware/adminAuth";
 import { randomUUID } from "crypto";
@@ -98,6 +99,66 @@ router.post("/events/telemetry/driver-ping", (req: Request, res: Response) => {
   }
   const updated = ecosystemEngine.updateDriverLocation(driverId, lat, lng, zone);
   res.json({ success: !!updated, driver: updated });
+});
+
+/**
+ * GET /api/system/network-info
+ * Exposes laptop's local network (LAN Wi-Fi) IPv4 addresses, connected SSE clients,
+ * and recent Admin activity feed for the Executive Command Dashboard.
+ */
+router.get("/system/network-info", requireAdmin, (req: Request, res: Response) => {
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+  const lanIps = syncBus.getLanAddresses();
+  const primaryLanIp = lanIps[0] || "";
+  const requestHost = String(req.headers["x-forwarded-host"] || req.headers.host || "");
+  const proto = String(req.headers["x-forwarded-proto"] || req.protocol || "http");
+
+  res.json({
+    ok: true,
+    lanIps,
+    primaryLanIp,
+    storefrontPort: 5175,
+    adminPort: 5174,
+    backendPort: Number(process.env.PORT || 5001),
+    customerLanUrl: primaryLanIp ? `http://${primaryLanIp}:5175/home` : `${proto}://${requestHost}/home`,
+    adminLanUrl: primaryLanIp ? `http://${primaryLanIp}:5174/admin` : `${proto}://${requestHost}/admin`,
+    connectedSseClients: ecosystemEngine.getSSEClientCount(),
+    recentActivity: syncBus.getRecentActivity(20),
+    timestamp: new Date().toISOString(),
+  });
+});
+
+/**
+ * GET /api/admin/activity
+ * Recent Admin change audit feed.
+ */
+router.get("/admin/activity", requireAdmin, (_req: Request, res: Response) => {
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+  res.json({
+    ok: true,
+    items: syncBus.getRecentActivity(40),
+    connectedSseClients: ecosystemEngine.getSSEClientCount(),
+  });
+});
+
+/**
+ * POST /api/events/force-sync
+ * Broadcasts FORCE_SYNC across all connected LAN/DevTunnel/localhost clients via SSE + Socket.io.
+ */
+router.post("/events/force-sync", requireAdmin, (req: Request, res: Response) => {
+  const reason = String(req.body?.reason || "Manual Force Sync triggered by Admin").trim();
+  const entry = syncBus.publish({
+    type: "FORCE_SYNC",
+    action: "FORCE_SYNC",
+    summary: reason,
+    socketEvent: "conon:force_sync",
+    socketPayload: { reason, timestamp: Date.now() },
+  });
+  res.json({
+    ok: true,
+    connectedSseClients: ecosystemEngine.getSSEClientCount(),
+    entry,
+  });
 });
 
 export default router;

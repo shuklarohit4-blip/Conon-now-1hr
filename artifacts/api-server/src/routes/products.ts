@@ -1,95 +1,82 @@
-import { Router, type IRouter } from "express";
+import { Router, type IRouter, type Request, type Response } from "express";
+import multer from "multer";
+import { productStore } from "../services/productStore";
+import { PRODUCTS_UPLOADS_DIR } from "../lib/paths";
+import { requireAdmin } from "../middleware/adminAuth";
 import {
-  ProductModel,
-  CATALOG_PRODUCTS,
-  type IProduct,
-  mongoose,
-} from "@workspace/db";
+  MAX_IMAGE_UPLOAD_BYTES,
+  processAndSaveUploadedImage,
+  validateUploadedImage,
+} from "../utils/uploadSanitizer";
+import { logger } from "../lib/logger";
 
 const router: IRouter = Router();
 
-router.get("/products", async (req, res) => {
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: MAX_IMAGE_UPLOAD_BYTES },
+});
+
+function setNoStore(res: Response) {
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+}
+
+function toStorefrontShape(p: any) {
+  return {
+    ...p,
+    name: p.title,
+    price: p.sellingPrice,
+    subCategory: p.subcategory,
+    image: p.imageUrl,
+    images: (p.images || []).map((g: any) => g.url).filter(Boolean),
+    galleryImages: p.images || [],
+    specifications: p.keyInfo?.length ? p.keyInfo : p.specTags || [],
+    highlights: p.usageTips?.length ? p.usageTips : [],
+    highlightTiles: p.highlights || [],
+    bulkPricingTiers: (p.bulkSlabs || []).map((s: any) => ({
+      minQty: s.minQty,
+      pricePerUnit: s.price,
+      label: s.label,
+    })),
+    inStock: p.isInStock,
+    discountPercent:
+      p.mrp > p.sellingPrice ? Math.round(((p.mrp - p.sellingPrice) / p.mrp) * 100) : 0,
+  };
+}
+
+router.get("/products", async (req: Request, res: Response) => {
   try {
-    const categoryQuery = (req.query.categorySlug || req.query.category || "") as string;
-    const subCategoryQuery = (req.query.subCategory || "") as string;
-    const searchQuery = (req.query.search || req.query.q || "") as string;
-    const limitQuery = parseInt(req.query.limit as string) || 0;
+    setNoStore(res);
+    const categoryQuery = String(req.query.categorySlug || req.query.category || "").trim();
+    const subCategoryQuery = String(req.query.subCategory || "").trim();
+    const searchQuery = String(req.query.search || req.query.q || "").trim();
+    const limitQuery = parseInt(String(req.query.limit || "0"), 10) || 0;
 
-    let products: IProduct[] = [];
+    let items = await productStore.list({
+      category: categoryQuery || undefined,
+      search: searchQuery || undefined,
+      includeArchived: false,
+      limit: limitQuery > 0 ? limitQuery : undefined,
+    });
 
-    // Attempt DB fetch if connected
-    if (mongoose.connection.readyState === 1) {
-      try {
-        const filter: Record<string, any> = {};
-        if (categoryQuery) {
-          filter.$or = [
-            { categorySlug: categoryQuery },
-            { categoryName: new RegExp(`^${categoryQuery}$`, "i") },
-          ];
-        }
-        if (subCategoryQuery) {
-          filter.subCategory = new RegExp(`^${subCategoryQuery}$`, "i");
-        }
-        if (searchQuery) {
-          filter.$or = [
-            { name: new RegExp(searchQuery, "i") },
-            { title: new RegExp(searchQuery, "i") },
-            { brand: new RegExp(searchQuery, "i") },
-            { description: new RegExp(searchQuery, "i") },
-          ];
-        }
-
-        let query = ProductModel.find(filter).lean();
-        if (limitQuery > 0) {
-          query = query.limit(limitQuery);
-        }
-        const dbProducts = await query.exec();
-        if (dbProducts && dbProducts.length > 0) {
-          products = dbProducts as unknown as IProduct[];
-        }
-      } catch (err) {
-        console.warn("[Products API] DB query warning, falling back to static catalog:", err);
-      }
+    if (subCategoryQuery) {
+      items = items.filter(
+        (p) => p.subcategory?.toLowerCase() === subCategoryQuery.toLowerCase()
+      );
     }
 
-    // Fallback to static catalog if DB returned nothing or DB is offline
-    if (!products || products.length === 0) {
-      let filtered = [...CATALOG_PRODUCTS];
-      if (categoryQuery) {
-        filtered = filtered.filter(
-          (p) =>
-            p.categorySlug === categoryQuery ||
-            p.categoryName?.toLowerCase() === categoryQuery.toLowerCase()
-        );
-      }
-      if (subCategoryQuery) {
-        filtered = filtered.filter(
-          (p) => p.subCategory?.toLowerCase() === subCategoryQuery.toLowerCase()
-        );
-      }
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        filtered = filtered.filter(
-          (p) =>
-            p.name.toLowerCase().includes(q) ||
-            p.title.toLowerCase().includes(q) ||
-            p.brand.toLowerCase().includes(q) ||
-            p.description.toLowerCase().includes(q)
-        );
-      }
-      if (limitQuery > 0) {
-        filtered = filtered.slice(0, limitQuery);
-      }
-      products = filtered as unknown as IProduct[];
-    }
-
+    const products = items.map(toStorefrontShape);
     return res.json({
+      ok: true,
       success: true,
       count: products.length,
       products,
+      updatedAt: new Date().toISOString(),
     });
   } catch (err: any) {
-    console.error("[Products API] Error in /products:", err);
+    logger.error({ err }, "[Products API] Error in GET /products");
     return res.status(500).json({
       success: false,
       error: err?.message || "Failed to fetch products",
@@ -98,54 +85,62 @@ router.get("/products", async (req, res) => {
   }
 });
 
-router.get("/products/:idOrSlug", async (req, res) => {
+router.post(
+  "/products/upload-image",
+  requireAdmin,
+  upload.single("image"),
+  async (req: Request, res: Response) => {
+    try {
+      validateUploadedImage(req.file);
+      const slug = String(req.body?.slug || req.body?.productId || "product");
+      const saved = await processAndSaveUploadedImage({
+        buffer: req.file!.buffer,
+        dir: PRODUCTS_UPLOADS_DIR,
+        publicPrefix: "/uploads/products",
+        prefixSlug: `prod-${slug}`,
+        maxWidth: 1000,
+        maxHeight: 1000,
+      });
+
+      return res.json({
+        ok: true,
+        success: true,
+        url: saved.url,
+        rawPath: saved.rawPath,
+        filename: saved.filename,
+        sizeBytes: saved.sizeBytes,
+      });
+    } catch (err: any) {
+      return res.status(400).json({
+        ok: false,
+        success: false,
+        error: err?.message || "Product image upload failed",
+      });
+    }
+  }
+);
+
+router.get("/products/:idOrSlug", async (req: Request, res: Response) => {
   try {
-    const { idOrSlug } = req.params;
+    setNoStore(res);
+    const idOrSlug = String(req.params.idOrSlug || "").trim();
     if (!idOrSlug) {
       return res.status(400).json({ success: false, error: "Product id or slug required" });
     }
-
-    let product: IProduct | null = null;
-
-    // Attempt DB fetch if connected
-    if (mongoose.connection.readyState === 1) {
-      try {
-        if (mongoose.Types.ObjectId.isValid(idOrSlug)) {
-          product = await ProductModel.findById(idOrSlug).lean() as unknown as IProduct;
-        }
-        if (!product) {
-          product = await ProductModel.findOne({
-            $or: [{ slug: idOrSlug }, { id: idOrSlug }],
-          }).lean() as unknown as IProduct;
-        }
-      } catch (err) {
-        console.warn("[Products API] DB lookup warning, falling back to static catalog:", err);
-      }
-    }
-
-    // Fallback to static catalog
-    if (!product) {
-      const match = CATALOG_PRODUCTS.find(
-        (p) => p.slug === idOrSlug || p.id === idOrSlug
-      );
-      if (match) {
-        product = match as unknown as IProduct;
-      }
-    }
-
-    if (!product) {
+    const item = await productStore.getOne(idOrSlug);
+    if (!item) {
       return res.status(404).json({
         success: false,
         error: `Product not found for: ${idOrSlug}`,
       });
     }
-
     return res.json({
+      ok: true,
       success: true,
-      product,
+      product: toStorefrontShape(item),
     });
   } catch (err: any) {
-    console.error("[Products API] Error in /products/:idOrSlug:", err);
+    logger.error({ err }, "[Products API] Error in GET /products/:idOrSlug");
     return res.status(500).json({
       success: false,
       error: err?.message || "Failed to fetch product",

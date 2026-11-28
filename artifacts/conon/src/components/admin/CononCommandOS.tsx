@@ -54,11 +54,12 @@ import {
   Receipt,
   Trash2,
   Landmark,
+  Activity,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAuthContext } from "@/context/AuthContext";
 import { useAdminCommand } from "@/context/AdminCommandContext";
-import { useFourPanelRelay } from "@/context/FourPanelRelayContext";
+import { LUCKNOW_PARTNER_HUBS, useFourPanelRelay, type RelayOrderStatus } from "@/context/FourPanelRelayContext";
 import { useCononMasterSync } from "@/context/CononMasterSyncContext";
 import { ADMIN_JWT_KEY, JWT_STORAGE_KEY } from "@/lib/authApi";
 import { SocketStatusPill, useSocketStatus } from "@/services/socket";
@@ -67,15 +68,35 @@ import { AdminKycWarRoom } from "@/components/kyc/AdminKycWarRoom";
 import { feedbackSync, type DisputeTicket, type SiteDnaProfile } from "@/services/feedbackSync";
 import { AdminCatalogStudio } from "@/components/admin/AdminCatalogStudio";
 import { AdminMediaVaultStudio } from "@/components/admin/AdminMediaVaultStudio";
-import { Layers as VaultLayersIcon } from "lucide-react";
+import { AdminLiveSyncNetworkBar } from "@/components/admin/AdminLiveSyncNetworkBar";
+import { AdminStorefrontMerchandisingPanel } from "@/components/admin/AdminStorefrontMerchandisingPanel";
+import { AdminHomeBannersStudio } from "@/components/admin/AdminHomeBannersStudio";
+import { AdminSearchStudio } from "@/components/admin/AdminSearchStudio";
+import { AdminOrdersControlTower } from "@/components/admin/AdminOrdersControlTower";
+import { AdminDirectoryPanel } from "@/components/admin/AdminDirectoryPanel";
+import { AdminQuickCommandPalette } from "@/components/admin/AdminQuickCommandPalette";
+import { Layers as VaultLayersIcon, Megaphone, Users } from "lucide-react";
 import { AdminAccountsGst } from "@/components/admin/AdminAccountsGst";
 import { AdminTreasuryControlCenter } from "@/components/admin/AdminTreasuryControlCenter";
+import { AdminServiceabilityPanel } from "@/components/admin/AdminServiceabilityPanel";
+import { AdminTurnkeyBuildPanel } from "@/components/admin/AdminTurnkeyBuildPanel";
+import { AdminLeadsQuoteDesk } from "@/components/admin/AdminLeadsQuoteDesk";
+import { AdminAuditLogsPanel } from "@/components/admin/AdminAuditLogsPanel";
+import { appendAdminAuditLog } from "@/services/adminAuditLog";
 import { EscrowBankTransferModal, type EscrowReleaseTarget } from "@/components/admin/EscrowBankTransferModal";
 import { fetchGstReport, generateGstReportPdf } from "@/services/adminAccountsGstService";
 import { servicesRentalsSync } from "@/services/servicesRentalsSync";
+import { rmcSync, type RmcConvoyOrder } from "@/services/rmcSync";
 
 export type AdminOSModule =
   | "founder_home"
+  | "home_banners_studio"
+  | "search_studio"
+  | "category_studio"
+  | "product_master"
+  | "merchandising"
+  | "orders_tower"
+  | "directory"
   | "dispatch"
   | "mandi_hedge"
   | "escrow"
@@ -87,7 +108,62 @@ export type AdminOSModule =
   | "accounts_gst"
   | "services_rentals"
   | "media_vault"
-  | "khata_bank";
+  | "khata_bank"
+  | "leads_desk"
+  | "audit_logs";
+
+type AdminRbacRole = "SUPER_ADMIN" | "DISPATCH_MANAGER" | "ACCOUNTS_CONTROL";
+
+const RBAC_ALLOWED_MODULES: Record<AdminRbacRole, Set<AdminOSModule>> = {
+  SUPER_ADMIN: new Set<AdminOSModule>([
+    "founder_home",
+    "home_banners_studio",
+    "search_studio",
+    "category_studio",
+    "product_master",
+    "merchandising",
+    "orders_tower",
+    "directory",
+    "dispatch",
+    "mandi_hedge",
+    "escrow",
+    "bill_xray",
+    "vault_risk",
+    "boq_khata",
+    "kyc_war_room",
+    "catalog_studio",
+    "accounts_gst",
+    "services_rentals",
+    "media_vault",
+    "khata_bank",
+    "leads_desk",
+    "audit_logs",
+  ]),
+  DISPATCH_MANAGER: new Set<AdminOSModule>([
+    "founder_home",
+    "dispatch",
+    "orders_tower",
+    "leads_desk",
+    "directory",
+    "kyc_war_room",
+    "services_rentals",
+    "audit_logs",
+  ]),
+  ACCOUNTS_CONTROL: new Set<AdminOSModule>([
+    "founder_home",
+    "mandi_hedge",
+    "escrow",
+    "bill_xray",
+    "boq_khata",
+    "khata_bank",
+    "accounts_gst",
+    "product_master",
+    "category_studio",
+    "catalog_studio",
+    "media_vault",
+    "audit_logs",
+  ]),
+};
 
 /* ─────────────────────────────────────────────────────────────────────────
    ADMIN SERVICES & RENTALS MODULE (SAC 9954 / 9973)
@@ -98,19 +174,22 @@ function AdminServicesRentalsModule({ isDark }: { isDark: boolean }) {
   const [serviceBkgs, setServiceBkgs] = React.useState<any[]>([]);
   const [rentalBkgs, setRentalBkgs] = React.useState<any[]>([]);
   const [fleetListings, setFleetListings] = React.useState<any[]>([]);
+  const [rmcOrders, setRmcOrders] = React.useState<RmcConvoyOrder[]>([]);
   const [loading, setLoading] = React.useState(true);
 
   const refresh = React.useCallback(async () => {
     setLoading(true);
     try {
-      const [sb, rb, fl] = await Promise.all([
+      const [sb, rb, fl, rmc] = await Promise.all([
         servicesRentalsSync.fetchServiceBookings(),
         servicesRentalsSync.fetchRentalBookings(),
         servicesRentalsSync.fetchFleetListings(),
+        rmcSync.fetchConvoyOrders(),
       ]);
       setServiceBkgs(sb || []);
       setRentalBkgs(rb || []);
       setFleetListings(fl || []);
+      setRmcOrders(rmc || []);
     } catch {
       // silent — will show empty tables
     } finally {
@@ -120,8 +199,12 @@ function AdminServicesRentalsModule({ isDark }: { isDark: boolean }) {
 
   React.useEffect(() => {
     refresh();
-    const unsub = servicesRentalsSync.subscribe(() => refresh());
-    return () => unsub();
+    const unsub1 = servicesRentalsSync.subscribe(() => refresh());
+    const unsub2 = rmcSync.subscribe(() => refresh());
+    return () => {
+      unsub1();
+      unsub2();
+    };
   }, [refresh]);
 
   const card = isDark
@@ -323,6 +406,48 @@ function AdminServicesRentalsModule({ isDark }: { isDark: boolean }) {
               </div>
             )}
           </div>
+
+          {/* ── CONON RMC PLANT DIRECT CONVOYS, 90-MIN FRESHNESS & E-WAY BILL GATE ── */}
+          <div className={card}>
+            <h3 className={`text-sm font-black mb-3 ${isDark ? "text-white" : "text-slate-800"}`}>
+              🏭 RMC Plant Direct Convoys &amp; 6-Cube Lab Compliance — {rmcOrders.length} active
+            </h3>
+            {rmcOrders.length === 0 ? (
+              <div className={`text-center py-6 text-xs ${isDark ? "text-slate-500" : "text-slate-400"}`}>
+                No RMC Plant Direct convoys yet (Zero-Dummy Clean Slate)
+              </div>
+            ) : (
+              <div className="space-y-2.5 text-xs">
+                {rmcOrders.map((o) => (
+                  <div
+                    key={o.id}
+                    className={`p-3 rounded-xl border flex flex-wrap items-center justify-between gap-2 ${
+                      isDark ? "bg-slate-900 border-slate-800" : "bg-slate-50 border-slate-200"
+                    }`}
+                  >
+                    <div>
+                      <div className="font-black">
+                        {o.shortId} • {o.gradeCode} ({o.volumeM3} m³ • {o.tmCount} TMs)
+                      </div>
+                      <div className="text-[11px] opacity-80">
+                        {o.customerName} ({o.lucknowZone}) • HSN {o.hsnCode} • ₹{o.totalAmount.toLocaleString("en-IN")}
+                        {o.ewayBillRequired && (
+                          <span className="ml-2 px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">
+                            {o.ewayBillNo ? `EWB: ${o.ewayBillNo}` : "UP E-Way Bill Gate (>=₹50k)"}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-500">
+                        {o.cubeLab.day28Mpa ? `28d: ${o.cubeLab.day28Mpa} MPa` : o.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
@@ -382,10 +507,34 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
   } = useAdminCommand();
 
   const [activeTab, setActiveTab] = useState<AdminOSModule>("founder_home");
+  const [adminRbacRole, setAdminRbacRole] = useState<AdminRbacRole>(() => {
+    const stored = typeof window !== "undefined" ? localStorage.getItem("conon_admin_role") : null;
+    if (stored === "DISPATCH_MANAGER" || stored === "ACCOUNTS_CONTROL" || stored === "SUPER_ADMIN") {
+      return stored;
+    }
+    return (user?.adminPermission as AdminRbacRole) || "SUPER_ADMIN";
+  });
+  useEffect(() => {
+    if (user?.adminPermission) {
+      setAdminRbacRole(user.adminPermission as AdminRbacRole);
+    }
+  }, [user?.adminPermission]);
+  const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [quickLaunchOpen, setQuickLaunchOpen] = useState(false);
   const quickLaunchRef = useRef<HTMLDivElement>(null);
   const socketStatus = useSocketStatus();
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setCmdPaletteOpen((v) => !v);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   // 3-state theme engine (persisted in localStorage: "auto" | "light" | "dark")
   const [themeMode, setThemeMode] = useState<"auto" | "light" | "dark">(() => {
@@ -525,6 +674,12 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
     updateMandiRate(skuId, landing, margin);
     const retailPrice = Math.round(landing * (1 + margin / 100));
     masterSync.updateMandiRate(skuId, retailPrice, `Margin ${margin}%`).catch(() => {});
+    appendAdminAuditLog({
+      category: "CATALOG_RATE",
+      action: "Updated Commodity Mandi Rate",
+      target: skuId,
+      details: `Landing ₹${landing} + ${margin}% margin -> Retail ₹${retailPrice}`,
+    });
   };
 
   // Voice Command Simulation
@@ -590,7 +745,7 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
   const handleCleanSlateReset = async () => {
     const pin = window.prompt("Enter Founder Admin PIN to execute Clean Slate Reset (Wipe test data):", "");
     if (!pin) return;
-    if (pin.trim() !== "2026") {
+    if (pin.trim() !== "2026" && pin.trim() !== "1407") {
       toast.error("Invalid Founder PIN. Clean Slate aborted.");
       return;
     }
@@ -601,7 +756,7 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
           "Content-Type": "application/json",
           "x-admin-key": "conon-lucknow-2026-admin-bypass",
         },
-        body: JSON.stringify({ pin: "2026" }),
+        body: JSON.stringify({ pin: "1407" }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -699,15 +854,69 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
     {
       id: "founder_home",
       labelHi: "Aaj Ka Kaam",
-      labelEn: "Founder Home",
-      label: "Aaj Ka Kaam",
+      labelEn: "Command Home",
+      label: "Command Home",
+      badge: "Live LAN",
       icon: LayoutDashboard,
+    },
+    {
+      id: "home_banners_studio",
+      labelHi: "Home & Banners",
+      labelEn: "Blinkit & Hero Studio",
+      label: "Home & Banners Studio",
+      badge: "Live Theme",
+      icon: Sparkles,
+    },
+    {
+      id: "search_studio",
+      labelHi: "Search Studio",
+      labelEn: "Hinglish, Parchi & Logs",
+      label: "Search & Discovery Studio",
+      badge: "Live Sync",
+      icon: Search,
+    },
+    {
+      id: "category_studio",
+      labelHi: "Category Studio",
+      labelEn: "Category Studio",
+      label: "Category Studio",
+      badge: "Drag Order",
+      icon: Layers,
+    },
+    {
+      id: "product_master",
+      labelHi: "Products & Pricing",
+      labelEn: "Products & Pricing",
+      label: "Products & Pricing",
+      badge: "Inline + CSV",
+      icon: Package,
+    },
+    {
+      id: "merchandising",
+      labelHi: "Banners & Settings",
+      labelEn: "Banners & Settings",
+      label: "Banners & Settings",
+      icon: Megaphone,
+    },
+    {
+      id: "orders_tower",
+      labelHi: "Orders Control",
+      labelEn: "Orders Tower",
+      label: "Orders Tower",
+      icon: Receipt,
+    },
+    {
+      id: "directory",
+      labelHi: "Partners & Drivers",
+      labelEn: "Partners & Drivers",
+      label: "Partners & Drivers",
+      icon: Users,
     },
     {
       id: "dispatch",
       labelHi: "Live Orders",
-      labelEn: "60-Min Dispatch",
-      label: "Live Orders",
+      labelEn: "60-Min Radar",
+      label: "Live Radar",
       badge: dhalaiLiveCount > 0 ? `${dhalaiLiveCount} Dhalai` : undefined,
       icon: Radio,
     },
@@ -796,7 +1005,31 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
       badge: undefined,
       icon: Truck,
     },
+    {
+      id: "leads_desk",
+      labelHi: "Leads & Quote Desk",
+      labelEn: "Solar • Parcha • BOQ",
+      label: "Leads & Quote Desk",
+      badge: "Live Leads",
+      icon: FileText,
+    },
+    {
+      id: "audit_logs",
+      labelHi: "Audit & Health",
+      labelEn: "Security & Audit Trail",
+      label: "Audit Logs",
+      icon: Activity,
+    },
   ];
+
+  const allowedSet = RBAC_ALLOWED_MODULES[adminRbacRole] || RBAC_ALLOWED_MODULES.SUPER_ADMIN;
+  const visibleTabs = tabs.filter((t) => allowedSet.has(t.id));
+
+  useEffect(() => {
+    if (!allowedSet.has(activeTab)) {
+      setActiveTab("founder_home");
+    }
+  }, [adminRbacRole, activeTab]);
 
   return (
     <div
@@ -1010,6 +1243,34 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
 
         {/* Right: STRICTLY 4 PRIMARY CONTROLS (Theme Switcher, Rain Mode, Quick Launch, Logout) */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* 1b. RBAC Role Badge & Switcher */}
+          <select
+            value={adminRbacRole}
+            onChange={(e) => {
+              const nextRole = e.target.value as AdminRbacRole;
+              setAdminRbacRole(nextRole);
+              try {
+                localStorage.setItem("conon_admin_role", nextRole);
+              } catch {}
+              appendAdminAuditLog({
+                category: "AUTH_RBAC",
+                action: "Switched Active RBAC View",
+                target: nextRole,
+              });
+              toast.info(`RBAC Role active: ${nextRole}`);
+            }}
+            aria-label="Admin RBAC Role"
+            className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black border outline-none cursor-pointer ${
+              isDark
+                ? "bg-[#0F172A] border-slate-800 text-amber-300"
+                : "bg-white border-slate-200 text-[#12357A]"
+            }`}
+          >
+            <option value="SUPER_ADMIN">Role: Super Admin</option>
+            <option value="DISPATCH_MANAGER">Role: Dispatch Mgr</option>
+            <option value="ACCOUNTS_CONTROL">Role: Accounts &amp; Rates</option>
+          </select>
+
           {/* 1. Compact Theme Switcher (Auto / Day / Night) */}
           <div
             className={`flex items-center p-0.5 rounded-xl border transition ${
@@ -1066,6 +1327,23 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
               <span className="hidden lg:inline">Night</span>
             </button>
           </div>
+
+          <button
+            type="button"
+            onClick={() => setCmdPaletteOpen(true)}
+            title="Quick Jump to any Product, Category, Order or Setting (Cmd/Ctrl + K)"
+            className={`hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer ${
+              isDark
+                ? "bg-slate-900 border-slate-700 text-slate-300 hover:text-white"
+                : "bg-white border-slate-300 text-slate-700 hover:text-slate-900"
+            }`}
+          >
+            <Search className="w-3.5 h-3.5 text-amber-400" />
+            <span>Quick Search</span>
+            <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-amber-300">
+              ⌘K
+            </kbd>
+          </button>
 
           {/* 2. Compact Rain Mode Toggle */}
           <button
@@ -1285,7 +1563,7 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
             Command Modules
           </div>
           <nav className="space-y-1">
-            {tabs.map((t) => {
+            {visibleTabs.map((t) => {
               const Icon = t.icon;
               const isActive = activeTab === t.id;
               return (
@@ -1361,7 +1639,7 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
         {/* Mobile Sub-Nav Drawer */}
         {mobileMenuOpen && (
           <div className={`md:hidden border-b p-3 space-y-1 ${isDark ? "bg-[#080D1A] border-slate-800" : "bg-white border-slate-200"}`}>
-            {tabs.map((t) => {
+            {visibleTabs.map((t) => {
               const Icon = t.icon;
               const isActive = activeTab === t.id;
               return (
@@ -1398,6 +1676,12 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
           ────────────────────────────────────────────────────────── */}
           {activeTab === "founder_home" && (
             <div className="space-y-6 max-w-7xl mx-auto">
+              {/* Live Network & LAN/SSE Sync Control Bar */}
+              <AdminLiveSyncNetworkBar
+                isDark={isDark}
+                onNavigateTab={(tabId) => setActiveTab(tabId as AdminOSModule)}
+              />
+
               {/* Header / Intro banner */}
               <div
                 className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-2xl border transition-colors ${
@@ -1619,6 +1903,171 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
                   >
                     Publish Banner
                   </button>
+                </div>
+              </div>
+
+              <AdminServiceabilityPanel isDark={isDark} />
+
+              <AdminTurnkeyBuildPanel isDark={isDark} />
+
+              {/* HERO BANNER LIVE STUDIO */}
+              <div
+                className={`p-5 rounded-2xl border space-y-3 ${
+                  isDark ? "bg-[#0F172A] border-slate-800" : "bg-white border-slate-200 shadow-sm"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <div>
+                    <h3 className={`text-sm font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      Hero Banner Live Studio (CONON-NOW Live Site Command Hero)
+                    </h3>
+                    <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                      Live-edit campaign pill, headline override, default mode &amp; optional backdrop photo (&lt; 500ms sync).
+                    </p>
+                  </div>
+                </div>
+
+                {(() => {
+                  const cur = masterSync.state.globalControls.liveHero || {
+                    campaignPill: "CONON INFRABUILT • 7+ Yrs • 150+ Projects",
+                    headlineOverride: "",
+                    defaultMode: "materials" as const,
+                    backdropImageUrl: "",
+                  };
+                  const patchHero = (patch: Partial<typeof cur>) =>
+                    masterSync.patchMasterState(
+                      { globalControls: { liveHero: { ...cur, ...patch } } },
+                      "globalControls"
+                    );
+                  return (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+                      <div>
+                        <label className="text-[10px] font-bold text-slate-400 block mb-1">Campaign Pill</label>
+                        <input
+                          type="text"
+                          value={cur.campaignPill}
+                          onChange={(e) => patchHero({ campaignPill: e.target.value })}
+                          className={`w-full px-3 py-1.5 rounded-xl border text-xs font-bold ${
+                            isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                          }`}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold text-slate-400 block mb-1">Headline Override (Optional)</label>
+                        <input
+                          type="text"
+                          value={cur.headlineOverride}
+                          placeholder="Site Materials Delivered in 60 Minutes."
+                          onChange={(e) => patchHero({ headlineOverride: e.target.value })}
+                          className={`w-full px-3 py-1.5 rounded-xl border text-xs font-bold ${
+                            isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                          }`}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold text-slate-400 block mb-1">Default Active Hero Mode</label>
+                        <select
+                          value={cur.defaultMode}
+                          onChange={(e) => patchHero({ defaultMode: e.target.value as any })}
+                          className={`w-full px-3 py-1.5 rounded-xl border text-xs font-bold ${
+                            isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                          }`}
+                        >
+                          <option value="materials">60-Min Express Materials</option>
+                          <option value="build_rmc">Turnkey Build &amp; RMC Direct</option>
+                          <option value="crew_fleet">Verified Karigar &amp; Machines</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold text-slate-400 block mb-1">Backdrop Photo URL (Optional)</label>
+                        <input
+                          type="text"
+                          value={cur.backdropImageUrl}
+                          placeholder="/real-products/hero/site.webp"
+                          onChange={(e) => patchHero({ backdropImageUrl: e.target.value })}
+                          className={`w-full px-3 py-1.5 rounded-xl border text-xs font-mono ${
+                            isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                          }`}
+                        />
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* POWER TRIO SPOTLIGHT DOCK LIVE CONTROLS */}
+              <div
+                className={`p-5 rounded-2xl border space-y-3 ${
+                  isDark ? "bg-[#0F172A] border-slate-800" : "bg-white border-slate-200 shadow-sm"
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <h3 className={`text-sm font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      Power Trio Spotlight Dock (/home Above-the-Fold)
+                    </h3>
+                    <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                      Live-toggle visibility and badge text for Builder Zone, Skilled Services &amp; Machines on Rent cards.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const cur = masterSync.state.globalControls.powerTrioSpotlight || {
+                        enabled: true,
+                        builderBadge: "PRO BUILDERS & GHAR CONSTRUCTION",
+                        servicesBadge: "60-MIN VISIT • ESCROW SAFE",
+                        rentalsBadge: "DIGITAL HMR BILLING • ZERO FRAUD",
+                      };
+                      masterSync.patchMasterState(
+                        { globalControls: { powerTrioSpotlight: { ...cur, enabled: !cur.enabled } } },
+                        "globalControls"
+                      );
+                      toast.success(`Power Trio Spotlight Dock ${!cur.enabled ? "Visible" : "Hidden"} on /home`);
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-black border cursor-pointer ${
+                      (masterSync.state.globalControls.powerTrioSpotlight?.enabled ?? true)
+                        ? "bg-emerald-500/15 text-emerald-500 border-emerald-500/40"
+                        : "bg-slate-700/40 text-slate-400 border-slate-700"
+                    }`}
+                  >
+                    {(masterSync.state.globalControls.powerTrioSpotlight?.enabled ?? true) ? "DOCK VISIBLE ✓" : "DOCK HIDDEN"}
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+                  {(
+                    [
+                      { key: "builderBadge", label: "Builder Zone Badge" },
+                      { key: "servicesBadge", label: "Skilled Services Badge" },
+                      { key: "rentalsBadge", label: "Machines on Rent Badge" },
+                    ] as const
+                  ).map((f) => {
+                    const cur = masterSync.state.globalControls.powerTrioSpotlight || {
+                      enabled: true,
+                      builderBadge: "PRO BUILDERS & GHAR CONSTRUCTION",
+                      servicesBadge: "60-MIN VISIT • ESCROW SAFE",
+                      rentalsBadge: "DIGITAL HMR BILLING • ZERO FRAUD",
+                    };
+                    return (
+                      <div key={f.key}>
+                        <label className="text-[10px] font-bold text-slate-400 block mb-1">{f.label}</label>
+                        <input
+                          type="text"
+                          value={cur[f.key]}
+                          onChange={(e) =>
+                            masterSync.patchMasterState(
+                              { globalControls: { powerTrioSpotlight: { ...cur, [f.key]: e.target.value } } },
+                              "globalControls"
+                            )
+                          }
+                          className={`w-full px-3 py-1.5 rounded-xl border text-xs font-bold ${
+                            isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                          }`}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -2481,6 +2930,105 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
                   </button>
                 </div>
               </div>
+
+              {/* Live 4-Panel Relay Orders Queue (Customer Checkout / Quote-to-Order -> Vendor -> Driver -> Admin) */}
+              {relay.state.orders.length > 0 && (
+                <div className="bg-[#0F172A] border border-amber-400/40 rounded-2xl p-4 space-y-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-sm font-black text-amber-300 flex items-center gap-2">
+                      <Zap className="w-4 h-4" />
+                      Live 4-Panel Order Lifecycle Queue ({relay.state.orders.length})
+                    </h3>
+                    <span className="text-[11px] font-bold text-slate-400">
+                      Customer → Vendor Accept/Reject → Pickup OTP → Driver Delivery OTP → Escrow
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                    {relay.state.orders.map((ro) => (
+                      <div
+                        key={ro.id}
+                        className={`p-3.5 rounded-xl border text-xs space-y-2.5 ${
+                          ro.status === "REJECTED_NEEDS_REASSIGN"
+                            ? "bg-rose-950/40 border-rose-500/60"
+                            : "bg-slate-900/90 border-slate-800"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-mono font-black text-amber-400">#{ro.shortId}</span>
+                              <span className="px-2 py-0.5 rounded-md bg-blue-500/20 text-sky-300 text-[10px] font-black">
+                                {ro.status}
+                              </span>
+                            </div>
+                            <p className="font-bold text-white mt-1">
+                              {ro.customerName} • ₹{ro.totalAmount.toLocaleString("en-IN")}
+                            </p>
+                            <p className="text-[11px] text-slate-400">{ro.itemsSummary}</p>
+                            {ro.rejectionReason && (
+                              <p className="text-[11px] font-bold text-rose-300 mt-1">
+                                ⚠ Rejected: {ro.rejectionReason}
+                              </p>
+                            )}
+                          </div>
+                          <div className="text-right font-mono text-[10.5px] text-slate-400">
+                            <div>Pickup OTP: <strong className="text-amber-300">{ro.pickupOtp}</strong></div>
+                            <div>Drop OTP: <strong className="text-emerald-300">{ro.customerOtp}</strong></div>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800">
+                          <select
+                            value={ro.hubName}
+                            onChange={(e) => {
+                              relay.reassignOrderHub(ro.id, e.target.value);
+                              appendAdminAuditLog({
+                                category: "ORDER_DISPATCH",
+                                action: "Reassigned Order Hub",
+                                target: `#${ro.shortId}`,
+                                details: `Assigned to ${e.target.value}`,
+                              });
+                            }}
+                            className="px-2 py-1 rounded-lg bg-slate-950 border border-slate-700 text-[11px] font-bold text-white"
+                          >
+                            {LUCKNOW_PARTNER_HUBS.map((h) => (
+                              <option key={h.id} value={h.name}>
+                                Hub: {h.name}
+                              </option>
+                            ))}
+                          </select>
+
+                          <div className="flex items-center gap-1.5">
+                            <select
+                              value={ro.status}
+                              onChange={(e) => {
+                                const nextSt = e.target.value as RelayOrderStatus;
+                                relay.adminOverrideOrderStatus(ro.id, nextSt, "Admin Force Override");
+                                appendAdminAuditLog({
+                                  category: "ORDER_DISPATCH",
+                                  action: `Override Status -> ${nextSt}`,
+                                  target: `#${ro.shortId}`,
+                                });
+                              }}
+                              className="px-2 py-1 rounded-lg bg-slate-950 border border-slate-700 text-[11px] font-bold text-amber-300"
+                            >
+                              <option value="NEW_INCOMING">PLACED / NEW_INCOMING</option>
+                              <option value="ACCEPTED_PACKING">VENDOR_ACCEPTED</option>
+                              <option value="LOADED_DISPATCHED">PACKED_READY</option>
+                              <option value="OUT_FOR_DELIVERY">IN_TRANSIT</option>
+                              <option value="ARRIVED_AT_SITE">ARRIVED_AT_SITE</option>
+                              <option value="DELIVERED_PENDING_ESCROW">DELIVERED</option>
+                              <option value="ESCROW_SETTLED">ESCROW_SETTLED</option>
+                              <option value="REJECTED_NEEDS_REASSIGN">REJECTED_NEEDS_REASSIGN</option>
+                              <option value="CANCELLED">CANCELLED</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Order Radar Cards Grid / Zero-State */}
               {filteredOrders.length === 0 ? (
@@ -3786,6 +4334,28 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
             </div>
           )}
 
+          {activeTab === "home_banners_studio" && (
+            <AdminHomeBannersStudio isDark={isDark} />
+          )}
+          {activeTab === "search_studio" && (
+            <AdminSearchStudio isDark={isDark} />
+          )}
+          {activeTab === "category_studio" && (
+            <AdminCatalogStudio initialSubTab="categories" />
+          )}
+          {activeTab === "product_master" && (
+            <AdminCatalogStudio initialSubTab="products" />
+          )}
+          {activeTab === "merchandising" && (
+            <AdminStorefrontMerchandisingPanel isDark={isDark} />
+          )}
+          {activeTab === "orders_tower" && (
+            <AdminOrdersControlTower isDark={isDark} />
+          )}
+          {activeTab === "directory" && (
+            <AdminDirectoryPanel isDark={isDark} />
+          )}
+
           {/* ─────────────────────────────────────────────────────────
               MODULE 7: KYC & COMPLIANCE WAR ROOM
           ────────────────────────────────────────────────────────── */}
@@ -3867,8 +4437,25 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
               MODULE 10: SKILLED SERVICES & HEAVY RENTALS (SAC 9954/9973)
           ────────────────────────────────────────────────────────── */}
           {activeTab === "services_rentals" && <AdminServicesRentalsModule isDark={isDark} />}
+
+          {/* ─────────────────────────────────────────────────────────
+              MODULE 11: LEADS & CUSTOM QUOTE DESK (SOLAR, PARCHA, TURNKEY)
+          ────────────────────────────────────────────────────────── */}
+          {activeTab === "leads_desk" && <AdminLeadsQuoteDesk isDark={isDark} />}
+
+          {/* ─────────────────────────────────────────────────────────
+              MODULE 12: SYSTEM HEALTH & AUDIT LOGS
+          ────────────────────────────────────────────────────────── */}
+          {activeTab === "audit_logs" && <AdminAuditLogsPanel isDark={isDark} />}
         </main>
       </div>
+
+      {/* Global Command Search (Cmd/Ctrl + K) */}
+      <AdminQuickCommandPalette
+        open={cmdPaletteOpen}
+        onClose={() => setCmdPaletteOpen(false)}
+        onNavigateModule={(moduleId) => setActiveTab(moduleId as AdminOSModule)}
+      />
 
       {/* Anti-Fraud From -> To Bank Transfer Verification Slip Modal */}
       <EscrowBankTransferModal
@@ -3877,6 +4464,12 @@ export function CononCommandOS({ onSwitchToClassic }: CononCommandOSProps) {
         onClose={() => setEscrowReleaseTarget(null)}
         onConfirmReleased={(escrowId) => {
           releaseEscrowPayout(escrowId);
+          appendAdminAuditLog({
+            category: "PAYOUT_SETTLEMENT",
+            action: "Released Escrow Payout",
+            target: escrowId,
+            details: "Vendor escrow bank transfer verified & released",
+          });
         }}
       />
 

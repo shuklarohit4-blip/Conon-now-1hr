@@ -15,6 +15,18 @@ import { computeBill } from "../services/pricing";
 import { CreditExceededError } from "../middleware/errorHandler";
 import { emitNewOrder, schedule180sCascade } from "../socket";
 import { ecosystemEngine } from "../services/ecosystemEngine";
+import { syncBus } from "../services/syncBus";
+import {
+  evaluatePaymentPolicy,
+  isPodRequested,
+  isVerifiedPrepaidEscrow,
+} from "../utils/paymentPolicy";
+import {
+  checkPincodeServiceability,
+  extractPincodeFromText,
+} from "../utils/serviceabilityPolicy";
+import { evaluateDispatchCompliance } from "../utils/lucknowTrafficPolicy";
+import { getLiveServiceabilityConfig } from "./serviceability";
 
 const router: IRouter = Router();
 const DEFAULT_CREDIT_LIMIT = 100000;
@@ -157,6 +169,46 @@ router.get("/orders/:id", (req, res) => {
 router.post("/orders", async (req, res, next) => {
   try {
     const body = PlaceOrderBody.parse(req.body);
+    const rawPin =
+      (req.body as any)?.deliveryPincode ||
+      (req.body as any)?.sitePincode ||
+      extractPincodeFromText(body.deliveryAddress);
+    const pinCheck = checkPincodeServiceability(rawPin, getLiveServiceabilityConfig());
+    if (!pinCheck.serviceable) {
+      res.status(400).json({
+        ok: false,
+        code: "PINCODE_NOT_SERVICEABLE",
+        allowedPincodes: pinCheck.allowedPincodes,
+        error: pinCheck.messageEn,
+      });
+      return;
+    }
+
+    const trafficCheck = evaluateDispatchCompliance({
+      domain: "MATERIAL",
+      totalWeightKg: Number((req.body as any)?.totalWeightKg || 0),
+      pincode: pinCheck.pincode,
+      dispatchMode: (req.body as any)?.dispatchMode,
+      assignedVehicleMaxKg: (req.body as any)?.assignedVehicleMaxKg !== undefined
+        ? Number((req.body as any)?.assignedVehicleMaxKg)
+        : undefined,
+    });
+    if (trafficCheck.overloadBlocked) {
+      res.status(400).json({
+        ok: false,
+        code: "OVERLOAD_BLOCKED",
+        error: trafficCheck.overloadReason,
+      });
+      return;
+    }
+    if (trafficCheck.illegalDaytimeHeavy) {
+      res.status(400).json({
+        ok: false,
+        code: "NO_ENTRY_BLOCKED",
+        error: "Lucknow Daytime Heavy No-Entry Active (06:00–23:00). Select Legal Night Window (11 PM – 6 AM) or Daytime Split Dispatch.",
+      });
+      return;
+    }
     let items: any[] = [];
 
     try {
@@ -191,6 +243,34 @@ router.post("/orders", async (req, res, next) => {
       0n,
     );
     const total = centsToDecimal(totalCents);
+    const numericTotal = decimalToNumber(total);
+    const paymentMode = String((req.body as any)?.paymentMode || "PAY_ON_DELIVERY");
+    const paymentStatus = String((req.body as any)?.paymentStatus || (isPodRequested(paymentMode) ? "PAY_ON_DELIVERY" : ""));
+    const paymentRef = (req.body as any)?.paymentRef as string | undefined;
+
+    const policy = evaluatePaymentPolicy({
+      domain: "MATERIAL",
+      items: items.map((i) => ({ category: i.category, materialId: i.materialId, name: i.name })),
+      grandTotal: numericTotal,
+    });
+
+    if (!policy.allowPod && isPodRequested(paymentMode)) {
+      res.status(400).json({
+        ok: false,
+        code: "PREPAID_REQUIRED",
+        error: "Upfront prepaid payment is mandatory for RMC, Services, Machine Rentals, and orders of ₹10,000 or above.",
+      });
+      return;
+    }
+
+    if ((policy.requirePrepaid || !isPodRequested(paymentMode)) && !isVerifiedPrepaidEscrow(paymentStatus, paymentRef)) {
+      res.status(402).json({
+        ok: false,
+        code: "PAYMENT_REQUIRED",
+        error: "Verified upfront escrow payment is required before order creation.",
+      });
+      return;
+    }
     const now = new Date();
     const externalId = randomUUID();
     const orderItems = items.map((item) => ({
@@ -273,6 +353,12 @@ router.post("/orders", async (req, res, next) => {
 
     if (ecoOrder) {
       schedule180sCascade(ecoOrder, (ecoOrder as any).hubId || "hub-naka");
+      syncBus.publish({
+        type: "ORDERS_UPDATED",
+        entityId: ecoOrder.id,
+        action: "CREATE",
+        summary: `New 60-Min Order ${ecoOrder.shortId} (₹${Math.round(ecoOrder.totalAmount)})`,
+      });
     }
     res.json({
       id: ecoOrder ? ecoOrder.id : order.externalId,
@@ -304,6 +390,46 @@ router.post("/orders", async (req, res, next) => {
 router.post("/orders/checkout", async (req, res, next) => {
   try {
     const body = CheckoutOrderBody.parse(req.body);
+    const rawPin =
+      (req.body as any)?.deliveryPincode ||
+      (req.body as any)?.sitePincode ||
+      extractPincodeFromText(body.deliveryAddress);
+    const pinCheck = checkPincodeServiceability(rawPin, getLiveServiceabilityConfig());
+    if (!pinCheck.serviceable) {
+      res.status(400).json({
+        ok: false,
+        code: "PINCODE_NOT_SERVICEABLE",
+        allowedPincodes: pinCheck.allowedPincodes,
+        error: pinCheck.messageEn,
+      });
+      return;
+    }
+
+    const trafficCheck = evaluateDispatchCompliance({
+      domain: "MATERIAL",
+      totalWeightKg: Number((req.body as any)?.totalWeightKg || 0),
+      pincode: pinCheck.pincode,
+      dispatchMode: (req.body as any)?.dispatchMode,
+      assignedVehicleMaxKg: (req.body as any)?.assignedVehicleMaxKg !== undefined
+        ? Number((req.body as any)?.assignedVehicleMaxKg)
+        : undefined,
+    });
+    if (trafficCheck.overloadBlocked) {
+      res.status(400).json({
+        ok: false,
+        code: "OVERLOAD_BLOCKED",
+        error: trafficCheck.overloadReason,
+      });
+      return;
+    }
+    if (trafficCheck.illegalDaytimeHeavy) {
+      res.status(400).json({
+        ok: false,
+        code: "NO_ENTRY_BLOCKED",
+        error: "Lucknow Daytime Heavy No-Entry Active (06:00–23:00). Select Legal Night Window (11 PM – 6 AM) or Daytime Split Dispatch.",
+      });
+      return;
+    }
     const isB2B = body.isB2B ?? false;
     const materialIds = body.items.map((item) => item.materialId);
     let materials: any[] = [];
@@ -334,6 +460,34 @@ router.post("/orders/checkout", async (req, res, next) => {
       resolvedItems.map(({ price, quantity, category }) => ({ price, quantity, category })),
       { isB2B, distanceKm: body.distanceKm },
     );
+    const paymentMode = String((req.body as any)?.paymentMode || (isB2B && body.contractorId ? "KHATA" : "PAY_ON_DELIVERY"));
+    const paymentStatus = String((req.body as any)?.paymentStatus || "");
+    const paymentRef = (req.body as any)?.paymentRef as string | undefined;
+
+    const policy = evaluatePaymentPolicy({
+      domain: "MATERIAL",
+      items: resolvedItems.map((i) => ({ category: i.category, materialId: i.materialId, name: i.name })),
+      grandTotal: bill.total,
+    });
+
+    if (!policy.allowPod && isPodRequested(paymentMode)) {
+      res.status(400).json({
+        ok: false,
+        code: "PREPAID_REQUIRED",
+        error: "Upfront prepaid payment is mandatory for RMC, Services, Machine Rentals, and orders of ₹10,000 or above.",
+      });
+      return;
+    }
+
+    const isKhataB2B = isB2B && Boolean(body.contractorId) && paymentMode.toUpperCase() === "KHATA";
+    if (!isKhataB2B && (policy.requirePrepaid || !isPodRequested(paymentMode)) && !isVerifiedPrepaidEscrow(paymentStatus, paymentRef)) {
+      res.status(402).json({
+        ok: false,
+        code: "PAYMENT_REQUIRED",
+        error: "Verified upfront escrow payment is required before order creation.",
+      });
+      return;
+    }
     const orderItems = resolvedItems.map((item) => ({
       id: randomUUID(),
       materialId: item.materialId,
@@ -467,6 +621,12 @@ router.post("/orders/checkout", async (req, res, next) => {
 
     if (ecoOrder) {
       schedule180sCascade(ecoOrder, (ecoOrder as any).hubId || "hub-naka");
+      syncBus.publish({
+        type: "ORDERS_UPDATED",
+        entityId: ecoOrder.id,
+        action: "CREATE",
+        summary: `New 60-Min Order ${ecoOrder.shortId} (₹${Math.round(ecoOrder.totalAmount)})`,
+      });
     }
 
     res.json({

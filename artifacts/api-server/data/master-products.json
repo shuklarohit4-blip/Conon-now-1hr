@@ -1,0 +1,166 @@
+{
+  "items": [
+    {
+      "id": "prod-cctv-networking-cp-z43q",
+      "slug": "cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q",
+      "title": "CP Plus 4MP Wi-Fi Full Color PT Camera - CP-Z43Q",
+      "brand": "CP PLUS",
+      "categorySlug": "cctv-networking",
+      "subcategory": "Cameras",
+      "unit": "Piece",
+      "mrp": 7200,
+      "sellingPrice": 3984,
+      "bulkPrice": 3745,
+      "bulkMinQty": 10,
+      "cashbackPercent": 2,
+      "stockQty": 120,
+      "hsnCode": "38245010",
+      "gstRate": 18,
+      "vehicleRequirement": "BIKE",
+      "imageUrl": "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp",
+      "images": [
+        {
+          "id": "img_1",
+          "url": "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp",
+          "slot": "front",
+          "caption": "Front View",
+          "isPrimary": true,
+          "order": 0
+        }
+      ],
+      "description": "High-definition 4MP PT camera engineered for residential and commercial site surveillance. Delivers vivid full-color video streaming day and night with intelligent motion tracking and instant smartphone alerts. Built with robust weatherproof casing and dual-band Wi-Fi for uninterrupted monitoring.",
+      "specTags": [
+        {
+          "label": "Brand",
+          "value": "CP PLUS"
+        },
+        {
+          "label": "Model / Series",
+          "value": "CP-Z43Q Wi-Fi PT Series"
+        },
+        {
+          "label": "Resolution",
+          "value": "4 Megapixel (2560 x 1440)"
+        },
+        {
+          "label": "Connectivity",
+          "value": "2.4GHz Wi-Fi + RJ45 Ethernet Port"
+        },
+        {
+          "label": "Night Vision Range",
+          "value": "Up to 30 Meters Full Color"
+        },
+        {
+          "label": "Audio",
+          "value": "Two-Way Audio with Noise Cancellation"
+        }
+      ],
+      "highlights": [
+        {
+          "label": "Brand",
+          "value": "CP PLUS"
+        },
+        {
+          "label": "Model / Series",
+          "value": "CP-Z43Q Wi-Fi PT Series"
+        },
+        {
+          "label": "Resolution",
+          "value": "4 Megapixel (2560 x 1440)"
+        },
+        {
+          "label": "Connectivity",
+          "value": "2.4GHz Wi-Fi + RJ45 Ethernet Port"
+        },
+        {
+          "label": "Night Vision Range",
+          "value": "Up to 30 Meters Full Color"
+        },
+        {
+          "label": "Audio",
+          "value": "Two-Way Audio with Noise Cancellation"
+        }
+      ],
+      "keyInfo": [
+        {
+          "label": "Brand",
+          "value": "CP PLUS"
+        },
+        {
+          "label": "Model / Series",
+          "value": "CP-Z43Q Wi-Fi PT Series"
+        },
+        {
+          "label": "Resolution",
+          "value": "4 Megapixel (2560 x 1440)"
+        },
+        {
+          "label": "Connectivity",
+          "value": "2.4GHz Wi-Fi + RJ45 Ethernet Port"
+        },
+        {
+          "label": "Night Vision Range",
+          "value": "Up to 30 Meters Full Color"
+        },
+        {
+          "label": "Audio",
+          "value": "Two-Way Audio with Noise Cancellation"
+        },
+        {
+          "label": "Storage Support",
+          "value": "MicroSD up to 256GB / Cloud Storage"
+        },
+        {
+          "label": "Warranty",
+          "value": "2 Years Manufacturer Warranty"
+        },
+        {
+          "label": "Delivery Time",
+          "value": "60 Mins Express Dispatch"
+        }
+      ],
+      "usageTips": [
+        "4MP Quad HD resolution with crystal clear zoom details",
+        "360° horizontal pan and 90° vertical tilt motorized control",
+        "Smart full-color night vision with dual high-power white LEDs",
+        "Full duplex two-way audio with built-in noise cancelling microphone",
+        "Supports up to 256GB MicroSD card and secure cloud storage"
+      ],
+      "variants": [
+        {
+          "id": "var-cp-z43q-1",
+          "label": "Single Camera Unit",
+          "unit": "Piece",
+          "price": 3984,
+          "mrp": 7200,
+          "stock": 50
+        },
+        {
+          "id": "var-cp-z43q-2",
+          "label": "Dual Pack (2 Cameras)",
+          "unit": "Pack of 2",
+          "price": 7800,
+          "mrp": 14400,
+          "stock": 25
+        },
+        {
+          "id": "var-cp-z43q-4",
+          "label": "Site Quad Kit (4 Cameras)",
+          "unit": "Pack of 4",
+          "price": 15200,
+          "mrp": 28800,
+          "stock": 15
+        }
+      ],
+      "bulkSlabs": [],
+      "isInStock": true,
+      "isFeatured": false,
+      "isArchived": false,
+      "adminLocked": true,
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-11-27T07:27:55.251Z"
+    }
+  ],
+  "deletedIds": [],
+  "updatedAt": "2026-11-27T07:27:55.251Z"
+}

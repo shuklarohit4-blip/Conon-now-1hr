@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { z } from "zod";
 import { catalogEngine } from "../services/catalogEngine";
+import { catalogSyncService } from "../services/catalogSyncService";
 import { requireAdmin } from "../middleware/adminAuth";
 
 export interface BuilderKitLead {
@@ -251,6 +252,24 @@ router.post("/builder-kit/leads", (req: Request, res: Response) => {
   try {
     const parsed = CreateLeadSchema.parse(req.body);
     const lead = leadManager.create(parsed);
+    void catalogSyncService.recordLead({
+      leadRefId: lead.id,
+      leadType: ((req.body as any)?.leadType === "SOLAR_MVVNL" || (req.body as any)?.leadType === "PARCHA_BOQ"
+        ? (req.body as any).leadType
+        : "TURNKEY_SERVICE"),
+      customerName: lead.name,
+      phone: lead.phone,
+      locality: lead.lucknowZone,
+      payload: {
+        builtUpSqFt: lead.builtUpSqFt,
+        qualityTier: lead.qualityTier,
+        wallType: lead.wallType,
+        floors: lead.floors,
+        grandTotal: lead.grandTotal,
+        notes: lead.notes,
+        startDate: lead.startDate,
+      },
+    });
     res.status(201).json({
       success: true,
       lead,

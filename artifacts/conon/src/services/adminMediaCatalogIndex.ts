@@ -4,6 +4,8 @@
  * Skilled Services (SAC 9954), Heavy Machine Rentals (SAC 9973), and Admin custom items.
  */
 import { CATALOG_PRODUCTS } from "@/data/catalogData";
+import { LUCKNOW_RMC_GRADES } from "@/data/lucknowRmcCatalog";
+import { LUCKNOW_32_SAFETY_SKUS } from "@/data/lucknowSafetyCatalog";
 import { ALL_45_ADHESIVES_PRODUCTS } from "@/data/adhesivesData";
 import { ALL_26_DOOR_HARDWARE_PRODUCTS } from "@/data/doorHardwareData";
 import { ALL_20_FURNITURE_HARDWARE_PRODUCTS } from "@/data/furnitureHardwareData";
@@ -26,7 +28,9 @@ import { CCTV_PRODUCTS } from "@/components/CCTVCollectionStorefront";
 import { TILES_STONE_PRODUCTS } from "@/components/TilesCollectionStorefront";
 import { TILE_PRODUCTS } from "@/components/TileAdhesivesCollectionStorefront";
 import { LIGHTING_PRODUCTS } from "@/components/LightingCollectionStorefront";
+import { SOLAR_PRODUCTS } from "@/components/SolarCollectionStorefront";
 import { SAFETY_PRODUCTS } from "@/components/SafetyCollectionStorefront";
+import { TOOL_SKUS } from "@/components/PowerToolsSafetyStorefront";
 import { MECHANICAL_LOCKS_PRODUCTS } from "@/components/LocksCollectionStorefront";
 import { HINGES_PRODUCTS, DRAWER_CHANNELS_PRODUCTS } from "@/components/HingesCollectionStorefront";
 import {
@@ -39,6 +43,7 @@ import {
 import { SHOWCASE_PRODUCTS_BY_CATEGORY } from "@/lib/catalogProducts";
 import { FALLBACK_SERVICE_CATALOG, FALLBACK_RENTAL_CATALOG } from "@/services/servicesRentalsSync";
 import { getAllVaultOverridesList } from "@/services/productMediaVault";
+import { LUCKNOW_SITE_KITS } from "@/data/siteKitsData";
 
 export interface VaultCategoryDefinition {
   slug: string;
@@ -67,6 +72,9 @@ export interface UnifiedVaultItem {
   hsnCode: string;
   gstRate: number;
   isInStock: boolean;
+  rentPricePerDay?: number;
+  dcrSubsidyEligible?: boolean;
+  stqcCompliant?: boolean;
   itemKind: "PRODUCT" | "SERVICE" | "RENTAL";
 }
 
@@ -86,10 +94,14 @@ export const VAULT_CATEGORIES: VaultCategoryDefinition[] = [
   { slug: "door-hardware-locks", name: "Door Hardware & Locks", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "83014090" },
   { slug: "cctv-networking", name: "CCTV & Networking", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "85258090" },
   { slug: "home-appliances", name: "Home Appliances", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "85161000" },
-  { slug: "lighting", name: "Lighting & Luminaires", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "94054090" },
-  { slug: "power-tools-safety", name: "Power Tools & Site Safety", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "84672100" },
+  { slug: "lighting", name: "Lighting & Architectural LED", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "94054090" },
+  { slug: "solar-rooftop-power", name: "Solar & Rooftop Power", group: "MATERIALS", defaultGstRate: 12, defaultHsnOrSac: "85414300" },
+  { slug: "tools-hardware", name: "Tools, Power Tools & Hardware", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "8467" },
+  { slug: "safety-ppe-workwear", name: "Site Safety & PPE (32 SKUs)", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "6506" },
+  { slug: "site-kits", name: "1-Click Lucknow Site Kits", group: "MATERIALS", defaultGstRate: 18, defaultHsnOrSac: "8467" },
   { slug: "skilled-services", name: "Skilled Services (SAC 9954)", group: "SERVICES", defaultGstRate: 18, defaultHsnOrSac: "9954" },
-  { slug: "heavy-machine-rentals", name: "Heavy Machine Rentals (SAC 9973)", group: "RENTALS", defaultGstRate: 18, defaultHsnOrSac: "9973" },
+  { slug: "heavy-machine-rentals", name: "Heavy Machine Rentals (20 Machines)", group: "RENTALS", defaultGstRate: 18, defaultHsnOrSac: "9973" },
+  { slug: "rmc-plant-direct", name: "RMC Plant Direct (16 Grades & Mixes)", group: "RENTALS", defaultGstRate: 18, defaultHsnOrSac: "38245010" },
 ];
 
 function extractBullets(raw: any): string[] {
@@ -140,6 +152,13 @@ function toUnified(
     hsnCode: String(raw.hsnCode || raw.sacCode || catDef.defaultHsnOrSac),
     gstRate: Number(raw.gstPercent ?? raw.gstRate ?? catDef.defaultGstRate),
     isInStock: raw.inStock !== false && raw.isActive !== false && !raw.isSoldOut,
+    ...(raw.rentPricePerDay !== undefined ? { rentPricePerDay: Number(raw.rentPricePerDay) } : {}),
+    ...(raw.dcrEligible !== undefined || raw.dcrSubsidyEligible !== undefined
+      ? { dcrSubsidyEligible: Boolean(raw.dcrEligible ?? raw.dcrSubsidyEligible) }
+      : {}),
+    ...(raw.stqcCompliant !== undefined || raw.stqcVerified !== undefined
+      ? { stqcCompliant: Boolean(raw.stqcCompliant ?? raw.stqcVerified) }
+      : {}),
     itemKind,
   };
 }
@@ -201,7 +220,8 @@ function buildBaseCatalogItems(): UnifiedVaultItem[] {
   pushAll(CCTV_PRODUCTS, "cctv-networking");
   pushAll(homeAppliancesProducts, "home-appliances");
   pushAll(LIGHTING_PRODUCTS, "lighting");
-  pushAll([...ALL_9_TOOLS_SAFETY_PRODUCTS, ...SAFETY_PRODUCTS], "power-tools-safety");
+  pushAll(SOLAR_PRODUCTS, "solar-rooftop-power");
+  pushAll([...ALL_9_TOOLS_SAFETY_PRODUCTS, ...SAFETY_PRODUCTS], "safety-ppe-workwear");
 
   // Also include Homepage shelf showcase items & any remaining CATALOG_PRODUCTS
   const showcaseToVaultCat: Record<string, string> = {
@@ -233,16 +253,71 @@ function buildBaseCatalogItems(): UnifiedVaultItem[] {
     else if (s.includes("cctv")) targetSlug = "cctv-networking";
     else if (s.includes("brick") || s.includes("sand") || s.includes("aac")) targetSlug = "bricks-sand-gitti-aac";
     else if (s.includes("adhes") || s.includes("fevicol") || s.includes("waterproof")) targetSlug = "fevicol-adhesives-sealants";
-    else if (s.includes("tool") || s.includes("safety")) targetSlug = "power-tools-safety";
+    else if (s.includes("safety") || s.includes("ppe")) targetSlug = "safety-ppe-workwear";
+    else if (s.includes("tool")) targetSlug = "tools-hardware";
     else if (s.includes("door") || s.includes("lock")) targetSlug = "door-hardware-locks";
     else if (s.includes("light")) targetSlug = "lighting";
+    else if (s.includes("solar")) targetSlug = "solar-rooftop-power";
     else if (s.includes("appli")) targetSlug = "home-appliances";
     pushAll([p], targetSlug);
   }
 
-  // Skilled Services (SAC 9954) & Heavy Machine Rentals (SAC 9973)
+  // Skilled Services (SAC 9954), Heavy Machine Rentals (SAC 9973), RMC Plant Direct & 32-SKU Lucknow Safety Studio
   pushAll(FALLBACK_SERVICE_CATALOG, "skilled-services", "SERVICE");
   pushAll(FALLBACK_RENTAL_CATALOG, "heavy-machine-rentals", "RENTAL");
+  pushAll(
+    LUCKNOW_32_SAFETY_SKUS.map((s) => ({
+      id: s.id,
+      slug: s.id,
+      title: s.title,
+      brand: s.brand,
+      subcategory: s.subCategoryId,
+      price: s.price,
+      mrp: s.mrp,
+      unit: s.unit,
+      hsnCode: s.hsnCode,
+      gstRate: s.gstRate,
+      description: s.specLine || s.title,
+      specBullets: [s.standardBadge || "ISI Certified", s.specLine || ""].filter(Boolean),
+    })),
+    "safety-ppe-workwear",
+    "PRODUCT"
+  );
+  pushAll(TOOL_SKUS, "tools-hardware", "PRODUCT");
+  pushAll(
+    LUCKNOW_SITE_KITS.map((k) => ({
+      id: k.id,
+      slug: k.id,
+      title: k.title,
+      brand: "CONON Site Kit",
+      subcategory: k.stageLabel,
+      price: k.kitPrice,
+      mrp: k.mrp,
+      unit: "kit",
+      hsnCode: "8467",
+      gstRate: 18,
+      description: k.previewSummary,
+      specBullets: k.items.map((it) => `${it.name} (${it.spec})`),
+    })),
+    "site-kits",
+    "PRODUCT"
+  );
+  pushAll(
+    LUCKNOW_RMC_GRADES.map((g) => ({
+      id: g.id,
+      slug: g.slug,
+      title: g.nameEn,
+      brand: `RMC ${g.gradeCode}`,
+      price: g.ratePerM3,
+      unit: "m³",
+      hsnCode: g.hsnCode,
+      gstRate: g.gstRate,
+      description: g.description,
+      specBullets: [g.slumpSpecMm, `${g.targetMpa28Day} MPa`, g.recommendedFor],
+    })),
+    "rmc-plant-direct",
+    "PRODUCT"
+  );
 
   cachedBaseItems = Array.from(byId.values());
   return cachedBaseItems;

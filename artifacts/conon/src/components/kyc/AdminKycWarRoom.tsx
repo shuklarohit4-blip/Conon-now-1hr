@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useKyc, PartnerKycApplication, KycDocument, KycDocStatus } from "@/context/KycContext";
+import { AdminComplianceKillSwitchPanel } from "@/components/kyc/AdminComplianceKillSwitchPanel";
 import { toast } from "sonner";
 
 export function AdminKycWarRoom() {
@@ -156,6 +157,11 @@ export function AdminKycWarRoom() {
             <span className="hidden sm:inline">Sync Queue</span>
           </button>
         </div>
+      </div>
+
+      {/* Security, Compliance Shield & Physical Field Inspection */}
+      <div className="px-4 sm:px-6 pt-4">
+        <AdminComplianceKillSwitchPanel applications={applications} />
       </div>
 
       {/* ─────────────────────────────────────────────────────────────

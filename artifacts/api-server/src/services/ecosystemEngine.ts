@@ -197,6 +197,10 @@ export class EcosystemEngine {
 
   /* ════════════════════════ SSE Management ════════════════════════ */
 
+  public getSSEClientCount(): number {
+    return this.sseClients.size;
+  }
+
   public addSSEClient(client: SSEClient) {
     this.sseClients.set(client.id, client);
     logger.info({ clientId: client.id, role: client.role, filterId: client.filterId }, "SSE client connected");
@@ -307,11 +311,37 @@ export class EcosystemEngine {
     );
 
     const v = matched || allVendors[0];
+    if (v) {
+      return {
+        vendorId: v.id,
+        vendorStore: v.shopName,
+        vendorPhone: v.phone,
+        vendorAddress: v.hubAddress,
+      };
+    }
+
+    // Category-aware Lucknow Authorized Hub fallback when operating in Clean Slate mode
+    if (catLower.includes("cement") || catLower.includes("steel") || catLower.includes("brick") || catLower.includes("sand")) {
+      return {
+        vendorId: "hub-chinhat",
+        vendorStore: "Chinhat & Transport Nagar Heavy Yard",
+        vendorPhone: "+91 98390 33440",
+        vendorAddress: "Faizabad Road, Chinhat Industrial Depot, Lucknow 226028",
+      };
+    }
+    if (catLower.includes("paint") || catLower.includes("tile") || catLower.includes("solar") || catLower.includes("plumb")) {
+      return {
+        vendorId: "hub-gomti",
+        vendorStore: "Gomti Nagar Express Depot",
+        vendorPhone: "+91 98390 22330",
+        vendorAddress: "Vibhuti Khand, Gomti Nagar, Lucknow 226010",
+      };
+    }
     return {
-      vendorId: v.id,
-      vendorStore: v.shopName,
-      vendorPhone: v.phone,
-      vendorAddress: v.hubAddress,
+      vendorId: "hub-latouche",
+      vendorStore: "Latouche Road Electrical & Hardware Hub",
+      vendorPhone: "+91 98390 11220",
+      vendorAddress: "Latouche Road & Naka Hindola Mandi, Lucknow 226001",
     };
   }
 
@@ -514,6 +544,44 @@ export class EcosystemEngine {
     // Broadcast SSE
     this.broadcast("order_updated", this.maskOrderForRole(order, "ADMIN"));
 
+    return { success: true, order };
+  }
+
+  public assignOrderPartnerDriver(
+    orderId: string,
+    opts: {
+      vendorId?: string;
+      vendorStore?: string;
+      vendorPhone?: string;
+      driverId?: string;
+      driverName?: string;
+      driverPhone?: string;
+      driverVehiclePlate?: string;
+      driverVehicleModel?: string;
+    }
+  ): { success: boolean; order?: EcosystemOrder; message?: string } {
+    const order = this.orders.get(orderId);
+    if (!order) return { success: false, message: `Order ${orderId} not found` };
+
+    if (opts.vendorId) order.vendorId = opts.vendorId;
+    if (opts.vendorStore) order.vendorStore = opts.vendorStore;
+    if (opts.vendorPhone) order.vendorPhone = opts.vendorPhone;
+    if (opts.driverId) {
+      const drv = this.drivers.get(opts.driverId);
+      order.driverId = opts.driverId;
+      order.driverName = opts.driverName || drv?.name || order.driverName;
+      order.driverPhone = opts.driverPhone || drv?.phone || order.driverPhone;
+      order.driverVehiclePlate = opts.driverVehiclePlate || drv?.vehiclePlate || order.driverVehiclePlate;
+      order.driverVehicleModel = opts.driverVehicleModel || drv?.vehicleModel || order.driverVehicleModel;
+    }
+    order.timeline.push({
+      status: order.status,
+      timestamp: new Date().toISOString(),
+      actor: "ADMIN",
+      note: `Admin updated assignment (${order.vendorStore}${order.driverName ? ` / Driver: ${order.driverName}` : ""})`,
+    });
+    this.saveStore();
+    this.broadcast("order_updated", this.maskOrderForRole(order, "ADMIN"));
     return { success: true, order };
   }
 

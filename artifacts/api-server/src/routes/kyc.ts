@@ -1,11 +1,13 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { kycEngine, type KycDocStatus, type KycDocument } from "../services/kycEngine";
 import { requireAdmin } from "../middleware/adminAuth";
+import { sendFast2SmsOtp, verifyFast2SmsOtp } from "../lib/fast2sms";
 import { emitKycEvent, logDispatchEvent, LUCKNOW_HUBS, getIo, adminRoom, vendorRoom, driverRoom } from "../socket";
 import { ecosystemEngine } from "../services/ecosystemEngine";
 import { vendorEngine } from "../services/vendorEngine";
 import { servicesRentalsEngine } from "../services/servicesRentalsEngine";
 import { logger } from "../lib/logger";
+import { isBlacklistedInDb } from "./compliance";
 
 const router: IRouter = Router();
 
@@ -56,7 +58,7 @@ router.post(["/kyc/penny-drop", "/api/kyc/penny-drop"], (req: Request, res: Resp
  * POST /api/kyc/vendor/submit
  * Submits vendor registration + paper verification package.
  */
-router.post(["/kyc/vendor/submit", "/api/kyc/vendor/submit"], (req: Request, res: Response) => {
+router.post(["/kyc/vendor/submit", "/api/kyc/vendor/submit"], async (req: Request, res: Response) => {
   try {
     const {
       firmName,
@@ -74,6 +76,20 @@ router.post(["/kyc/vendor/submit", "/api/kyc/vendor/submit"], (req: Request, res
 
     if (!firmName || !ownerName || !phone) {
       res.status(400).json({ success: false, error: "Firm name, owner name, and phone are mandatory." });
+      return;
+    }
+
+    const blk = await isBlacklistedInDb({
+      phone,
+      pan: req.body?.pan,
+      gstin: req.body?.gstin,
+    });
+    if (blk.blocked) {
+      res.status(403).json({
+        success: false,
+        error: "This mobile/PAN/GSTIN/vehicle is permanently restricted under CONON Safety Policy.",
+        reason: blk.reason,
+      });
       return;
     }
 
@@ -173,7 +189,7 @@ router.post(["/kyc/vendor/submit", "/api/kyc/vendor/submit"], (req: Request, res
  * POST /api/kyc/driver/submit
  * Submits driver registration + RTO verification package.
  */
-router.post(["/kyc/driver/submit", "/api/kyc/driver/submit"], (req: Request, res: Response) => {
+router.post(["/kyc/driver/submit", "/api/kyc/driver/submit"], async (req: Request, res: Response) => {
   try {
     const fullName = String(req.body?.fullName || req.body?.name || "").trim();
     const phone = String(req.body?.phone || "").trim();
@@ -186,6 +202,16 @@ router.post(["/kyc/driver/submit", "/api/kyc/driver/submit"], (req: Request, res
 
     if (!fullName || !phone || !vehiclePlate) {
       res.status(400).json({ success: false, error: "Full name, phone, and vehicle registration plate are required." });
+      return;
+    }
+
+    const blk = await isBlacklistedInDb({ phone, vehicleNo: vehiclePlate });
+    if (blk.blocked) {
+      res.status(403).json({
+        success: false,
+        error: "This mobile/PAN/GSTIN/vehicle is permanently restricted under CONON Safety Policy.",
+        reason: blk.reason,
+      });
       return;
     }
 
@@ -542,7 +568,7 @@ router.post(["/kyc/admin/applications/:appId/decision", "/api/kyc/admin/applicat
  * POST /api/auth/partner-login
  * Strict authentication + KYC status lookup for Vendors and Drivers.
  */
-router.post(["/auth/partner-login", "/api/auth/partner-login"], (req: Request, res: Response) => {
+router.post(["/auth/partner-login", "/api/auth/partner-login"], async (req: Request, res: Response) => {
   try {
     const rawPhone = String(req.body?.phone || "");
     const otp = String(req.body?.otp || "").trim();
@@ -555,20 +581,40 @@ router.post(["/auth/partner-login", "/api/auth/partner-login"], (req: Request, r
       return res.status(400).json({ success: false, error: "Valid 10-digit mobile number required (+91)." });
     }
 
-    // Step 1: Send OTP
+    const blk = await isBlacklistedInDb({ phone: cleanPhone });
+    if (blk.blocked) {
+      return res.status(403).json({
+        success: false,
+        error: "This mobile/PAN/GSTIN/vehicle is permanently restricted under CONON Safety Policy.",
+      });
+    }
+
+    // Step 1: Send OTP via Fast2SMS
     if (action === "send_otp") {
+      const otpRes = await sendFast2SmsOtp(cleanPhone);
+      if (!otpRes.ok) {
+        return res.status(400).json({
+          success: false,
+          error: otpRes.error || otpRes.message || "Failed to send OTP via SMS.",
+        });
+      }
       return res.json({
         success: true,
         otpSent: true,
         phone: cleanPhone,
-        message: `OTP sent to +91 ${cleanPhone}. (Use 1234 for instant verification)`,
+        provider: otpRes.provider,
+        message: otpRes.message,
+        ...(otpRes.devOtp ? { devOtp: otpRes.devOtp } : {}),
       });
     }
 
-    // Step 2: Verify OTP
-    // Allow '1234' or any 4-digit code in test environment
-    if (otp !== "1234" && otp.length !== 4) {
-      return res.status(401).json({ success: false, error: "Invalid OTP. Please enter the 4-digit verification code." });
+    // Step 2: Verify OTP strictly against issued Fast2SMS challenge
+    const verification = verifyFast2SmsOtp(cleanPhone, otp);
+    if (!verification.ok) {
+      return res.status(401).json({
+        success: false,
+        error: verification.error || "Invalid or expired OTP.",
+      });
     }
 
     // Look up applicant in KYC engine
@@ -691,13 +737,13 @@ router.post(["/kyc/admin/simulate-expiry", "/api/kyc/admin/simulate-expiry"], re
 
 /**
  * POST /api/admin/clean-slate
- * Complete Zero-Dummy Clean Slate Production Reset (Protected by PIN 2026 + requireAdmin)
+ * Complete Zero-Dummy Clean Slate Production Reset (Protected by PIN 1407 + requireAdmin)
  */
 router.post(["/admin/clean-slate", "/api/admin/clean-slate"], requireAdmin, async (req: Request, res: Response) => {
   try {
     const pin = String(req.body?.pin || "").trim();
-    if (pin !== "2026") {
-      res.status(403).json({ success: false, error: "Invalid Security PIN. Enter '2026' to confirm clean slate reset." });
+    if (pin !== "1407") {
+      res.status(403).json({ success: false, error: "Invalid Security PIN. Enter '1407' to confirm clean slate reset." });
       return;
     }
 

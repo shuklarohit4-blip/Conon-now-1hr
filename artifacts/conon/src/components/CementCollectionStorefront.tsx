@@ -4021,6 +4021,16 @@ export function CementCollectionStorefront({
           }}
         />
       )}
+      {/* Slim Architectural Contextual Cross-Link */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 pb-4">
+        <a
+          href="/kits?stage=slab"
+          className="flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-amber-300 text-xs font-black hover:bg-slate-800 transition"
+        >
+          <span>Ordering for a full floor? Switch to Stage-Wise Builder Kit &amp; save up to 12%</span>
+          <span>Builder Kit →</span>
+        </a>
+      </div>
     </div>
   );
 }

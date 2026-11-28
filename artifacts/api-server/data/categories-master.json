@@ -1,0 +1,1186 @@
+[
+  {
+    "id": "cat_rmc_ready_mix",
+    "catId": 1,
+    "slug": "rmc-ready-mix-concrete",
+    "name": "RMC (Ready Mix Concrete)",
+    "nameHi": "रेडी मिक्स कंक्रीट (प्लांट डायरेक्ट)",
+    "title": "RMC (Ready Mix Concrete)",
+    "titleHi": "रेडी मिक्स कंक्रीट (प्लांट डायरेक्ट)",
+    "department": "Civil & Structural",
+    "dbCategory": "rmc",
+    "route": "/category/rmc-ready-mix-concrete",
+    "imageUrl": "/images/home-categories/rmc-ready-mix-concrete.webp?v=1795763381696",
+    "image": "/images/home-categories/rmc-ready-mix-concrete.webp?v=1795763381696",
+    "badge": "PLANT DIRECT",
+    "badgeColor": "#F2B705",
+    "categoryType": "RMC",
+    "defaultHsn": "38245010",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Transit Mixer (6 m³) / Loader",
+    "displayOrder": 1,
+    "sortOrder": 1,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "M10–M50 Structural Grades",
+        "slug": "standard-grades",
+        "itemCount": 8
+      },
+      {
+        "name": "SCC, Waterproof & Green RMC",
+        "slug": "speciality-mixes",
+        "itemCount": 9
+      },
+      {
+        "name": "Narrow-Lane Dry Mix Bags (40kg)",
+        "slug": "dry-mix-bags",
+        "itemCount": 1
+      },
+      {
+        "name": "Boom Placer & Line Pumps",
+        "slug": "pumps-admixtures",
+        "itemCount": 6
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T13:15:49.935Z"
+  },
+  {
+    "id": "cat_cctv_networking",
+    "catId": 101,
+    "slug": "cctv-networking",
+    "name": "CCTV & Networking",
+    "nameHi": "सी.सी.टी.वी. और नेटवर्किंग",
+    "title": "CCTV & Networking",
+    "titleHi": "सी.सी.टी.वी. और नेटवर्किंग",
+    "department": "Electrical",
+    "dbCategory": "electrical",
+    "route": "/collections/cctv-networking",
+    "imageUrl": "/images/home-categories/cctv-networking.webp",
+    "image": "/images/home-categories/cctv-networking.webp",
+    "badge": "New Tech",
+    "badgeColor": "#1D4ED8",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "85258900",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 2,
+    "sortOrder": 2,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "CCTV Cameras",
+        "slug": "cctv-cameras",
+        "itemCount": 24
+      },
+      {
+        "name": "DVR & NVR Recorders",
+        "slug": "dvr-nvr-recorders",
+        "itemCount": 16
+      },
+      {
+        "name": "Surveillance Storage",
+        "slug": "surveillance-storage",
+        "itemCount": 8
+      },
+      {
+        "name": "CCTV & LAN Cables",
+        "slug": "cctv-lan-cables",
+        "itemCount": 12
+      },
+      {
+        "name": "Power & PoE Switches",
+        "slug": "power-poe-switches",
+        "itemCount": 14
+      },
+      {
+        "name": "Routers, Racks & Accessories",
+        "slug": "routers-racks-accessories",
+        "itemCount": 18
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_cpvc_plumbing",
+    "catId": 2,
+    "slug": "cpvc-plumbing-tanks",
+    "name": "CPVC Plumbing & Overhead Tanks",
+    "nameHi": "सी.पी.वी.सी. प्लंबिंग और पानी की टंकियां",
+    "title": "CPVC Plumbing & Overhead Tanks",
+    "titleHi": "सी.पी.वी.सी. प्लंबिंग और पानी की टंकियां",
+    "department": "Plumbing, Sanitary & Bath",
+    "dbCategory": "plumbing",
+    "route": "/categories?cat=cpvc-plumbing-tanks",
+    "imageUrl": "/images/home-categories/cpvc-plumbing-tanks.webp",
+    "image": "/images/home-categories/cpvc-plumbing-tanks.webp",
+    "badge": "Bulk Rates",
+    "badgeColor": "#F2B705",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "39172390",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 3,
+    "sortOrder": 3,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "CPVC Pipes",
+        "slug": "cpvc-pipes",
+        "itemCount": 15
+      },
+      {
+        "name": "UPVC Pipes & Fittings",
+        "slug": "upvc-pipes-fittings",
+        "itemCount": 2
+      },
+      {
+        "name": "SWR Drainage Pipes",
+        "slug": "swr-drainage-pipes",
+        "itemCount": 4
+      },
+      {
+        "name": "CPVC Fittings, Brass Inserts & Valves",
+        "slug": "cpvc-fittings-valves",
+        "itemCount": 16
+      },
+      {
+        "name": "Solvent Cements & Adhesives",
+        "slug": "solvent-cements-adhesives",
+        "itemCount": 4
+      },
+      {
+        "name": "Overhead Water Tanks & Accessories",
+        "slug": "overhead-water-tanks",
+        "itemCount": 15
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_cement_civil",
+    "catId": 3,
+    "slug": "cement-civil-works",
+    "name": "Cement, TMT Sariya & Chemicals",
+    "nameHi": "सीमेंट और सिविल कार्य",
+    "title": "Cement, TMT Sariya & Chemicals",
+    "titleHi": "सीमेंट और सिविल कार्य",
+    "department": "Civil & Structural",
+    "dbCategory": "cement",
+    "route": "/collections/cement-1",
+    "imageUrl": "/images/home-categories/cement-civil-works.webp",
+    "image": "/images/home-categories/cement-civil-works.webp",
+    "badge": "Bulk Prices",
+    "badgeColor": "#F2B705",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "25232910",
+    "defaultGstRate": 28,
+    "defaultGst": 28,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 4,
+    "sortOrder": 4,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Cement & White Cement",
+        "slug": "cement-white-cement",
+        "itemCount": 16
+      },
+      {
+        "name": "TMT Sariya (Steel Bars)",
+        "slug": "tmt-sariya",
+        "itemCount": 20
+      },
+      {
+        "name": "Binding Wire & Steel Accessories",
+        "slug": "binding-wire-accessories",
+        "itemCount": 4
+      },
+      {
+        "name": "Waterproofing & Bonding Chemicals",
+        "slug": "waterproofing-chemicals",
+        "itemCount": 22
+      },
+      {
+        "name": "Tile Adhesives & Block Mortar",
+        "slug": "tile-adhesives-block-mortar",
+        "itemCount": 8
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_plywood_boards",
+    "catId": 4,
+    "slug": "plywood-boards",
+    "name": "Plywood, Doors & Hardware",
+    "nameHi": "प्लाईवुड और बोर्ड्स",
+    "title": "Plywood, Doors & Hardware",
+    "titleHi": "प्लाईवुड और बोर्ड्स",
+    "department": "Civil & Interiors",
+    "dbCategory": "wood",
+    "route": "/categories?cat=plywood-boards",
+    "imageUrl": "/images/home-categories/plywood-boards.webp",
+    "image": "/images/home-categories/plywood-boards.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "44123990",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 5,
+    "sortOrder": 5,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Plywood (8x4 ft)",
+        "slug": "plywood-8x4",
+        "itemCount": 6
+      },
+      {
+        "name": "Flush Doors (30mm)",
+        "slug": "flush-doors-30mm",
+        "itemCount": 4
+      },
+      {
+        "name": "Laminates (1mm)",
+        "slug": "laminates-1mm",
+        "itemCount": 2
+      },
+      {
+        "name": "Hardware (Locks, Closers & Hinges)",
+        "slug": "hardware-locks-hinges",
+        "itemCount": 4
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_fevicol_adhesives",
+    "catId": 5,
+    "slug": "fevicol-adhesives-sealants",
+    "name": "Fevicol, Adhesives & Sealants",
+    "nameHi": "फेविकोल, चिपकने वाले पदार्थ और सीलेंट",
+    "title": "Fevicol, Adhesives & Sealants",
+    "titleHi": "फेविकोल, चिपकने वाले पदार्थ और सीलेंट",
+    "department": "Furniture & Architectural Hardware",
+    "dbCategory": "adhesives",
+    "route": "/categories?cat=fevicol-adhesives-sealants",
+    "imageUrl": "/images/home-categories/fevicol-adhesives-sealants.webp",
+    "image": "/images/home-categories/fevicol-adhesives-sealants.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "35069190",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 6,
+    "sortOrder": 6,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Wood & Laminate Adhesives",
+        "slug": "wood-laminate-adhesives",
+        "itemCount": 20
+      },
+      {
+        "name": "Contact & Rubber Adhesives",
+        "slug": "contact-rubber-adhesives",
+        "itemCount": 3
+      },
+      {
+        "name": "Epoxy, Putty & Instant Repair",
+        "slug": "epoxy-putty-instant-repair",
+        "itemCount": 10
+      },
+      {
+        "name": "Silicone, PU Sealants & Foam",
+        "slug": "silicone-pu-sealants-foam",
+        "itemCount": 8
+      },
+      {
+        "name": "Applicator Guns & Masking Tapes",
+        "slug": "applicator-guns-masking-tapes",
+        "itemCount": 4
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_wires_electrical",
+    "catId": 6,
+    "slug": "wires-mcb-electrical",
+    "name": "Wires, MCB & Electrical Supplies",
+    "nameHi": "तार, एम.सी.बी. और बिजली के सामान",
+    "title": "Wires, MCB & Electrical Supplies",
+    "titleHi": "तार, एम.सी.बी. और बिजली के सामान",
+    "department": "Electrical",
+    "dbCategory": "electrical",
+    "route": "/categories?cat=wires-mcb-electrical",
+    "imageUrl": "/images/home-categories/wires-mcb-electrical.webp",
+    "image": "/images/home-categories/wires-mcb-electrical.webp",
+    "badge": "ISI Certified",
+    "badgeColor": "#10B981",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "85444999",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 7,
+    "sortOrder": 7,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Flame Retardant House Wires",
+        "slug": "fr-house-wires",
+        "itemCount": 42
+      },
+      {
+        "name": "MCB & Distribution Boards",
+        "slug": "mcb-db-boards",
+        "itemCount": 28
+      },
+      {
+        "name": "Modular Switches & Sockets",
+        "slug": "modular-switches",
+        "itemCount": 64
+      },
+      {
+        "name": "Conduits, Bends & Metal Boxes",
+        "slug": "conduits-boxes",
+        "itemCount": 36
+      },
+      {
+        "name": "Earth Bar & Industrial Glands",
+        "slug": "earthing-glands",
+        "itemCount": 16
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_kitchen_sinks",
+    "catId": 7,
+    "slug": "kitchen-sinks-faucets",
+    "name": "Kitchen Sinks & Faucets",
+    "nameHi": "किचन सिंक और नल",
+    "title": "Kitchen Sinks & Faucets",
+    "titleHi": "किचन सिंक और नल",
+    "department": "Plumbing, Sanitary & Bath",
+    "dbCategory": "hardware",
+    "route": "/categories?cat=kitchen-sinks-faucets",
+    "imageUrl": "/images/home-categories/kitchen-sinks-faucets.webp",
+    "image": "/images/home-categories/kitchen-sinks-faucets.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "73241000",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 8,
+    "sortOrder": 8,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "SS Pressed Sinks",
+        "slug": "ss-pressed-sinks",
+        "itemCount": 9
+      },
+      {
+        "name": "Handmade SS Sinks",
+        "slug": "handmade-ss-sinks",
+        "itemCount": 6
+      },
+      {
+        "name": "Quartz Sinks",
+        "slug": "quartz-sinks",
+        "itemCount": 4
+      },
+      {
+        "name": "Kitchen Sink Cocks",
+        "slug": "kitchen-sink-cocks",
+        "itemCount": 11
+      },
+      {
+        "name": "Sink Mixers & Pull-Out Faucets",
+        "slug": "sink-mixers-pullout",
+        "itemCount": 4
+      },
+      {
+        "name": "Sink Accessories & RO Add-Ons",
+        "slug": "sink-accessories-ro",
+        "itemCount": 4
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_furniture_hardware",
+    "catId": 8,
+    "slug": "furniture-wardrobe-bed-hardware",
+    "name": "Furniture, Wardrobe & Bed Hardware",
+    "nameHi": "फर्नीचर, अलमारी और बेड हार्डवेयर",
+    "title": "Furniture, Wardrobe & Bed Hardware",
+    "titleHi": "फर्नीचर, अलमारी और बेड हार्डवेयर",
+    "department": "Furniture & Architectural Hardware",
+    "dbCategory": "hardware",
+    "route": "/categories?cat=furniture-wardrobe-bed-hardware",
+    "imageUrl": "/images/home-categories/furniture-wardrobe-bed-hardware.webp",
+    "image": "/images/home-categories/furniture-wardrobe-bed-hardware.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "83024200",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 9,
+    "sortOrder": 9,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Telescopic Channels",
+        "slug": "telescopic-channels",
+        "itemCount": 6
+      },
+      {
+        "name": "Soft-Close Hinges & Sliding Track",
+        "slug": "soft-close-hinges-sliding-track",
+        "itemCount": 5
+      },
+      {
+        "name": "Hydraulic Bed & Wardrobe Lifts",
+        "slug": "hydraulic-bed-wardrobe-lifts",
+        "itemCount": 5
+      },
+      {
+        "name": "Wardrobe Pipes & SS 304 Handles",
+        "slug": "wardrobe-pipes-ss304-handles",
+        "itemCount": 4
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_modular_kitchen",
+    "catId": 9,
+    "slug": "modular-kitchen-systems",
+    "name": "Modular Kitchen Systems & Fittings",
+    "nameHi": "मॉड्यूलर किचन सिस्टम और फिटिंग्स",
+    "title": "Modular Kitchen Systems & Fittings",
+    "titleHi": "मॉड्यूलर किचन सिस्टम और फिटिंग्स",
+    "department": "Furniture & Architectural Hardware",
+    "dbCategory": "hardware",
+    "route": "/categories?cat=modular-kitchen-systems",
+    "imageUrl": "/images/home-categories/modular-kitchen-systems.webp",
+    "image": "/images/home-categories/modular-kitchen-systems.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "83024200",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 10,
+    "sortOrder": 10,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Tandem Box Drawer Systems",
+        "slug": "tandem-box-drawer-systems",
+        "itemCount": 7
+      },
+      {
+        "name": "Bottle Pull-Outs, Corner Units & Tall Pantry",
+        "slug": "bottle-pullouts-corner-pantry",
+        "itemCount": 8
+      },
+      {
+        "name": "SS 304 Baskets, Wicker & Organizers",
+        "slug": "ss304-baskets-wicker-organizers",
+        "itemCount": 6
+      },
+      {
+        "name": "Rolling Shutters, Lift-Ups & Gola Profiles",
+        "slug": "rolling-shutters-liftups-gola",
+        "itemCount": 5
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_door_hardware",
+    "catId": 10,
+    "slug": "door-hardware-locks",
+    "name": "Door Hardware & Locks",
+    "nameHi": "दरवाजे के हार्डवेयर और ताले",
+    "title": "Door Hardware & Locks",
+    "titleHi": "दरवाजे के हार्डवेयर और ताले",
+    "department": "Furniture & Architectural Hardware",
+    "dbCategory": "hardware",
+    "route": "/categories?cat=door-hardware-locks",
+    "imageUrl": "/images/home-categories/door-hardware-locks.webp",
+    "image": "/images/home-categories/door-hardware-locks.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "83014090",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 11,
+    "sortOrder": 11,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Smart Digital Locks",
+        "slug": "smart-digital-locks",
+        "itemCount": 6
+      },
+      {
+        "name": "Main Door Rim Locks, Mortise Sets & Padlocks",
+        "slug": "rim-mortise-padlocks",
+        "itemCount": 10
+      },
+      {
+        "name": "Aldrops, Tower Bolts, Stoppers & Pull Handles",
+        "slug": "aldrops-bolts-stoppers-handles",
+        "itemCount": 5
+      },
+      {
+        "name": "SS 304 Hinges, Door Closers & Floor Springs",
+        "slug": "hinges-closers-springs",
+        "itemCount": 5
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_sanitary_bath",
+    "catId": 11,
+    "slug": "sanitary-bath-fittings",
+    "name": "Sanitary & Bath Fittings",
+    "nameHi": "सैनिटरी और बाथ फिटिंग",
+    "title": "Sanitary & Bath Fittings",
+    "titleHi": "सैनिटरी और बाथ फिटिंग",
+    "department": "Plumbing, Sanitary & Bath",
+    "dbCategory": "plumbing",
+    "route": "/categories?cat=sanitary-bath-fittings",
+    "imageUrl": "/images/home-categories/sanitary-bath-fittings.webp",
+    "image": "/images/home-categories/sanitary-bath-fittings.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "69101000",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 12,
+    "sortOrder": 12,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Wall-Hung WCs & One-Piece Commodes",
+        "slug": "wall-hung-and-one-piece-wc",
+        "itemCount": 6
+      },
+      {
+        "name": "Concealed Cisterns & Dual-Flush Plates",
+        "slug": "concealed-cisterns-flush-plates",
+        "itemCount": 5
+      },
+      {
+        "name": "Countertop & Vanity Ceramic Basins",
+        "slug": "countertop-vanity-basins",
+        "itemCount": 6
+      },
+      {
+        "name": "Shower Diverters, Rain Showers & Spouts",
+        "slug": "shower-diverters-rain-spouts",
+        "itemCount": 6
+      },
+      {
+        "name": "Health Faucets, Angle Valves & Bath Brassware",
+        "slug": "health-faucets-valves-brassware",
+        "itemCount": 5
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_tile_stone",
+    "catId": 12,
+    "slug": "tile-stone-installation",
+    "name": "Tiles, Marble & Granite",
+    "nameHi": "टाइल्स, मार्बल और ग्रेनाइट",
+    "title": "Tiles, Marble & Granite",
+    "titleHi": "टाइल्स, मार्बल और ग्रेनाइट",
+    "department": "Civil & Interiors",
+    "dbCategory": "tiles",
+    "route": "/collections/tiles-marble-granite",
+    "imageUrl": "/images/home-categories/tile-stone-installation.webp",
+    "image": "/images/home-categories/tile-stone-installation.webp",
+    "badge": "Bulk Rates",
+    "badgeColor": "#F2B705",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "69072100",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 13,
+    "sortOrder": 13,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Vitrified Floor Tiles",
+        "slug": "vitrified-floor-tiles",
+        "itemCount": 12
+      },
+      {
+        "name": "Ceramic Wall & Parking Tiles",
+        "slug": "ceramic-wall-parking-tiles",
+        "itemCount": 6
+      },
+      {
+        "name": "Granite Slabs",
+        "slug": "granite-slabs",
+        "itemCount": 7
+      },
+      {
+        "name": "Marble & Natural Stones",
+        "slug": "marble-natural-stones",
+        "itemCount": 9
+      },
+      {
+        "name": "Grouts, Epoxy, Spacers & Cutting Tools",
+        "slug": "grouts-tools",
+        "itemCount": 8
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_home_appliances",
+    "catId": 13,
+    "slug": "home-appliances",
+    "name": "Home Appliances",
+    "nameHi": "होम अप्लायंसेज और गीजर",
+    "title": "Home Appliances",
+    "titleHi": "होम अप्लायंसेज और गीजर",
+    "department": "Electrical",
+    "dbCategory": "electrical",
+    "route": "/collections/home-appliances",
+    "imageUrl": "/images/home-categories/home-appliances.webp",
+    "image": "/images/home-categories/home-appliances.webp",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "85161000",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 14,
+    "sortOrder": 14,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Water Heaters & Geysers",
+        "slug": "water-heaters-geysers",
+        "itemCount": 7
+      },
+      {
+        "name": "Modular Kitchen Chimneys",
+        "slug": "modular-kitchen-chimneys",
+        "itemCount": 4
+      },
+      {
+        "name": "Exhaust & Ventilation Fans",
+        "slug": "exhaust-ventilation-fans",
+        "itemCount": 4
+      },
+      {
+        "name": "Desert Air Coolers",
+        "slug": "desert-air-coolers",
+        "itemCount": 2
+      },
+      {
+        "name": "Inverters & Tubular Batteries",
+        "slug": "inverters-tubular-batteries",
+        "itemCount": 2
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_lighting",
+    "catId": 14,
+    "slug": "lighting",
+    "name": "Lighting & Architectural LED",
+    "nameHi": "लाइटिंग और फिक्स्चर",
+    "title": "Lighting & Architectural LED",
+    "titleHi": "लाइटिंग और फिक्स्चर",
+    "department": "Electrical",
+    "dbCategory": "electrical",
+    "route": "/collections/lighting",
+    "imageUrl": "/images/home-categories/lighting.webp",
+    "image": "/images/home-categories/lighting.webp",
+    "badge": "Kelvin Simulator",
+    "badgeColor": "#1D4ED8",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "94054200",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 15,
+    "sortOrder": 15,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Concealed & Junction (3\" Box)",
+        "slug": "concealed-junction-lights",
+        "itemCount": 6
+      },
+      {
+        "name": "Ceiling Panels (Rimless & 3-in-1)",
+        "slug": "ceiling-panel-lights",
+        "itemCount": 8
+      },
+      {
+        "name": "Anti-Glare COB & Spotlights",
+        "slug": "cob-spot-lights",
+        "itemCount": 6
+      },
+      {
+        "name": "Zero-Dot Strips, Profiles & SMPS",
+        "slug": "strip-profiles-drivers",
+        "itemCount": 7
+      },
+      {
+        "name": "LED Battens (Tubelights)",
+        "slug": "led-battens",
+        "itemCount": 4
+      },
+      {
+        "name": "Bulbs & Inverter Emergency",
+        "slug": "bulbs-inverter-emergency",
+        "itemCount": 5
+      },
+      {
+        "name": "Staircase, Cabinet & Track",
+        "slug": "cabinet-track-commercial",
+        "itemCount": 6
+      },
+      {
+        "name": "Outdoor, Flood & Gate Elevation",
+        "slug": "outdoor-flood-gate-lights",
+        "itemCount": 5
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:27:55.250Z"
+  },
+  {
+    "id": "cat_painting",
+    "catId": 15,
+    "slug": "painting",
+    "name": "Paints, Putty & Primer",
+    "nameHi": "पेंटिंग, पुट्टी और प्राइमर",
+    "title": "Paints, Putty & Primer",
+    "titleHi": "पेंटिंग, पुट्टी और प्राइमर",
+    "department": "Civil & Interiors",
+    "dbCategory": "paint",
+    "route": "/collections/paints-putty-primer",
+    "imageUrl": "/images/home-categories/painting.webp",
+    "image": "/images/home-categories/painting.webp",
+    "badge": "GST 18% Compliant",
+    "badgeColor": "#10B981",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "32091090",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 16,
+    "sortOrder": 16,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Wall Putty",
+        "slug": "wall-putty",
+        "itemCount": 8
+      },
+      {
+        "name": "Wall & Metal Primers",
+        "slug": "wall-metal-primers",
+        "itemCount": 8
+      },
+      {
+        "name": "Interior Paints & Distempers",
+        "slug": "interior-paints-distempers",
+        "itemCount": 14
+      },
+      {
+        "name": "Exterior Paints",
+        "slug": "exterior-paints",
+        "itemCount": 10
+      },
+      {
+        "name": "Enamels, Thinners & Painting Tools",
+        "slug": "enamels-tools",
+        "itemCount": 8
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_safety_ppe",
+    "catId": 16,
+    "slug": "safety-ppe-workwear",
+    "name": "Site Safety & PPE",
+    "nameHi": "साइट सेफ्टी और सुरक्षा गियर",
+    "title": "Site Safety & PPE",
+    "titleHi": "साइट सेफ्टी और सुरक्षा गियर",
+    "department": "Tools & Safety",
+    "dbCategory": "safety",
+    "route": "/category/safety-ppe-workwear",
+    "imageUrl": "/images/home-categories/safety-workwear.webp",
+    "image": "/images/home-categories/safety-workwear.webp",
+    "badge": "ISI / RERA Compliant",
+    "badgeColor": "#10B981",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "6506",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 17,
+    "sortOrder": 17,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Head, Eye & Face Protection",
+        "slug": "head-eye-face",
+        "itemCount": 5
+      },
+      {
+        "name": "Safety Shoes & Gumboots",
+        "slug": "shoes-gumboots",
+        "itemCount": 5
+      },
+      {
+        "name": "Fall Protection & Harnesses",
+        "slug": "fall-protection",
+        "itemCount": 5
+      },
+      {
+        "name": "Industrial Hand Gloves",
+        "slug": "hand-gloves",
+        "itemCount": 5
+      },
+      {
+        "name": "Hi-Vis Jackets & Rainwear",
+        "slug": "hivis-rainwear",
+        "itemCount": 3
+      },
+      {
+        "name": "Respiratory & Ear Protection",
+        "slug": "respiratory-ear",
+        "itemCount": 3
+      },
+      {
+        "name": "Site Barricading & Signboards",
+        "slug": "barricading-signs",
+        "itemCount": 3
+      },
+      {
+        "name": "Fire, Electrical Mat & First-Aid",
+        "slug": "fire-first-aid",
+        "itemCount": 3
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_tools_hardware",
+    "catId": 17,
+    "slug": "tools-hardware",
+    "name": "Tools, Power Tools & General Hardware",
+    "nameHi": "पावर टूल्स, हाथ के औजार और हार्डवेयर",
+    "title": "Tools, Power Tools & General Hardware",
+    "titleHi": "पावर टूल्स, हाथ के औजार और हार्डवेयर",
+    "department": "Tools",
+    "dbCategory": "tools",
+    "route": "/collections/tools-hardware",
+    "imageUrl": "/images/home-categories/tools-hardware.webp",
+    "image": "/images/home-categories/tools-hardware.webp",
+    "badge": "Buy or Rent",
+    "badgeColor": "#1D4ED8",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "84672100",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 18,
+    "sortOrder": 18,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Angle Grinders & Marble Cutters",
+        "slug": "grinders-cutters",
+        "itemCount": 6
+      },
+      {
+        "name": "Rotary Hammers & Impact Drills",
+        "slug": "rotary-drills",
+        "itemCount": 6
+      },
+      {
+        "name": "Cutting Blades, Discs & Drill Bits",
+        "slug": "blades-discs-bits",
+        "itemCount": 8
+      },
+      {
+        "name": "Hand Tools & Masonry Essentials",
+        "slug": "hand-masonry-tools",
+        "itemCount": 7
+      },
+      {
+        "name": "Measuring, Levelling & Marking",
+        "slug": "measuring-levelling",
+        "itemCount": 5
+      },
+      {
+        "name": "Fasteners, Screws & Anchors",
+        "slug": "fasteners-anchors",
+        "itemCount": 6
+      },
+      {
+        "name": "Safety Gear & Site Utility",
+        "slug": "safety-utility",
+        "itemCount": 5
+      },
+      {
+        "name": "Ladders, Wheelbarrows & Tapes",
+        "slug": "ladders-tapes-utility",
+        "itemCount": 4
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_waterproofing",
+    "catId": 18,
+    "slug": "waterproofing-repairing",
+    "name": "Waterproofing & Repairing",
+    "nameHi": "वॉटरप्रूफिंग और मरम्मत",
+    "title": "Waterproofing & Repairing",
+    "titleHi": "वॉटरप्रूफिंग और मरम्मत",
+    "department": "Civil & Interiors",
+    "dbCategory": "adhesives",
+    "route": "/categories?cat=waterproofing-repairing",
+    "imageUrl": "/images/home-categories/waterproofing-repairing.webp",
+    "image": "/images/home-categories/waterproofing-repairing.webp",
+    "badge": "Site Tested",
+    "badgeColor": "#0EA5E9",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "38244090",
+    "defaultGstRate": 18,
+    "defaultGst": 18,
+    "vehicleType": "BIKE",
+    "vehicleClass": "Delivery Bike (<=30kg)",
+    "displayOrder": 19,
+    "sortOrder": 19,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Integral Liquid Waterproofing",
+        "slug": "integral-waterproofing",
+        "itemCount": 12
+      },
+      {
+        "name": "Polymer Bonding Agents (URP)",
+        "slug": "bonding-agents",
+        "itemCount": 14
+      },
+      {
+        "name": "Elastomeric Terrace Coatings",
+        "slug": "terrace-coatings",
+        "itemCount": 10
+      },
+      {
+        "name": "Crack Sealants & Putty",
+        "slug": "crack-sealants",
+        "itemCount": 16
+      },
+      {
+        "name": "Damp-Proof Surface Barriers",
+        "slug": "damp-proof-barriers",
+        "itemCount": 8
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_bricks_sand_gitti",
+    "catId": 19,
+    "slug": "bricks-sand-gitti-aac",
+    "name": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "nameHi": "ईंट, मौरंग, गिट्टी और ए.ए.सी. ब्लॉक",
+    "title": "Bricks, Sand (Morang), Gitti & AAC Blocks",
+    "titleHi": "ईंट, मौरंग, गिट्टी और ए.ए.सी. ब्लॉक",
+    "department": "Civil & Structural",
+    "dbCategory": "bricks",
+    "route": "/collections/bricks-sand-gitti-aac",
+    "imageUrl": "/images/home-categories/eeta.webp",
+    "image": "/images/home-categories/eeta.webp",
+    "badge": "Bhatta & Crusher Direct",
+    "badgeColor": "#F2B705",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "69041000",
+    "defaultGstRate": 5,
+    "defaultGst": 5,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 20,
+    "sortOrder": 20,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Red Clay & Fly Ash Bricks",
+        "slug": "red-clay-fly-ash-bricks",
+        "itemCount": 6
+      },
+      {
+        "name": "AAC & Concrete Blocks",
+        "slug": "aac-concrete-blocks",
+        "itemCount": 15
+      },
+      {
+        "name": "Sand, Morang & Stone Dust",
+        "slug": "sand-morang-stone-dust",
+        "itemCount": 7
+      },
+      {
+        "name": "Stone Aggregates (Gitti)",
+        "slug": "stone-aggregates-gitti",
+        "itemCount": 6
+      },
+      {
+        "name": "Paver Blocks & Concrete Cover Blocks",
+        "slug": "paver-blocks-cover-blocks",
+        "itemCount": 3
+      }
+    ],
+    "createdAt": "2026-11-27T07:09:41.696Z",
+    "updatedAt": "2026-11-27T07:09:41.696Z"
+  },
+  {
+    "id": "cat_solar_rooftop",
+    "catId": 20,
+    "slug": "solar-rooftop-power",
+    "name": "Solar & Rooftop Power",
+    "nameHi": "सोलर पैनल और रूफटॉप पावर",
+    "title": "Solar & Rooftop Power",
+    "titleHi": "सोलर पैनल और रूफटॉप पावर",
+    "department": "Electrical",
+    "dbCategory": "solar",
+    "route": "/collections/solar-rooftop-power",
+    "imageUrl": "/images/home-categories/solar-rooftop-power.webp",
+    "image": "/images/home-categories/solar-rooftop-power.webp",
+    "badge": "₹1.08L SUBSIDY",
+    "badgeColor": "#F59E0B",
+    "categoryType": "MATERIAL",
+    "defaultHsn": "85414300",
+    "defaultGstRate": 12,
+    "defaultGst": 12,
+    "vehicleType": "LOADER",
+    "vehicleClass": "Chhota Hathi (1.5T Loader)",
+    "displayOrder": 21,
+    "sortOrder": 21,
+    "isActive": true,
+    "productCount": 0,
+    "subcategories": [
+      {
+        "name": "Solar Panels (DCR & Non-DCR)",
+        "slug": "solar-panels",
+        "itemCount": 8
+      },
+      {
+        "name": "Complete Rooftop Kits (1kW–10kW)",
+        "slug": "rooftop-solar-kits",
+        "itemCount": 7
+      },
+      {
+        "name": "On-Grid & Hybrid Inverters",
+        "slug": "solar-inverters",
+        "itemCount": 6
+      },
+      {
+        "name": "Lithium & Solar Batteries",
+        "slug": "solar-batteries",
+        "itemCount": 4
+      },
+      {
+        "name": "ACDB, DCDB & Protection",
+        "slug": "solar-acdb-dcdb",
+        "itemCount": 5
+      },
+      {
+        "name": "DC Cables, Earthing & Site Shield",
+        "slug": "solar-cables-earthing",
+        "itemCount": 8
+      },
+      {
+        "name": "HDGI Structures & Waterproofing",
+        "slug": "solar-structures-lights",
+        "itemCount": 7
+      }
+    ],
+    "createdAt": "2026-11-27T12:41:28.890Z",
+    "updatedAt": "2026-11-27T12:41:28.890Z"
+  }
+]

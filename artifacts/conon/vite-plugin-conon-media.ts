@@ -406,6 +406,29 @@ export function cononMediaPlugin(options: CononMediaPluginOptions = {}): Plugin 
         }
       });
 
+      server.middlewares.use("/__conon-media/save-category-cover", async (req, res, next) => {
+        if (req.method !== "POST") return next();
+        try {
+          const body = (await readJsonBody(req)) as { slug: string; dataUrl: string };
+          const safeSlug = sanitizeSlug(String(body.slug || ""), "custom-category");
+          const rawUrl = String(body.dataUrl || "");
+          const match = rawUrl.match(/^data:image\/([a-zA-Z0-9+.-]+);base64,(.+)$/);
+          if (!match) {
+            return sendJson(res, 400, { ok: false, error: "Invalid image dataUrl" });
+          }
+          const ext = match[1] === "jpeg" ? "jpg" : match[1];
+          const buffer = Buffer.from(match[2], "base64");
+          const catDir = path.join(realProductsDir, "categories", safeSlug);
+          fs.mkdirSync(catDir, { recursive: true });
+          const filename = `cover-${Date.now()}.${ext}`;
+          fs.writeFileSync(path.join(catDir, filename), buffer);
+          const url = `/real-products/categories/${safeSlug}/${filename}`;
+          sendJson(res, 200, { ok: true, slug: safeSlug, url });
+        } catch (err: any) {
+          sendJson(res, 400, { ok: false, error: err?.message || "Failed to save category cover" });
+        }
+      });
+
       server.middlewares.use("/__conon-media/clear-item", async (req, res, next) => {
         if (req.method !== "POST") return next();
         try {

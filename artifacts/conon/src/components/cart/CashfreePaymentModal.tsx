@@ -74,13 +74,11 @@ export function CashfreePaymentModal({
             </div>
           </div>
 
-          {/* Yellow Square Logo HOMERUN (Screenshot 6) */}
-          <div className="w-14 h-14 rounded-2xl bg-[#FFE500] border border-[#E5B800] shadow-sm flex items-center justify-center text-blue-600 font-black text-[10px] tracking-tight mb-2">
-            HOMERUN
+          <div className="w-14 h-14 rounded-2xl bg-[#FFE500] border border-[#E5B800] shadow-sm flex items-center justify-center text-blue-800 font-black text-[10px] tracking-tight mb-2">
+            CONON
           </div>
 
-          {/* Brand Name HomeRun */}
-          <h3 className="text-base font-bold text-slate-900">HomeRun</h3>
+          <h3 className="text-base font-bold text-slate-900">CONON-NOW</h3>
 
           {/* Amount Dropdown Button (Screenshot 6: ₹509 ˅) */}
           <button

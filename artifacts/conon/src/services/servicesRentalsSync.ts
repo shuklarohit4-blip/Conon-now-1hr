@@ -18,6 +18,14 @@ import {
   getVaultOverrideForProduct,
   resolveProductWithVault,
 } from "@/services/productMediaVault";
+import {
+  LUCKNOW_18_SKILLED_TRADES,
+  type SkilledTradeCluster,
+} from "@/data/lucknowSkilledServices";
+import {
+  LUCKNOW_20_MACHINE_RENTALS,
+  type MachineRentalCluster,
+} from "@/data/lucknowMachineRentals";
 
 export type ServiceCategory = "CIVIL" | "MEP" | "FINISHING" | "AUDIT";
 export type RentalCategory = "EARTHMOVING" | "CONCRETE" | "TRANSPORT" | "TOOLS";
@@ -28,8 +36,17 @@ export interface ServiceCatalogItem {
   tradeName: string;
   tradeNameHi: string;
   category: ServiceCategory;
+  cluster?: SkilledTradeCluster;
   sacCode: string;
+  gstRate?: number;
   shiftRate: number;
+  contractRate?: number;
+  contractUnit?: string;
+  contractLabel?: string;
+  quickVisitRate?: number;
+  mandatoryToolKit?: string[];
+  recommendedMaterialComboSlugs?: string[];
+  tasksIncluded?: string[];
   shiftHours: number;
   unit: string;
   description: string;
@@ -47,13 +64,17 @@ export interface MachineRentalCatalogItem {
   id: string;
   slug: string;
   machineName: string;
+  nameHi?: string;
   modelName: string;
   category: RentalCategory;
+  cluster?: MachineRentalCluster;
   sacCode: string;
-  wetRates: { hour: number; shift: number; week: number };
-  dryRates: { hour: number; shift: number; week: number };
+  gstRate?: number;
+  wetRates: { hour: number; shift: number; week: number; month?: number };
+  dryRates: { hour: number; shift: number; week: number; month?: number };
   mobilizationFee: number;
   needsOperator: boolean;
+  heavyNoEntryFlag?: boolean;
   capacitySpec: string;
   fuelNote: string;
   tag: string;
@@ -117,6 +138,12 @@ export interface ServiceBookingRecord {
   paymentMode: "LIVING_VAULT" | "UPI";
   startOtp: string;
   endOtp: string;
+  bookingMode?: "SHIFT" | "CONTRACT" | "QUICK_VISIT";
+  measuredUnits?: number;
+  unitLabel?: string;
+  milestoneStage?: string;
+  toolkitVerified?: boolean;
+  materialComboOrderId?: string;
   selfieHaziriUrl?: string;
   haziriGpsVerified: boolean;
   haziriCoords?: string;
@@ -202,333 +229,63 @@ export interface MachineRentalBookingRecord {
   settledAt?: string;
 }
 
-export const FALLBACK_SERVICE_CATALOG: ServiceCatalogItem[] = [
-  {
-    id: "srv-head-mistri",
-    slug: "civil-mason-mistri",
-    tradeName: "Head Civil Mason (Raj Mistri)",
-    tradeNameHi: "हेड राज मिस्त्री",
-    category: "CIVIL",
-    sacCode: "9954",
-    shiftRate: 950,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Experienced Aadhaar-verified master mason for 9-inch / 4.5-inch brickwork, AAC block masonry, level plastering & beam shuttering alignment.",
-    highlights: ["Plumb & Laser Level", "AAC & Red Brick Expert", "GPS Selfie Haziri"],
-    badge: "Most Booked • Civil",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 1,
-  },
-  {
-    id: "srv-helper-beldar",
-    slug: "construction-helper-beldar",
-    tradeName: "Site Helper / Beldar (Mazdoor)",
-    tradeNameHi: "सहायक / बेलदार",
-    category: "CIVIL",
-    sacCode: "9954",
-    shiftRate: 550,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Physically fit construction helpers for mortar mixing, concrete pouring (dhalai), curing, brick shifting, and debris clearing.",
-    highlights: ["Dhalai Casting Support", "Safety Helmet & Boots", "Zero Absenteeism Backup"],
-    badge: "Dhalai Essential",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 2,
-  },
-  {
-    id: "srv-bar-bender",
-    slug: "bar-bender-sariya",
-    tradeName: "Bar-Bender & Steel Fitter (Sariya)",
-    tradeNameHi: "सरिया फिटर / बार बेंडर",
-    category: "CIVIL",
-    sacCode: "9954",
-    shiftRate: 900,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Structural BBS expert for TMT 8mm-20mm ring making, column starter stirrups, crank bars, and Chhat Dhalai slab reinforcement binding.",
-    highlights: ["BBS Structural Reading", "Zero Wastage Cutting", "Slab & Column Cages"],
-    badge: "IS-456 Precision",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 3,
-  },
-  {
-    id: "srv-shuttering-carpenter",
-    slug: "shuttering-carpenter",
-    tradeName: "Shuttering & Formwork Carpenter",
-    tradeNameHi: "शटरिंग कारीगर",
-    category: "CIVIL",
-    sacCode: "9954",
-    shiftRate: 900,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Precision formwork carpenter for MS plate centering, acrow prop bracing, beam bottoms, and waterproof ply slab shuttering.",
-    highlights: ["Leak-Proof Slab Joints", "Prop Load Checking", "Fast De-Shuttering"],
-    badge: "Zero Leakage Lock",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 4,
-  },
-  {
-    id: "srv-cpvc-plumber",
-    slug: "cpvc-plumber",
-    tradeName: "Master CPVC & Sanitary Plumber",
-    tradeNameHi: "मास्टर प्लंबर (CPVC/सैनिटरी)",
-    category: "MEP",
-    sacCode: "9954",
-    shiftRate: 850,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Licensed plumbing technician for concealed CPVC/UPVC piping, diverter valves, SWR drainage lines, overhead tank & motor pressure testing.",
-    highlights: ["Hydro Pressure Tested", "Jaquar/Hindware Diverters", "Zero Seepage Guarantee"],
-    badge: "Pressure Tested",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 5,
-  },
-  {
-    id: "srv-licensed-electrician",
-    slug: "licensed-electrician",
-    tradeName: "Certified Wireman & Electrician",
-    tradeNameHi: "सर्टिफाइड इलेक्ट्रिशियन",
-    category: "MEP",
-    sacCode: "9954",
-    shiftRate: 850,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Qualified site electrician for wall chasing & conduit laying, Havells/Polycab FR wire pulling, 3-phase MCB/RCCB DB dressing & inverter backup.",
-    highlights: ["Earth Leakage Tested", "3-Phase DB Balancing", "Color-Coded Wiring"],
-    badge: "Safety Certified",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 6,
-  },
-  {
-    id: "srv-tile-mason",
-    slug: "tile-marble-mason",
-    tradeName: "Tile, Granite & Marble Mason",
-    tradeNameHi: "टाइल और मार्बल मिस्त्री",
-    category: "FINISHING",
-    sacCode: "9954",
-    shiftRate: 1050,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Master finishing mason for 4x2 GVT/PGVT vitrified tiles, spacer-aligned epoxy grouting, staircase granite molding, and bathroom waterproofing slope.",
-    highlights: ["2mm Spacer Laser Align", "Hollow-Free Notch Trowel", "Epoxy Grout Ready"],
-    badge: "Showroom Finish",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 7,
-  },
-  {
-    id: "srv-painter-putty",
-    slug: "painter-putty-crew",
-    tradeName: "Painter & Birla Putty Specialist",
-    tradeNameHi: "पेंटर एवं पुट्टी कारीगर",
-    category: "FINISHING",
-    sacCode: "9954",
-    shiftRate: 800,
-    shiftHours: 8,
-    unit: "8-Hr Shift",
-    description:
-      "Dust-free 2-coat Birla White wall putty, sanding, Asian Paints primer + luxury emulsion roller finish, and roof Dr. Fixit waterproof coating.",
-    highlights: ["Zero-Drip Roller Finish", "Moisture Meter Check", "2-Coat Smooth Putty"],
-    badge: "Clean Site Cover",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 8,
-  },
-  {
-    id: "srv-civil-engineer-audit",
-    slug: "civil-engineer-audit",
-    tradeName: "CONON Civil Engineer Site Audit",
-    tradeNameHi: "सिविल इंजीनियर साइट ऑडिट",
-    category: "AUDIT",
-    sacCode: "9954",
-    shiftRate: 499,
-    shiftHours: 2,
-    unit: "Per Inspection Visit",
-    description:
-      "B.Tech Civil Engineer on-site pre-dhalai quality audit: slump cone check, rebar lap length & cover block verification, curing audit & PDF Site DNA report.",
-    highlights: ["Pre-Slab Steel Checklist", "Cover Block & Stirrup Check", "Signed Audit PDF"],
-    badge: "B.Tech Certified • ₹499",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 9,
-  },
-];
+export const FALLBACK_SERVICE_CATALOG: ServiceCatalogItem[] = LUCKNOW_18_SKILLED_TRADES.map((t) => ({
+  id: t.id,
+  slug: t.slug,
+  tradeName: t.nameEn,
+  tradeNameHi: t.nameHi,
+  category: t.category,
+  cluster: t.cluster,
+  sacCode: t.sacCode,
+  gstRate: t.gstRate,
+  shiftRate: t.shiftRate8Hr,
+  contractRate: t.contractRate,
+  contractUnit: t.contractUnit,
+  contractLabel: t.contractLabel,
+  quickVisitRate: t.quickVisitRate,
+  mandatoryToolKit: t.mandatoryToolKit,
+  recommendedMaterialComboSlugs: t.recommendedMaterialComboSlugs,
+  tasksIncluded: t.tasksIncluded,
+  shiftHours: 8,
+  unit: "8-Hr Shift",
+  description: t.description,
+  highlights: t.mandatoryToolKit.slice(0, 3),
+  badge: t.badge,
+  imageUrl: "",
+  isActive: true,
+  sortOrder: t.sortOrder,
+}));
 
-export const FALLBACK_RENTAL_CATALOG: MachineRentalCatalogItem[] = [
-  {
-    id: "rent-jcb-3dx",
-    slug: "jcb-3dx-super",
-    machineName: "JCB Backhoe Loader",
-    modelName: "JCB 3DX Super EcoXcellence",
-    category: "EARTHMOVING",
-    sacCode: "9973",
-    wetRates: { hour: 950, shift: 6500, week: 36000 },
-    dryRates: { hour: 750, shift: 5200, week: 29000 },
-    mobilizationFee: 1200,
-    needsOperator: true,
-    capacitySpec: "1.1 m³ Loader Bucket • 4.7m Dig Depth",
-    fuelNote: "Wet rate includes diesel + certified operator",
-    tag: "Most Booked",
-    description:
-      "Versatile foundation excavation, trenching, plot leveling & backfilling backhoe loader with Digital HMR optical clock.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 1,
-  },
-  {
-    id: "rent-komatsu-pc210",
-    slug: "komatsu-pc210-excavator",
-    machineName: "Hydraulic Tracked Excavator",
-    modelName: "Komatsu PC210 LC-8",
-    category: "EARTHMOVING",
-    sacCode: "9973",
-    wetRates: { hour: 2200, shift: 14500, week: 84000 },
-    dryRates: { hour: 1750, shift: 11800, week: 68000 },
-    mobilizationFee: 4500,
-    needsOperator: true,
-    capacitySpec: "21 Ton Class • 1.2 m³ Heavy Bucket",
-    fuelNote: "Wet rate includes heavy diesel supply + licensed operator",
-    tag: "Deep Basement",
-    description:
-      "Heavy crawler hydraulic excavator built for deep basement pits, commercial foundation digging, and bulk earth loading.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 2,
-  },
-  {
-    id: "rent-hyva-tipper",
-    slug: "hyva-10w-tipper",
-    machineName: "10-Wheeler Tipper Dumper",
-    modelName: "Tata / BharatBenz 10W Hyva (16 m³)",
-    category: "TRANSPORT",
-    sacCode: "9973",
-    wetRates: { hour: 1250, shift: 8200, week: 47000 },
-    dryRates: { hour: 950, shift: 6400, week: 36500 },
-    mobilizationFee: 1500,
-    needsOperator: true,
-    capacitySpec: "16 m³ Tipping Body • 25 Ton GVW",
-    fuelNote: "GPS-tracked quarry & site soil disposal",
-    tag: "Bulk Haul",
-    description:
-      "High-volume 10-wheel construction tipper for excavated soil removal, bulk morang/gitti haulage, and plot filling.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 3,
-  },
-  {
-    id: "rent-transit-mixer",
-    slug: "concrete-transit-mixer",
-    machineName: "RMC Concrete Transit Mixer",
-    modelName: "Schwing Stetter 6 m³ Drum Truck",
-    category: "CONCRETE",
-    sacCode: "9973",
-    wetRates: { hour: 1650, shift: 10500, week: 59000 },
-    dryRates: { hour: 1300, shift: 8400, week: 47000 },
-    mobilizationFee: 2000,
-    needsOperator: true,
-    capacitySpec: "6.0 m³ Drum • Constant RPM Agitation",
-    fuelNote: "Zero-segregation transit concrete supply",
-    tag: "Chhat Dhalai",
-    description:
-      "Self-rotating 6 cubic meter concrete mixer truck ensuring uniform slump and zero setting delay during roof slab pours.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 4,
-  },
-  {
-    id: "rent-one-bag-mixer",
-    slug: "one-bag-concrete-mixer",
-    machineName: "1-Bag Tilting Concrete Mixer",
-    modelName: "10/7 Heavy Diesel / Electric Drum",
-    category: "CONCRETE",
-    sacCode: "9973",
-    wetRates: { hour: 280, shift: 1650, week: 9200 },
-    dryRates: { hour: 220, shift: 1300, week: 7400 },
-    mobilizationFee: 450,
-    needsOperator: false,
-    capacitySpec: "280L Batch • 1 Full Cement Bag/Mix",
-    fuelNote: "Wet includes diesel; Dry runs on site diesel/power",
-    tag: "Slab & Lintel",
-    description:
-      "Rugged pneumatic-wheel 10/7 tilting mixer machine delivering homogenous M20/M25 concrete for residential slabs and columns.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 5,
-  },
-  {
-    id: "rent-needle-vibrator",
-    slug: "needle-vibrator",
-    machineName: "Concrete Needle Vibrator Set",
-    modelName: "Heavy Electric Motor + 40mm 4m Shaft",
-    category: "CONCRETE",
-    sacCode: "9973",
-    wetRates: { hour: 180, shift: 1100, week: 5800 },
-    dryRates: { hour: 150, shift: 950, week: 4900 },
-    mobilizationFee: 250,
-    needsOperator: false,
-    capacitySpec: "12,000 VPM • 40mm Poker + 4m Flexible Shaft",
-    fuelNote: "Zero-honeycomb column & beam compaction",
-    tag: "No Honeycomb",
-    description:
-      "High-frequency concrete needle vibrator complete with heavy flexible shaft & 40mm steel poker for dense, void-free RCC compaction.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 6,
-  },
-  {
-    id: "rent-scaffolding-shuttering",
-    slug: "scaffolding-shuttering-set",
-    machineName: "MS Shuttering & Scaffolding Set",
-    modelName: "3x2ft MS Plates + 40 Acrow Props (100 sqm)",
-    category: "TOOLS",
-    sacCode: "9973",
-    wetRates: { hour: 160, shift: 950, week: 5400 },
-    dryRates: { hour: 160, shift: 950, week: 5400 },
-    mobilizationFee: 600,
-    needsOperator: false,
-    capacitySpec: "Covers 1,000 sq ft Slab Area • Zero Leak Seal",
-    fuelNote: "Delivered stacked via Chhota Hathi loader",
-    tag: "Roof Formwork",
-    description:
-      "Precision steel centering plates, telescopic acrow props, and cuplock verticals pre-oiled for smooth leak-proof concrete soffits.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 7,
-  },
-  {
-    id: "rent-bosch-breaker",
-    slug: "bosch-demolition-breaker",
-    machineName: "Demolition Concrete Breaker",
-    modelName: "Bosch GSH 16-30 Heavy Jackhammer (1750W)",
-    category: "TOOLS",
-    sacCode: "9973",
-    wetRates: { hour: 240, shift: 1450, week: 7800 },
-    dryRates: { hour: 200, shift: 1200, week: 6500 },
-    mobilizationFee: 250,
-    needsOperator: false,
-    capacitySpec: "41 Joules Impact • Pointed & Flat Chisels",
-    fuelNote: "Single-phase 220V plug-and-break on site",
-    tag: "High Impact",
-    description:
-      "Industrial electric concrete breaker for rapid slab chasing, RCC demolition, plinth breaking, and trench cutting.",
-    imageUrl: "",
-    isActive: true,
-    sortOrder: 8,
-  },
-];
+export const FALLBACK_RENTAL_CATALOG: MachineRentalCatalogItem[] = LUCKNOW_20_MACHINE_RENTALS.map((m) => ({
+  id: m.id,
+  slug: m.slug,
+  machineName: m.nameEn,
+  nameHi: m.nameHi,
+  modelName: m.modelName,
+  category:
+    m.cluster === "EARTHMOVING"
+      ? "EARTHMOVING"
+      : m.cluster === "CONCRETE"
+      ? "CONCRETE"
+      : m.cluster === "CRANES_LIFTS"
+      ? "TRANSPORT"
+      : "TOOLS",
+  cluster: m.cluster,
+  sacCode: m.sacCode,
+  gstRate: m.gstRate,
+  wetRates: m.wetRates,
+  dryRates: m.dryRates,
+  mobilizationFee: m.mobilizationFee,
+  needsOperator: m.needsOperator,
+  heavyNoEntryFlag: m.heavyNoEntryFlag,
+  capacitySpec: m.capacitySpec,
+  fuelNote: m.fuelNote,
+  tag: m.tag,
+  description: m.description,
+  imageUrl: "",
+  isActive: true,
+  sortOrder: m.sortOrder,
+}));
 
 const BUS_NAME = "conon_services_rentals_bus";
 const KEY_SERVICE_BOOKINGS = "conon_srv_bookings_v1";

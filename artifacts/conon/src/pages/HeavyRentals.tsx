@@ -24,8 +24,20 @@ import {
 import { Layout } from "@/components/Layout";
 import { CononProductMedia } from "@/components/CononProductMedia";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { CononEscrowPaymentSheet, type VerifiedEscrowPaymentResult } from "@/components/CononEscrowPaymentSheet";
+import { ServiceabilityLockBanner } from "@/components/ServiceabilityLockBanner";
+import { checkPincodeServiceability } from "@/utils/serviceabilityPolicy";
+import { evaluateDispatchCompliance } from "@/utils/lucknowTrafficPolicy";
+import { LucknowFleetComplianceCard, type DispatchSlotChoice } from "@/components/LucknowFleetComplianceCard";
+import { useDeliveryLocation } from "@/context/LocationContext";
 import { useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
 import { useLiveRentals } from "@/hooks/useCononLiveData";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { generateUtr } from "@/services/treasuryEngine";
+import {
+  MACHINE_RENTAL_CLUSTERS,
+  type MachineRentalCluster,
+} from "@/data/lucknowMachineRentals";
 import { useWallet } from "@/context/WalletContext";
 import { useUser } from "@/context/UserContext";
 import {
@@ -40,17 +52,14 @@ const BRAND = "#1848a0";
 const AMBER = "#f59e0b";
 const inr = (n: number) => `₹${Math.round(n).toLocaleString("en-IN")}`;
 
-type BillingUnit = "HOUR" | "SHIFT" | "WEEK";
+type BillingUnit = "HOUR" | "SHIFT" | "WEEK" | "MONTH";
 type FuelMode = "WET" | "DRY";
-type CatFilter = "ALL" | RentalCategory;
+type CatFilter = "ALL" | MachineRentalCluster;
 
-const CATEGORIES: { id: CatFilter; label: string }[] = [
-  { id: "ALL", label: "All Machines" },
-  { id: "EARTHMOVING", label: "Earthmoving" },
-  { id: "CONCRETE", label: "Concrete & Dhalai" },
-  { id: "TRANSPORT", label: "Transport" },
-  { id: "TOOLS", label: "Shuttering & Tools" },
-];
+const CATEGORIES: { id: CatFilter; label: string }[] = MACHINE_RENTAL_CLUSTERS.map((c) => ({
+  id: c.id,
+  label: c.labelEn,
+}));
 
 const LUCKNOW_ZONES = [
   "Gomti Nagar Extension",
@@ -67,6 +76,8 @@ export function HeavyRentals() {
   const vault = useSafeProductMediaVault();
   const vaultVersion = vault?.version ?? 0;
   const liveRentals = useLiveRentals();
+  const masterSync = useSafeCononMasterSync();
+  const [entrySlot, setEntrySlot] = useState<"DAY" | "NIGHT">("NIGHT");
 
   const [catalog, setCatalog] = useState<MachineRentalCatalogItem[]>(liveRentals);
   useEffect(() => {
@@ -120,16 +131,26 @@ export function HeavyRentals() {
   }, [bookings]);
 
   const filteredMachines = useMemo(
-    () => (activeCat === "ALL" ? catalog : catalog.filter((m) => m.category === activeCat)),
+    () => (activeCat === "ALL" ? catalog : catalog.filter((m) => m.cluster === activeCat)),
     [catalog, activeCat]
   );
 
   const getRateFor = (m: MachineRentalCatalogItem, mode: FuelMode, unit: BillingUnit): number => {
     const table = mode === "WET" ? m.wetRates : m.dryRates;
-    return unit === "HOUR" ? table.hour : unit === "WEEK" ? table.week : table.shift;
+    if (unit === "HOUR") return table.hour;
+    if (unit === "WEEK") return table.week;
+    if (unit === "MONTH") return table.month || table.week * 3.5;
+    return table.shift;
   };
 
-  const unitSuffix = billingUnit === "HOUR" ? "/hr" : billingUnit === "WEEK" ? "/wk" : "/8-hr shift";
+  const unitSuffix =
+    billingUnit === "HOUR"
+      ? "/hr"
+      : billingUnit === "WEEK"
+      ? "/wk"
+      : billingUnit === "MONTH"
+      ? "/mo"
+      : "/8-hr shift";
 
   const drawerTotals = useMemo(() => {
     if (!bookingMachine) return { unitRate: 0, subtotal: 0, gst: 0, total: 0 };
@@ -144,20 +165,49 @@ export function HeavyRentals() {
     setBookingMachine(eq);
   };
 
-  const handleConfirmBooking = async (e: React.FormEvent) => {
+  const [escrowPayOpen, setEscrowPayOpen] = useState(false);
+  const { location: deliveryLoc } = useDeliveryLocation();
+  const [sitePincode, setSitePincode] = useState(() => deliveryLoc.pincode || "226030");
+  const [dispatchMode, setDispatchMode] = useState<DispatchSlotChoice>("STANDARD");
+  const sitePinCheck = useMemo(
+    () =>
+      checkPincodeServiceability(
+        sitePincode,
+        masterSync?.state.globalControls?.serviceability
+      ),
+    [sitePincode, masterSync?.state.globalControls?.serviceability]
+  );
+  const rentalTrafficCompliance = useMemo(
+    () =>
+      evaluateDispatchCompliance({
+        domain: "RENTAL",
+        totalWeightKg: 7500,
+        pincode: sitePincode,
+        rules: masterSync?.state.globalControls?.trafficPolicy,
+      }),
+    [sitePincode, masterSync?.state.globalControls?.trafficPolicy]
+  );
+
+  const handleConfirmBooking = (e: React.FormEvent) => {
     e.preventDefault();
     if (!bookingMachine) return;
+    if (!sitePinCheck.serviceable) {
+      toast.error(sitePinCheck.messageEn);
+      return;
+    }
+    if (rentalTrafficCompliance.isNoEntryWindow && dispatchMode === "STANDARD") {
+      toast.error("Daytime Heavy No-Entry Active: Select Legal Night Window (11:00 PM – 06:00 AM) to mobilize.");
+      return;
+    }
     if (!customerName.trim() || !customerPhone.trim() || !siteAddress.trim()) {
       toast.error("Please fill Contact Name, Phone & Lucknow Site Address");
       return;
     }
+    setEscrowPayOpen(true);
+  };
 
-    if (paymentMode === "LIVING_VAULT" && wallet.balance < drawerTotals.total) {
-      toast.warning(`Living Vault balance (${inr(wallet.balance)}) below ${inr(drawerTotals.total)} — switched to UPI Escrow Lock.`);
-      setPaymentMode("UPI");
-      return;
-    }
-
+  const executeRentalBookingAfterPayment = async (verified: VerifiedEscrowPaymentResult) => {
+    if (!bookingMachine) return;
     setIsSubmitting(true);
     try {
       const created = await servicesRentalsSync.createRentalBooking({
@@ -165,18 +215,56 @@ export function HeavyRentals() {
         customerPhone: customerPhone.trim(),
         customerGstin: customerGstin.trim() || undefined,
         siteAddress: siteAddress.trim(),
+        sitePincode: sitePinCheck.pincode,
+        dispatchMode,
         lucknowZone,
         machineId: bookingMachine.id,
         fuelMode,
-        billingUnit,
-        quantityUnits: qtyUnits,
-        paymentMode,
-      });
+        billingUnit: billingUnit === "MONTH" ? "WEEK" : billingUnit,
+        quantityUnits: billingUnit === "MONTH" ? qtyUnits * 4 : qtyUnits,
+        paymentMode: verified.paymentMode as any,
+        paymentStatus: verified.paymentStatus,
+        paymentRef: verified.paymentRef,
+        utrNumber: verified.utrNumber,
+      } as any);
 
-      if (paymentMode === "LIVING_VAULT") {
+      if (masterSync) {
+        const accounts = masterSync.state.treasury?.companyAccounts || [];
+        const collectionAcct =
+          accounts.find((a) => (a.role === "COLLECTION" || a.role === "ESCROW_NODAL") && a.isPrimary) ||
+          accounts[0];
+        masterSync
+          .recordTreasuryEntry({
+            id: `tr_rnt_${created.id}`,
+            orderId: created.shortId,
+            entryType: "CUSTOMER_INFLOW",
+            direction: "CREDIT",
+            fromAccountLabel: `Customer (${verified.paymentMode})`,
+            fromAccountRef: customerPhone.trim(),
+            toAccountLabel: collectionAcct?.label || "CONON Collection A/c",
+            toAccountRef: collectionAcct
+              ? `${collectionAcct.bankName} ${collectionAcct.accountNumberMasked}`
+              : "CONON-COLLECTION",
+            toIfsc: collectionAcct?.ifscCode || "",
+            beneficiaryName: "CONON INFRABUILT PVT LTD",
+            paymentMode: verified.paymentMode,
+            utrNumber: verified.utrNumber || generateUtr("5"),
+            grossAmount: drawerTotals.total,
+            platformMargin: Math.round(drawerTotals.subtotal * 0.12),
+            taxAmount: drawerTotals.gst,
+            netAmount: drawerTotals.total,
+            status: "SETTLED",
+            createdAt: new Date().toISOString(),
+            customerName: customerName.trim(),
+          })
+          .catch(() => {});
+      }
+
+      if (verified.paymentMode === "PREPAID_VAULT") {
         wallet.spend(created.estimatedTotal, `HMR Escrow Lock • ${created.shortId} (${created.modelName})`);
       }
 
+      setEscrowPayOpen(false);
       setBookingMachine(null);
       setActiveTracker(created);
       toast.success(`Machine Booked with Digital HMR Lock • #${created.shortId}`, {
@@ -379,6 +467,7 @@ export function HeavyRentals() {
                       { id: "HOUR", label: "Hourly" },
                       { id: "SHIFT", label: "8-Hr Shift" },
                       { id: "WEEK", label: "Weekly" },
+                      { id: "MONTH", label: "Monthly" },
                     ] as const
                   ).map((u) => (
                     <button
@@ -583,22 +672,53 @@ export function HeavyRentals() {
                       src={bookingMachine.imageUrl}
                       variant="thumb"
                       showGalleryBadge={false}
-                      containerClassName="w-full h-full"
-                      className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-black text-slate-900">{bookingMachine.machineName}</p>
-                    <p className="text-[11px] text-slate-500">{bookingMachine.capacitySpec}</p>
-                    <p className="text-[10px] font-bold text-emerald-700 mt-0.5">
-                      Start &amp; End Optical Hour-Meter Photo Lock Included
-                    </p>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs font-black text-slate-900 truncate">{bookingMachine.machineName}</div>
+                    <div className="text-[11px] text-slate-500">{bookingMachine.capacitySpec}</div>
                   </div>
                 </div>
 
+                {/* LUCKNOW DAYTIME HEAVY-VEHICLE NO-ENTRY SMART GUARD */}
+                {bookingMachine.heavyNoEntryFlag && (
+                  <div className="p-3 rounded-2xl bg-amber-50 border border-amber-300 text-amber-950 text-xs space-y-2">
+                    <div className="font-bold flex items-start gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                      <span>
+                        ⚠️ Lucknow Daytime No-Entry Zone Alert (7:00 AM – 9:30 PM): Select Night Slot (10:00 PM – 6:00 AM) for smooth entry, or switch to a smaller city-compliant machine.
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setEntrySlot("NIGHT")}
+                        className={`py-1.5 rounded-xl text-[11px] font-black border cursor-pointer ${
+                          entrySlot === "NIGHT"
+                            ? "bg-amber-500 text-slate-950 border-amber-600"
+                            : "bg-white text-slate-700 border-amber-200"
+                        }`}
+                      >
+                        🌙 Night Slot (10 PM – 6 AM)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setEntrySlot("DAY")}
+                        className={`py-1.5 rounded-xl text-[11px] font-black border cursor-pointer ${
+                          entrySlot === "DAY"
+                            ? "bg-slate-900 text-white border-slate-900"
+                            : "bg-white text-slate-700 border-amber-200"
+                        }`}
+                      >
+                        ☀️ Outer Ring / Day Permit
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 {/* Billing Unit & Fuel Mode */}
-                <div className="grid grid-cols-3 gap-2 text-xs">
-                  {(["HOUR", "SHIFT", "WEEK"] as BillingUnit[]).map((u) => {
+                <div className="grid grid-cols-4 gap-2 text-xs">
+                  {(["HOUR", "SHIFT", "WEEK", "MONTH"] as BillingUnit[]).map((u) => {
                     const rate = getRateFor(bookingMachine, fuelMode, u);
                     const on = billingUnit === u;
                     return (
@@ -711,6 +831,18 @@ export function HeavyRentals() {
                   />
                 </div>
 
+                <ServiceabilityLockBanner
+                  pincode={sitePincode}
+                  onChangePincode={setSitePincode}
+                  label="Machine Delivery Site Pin Code *"
+                />
+
+                <LucknowFleetComplianceCard
+                  compliance={rentalTrafficCompliance}
+                  dispatchMode={dispatchMode}
+                  onSelectDispatchMode={setDispatchMode}
+                />
+
                 {/* Totals Box */}
                 <div className="p-3.5 rounded-2xl bg-slate-900 text-white text-xs space-y-1.5">
                   <div className="flex justify-between text-slate-300">
@@ -727,50 +859,29 @@ export function HeavyRentals() {
                   </div>
                 </div>
 
-                {/* Payment Mode */}
-                <div className="grid grid-cols-2 gap-2.5 text-xs">
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMode("LIVING_VAULT")}
-                    className={`p-3 rounded-2xl border-2 text-left transition cursor-pointer ${
-                      paymentMode === "LIVING_VAULT"
-                        ? "border-blue-700 bg-blue-50"
-                        : "border-slate-200 bg-white"
-                    }`}
-                  >
-                    <div className="font-black text-slate-900 flex items-center gap-1.5">
-                      <Wallet className="w-3.5 h-3.5 text-blue-700" />
-                      Living Vault
+                {/* 100% Prepaid Escrow Required Notice */}
+                <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 flex items-start gap-2.5">
+                  <Lock className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-black text-emerald-900">
+                      100% Prepaid Escrow Required • Pay First to Confirm Machine & Operator
                     </div>
-                    <div className="text-[10px] font-mono text-slate-500">Avail: {inr(wallet.balance)}</div>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMode("UPI")}
-                    className={`p-3 rounded-2xl border-2 text-left transition cursor-pointer ${
-                      paymentMode === "UPI"
-                        ? "border-amber-500 bg-amber-50"
-                        : "border-slate-200 bg-white"
-                    }`}
-                  >
-                    <div className="font-black text-slate-900 flex items-center gap-1.5">
-                      <CreditCard className="w-3.5 h-3.5 text-amber-600" />
-                      UPI Escrow
+                    <div className="text-[11px] text-emerald-800 mt-0.5">
+                      Pay on Delivery is disabled for Heavy Machine Rentals. Digital HMR lock protects billing.
                     </div>
-                    <div className="text-[10px] text-slate-500">Instant Verify</div>
-                  </button>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm shadow-lg transition cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
+                  disabled={isSubmitting || !sitePinCheck.serviceable || (rentalTrafficCompliance.isNoEntryWindow && dispatchMode === "STANDARD")}
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm shadow-lg transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   <Lock className="w-4 h-4" />
                   <span>
                     {isSubmitting
                       ? "Locking Escrow..."
-                      : `Confirm & Lock Digital HMR Escrow (${inr(drawerTotals.total)})`}
+                      : `Pay ${inr(drawerTotals.total)} & Confirm Machine Booking`}
                   </span>
                 </button>
               </form>
@@ -778,6 +889,18 @@ export function HeavyRentals() {
           </>
         )}
       </AnimatePresence>
+
+      <CononEscrowPaymentSheet
+        isOpen={escrowPayOpen}
+        onClose={() => setEscrowPayOpen(false)}
+        amount={drawerTotals.total}
+        title={`Heavy Machine Escrow • ${bookingMachine?.modelName || "Equipment"}`}
+        subtitle={`${qtyUnits} ${billingUnit} (${fuelMode}) • ${lucknowZone}`}
+        ctaLabel={`Pay ${inr(drawerTotals.total)} & Confirm Machine Booking`}
+        phoneNumber={customerPhone}
+        isProcessingExternal={isSubmitting}
+        onPaymentVerified={executeRentalBookingAfterPayment}
+      />
 
       {/* LIVE DIGITAL HMR & BREAKDOWN TRACKER MODAL */}
       <AnimatePresence>

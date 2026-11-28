@@ -94,6 +94,7 @@ interface CategoryShowcaseFeedProps {
   onSetCartQty: (product: Product, quantity: number) => void;
   onSelectCategory: (category: string) => void;
   onOpenDetail?: (product: Product) => void;
+  hideFloatingBackToTop?: boolean;
 }
 
 export const CategoryShowcaseFeed: React.FC<CategoryShowcaseFeedProps> = ({
@@ -103,6 +104,7 @@ export const CategoryShowcaseFeed: React.FC<CategoryShowcaseFeedProps> = ({
   onSetCartQty,
   onSelectCategory,
   onOpenDetail,
+  hideFloatingBackToTop = false,
 }) => {
   const mergeLiveProducts = useLiveProductMerger();
   // Variant bottom sheet state
@@ -132,7 +134,7 @@ export const CategoryShowcaseFeed: React.FC<CategoryShowcaseFeedProps> = ({
       {/* ────────────────────────────────────────────────────────────
           FLOATING BACK TO TOP PILL (Appears on scroll past hero)
           ──────────────────────────────────────────────────────────── */}
-      {showBackToTop && (
+      {!hideFloatingBackToTop && showBackToTop && (
         <button
           onClick={scrollToTop}
           aria-label="Scroll back to top"

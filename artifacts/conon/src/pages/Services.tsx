@@ -25,12 +25,23 @@ import {
   FileText,
   ArrowRight,
   Radio,
+  Search,
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { CononProductMedia } from "@/components/CononProductMedia";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
+import { CononEscrowPaymentSheet, type VerifiedEscrowPaymentResult } from "@/components/CononEscrowPaymentSheet";
+import { ServiceabilityLockBanner } from "@/components/ServiceabilityLockBanner";
+import { checkPincodeServiceability } from "@/utils/serviceabilityPolicy";
+import { useDeliveryLocation } from "@/context/LocationContext";
 import { useSafeProductMediaVault } from "@/context/ProductMediaVaultContext";
-import { useLiveServices } from "@/hooks/useCononLiveData";
+import { useLiveServices, useLiveProducts } from "@/hooks/useCononLiveData";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { generateUtr } from "@/services/treasuryEngine";
+import {
+  SKILLED_TRADE_CLUSTERS,
+  type SkilledTradeCluster,
+} from "@/data/lucknowSkilledServices";
 import { useWallet } from "@/context/WalletContext";
 import { useUser } from "@/context/UserContext";
 import {
@@ -45,15 +56,12 @@ const BRAND = "#1848a0";
 const AMBER = "#f59e0b";
 const inr = (n: number) => `₹${Math.round(n).toLocaleString("en-IN")}`;
 
-type FilterTab = "ALL" | ServiceCategory;
+type FilterTab = "ALL" | SkilledTradeCluster;
 
-const TRADE_TABS: { id: FilterTab; label: string }[] = [
-  { id: "ALL", label: "All Trades" },
-  { id: "CIVIL", label: "Civil & Structure" },
-  { id: "MEP", label: "MEP Plumbing/Electrical" },
-  { id: "FINISHING", label: "Finishing" },
-  { id: "AUDIT", label: "Engineering Audit" },
-];
+const TRADE_TABS: { id: FilterTab; label: string }[] = SKILLED_TRADE_CLUSTERS.map((c) => ({
+  id: c.id,
+  label: `${c.labelEn}`,
+}));
 
 interface StagePreset {
   id: string;
@@ -161,21 +169,38 @@ const STAGE_PRESETS: StagePreset[] = [
     crossSell: { id: "add-audit", label: "+ Add ₹499 CONON Civil Engineer Site Audit", kind: "SERVICE", priceLabel: "₹499/visit" },
   },
   {
-    id: "painting",
-    label: "Interior Painting & Putty",
-    badge: "Dust-Free",
-    defaultSqft: 1500,
-    defaultDays: 3,
-    ratioNote: "2-coat Birla putty + primer + emulsion roller",
+    id: "pvc-ceiling",
+    label: "PVC + False Ceiling Makeover",
+    badge: "Seelan-Proof",
+    defaultSqft: 400,
+    defaultDays: 2,
+    ratioNote: "Damp-proof PVC wall paneling + POP/Gypsum cove ceiling",
     computeSquad: (sqft, days, catalog) => {
-      const f = Math.max(1, sqft / 1500);
+      const f = Math.max(1, sqft / 400);
       const findRate = (id: string, def: number) => catalog.find((c) => c.id === id)?.shiftRate || def;
       return [
-        { serviceId: "srv-painter-putty", tradeName: "Painter & Birla Putty Specialist", qty: Math.max(2, Math.round(3 * f)), days, ratePerShift: findRate("srv-painter-putty", 800) },
-        { serviceId: "srv-helper-beldar", tradeName: "Site Helper / Beldar", qty: 1, days, ratePerShift: findRate("srv-helper-beldar", 550) },
+        { serviceId: "srv-pvc-wall-ceiling", tradeName: "PVC Wall Panel & Ceiling Installer", qty: Math.max(1, Math.round(2 * f)), days, ratePerShift: findRate("srv-pvc-wall-ceiling", 900) },
+        { serviceId: "srv-pop-gypsum-mistri", tradeName: "POP & Gypsum False Ceiling Mistri", qty: Math.max(1, Math.round(1 * f)), days, ratePerShift: findRate("srv-pop-gypsum-mistri", 900) },
       ];
     },
-    crossSell: { id: "add-scaffold", label: "+ Add MS Scaffolding Access Set (Rental)", kind: "RENTAL", rentalId: "rent-scaffolding-shuttering", priceLabel: "₹950/shift" },
+    crossSell: { id: "add-audit", label: "+ Add ₹499 CONON Civil Engineer Moisture Audit", kind: "SERVICE", priceLabel: "₹499/visit" },
+  },
+  {
+    id: "modular-woodwork",
+    label: "Modular Kitchen & Woodwork",
+    badge: "Joinery",
+    defaultSqft: 250,
+    defaultDays: 4,
+    ratioNote: "Modular kitchen carcass, wardrobe & door hardware crew",
+    computeSquad: (sqft, days, catalog) => {
+      const f = Math.max(1, sqft / 250);
+      const findRate = (id: string, def: number) => catalog.find((c) => c.id === id)?.shiftRate || def;
+      return [
+        { serviceId: "srv-modular-carpenter", tradeName: "Furniture, Door & Modular Carpenter", qty: Math.max(2, Math.round(2 * f)), days, ratePerShift: findRate("srv-modular-carpenter", 900) },
+        { serviceId: "srv-painter-putty", tradeName: "Painter, Putty & Wood Polish Crew", qty: 1, days: Math.max(1, Math.round(days / 2)), ratePerShift: findRate("srv-painter-putty", 750) },
+      ];
+    },
+    crossSell: { id: "add-audit", label: "+ Add ₹499 CONON Civil Engineer Site Audit", kind: "SERVICE", priceLabel: "₹499/visit" },
   },
 ];
 
@@ -194,15 +219,21 @@ export function Services() {
   const vault = useSafeProductMediaVault();
   const vaultVersion = vault?.version ?? 0;
   const liveServices = useLiveServices();
+  const masterSync = useSafeCononMasterSync();
 
   const [catalog, setCatalog] = useState<ServiceCatalogItem[]>(liveServices);
   React.useEffect(() => {
-    setCatalog((prev) => (prev.length === 0 ? liveServices : liveServices));
+    setCatalog(liveServices);
   }, [liveServices]);
   const [detailService, setDetailService] = useState<ServiceCatalogItem | null>(null);
   const [bookings, setBookings] = useState<ServiceBookingRecord[]>([]);
   const [activeTab, setActiveTab] = useState<FilterTab>("ALL");
+  const [tradeSearch, setTradeSearch] = useState("");
   const [crewQtys, setCrewQtys] = useState<Record<string, number>>({});
+  const [tradeModeMap, setTradeModeMap] = useState<Record<string, "SHIFT" | "CONTRACT" | "QUICK_VISIT">>({});
+  const [contractUnitsMap, setContractUnitsMap] = useState<Record<string, number>>({});
+  const [selectedTradeForDrawer, setSelectedTradeForDrawer] = useState<ServiceCatalogItem | null>(null);
+  const [selectedComboProductIds, setSelectedComboProductIds] = useState<string[]>([]);
 
   // Smart Squad Builder State
   const [selectedPresetId, setSelectedPresetId] = useState<string>("dhalai");
@@ -271,10 +302,21 @@ export function Services() {
     return { subtotal, gst, total: subtotal + gst };
   }, [calculatedSquad, addCrossSellAudit, catalog]);
 
-  const filteredCatalog = useMemo(
-    () => (activeTab === "ALL" ? catalog : catalog.filter((c) => c.category === activeTab)),
-    [catalog, activeTab]
-  );
+  const filteredCatalog = useMemo(() => {
+    const q = tradeSearch.trim().toLowerCase();
+    return catalog.filter((c) => {
+      if (activeTab !== "ALL" && c.cluster !== activeTab) return false;
+      if (!q) return true;
+      const hay = `${c.tradeName} ${c.tradeNameHi} ${c.description} ${(c.mandatoryToolKit || []).join(" ")} ${
+        q.includes("bijli") ? "electrician" : ""
+      }`.toLowerCase();
+      return hay.includes(q);
+    });
+  }, [catalog, activeTab, tradeSearch]);
+
+  const activeComboSlug =
+    selectedTradeForDrawer?.recommendedMaterialComboSlugs?.[0] || "cement-civil-works";
+  const comboMaterials = useLiveProducts(activeComboSlug).slice(0, 3);
 
   const handleSelectPreset = (preset: StagePreset) => {
     setSelectedPresetId(preset.id);
@@ -302,17 +344,48 @@ export function Services() {
   };
 
   const openBookSingleTrade = (svc: ServiceCatalogItem) => {
+    const mode = tradeModeMap[svc.id] || "SHIFT";
     const qty = crewQtys[svc.id] || 1;
-    setDraftSquad([
-      {
-        serviceId: svc.id,
-        tradeName: svc.tradeName,
-        qty,
-        days: 1,
-        ratePerShift: svc.shiftRate,
-      },
-    ]);
-    setBookingTitle(`${svc.tradeName} × ${qty} Shift`);
+    const defaultUnits = svc.contractUnit === "sq.ft" ? 100 : svc.contractUnit === "point" || svc.contractUnit === "camera" ? 10 : 1;
+    const measuredUnits = contractUnitsMap[svc.id] ?? defaultUnits;
+
+    setSelectedTradeForDrawer(svc);
+    setSelectedComboProductIds([]);
+
+    if (mode === "CONTRACT" && svc.contractRate) {
+      setDraftSquad([
+        {
+          serviceId: svc.id,
+          tradeName: `${svc.tradeName} (${measuredUnits} ${svc.contractUnit || "units"} Contract)`,
+          qty: measuredUnits,
+          days: 1,
+          ratePerShift: svc.contractRate,
+        },
+      ]);
+      setBookingTitle(`${svc.tradeName} • ${measuredUnits} ${svc.contractUnit || "units"}`);
+    } else if (mode === "QUICK_VISIT" && svc.quickVisitRate) {
+      setDraftSquad([
+        {
+          serviceId: svc.id,
+          tradeName: `${svc.tradeName} (60-Min Quick Visit)`,
+          qty: 1,
+          days: 1,
+          ratePerShift: svc.quickVisitRate,
+        },
+      ]);
+      setBookingTitle(`${svc.tradeName} • 60-Min Quick Visit`);
+    } else {
+      setDraftSquad([
+        {
+          serviceId: svc.id,
+          tradeName: svc.tradeName,
+          qty,
+          days: 1,
+          ratePerShift: svc.shiftRate,
+        },
+      ]);
+      setBookingTitle(`${svc.tradeName} × ${qty} Shift`);
+    }
     setDrawerOpen(true);
   };
 
@@ -322,19 +395,32 @@ export function Services() {
     return { subtotal, gst, total: subtotal + gst };
   }, [draftSquad]);
 
-  const handleConfirmBooking = async (e: React.FormEvent) => {
+  const [escrowPayOpen, setEscrowPayOpen] = useState(false);
+  const { location: deliveryLoc } = useDeliveryLocation();
+  const [sitePincode, setSitePincode] = useState(() => deliveryLoc.pincode || "226030");
+  const sitePinCheck = useMemo(
+    () =>
+      checkPincodeServiceability(
+        sitePincode,
+        masterSync?.state.globalControls?.serviceability
+      ),
+    [sitePincode, masterSync?.state.globalControls?.serviceability]
+  );
+
+  const handleConfirmBooking = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!sitePinCheck.serviceable) {
+      toast.error(sitePinCheck.messageEn);
+      return;
+    }
     if (!customerName.trim() || !customerPhone.trim() || !siteAddress.trim()) {
       toast.error("Please enter Site Contact Name, Phone & Lucknow Site Address");
       return;
     }
+    setEscrowPayOpen(true);
+  };
 
-    if (paymentMode === "LIVING_VAULT" && wallet.balance < draftFinancials.total) {
-      toast.warning(`Living Vault balance (${inr(wallet.balance)}) is below ${inr(draftFinancials.total)} — switched to UPI Escrow Lock.`);
-      setPaymentMode("UPI");
-      return;
-    }
-
+  const executeServiceBookingAfterPayment = async (verified: VerifiedEscrowPaymentResult) => {
     setIsSubmitting(true);
     try {
       const addons: string[] = [];
@@ -350,8 +436,11 @@ export function Services() {
           fuelMode: "WET",
           billingUnit: "SHIFT",
           quantityUnits: squadDays,
-          paymentMode,
-        });
+          paymentMode: verified.paymentMode as any,
+          paymentStatus: verified.paymentStatus,
+          paymentRef: verified.paymentRef,
+          utrNumber: verified.utrNumber,
+        } as any);
       }
 
       const created = await servicesRentalsSync.createServiceBooking({
@@ -359,6 +448,7 @@ export function Services() {
         customerPhone: customerPhone.trim(),
         customerGstin: customerGstin.trim() || undefined,
         siteAddress: siteAddress.trim(),
+        sitePincode: sitePinCheck.pincode,
         lucknowZone,
         bookingDate: siteDate,
         shiftSlot,
@@ -369,13 +459,49 @@ export function Services() {
           days: d.days,
         })),
         crossSellAddons: addons,
-        paymentMode,
-      });
+        paymentMode: verified.paymentMode as any,
+        paymentStatus: verified.paymentStatus,
+        paymentRef: verified.paymentRef,
+        utrNumber: verified.utrNumber,
+      } as any);
 
-      if (paymentMode === "LIVING_VAULT") {
+      if (verified.paymentMode === "PREPAID_VAULT") {
         wallet.spend(created.totalAmount, `Escrow Lock • ${created.shortId} (SAC 9954)`);
       }
 
+      if (masterSync) {
+        const accounts = masterSync.state.treasury?.companyAccounts || [];
+        const collectionAcct =
+          accounts.find((a) => (a.role === "COLLECTION" || a.role === "ESCROW_NODAL") && a.isPrimary) ||
+          accounts[0];
+        masterSync
+          .recordTreasuryEntry({
+            id: `tr_srv_${created.id}`,
+            orderId: created.shortId,
+            entryType: "CUSTOMER_INFLOW",
+            direction: "CREDIT",
+            fromAccountLabel: `Customer (${verified.paymentMode})`,
+            fromAccountRef: customerPhone.trim(),
+            toAccountLabel: collectionAcct?.label || "CONON Collection A/c",
+            toAccountRef: collectionAcct
+              ? `${collectionAcct.bankName} ${collectionAcct.accountNumberMasked}`
+              : "CONON-COLLECTION",
+            toIfsc: collectionAcct?.ifscCode || "",
+            beneficiaryName: "CONON INFRABUILT PVT LTD",
+            paymentMode: verified.paymentMode,
+            utrNumber: verified.utrNumber || generateUtr("5"),
+            grossAmount: created.totalAmount,
+            platformMargin: Math.round(created.subtotalAmount * 0.12),
+            taxAmount: created.gstAmount,
+            netAmount: created.totalAmount,
+            status: "SETTLED",
+            createdAt: new Date().toISOString(),
+            customerName: customerName.trim(),
+          })
+          .catch(() => {});
+      }
+
+      setEscrowPayOpen(false);
       setDrawerOpen(false);
       setActiveTrackerBooking(created);
       toast.success(`Skilled Squad Booked • #${created.shortId}`, {
@@ -759,24 +885,36 @@ export function Services() {
                 </p>
               </div>
 
-              <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-hide">
-                {TRADE_TABS.map((t) => {
-                  const on = activeTab === t.id;
-                  return (
-                    <button
-                      key={t.id}
-                      type="button"
-                      onClick={() => setActiveTab(t.id)}
-                      className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-black transition cursor-pointer ${
-                        on
-                          ? "bg-blue-700 text-white shadow-sm"
-                          : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
-                      }`}
-                    >
-                      {t.label}
-                    </button>
-                  );
-                })}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 w-full lg:w-auto">
+                <div className="relative min-w-[230px]">
+                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    value={tradeSearch}
+                    onChange={(e) => setTradeSearch(e.target.value)}
+                    placeholder="Search plumber, tile, pvc, carpenter, bijli..."
+                    className="w-full pl-8 pr-3 py-2 rounded-full border border-slate-200 bg-white text-xs text-slate-900"
+                  />
+                </div>
+                <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-hide">
+                  {TRADE_TABS.map((t) => {
+                    const on = activeTab === t.id;
+                    return (
+                      <button
+                        key={t.id}
+                        type="button"
+                        onClick={() => setActiveTab(t.id)}
+                        className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-black transition cursor-pointer ${
+                          on
+                            ? "bg-blue-700 text-white shadow-sm"
+                            : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                        }`}
+                      >
+                        {t.label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
@@ -856,7 +994,7 @@ export function Services() {
                         </div>
 
                         <div className="flex flex-wrap gap-1.5">
-                          {svc.highlights.slice(0, 3).map((h) => (
+                          {(svc.mandatoryToolKit || svc.highlights).slice(0, 3).map((h) => (
                             <span
                               key={h}
                               className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700"
@@ -865,43 +1003,132 @@ export function Services() {
                             </span>
                           ))}
                         </div>
+
+                        {/* WORLD-FIRST 3-MODE RATE SWITCHER */}
+                        {(() => {
+                          const activeMode = tradeModeMap[svc.id] || "SHIFT";
+                          const defaultU = svc.contractUnit === "sq.ft" ? 100 : svc.contractUnit === "point" || svc.contractUnit === "camera" ? 10 : 1;
+                          const units = contractUnitsMap[svc.id] ?? defaultU;
+                          return (
+                            <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                              <div className="grid grid-cols-3 gap-1">
+                                <button
+                                  type="button"
+                                  onClick={() => setTradeModeMap((m) => ({ ...m, [svc.id]: "SHIFT" }))}
+                                  className={`py-1 px-1.5 rounded-lg text-[10px] font-black cursor-pointer transition ${
+                                    activeMode === "SHIFT"
+                                      ? "bg-blue-700 text-white shadow-xs"
+                                      : "bg-white text-slate-600 border border-slate-200"
+                                  }`}
+                                >
+                                  8-Hr Shift
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setTradeModeMap((m) => ({ ...m, [svc.id]: "CONTRACT" }))}
+                                  className={`py-1 px-1.5 rounded-lg text-[10px] font-black cursor-pointer transition ${
+                                    activeMode === "CONTRACT"
+                                      ? "bg-blue-700 text-white shadow-xs"
+                                      : "bg-white text-slate-600 border border-slate-200"
+                                  }`}
+                                >
+                                  Contract
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setTradeModeMap((m) => ({ ...m, [svc.id]: "QUICK_VISIT" }))}
+                                  className={`py-1 px-1.5 rounded-lg text-[10px] font-black cursor-pointer transition ${
+                                    activeMode === "QUICK_VISIT"
+                                      ? "bg-amber-400 text-slate-950 shadow-xs"
+                                      : "bg-white text-slate-600 border border-slate-200"
+                                  }`}
+                                >
+                                  Quick ₹{svc.quickVisitRate || 249}
+                                </button>
+                              </div>
+                              {activeMode === "CONTRACT" && (
+                                <div className="flex items-center justify-between gap-2 text-[11px]">
+                                  <span className="font-bold text-slate-600">
+                                    ₹{svc.contractRate || svc.shiftRate}/{svc.contractUnit || "unit"}
+                                  </span>
+                                  <div className="flex items-center gap-1">
+                                    <input
+                                      type="number"
+                                      min={1}
+                                      value={units}
+                                      onChange={(e) =>
+                                        setContractUnitsMap((u) => ({
+                                          ...u,
+                                          [svc.id]: Math.max(1, Number(e.target.value) || 1),
+                                        }))
+                                      }
+                                      className="w-16 px-2 py-0.5 rounded-md border border-slate-300 bg-white text-slate-900 font-mono font-bold text-right"
+                                    />
+                                    <span className="text-[10px] text-slate-500 font-bold">
+                                      {svc.contractUnit || "units"}
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })()}
                       </div>
                     </div>
 
-                    {/* Footer: Crew Qty Selector + Book Shift CTA */}
-                    <div className="px-4 sm:px-5 pb-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
-                      <div className="flex items-center border border-slate-200 rounded-xl bg-slate-50 p-0.5">
-                        <button
-                          type="button"
-                          onClick={() => setCrewQtys((q) => ({ ...q, [svc.id]: Math.max(1, (q[svc.id] || 1) - 1) }))}
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 hover:bg-white cursor-pointer"
-                          aria-label="Decrease crew"
-                        >
-                          <Minus className="w-3.5 h-3.5" />
-                        </button>
-                        <span className="w-8 text-center text-xs font-black font-mono text-slate-900">
-                          {qty}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => setCrewQtys((q) => ({ ...q, [svc.id]: Math.min(20, (q[svc.id] || 1) + 1) }))}
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 hover:bg-white cursor-pointer"
-                          aria-label="Increase crew"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
+                    {/* Footer: Crew Qty Selector + Book CTA */}
+                    {(() => {
+                      const activeMode = tradeModeMap[svc.id] || "SHIFT";
+                      const defaultU = svc.contractUnit === "sq.ft" ? 100 : svc.contractUnit === "point" || svc.contractUnit === "camera" ? 10 : 1;
+                      const units = contractUnitsMap[svc.id] ?? defaultU;
+                      const ctaPrice =
+                        activeMode === "CONTRACT"
+                          ? (svc.contractRate || svc.shiftRate) * units
+                          : activeMode === "QUICK_VISIT"
+                          ? svc.quickVisitRate || 249
+                          : svc.shiftRate * qty;
+                      const ctaLabel =
+                        activeMode === "CONTRACT"
+                          ? `Book Contract • ${inr(ctaPrice)}`
+                          : activeMode === "QUICK_VISIT"
+                          ? `Quick Visit • ${inr(ctaPrice)}`
+                          : `Book Shift • ${inr(ctaPrice)}`;
+                      return (
+                        <div className="px-4 sm:px-5 pb-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+                          <div className="flex items-center border border-slate-200 rounded-xl bg-slate-50 p-0.5">
+                            <button
+                              type="button"
+                              onClick={() => setCrewQtys((q) => ({ ...q, [svc.id]: Math.max(1, (q[svc.id] || 1) - 1) }))}
+                              className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 hover:bg-white cursor-pointer"
+                              aria-label="Decrease crew"
+                            >
+                              <Minus className="w-3.5 h-3.5" />
+                            </button>
+                            <span className="w-8 text-center text-xs font-black font-mono text-slate-900">
+                              {qty}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => setCrewQtys((q) => ({ ...q, [svc.id]: Math.min(20, (q[svc.id] || 1) + 1) }))}
+                              className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 hover:bg-white cursor-pointer"
+                              aria-label="Increase crew"
+                            >
+                              <Plus className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
 
-                      <button
-                        type="button"
-                        onClick={() => openBookSingleTrade(svc)}
-                        className="flex-1 py-2.5 px-4 rounded-xl text-xs font-black text-white shadow-sm hover:brightness-110 transition cursor-pointer flex items-center justify-center gap-1.5"
-                        style={{ background: BRAND }}
-                      >
-                        <Calendar className="w-3.5 h-3.5 text-amber-300" />
-                        <span>Book Shift • {inr(svc.shiftRate * qty)}</span>
-                      </button>
-                    </div>
+                          <button
+                            type="button"
+                            onClick={() => openBookSingleTrade(svc)}
+                            className="flex-1 py-2.5 px-4 rounded-xl text-xs font-black text-white shadow-sm hover:brightness-110 transition cursor-pointer flex items-center justify-center gap-1.5"
+                            style={{ background: BRAND }}
+                          >
+                            <Calendar className="w-3.5 h-3.5 text-amber-300" />
+                            <span>{ctaLabel}</span>
+                          </button>
+                        </div>
+                      );
+                    })()}
                   </motion.div>
                 );
               })}
@@ -1055,6 +1282,11 @@ export function Services() {
                       className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-slate-900"
                     />
                   </div>
+                  <ServiceabilityLockBanner
+                    pincode={sitePincode}
+                    onChangePincode={setSitePincode}
+                    label="Service Site Pin Code *"
+                  />
                   <div>
                     <label className="font-bold text-slate-600 block mb-1">Optional Material Combo Note</label>
                     <input
@@ -1065,58 +1297,87 @@ export function Services() {
                       className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-slate-900"
                     />
                   </div>
+
+                  {/* Material + Karigar 60-Min Smart Combo & Mandatory Tool-Kit */}
+                  {selectedTradeForDrawer?.mandatoryToolKit && (
+                    <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-[11px] space-y-1">
+                      <div className="font-black text-emerald-800">
+                        Karigar Arrives With Mandatory Tool-Kit:
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedTradeForDrawer.mandatoryToolKit.map((tool) => (
+                          <span key={tool} className="px-2 py-0.5 rounded-md bg-white border border-emerald-200 text-emerald-800 font-bold">
+                            {tool} ✓
+                          </span>
+                        ))}
+                      </div>
+                      <div className="text-[10px] font-bold text-emerald-700 pt-1">
+                        Work-Stage Escrow: Start Haziri + OTP → Mid-Work Photo → Final Finish + End OTP Release
+                      </div>
+                    </div>
+                  )}
+
+                  {comboMaterials.length > 0 && (
+                    <div className="p-3 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
+                      <div className="font-black text-blue-900 text-[11px]">
+                        + Add Matching Materials (Delivered in 60 Mins)
+                      </div>
+                      <div className="space-y-1.5">
+                        {comboMaterials.map((mat) => {
+                          const checked = selectedComboProductIds.includes(mat.id);
+                          return (
+                            <label
+                              key={mat.id}
+                              className="flex items-center justify-between gap-2 p-2 rounded-xl bg-white border border-blue-100 cursor-pointer text-[11px]"
+                            >
+                              <div className="flex items-center gap-2">
+                                <input
+                                  type="checkbox"
+                                  checked={checked}
+                                  onChange={() => {
+                                    setSelectedComboProductIds((prev) =>
+                                      prev.includes(mat.id) ? prev.filter((x) => x !== mat.id) : [...prev, mat.id]
+                                    );
+                                    if (!checked && !materialComboNote.includes(mat.title)) {
+                                      setMaterialComboNote((n) => (n ? `${n}; + ${mat.title}` : `+ ${mat.title}`));
+                                    }
+                                  }}
+                                />
+                                <span className="font-bold text-slate-900">{mat.title}</span>
+                              </div>
+                              <span className="font-mono font-black text-blue-700">₹{mat.price}</span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                {/* Payment Mode Selector */}
-                <div className="grid grid-cols-2 gap-2.5 text-xs">
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMode("LIVING_VAULT")}
-                    className={`p-3 rounded-2xl border-2 text-left transition cursor-pointer ${
-                      paymentMode === "LIVING_VAULT"
-                        ? "border-blue-700 bg-blue-50"
-                        : "border-slate-200 bg-white"
-                    }`}
-                  >
-                    <div className="font-black text-slate-900 flex items-center gap-1.5">
-                      <Wallet className="w-3.5 h-3.5 text-blue-700" />
-                      Living Vault Escrow
+                {/* 100% Prepaid Escrow Required Notice */}
+                <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 flex items-start gap-2.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-black text-emerald-900">
+                      100% Prepaid Escrow Required • Pay First to Dispatch Verified Karigar Squad
                     </div>
-                    <div className="text-[10px] font-mono font-bold text-slate-500 mt-0.5">
-                      Avail: {inr(wallet.balance)}
+                    <div className="text-[11px] text-emerald-800 mt-0.5">
+                      Pay on Delivery is disabled for Skilled Services. Escrow stays locked until Start/End OTP & Haziri.
                     </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMode("UPI")}
-                    className={`p-3 rounded-2xl border-2 text-left transition cursor-pointer ${
-                      paymentMode === "UPI"
-                        ? "border-amber-500 bg-amber-50"
-                        : "border-slate-200 bg-white"
-                    }`}
-                  >
-                    <div className="font-black text-slate-900 flex items-center gap-1.5">
-                      <CreditCard className="w-3.5 h-3.5 text-amber-600" />
-                      UPI Escrow Hold
-                    </div>
-                    <div className="text-[10px] font-bold text-slate-500 mt-0.5">
-                      GPay / PhonePe / Paytm
-                    </div>
-                  </button>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-2xl text-white font-black text-sm shadow-lg transition cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
+                  disabled={isSubmitting || !sitePinCheck.serviceable}
+                  className="w-full py-3.5 rounded-2xl text-white font-black text-sm shadow-lg transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   style={{ background: BRAND }}
                 >
                   <ShieldCheck className="w-4 h-4 text-amber-300" />
                   <span>
                     {isSubmitting
                       ? "Locking Escrow & Dispatching..."
-                      : `Lock ${inr(draftFinancials.total)} in Escrow & Book`}
+                      : `Pay ${inr(draftFinancials.total)} & Confirm Crew Booking`}
                   </span>
                 </button>
               </form>
@@ -1124,6 +1385,18 @@ export function Services() {
           </>
         )}
       </AnimatePresence>
+
+      <CononEscrowPaymentSheet
+        isOpen={escrowPayOpen}
+        onClose={() => setEscrowPayOpen(false)}
+        amount={draftFinancials.total}
+        title="CONON Skilled Crew Escrow"
+        subtitle={`${draftSquad.length} trade(s) • ${lucknowZone}`}
+        ctaLabel={`Pay ${inr(draftFinancials.total)} & Confirm Crew Booking`}
+        phoneNumber={customerPhone}
+        isProcessingExternal={isSubmitting}
+        onPaymentVerified={executeServiceBookingAfterPayment}
+      />
 
       {/* ACTIVE SERVICE BOOKING DETAIL MODAL */}
       <AnimatePresence>

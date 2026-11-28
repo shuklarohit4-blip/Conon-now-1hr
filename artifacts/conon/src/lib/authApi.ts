@@ -58,6 +58,69 @@ export interface Msg91VerifyOptions {
   name?: string;
 }
 
+export interface SendOtpResult {
+  ok: boolean;
+  error?: string;
+  phone?: string;
+  provider?: "fast2sms" | "dev-fallback";
+  expiresInSeconds?: number;
+  message?: string;
+  devOtp?: string;
+}
+
+export async function sendOtp(phone: string): Promise<SendOtpResult> {
+  try {
+    const r = await fetch(`${API}/auth/otp/send`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ phone }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      return { ok: false, error: data.error ?? "Failed to send OTP." };
+    }
+    return {
+      ok: true,
+      phone: data.phone,
+      provider: data.provider,
+      expiresInSeconds: data.expiresInSeconds,
+      message: data.message,
+      devOtp: data.devOtp,
+    };
+  } catch {
+    return { ok: false, error: "Network error while sending OTP." };
+  }
+}
+
+export async function verifyOtp(
+  phone: string,
+  otp: string,
+  opts?: { name?: string; role?: "customer" | "vendor" | "driver"; storeName?: string },
+): Promise<VerifyOtpResult> {
+  try {
+    const r = await fetch(`${API}/auth/otp/verify`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        phone,
+        otp,
+        ...(opts?.name ? { name: opts.name } : {}),
+        ...(opts?.role ? { role: opts.role } : {}),
+        ...(opts?.storeName ? { storeName: opts.storeName } : {}),
+      }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      return { ok: false, error: data.error ?? "Invalid or expired OTP." };
+    }
+    return { ok: true, token: data.token, user: data.user };
+  } catch {
+    return { ok: false, error: "Network error while verifying OTP." };
+  }
+}
+
 /**
  * Validate a MSG91 widget access-token on the server and log the user in.
  * The server binds the account to the number MSG91 verified — the client never
@@ -143,7 +206,16 @@ export async function adminLogin(
     });
     const data = await r.json().catch(() => ({}));
     if (!r.ok) {
-      return { ok: false, error: data.error ?? "Invalid admin credentials." };
+      if (data.error) {
+        return { ok: false, error: data.error };
+      }
+      if (r.status >= 500 || r.status === 404) {
+        return {
+          ok: false,
+          error: `Backend auth service unavailable (HTTP ${r.status}). Please ensure the API server is running.`,
+        };
+      }
+      return { ok: false, error: "Invalid admin credentials." };
     }
     return { ok: true, token: data.token };
   } catch {

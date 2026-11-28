@@ -9,6 +9,16 @@ import {
 } from "@workspace/db";
 import { BookServiceBody } from "@workspace/api-zod";
 import { randomUUID } from "crypto";
+import {
+  evaluatePaymentPolicy,
+  isPodRequested,
+  isVerifiedPrepaidEscrow,
+} from "../utils/paymentPolicy";
+import {
+  checkPincodeServiceability,
+  extractPincodeFromText,
+} from "../utils/serviceabilityPolicy";
+import { getLiveServiceabilityConfig } from "./serviceability";
 
 const router: IRouter = Router();
 
@@ -51,6 +61,40 @@ router.get("/services", async (_req, res, next) => {
 
 router.post("/services", async (req, res) => {
   const body = BookServiceBody.parse(req.body);
+  const rawPin =
+    (req.body as any)?.sitePincode ||
+    (req.body as any)?.deliveryPincode ||
+    extractPincodeFromText((req.body as any)?.siteAddress || body.notes);
+  const pinCheck = checkPincodeServiceability(rawPin, getLiveServiceabilityConfig());
+  if (!pinCheck.serviceable) {
+    res.status(400).json({
+      ok: false,
+      code: "PINCODE_NOT_SERVICEABLE",
+      allowedPincodes: pinCheck.allowedPincodes,
+      error: pinCheck.messageEn,
+    });
+    return;
+  }
+  const paymentMode = (req.body as any)?.paymentMode;
+  const paymentStatus = (req.body as any)?.paymentStatus;
+  const paymentRef = (req.body as any)?.paymentRef;
+  const policy = evaluatePaymentPolicy({ domain: "SERVICE", grandTotal: 1 });
+  if (!policy.allowPod && isPodRequested(paymentMode)) {
+    res.status(400).json({
+      ok: false,
+      code: "PREPAID_REQUIRED",
+      error: "Upfront prepaid payment is mandatory for RMC, Services, Machine Rentals, and orders of ₹10,000 or above.",
+    });
+    return;
+  }
+  if (policy.requirePrepaid && !isVerifiedPrepaidEscrow(paymentStatus, paymentRef)) {
+    res.status(402).json({
+      ok: false,
+      code: "PAYMENT_REQUIRED",
+      error: "Verified upfront escrow payment is required before service booking.",
+    });
+    return;
+  }
 
   const service = await collection("services").findOne({ externalId: body.serviceId });
 

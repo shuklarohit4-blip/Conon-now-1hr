@@ -1,0 +1,39 @@
+{
+  "updatedAt": "2026-11-27T07:27:55.252Z",
+  "overrides": {
+    "prod-cctv-networking-cp-z43q": {
+      "productId": "prod-cctv-networking-cp-z43q",
+      "categorySlug": "cctv-networking",
+      "title": "CP Plus 4MP Wi-Fi Full Color PT Camera - CP-Z43Q",
+      "brand": "CP PLUS",
+      "subcategory": "Cameras",
+      "description": "High-definition 4MP PT camera engineered for residential and commercial site surveillance. Delivers vivid full-color video streaming day and night with intelligent motion tracking and instant smartphone alerts. Built with robust weatherproof casing and dual-band Wi-Fi for uninterrupted monitoring.",
+      "specBullets": [
+        "4MP Quad HD resolution with crystal clear zoom details",
+        "360° horizontal pan and 90° vertical tilt motorized control",
+        "Smart full-color night vision with dual high-power white LEDs",
+        "Full duplex two-way audio with built-in noise cancelling microphone",
+        "Supports up to 256GB MicroSD card and secure cloud storage"
+      ],
+      "images": [
+        {
+          "id": "img_1",
+          "url": "/images/products/cctv/cp-plus-4mp-wifi-full-color-pt-camera-cp-z43q.webp",
+          "caption": "Front View",
+          "isPrimary": true,
+          "order": 0
+        }
+      ],
+      "price": 3984,
+      "mrp": 7200,
+      "bulkPrice": 3745,
+      "bulkMinQty": 10,
+      "hsnCode": "38245010",
+      "gstRate": 18,
+      "unit": "Piece",
+      "isInStock": true,
+      "isAdminVerifiedMedia": true,
+      "updatedAt": "2026-11-27T07:27:55.252Z"
+    }
+  }
+}

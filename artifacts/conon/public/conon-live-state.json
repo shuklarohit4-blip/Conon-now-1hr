@@ -1,15 +1,89 @@
 {
-  "version": 1795684390583,
+  "version": 1795755374496,
   "globalControls": {
-    "rainMode": true,
+    "rainMode": false,
     "storefrontBanner": {
-      "enabled": true,
-      "text": "E2E Banner Sync",
-      "badge": "TEST",
-      "tone": "amber"
+      "enabled": false,
+      "text": "",
+      "badge": "LIVE",
+      "tone": "emerald"
     },
-    "deliverySlaMins": 45,
-    "emergencyPause": false
+    "deliverySlaMins": 60,
+    "emergencyPause": false,
+    "paymentPolicy": {
+      "podMaxMaterialAmount": 10000,
+      "forcePrepaidRmc": true,
+      "forcePrepaidServices": true,
+      "forcePrepaidRentals": true
+    },
+    "serviceability": {
+      "strictPincodeLock": true,
+      "activePincodes": [
+        {
+          "pincode": "226030",
+          "areaName": "Sushant Golf City & Sultanpur Road",
+          "slaMins": 60,
+          "active": true
+        },
+        {
+          "pincode": "226010",
+          "areaName": "Gomti Nagar & Gomti Nagar Extension",
+          "slaMins": 60,
+          "active": true
+        },
+        {
+          "pincode": "226028",
+          "areaName": "Faizabad Road (Chinhat / Kamta / BBD)",
+          "slaMins": 60,
+          "active": true
+        },
+        {
+          "pincode": "226002",
+          "areaName": "Sultanpur Road (Arjunganj / Shaheed Path)",
+          "slaMins": 60,
+          "active": true
+        }
+      ]
+    },
+    "trafficPolicy": {
+      "noEntryStartHour": 6,
+      "noEntryEndHour": 23,
+      "peakMorningStart": "08:00",
+      "peakMorningEnd": "11:00",
+      "peakEveningStart": "17:00",
+      "peakEveningEnd": "20:30",
+      "vipDiversionActive": false,
+      "vipDiversionNote": "",
+      "zonePreferredVehicle": {
+        "226002": "THREE_WHEELER_LOADER",
+        "226010": "LCV_CHHOTA_HATHI",
+        "226028": "LCV_CHHOTA_HATHI",
+        "226030": "LCV_CHHOTA_HATHI"
+      }
+    },
+    "powerTrioSpotlight": {
+      "enabled": true,
+      "builderBadge": "PRO BUILDERS & GHAR CONSTRUCTION",
+      "servicesBadge": "60-MIN VISIT • ESCROW SAFE",
+      "rentalsBadge": "DIGITAL HMR BILLING • ZERO FRAUD"
+    },
+    "turnkeyBuild": {
+      "rates": {
+        "grey": 1500,
+        "silver": 1650,
+        "gold": 2100,
+        "platinum": 2750,
+        "luxury": 3600
+      },
+      "promoBanner": "Free 2D Vastu + LDA/Ansal Map Support on Gold & Platinum Turnkey",
+      "offerActive": true
+    },
+    "liveHero": {
+      "campaignPill": "CONON INFRABUILT • 7+ Yrs • 150+ Projects",
+      "headlineOverride": "",
+      "defaultMode": "materials",
+      "backdropImageUrl": ""
+    }
   },
   "categories": {
     "customCategories": [],
@@ -19,11 +93,62 @@
   "products": {
     "customProducts": [],
     "hiddenProductIds": [],
-    "overrides": {}
+    "overrides": {
+      "astral-cpvc-pro-15mm-sdr11-3m": {
+        "productId": "astral-cpvc-pro-15mm-sdr11-3m",
+        "slug": "astral-cpvc-pro-15mm-sdr11-3m",
+        "categorySlug": "cpvc-plumbing-tanks",
+        "images": [
+          {
+            "id": "disk-0",
+            "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/01.webp",
+            "caption": "Front View",
+            "isPrimary": true,
+            "order": 0
+          },
+          {
+            "id": "disk-1",
+            "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/02.webp",
+            "caption": "Front Pack",
+            "isPrimary": false,
+            "order": 1
+          },
+          {
+            "id": "disk-2",
+            "url": "/real-products/cpvc-plumbing-tanks/astral-cpvc-pro-15mm-sdr11-3m/03.webp",
+            "caption": "ISI / Grade Mark",
+            "isPrimary": false,
+            "order": 2
+          }
+        ],
+        "title": "Astral CPVC Pro 1/2\" (15mm) SDR-11, 3m (10ft)",
+        "brand": "Astral",
+        "subcategory": "cpvc-pipes",
+        "description": "Astral CPVC Pro 1/2\" (15mm) SDR-11, 3m (10ft) — Authentic construction supply with 60-minute express site dispatch across Lucknow.",
+        "specBullets": [
+          "3m / 10ft • SDR-11 • 28.1 kg/cm²"
+        ],
+        "price": 210,
+        "mrp": 270,
+        "bulkPrice": 188,
+        "hsnCode": "39172390",
+        "gstRate": 18,
+        "unit": "Pipe (3m / 10ft)",
+        "isInStock": true,
+        "isCustomItem": false,
+        "isAdminVerifiedMedia": true,
+        "updatedAt": "2026-11-27T01:32:05.400Z"
+      }
+    }
   },
   "mandiRates": {},
   "servicesAndRentals": {
-    "serviceOverrides": {},
+    "serviceOverrides": {
+      "srv-pvc-wall-ceiling": {
+        "shiftRate": 980,
+        "contractRate": 32
+      }
+    },
     "customServices": [],
     "rentalOverrides": {},
     "customRentals": []
@@ -69,6 +194,26 @@
     ],
     "ledger": [
       {
+        "id": "tr_vault_1795755374490",
+        "orderId": "VAULT-374490",
+        "entryType": "VAULT_TOPUP",
+        "direction": "CREDIT",
+        "fromAccountLabel": "Customer Vault (UPI)",
+        "fromAccountRef": "UPI",
+        "toAccountLabel": "CONON Collection A/c",
+        "toAccountRef": "HDFC Bank •••• •••• 4411",
+        "toIfsc": "HDFC0001234",
+        "beneficiaryName": "CONON LIVING VAULT",
+        "paymentMode": "UPI",
+        "utrNumber": "646649758154",
+        "grossAmount": 1,
+        "platformMargin": 0,
+        "taxAmount": 0,
+        "netAmount": 1,
+        "status": "SETTLED",
+        "createdAt": "2026-11-27T04:56:14.490Z"
+      },
+      {
         "id": "tr_1",
         "orderId": "ORD-E2E-1",
         "entryType": "CUSTOMER_INFLOW",
@@ -110,7 +255,41 @@
       }
     ]
   },
-  "updatedAt": "2026-11-26T09:13:10.583Z",
+  "compliance": {
+    "partnerStatuses": {
+      "test-partner-1": {
+        "partnerId": "test-partner-1",
+        "status": "SUSPENDED",
+        "suspensionReason": "Quality / Torn Material Complaint",
+        "physicallyInspected": true,
+        "inspectionMeta": {
+          "inspectorName": "Rohiit Shukla",
+          "inspectedAt": "2026-11-27"
+        },
+        "updatedAt": "2026-11-27T02:15:03.873Z"
+      }
+    },
+    "blacklistRegistry": [
+      {
+        "id": "blk_test",
+        "phone": "9999988888",
+        "reason": "Policy Violation",
+        "blacklistedAt": "2026-11-27T02:15:03.875Z"
+      }
+    ],
+    "auditLog": [
+      {
+        "id": "aud_test",
+        "partnerId": "test-partner-1",
+        "partnerType": "VENDOR",
+        "action": "SUSPENDED",
+        "reason": "Quality Complaint",
+        "actor": "CONON HQ",
+        "createdAt": "2026-11-27T02:15:03.875Z"
+      }
+    ]
+  },
+  "updatedAt": "2026-11-27T04:56:14.496Z",
   "replace": {
     "globalControls": {
       "rainMode": false,
@@ -131,6 +310,22 @@
     "treasury": {
       "companyAccounts": [],
       "ledger": []
+    },
+    "servicesAndRentals": {
+      "serviceOverrides": {},
+      "customServices": [],
+      "rentalOverrides": {},
+      "customRentals": []
+    },
+    "compliance": {
+      "partnerStatuses": {},
+      "blacklistRegistry": [],
+      "auditLog": []
+    },
+    "categories": {
+      "customCategories": [],
+      "hiddenCategorySlugs": [],
+      "overrides": {}
     }
   }
 }

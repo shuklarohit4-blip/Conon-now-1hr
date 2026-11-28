@@ -15,6 +15,9 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { useKyc, type PartnerKycApplication } from "@/context/KycContext";
+import { sendOtp, verifyOtp } from "@/lib/authApi";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { checkBlacklistMatch } from "@/utils/complianceEvaluator";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import { useDriverTheme } from "@/context/DriverThemeContext";
@@ -37,6 +40,7 @@ const LUCKNOW_ZONES = [
 export function DriverRegisterWizard({ onSuccess, onCancel }: DriverRegisterWizardProps) {
   const [, setLocation] = useLocation();
   const { submitDriverKyc, verifyPennyDrop, isSubmitting } = useKyc();
+  const masterSync = useSafeCononMasterSync();
   const { isDark } = useDriverTheme();
   const { t, lang } = useDriverLang();
 
@@ -45,7 +49,8 @@ export function DriverRegisterWizard({ onSuccess, onCancel }: DriverRegisterWiza
   // Step 1: Driver Profile
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [, setOtpSent] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpCode, setOtpCode] = useState("");
   const [otpVerified, setOtpVerified] = useState(false);
   const [zone, setZone] = useState("Alambagh / Transport Nagar");
   const [iceContact, setIceContact] = useState("");
@@ -87,13 +92,35 @@ export function DriverRegisterWizard({ onSuccess, onCancel }: DriverRegisterWiza
   const [agreeRainCover, setAgreeRainCover] = useState(false);
   const [agreeOtpProof, setAgreeOtpProof] = useState(false);
 
-  const handleSendOtp = () => {
+  const handleSendOtp = async () => {
+    const clean = phone.replace(/\D/g, "").slice(-10);
+    if (clean.length !== 10) {
+      toast.error(lang === "hi" ? "कृपया मान्य 10 अंकों का नंबर दर्ज करें" : "Enter a valid 10-digit mobile number");
+      return;
+    }
+    const res = await sendOtp(clean);
+    if (!res.ok) {
+      toast.error(res.error || "Failed to send SMS OTP");
+      return;
+    }
     setOtpSent(true);
-    toast.info(lang === "hi" ? "डेमो ओटीपी: 1234" : "Demo OTP: 1234");
-    setTimeout(() => {
-      setOtpVerified(true);
-      toast.success(lang === "hi" ? "ओटीपी सफलतापूर्वक सत्यापित!" : "Phone verified via OTP!");
-    }, 600);
+    if (res.devOtp) {
+      setOtpCode(res.devOtp);
+      toast.info(res.message || `Dev OTP ready: ${res.devOtp}`);
+    } else {
+      toast.success(res.message || `OTP sent via SMS to +91 ${clean}`);
+    }
+  };
+
+  const handleVerifyDriverOtp = async () => {
+    const clean = phone.replace(/\D/g, "").slice(-10);
+    const res = await verifyOtp(clean, otpCode.trim(), { role: "driver", name });
+    if (!res.ok) {
+      toast.error(res.error || "Invalid OTP");
+      return;
+    }
+    setOtpVerified(true);
+    toast.success(lang === "hi" ? "ओटीपी सफलतापूर्वक सत्यापित!" : "Phone verified via Fast2SMS OTP!");
   };
 
   const handlePennyDrop = async () => {
@@ -228,6 +255,15 @@ export function DriverRegisterWizard({ onSuccess, onCancel }: DriverRegisterWiza
         },
       ],
     };
+
+    const blkMatch = checkBlacklistMatch(
+      masterSync?.state.compliance?.blacklistRegistry || [],
+      { phone, vehicleNo: vehiclePlate }
+    );
+    if (blkMatch) {
+      toast.error("This mobile/PAN/GSTIN/vehicle is permanently restricted under CONON Safety Policy.");
+      return;
+    }
 
     const created = await submitDriverKyc(payload);
     if (onSuccess) {
@@ -415,10 +451,31 @@ export function DriverRegisterWizard({ onSuccess, onCancel }: DriverRegisterWiza
                         ? "✓ सत्यापित"
                         : "✓ Verified"
                       : lang === "hi"
-                      ? "1-टैप ओटीपी (1234)"
-                      : "1-Tap OTP (1234)"}
+                      ? "OTP भेजें"
+                      : "Send OTP"}
                   </button>
                 </div>
+                {otpSent && !otpVerified && (
+                  <div className="flex gap-2 mt-2">
+                    <input
+                      type="text"
+                      maxLength={6}
+                      value={otpCode}
+                      onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ""))}
+                      placeholder="Enter 4-digit SMS OTP"
+                      className={`flex-1 px-3 py-2 rounded-xl border text-sm font-bold tracking-widest outline-none ${
+                        isDark ? "bg-slate-900 border-slate-700 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
+                      }`}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleVerifyDriverOtp}
+                      className="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black cursor-pointer"
+                    >
+                      Verify OTP
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div>

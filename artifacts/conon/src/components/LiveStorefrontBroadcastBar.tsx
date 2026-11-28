@@ -1,6 +1,7 @@
 import React from "react";
 import { CloudRain, Megaphone, PauseCircle, Clock } from "lucide-react";
 import { useGlobalControls } from "@/hooks/useCononLiveData";
+import { useLiveStorefrontConfig } from "@/services/liveStorefrontConfig";
 
 const TONE_MAP = {
   emerald: "bg-emerald-600 text-white border-emerald-500",
@@ -10,15 +11,29 @@ const TONE_MAP = {
 
 export function LiveStorefrontBroadcastBar() {
   const { rainMode, storefrontBanner, deliverySlaMins, emergencyPause } = useGlobalControls();
+  const { settings } = useLiveStorefrontConfig();
 
-  const hasBanner = Boolean(storefrontBanner?.enabled && storefrontBanner?.text?.trim());
-  if (!hasBanner && !rainMode && !emergencyPause && deliverySlaMins === 60) {
+  const effectiveNoticeEnabled = Boolean(settings.noticeStripEnabled && settings.noticeStripText?.trim());
+  const hasBanner = Boolean(storefrontBanner?.enabled && storefrontBanner?.text?.trim()) || effectiveNoticeEnabled;
+  const isMaintenance = Boolean(emergencyPause || settings.maintenanceMode);
+  const etaMinsText = settings.deliveryEtaText || `${deliverySlaMins} Mins`;
+
+  const rawNoticeText = effectiveNoticeEnabled
+    ? settings.noticeStripText
+    : storefrontBanner.text;
+  const isDebugTestBanner = /\b(TEST|E2E)\b/i.test(String(rawNoticeText || ""));
+  const showAnnouncementBanner = hasBanner && !isDebugTestBanner;
+
+  if (!showAnnouncementBanner && !rainMode && !isMaintenance && deliverySlaMins === 60) {
     return null;
   }
 
+  const displayBannerText = showAnnouncementBanner ? rawNoticeText : "";
+  const displayBadge = effectiveNoticeEnabled ? settings.storeName : storefrontBanner.badge;
+
   return (
     <div className="w-full space-y-1.5 px-3 sm:px-6 pt-2 max-w-[1160px] mx-auto">
-      {emergencyPause && (
+      {isMaintenance && (
         <div className="w-full rounded-xl bg-rose-600 text-white px-4 py-2.5 flex items-center justify-between gap-3 shadow-sm">
           <div className="flex items-center gap-2 text-xs font-black">
             <PauseCircle className="w-4 h-4 shrink-0" />
@@ -30,7 +45,7 @@ export function LiveStorefrontBroadcastBar() {
         </div>
       )}
 
-      {hasBanner && (
+      {showAnnouncementBanner && (
         <div
           className={`w-full rounded-xl border px-4 py-2.5 flex items-center justify-between gap-3 shadow-sm ${
             TONE_MAP[storefrontBanner.tone || "emerald"]
@@ -38,16 +53,16 @@ export function LiveStorefrontBroadcastBar() {
         >
           <div className="flex items-center gap-2.5 min-w-0">
             <Megaphone className="w-4 h-4 shrink-0" />
-            {storefrontBanner.badge && (
+            {displayBadge && (
               <span className="px-2 py-0.5 rounded-full bg-black/20 text-[10px] font-black uppercase tracking-wider shrink-0">
-                {storefrontBanner.badge}
+                {displayBadge}
               </span>
             )}
-            <p className="text-xs font-bold truncate">{storefrontBanner.text}</p>
+            <p className="text-xs font-bold truncate">{displayBannerText}</p>
           </div>
-          {deliverySlaMins !== 60 && (
+          {etaMinsText && (
             <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-black bg-black/15 px-2 py-0.5 rounded-full shrink-0">
-              <Clock className="w-3 h-3" /> {deliverySlaMins}m SLA
+              <Clock className="w-3 h-3" /> {etaMinsText} SLA
             </span>
           )}
         </div>

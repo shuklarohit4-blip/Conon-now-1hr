@@ -57,14 +57,15 @@ import { KycSandboxPendingBanner } from "@/components/kyc/KycSandboxPendingBanne
 import { VendorRegisterWizard } from "@/components/kyc/VendorRegisterWizard";
 import { VendorCatalogStudio, CATEGORY_ICON_MAP } from "./VendorCatalogStudio";
 import { ProductImageUploader } from "./ProductImageUploader";
-import { VendorServicesFleetWorkspace } from "./VendorServicesFleetWorkspace";
-import { HOME_CATEGORIES } from "@/data/homeCategories";
 import { updateProductImageApi, resetProductImageApi, toggleCategoryApi } from "@/services/vendorCatalogSync";
+import { VendorServicesFleetWorkspace } from "./VendorServicesFleetWorkspace";
 import { useVendorTheme, VendorThemeToggle } from "@/context/VendorThemeContext";
 import { useVendorLang, VendorLanguageToggle } from "@/context/VendorLanguageContext";
-import { useGlobalControls } from "@/hooks/useCononLiveData";
+import { useGlobalControls, useLiveCategories } from "@/hooks/useCononLiveData";
 import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
 import { downloadPaymentAdvicePdf } from "@/services/treasuryEngine";
+import { rmcSync, type RmcConvoyOrder } from "@/services/rmcSync";
+import { PartnerComplianceGuard, PartnerComplianceBadge } from "@/components/kyc/PartnerComplianceGuard";
 import { feedbackSync, type DisputeTicket } from "@/services/feedbackSync";
 
 export interface PartnerDukaanOSProps {
@@ -76,7 +77,15 @@ export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}
   const { isDark } = useVendorTheme();
   const { t, lang } = useVendorLang();
   const globalControls = useGlobalControls();
+  const liveCategories = useLiveCategories({ includeInactive: false });
   const masterSync = useSafeCononMasterSync();
+  const [rmcList, setRmcList] = useState<RmcConvoyOrder[]>([]);
+  useEffect(() => {
+    rmcSync.fetchConvoyOrders().then(setRmcList).catch(() => {});
+    return rmcSync.subscribe(() => {
+      rmcSync.fetchConvoyOrders().then(setRmcList).catch(() => {});
+    });
+  }, []);
   const latestVendorPayout = useMemo(
     () =>
       (masterSync?.state.treasury?.ledger || []).find(
@@ -91,6 +100,7 @@ export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}
     setVendorHub,
     simulateIncomingExpressOrder,
     acceptVendorOrder,
+    rejectVendorOrder,
     toggleChecklistItem,
     markOrderLoaded,
     toggleStockKillSwitch,
@@ -832,6 +842,16 @@ export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}
       {/* ─────────────────────────────────────────────────────────────
           2. MASTERPIECE 3-ZONE OPERATIONS COMMAND LAYOUT
       ────────────────────────────────────────────────────────────── */}
+      <PartnerComplianceGuard
+        partnerId={currentApplication?.id}
+        partnerName={currentApplication?.firmOrName || currentHubInfo.name}
+        partnerType="VENDOR"
+        lang={lang}
+        expirySource={currentApplication || undefined}
+      >
+      <div className="max-w-[1680px] mx-auto w-full px-4 sm:px-6 pt-2 flex justify-end">
+        <PartnerComplianceBadge partnerId={currentApplication?.id} />
+      </div>
       <main className="max-w-[1680px] mx-auto w-full px-4 sm:px-6 mt-6 flex-1 space-y-4">
         {/* Quality Dispute Warning Banner */}
         {openDamageDispute && (
@@ -1229,16 +1249,26 @@ export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}
                         )}
                       </div>
 
-                      {/* STEP 1: 1-TAP ACCEPT ORDER */}
+                      {/* STEP 1: 1-TAP ACCEPT OR REJECT -> REROUTE */}
                       {isNew && (
-                        <div className={`mt-3 pt-3 border-t ${isDark ? "border-slate-800" : "border-slate-100"}`}>
+                        <div className={`mt-3 pt-3 border-t grid grid-cols-1 sm:grid-cols-3 gap-2 ${isDark ? "border-slate-800" : "border-slate-100"}`}>
                           <button
                             type="button"
                             onClick={() => acceptVendorOrder(order.id)}
-                            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition cursor-pointer flex items-center justify-center gap-2 active:scale-98"
+                            className="sm:col-span-2 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition cursor-pointer flex items-center justify-center gap-2 active:scale-98"
                           >
                             <CheckCircle2 className="w-4 h-4" />
                             <span>{t("acceptOrderBtn", "Accept Order & Start Loading")}</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const reason = window.prompt("Reject Reason (flags Admin Radar for instant reassignment):", "Yard Stock Temporarily Exhausted");
+                              if (reason !== null) rejectVendorOrder(order.id, reason || "Yard Stock Unavailable");
+                            }}
+                            className="py-3.5 px-3 rounded-2xl border border-rose-500/40 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-300 font-black text-xs uppercase tracking-wider transition cursor-pointer"
+                          >
+                            {lang === "hi" ? "✕ अस्वीकार (Reroute)" : "✕ Reject & Reroute"}
                           </button>
                         </div>
                       )}
@@ -1409,7 +1439,7 @@ export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}
 
                 {/* Category Horizontal Scrolling Strip */}
                 <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-slate-700">
-                  {HOME_CATEGORIES.slice(0, 16)
+                  {liveCategories
                     .filter((cat) => {
                       const isEnabled = categoryPowerState[cat.slug] ?? true;
                       if (stripOnlyActive && !isEnabled) return false;
@@ -1899,15 +1929,55 @@ export function PartnerDukaanOS({ onLogout, session }: PartnerDukaanOSProps = {}
 
         {/* ── SERVICES & FLEET WORKSPACE (4th panel, mobile + desktop) ── */}
         {mobileTab === "services_fleet" && (
-          <section className="max-w-[1680px] mx-auto w-full p-4 xl:p-6">
+          <section className="max-w-[1680px] mx-auto w-full p-4 xl:p-6 space-y-6">
             <VendorServicesFleetWorkspace
               vendorHubId={currentHubInfo.id || "hub-naka"}
               vendorName={currentHubInfo.name || "CONON Partner Hub"}
               vendorZone={currentHubInfo.zone || "Lucknow"}
             />
+
+            {/* RMC PLANT CONSOLE */}
+            <div className={`p-5 rounded-2xl border ${isDark ? "bg-[#0F172A] border-slate-800 text-white" : "bg-white border-slate-200 text-slate-900"}`}>
+              <h3 className="text-sm font-black mb-2">
+                🏭 {lang === "hi" ? "RMC बैचिंग प्लांट कंसोल (कन्वॉय और लैब रिपोर्ट)" : "RMC Batching Plant Console (Convoy Dispatch & 6-Cube Lab Reports)"}
+              </h3>
+              {rmcList.length === 0 ? (
+                <p className="text-xs opacity-70">
+                  {lang === "hi" ? "कोई लाइव RMC कन्वॉय ऑर्डर नहीं है।" : "No live RMC convoy bookings yet (Zero-Dummy Clean Slate)."}
+                </p>
+              ) : (
+                <div className="space-y-2.5">
+                  {rmcList.map((o) => (
+                    <div key={o.id} className={`p-3 rounded-xl border text-xs flex flex-wrap items-center justify-between gap-2 ${isDark ? "bg-slate-900 border-slate-800" : "bg-slate-50 border-slate-200"}`}>
+                      <div>
+                        <div className="font-black">{o.shortId} • {o.gradeCode} ({o.volumeM3} m³ • {o.tmCount} TMs)</div>
+                        <div className="text-[11px] opacity-75">{o.siteAddress} • {o.ewayBillRequired ? "E-Way Bill Required" : "HSN 38245010"}</div>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={() => rmcSync.dispatchTransitTruck(o.id, 1, { wcRatio: "0.45", plantTempC: 27, truckRegNo: "UP32-TM-01", ewayBillNo: o.ewayBillRequired ? `EWB-${Date.now().toString().slice(-8)}` : undefined })}
+                          className="px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-black cursor-pointer"
+                        >
+                          Dispatch TM #1 + Batch Slip
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => rmcSync.uploadCubeLabReport(o.id, { day7Mpa: 21.5, day28Mpa: 31.4, targetMpa: 25 })}
+                          className="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-black cursor-pointer"
+                        >
+                          Upload 7/28d Cube Lab
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </section>
         )}
       </main>
+      </PartnerComplianceGuard>
 
       {/* VENDOR REGISTRATION WIZARD MODAL */}
       {registerModalOpen && (

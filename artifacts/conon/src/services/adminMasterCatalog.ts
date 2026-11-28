@@ -2,21 +2,37 @@
  * CONON MASTER CATALOG ENGINE & REAL-TIME BUS
  * Powers the Admin "Catalog Studio", Storefront category rails, and Vendor Dukaan OS.
  */
-import { resolveApiUrl } from "@/lib/apiBase";
+import { getAdminHeaders, resolveApiUrl } from "@/lib/apiBase";
+import { HOME_CATEGORIES } from "@/data/homeCategories";
+import {
+  broadcastCategorySyncSignal,
+  refreshLiveCategories,
+} from "@/services/liveCategoriesStore";
+import { refreshLiveProducts } from "@/services/liveProductsStore";
 
 export interface AdminMasterCategory {
   id: string;
   name: string;
   nameHi?: string;
+  title?: string;
+  titleHi?: string;
   slug: string;
   imageUrl: string;
+  image?: string;
+  badge?: string;
+  badgeColor?: string;
+  department?: string;
+  categoryType?: "MATERIAL" | "RMC" | "SERVICE" | "RENTAL";
+  defaultHsn?: string;
   defaultGstRate: number; // 5, 12, 18, 28
   vehicleType: "BIKE" | "LOADER";
+  vehicleClass?: string;
   isActive: boolean;
   sortOrder: number;
+  displayOrder?: number;
   productCount?: number;
-  createdAt?: string;
   updatedAt?: string;
+  createdAt?: string;
 }
 
 export interface AdminMasterProduct {
@@ -34,16 +50,31 @@ export interface AdminMasterProduct {
   gstRate: number; // 5, 12, 18, 28
   vehicleRequirement: "BIKE" | "LOADER";
   imageUrl: string;
+  images?: Array<{
+    id: string;
+    url: string;
+    slot?: "front" | "back" | "specs" | "application" | "packaging";
+    caption?: string;
+    isPrimary?: boolean;
+    order: number;
+  }>;
   description: string;
   specTags: Array<{ label: string; value: string }>;
+  highlights?: Array<{ label: string; value: string }>;
+  keyInfo?: Array<{ label: string; value: string }>;
+  usageTips?: string[];
+  variants?: Array<{ id: string; label: string; unit: string; price: number; mrp: number; stock?: number }>;
+  bulkSlabs?: Array<{ minQty: number; price: number; label?: string }>;
+  cashbackPercent?: number;
+  stockQty?: number;
   isInStock: boolean;
+  isFeatured?: boolean;
+  isArchived?: boolean;
   adminLocked: boolean;
   createdAt?: string;
   updatedAt?: string;
 }
 
-const STORAGE_CATS_KEY = "conon_master_catalog_categories";
-const STORAGE_PRODS_KEY = "conon_master_products";
 const BROADCAST_BUS_NAME = "conon_catalog_bus";
 
 // Shared BroadcastChannel for cross-tab instant relay (<1s)
@@ -57,202 +88,30 @@ try {
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
- * DEFAULT 16 MASTER CATEGORIES (SEEDED FROM REAL STOREFRONT TILES)
+ * CANONICAL FALLBACK MASTER CATEGORIES (DERIVED FROM UNIFIED STOREFRONT LIST)
  * ──────────────────────────────────────────────────────────────────────────── */
-export const DEFAULT_MASTER_CATEGORIES: AdminMasterCategory[] = [
-  {
-    id: "cat_cement_civil",
-    name: "Cement & Civil Works",
-    nameHi: "सीमेंट और सिविल कार्य",
-    slug: "cement-civil-works",
-    imageUrl: "/images/home-categories/cement-civil-works.webp",
-    defaultGstRate: 28,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 1,
-    productCount: 24,
-  },
-  {
-    id: "cat_cpvc_plumbing",
-    name: "CPVC Plumbing & Overhead Tanks",
-    nameHi: "सी.पी.वी.सी. प्लंबिंग और पानी की टंकियां",
-    slug: "cpvc-plumbing-tanks",
-    imageUrl: "/images/home-categories/cpvc-plumbing-tanks.webp",
-    defaultGstRate: 18,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 2,
-    productCount: 42,
-  },
-  {
-    id: "cat_plywood_boards",
-    name: "Plywood & Boards",
-    nameHi: "प्लाईवुड और बोर्ड्स",
-    slug: "plywood-boards",
-    imageUrl: "/images/home-categories/plywood-boards.webp",
-    defaultGstRate: 18,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 3,
-    productCount: 30,
-  },
-  {
-    id: "cat_painting",
-    name: "Painting, Putty & Primers",
-    nameHi: "पेंटिंग, पुट्टी और प्राइमर",
-    slug: "painting",
-    imageUrl: "/images/home-categories/painting.webp",
-    defaultGstRate: 18,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 4,
-    productCount: 36,
-  },
-  {
-    id: "cat_fevicol_adhesives",
-    name: "Fevicol, Adhesives & Sealants",
-    nameHi: "फेविकोल, चिपकने वाले पदार्थ और सीलेंट",
-    slug: "fevicol-adhesives-sealants",
-    imageUrl: "/images/home-categories/fevicol-adhesives-sealants.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 5,
-    productCount: 22,
-  },
-  {
-    id: "cat_wires_electrical",
-    name: "Wires, MCB & Electrical Supplies",
-    nameHi: "तार, एम.सी.बी. और बिजली के सामान",
-    slug: "wires-mcb-electrical",
-    imageUrl: "/images/home-categories/wires-mcb-electrical.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 6,
-    productCount: 38,
-  },
-  {
-    id: "cat_tile_stone",
-    name: "Tiles, Marble & Granite",
-    nameHi: "टाइल्स, मार्बल और ग्रेनाइट",
-    slug: "tile-stone-installation",
-    imageUrl: "/images/home-categories/tile-stone-installation.webp",
-    defaultGstRate: 18,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 7,
-    productCount: 28,
-  },
-  {
-    id: "cat_power_tools",
-    name: "Power Tools, Hand Tools & Site Safety",
-    nameHi: "पावर टूल्स, हाथ के औजार और साइट सुरक्षा",
-    slug: "power-tools-safety",
-    imageUrl: "/images/home-categories/power-tools-safety.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 8,
-    productCount: 34,
-  },
-  {
-    id: "cat_waterproofing",
-    name: "Waterproofing & Repairing",
-    nameHi: "वॉटरप्रूफिंग और मरम्मत",
-    slug: "waterproofing-repairing",
-    imageUrl: "/images/home-categories/waterproofing-repairing.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 9,
-    productCount: 18,
-  },
-  {
-    id: "cat_sanitary_bath",
-    name: "Sanitary & Bath Fittings",
-    nameHi: "सैनिटरी और बाथ फिटिंग",
-    slug: "sanitary-bath-fittings",
-    imageUrl: "/images/home-categories/sanitary-bath-fittings.webp",
-    defaultGstRate: 18,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 10,
-    productCount: 26,
-  },
-  {
-    id: "cat_door_hardware",
-    name: "Door Hardware & Locks",
-    nameHi: "दरवाजे के हार्डवेयर और ताले",
-    slug: "door-hardware-locks",
-    imageUrl: "/images/home-categories/door-hardware-locks.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 11,
-    productCount: 30,
-  },
-  {
-    id: "cat_modular_kitchen",
-    name: "Modular Kitchen Systems & Fittings",
-    nameHi: "मॉड्यूलर किचन सिस्टम और फिटिंग्स",
-    slug: "modular-kitchen-systems",
-    imageUrl: "/images/home-categories/modular-kitchen-systems.webp",
-    defaultGstRate: 18,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 12,
-    productCount: 20,
-  },
-  {
-    id: "cat_cctv_networking",
-    name: "CCTV & Networking",
-    nameHi: "सी.सी.टी.वी. और नेटवर्किंग",
-    slug: "cctv-networking",
-    imageUrl: "/images/home-categories/cctv-networking.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 13,
-    productCount: 16,
-  },
-  {
-    id: "cat_kitchen_sinks",
-    name: "Kitchen Sinks & Faucets",
-    nameHi: "किचन सिंक और नल",
-    slug: "kitchen-sinks-faucets",
-    imageUrl: "/images/home-categories/kitchen-sinks-faucets.webp",
-    defaultGstRate: 18,
-    vehicleType: "LOADER",
-    isActive: true,
-    sortOrder: 14,
-    productCount: 15,
-  },
-  {
-    id: "cat_furniture_hardware",
-    name: "Furniture, Wardrobe & Bed Hardware",
-    nameHi: "फर्नीचर, अलमारी और बेड हार्डवेयर",
-    slug: "furniture-wardrobe-bed-hardware",
-    imageUrl: "/images/home-categories/furniture-wardrobe-bed-hardware.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 15,
-    productCount: 25,
-  },
-  {
-    id: "cat_lighting",
-    name: "Lighting & Luminaires",
-    nameHi: "लाइटिंग और फिक्स्चर",
-    slug: "lighting",
-    imageUrl: "/images/home-categories/lighting.webp",
-    defaultGstRate: 18,
-    vehicleType: "BIKE",
-    isActive: true,
-    sortOrder: 16,
-    productCount: 22,
-  },
-];
+export const DEFAULT_MASTER_CATEGORIES: AdminMasterCategory[] = HOME_CATEGORIES.map((c, idx) => ({
+  id: `cat_${c.slug}`,
+  name: c.title,
+  nameHi: c.titleHi,
+  title: c.title,
+  titleHi: c.titleHi,
+  slug: c.slug,
+  imageUrl: c.image,
+  image: c.image,
+  badge: c.badge,
+  badgeColor: c.badgeColor,
+  department: c.department,
+  categoryType: c.categoryType,
+  defaultHsn: c.defaultHsn,
+  defaultGstRate: c.defaultGst ?? 18,
+  vehicleType: c.vehicleClass?.toLowerCase().includes("bike") ? "BIKE" : "LOADER",
+  vehicleClass: c.vehicleClass,
+  isActive: c.isActive !== false,
+  sortOrder: c.displayOrder ?? idx + 1,
+  displayOrder: c.displayOrder ?? idx + 1,
+  productCount: c.subcategories.reduce((sum, s) => sum + (s.itemCount || 0), 0),
+}));
 
 /* ────────────────────────────────────────────────────────────────────────────
  * DEFAULT MASTER PRODUCTS (WITH AUTHENTIC CIVIL SPECS & 8-DIGIT HSN)
@@ -786,271 +645,189 @@ function notifyCatalogChange(type: "category" | "product", action: "create" | "u
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
- * CATEGORY STORE & API METHODS
+ * CATEGORY STORE & API METHODS (ZERO LOCALSTORAGE FALLBACK — DB AUTHORITATIVE)
  * ──────────────────────────────────────────────────────────────────────────── */
-export function getLocalMasterCategories(): AdminMasterCategory[] {
-  if (typeof window === "undefined") return DEFAULT_MASTER_CATEGORIES;
-  try {
-    const raw = localStorage.getItem(STORAGE_CATS_KEY);
-    if (!raw) {
-      localStorage.setItem(STORAGE_CATS_KEY, JSON.stringify(DEFAULT_MASTER_CATEGORIES));
-      return DEFAULT_MASTER_CATEGORIES;
-    }
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : DEFAULT_MASTER_CATEGORIES;
-  } catch {
-    return DEFAULT_MASTER_CATEGORIES;
-  }
-}
-
-export function saveLocalMasterCategories(cats: AdminMasterCategory[]): void {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.setItem(STORAGE_CATS_KEY, JSON.stringify(cats));
-  } catch {
-    // Ignore storage quota
-  }
-}
-
 export async function fetchMasterCategories(): Promise<AdminMasterCategory[]> {
   try {
-    const adminKey = localStorage.getItem("x-admin-key") || "conon_mac_secret_9988";
     const res = await fetch(resolveApiUrl("/api/admin/catalog/categories"), {
-      headers: {
-        "x-admin-key": adminKey,
-      },
+      cache: "no-store",
+      headers: getAdminHeaders({ "Cache-Control": "no-cache" }),
     });
     if (res.ok) {
       const data = await res.json();
-      if (data.success && Array.isArray(data.categories) && data.categories.length > 0) {
-        saveLocalMasterCategories(data.categories);
+      if (data.success && Array.isArray(data.categories)) {
         return data.categories;
       }
     }
   } catch {
-    // API offline -> fall back to local
+    // Try public read endpoint
   }
-  return getLocalMasterCategories();
+  const res = await fetch(resolveApiUrl("/api/categories"), { cache: "no-store" });
+  if (res.ok) {
+    const data = await res.json();
+    if (Array.isArray(data?.categories)) {
+      return data.categories;
+    }
+  }
+  return DEFAULT_MASTER_CATEGORIES;
 }
 
 export async function saveMasterCategory(
   category: Partial<AdminMasterCategory> & { name: string; slug: string; imageUrl: string }
 ): Promise<AdminMasterCategory> {
-  const currentCats = getLocalMasterCategories();
-  const existingIdx = currentCats.findIndex((c) => c.id === category.id || c.slug === category.slug);
+  const payload: Record<string, any> = {
+    ...category,
+    title: category.name,
+    titleHi: category.nameHi,
+    image: category.imageUrl,
+    displayOrder: category.displayOrder ?? category.sortOrder,
+  };
 
-  let updatedCategory: AdminMasterCategory;
+  const targetId = category.id || category.slug;
+  const isUpdate = Boolean(category.id);
+  const endpoint = isUpdate
+    ? resolveApiUrl(`/api/categories/${encodeURIComponent(String(targetId))}`)
+    : resolveApiUrl("/api/categories");
+  const method = isUpdate ? "PUT" : "POST";
 
-  if (existingIdx !== -1) {
-    updatedCategory = {
-      ...currentCats[existingIdx],
-      ...category,
-      updatedAt: new Date().toISOString(),
-    };
-    currentCats[existingIdx] = updatedCategory;
-  } else {
-    updatedCategory = {
-      id: category.id || `cat_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-      name: category.name,
-      nameHi: category.nameHi,
-      slug: category.slug,
-      imageUrl: category.imageUrl,
-      defaultGstRate: category.defaultGstRate || 18,
-      vehicleType: category.vehicleType || "LOADER",
-      isActive: category.isActive !== false,
-      sortOrder: category.sortOrder || currentCats.length + 1,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    currentCats.push(updatedCategory);
+  const res = await fetch(endpoint, {
+    method,
+    headers: getAdminHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json().catch(() => null);
+  if (!res.ok || !data?.category) {
+    throw new Error(data?.error || `Failed to save category (${res.status})`);
   }
 
-  saveLocalMasterCategories(currentCats);
-  notifyCatalogChange("category", existingIdx !== -1 ? "update" : "create", updatedCategory);
+  const savedCategory: AdminMasterCategory = data.category;
+  notifyCatalogChange("category", isUpdate ? "update" : "create", savedCategory);
+  broadcastCategorySyncSignal("admin-master-save");
+  await refreshLiveCategories(true);
 
-  // Sync with API in background
-  try {
-    const adminKey = localStorage.getItem("x-admin-key") || "conon_mac_secret_9988";
-    const endpoint = existingIdx !== -1
-      ? resolveApiUrl(`/api/admin/catalog/categories/${updatedCategory.id}`)
-      : resolveApiUrl("/api/admin/catalog/categories");
-    const method = existingIdx !== -1 ? "PATCH" : "POST";
-
-    fetch(endpoint, {
-      method,
-      headers: { "Content-Type": "application/json", "x-admin-key": adminKey },
-      body: JSON.stringify(updatedCategory),
-    }).catch(() => {});
-  } catch {
-    // Background sync
-  }
-
-  return updatedCategory;
+  return savedCategory;
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
- * PRODUCT STORE & API METHODS
+ * PRODUCT STORE & API METHODS (ZERO LOCALSTORAGE — REAL DB SOURCE OF TRUTH)
  * ──────────────────────────────────────────────────────────────────────────── */
-export function getLocalMasterProducts(): AdminMasterProduct[] {
-  if (typeof window === "undefined") return DEFAULT_MASTER_PRODUCTS;
-  try {
-    const raw = localStorage.getItem(STORAGE_PRODS_KEY);
-    if (!raw) {
-      localStorage.setItem(STORAGE_PRODS_KEY, JSON.stringify(DEFAULT_MASTER_PRODUCTS));
-      return DEFAULT_MASTER_PRODUCTS;
-    }
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : DEFAULT_MASTER_PRODUCTS;
-  } catch {
-    return DEFAULT_MASTER_PRODUCTS;
-  }
-}
-
-export function saveLocalMasterProducts(prods: AdminMasterProduct[]): void {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.setItem(STORAGE_PRODS_KEY, JSON.stringify(prods));
-  } catch {
-    // Storage quota fallback
-  }
-}
+let latestFetchedProducts: AdminMasterProduct[] = DEFAULT_MASTER_PRODUCTS;
 
 export async function fetchMasterProducts(filter?: {
   category?: string;
   search?: string;
   locked?: boolean;
+  includeArchived?: boolean;
 }): Promise<AdminMasterProduct[]> {
-  try {
-    const adminKey = localStorage.getItem("x-admin-key") || "conon_mac_secret_9988";
-    const params = new URLSearchParams();
-    if (filter?.category && filter.category !== "all") params.append("category", filter.category);
-    if (filter?.search) params.append("search", filter.search);
-    if (filter?.locked !== undefined) params.append("locked", String(filter.locked));
+  const params = new URLSearchParams();
+  if (filter?.category && filter.category !== "all") params.append("category", filter.category);
+  if (filter?.search) params.append("search", filter.search);
+  if (filter?.locked !== undefined) params.append("locked", String(filter.locked));
+  if (filter?.includeArchived) params.append("includeArchived", "true");
 
-    const url = resolveApiUrl(`/api/admin/catalog/products${params.toString() ? `?${params.toString()}` : ""}`);
-    const res = await fetch(url, {
-      headers: { "x-admin-key": adminKey },
-    });
-    if (res.ok) {
-      const data = await res.json();
-      if (data.success && Array.isArray(data.products) && data.products.length > 0) {
-        saveLocalMasterProducts(data.products);
-        return data.products;
-      }
-    }
-  } catch {
-    // API offline
+  const url = resolveApiUrl(`/api/admin/catalog/products${params.toString() ? `?${params.toString()}` : ""}`);
+  const res = await fetch(url, {
+    cache: "no-store",
+    headers: getAdminHeaders({ "Cache-Control": "no-cache" }),
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch catalog products (${res.status})`);
   }
-
-  // Filter local store
-  let prods = getLocalMasterProducts();
-  if (filter?.category && filter.category !== "all") {
-    prods = prods.filter((p) => p.categorySlug === filter.category);
+  const data = await res.json();
+  if (data.success && Array.isArray(data.products)) {
+    latestFetchedProducts = data.products;
+    return data.products;
   }
-  if (filter?.search) {
-    const term = filter.search.toLowerCase();
-    prods = prods.filter(
-      (p) =>
-        p.title.toLowerCase().includes(term) ||
-        p.brand.toLowerCase().includes(term) ||
-        p.hsnCode.includes(term)
-    );
-  }
-  if (filter?.locked !== undefined) {
-    prods = prods.filter((p) => p.adminLocked === filter.locked);
-  }
-  return prods;
+  return [];
 }
 
-export async function saveMasterProduct(product: Partial<AdminMasterProduct> & {
-  title: string;
-  brand: string;
-  categorySlug: string;
-  imageUrl: string;
-}): Promise<AdminMasterProduct> {
-  const currentProds = getLocalMasterProducts();
-  const existingIdx = currentProds.findIndex((p) => p.id === product.id);
+export async function saveMasterProduct(
+  product: Partial<AdminMasterProduct> & {
+    title: string;
+    brand: string;
+    categorySlug: string;
+    imageUrl: string;
+  }
+): Promise<AdminMasterProduct> {
+  const isUpdate = Boolean(product.id);
+  const endpoint = isUpdate
+    ? resolveApiUrl(`/api/admin/catalog/products/${encodeURIComponent(String(product.id))}`)
+    : resolveApiUrl("/api/admin/catalog/products");
+  const method = isUpdate ? "PUT" : "POST";
 
-  let updatedProd: AdminMasterProduct;
-
-  if (existingIdx !== -1) {
-    updatedProd = {
-      ...currentProds[existingIdx],
-      ...product,
-      updatedAt: new Date().toISOString(),
-    };
-    currentProds[existingIdx] = updatedProd;
-  } else {
-    updatedProd = {
-      id: product.id || `mp_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-      title: product.title,
-      brand: product.brand,
-      categorySlug: product.categorySlug,
-      subcategory: product.subcategory,
-      unit: product.unit || "Unit",
-      mrp: Number(product.mrp) || Number(product.sellingPrice) || 0,
-      sellingPrice: Number(product.sellingPrice) || 0,
-      bulkPrice: Number(product.bulkPrice) || Number(product.sellingPrice) || 0,
-      bulkMinQty: Number(product.bulkMinQty) || 10,
-      hsnCode: product.hsnCode || "25232910",
-      gstRate: product.gstRate || 18,
-      vehicleRequirement: product.vehicleRequirement || "LOADER",
-      imageUrl: product.imageUrl,
-      description: product.description || "",
-      specTags: product.specTags || [],
-      isInStock: product.isInStock !== false,
-      adminLocked: product.adminLocked !== false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    currentProds.unshift(updatedProd);
+  const res = await fetch(endpoint, {
+    method,
+    headers: getAdminHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(product),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok || !data?.product) {
+    throw new Error(data?.error || `Failed to save product (${res.status})`);
   }
 
-  saveLocalMasterProducts(currentProds);
-  notifyCatalogChange("product", existingIdx !== -1 ? "update" : "create", updatedProd);
+  const saved: AdminMasterProduct = data.product;
+  notifyCatalogChange("product", isUpdate ? "update" : "create", saved);
+  await refreshLiveProducts(true);
+  return saved;
+}
 
-  // Background API call
-  try {
-    const adminKey = localStorage.getItem("x-admin-key") || "conon_mac_secret_9988";
-    const endpoint = existingIdx !== -1
-      ? resolveApiUrl(`/api/admin/catalog/products/${updatedProd.id}`)
-      : resolveApiUrl("/api/admin/catalog/products");
-    const method = existingIdx !== -1 ? "PATCH" : "POST";
-
-    fetch(endpoint, {
-      method,
-      headers: { "Content-Type": "application/json", "x-admin-key": adminKey },
-      body: JSON.stringify(updatedProd),
-    }).catch(() => {});
-  } catch {
-    // Background sync
+export async function bulkUpdateMasterProducts(
+  updates: Array<{
+    id: string;
+    sellingPrice?: number;
+    mrp?: number;
+    bulkPrice?: number;
+    stockQty?: number;
+    isInStock?: boolean;
+    isFeatured?: boolean;
+  }>
+): Promise<AdminMasterProduct[]> {
+  const res = await fetch(resolveApiUrl("/api/admin/catalog/products/bulk-update"), {
+    method: "PUT",
+    headers: getAdminHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ updates }),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok || !data?.success) {
+    throw new Error(data?.error || `Bulk update failed (${res.status})`);
   }
+  notifyCatalogChange("product", "update", { bulkCount: data.updatedCount });
+  await refreshLiveProducts(true);
+  return data.products || [];
+}
 
-  return updatedProd;
+export async function importCsvMasterProducts(rows: any[]): Promise<number> {
+  const res = await fetch(resolveApiUrl("/api/admin/catalog/products/import-csv"), {
+    method: "POST",
+    headers: getAdminHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ rows }),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok || !data?.success) {
+    throw new Error(data?.error || `CSV import failed (${res.status})`);
+  }
+  notifyCatalogChange("product", "update", { imported: data.updatedCount });
+  await refreshLiveProducts(true);
+  return Number(data.updatedCount || 0);
 }
 
 export async function deleteMasterProduct(productId: string): Promise<boolean> {
-  const currentProds = getLocalMasterProducts();
-  const nextProds = currentProds.filter((p) => p.id !== productId);
-  saveLocalMasterProducts(nextProds);
-  notifyCatalogChange("product", "delete", { id: productId });
-
-  try {
-    const adminKey = localStorage.getItem("x-admin-key") || "conon_mac_secret_9988";
-    fetch(resolveApiUrl(`/api/admin/catalog/products/${productId}`), {
-      method: "DELETE",
-      headers: { "x-admin-key": adminKey },
-    }).catch(() => {});
-  } catch {
-    // Background sync
+  const res = await fetch(resolveApiUrl(`/api/admin/catalog/products/${encodeURIComponent(productId)}`), {
+    method: "DELETE",
+    headers: getAdminHeaders(),
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => null);
+    throw new Error(data?.error || "Failed to delete product");
   }
-
+  notifyCatalogChange("product", "delete", { id: productId });
+  await refreshLiveProducts(true);
   return true;
 }
 
 export function isProductAdminLocked(productIdentifier: string): boolean {
-  const prods = getLocalMasterProducts();
-  const target = prods.find(
+  const target = latestFetchedProducts.find(
     (p) =>
       p.id === productIdentifier ||
       p.title.toLowerCase().trim() === productIdentifier.toLowerCase().trim()

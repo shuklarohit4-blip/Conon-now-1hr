@@ -17,7 +17,9 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useUser } from "@/context/UserContext";
 import { CartSheet } from "./CartSheet";
 import { Footer } from "./Footer";
+import { SmartSearchBar } from "./SmartSearchBar";
 import { HomeDepartmentNav } from "./HomeDepartmentNav";
+import { CononQuickSwitchBar } from "./CononQuickSwitchBar";
 import { useDeliveryLocation } from "@/context/LocationContext";
 import { formatINR } from "@/lib/wallet";
 import { useWallet } from "@/context/WalletContext";
@@ -38,9 +40,11 @@ const LIGHT_BLUE = "#bae6fd";
 export function Layout({
   children,
   hideHeader = false,
+  hideFloatingCartPill = false,
 }: {
   children: React.ReactNode;
   hideHeader?: boolean;
+  hideFloatingCartPill?: boolean;
 }) {
   const [location, setLocationPath] = useLocation();
   const { isCartOpen, setCartOpen, isMenuOpen, setMenuOpen, setLoginModalOpen, screenRatio, setScreenRatio } = useUI();
@@ -76,22 +80,23 @@ export function Layout({
     await authLogout();
   };
 
-  const { location: deliveryLoc, openLocationSheet } = useDeliveryLocation();
+  const { location: deliveryLoc, openLocationSheet, isServiceable } = useDeliveryLocation();
   const pincode = deliveryLoc.pincode;
   const pinArea = deliveryLoc.fullLabel;
+  const isCurrentPinServiceable = isServiceable(pincode);
 
-  const navItems: { href: string; icon: typeof Home; label: string; center?: boolean }[] = [
-    { href: "/build",    icon: HardHat,   label: "Builder"          },
-    { href: "/rentals",  icon: Tractor,   label: "Machine on Rent"  },
-    { href: "/home",     icon: Home,      label: "Home", center: true },
-    { href: "/categories", icon: Grid3x3, label: "Categories"       },
-    { href: "/services", icon: Handshake, label: "Services"         },
-    { href: "/kits",     icon: Boxes,     label: "Builder Kits"     },
+  const navItems: { href: string; icon: typeof Home; label: string; center?: boolean; isCart?: boolean }[] = [
+    { href: "/home",     icon: Home,        label: "Home"     },
+    { href: "/kits",     icon: Boxes,       label: "Builder"  },
+    { href: "/services", icon: Handshake,   label: "Services", center: true },
+    { href: "/rentals",  icon: Tractor,     label: "Rentals"  },
+    { href: "/cart",     icon: ShoppingBag, label: "Cart", isCart: true },
   ];
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col items-center justify-start w-full transition-all">
-      {/* ── Screen Ratio Controller Bar (16:9 Widescreen Desktop / 16:9 Frame / 9:16 Mobile) ── */}
+      {/* ── Screen Ratio Controller Bar (Restricted to explicit ?devViewport=1 debug mode) ── */}
+      {typeof window !== "undefined" && window.location.search.includes("devViewport=1") && (
       <div className="w-full bg-slate-900 text-white text-[11px] py-1 px-4 flex items-center justify-between border-b border-slate-800 z-50 shrink-0">
         <div className="flex items-center gap-2">
           <span className="font-extrabold text-[#f2b705] tracking-wider uppercase text-[10px]">
@@ -152,6 +157,7 @@ export function Layout({
           </button>
         </div>
       </div>
+      )}
 
       <div
         className={
@@ -234,31 +240,18 @@ export function Layout({
                     <ChevronDown className="w-3 h-3 text-slate-600 group-hover:translate-y-0.5 transition-transform" strokeWidth={2.5} />
                   </div>
                   <span className="text-[10px] sm:text-[11px] text-slate-500 font-normal leading-none mt-1 tracking-tight">
-                    {pincode || "226010"}
+                    {pincode || "226030"}
                   </span>
                 </button>
               </div>
 
-              {/* Center: Search Bar (Exact Match to Reference Screenshot) */}
+              {/* Center: Global Smart Search Bar */}
               <div className="hidden md:flex flex-1 max-w-xl mx-4">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const val = (e.currentTarget.elements.namedItem("search") as HTMLInputElement)?.value;
-                    if (val?.trim()) {
-                      setLocationPath(`/categories?q=${encodeURIComponent(val.trim())}`);
-                    }
-                  }}
-                  className="w-full relative flex items-center bg-[#F4F6F8] hover:bg-[#EDF1F5] focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 rounded-lg h-9 sm:h-10 px-3 border border-slate-200 transition-all"
-                >
-                  <Search className="w-4 h-4 text-slate-400 shrink-0 mr-2" strokeWidth={2.2} />
-                  <input
-                    name="search"
-                    type="text"
-                    placeholder="Search for Fevicol, Cement, Tiles..."
-                    className="w-full bg-transparent text-xs sm:text-[13px] font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none"
-                  />
-                </form>
+                <SmartSearchBar
+                  onFocusNavigateToSearch
+                  enableGlobalShortcut
+                  compact
+                />
               </div>
 
               {/* Right: Guarantee Pill + Wallet + User Profile (Login with OTP) + Cart Bag */}
@@ -346,6 +339,24 @@ export function Layout({
                 }}
               />
             </div>
+
+            {/* ── Persistent Quick-Switch Mode Bar (All 5 CONON Pillars) ── */}
+            <CononQuickSwitchBar />
+
+            {!isCurrentPinServiceable && (
+              <div className="bg-amber-50 border-t border-amber-200 px-3 sm:px-6 py-1.5 flex items-center justify-between gap-2 text-[11px] text-amber-950">
+                <span className="font-semibold truncate">
+                  Browsing Mode — Delivery is currently open only in 226030, 226010, 226028 &amp; 226002
+                </span>
+                <button
+                  type="button"
+                  onClick={openLocationSheet}
+                  className="px-2.5 py-0.5 rounded-md bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-[10px] shrink-0 cursor-pointer"
+                >
+                  Switch Pin Code
+                </button>
+              </div>
+            )}
           </div>
         )}
 
@@ -581,8 +592,8 @@ export function Layout({
         </main>
 
         {/* Floating "View cart" pill — sits above the bottom dock, hidden when
-            the cart is empty or already open (-style). */}
-        {cart && cart.totalItems > 0 && !isCartOpen && (
+            the cart is empty, already open, or consolidated into Home's unified dock. */}
+        {!hideFloatingCartPill && cart && cart.totalItems > 0 && !isCartOpen && (
           <div className="absolute left-0 right-0 z-30 px-4 pointer-events-none flex justify-center" style={{ bottom: "92px" }}>
             <div className="w-full max-w-md">
               <button
@@ -623,7 +634,36 @@ export function Layout({
                 const Icon = item.icon;
 
                 if (item.center) {
+                  if (item.isCart) {
                   return (
+                    <button
+                      key={`cart-${idx}`}
+                      type="button"
+                      onClick={() => setCartOpen(true)}
+                      className="flex-1 min-w-0 h-full flex flex-col items-center justify-center gap-1 cursor-pointer px-0.5 relative"
+                    >
+                      <div className="relative">
+                        <Icon
+                          className="w-[20px] h-[20px] shrink-0 transition-all"
+                          style={{ color: "#475569", strokeWidth: 2 }}
+                        />
+                        {cart && cart.totalItems > 0 && (
+                          <span
+                            className="absolute -top-1.5 -right-2 min-w-[15px] h-[15px] px-1 text-[8px] font-black rounded-full flex items-center justify-center text-white"
+                            style={{ background: BRAND_DARK }}
+                          >
+                            {cart.totalItems}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[8px] font-black tracking-tight text-center leading-[1.1] text-slate-600">
+                        {item.label}
+                      </span>
+                    </button>
+                  );
+                }
+
+                return (
                     <Link key={`center-${idx}`} href={item.href} className="flex-1 min-w-0">
                       <div className="h-full flex flex-col items-center justify-center gap-0.5 cursor-pointer relative">
                         <div
@@ -640,6 +680,35 @@ export function Layout({
                         </span>
                       </div>
                     </Link>
+                  );
+                }
+
+                if (item.isCart) {
+                  return (
+                    <button
+                      key={`cart-${idx}`}
+                      type="button"
+                      onClick={() => setCartOpen(true)}
+                      className="flex-1 min-w-0 h-full flex flex-col items-center justify-center gap-1 cursor-pointer px-0.5 relative"
+                    >
+                      <div className="relative">
+                        <Icon
+                          className="w-[20px] h-[20px] shrink-0 transition-all"
+                          style={{ color: "#475569", strokeWidth: 2 }}
+                        />
+                        {cart && cart.totalItems > 0 && (
+                          <span
+                            className="absolute -top-1.5 -right-2 min-w-[15px] h-[15px] px-1 text-[8px] font-black rounded-full flex items-center justify-center text-white"
+                            style={{ background: BRAND_DARK }}
+                          >
+                            {cart.totalItems}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[8px] font-black tracking-tight text-center leading-[1.1] text-slate-600">
+                        {item.label}
+                      </span>
+                    </button>
                   );
                 }
 

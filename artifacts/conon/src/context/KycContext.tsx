@@ -8,9 +8,8 @@ import React, {
   useMemo,
 } from "react";
 import { toast } from "sonner";
-import { apiUrl } from "@/lib/apiBase";
+import { apiUrl, getAdminHeaders } from "@/lib/apiBase";
 import { getSocket, joinApplicantRoom } from "@/services/socket";
-import { MAC_ADMIN_KEY } from "@/config/adminGuard";
 
 export type ApplicantType = "VENDOR" | "DRIVER";
 
@@ -294,9 +293,8 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
     setIsLoadingQueue(true);
     try {
       const res = await fetch(apiUrl("/api/kyc/admin/queue"), {
-        headers: {
-          "x-admin-key": MAC_ADMIN_KEY || "conon_admin_secret_lucknow_2025",
-        },
+        credentials: "include",
+        headers: getAdminHeaders(),
       });
       if (res.ok) {
         const data = await res.json();
@@ -701,10 +699,8 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch(apiUrl(`/api/kyc/admin/documents/${docId}/review`), {
           method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "x-admin-key": MAC_ADMIN_KEY || "conon_admin_secret_lucknow_2025",
-          },
+          credentials: "include",
+          headers: getAdminHeaders({ "Content-Type": "application/json" }),
           body: JSON.stringify({ status, reason }),
         });
         if (res.ok) {
@@ -773,10 +769,8 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch(apiUrl(`/api/kyc/admin/applications/${appId}/decision`), {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-admin-key": MAC_ADMIN_KEY || "conon_admin_secret_lucknow_2025",
-          },
+          credentials: "include",
+          headers: getAdminHeaders({ "Content-Type": "application/json" }),
           body: JSON.stringify({ decision, reason }),
         });
         if (res.ok) {
@@ -852,10 +846,8 @@ export function KycProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch(apiUrl("/api/kyc/admin/simulate-expiry"), {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-admin-key": MAC_ADMIN_KEY || "conon_admin_secret_lucknow_2025",
-          },
+          credentials: "include",
+          headers: getAdminHeaders({ "Content-Type": "application/json" }),
           body: JSON.stringify({ driverId, expiryType }),
         });
         if (res.ok) {

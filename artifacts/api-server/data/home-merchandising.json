@@ -1,0 +1,269 @@
+{
+  "masthead": {
+    "id": "default",
+    "isEnabled": true,
+    "presetName": "dark-teal",
+    "bgGradientStart": "#0B292E",
+    "bgGradientEnd": "#124249",
+    "accentColor": "#FACC15",
+    "textColor": "#FFFFFF",
+    "pillBgColor": "#14535B",
+    "pillTextColor": "#FDE047",
+    "campaignTitle": "VERIFY TEST CAMPAIGN",
+    "campaignSubtitle": "Factory & Depot Direct Rates · Guaranteed 60-Min Lucknow Dispatch",
+    "showSparkles": true,
+    "bgPatternImageUrl": "",
+    "bottomEdgeStyle": "dotted-pattern",
+    "startDate": "",
+    "endDate": "",
+    "updatedAt": "2026-11-27T07:40:02.061Z"
+  },
+  "bentoCards": [
+    {
+      "id": "bento_slot_1",
+      "slotType": "HERO_LEFT",
+      "slotOrder": 1,
+      "isActive": true,
+      "badgePrefix": "Up to",
+      "badgeHighlight": "15% OFF",
+      "badgeColor": "#FACC15",
+      "title": "Cement & TMT Mega Deals",
+      "subtitle": "UltraTech & Tata Tiscon",
+      "originalPrice": 410,
+      "offerPrice": 365,
+      "imageUrl": "/images/home-categories/cement-civil-works.webp?v=1795765151810",
+      "cardBgColor": "#F5FBF9",
+      "linkType": "category",
+      "linkTarget": "cement-civil-works",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "bento_slot_2",
+      "slotType": "GRID_TILE",
+      "slotOrder": 2,
+      "isActive": true,
+      "badgePrefix": "Starting at",
+      "badgeHighlight": "₹345",
+      "badgeColor": "#10B981",
+      "title": "RMC Concrete Mixes",
+      "subtitle": "M10–M50 Plant Direct",
+      "imageUrl": "/images/home-categories/rmc-ready-mix-concrete.webp?v=1795765151810",
+      "cardBgColor": "#FFFFFF",
+      "linkType": "category",
+      "linkTarget": "rmc-ready-mix-concrete",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "bento_slot_3",
+      "slotType": "GRID_TILE",
+      "slotOrder": 3,
+      "isActive": true,
+      "badgePrefix": "Up to",
+      "badgeHighlight": "20% OFF",
+      "badgeColor": "#0EA5E9",
+      "title": "Waterproofing & Chemicals",
+      "subtitle": "Dr. Fixit & Fosroc",
+      "imageUrl": "/images/home-categories/waterproofing-repairing.webp?v=1795765151810",
+      "cardBgColor": "#FFFFFF",
+      "linkType": "category",
+      "linkTarget": "waterproofing-repairing",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "bento_slot_4",
+      "slotType": "GRID_TILE",
+      "slotOrder": 4,
+      "isActive": true,
+      "badgePrefix": "Bulk Rates",
+      "badgeHighlight": "18% OFF",
+      "badgeColor": "#F59E0B",
+      "title": "Plumbing & CPVC Pipes",
+      "subtitle": "Astral & Supreme",
+      "imageUrl": "/images/home-categories/cpvc-plumbing-tanks.webp?v=1795765151810",
+      "cardBgColor": "#FFFFFF",
+      "linkType": "category",
+      "linkTarget": "cpvc-plumbing-tanks",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "bento_slot_5",
+      "slotType": "GRID_TILE",
+      "slotOrder": 5,
+      "isActive": true,
+      "badgePrefix": "Starting at",
+      "badgeHighlight": "₹499",
+      "badgeColor": "#2563EB",
+      "title": "Paints, Putty & Primer",
+      "subtitle": "Asian Paints & Berger",
+      "imageUrl": "/images/home-categories/painting.webp?v=1795765151810",
+      "cardBgColor": "#FFFFFF",
+      "linkType": "category",
+      "linkTarget": "painting",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    }
+  ],
+  "offerStrips": [
+    {
+      "id": "offer_strip_1",
+      "order": 1,
+      "isActive": true,
+      "iconType": "percent",
+      "title": "TODAY'S BULK DEALS",
+      "subtitle": "Save up to ₹25/bag on 50+ cement bags",
+      "bgColor": "#0E363C",
+      "textColor": "#FFFFFF",
+      "linkType": "category",
+      "linkTarget": "cement-civil-works",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "offer_strip_2",
+      "order": 2,
+      "isActive": true,
+      "iconType": "truck",
+      "title": "60-MIN SITE EXPRESS",
+      "subtitle": "Free Chhota Hathi delivery above ₹1,000",
+      "bgColor": "#14273E",
+      "textColor": "#FFFFFF",
+      "linkType": "category",
+      "linkTarget": "rmc-ready-mix-concrete",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "offer_strip_3",
+      "order": 3,
+      "isActive": true,
+      "iconType": "bolt",
+      "title": "WIRES & MCB COMBOS",
+      "subtitle": "Havells & Polycab IS 694 pure copper",
+      "bgColor": "#291D3D",
+      "textColor": "#FFFFFF",
+      "linkType": "category",
+      "linkTarget": "wires-mcb-electrical",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    }
+  ],
+  "heroBanners": [
+    {
+      "id": "hero_brand_1",
+      "placement": "TOP_HERO",
+      "order": 1,
+      "isActive": true,
+      "bannerImageUrl": "/images/home-categories/rmc-ready-mix-concrete.webp?v=1795765151810",
+      "headline": "RMC Plant Direct — Zero Slump Loss",
+      "subheadline": "M10–M50 Structural Concrete delivered fresh in 6 m³ Transit Mixers across Lucknow",
+      "ctaText": "Shop now",
+      "ctaBgColor": "#FACC15",
+      "ctaTextColor": "#0F172A",
+      "overlayGradient": "linear-gradient(110deg, #091E3A 0%, #1848A0 100%)",
+      "linkType": "category",
+      "linkTarget": "rmc-ready-mix-concrete",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "hero_mid_1",
+      "placement": "MID_PAGE",
+      "order": 1,
+      "isActive": true,
+      "bannerImageUrl": "/images/home-categories/waterproofing-repairing.webp?v=1795765151810",
+      "headline": "LIVE NOW — UP TO 20% OFF ON WATERPROOFING",
+      "subheadline": "Protect roof slabs, sunken toilets & exterior walls before dampness hits",
+      "ctaText": "Shop Waterproofing",
+      "ctaBgColor": "#FACC15",
+      "ctaTextColor": "#0F172A",
+      "overlayGradient": "linear-gradient(110deg, #0D2F34 0%, #115E59 100%)",
+      "linkType": "category",
+      "linkTarget": "waterproofing-repairing",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "hero_brand_2",
+      "placement": "TOP_HERO",
+      "order": 2,
+      "isActive": true,
+      "bannerImageUrl": "/images/home-categories/wires-mcb-electrical.webp?v=1795765151810",
+      "headline": "Genuine Brand Electricals & Lighting",
+      "subheadline": "Havells, Polycab & Philips Bulk Contractor Prices with Instant GST Invoice",
+      "ctaText": "Explore Electricals",
+      "ctaBgColor": "#FFFFFF",
+      "ctaTextColor": "#0F172A",
+      "overlayGradient": "linear-gradient(110deg, #1E1B4B 0%, #3730A3 100%)",
+      "linkType": "category",
+      "linkTarget": "wires-mcb-electrical",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    }
+  ],
+  "promoStrips": [
+    {
+      "id": "promo_strip_1",
+      "order": 1,
+      "isActive": true,
+      "stripType": "OFFER_BAR",
+      "badgeLabel": "SUPER SAVER",
+      "boldText": "Flat ₹250 Off",
+      "regularText": "on material orders above ₹5,000 across Lucknow",
+      "termsText": "*T&C Apply",
+      "bgColor": "#FEF3C7",
+      "textColor": "#78350F",
+      "borderColor": "#FDE68A",
+      "linkType": "category",
+      "linkTarget": "cement-civil-works",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    },
+    {
+      "id": "promo_strip_2",
+      "order": 2,
+      "isActive": true,
+      "stripType": "PAYMENT_PARTNER",
+      "badgeLabel": "UPI / GST",
+      "boldText": "100% GST Billing",
+      "regularText": "| Assured 1% Cashback on Bulk UPI Orders",
+      "termsText": "*Instant ITC Tax Invoice",
+      "bgColor": "#FFFFFF",
+      "textColor": "#0F172A",
+      "borderColor": "#E2E8F0",
+      "linkType": "category",
+      "linkTarget": "rmc-ready-mix-concrete",
+      "updatedAt": "2026-11-27T07:39:11.810Z"
+    }
+  ],
+  "sectionLayout": [
+    {
+      "id": "MASTHEAD_BENTO",
+      "label": "Blinkit Campaign Masthead & 5-Card Bento Grid",
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "OFFER_CAROUSEL",
+      "label": "Horizontal Deal Pill Carousel",
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "TOP_HERO_BANNER",
+      "label": "Flipkart Minutes Sponsored Brand Banner Carousel",
+      "order": 3,
+      "isActive": true
+    },
+    {
+      "id": "PROMO_STRIPS",
+      "label": "Thin Offer & UPI/GST Payment Strips",
+      "order": 4,
+      "isActive": true
+    },
+    {
+      "id": "CATEGORY_GRID",
+      "label": "Main Storefront Category Grid",
+      "order": 5,
+      "isActive": true
+    },
+    {
+      "id": "MID_PAGE_BANNER",
+      "label": "Mid-Page Secondary Campaign Banner",
+      "order": 6,
+      "isActive": true
+    }
+  ],
+  "updatedAt": "2026-11-27T07:40:02.061Z"
+}

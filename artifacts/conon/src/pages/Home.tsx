@@ -25,7 +25,7 @@ import { EquipmentRentalSlider } from "@/components/EquipmentRentalSlider";
 import PromoCarousel from "@/components/PromoCarousel";
 import { FeatureShortcuts } from "@/components/FeatureShortcuts";
 import { FestivalHeroBanner } from "@/components/FestivalHeroBanner";
-import { HomeHeroBanner } from "@/components/HomeHeroBanner";
+import { CononLiveCommandHero } from "@/components/CononLiveCommandHero";
 import { HomeRunHeader } from "@/components/HomeRunHeader";
 import { SeamlessHeroHeader } from "@/components/SeamlessHeroHeader";
 import { CategoryShowcaseFeed } from "@/components/CategoryShowcaseFeed";
@@ -46,11 +46,13 @@ import { CCTVCollectionStorefront } from "@/components/CCTVCollectionStorefront"
 import { TileAdhesivesCollectionStorefront } from "@/components/TileAdhesivesCollectionStorefront";
 import { TilesCollectionStorefront } from "@/components/TilesCollectionStorefront";
 import { LightingCollectionStorefront } from "@/components/LightingCollectionStorefront";
+import { SolarCollectionStorefront } from "@/components/SolarCollectionStorefront";
 import { SafetyCollectionStorefront } from "@/components/SafetyCollectionStorefront";
 import { CPVCPlumbingStorefront } from "@/components/CPVCPlumbingStorefront";
 import { SanitaryBathCollectionStorefront } from "@/components/SanitaryBathCollectionStorefront";
 import { AppliancesCollectionStorefront } from "@/components/AppliancesCollectionStorefront";
 import { BricksMasonryStorefront } from "@/components/BricksMasonryStorefront";
+import { PowerToolsSafetyStorefront } from "@/components/PowerToolsSafetyStorefront";
 import type { HomeCategory } from "@/data/homeCategories";
 import { getShowcaseProducts } from "@/lib/catalogProducts";
 import { useDeliveryLocation } from "@/context/LocationContext";
@@ -60,6 +62,32 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useUI } from "@/context/UIContext";
 import { CononProductMedia } from "@/components/CononProductMedia";
 import { LiveStorefrontBroadcastBar } from "@/components/LiveStorefrontBroadcastBar";
+import { RmcHomeSpotlightShelf } from "@/components/RmcHomeSpotlightShelf";
+import { CononPowerTrioSpotlight } from "@/components/CononPowerTrioSpotlight";
+import { CononQuickSwitchBar } from "@/components/CononQuickSwitchBar";
+import { WhatAreYouBuildingStrip } from "@/components/WhatAreYouBuildingStrip";
+import { CononTurnkeyHomeBanner } from "@/components/CononTurnkeyHomeBanner";
+import { LucknowAuthorizedHubs } from "@/components/home/LucknowAuthorizedHubs";
+import { InstantSiteKits } from "@/components/home/InstantSiteKits";
+import { ParchaUploadAndBulkCloser } from "@/components/home/ParchaUploadAndBulkCloser";
+import { CononTrustFooter } from "@/components/home/CononTrustFooter";
+import { HomeFloatingCommandDock } from "@/components/home/HomeFloatingCommandDock";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { isRmcSlug } from "@workspace/shared";
+
+const InlineRmcPlantDirect = React.lazy(() => import("./RmcPlantDirect"));
+import {
+  MerchandisingMastheadAndBento,
+  MerchandisingOfferCarousel,
+  MerchandisingHeroBannerCarousel,
+  MerchandisingPromoStrips,
+} from "@/components/HomeMerchandisingSections";
+import {
+  useLiveMerchandising,
+  type LinkType,
+} from "@/services/liveMerchandisingStore";
+import { useLiveCategoriesStore } from "@/services/liveCategoriesStore";
+import { useLiveProductsStore } from "@/services/liveProductsStore";
 import { useGetMaterials, useAddToCart, useUpdateCartItem, useRemoveFromCart, useGetCart, getGetCartQueryKey, GetMaterialsStage } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -75,14 +103,6 @@ import { toast } from "sonner";
 const BRAND_DARK = "#1848a0";
 const LOGO_BLUE  = "#1848a0";
 const BLINKIT_GREEN = "#1848a0";
-
-const SPOTLIGHT_STORES: { name: string; tag: string; initials: string; bg: string; rating: string; eta: string }[] = [
-  { name: "UltraTech Store",   tag: "Cement & Concrete", initials: "UT", bg: "linear-gradient(135deg,#1848a0,#2a7a3b)", rating: "4.6", eta: "1 hr" },
-  { name: "TATA Steel Depot",  tag: "TMT & Structural",  initials: "TS", bg: "linear-gradient(135deg,#0f172a,#334155)", rating: "4.7", eta: "Today" },
-  { name: "Asian Paints Hub",  tag: "Paints & Finishes", initials: "AP", bg: "linear-gradient(135deg,#7c2d12,#f59e0b)", rating: "4.5", eta: "1 hr" },
-  { name: "Kajaria Tiles",     tag: "Tiles & Sanitary",  initials: "KT", bg: "linear-gradient(135deg,#0c831f,#15803d)", rating: "4.4", eta: "Today" },
-  { name: "CONON-NOW Brick Yard",  tag: "Bricks & Blocks",   initials: "CB", bg: "linear-gradient(135deg,#9a3412,#c8894a)", rating: "4.3", eta: "Tomorrow" },
-];
 const BRAND_MID  = "#5c92b1";
 const AMBER      = "#f59e0b";
 const GREEN      = "#2a7a3b";
@@ -178,20 +198,6 @@ const HOME_CHIPS: HomeChip[] = [
   { label: "Tiles",      db: "tiles",          icon: Grid3x3    },
   { label: "Steel",      db: "steel",          icon: Layers     },
   { label: "Hardware",   db: "hardware",       icon: Hammer     },
-];
-
-/* ── Frequently-bought bundles & Featured cards (presentational) ───── */
-const FREQUENT_BUNDLES = [
-  { db: "tools",      label: "Hammer & Chisel",     extra: "+10 more", image: CAT_PHOTO("tools") },
-  { db: "paint",      label: "Paint Roller & Brush", extra: "+15 more", image: CAT_PHOTO("paint") },
-  { db: "electrical", label: "Wiring Essentials",   extra: "+12 more", image: CAT_PHOTO("electrical") },
-  { db: "plumbing",   label: "Bathroom Fittings",   extra: "+9 more",  image: CAT_PHOTO("plumbing") },
-];
-
-const FEATURED_CARDS = [
-  { db: "cement",     title: "Cement Specials",   sub: "Up to 18% off OPC/PPC", image: CAT_PHOTO("cement"), tint: "#f59e0b" },
-  { db: "tools",      title: "Power Tool Deals",  sub: "Drills · Grinders · Saws", image: CAT_PHOTO("tools"), tint: "#1848a0" },
-  { db: "electrical", title: "Electrical Fittings", sub: "Switches · Wires · MCBs", image: CAT_PHOTO("electrical"), tint: "#2a7a3b" },
 ];
 
 /* ── AR Material Drop overlay ─────────────────────────────────────── */
@@ -375,9 +381,38 @@ export function Home() {
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
   const [heroMode, setHeroMode]         = useState<"homerun" | "winter_sale">("homerun");
 
-  const handleDepartmentNavSelect = (cat: HomeCategory) => {
-    if (cat.slug === "safety-workwear" || cat.slug === "shoes-gloves") {
-      setSelectedCategory("safety-workwear");
+  const merchandising = useLiveMerchandising({ activeOnly: true });
+  const { categories: liveAllCategories } = useLiveCategoriesStore({ includeInactive: false });
+  const { products: liveAllProducts } = useLiveProductsStore();
+
+  const isMastheadSectionActive = merchandising.sectionLayout.some(
+    (s) => s.id === "MASTHEAD_BENTO" && s.isActive
+  );
+  const activeCampaignTheme =
+    !selectedCategory && isMastheadSectionActive && merchandising.masthead.isEnabled
+      ? merchandising.masthead
+      : undefined;
+
+  const topHeroBanners = React.useMemo(
+    () => merchandising.heroBanners.filter((b) => b.placement === "TOP_HERO"),
+    [merchandising.heroBanners]
+  );
+  const midPageBanners = React.useMemo(
+    () => merchandising.heroBanners.filter((b) => b.placement === "MID_PAGE"),
+    [merchandising.heroBanners]
+  );
+
+  const handleDepartmentNavSelect = (cat: HomeCategory, subSlug?: string) => {
+    if (isRmcSlug(cat.slug) || isRmcSlug(cat.dbCategory) || isRmcSlug(cat.title) || cat.categoryType === "RMC") {
+      navigate(subSlug ? `/rmc?sub=${encodeURIComponent(subSlug)}` : "/rmc");
+      return;
+    }
+    if (subSlug && cat.route?.startsWith("/category/")) {
+      navigate(`${cat.route}?sub=${encodeURIComponent(subSlug)}`);
+      return;
+    }
+    if (cat.slug === "safety-ppe-workwear" || cat.slug === "safety-workwear" || cat.slug === "shoes-gloves") {
+      setSelectedCategory("safety-ppe-workwear");
     } else if (
       cat.slug === "sanitary-bath-fittings" ||
       cat.slug.includes("sanitary") ||
@@ -436,6 +471,92 @@ export function Home() {
     }
     setSelectedPanelLabel(cat.title);
   };
+
+  const handleMerchandisingNavigate = React.useCallback(
+    (linkType: LinkType, linkTarget: string) => {
+      const target = (linkTarget || "").trim();
+      if (!target) return;
+
+      if (linkType === "search") {
+        setSelectedCategory(null);
+        setSelectedPanelLabel(null);
+        setSearchTerm(target);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      if (linkType === "url") {
+        if (target.startsWith("/")) {
+          navigate(target);
+        } else {
+          window.open(target, "_blank", "noopener,noreferrer");
+        }
+        return;
+      }
+
+      if (linkType === "product") {
+        const lower = target.toLowerCase();
+        const found = liveAllProducts.find(
+          (p) =>
+            p.id.toLowerCase() === lower ||
+            p.slug.toLowerCase() === lower ||
+            p.title.toLowerCase() === lower ||
+            p.title.toLowerCase().includes(lower)
+        );
+        if (found) {
+          const effectivePrice = found.sellingPrice || found.price || found.mrp || 0;
+          setDetailProduct({
+            id: found.id,
+            title: found.title,
+            brand: found.brand || "CONON Certified",
+            price: effectivePrice,
+            mrp: found.mrp || effectivePrice,
+            unit: found.unit || "Unit",
+            image: found.imageUrl || found.image || found.images?.[0] || "",
+            description: found.description || found.highlights?.[0] || "",
+            materialTag: found.categorySlug,
+            rating: 4.8,
+            reviews: 124,
+            deliveryEta: "60 mins",
+            specs:
+              found.specifications?.map((s) => ({ label: s.label, value: s.value })) ||
+              found.highlights?.map((h, i) => ({ label: `Spec ${i + 1}`, value: h })) ||
+              [],
+          });
+          return;
+        }
+        setSearchTerm(target);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      if (linkType === "category") {
+        const lower = target.toLowerCase();
+        const matchedCat = liveAllCategories.find(
+          (c) =>
+            c.slug.toLowerCase() === lower ||
+            String(c.id).toLowerCase() === lower ||
+            c.dbCategory?.toLowerCase() === lower ||
+            c.title.toLowerCase() === lower
+        );
+        if (matchedCat) {
+          if (isRmcSlug(matchedCat.slug) || isRmcSlug(matchedCat.dbCategory) || matchedCat.categoryType === "RMC") {
+            navigate("/rmc");
+            return;
+          }
+          handleDepartmentNavSelect(matchedCat);
+          return;
+        }
+        if (lower.includes("rmc") || isRmcSlug(target)) {
+          navigate("/rmc");
+        } else {
+          setSelectedCategory(target);
+          setSelectedPanelLabel(getCatLabel(target));
+        }
+      }
+    },
+    [liveAllProducts, liveAllCategories, navigate]
+  );
 
   const { data: materials, isLoading } = useGetMaterials({ stage: stage === "all" ? undefined : stage });
   const qc = useQueryClient();
@@ -657,11 +778,12 @@ export function Home() {
 
   /* Filtered materials for list view (with Priority #1 Admin Media Vault overrides) */
   const listMaterials = (() => {
-    const mapped = materials?.map((m) => resolveProduct(m as any));
-    let base = selectedCategory ? mapped?.filter((m: any) => m.category === selectedCategory) : mapped;
+    const safeMaterials = Array.isArray(materials) ? materials : [];
+    const mapped = safeMaterials.map((m) => resolveProduct(m as any));
+    let base = selectedCategory ? mapped.filter((m: any) => m.category === selectedCategory) : mapped;
     if (searchTerm.trim()) {
       const q = searchTerm.toLowerCase();
-      base = base?.filter((m: any) =>
+      base = base.filter((m: any) =>
         (m.title || m.name || "").toLowerCase().includes(q) ||
         (m.category || "").toLowerCase().includes(q) ||
         (m.description || "").toLowerCase().includes(q)
@@ -681,7 +803,7 @@ export function Home() {
 
 
   return (
-    <Layout hideHeader={true}>
+    <Layout hideHeader={true} hideFloatingCartPill={!selectedCategory}>
       <div className="relative min-h-full">
         {/* ── Top Hero Header: HomeRun Style (Default) OR Blinkit Seamless Blue ── */}
         {heroMode === "homerun" ? (
@@ -698,8 +820,9 @@ export function Home() {
               onOpenMenu={() => setMenuOpen(true)}
               onOpenCart={() => setCartOpen(true)}
               onSelectCategory={(cat) => setSelectedCategory(cat)}
+              campaignTheme={activeCampaignTheme}
             />
-            {/* ── Subnavigation Department Bar (Exact Match to Reference Screenshot) ── */}
+            {/* ── Subnavigation Department Bar (Blends with Active Campaign Takeover) ── */}
             <HomeDepartmentNav
               activeDepartmentId={selectedCategory ? undefined : "home"}
               onSelectDepartment={(dept) => {
@@ -709,8 +832,11 @@ export function Home() {
                 }
               }}
               onSelectCategory={handleDepartmentNavSelect}
+              campaignTheme={activeCampaignTheme}
             />
-            <HomeHeroBanner onSelectCategory={(cat) => setSelectedCategory(cat)} />
+            {!activeCampaignTheme && (
+              <CononLiveCommandHero onSelectCategory={(cat) => setSelectedCategory(cat)} />
+            )}
           </>
         ) : (
           <SeamlessHeroHeader
@@ -732,34 +858,6 @@ export function Home() {
           />
         )}
 
-        {/* ── Visual Benchmark Switcher: HomeRun 60-Min vs Blinkit Winter Sale ── */}
-        <div className="flex items-center justify-center gap-2 py-2 px-3 bg-slate-50 border-y border-slate-200/80">
-          <button
-            type="button"
-            onClick={() => setHeroMode("homerun")}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black transition active:scale-95 ${
-              heroMode === "homerun"
-                ? "bg-[#1848a0] text-white shadow-xs"
-                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
-            }`}
-          >
-            <span>🚚</span>
-            <span>60-Min Construction Hero (CONON-NOW)</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setHeroMode("winter_sale")}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black transition active:scale-95 ${
-              heroMode === "winter_sale"
-                ? "bg-[#094596] text-white shadow-xs"
-                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
-            }`}
-          >
-            <span>❄️</span>
-            <span>Winter Build Sale (Express)</span>
-          </button>
-        </div>
-
         {/* ── Search Results (override feed when user types in search bar) ─ */}
         <AnimatePresence>
           {isSearching && (
@@ -779,6 +877,34 @@ export function Home() {
                   Clear
                 </button>
               </div>
+              {/* Instant RMC & Dynamic Category Match Strip */}
+              {(() => {
+                const q = searchTerm.trim().toLowerCase();
+                const rmcKeywords = ["rmc", "concrete", "m10", "m15", "m20", "m25", "m30", "m35", "m40", "m45", "m50", "dhalai", "chhat", "pump", "scc", "bagcrete", "transit mixer"];
+                const matchesRmc = rmcKeywords.some((kw) => q.includes(kw));
+                if (!matchesRmc) return null;
+                return (
+                  <a
+                    href="/category/rmc-ready-mix-concrete"
+                    className="mb-4 p-4 rounded-2xl bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] text-white flex items-center justify-between gap-3 shadow-md"
+                  >
+                    <div>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-400 text-slate-950">
+                        PLANT DIRECT • 18 MIXES
+                      </span>
+                      <div className="text-sm font-black mt-1">
+                        RMC (Ready Mix Concrete) — M10 to M50, SCC, Waterproof &amp; 40kg Dry Mix Bags
+                      </div>
+                      <div className="text-xs text-slate-300">
+                        Includes Slab/Footing Volume &amp; TM-Fleet Calculator + 90-Min Freshness Clock
+                      </div>
+                    </div>
+                    <span className="px-3.5 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-black shrink-0">
+                      Open RMC →
+                    </span>
+                  </a>
+                );
+              })()}
               <MaterialList materials={listMaterials} isLoading={isLoading} addToCart={addToCart} />
             </motion.div>
           )}
@@ -787,7 +913,7 @@ export function Home() {
         {/* ── Normal (non-search) UI ─────────────────────────────── */}
         {!isSearching && (
           <>
-            <LiveStorefrontBroadcastBar />
+            {!selectedCategory && <LiveStorefrontBroadcastBar />}
             {/* ── Top Department Navigation Bar (rendered here when in seamless mode) ── */}
             {heroMode !== "homerun" && (
               <HomeDepartmentNav
@@ -802,143 +928,252 @@ export function Home() {
               />
             )}
 
-            {/* Category Grid or Material List */}
-            <AnimatePresence mode="wait">
-              {!selectedCategory ? (
-                <motion.div
-                  key="cat-grid"
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                  className="pt-0 pb-28"
-                >
-                  {/* ── Signature 6-Column x 3-Row Centered Category Directory Grid (HomeRun Spec) ── */}
-                  <HomeCategoryGrid
-                    onSelectCategory={(cat: HomeCategory) => {
-                      if (
-                        cat.slug === "cement-civil-works" ||
-                        cat.slug === "cement" ||
-                        cat.slug === "steel" ||
-                        cat.slug.includes("cement") ||
-                        cat.slug.includes("sariya") ||
-                        cat.slug.includes("tmt") ||
-                        cat.slug.includes("steel")
-                      ) {
-                        setSelectedCategory("cement");
-                      } else if (
-                        cat.slug === "plywood-boards" ||
-                        cat.slug === "plywood-doors-hardware" ||
-                        cat.slug.includes("plywood") ||
-                        cat.slug.includes("door") ||
-                        cat.slug.includes("hdhmr") ||
-                        cat.slug.includes("laminate")
-                      ) {
-                        setSelectedCategory("plywood-boards");
-                      } else if (cat.slug === "fevicol-adhesives-sealants") {
-                        setSelectedCategory("fevicol-adhesives-sealants");
-                      } else if (cat.slug === "furniture-wardrobe-bed-hardware") {
-                        setSelectedCategory("furniture-wardrobe-bed-hardware");
-                      } else if (cat.slug === "door-hardware-locks") {
-                        setSelectedCategory("door-hardware-locks");
-                      } else if (cat.slug === "wires-mcb-electrical") {
-                        setSelectedCategory("wires-mcb-electrical");
-                      } else if (cat.slug === "kitchen-sinks-faucets") {
-                        setSelectedCategory("kitchen-sinks-faucets");
-                      } else if (
-                        cat.slug === "painting" ||
-                        cat.slug === "paints-putty-primer" ||
-                        cat.slug.includes("paint") ||
-                        cat.slug.includes("putty") ||
-                        cat.slug.includes("primer")
-                      ) {
-                        setSelectedCategory("painting");
-                      } else if (cat.slug === "cctv-networking") {
-                        setSelectedCategory("cctv-networking");
-                      } else if (
-                        cat.slug === "tile-stone-installation" ||
-                        cat.slug === "tile-adhesives" ||
-                        cat.slug === "tiles" ||
-                        cat.slug === "tiles-marble-granite" ||
-                        cat.slug.includes("tile") ||
-                        cat.slug.includes("granite") ||
-                        cat.slug.includes("marble")
-                      ) {
-                        setSelectedCategory("tile-stone-installation");
-                      } else if (
-                        cat.slug === "lighting" ||
-                        cat.slug === "ceiling-panel-lights"
-                      ) {
-                        setSelectedCategory("lighting");
-                      } else if (
-                        cat.slug === "safety-workwear" ||
-                        cat.slug === "shoes-gloves" ||
-                        cat.slug === "safety"
-                      ) {
-                        setSelectedCategory("safety-workwear");
-                      } else if (
-                        cat.slug === "sanitary-bath-fittings" ||
-                        cat.slug.includes("sanitary") ||
-                        cat.slug.includes("bath-fittings")
-                      ) {
-                        setSelectedCategory("sanitary-bath-fittings");
-                      } else if (
-                        cat.slug === "cpvc-plumbing-tanks" ||
-                        cat.slug === "cpvc-pipes-hardware" ||
-                        cat.slug.includes("cpvc") ||
-                        cat.slug.includes("plumbing")
-                      ) {
-                        setSelectedCategory("cpvc-plumbing-tanks");
-                      } else if (
-                        cat.slug === "bricks-sand-gitti-aac" ||
-                        cat.slug === "eeta" ||
-                        cat.slug === "morang" ||
-                        cat.slug.includes("brick") ||
-                        cat.slug.includes("morang") ||
-                        cat.slug.includes("gitti") ||
-                        cat.slug.includes("aac")
-                      ) {
-                        setSelectedCategory("bricks-sand-gitti-aac");
-                      } else if (
-                        cat.slug === "home-appliances" ||
-                        cat.slug.includes("appliance")
-                      ) {
-                        setSelectedCategory("home-appliances");
-                      } else if (
-                        cat.slug === "modular-kitchen-systems" ||
-                        cat.slug.includes("kitchen-system")
-                      ) {
-                        setSelectedCategory("modular-kitchen-systems");
-                      } else {
-                        setSelectedCategory(cat.dbCategory);
-                      }
-                      setSelectedPanelLabel(cat.title);
-                    }}
-                  />
+            {/* ── Persistent Quick-Switch Mode Bar (Zero Sidebar Hunting) ── */}
+            <CononQuickSwitchBar />
 
-                  {/* ── Quick Category Filter Chips ── */}
-                  <div className="flex gap-2 mt-4 overflow-x-auto scrollbar-hide px-4 pb-1">
-                    {HOME_CHIPS.map(chip => {
-                      const active = chip.db === null ? selectedCategory === null : selectedCategory === chip.db;
-                      const Icon = chip.icon;
+            {/* Category Grid or Material List — Always ErrorBoundary-protected, zero opacity traps */}
+            {!selectedCategory ? (
+              <div key="cat-grid" className="pt-0 pb-28">
+                {/* ── Admin-Ordered Dynamic Home Merchandising Sections + Core Category Grid ── */}
+                <ErrorBoundary compact fallbackTitle="Campaign & Category Directory">
+                  {(Array.isArray(merchandising?.sectionLayout) && merchandising.sectionLayout.length > 0
+                    ? merchandising.sectionLayout
+                    : [{ id: "CATEGORY_GRID", label: "Categories", order: 1, isActive: true }]
+                  ).map((sec) => {
+                    if (sec.id === "MASTHEAD_BENTO") {
                       return (
-                        <button
-                          key={chip.label}
-                          onClick={() => {
-                            if (chip.db === null) { setSelectedCategory(null); setSelectedPanelLabel(null); }
-                            else { setSelectedCategory(chip.db); setSelectedPanelLabel(chip.label); }
-                          }}
-                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition active:scale-95 ${
-                            active
-                              ? "bg-[#1848a0] text-white shadow-xs"
-                              : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                          }`}
-                        >
-                          <Icon className="w-3.5 h-3.5" strokeWidth={2.4} />
-                          <span>{chip.label}</span>
-                        </button>
+                        <MerchandisingMastheadAndBento
+                          key={sec.id}
+                          masthead={merchandising.masthead}
+                          cards={Array.isArray(merchandising.bentoCards) ? merchandising.bentoCards : []}
+                          updatedAt={merchandising.updatedAt}
+                          onNavigate={handleMerchandisingNavigate}
+                        />
                       );
-                    })}
-                  </div>
+                    }
+                    if (sec.id === "OFFER_CAROUSEL") {
+                      return (
+                        <MerchandisingOfferCarousel
+                          key={sec.id}
+                          strips={Array.isArray(merchandising.offerStrips) ? merchandising.offerStrips : []}
+                          updatedAt={merchandising.updatedAt}
+                          onNavigate={handleMerchandisingNavigate}
+                        />
+                      );
+                    }
+                    if (sec.id === "TOP_HERO_BANNER") {
+                      return (
+                        <MerchandisingHeroBannerCarousel
+                          key={sec.id}
+                          banners={Array.isArray(topHeroBanners) ? topHeroBanners : []}
+                          updatedAt={merchandising.updatedAt}
+                          onNavigate={handleMerchandisingNavigate}
+                          ariaLabel="Sponsored Brand Hero Banners"
+                        />
+                      );
+                    }
+                    if (sec.id === "PROMO_STRIPS") {
+                      return (
+                        <MerchandisingPromoStrips
+                          key={sec.id}
+                          strips={Array.isArray(merchandising.promoStrips) ? merchandising.promoStrips : []}
+                          updatedAt={merchandising.updatedAt}
+                          onNavigate={handleMerchandisingNavigate}
+                        />
+                      );
+                    }
+                    if (sec.id === "MID_PAGE_BANNER") {
+                      return (
+                        <MerchandisingHeroBannerCarousel
+                          key={sec.id}
+                          banners={Array.isArray(midPageBanners) ? midPageBanners : []}
+                          updatedAt={merchandising.updatedAt}
+                          onNavigate={handleMerchandisingNavigate}
+                          ariaLabel="Mid-Page Campaign Banners"
+                        />
+                      );
+                    }
+                    if (sec.id === "CATEGORY_GRID") {
+                      return (
+                        <React.Fragment key={sec.id}>
+                          {activeCampaignTheme && heroMode === "homerun" && (
+                            <CononLiveCommandHero onSelectCategory={(cat) => setSelectedCategory(cat)} />
+                          )}
 
-                  {/* ── Category-Wise Product Showcase Feed (Blinkit 3-Column High-Density Grid) ── */}
+                          {/* ── Above-the-Fold CONON Power Trio Spotlight Dock ── */}
+                          <CononPowerTrioSpotlight />
+
+                          {/* ── Lucknow Turnkey Home & Commercial Studio Banner ── */}
+                          <CononTurnkeyHomeBanner />
+
+                          {/* ── Signature 6-Column x 3-Row Centered Category Directory Grid (HomeRun Spec) ── */}
+                          <HomeCategoryGrid
+                            onSelectCategory={(cat: HomeCategory) => {
+                              if (
+                                isRmcSlug(cat.slug) ||
+                                isRmcSlug(cat.dbCategory) ||
+                                isRmcSlug(cat.title) ||
+                                cat.categoryType === "RMC"
+                              ) {
+                                navigate("/rmc");
+                                return;
+                              }
+                              if (cat.route?.startsWith("/category/")) {
+                                navigate(cat.route);
+                                return;
+                              }
+                              if (
+                                cat.slug === "cement-civil-works" ||
+                                cat.slug === "cement" ||
+                                cat.slug === "steel" ||
+                                cat.slug.includes("cement") ||
+                                cat.slug.includes("sariya") ||
+                                cat.slug.includes("tmt") ||
+                                cat.slug.includes("steel")
+                              ) {
+                                setSelectedCategory("cement");
+                              } else if (
+                                cat.slug === "plywood-boards" ||
+                                cat.slug === "plywood-doors-hardware" ||
+                                cat.slug.includes("plywood") ||
+                                cat.slug.includes("door") ||
+                                cat.slug.includes("hdhmr") ||
+                                cat.slug.includes("laminate")
+                              ) {
+                                setSelectedCategory("plywood-boards");
+                              } else if (cat.slug === "fevicol-adhesives-sealants") {
+                                setSelectedCategory("fevicol-adhesives-sealants");
+                              } else if (cat.slug === "furniture-wardrobe-bed-hardware") {
+                                setSelectedCategory("furniture-wardrobe-bed-hardware");
+                              } else if (cat.slug === "door-hardware-locks") {
+                                setSelectedCategory("door-hardware-locks");
+                              } else if (cat.slug === "wires-mcb-electrical") {
+                                setSelectedCategory("wires-mcb-electrical");
+                              } else if (cat.slug === "kitchen-sinks-faucets") {
+                                setSelectedCategory("kitchen-sinks-faucets");
+                              } else if (
+                                cat.slug === "painting" ||
+                                cat.slug === "paints-putty-primer" ||
+                                cat.slug.includes("paint") ||
+                                cat.slug.includes("putty") ||
+                                cat.slug.includes("primer")
+                              ) {
+                                setSelectedCategory("painting");
+                              } else if (cat.slug === "cctv-networking") {
+                                setSelectedCategory("cctv-networking");
+                              } else if (
+                                cat.slug === "tile-stone-installation" ||
+                                cat.slug === "tile-adhesives" ||
+                                cat.slug === "tiles" ||
+                                cat.slug === "tiles-marble-granite" ||
+                                cat.slug.includes("tile") ||
+                                cat.slug.includes("granite") ||
+                                cat.slug.includes("marble")
+                              ) {
+                                setSelectedCategory("tile-stone-installation");
+                              } else if (
+                                cat.slug === "lighting" ||
+                                cat.slug === "ceiling-panel-lights"
+                              ) {
+                                setSelectedCategory("lighting");
+                              } else if (
+                                cat.slug === "solar-rooftop-power" ||
+                                cat.slug.includes("solar")
+                              ) {
+                                setSelectedCategory("solar-rooftop-power");
+                              } else if (
+                                cat.slug === "safety-workwear" ||
+                                cat.slug === "shoes-gloves" ||
+                                cat.slug === "safety"
+                              ) {
+                                setSelectedCategory("safety-workwear");
+                              } else if (
+                                cat.slug === "sanitary-bath-fittings" ||
+                                cat.slug.includes("sanitary") ||
+                                cat.slug.includes("bath-fittings")
+                              ) {
+                                setSelectedCategory("sanitary-bath-fittings");
+                              } else if (
+                                cat.slug === "cpvc-plumbing-tanks" ||
+                                cat.slug === "cpvc-pipes-hardware" ||
+                                cat.slug.includes("cpvc") ||
+                                cat.slug.includes("plumbing")
+                              ) {
+                                setSelectedCategory("cpvc-plumbing-tanks");
+                              } else if (
+                                cat.slug === "bricks-sand-gitti-aac" ||
+                                cat.slug === "eeta" ||
+                                cat.slug === "morang" ||
+                                cat.slug.includes("brick") ||
+                                cat.slug.includes("morang") ||
+                                cat.slug.includes("gitti") ||
+                                cat.slug.includes("aac")
+                              ) {
+                                setSelectedCategory("bricks-sand-gitti-aac");
+                              } else if (
+                                cat.slug === "home-appliances" ||
+                                cat.slug.includes("appliance")
+                              ) {
+                                setSelectedCategory("home-appliances");
+                              } else if (
+                                cat.slug === "modular-kitchen-systems" ||
+                                cat.slug.includes("kitchen-system")
+                              ) {
+                                setSelectedCategory("modular-kitchen-systems");
+                              } else if (
+                                cat.slug === "tools-hardware" ||
+                                cat.slug.includes("power-tools") ||
+                                cat.slug.includes("hand-measuring")
+                              ) {
+                                setSelectedCategory("tools-hardware");
+                              } else {
+                                setSelectedCategory(cat.dbCategory);
+                              }
+                              setSelectedPanelLabel(cat.title);
+                            }}
+                          />
+                        </React.Fragment>
+                      );
+                    }
+                    return null;
+                  })}
+                </ErrorBoundary>
+
+                {/* ── Quick Category Filter Chips ── */}
+                <div className="flex gap-2 mt-4 overflow-x-auto scrollbar-hide px-4 pb-1">
+                  {HOME_CHIPS.map(chip => {
+                    const active = chip.db === null ? selectedCategory === null : selectedCategory === chip.db;
+                    const Icon = chip.icon;
+                    return (
+                      <button
+                        key={chip.label}
+                        onClick={() => {
+                          if (chip.db === null) { setSelectedCategory(null); setSelectedPanelLabel(null); }
+                          else { setSelectedCategory(chip.db); setSelectedPanelLabel(chip.label); }
+                        }}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition active:scale-95 ${
+                          active
+                            ? "bg-[#1848a0] text-white shadow-xs"
+                            : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5" strokeWidth={2.4} />
+                        <span>{chip.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* ── Interactive "What Are You Building Today?" Strip ── */}
+                <ErrorBoundary compact fallbackTitle="Project Builder Strip">
+                  <WhatAreYouBuildingStrip />
+                </ErrorBoundary>
+
+                {/* ── Category-Wise Product Showcase Feed ── */}
+                <ErrorBoundary compact fallbackTitle="RMC Plant Spotlight">
+                  <RmcHomeSpotlightShelf />
+                </ErrorBoundary>
+                <ErrorBoundary compact fallbackTitle="Featured Category Product Shelves">
                   <div className="mt-5">
                     <CategoryShowcaseFeed
                       getProductsForCategory={getShowcaseProducts}
@@ -950,248 +1185,91 @@ export function Home() {
                         setSelectedPanelLabel(getCatLabel(cat));
                       }}
                       onOpenDetail={setDetailProduct}
+                      hideFloatingBackToTop={true}
                     />
                   </div>
+                </ErrorBoundary>
 
-                  {/* ── Festival / Mega Discount Banner ──── */}
-                  <div className="mt-8">
-                    <FestivalHeroBanner onSelectCategory={(cat) => setSelectedCategory(cat)} />
-                  </div>
+                {/* ── Festival / Mega Discount Banner ──── */}
+                <div className="mt-8">
+                  <FestivalHeroBanner onSelectCategory={(cat) => setSelectedCategory(cat)} />
+                </div>
 
-                  {/* ── Flagship Builder Kit 6-Stage Home Construction Planner Banner ── */}
-                  <div className="px-4 mt-6">
-                    <Link href="/builder-kit">
-                      <div
-                        className="relative rounded-3xl p-5 sm:p-6 overflow-hidden text-white cursor-pointer shadow-lg hover:shadow-xl transition active:scale-[0.99] border border-amber-400/30"
-                        style={{
-                          background: "linear-gradient(135deg, #0F172A 0%, #1E293B 55%, #334155 100%)",
-                        }}
-                      >
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
-                          <div className="space-y-1.5 max-w-lg">
-                            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider">
-                              <span>⚡ Flagship Project Planner</span>
-                            </div>
-                            <h3 className="text-base sm:text-xl font-black text-white leading-tight">
-                              6-Stage Home Construction Material Kit &amp; BOQ
-                            </h3>
-                            <p className="text-xs text-slate-300 leading-relaxed">
-                              Civil engineering formulas, 3 quality tiers (Standard • Premium • Luxury), vehicle split preview &amp; 1-click stage order to cart.
-                            </p>
+                {/* ── Flagship Builder Kit 6-Stage Home Construction Planner Banner ── */}
+                <div className="px-4 mt-6">
+                  <Link href="/builder-kit">
+                    <div
+                      className="relative rounded-3xl p-5 sm:p-6 overflow-hidden text-white cursor-pointer shadow-lg hover:shadow-xl transition active:scale-[0.99] border border-amber-400/30"
+                      style={{
+                        background: "linear-gradient(135deg, #0F172A 0%, #1E293B 55%, #334155 100%)",
+                      }}
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                        <div className="space-y-1.5 max-w-lg">
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider">
+                            <span>⚡ Flagship Project Planner</span>
                           </div>
+                          <h3 className="text-base sm:text-xl font-black text-white leading-tight">
+                            6-Stage Home Construction Material Kit &amp; BOQ
+                          </h3>
+                          <p className="text-xs text-slate-300 leading-relaxed">
+                            Civil engineering formulas, 3 quality tiers (Standard • Premium • Luxury), vehicle split preview &amp; 1-click stage order to cart.
+                          </p>
+                        </div>
 
-                          <div className="flex flex-col items-start sm:items-end shrink-0">
-                            <span className="px-4 py-2.5 rounded-2xl bg-[#FDB813] hover:bg-[#F5B800] text-slate-950 font-black text-xs shadow-md flex items-center gap-1.5 transition">
-                              <span>Calculate BOQ Free</span>
-                              <span>→</span>
-                            </span>
-                            <span className="text-[10px] text-amber-300 font-bold mt-1.5">
-                              Printable A4 Quotation Included
-                            </span>
-                          </div>
+                        <div className="flex flex-col items-start sm:items-end shrink-0">
+                          <span className="px-4 py-2.5 rounded-2xl bg-[#FDB813] hover:bg-[#F5B800] text-slate-950 font-black text-xs shadow-md flex items-center gap-1.5 transition">
+                            <span>Calculate BOQ Free</span>
+                            <span>→</span>
+                          </span>
+                          <span className="text-[10px] text-amber-300 font-bold mt-1.5">
+                            Printable A4 Quotation Included
+                          </span>
                         </div>
                       </div>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
+                </div>
 
-                  {/* ── Explore CONON-NOW — quick-access feature shortcuts ──── */}
-                  <FeatureShortcuts />
+                {/* ── Explore CONON-NOW — quick-access feature shortcuts ──── */}
+                <FeatureShortcuts />
 
-                  {/* Heavy machines on rent — fleet slider, directly below categories */}
+                {/* Heavy machines on rent — fleet slider, directly below categories */}
+                <ErrorBoundary compact fallbackTitle="Heavy Equipment Rentals">
                   <EquipmentRentalSlider />
+                </ErrorBoundary>
 
-                  {/* ── Hero banner carousel ─────────────────────────── */}
-                  <PromoCarousel />
+                {/* ── Hero banner carousel ─────────────────────────── */}
+                <PromoCarousel />
 
-                  {/* Special offer bar */}
-                  <div className="px-4 mt-3">
-                    <div
-                      className="rounded-2xl px-4 py-3 flex items-center gap-3"
-                      style={{ background: `linear-gradient(135deg, ${GREEN} 0%, #1f5e2c 100%)` }}
-                    >
-                      <span className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
-                        <Zap className="w-4 h-4 text-amber-300" strokeWidth={2.6} fill="currentColor" />
-                      </span>
-                      <p className="text-white text-[13px] font-black leading-tight">
-                        Shop for ₹50,000 &amp; above,{" "}
-                        <span className="text-amber-300">get an extra ₹5,000 OFF</span>
-                      </p>
-                    </div>
-                  </div>
+                {/* ── BLOCK 1: Lucknow Live Authorized Hubs ────────── */}
+                <ErrorBoundary compact fallbackTitle="Lucknow Authorized Hubs">
+                  <LucknowAuthorizedHubs
+                    onSelectHub={(categoryDb, label) => {
+                      setSelectedCategory(categoryDb);
+                      setSelectedPanelLabel(label);
+                    }}
+                    onSeeAll={() => navigate("/categories")}
+                  />
+                </ErrorBoundary>
 
-                  {/* Stores in spotlight — horizontal scroll */}
-                  <div className="mt-6">
-                    <div className="flex items-center justify-between px-4 mb-3">
-                      <h3 className="font-display font-black text-[15px]" style={{ color: BRAND_DARK }}>
-                        Stores in spotlight
-                      </h3>
-                      <button
-                        onClick={() => navigate("/categories")}
-                        className="text-[12px] font-black flex items-center gap-0.5"
-                        style={{ color: GREEN }}
-                      >
-                        See all <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                    <div className="flex gap-3 overflow-x-auto scrollbar-hide px-4 pb-1">
-                      {SPOTLIGHT_STORES.map((s) => (
-                        <button
-                          key={s.name}
-                          onClick={() => navigate("/categories")}
-                          className="shrink-0 w-[136px] text-left rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-[0_4px_14px_-8px_rgba(27,67,102,0.35)] active:scale-[0.97] transition"
-                        >
-                          <div
-                            className="h-20 flex items-center justify-center"
-                            style={{ background: s.bg }}
-                          >
-                            <span className="text-2xl font-black text-white tracking-tight">{s.initials}</span>
-                          </div>
-                          <div className="p-2.5">
-                            <p className="text-[13px] font-black leading-tight truncate" style={{ color: BRAND_DARK }}>
-                              {s.name}
-                            </p>
-                            <p className="text-[11px] font-semibold text-slate-400 truncate">{s.tag}</p>
-                            <div className="flex items-center gap-1 mt-1.5">
-                              <span
-                                className="inline-flex items-center gap-0.5 text-[10px] font-black text-white px-1.5 py-0.5 rounded-md"
-                                style={{ background: GREEN }}
-                              >
-                                <Star className="w-2.5 h-2.5" fill="currentColor" strokeWidth={0} /> {s.rating}
-                              </span>
-                              <span className="text-[10px] font-semibold text-slate-400">{s.eta}</span>
-                            </div>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                {/* ── BLOCK 2: 1-Click Lucknow Site Kits ───────────── */}
+                <ErrorBoundary compact fallbackTitle="1-Click Lucknow Site Kits">
+                  <InstantSiteKits />
+                </ErrorBoundary>
 
+                {/* ── BLOCK 3: Parcha Upload & Live Bulk Savings Closer ─ */}
+                <ErrorBoundary compact fallbackTitle="Parcha Upload & Bulk Savings">
+                  <ParchaUploadAndBulkCloser />
+                </ErrorBoundary>
 
+                {/* ── BLOCK 5: Compact Lucknow Trust Strip ─────────── */}
+                <CononTrustFooter />
 
-                  {/* Frequently bought */}
-                  <div className="mt-6">
-                    <div className="flex items-center justify-between px-4 mb-3">
-                      <h3 className="font-display font-black text-[15px]" style={{ color: BRAND_DARK }}>
-                        Frequently bought
-                      </h3>
-                    </div>
-                    <div className="flex gap-3 overflow-x-auto scrollbar-hide px-4 pb-1">
-                      {FREQUENT_BUNDLES.map(b => (
-                        <button
-                          key={b.label}
-                          onClick={() => { setSelectedCategory(b.db); setSelectedPanelLabel(b.label); }}
-                          className="shrink-0 w-[120px] active:scale-95 transition"
-                        >
-                          <div className="w-full h-[100px] rounded-2xl overflow-hidden relative border border-slate-100 bg-slate-50">
-                            <CononProductMedia
-                              product={{
-                                id: `bundle-${b.db}`,
-                                title: b.label,
-                                brand: "CONON BUNDLE",
-                                categorySlug: b.db,
-                              }}
-                              variant="tile"
-                              showGalleryBadge={false}
-                              containerClassName="w-full h-full"
-                              className="w-full h-full object-cover"
-                            />
-                            <span className="absolute bottom-1.5 left-1.5 text-[9px] font-black text-white px-1.5 py-0.5 rounded-md z-10" style={{ background: "rgba(15,23,42,0.7)" }}>
-                              {b.extra}
-                            </span>
-                          </div>
-                          <p className="text-[11px] font-bold text-slate-700 mt-1.5 text-left leading-tight">{b.label}</p>
-                        </button>
-                      ))}
-                    </div>
-                    <div className="px-4 mt-3">
-                      <button
-                        onClick={() => setSelectedCategory(null)}
-                        className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-slate-200 bg-white active:scale-[0.98] transition"
-                      >
-                        <span className="text-[12px] font-black" style={{ color: BRAND_DARK }}>See all materials</span>
-                        <ChevronRight className="w-4 h-4" style={{ color: BRAND_DARK }} />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Featured this week */}
-                  <div className="mt-6">
-                    <h3 className="font-display font-black text-[15px] px-4 mb-3" style={{ color: BRAND_DARK }}>
-                      Featured this week
-                    </h3>
-                    <div className="flex gap-3 overflow-x-auto scrollbar-hide px-4 pb-1">
-                      {FEATURED_CARDS.map(card => (
-                        <button
-                          key={card.title}
-                          onClick={() => { setSelectedCategory(card.db); setSelectedPanelLabel(card.title); }}
-                          className="shrink-0 w-[170px] rounded-2xl overflow-hidden relative active:scale-95 transition text-left"
-                          style={{ background: card.tint }}
-                        >
-                          <div className="absolute inset-0 opacity-25 pointer-events-none">
-                            <CononProductMedia
-                              product={{
-                                id: `featured-${card.db}`,
-                                title: card.title,
-                                brand: "CONON",
-                                categorySlug: card.db,
-                              }}
-                              variant="banner"
-                              isDark
-                              showGalleryBadge={false}
-                              containerClassName="w-full h-full"
-                              className="w-full h-full object-cover blur-[1px]"
-                            />
-                          </div>
-                          <div className="relative z-10 p-3.5 h-[112px] flex flex-col">
-                            <span className="self-start text-[8px] font-black uppercase tracking-widest text-white/90 bg-white/20 px-2 py-0.5 rounded-full">
-                              Featured
-                            </span>
-                            <h4 className="font-display font-black text-white text-[15px] leading-tight mt-auto">{card.title}</h4>
-                            <p className="text-[10px] font-bold text-white/80 mt-0.5">{card.sub}</p>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Smart tools */}
-                  <div className="grid grid-cols-2 gap-3 px-4 mt-6">
-                    <button
-                      onClick={() => setShowAR(true)}
-                      className="bg-blue-50 border-2 border-blue-100 p-3.5 rounded-[22px] flex items-center gap-3 active:scale-95 transition"
-                    >
-                      <div className="bg-blue-600 p-2 rounded-xl text-white shadow-md shadow-blue-600/25">
-                        <Camera className="w-4 h-4" />
-                      </div>
-                      <div className="text-left">
-                        <p className="text-[10px] font-black uppercase" style={{ color: BRAND_DARK }}>AR Measure</p>
-                        <p className="text-[8px] font-bold text-blue-400">Scan Your Wall</p>
-                      </div>
-                    </button>
-                    <button
-                      onClick={() => setShowVoiceModal(true)}
-                      className="p-3.5 rounded-[22px] flex items-center gap-3 active:scale-95 transition-all shadow-xl bg-slate-900 shadow-slate-200"
-                    >
-                      <div className="p-2 rounded-xl bg-white/10 text-white">
-                        <Mic className="w-4 h-4" />
-                      </div>
-                      <div className="text-left">
-                        <p className="text-[10px] font-black text-white uppercase">Voice Order</p>
-                        <p className="text-[8px] font-bold text-white/50 italic">Tap &amp; Hold</p>
-                      </div>
-                    </button>
-                  </div>
-
-
-
-                  <div className="pb-28" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="mat-list"
-                  initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }}
-                  className="px-4 pt-5 pb-28"
-                >
+                <div className="pb-32" />
+              </div>
+            ) : (
+              <div key="mat-list" className="px-4 pt-5 pb-28">
                   {/* Back header */}
                   <div className="flex items-center gap-2 mb-4">
                     <button
@@ -1216,6 +1294,15 @@ export function Home() {
                   </div>
 
                   {(() => {
+                    if (isRmcSlug(selectedCategory)) {
+                      return (
+                        <React.Suspense fallback={<div className="p-8 text-center text-xs font-bold text-slate-500">Loading RMC Plant Direct…</div>}>
+                          <ErrorBoundary compact fallbackTitle="RMC Plant Direct">
+                            <InlineRmcPlantDirect />
+                          </ErrorBoundary>
+                        </React.Suspense>
+                      );
+                    }
                     if (
                       selectedCategory === "bricks" ||
                       selectedCategory === "sand" ||
@@ -1457,6 +1544,32 @@ export function Home() {
                       return (
                         <LightingCollectionStorefront
                           onOpenDetail={setDetailProduct}
+                          onBack={() => setSelectedCategory(null)}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "solar-rooftop-power" ||
+                      selectedCategory?.toLowerCase().includes("solar")
+                    ) {
+                      return (
+                        <SolarCollectionStorefront
+                          onOpenDetail={setDetailProduct}
+                          onBack={() => setSelectedCategory(null)}
+                        />
+                      );
+                    }
+                    if (
+                      selectedCategory === "tools-hardware" ||
+                      selectedCategory === "power-tools" ||
+                      selectedCategory === "tools" ||
+                      selectedCategory?.toLowerCase().includes("power-tool") ||
+                      selectedCategory?.toLowerCase().includes("tools-hardware")
+                    ) {
+                      return (
+                        <PowerToolsSafetyStorefront
+                          onOpenDetail={setDetailProduct}
+                          onBack={() => setSelectedCategory(null)}
                         />
                       );
                     }
@@ -1547,9 +1660,8 @@ export function Home() {
                       />
                     );
                   })()}
-                </motion.div>
-              )}
-            </AnimatePresence>
+              </div>
+            )}
           </>
         )}
 
@@ -1584,17 +1696,17 @@ export function Home() {
           cartQty={detailProduct ? getCartQty(detailProduct.materialTag, detailProduct.title) : 0}
         />
 
-        {/* Reorder FAB */}
-        <motion.button
-          onClick={() => toast.success("Last order queued!", { description: "Your bulk order will be placed shortly." })}
-          className="fixed bottom-24 right-4 flex items-center gap-2 px-4 h-10 rounded-full text-xs font-black shadow-lg z-20"
-          style={{ background: BRAND_DARK, color: "#fff", boxShadow: "0 4px 16px rgba(27,67,102,0.3)" }}
-          whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-          initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <RotateCcw className="w-3.5 h-3.5" /> Reorder Last
-        </motion.button>
+        {/* Unified Floating Command Dock (AR Measure, Voice Order, Live Cart, Reorder Last, Back to Top) */}
+        {!selectedCategory && (
+          <HomeFloatingCommandDock
+            onOpenAR={() => setShowAR(true)}
+            onOpenVoice={() => setShowVoiceModal(true)}
+            onReorderLast={() => toast.success("Last order queued!", { description: "Your bulk order will be placed shortly." })}
+            onOpenCart={() => setCartOpen(true)}
+            cartCount={Number(cart?.totalItems || 0)}
+            cartTotal={Number(cart?.grandTotal || 0)}
+          />
+        )}
       </div>
 
       <VoiceOrderModal

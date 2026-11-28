@@ -1,21 +1,14 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "wouter";
 import {
-  Clock,
-  ChevronRight,
-  Minus,
-  Plus,
-  SlidersHorizontal,
-  Bike,
-  ShieldCheck,
-  Check,
-  Package,
-  Sparkles,
-  Info,
   Wrench,
-  HardHat,
-  Eye,
+  ShieldCheck,
+  Tractor,
+  Sparkles,
+  Plus,
+  X,
   AlertTriangle,
-  Zap,
+  Package,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -27,536 +20,840 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
-import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
-import { RealProductImage } from "@/components/RealProductImage";
+import { useLiveProductMerger } from "@/hooks/useCononLiveData";
 import {
-  ALL_9_TOOLS_SAFETY_PRODUCTS,
-  type ToolsSafetyProduct,
-} from "@/data/toolsSafetyData";
+  TOOLS_BRANDS,
+  TOOLS_HARDWARE_PRODUCTS,
+  TOOLS_SUBCATEGORIES,
+  TOOLS_USE_FILTERS,
+  type ToolHardwareProduct,
+  type ToolSubCategoryId,
+} from "@/data/toolsHardwareCatalog";
+import {
+  CategoryHeader,
+  DualRowFilterBar,
+  FloatingReorderLast,
+  HorizontalSubCategoryBar,
+  ProductCard,
+  SiteCompanionBanner,
+} from "@/components/storefront/UnifiedStorefrontPrimitives";
+import { ToolSvgGraphic } from "@/components/storefront/CategoryProductGraphics";
+import {
+  BuyOrRentBadge,
+  type ToolAcquireMode,
+} from "@/components/tools/BuyOrRentBadge";
+import { TradeMistriKitModal } from "@/components/tools/TradeMistriKitModal";
+import { SiteRefillDrawer } from "@/components/tools/SiteRefillDrawer";
+
+export const TOOL_SKUS = TOOLS_HARDWARE_PRODUCTS;
 
 export interface PowerToolsSafetyStorefrontProps {
+  defaultSubcat?: string;
+  onBack?: () => void;
   onOpenDetail?: (product: Product) => void;
 }
 
-export function PowerToolsSafetyStorefront({ onOpenDetail }: PowerToolsSafetyStorefrontProps) {
+const LAST_TOOLS_ORDER_KEY = "conon_last_tools_order_v1";
+
+function resolveInitialToolSubcat(defaultSubcat?: string): ToolSubCategoryId {
+  const valid = new Set(TOOLS_SUBCATEGORIES.map((s) => s.id));
+  if (defaultSubcat && valid.has(defaultSubcat as ToolSubCategoryId)) {
+    return defaultSubcat as ToolSubCategoryId;
+  }
+  if (typeof window !== "undefined") {
+    const path = window.location.pathname.toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+    const subParam = params.get("subcat")?.toLowerCase() || "";
+    const target = `${path} ${subParam}`;
+    for (const sub of TOOLS_SUBCATEGORIES) {
+      if (target.includes(sub.id)) return sub.id;
+    }
+    if (target.includes("grinder") || target.includes("cutter") || target.includes("marble")) return "grinders-cutters";
+    if (target.includes("rotary") || target.includes("drill") || target.includes("hammer")) return "rotary-drills";
+    if (target.includes("blade") || target.includes("disc") || target.includes("bit")) return "blades-discs-bits";
+    if (target.includes("hand") || target.includes("masonry") || target.includes("spanner")) return "hand-masonry-tools";
+    if (target.includes("measur") || target.includes("level") || target.includes("laser")) return "measuring-levelling";
+    if (target.includes("fastener") || target.includes("screw") || target.includes("anchor")) return "fasteners-anchors";
+    if (target.includes("safety") || target.includes("helmet")) return "safety-utility";
+    if (target.includes("ladder") || target.includes("tape") || target.includes("tasla")) return "ladders-tapes-utility";
+  }
+  return "grinders-cutters";
+}
+
+export function PowerToolsSafetyStorefront({
+  defaultSubcat,
+  onBack,
+  onOpenDetail,
+}: PowerToolsSafetyStorefrontProps) {
   const qc = useQueryClient();
-  const { resolveProduct } = useProductMediaVault();
+  const { data: cart } = useGetCart();
   const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
   const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
   const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
   const removeFromCart = useRemoveFromCart({ mutation: { onSuccess: invalidateCart } });
-  const { data: cart } = useGetCart();
+  const mergeLiveProducts = useLiveProductMerger();
 
-  // Active subcategory tab
-  const [activeSubcat, setActiveSubcat] = useState<string>("ALL");
-  const [selectedBrand, setSelectedBrand] = useState<string>("ALL");
-  const [sortBy, setSortBy] = useState<"relevance" | "price-asc" | "price-desc">("relevance");
-  const [modalProduct, setModalProduct] = useState<Product | null>(null);
+  const [activeSubcat, setActiveSubcat] = useState<ToolSubCategoryId>(() =>
+    resolveInitialToolSubcat(defaultSubcat),
+  );
+  const [useFilter, setUseFilter] = useState<string>("all");
+  const [serialWarrantyOnly, setSerialWarrantyOnly] = useState<boolean>(false);
+  const [rentAvailableOnly, setRentAvailableOnly] = useState<boolean>(false);
+  const [brandFilter, setBrandFilter] = useState<string>("all");
+  const [sizeFilter, setSizeFilter] = useState<string>("all");
+  const [priceFilter, setPriceFilter] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("relevance");
 
-  // Cart item mapping
-  const cartItemByKey = useMemo(() => {
-    const map: Record<string, { ids: string[]; quantity: number }> = {};
-    for (const c of cart?.categories ?? []) {
-      for (const it of c.items ?? []) {
-        const key = `${(it.category || "").toLowerCase()}::${(it.name || "").toLowerCase()}`;
-        if (!map[key]) {
-          map[key] = { ids: [it.id], quantity: it.quantity };
-        } else {
-          map[key].ids.push(it.id);
-          map[key].quantity += it.quantity;
-        }
-      }
+  // Buy vs Rent Mode per product card + Pack Tier selection per consumable/fastener
+  const [acquireModeById, setAcquireModeById] = useState<Record<string, ToolAcquireMode>>({});
+  const [packIdxById, setPackIdxById] = useState<Record<string, number>>({});
+
+  // Magical Modals & Companion Upsell State
+  const [mistriKitOpen, setMistriKitOpen] = useState<boolean>(false);
+  const [siteRefillOpen, setSiteRefillOpen] = useState<boolean>(false);
+  const [companionParent, setCompanionParent] = useState<ToolHardwareProduct | null>(null);
+  const [variantProduct, setVariantProduct] = useState<ToolHardwareProduct | null>(null);
+  const [quickDetailProduct, setQuickDetailProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    if (defaultSubcat) {
+      setActiveSubcat(resolveInitialToolSubcat(defaultSubcat));
     }
-    return map;
-  }, [cart]);
+  }, [defaultSubcat]);
 
-  const getItemCartState = (prod: ToolsSafetyProduct) => {
-    const key = `${prod.categorySlug.toLowerCase()}::${prod.name.toLowerCase()}`;
-    return cartItemByKey[key] || { ids: [], quantity: 0 };
-  };
+  const liveProducts = useMemo(
+    () => mergeLiveProducts(TOOLS_HARDWARE_PRODUCTS as unknown as any[]) as ToolHardwareProduct[],
+    [mergeLiveProducts],
+  );
 
-  const handleAdd = (prod: ToolsSafetyProduct, e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    addToCart.mutate(
-      {
-        data: {
-          materialId: prod.id,
-          category: prod.categorySlug,
-          name: prod.name,
-          quantity: 1,
-          price: prod.price,
-          unit: prod.unit,
-        },
-      },
-      {
-        onSuccess: () => {
-          toast.success(`Added ${prod.name} to cart!`);
-        },
-      }
-    );
-  };
-
-  const handleIncrement = (prod: ToolsSafetyProduct, currentQty: number, e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    const itemState = getItemCartState(prod);
-    if (itemState.ids.length > 0) {
-      updateCartItem.mutate({
-        itemId: itemState.ids[0],
-        data: { quantity: currentQty + 1 },
-      });
-    }
-  };
-
-  const handleDecrement = (prod: ToolsSafetyProduct, currentQty: number, e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    const itemState = getItemCartState(prod);
-    if (itemState.ids.length > 0) {
-      if (currentQty <= 1) {
-        removeFromCart.mutate({ itemId: itemState.ids[0] });
-      } else {
-        updateCartItem.mutate({
-          itemId: itemState.ids[0],
-          data: { quantity: currentQty - 1 },
+  const cartItemsList = useMemo(() => {
+    const list: Array<{ id: string; materialId: string; quantity: number; name?: string; price?: number }> = [];
+    if (!cart?.categories) return list;
+    for (const c of cart.categories) {
+      for (const item of c.items ?? []) {
+        list.push({
+          id: String(item.id),
+          materialId: item.materialId,
+          quantity: item.quantity,
+          name: item.name,
+          price: item.price,
         });
       }
     }
+    return list;
+  }, [cart]);
+
+  const getAcquireMode = (product: ToolHardwareProduct): ToolAcquireMode =>
+    acquireModeById[product.id] || "BUY";
+
+  const getSelectedPack = (product: ToolHardwareProduct) => {
+    if (!product.bulkPack || product.bulkPack.length === 0) return null;
+    const idx = packIdxById[product.id] ?? 0;
+    return product.bulkPack[idx] || product.bulkPack[0];
   };
 
-  const openProduct = (prod: ToolsSafetyProduct) => {
-    const p: Product = {
-      id: prod.id,
-      title: prod.title || prod.name,
-      vendor: prod.vendor,
-      materialTag: prod.categorySlug,
-      brand: prod.brand,
-      price: prod.price,
-      mrp: prod.mrp,
-      unit: prod.unit,
-      rating: prod.rating,
-      reviews: prod.reviewsCount,
-      deliveryEta: prod.deliveryEta,
-      image: prod.image,
-      images: prod.images,
-      description: prod.description,
-      features: prod.highlights,
-      specs: prod.specifications,
+  const getEffectiveOffer = (product: ToolHardwareProduct) => {
+    const mode = getAcquireMode(product);
+    if (mode === "RENT" && product.rentPricePerDay) {
+      return {
+        price: product.rentPricePerDay,
+        mrp: Math.round(product.rentPricePerDay * 1.25),
+        unit: "Day Rental",
+        labelSuffix: "Daily Rent Booking (Lucknow)",
+        isRent: true,
+      };
+    }
+    const pack = getSelectedPack(product);
+    if (pack) {
+      return {
+        price: pack.price,
+        mrp: pack.mrp,
+        unit: pack.unit,
+        labelSuffix: pack.label,
+        isRent: false,
+      };
+    }
+    return {
+      price: product.price,
+      mrp: product.mrp,
+      unit: product.unit,
+      labelSuffix: "",
+      isRent: false,
     };
-    if (onOpenDetail) onOpenDetail(p);
-    else setModalProduct(p);
   };
 
-  // Subcategory tabs
-  const subcategoryTabs = [
-    { id: "ALL", label: "All Items", count: ALL_9_TOOLS_SAFETY_PRODUCTS.length },
-    {
-      id: "Power Tools",
-      label: "Power Tools",
-      count: ALL_9_TOOLS_SAFETY_PRODUCTS.filter((p) => p.subCategory === "Power Tools").length,
-    },
-    {
-      id: "Hand & Measuring Tools",
-      label: "Hand & Measuring",
-      count: ALL_9_TOOLS_SAFETY_PRODUCTS.filter((p) => p.subCategory === "Hand & Measuring Tools").length,
-    },
-    {
-      id: "Site Safety & PPE",
-      label: "Site Safety & PPE",
-      count: ALL_9_TOOLS_SAFETY_PRODUCTS.filter((p) => p.subCategory === "Site Safety & PPE").length,
-    },
-  ];
+  const getQtyInCart = (productId: string): number =>
+    cartItemsList
+      .filter((it) => it.materialId === productId || it.materialId.startsWith(`${productId}::`))
+      .reduce((s, it) => s + it.quantity, 0);
 
-  // Brand filter
-  const brandList = ["ALL", "Bosch", "Taparia", "Stanley", "Karam", "3M", "SMASYS"];
+  const findPrimaryCartItem = (productId: string) =>
+    cartItemsList.find((it) => it.materialId === productId || it.materialId.startsWith(`${productId}::`));
 
-  // Filtered Products
-  const filteredProducts = useMemo(() => {
-    return ALL_9_TOOLS_SAFETY_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
-      if (activeSubcat !== "ALL" && p.subCategory !== activeSubcat) return false;
-      if (selectedBrand !== "ALL" && p.brand !== selectedBrand) return false;
-      return true;
-    }).sort((a, b) => {
-      if (sortBy === "price-asc") return a.price - b.price;
-      if (sortBy === "price-desc") return b.price - a.price;
-      return 0;
-    });
-  }, [activeSubcat, selectedBrand, sortBy, resolveProduct]);
+  const handleAddTool = (
+    product: ToolHardwareProduct,
+    overrideOffer?: { price: number; unit: string; suffix?: string },
+    qty = 1,
+  ) => {
+    const offer = overrideOffer || getEffectiveOffer(product);
+    const suffix = "labelSuffix" in offer ? offer.labelSuffix : offer.suffix;
+    const itemName = suffix ? `${product.title} — ${suffix}` : product.title;
 
-  // Site-Safe Cross-Sell Bundles
-  const crossSellBundles = [
-    {
-      id: "grinder-bundle",
-      title: "Angle Grinder Safe Operator Kit",
-      headline: "Mandatory Eye & Spark Protection",
-      mainProduct: ALL_9_TOOLS_SAFETY_PRODUCTS.find((p) => p.id === "prod-tools-bosch-gws-600"),
-      addonProduct: ALL_9_TOOLS_SAFETY_PRODUCTS.find((p) => p.id === "prod-safety-3m-fahrenheit-7136013"),
-      reason: "High-RPM angle grinding generates hazardous metal sparks and abrasive grit. Pair with 3M chemical/impact goggles for zero corneal injury.",
-    },
-    {
-      id: "rotary-bundle",
-      title: "Rotary Hammer Overhead Protection Kit",
-      headline: "Debris & Concrete Fall Protection",
-      mainProduct: ALL_9_TOOLS_SAFETY_PRODUCTS.find((p) => p.id === "prod-tools-bosch-gbh-2-26-re"),
-      addonProduct: ALL_9_TOOLS_SAFETY_PRODUCTS.find((p) => p.id === "prod-safety-karam-pn501"),
-      reason: "Overhead masonry drilling causes heavy mortar chipping and falling concrete debris. Pair with ISI Shelmet for contractor safety compliance.",
-    },
-    {
-      id: "height-bundle",
-      title: "Scaffolding & High-Rise Safety Kit",
-      headline: "Fall Arrest & High-Visibility",
-      mainProduct: ALL_9_TOOLS_SAFETY_PRODUCTS.find((p) => p.id === "prod-safety-karam-ki01-pn351"),
-      addonProduct: ALL_9_TOOLS_SAFETY_PRODUCTS.find((p) => p.id === "prod-safety-smasys-reflective-jacket"),
-      reason: "Working on scaffolding above 6 feet requires dual-hook lanyard arrest plus 360° reflective jacket for crane & dumper visibility.",
-    },
-  ];
+    try {
+      localStorage.setItem(
+        LAST_TOOLS_ORDER_KEY,
+        JSON.stringify([
+          {
+            materialId: product.id,
+            name: itemName,
+            price: offer.price,
+            unit: offer.unit,
+            brand: product.brand,
+            quantity: qty,
+          },
+        ]),
+      );
+    } catch {}
 
-  const handleAddBundle = (bundle: (typeof crossSellBundles)[0]) => {
-    if (!bundle.mainProduct || !bundle.addonProduct) return;
     addToCart.mutate(
       {
         data: {
-          materialId: bundle.mainProduct.id,
-          category: bundle.mainProduct.categorySlug,
-          name: bundle.mainProduct.name,
-          quantity: 1,
-          price: bundle.mainProduct.price,
-          unit: bundle.mainProduct.unit,
+          materialId: product.id,
+          name: itemName,
+          category: "Power Tools & Hardware",
+          price: offer.price,
+          unit: offer.unit,
+          vendor: product.brand,
+          quantity: qty,
         },
       },
       {
         onSuccess: () => {
-          addToCart.mutate({
-            data: {
-              materialId: bundle.addonProduct!.id,
-              category: bundle.addonProduct!.categorySlug,
-              name: bundle.addonProduct!.name,
-              quantity: 1,
-              price: bundle.addonProduct!.price,
-              unit: bundle.addonProduct!.unit,
-            },
-          });
-          toast.success(`Added ${bundle.title} (2 items) to cart!`);
+          invalidateCart();
+          if (product.compatibleConsumableIds && product.compatibleConsumableIds.length > 0) {
+            setCompanionParent(product);
+            toast.success(`Added ${itemName}`, {
+              description: `Matched blades/bits suggested below (${product.boreOrChuck}).`,
+            });
+          } else {
+            toast.success(`Added ${itemName} to Site Cart`);
+          }
         },
-      }
+        onError: () => toast.error("Failed to add tool to cart"),
+      },
     );
   };
 
+  const handleUpdateQty = (product: ToolHardwareProduct, nextQty: number) => {
+    const match = findPrimaryCartItem(product.id);
+    if (!match) return;
+    if (nextQty <= 0) {
+      removeFromCart.mutate({ itemId: match.id }, { onSuccess: invalidateCart });
+    } else {
+      updateCartItem.mutate({ itemId: match.id, data: { quantity: nextQty } }, { onSuccess: invalidateCart });
+    }
+  };
+
+  const handleAddTradeKit = (items: ToolHardwareProduct[], tradeLabel: string, discountPct: number) => {
+    for (const p of items) {
+      const discounted = Math.round(p.price * (1 - discountPct / 100));
+      addToCart.mutate({
+        data: {
+          materialId: p.id,
+          name: `${p.title} [${tradeLabel} -${discountPct}%]`,
+          category: "Power Tools & Hardware",
+          price: discounted,
+          unit: p.unit,
+          vendor: p.brand,
+          quantity: 1,
+        },
+      });
+    }
+    try {
+      localStorage.setItem(
+        LAST_TOOLS_ORDER_KEY,
+        JSON.stringify(
+          items.map((p) => ({
+            materialId: p.id,
+            name: `${p.title} [${tradeLabel}]`,
+            price: Math.round(p.price * (1 - discountPct / 100)),
+            unit: p.unit,
+            brand: p.brand,
+            quantity: 1,
+          })),
+        ),
+      );
+    } catch {}
+    toast.success(`${tradeLabel} (${items.length} tools) added at extra ${discountPct}% off!`);
+  };
+
+  const handleDispatchRefill = (entries: Array<{ product: ToolHardwareProduct; qty: number }>) => {
+    for (const entry of entries) {
+      addToCart.mutate({
+        data: {
+          materialId: entry.product.id,
+          name: `${entry.product.title} [60-Min Refill]`,
+          category: "Power Tools & Hardware",
+          price: entry.product.price,
+          unit: entry.product.unit,
+          vendor: entry.product.brand,
+          quantity: entry.qty,
+        },
+      });
+    }
+    try {
+      localStorage.setItem(
+        LAST_TOOLS_ORDER_KEY,
+        JSON.stringify(
+          entries.map((e) => ({
+            materialId: e.product.id,
+            name: `${e.product.title} [60-Min Refill]`,
+            price: e.product.price,
+            unit: e.product.unit,
+            brand: e.product.brand,
+            quantity: e.qty,
+          })),
+        ),
+      );
+    } catch {}
+    toast.success(`Dispatched ${entries.length} emergency consumable item(s) to Cart!`);
+  };
+
+  const handleReorderLast = () => {
+    try {
+      const raw = localStorage.getItem(LAST_TOOLS_ORDER_KEY);
+      if (raw) {
+        const items = JSON.parse(raw) as Array<{
+          materialId: string;
+          name: string;
+          price: number;
+          unit: string;
+          brand: string;
+          quantity: number;
+        }>;
+        if (Array.isArray(items) && items.length > 0) {
+          for (const it of items) {
+            addToCart.mutate({
+              data: {
+                materialId: it.materialId,
+                name: it.name,
+                category: "Power Tools & Hardware",
+                price: it.price,
+                unit: it.unit,
+                vendor: it.brand,
+                quantity: it.quantity || 1,
+              },
+            });
+          }
+          toast.success(`Reordered ${items.length} tool/consumable item(s)`);
+          return;
+        }
+      }
+    } catch {}
+    const starter = liveProducts.find((p) => p.id === "norton-4inch-metal-cutting-wheel") || liveProducts[0];
+    if (starter) handleAddTool(starter);
+  };
+
+  const companionSuggestions = useMemo(() => {
+    if (!companionParent?.compatibleConsumableIds) return [];
+    return companionParent.compatibleConsumableIds
+      .map((id) => liveProducts.find((p) => p.id === id))
+      .filter((p): p is ToolHardwareProduct => Boolean(p));
+  }, [companionParent, liveProducts]);
+
+  const filteredProducts = useMemo(() => {
+    let list = liveProducts.filter((p) => p.subcategory === activeSubcat);
+    if (useFilter !== "all") {
+      list = list.filter((p) => p.useTags.includes(useFilter as any));
+    }
+    if (serialWarrantyOnly) list = list.filter((p) => p.hasSerialWarranty);
+    if (rentAvailableOnly) list = list.filter((p) => Boolean(p.rentPricePerDay));
+    if (brandFilter !== "all") list = list.filter((p) => p.brand.toLowerCase() === brandFilter.toLowerCase());
+    if (sizeFilter !== "all") list = list.filter((p) => p.sizeClass === sizeFilter);
+
+    if (priceFilter !== "all") {
+      if (priceFilter === "under-400") list = list.filter((p) => p.price < 400);
+      else if (priceFilter === "400-1500") list = list.filter((p) => p.price >= 400 && p.price <= 1500);
+      else if (priceFilter === "1500-4000") list = list.filter((p) => p.price > 1500 && p.price <= 4000);
+      else if (priceFilter === "above-4000") list = list.filter((p) => p.price > 4000);
+    }
+
+    const sorted = [...list];
+    if (sortBy === "price-low") sorted.sort((a, b) => a.price - b.price);
+    else if (sortBy === "price-high") sorted.sort((a, b) => b.price - a.price);
+    else if (sortBy === "discount") sorted.sort((a, b) => b.discountPct - a.discountPct);
+    return sorted;
+  }, [
+    liveProducts,
+    activeSubcat,
+    useFilter,
+    serialWarrantyOnly,
+    rentAvailableOnly,
+    brandFilter,
+    sizeFilter,
+    priceFilter,
+    sortBy,
+  ]);
+
+  const activeSubcatMeta =
+    TOOLS_SUBCATEGORIES.find((s) => s.id === activeSubcat) || TOOLS_SUBCATEGORIES[0];
+
+  const toGenericProduct = (p: ToolHardwareProduct): Product => ({
+    id: p.id,
+    name: p.title,
+    title: p.title,
+    brand: p.brand,
+    unit: p.unit,
+    price: p.price,
+    mrp: p.mrp,
+    image: p.image,
+    materialTag: "Power Tools",
+    rating: 4.9,
+    reviews: 112,
+    deliveryEta: "60 Mins",
+    specs: [
+      { label: "Model", value: p.model },
+      { label: "Power / Size", value: p.powerOrSize },
+      { label: "Bore / Chuck", value: p.boreOrChuck },
+      { label: "Warranty", value: p.warranty },
+    ],
+  });
+
+  const handleOpenDetail = (p: ToolHardwareProduct) => {
+    const gp = toGenericProduct(p);
+    if (onOpenDetail) onOpenDetail(gp);
+    else setQuickDetailProduct(gp);
+  };
+
   return (
-    <div className="w-full bg-[#F8FAFC] min-h-screen pb-16">
-      {/* ── Top Category Header Banner ── */}
-      <div className="bg-gradient-to-r from-[#1848a0] via-[#1e3a8a] to-[#0f172a] text-white py-8 px-4 sm:px-6 lg:px-8 border-b border-blue-900 shadow-md">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-amber-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
-                60-Min Express • Lucknow
-              </span>
-              <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                <Bike className="w-3 h-3" />
-                2-Wheeler Fleet Express
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-2">
-              Power Tools, Hand Tools &amp; Site Safety
-            </h1>
-            <p className="text-xs sm:text-sm text-blue-200 mt-1 max-w-2xl leading-relaxed">
-              Wholesale contractor supply sourced directly from Latouche Road &amp; Hewett Road. Bosch 800W rotary hammers, angle grinders, Taparia insulated sets, Stanley tapes, and ISI safety gear delivered in 60 minutes.
-            </p>
-          </div>
+    <div className="w-full bg-[#F4F6F8] dark:bg-slate-950 min-h-screen pb-28">
+      <CategoryHeader
+        title="Tools, Power Tools & General Hardware"
+        breadcrumbCategory="Tools & Hardware"
+        activeSubCategoryName={activeSubcatMeta.name}
+        hubSubtitle="Latouche Road & Aminabad Genuine Tool Hubs"
+        icon={<Wrench className="w-5 h-5" />}
+        onBack={onBack}
+      />
 
-          {/* Quick Stats Pill */}
-          <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-2.5 rounded-xl self-start md:self-auto">
-            <div className="text-center px-2 border-r border-white/20">
-              <div className="text-xs text-blue-200 font-medium">GST Rate</div>
-              <div className="text-base font-black text-white">18% Standard</div>
-            </div>
-            <div className="text-center px-2 border-r border-white/20">
-              <div className="text-xs text-blue-200 font-medium">Verified SKUs</div>
-              <div className="text-base font-black text-white">9 Items</div>
-            </div>
-            <div className="text-center px-2">
-              <div className="text-xs text-blue-200 font-medium">Delivery Mode</div>
-              <div className="text-base font-black text-amber-300">2-Wheeler 60m</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 pt-4">
+        <SiteCompanionBanner
+          icon={<Wrench className="w-5 h-5" />}
+          title="Essential Lucknow Site Tools & Blade-Match Companion"
+          description="Never stall site work over a worn blade or burnt carbon brush. Get serial-verified Bosch/Taparia tools, exact-bore diamond discs & fasteners in 60 mins."
+          goldCtaLabel="🧰 Trade Mistri Kit Builder →"
+          onGoldCtaClick={() => setMistriKitOpen(true)}
+          blueCtaLabel="⚡ 60-Min Blade & Bit Refill"
+          onBlueCtaClick={() => setSiteRefillOpen(true)}
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        {/* ── Subcategory Navigation Tabs ── */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
-          {subcategoryTabs.map((tab) => {
-            const isActive = activeSubcat === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveSubcat(tab.id)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
-                  isActive
-                    ? "bg-[#1848a0] text-white shadow-md shadow-blue-900/20"
-                    : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                }`}
-              >
-                <span>{tab.label}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                    isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"
-                  }`}
-                >
-                  {tab.count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ── Brand Filter & Sort Bar ── */}
-        <div className="mt-4 p-3 bg-white rounded-xl border border-slate-200 shadow-2xs flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">
-              Brand:
-            </span>
-            {brandList.map((b) => (
-              <button
-                key={b}
-                onClick={() => setSelectedBrand(b)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
-                  selectedBrand === b
-                    ? "bg-slate-900 text-white"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                }`}
-              >
-                {b}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="text-xs font-semibold bg-transparent border-0 text-slate-700 focus:outline-none cursor-pointer"
-            >
-              <option value="relevance">Sort: Relevance</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-          </div>
-        </div>
-
-        {/* ── "Site-Safe" Cross-Sell Pairing Engine (Required by STEP 5) ── */}
-        <div className="mt-6 bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/80 rounded-2xl p-5 shadow-xs">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="p-1.5 rounded-lg bg-amber-500 text-white shadow-2xs">
-              <HardHat className="w-4 h-4" />
-            </div>
-            <div>
-              <h2 className="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                Site-Safe™ Safety &amp; Tool Pairing Recommendation Engine
-              </h2>
-              <p className="text-xs text-slate-600">
-                Lucknow Contractor Safety Protocol: High-speed power tools must be paired with mandatory PPE.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            {crossSellBundles.map((bundle) => {
-              if (!bundle.mainProduct || !bundle.addonProduct) return null;
-              return (
-                <div
-                  key={bundle.id}
-                  className="bg-white rounded-xl p-4 border border-amber-200 shadow-xs flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between text-[11px] font-bold text-amber-800 uppercase tracking-wider mb-1">
-                      <span>{bundle.headline}</span>
-                      <span className="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded text-[10px]">
-                        Safety Pairing
-                      </span>
-                    </div>
-                    <h3 className="text-sm font-bold text-slate-900 mb-2 leading-snug">
-                      {bundle.title}
-                    </h3>
-                    <p className="text-[11.5px] text-slate-500 mb-3 leading-relaxed">
-                      {bundle.reason}
-                    </p>
-
-                    {/* Pair Items Mini Preview */}
-                    <div className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-100 mb-3">
-                      <RealProductImage
-                        product={bundle.mainProduct}
-                        src={bundle.mainProduct.image}
-                        variant="thumb"
-                        className="w-10 h-10 object-contain rounded bg-white border border-slate-200 shrink-0"
-                      />
-                      <span className="text-xs font-bold text-slate-400">+</span>
-                      <RealProductImage
-                        product={bundle.addonProduct}
-                        src={bundle.addonProduct.image}
-                        variant="thumb"
-                        className="w-10 h-10 object-contain rounded bg-white border border-slate-200 shrink-0"
-                      />
-                      <div className="min-w-0 flex-1 ml-1">
-                        <div className="text-[11px] font-bold text-slate-800 truncate">
-                          {bundle.mainProduct.brand} + {bundle.addonProduct.brand}
-                        </div>
-                        <div className="text-xs font-black text-emerald-700">
-                          ₹{(bundle.mainProduct.price + bundle.addonProduct.price).toLocaleString("en-IN")}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => handleAddBundle(bundle)}
-                    className="w-full py-2 px-3 rounded-lg bg-[#1848a0] hover:bg-[#123678] active:scale-[0.99] text-white text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
-                  >
-                    <span>1-Click Add Safety Bundle</span>
-                  </button>
+        {/* Machine-to-Blade / Bit Smart Companion Auto-Upsell Bar */}
+        {companionParent && companionSuggestions.length > 0 && (
+          <div className="mb-4 p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 shadow-sm space-y-2.5">
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs font-black text-amber-950 dark:text-amber-200">
+                    Exact-Bore Companion Match for {companionParent.brand} {companionParent.model} ({companionParent.boreOrChuck})
+                  </p>
+                  <p className="text-[11px] text-amber-800 dark:text-amber-300">
+                    Machines ship without extra discs/bits. Add exact compatible consumables in 1 click:
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ── Product Grid (All 9 Verified SKUs) ── */}
-        <div className="mt-6">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-base font-extrabold text-slate-900 tracking-tight">
-              {activeSubcat === "ALL" ? "All Products" : activeSubcat} ({filteredProducts.length} items)
-            </h2>
-            <div className="flex items-center gap-1 text-xs text-slate-500">
-              <Bike className="w-3.5 h-3.5 text-emerald-600" />
-              <span>All 9 items dispatch via 2-Wheeler (60 mins)</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCompanionParent(null)}
+                aria-label="Close companion suggestions"
+                className="p-1 rounded-lg text-amber-700 dark:text-amber-300 hover:bg-amber-200/40 cursor-pointer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {companionSuggestions.map((comp) => (
+                <button
+                  key={comp.id}
+                  type="button"
+                  onClick={() => handleAddTool(comp)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#12357A] hover:bg-[#0B1B3D] text-white text-[11px] font-bold transition cursor-pointer"
+                >
+                  <Plus className="w-3 h-3 text-amber-300" />
+                  <span>
+                    {comp.brand} {comp.model} — ₹{comp.price.toLocaleString("en-IN")}
+                  </span>
+                </button>
+              ))}
             </div>
           </div>
+        )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredProducts.map((prod) => {
-              const itemState = getItemCartState(prod);
-              const inCart = itemState.quantity > 0;
+        {/* Horizontal Sub-Category Pill Cards (NO Civil Left Sidebar) */}
+        <HorizontalSubCategoryBar
+          activeId={activeSubcat}
+          onSelect={(id) => {
+            setActiveSubcat(id as ToolSubCategoryId);
+            if (typeof window !== "undefined") {
+              window.history.pushState({}, "", `/collections/${id}`);
+            }
+          }}
+          items={TOOLS_SUBCATEGORIES.map((s) => ({
+            id: s.id,
+            name: s.name,
+            count: s.count,
+            thumbnail: <ToolSvgGraphic kind={s.visualKind} compact />,
+          }))}
+        />
+
+        {/* Dual-Row Filter Bar */}
+        <DualRowFilterBar
+          row1Label="Use:"
+          quickFilters={TOOLS_USE_FILTERS}
+          activeQuickFilter={useFilter}
+          onQuickFilterChange={setUseFilter}
+          trustHighlights={[
+            {
+              id: "warranty",
+              label: "🛡️ Genuine Serial & Brand Warranty",
+              active: serialWarrantyOnly,
+              tone: "emerald",
+              onToggle: () => setSerialWarrantyOnly((v) => !v),
+            },
+            {
+              id: "rent",
+              label: "🔄 Buy or Daily Rent Available",
+              active: rentAvailableOnly,
+              tone: "amber",
+              onToggle: () => setRentAvailableOnly((v) => !v),
+            },
+          ]}
+          brandFilterValue={brandFilter}
+          onBrandFilterChange={setBrandFilter}
+          brandOptions={[
+            { value: "all", label: "All Brands (Bosch, Taparia, Stanley, Dongcheng)" },
+            ...TOOLS_BRANDS.map((b) => ({ value: b, label: b })),
+          ]}
+          specFilterValue={sizeFilter}
+          onSpecFilterChange={setSizeFilter}
+          specOptions={[
+            { value: "all", label: 'Power / Size (4", 5", SDS-Plus, Hand)' },
+            { value: "4-INCH", label: '4" / 100–110mm Power Tools & Discs' },
+            { value: "SDS_PLUS", label: "SDS-Plus & Heavy Hammers" },
+            { value: "HAND", label: "Hand Tools, Fasteners & Site Utility" },
+          ]}
+          priceFilterValue={priceFilter}
+          onPriceFilterChange={setPriceFilter}
+          priceOptions={[
+            { value: "all", label: "Price: All Ranges" },
+            { value: "under-400", label: "Under ₹400" },
+            { value: "400-1500", label: "₹400 – ₹1,500" },
+            { value: "1500-4000", label: "₹1,500 – ₹4,000" },
+            { value: "above-4000", label: "Above ₹4,000" },
+          ]}
+          resultCount={filteredProducts.length}
+          sortByValue={sortBy}
+          onSortByChange={setSortBy}
+        />
+
+        {/* Responsive Product Grid (4-col desktop, 3-col tablet, 2-col mobile, pb-24 prevents overlap) */}
+        {filteredProducts.length === 0 ? (
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-gray-300 dark:border-slate-700 p-10 text-center space-y-2 mb-24">
+            <Wrench className="w-8 h-8 text-[#12357A] dark:text-amber-300 mx-auto" />
+            <p className="text-sm font-bold text-gray-900 dark:text-white">
+              No tools or hardware match those active filters in {activeSubcatMeta.name}.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setUseFilter("all");
+                setSerialWarrantyOnly(false);
+                setRentAvailableOnly(false);
+                setBrandFilter("all");
+                setSizeFilter("all");
+                setPriceFilter("all");
+              }}
+              className="px-4 py-1.5 rounded-xl bg-[#12357A] text-white text-xs font-bold cursor-pointer"
+            >
+              Reset Tool Filters
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 pb-24">
+            {filteredProducts.map((product) => {
+              const qtyInCart = getQtyInCart(product.id);
+              const offer = getEffectiveOffer(product);
+              const mode = getAcquireMode(product);
+              const selectedPackIdx = packIdxById[product.id] ?? 0;
+
+              const topRightBadge = product.rentPricePerDay ? (
+                <span className="px-2 py-0.5 rounded-md text-[9.5px] font-black bg-amber-400 text-slate-950 shadow-sm inline-flex items-center gap-0.5">
+                  <Tractor className="w-2.5 h-2.5" />
+                  RENT ₹{product.rentPricePerDay}/D
+                </span>
+              ) : (
+                <span className="px-2 py-0.5 rounded-md text-[9.5px] font-black bg-emerald-600 text-white shadow-sm inline-flex items-center gap-0.5">
+                  <ShieldCheck className="w-2.5 h-2.5" />
+                  GENUINE
+                </span>
+              );
 
               return (
-                <div
-                  key={prod.id}
-                  onClick={() => openProduct(prod)}
-                  className="bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-200 p-4 flex flex-col justify-between cursor-pointer group relative"
-                >
-                  {/* Top Badges */}
-                  <div>
-                    <div className="flex items-center justify-between gap-1 mb-2">
-                      <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-800">
-                        {prod.brand}
-                      </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center gap-1">
-                        <Bike className="w-3 h-3" />
-                        60m Express
-                      </span>
-                    </div>
-
-                    {/* Product Image */}
-                    <div className="w-full aspect-square bg-[#FAFAFA] rounded-xl overflow-hidden mb-3 p-3 flex items-center justify-center relative">
-                      <RealProductImage
-                        product={prod}
-                        src={prod.image}
-                        alt={prod.name}
-                        title={prod.name}
-                        brand={prod.brand}
-                        category="power-tools-safety"
-                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  discountPct={product.discountPct}
+                  topRightBadge={topRightBadge}
+                  visualNode={<ToolSvgGraphic kind={product.toolVisual} />}
+                  siteWarningNote={product.siteBadge}
+                  brand={product.brand}
+                  oemModelCode={product.model}
+                  title={product.title}
+                  specLine={`${product.powerOrSize} · ${product.boreOrChuck} · ${product.spec}`}
+                  price={offer.price}
+                  mrp={offer.mrp}
+                  gstPercent={product.gstPercent}
+                  unit={offer.unit}
+                  deliveryTime={product.deliveryTime}
+                  vehicleType={product.vehicleType}
+                  qtyInCart={qtyInCart}
+                  hasVariants={Boolean(product.bulkPack?.length || product.rentPricePerDay)}
+                  onCardClick={() => handleOpenDetail(product)}
+                  onAdd={() => handleAddTool(product)}
+                  onDecrement={() => handleUpdateQty(product, qtyInCart - 1)}
+                  onIncrement={() => handleUpdateQty(product, qtyInCart + 1)}
+                  onOpenVariants={() => setVariantProduct(product)}
+                  extraControls={
+                    <>
+                      {/* Buy New vs Rent Today inline toggle on heavy power tools */}
+                      <BuyOrRentBadge
+                        buyPrice={product.price}
+                        rentPricePerDay={product.rentPricePerDay}
+                        mode={mode}
+                        onChangeMode={(next) =>
+                          setAcquireModeById((prev) => ({ ...prev, [product.id]: next }))
+                        }
+                        compact
                       />
-                      {/* Key Spec Overlay Badge */}
-                      <div className="absolute bottom-2 left-2 right-2 bg-slate-900/85 backdrop-blur-xs text-white text-[10px] font-bold py-1 px-2 rounded-md text-center truncate">
-                        {prod.keySpecBadge}
-                      </div>
-                    </div>
 
-                    {/* Subcategory & Title */}
-                    <div className="text-[10.5px] font-semibold text-slate-400 mb-1">
-                      {prod.subCategory} • HSN {prod.hsnCode}
-                    </div>
-                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#1848a0] transition-colors leading-snug line-clamp-2">
-                      {prod.name}
-                    </h3>
-
-                    {/* Spec Chips */}
-                    <div className="flex flex-wrap gap-1 mt-2.5 mb-3">
-                      {prod.specChips.slice(0, 3).map((chip, idx) => (
-                        <span
-                          key={idx}
-                          className="text-[10px] font-medium bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded"
+                      {/* Inline Pack Size & Mistri Bulk Switcher on consumables & fasteners */}
+                      {product.bulkPack && product.bulkPack.length > 0 && (
+                        <div
+                          className="flex flex-wrap gap-1 mt-2"
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          {chip}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Pricing & Add to Cart Footer */}
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 mt-auto">
-                    <div>
-                      <div className="flex items-baseline gap-1.5 leading-none">
-                        <span className="text-lg font-black text-slate-900">
-                          ₹{prod.price.toLocaleString("en-IN")}
-                        </span>
-                        <span className="text-xs text-slate-400 line-through">
-                          ₹{prod.mrp.toLocaleString("en-IN")}
-                        </span>
-                      </div>
-                      <div className="text-[10.5px] text-slate-500 font-medium mt-1 leading-none">
-                        Ex-GST: ₹{prod.exGstPrice.toLocaleString("en-IN")}{" "}
-                        <span className="text-emerald-600 font-semibold">(18% GST)</span>
-                      </div>
-                    </div>
-
-                    {/* Cart Action Button */}
-                    <div onClick={(e) => e.stopPropagation()}>
-                      {!inCart ? (
-                        <button
-                          onClick={(e) => handleAdd(prod, e)}
-                          className="h-9 px-4 rounded-xl bg-[#1848a0] hover:bg-[#123678] active:scale-95 text-white font-bold text-xs transition cursor-pointer shadow-xs flex items-center gap-1"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>ADD</span>
-                        </button>
-                      ) : (
-                        <div className="flex items-center gap-2 bg-[#1848a0] text-white rounded-xl px-2 h-9 shadow-xs">
-                          <button
-                            onClick={(e) => handleDecrement(prod, itemState.quantity, e)}
-                            className="p-1 hover:bg-white/20 rounded active:scale-90 transition cursor-pointer"
-                          >
-                            <Minus className="w-3.5 h-3.5" />
-                          </button>
-                          <span className="text-xs font-bold w-4 text-center">
-                            {itemState.quantity}
-                          </span>
-                          <button
-                            onClick={(e) => handleIncrement(prod, itemState.quantity, e)}
-                            className="p-1 hover:bg-white/20 rounded active:scale-90 transition cursor-pointer"
-                          >
-                            <Plus className="w-3.5 h-3.5" />
-                          </button>
+                          {product.bulkPack.map((tier, idx) => (
+                            <button
+                              key={tier.label}
+                              type="button"
+                              onClick={() =>
+                                setPackIdxById((prev) => ({ ...prev, [product.id]: idx }))
+                              }
+                              className={`px-2 py-0.5 rounded-lg border text-[10px] font-bold transition cursor-pointer ${
+                                selectedPackIdx === idx
+                                  ? "bg-[#12357A] text-white border-[#12357A]"
+                                  : "bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700"
+                              }`}
+                            >
+                              {tier.shortLabel}
+                            </button>
+                          ))}
                         </div>
                       )}
-                    </div>
-                  </div>
-                </div>
+                    </>
+                  }
+                  extraStrip={
+                    mode === "RENT" && product.rentPricePerDay ? (
+                      <Link
+                        href="/rentals"
+                        onClick={(e) => e.stopPropagation()}
+                        className="mt-2 text-[10.5px] font-black text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 px-2 py-0.5 rounded-md inline-flex items-center gap-1"
+                      >
+                        <Tractor className="w-3 h-3" />
+                        <span>Machines on Rent Fleet →</span>
+                      </Link>
+                    ) : product.bulkPack && product.bulkPack.length > 1 ? (
+                      <div className="mt-2 text-[10.5px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50/70 dark:bg-emerald-950/50 border border-emerald-100 dark:border-emerald-800 px-2 py-0.5 rounded-md inline-block">
+                        Latouche Bulk Packs: Extra 10–15% Off
+                      </div>
+                    ) : null
+                  }
+                />
               );
             })}
           </div>
-        </div>
+        )}
       </div>
 
-      {/* Product Detail Modal */}
-      {modalProduct && (
+      {/* Floating Reorder Last (Clear bottom clearance above mobile nav) */}
+      <FloatingReorderLast onReorderLast={handleReorderLast} />
+
+      {/* 1-Click Trade Mistri Kit Builder Modal */}
+      <TradeMistriKitModal
+        isOpen={mistriKitOpen}
+        onClose={() => setMistriKitOpen(false)}
+        onAddTradeKit={handleAddTradeKit}
+      />
+
+      {/* 60-Min Emergency Consumables Quick-Refill Sheet */}
+      <SiteRefillDrawer
+        isOpen={siteRefillOpen}
+        onClose={() => setSiteRefillOpen(false)}
+        onDispatchRefill={handleDispatchRefill}
+      />
+
+      {/* Variant, Bulk Pack & Rent Drawer */}
+      {variantProduct && (
+        <div
+          className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4"
+          onClick={() => setVariantProduct(null)}
+        >
+          <div
+            className="bg-white dark:bg-slate-900 w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-700 p-5 space-y-4 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {(() => {
+              const p = variantProduct;
+              const offer = getEffectiveOffer(p);
+              const mode = getAcquireMode(p);
+              const selectedPackIdx = packIdxById[p.id] ?? 0;
+
+              return (
+                <>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
+                        <ToolSvgGraphic kind={p.toolVisual} compact />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-black uppercase text-[#12357A] dark:text-amber-300">
+                          {p.brand} · {p.model} · {p.warranty}
+                        </span>
+                        <h3 className="text-sm font-black text-slate-900 dark:text-white line-clamp-2">
+                          {p.title}
+                        </h3>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setVariantProduct(null)}
+                      className="p-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 cursor-pointer"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {p.rentPricePerDay && (
+                    <div>
+                      <p className="text-[11px] font-bold uppercase text-slate-500 dark:text-slate-400 mb-1">
+                        Choose Buy New or Daily Rent
+                      </p>
+                      <BuyOrRentBadge
+                        buyPrice={p.price}
+                        rentPricePerDay={p.rentPricePerDay}
+                        mode={mode}
+                        onChangeMode={(next) =>
+                          setAcquireModeById((prev) => ({ ...prev, [p.id]: next }))
+                        }
+                      />
+                    </div>
+                  )}
+
+                  {p.bulkPack && p.bulkPack.length > 0 && (
+                    <div>
+                      <p className="text-[11px] font-bold uppercase text-slate-500 dark:text-slate-400 mb-1.5">
+                        Pack Size &amp; Mistri Bulk Switcher
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        {p.bulkPack.map((tier, idx) => (
+                          <button
+                            key={tier.label}
+                            type="button"
+                            onClick={() => setPackIdxById((prev) => ({ ...prev, [p.id]: idx }))}
+                            className={`p-2.5 rounded-xl border text-left transition cursor-pointer ${
+                              selectedPackIdx === idx
+                                ? "bg-[#12357A] text-white border-[#12357A]"
+                                : "bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-700"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between gap-1">
+                              <p className="text-xs font-black">{tier.label}</p>
+                              {tier.discountBadge && (
+                                <span className="text-[9px] font-black px-1 rounded bg-amber-400 text-slate-950">
+                                  {tier.discountBadge}
+                                </span>
+                              )}
+                            </div>
+                            <p className={`text-[11px] font-bold mt-0.5 ${selectedPackIdx === idx ? "text-blue-100" : "text-slate-500"}`}>
+                              ₹{tier.price.toLocaleString("en-IN")} ({tier.unit})
+                            </p>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 rounded-xl p-3 space-y-1">
+                    <p>
+                      <strong>Spec:</strong> {p.powerOrSize} • {p.boreOrChuck}
+                    </p>
+                    <p>{p.spec}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+                    <div>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-lg font-black text-slate-900 dark:text-white">
+                          ₹{offer.price.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-xs text-slate-400 line-through">
+                          ₹{offer.mrp.toLocaleString("en-IN")}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-medium">
+                        Incl. {p.gstPercent}% GST ({offer.unit})
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setVariantProduct(null);
+                          handleOpenDetail(p);
+                        }}
+                        className="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 cursor-pointer"
+                      >
+                        Full Specs
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleAddTool(p);
+                          setVariantProduct(null);
+                        }}
+                        className="px-5 py-2.5 rounded-xl bg-[#12357A] hover:bg-[#0B1B3D] text-white text-xs font-black shadow-md cursor-pointer"
+                      >
+                        {mode === "RENT" ? "Book Daily Rent" : "Add to Cart"}
+                      </button>
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
+      {quickDetailProduct && (
         <ProductDetailModal
-          product={modalProduct}
-          onClose={() => setModalProduct(null)}
+          isOpen={true}
+          product={quickDetailProduct}
+          onClose={() => setQuickDetailProduct(null)}
           onAddToCart={() => {
-            const found = ALL_9_TOOLS_SAFETY_PRODUCTS.find((p) => p.id === modalProduct.id);
-            if (found) handleAdd(found);
+            const tp = liveProducts.find((item) => item.id === quickDetailProduct.id);
+            if (tp) handleAddTool(tp);
           }}
         />
       )}

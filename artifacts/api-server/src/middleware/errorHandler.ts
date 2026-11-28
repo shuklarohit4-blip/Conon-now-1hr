@@ -102,6 +102,19 @@ export function errorHandler(
     return;
   }
 
+  if ((err as any)?.name === "MulterError") {
+    const code = (err as any)?.code;
+    res.status(400).json({
+      ok: false,
+      error:
+        code === "LIMIT_FILE_SIZE"
+          ? "Uploaded image exceeds the 5MB maximum file size limit."
+          : (err as any)?.message || "Invalid file upload",
+      code: code || "UPLOAD_ERROR",
+    });
+    return;
+  }
+
   if (err instanceof ZodError) {
     res.status(400).json({
       ok: false,
@@ -113,9 +126,10 @@ export function errorHandler(
   }
 
   logger.error({ err }, "Unhandled request error");
+  const isProd = process.env.NODE_ENV === "production";
   res.status(500).json({
     ok: false,
-    error: (err as any)?.message || "Internal server error",
+    error: isProd ? "Internal server error" : ((err as any)?.message || "Internal server error"),
     code: "INTERNAL_ERROR",
   });
 }

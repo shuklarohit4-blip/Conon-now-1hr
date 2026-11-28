@@ -1,5 +1,14 @@
-import React, { useState, useMemo } from "react";
-import { Clock, ChevronRight } from "lucide-react";
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  Lightbulb,
+  ShieldCheck,
+  Sparkles,
+  X,
+  Plus,
+  CheckCircle2,
+  Package,
+  AlertTriangle,
+} from "lucide-react";
 import { toast } from "sonner";
 import {
   useAddToCart,
@@ -10,699 +19,810 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
-import { useProductMediaVault } from "@/context/ProductMediaVaultContext";
 import type { Product } from "@/components/ProductCard";
-import { RealProductImage } from "@/components/RealProductImage";
+import { useLiveProductMerger } from "@/hooks/useCononLiveData";
+import {
+  LIGHTING_BRANDS,
+  LIGHTING_MOUNT_FILTERS,
+  LIGHTING_PRODUCTS,
+  LIGHTING_SUBCATEGORIES,
+  type CctKelvin,
+  type LightingProduct,
+  type LightingSubCategoryId,
+} from "@/data/lightingCatalog";
+import {
+  CategoryHeader,
+  DualRowFilterBar,
+  FloatingReorderLast,
+  HorizontalSubCategoryBar,
+  ProductCard,
+  SiteCompanionBanner,
+} from "@/components/storefront/UnifiedStorefrontPrimitives";
+import { LuminaireSvgGraphic } from "@/components/storefront/CategoryProductGraphics";
+import {
+  KELVIN_META,
+  KelvinPreviewToggle,
+} from "@/components/lighting/KelvinPreviewToggle";
+import {
+  RoomLightingCalculatorModal,
+  type CalculatedKitLine,
+} from "@/components/lighting/RoomLightingCalculatorModal";
 
-export interface LightingProduct {
-  id: string;
-  title: string;
-  brand: string;
-  subcategory:
-    | "ceiling-panel-lights"
-    | "cob-spot-lights"
-    | "strip-lights-profiles"
-    | "light-battens"
-    | "furniture-cabinetry-lighting"
-    | "outdoor-lights"
-    | "bulbs";
-  price: number;
-  mrp: number;
-  discountPct: number;
-  image: string;
-  spec?: string;
-  deliveryTime: string;
-  optionsCount?: number;
-  dotsCount: number;
-}
+export { LIGHTING_PRODUCTS };
 
-export const LIGHTING_PRODUCTS: LightingProduct[] = [
-  {
-    id: "wipro-garnet-rimless-round-led-surface-panel-light",
-    title: "Wipro Garnet Rimless Round LED Surface Panel Light (2 Years Warranty)",
-    brand: "Wipro",
-    subcategory: "ceiling-panel-lights",
-    price: 389,
-    mrp: 890,
-    discountPct: 56,
-    image: "",
-    spec: "3.5 KV Surge",
-    deliveryTime: "60 Mins",
-    optionsCount: 9,
-    dotsCount: 5,
-  },
-  {
-    id: "philips-full-glow-led-surface-light-round",
-    title: "Philips Full Glow LED Surface Light, Round",
-    brand: "Philips",
-    subcategory: "ceiling-panel-lights",
-    price: 518,
-    mrp: 775,
-    discountPct: 33,
-    image: "",
-    spec: "Slim 2.9 cm",
-    deliveryTime: "60 Mins",
-    optionsCount: 12,
-    dotsCount: 4,
-  },
-  {
-    id: "sturlite-lexxo-trimless-surface-mount-led-downlight",
-    title: "Sturlite LEXXO Trimless Surface Mount LED Downlight (Round)",
-    brand: "Sturlite",
-    subcategory: "ceiling-panel-lights",
-    price: 242,
-    mrp: 242,
-    discountPct: 0,
-    image: "",
-    spec: "2-yr warranty",
-    deliveryTime: "60 Mins",
-    optionsCount: 6,
-    dotsCount: 4,
-  },
-  {
-    id: "wipro-garnet-rimless-3in1-cct-surface-mounted-led-panel",
-    title: "Wipro Garnet Rimless 3-in-1 CCT Surface Mounted LED Panel (2 Years Warranty)",
-    brand: "Wipro",
-    subcategory: "ceiling-panel-lights",
-    price: 579,
-    mrp: 990,
-    discountPct: 42,
-    image: "",
-    spec: "100 Lm/W",
-    deliveryTime: "60 Mins",
-    optionsCount: 2,
-    dotsCount: 5,
-  },
-  {
-    id: "wipro-garnet-wave-led-slim-panel-square-18w",
-    title: "Wipro Garnet Wave LED Slim Panel Light, Square (18W)",
-    brand: "Wipro",
-    subcategory: "ceiling-panel-lights",
-    price: 449,
-    mrp: 650,
-    discountPct: 31,
-    image: "",
-    spec: "High Lumen Output",
-    deliveryTime: "60 Mins",
-    optionsCount: 4,
-    dotsCount: 3,
-  },
-  {
-    id: "philips-stellar-bright-rimless-surface-downlight-15w",
-    title: "Philips Stellar Bright Rimless Surface LED Downlight, Round (15W)",
-    brand: "Philips",
-    subcategory: "ceiling-panel-lights",
-    price: 495,
-    mrp: 840,
-    discountPct: 41,
-    image: "",
-    spec: "EyeComfort Tech",
-    deliveryTime: "60 Mins",
-    optionsCount: 6,
-    dotsCount: 4,
-  },
-  {
-    id: "philips-star-glass-downlight-recessed-ceiling-panel-12w",
-    title: "Philips Star Glass Downlight Recessed Ceiling Panel (12W)",
-    brand: "Philips",
-    subcategory: "ceiling-panel-lights",
-    price: 399,
-    mrp: 799,
-    discountPct: 50,
-    image: "",
-    spec: "Frosted Diffuser",
-    deliveryTime: "60 Mins",
-    optionsCount: 3,
-    dotsCount: 3,
-  },
-  {
-    id: "syska-ultraslim-led-recessed-ceiling-panel-light-7w",
-    title: "Syska UltraSlim LED Recessed Ceiling Panel Light (7W)",
-    brand: "Syska",
-    subcategory: "ceiling-panel-lights",
-    price: 199,
-    mrp: 435,
-    discountPct: 54,
-    image: "",
-    spec: "Aluminium Heat Sink",
-    deliveryTime: "60 Mins",
-    optionsCount: 5,
-    dotsCount: 4,
-  },
-  // Supporting products for other tabs to bring total to 12
-  {
-    id: "philips-cob-spotlight-recessed-7w",
-    title: "Philips Deep Recessed Anti-Glare COB Spotlight 7W (Warm White 3000K)",
-    brand: "Philips",
-    subcategory: "cob-spot-lights",
-    price: 549,
-    mrp: 890,
-    discountPct: 38,
-    image: "",
-    spec: "36° Beam Angle",
-    deliveryTime: "60 Mins",
-    optionsCount: 4,
-    dotsCount: 3,
-  },
-  {
-    id: "wipro-dglow-strip-light-5m-warm",
-    title: "Wipro D-Glow Flexible 5M 300-LED Strip Light Reel with Power Adapter",
-    brand: "Wipro",
-    subcategory: "strip-lights-profiles",
-    price: 680,
-    mrp: 1200,
-    discountPct: 43,
-    image: "",
-    spec: "IP65 Waterproof",
-    deliveryTime: "60 Mins",
-    optionsCount: 3,
-    dotsCount: 4,
-  },
-  {
-    id: "philips-t5-high-lumen-20w-tube-batten",
-    title: "Philips T5 Ultra-Bright 20W 4-Foot LED Tube Batten Light",
-    brand: "Philips",
-    subcategory: "light-battens",
-    price: 280,
-    mrp: 450,
-    discountPct: 37,
-    image: "",
-    spec: "Surge Protected 4KV",
-    deliveryTime: "60 Mins",
-    optionsCount: 2,
-    dotsCount: 3,
-  },
-  {
-    id: "philips-stellar-smart-led-bulb-12w-b22",
-    title: "Philips Stellar Multi-Wattage Inverter Backup LED Bulb 12W B22",
-    brand: "Philips",
-    subcategory: "bulbs",
-    price: 340,
-    mrp: 599,
-    discountPct: 43,
-    image: "",
-    spec: "4 Hr Power Backup",
-    deliveryTime: "60 Mins",
-    optionsCount: 4,
-    dotsCount: 3,
-  },
-];
-
-interface LightingCollectionStorefrontProps {
+export interface LightingCollectionStorefrontProps {
+  defaultSubcat?: string;
+  onBack?: () => void;
   onOpenDetail?: (product: Product) => void;
 }
 
+const LAST_LIGHTING_ORDER_KEY = "conon_last_lighting_order_v1";
+
+function resolveInitialLightingSubcat(defaultSubcat?: string): LightingSubCategoryId {
+  const valid = new Set(LIGHTING_SUBCATEGORIES.map((s) => s.id));
+  if (defaultSubcat && valid.has(defaultSubcat as LightingSubCategoryId)) {
+    return defaultSubcat as LightingSubCategoryId;
+  }
+  if (typeof window !== "undefined") {
+    const path = window.location.pathname.toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+    const subParam = params.get("subcat")?.toLowerCase() || "";
+    const target = `${path} ${subParam}`;
+    for (const sub of LIGHTING_SUBCATEGORIES) {
+      if (target.includes(sub.id)) return sub.id;
+    }
+    if (target.includes("concealed") || target.includes("junction")) return "concealed-junction-lights";
+    if (target.includes("cob") || target.includes("spot")) return "cob-spot-lights";
+    if (target.includes("strip") || target.includes("profile") || target.includes("driver")) return "strip-profiles-drivers";
+    if (target.includes("batten") || target.includes("tube")) return "led-battens";
+    if (target.includes("bulb") || target.includes("inverter") || target.includes("emergency")) return "bulbs-inverter-emergency";
+    if (target.includes("cabinet") || target.includes("track") || target.includes("commercial")) return "cabinet-track-commercial";
+    if (target.includes("outdoor") || target.includes("flood") || target.includes("gate")) return "outdoor-flood-gate-lights";
+  }
+  return "concealed-junction-lights";
+}
+
 export function LightingCollectionStorefront({
+  defaultSubcat,
+  onBack,
   onOpenDetail,
 }: LightingCollectionStorefrontProps) {
-  const [activeSubcategory, setActiveSubcategory] =
-    useState<string>("ceiling-panel-lights");
-  const [selectedBrand, setSelectedBrand] = useState<string>("All");
-  const [selectedSort, setSelectedSort] = useState<string>("relevance");
-  const [quickDetailProduct, setQuickDetailProduct] = useState<Product | null>(
-    null,
+  const qc = useQueryClient();
+  const { data: cart } = useGetCart();
+  const invalidateCart = () => qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
+  const addToCart = useAddToCart({ mutation: { onSuccess: invalidateCart } });
+  const updateCartItem = useUpdateCartItem({ mutation: { onSuccess: invalidateCart } });
+  const removeFromCart = useRemoveFromCart({ mutation: { onSuccess: invalidateCart } });
+  const mergeLiveProducts = useLiveProductMerger();
+
+  const [activeSubcat, setActiveSubcat] = useState<LightingSubCategoryId>(() =>
+    resolveInitialLightingSubcat(defaultSubcat),
+  );
+  const [mountFilter, setMountFilter] = useState<string>("all");
+  const [surgeOnly, setSurgeOnly] = useState<boolean>(false);
+  const [cct3in1Only, setCct3in1Only] = useState<boolean>(false);
+  const [brandFilter, setBrandFilter] = useState<string>("all");
+  const [specFilter, setSpecFilter] = useState<string>("all");
+  const [priceFilter, setPriceFilter] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("relevance");
+
+  // Live Kelvin Mood Glow Simulator state per SKU
+  const [cctByProduct, setCctByProduct] = useState<Record<string, CctKelvin>>({});
+  const [calcOpen, setCalcOpen] = useState<boolean>(false);
+  const [companionDismissed, setCompanionDismissed] = useState<boolean>(false);
+  const [companionTriggerTitle, setCompanionTriggerTitle] = useState<string | null>(null);
+
+  // Variant & Pack-of-10 Drawer State
+  const [variantModalProduct, setVariantModalProduct] = useState<LightingProduct | null>(null);
+  const [drawerVariantIdx, setDrawerVariantIdx] = useState<number>(0);
+  const [drawerPackMode, setDrawerPackMode] = useState<"SINGLE" | "PACK10">("SINGLE");
+  const [quickDetailProduct, setQuickDetailProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    if (defaultSubcat) {
+      setActiveSubcat(resolveInitialLightingSubcat(defaultSubcat));
+    }
+  }, [defaultSubcat]);
+
+  const liveProducts = useMemo(
+    () => mergeLiveProducts(LIGHTING_PRODUCTS as unknown as any[]) as LightingProduct[],
+    [mergeLiveProducts],
   );
 
-  const queryClient = useQueryClient();
-  const { resolveProduct } = useProductMediaVault();
-  const { data: cartData } = useGetCart();
-  const addToCart = useAddToCart({
-    mutation: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetCartQueryKey() });
-        toast.success("Added to cart");
-      },
-      onError: () => toast.error("Failed to add to cart"),
-    },
-  });
-  const updateCartItem = useUpdateCartItem({
-    mutation: {
-      onSuccess: () =>
-        queryClient.invalidateQueries({ queryKey: getGetCartQueryKey() }),
-    },
-  });
-  const removeFromCart = useRemoveFromCart({
-    mutation: {
-      onSuccess: () =>
-        queryClient.invalidateQueries({ queryKey: getGetCartQueryKey() }),
-    },
-  });
-
-  const cartItems = useMemo(() => {
-    if (!cartData?.categories) return [];
-    return cartData.categories.flatMap((c) => c.items ?? []);
-  }, [cartData]);
-
-  const getItemQuantity = (productId: string) => {
-    const item = cartItems.find(
-      (ci: any) =>
-        ci.materialId === productId ||
-        ci.id === productId ||
-        ci.title === productId,
-    );
-    return item ? item.quantity : 0;
-  };
-
-  const getCartItemId = (productId: string) => {
-    const item = cartItems.find(
-      (ci: any) =>
-        ci.materialId === productId ||
-        ci.id === productId ||
-        ci.title === productId,
-    );
-    return item ? item.id : null;
-  };
-
-  const handleAddToCart = (p: LightingProduct) => {
-    addToCart.mutate({
-      data: {
-        materialId: p.id,
-        quantity: 1,
-        name: p.title,
-        price: p.price,
-        unit: "Piece",
-        vendor: `${p.brand} Official`,
-        category: "Lighting",
-      },
-    });
-  };
-
-  const handleUpdateQty = (p: LightingProduct, newQty: number) => {
-    const cartItemId = getCartItemId(p.id);
-    if (!cartItemId) {
-      if (newQty > 0) handleAddToCart(p);
-      return;
+  const cartItemsList = useMemo(() => {
+    const list: Array<{ id: string; materialId: string; quantity: number; name?: string; price?: number }> = [];
+    if (!cart?.categories) return list;
+    for (const c of cart.categories) {
+      for (const item of c.items ?? []) {
+        list.push({
+          id: String(item.id),
+          materialId: item.materialId,
+          quantity: item.quantity,
+          name: item.name,
+          price: item.price,
+        });
+      }
     }
-    if (newQty <= 0) {
-      removeFromCart.mutate({ itemId: cartItemId });
+    return list;
+  }, [cart]);
+
+  // Detect if Strip or Track exists in cart without SMPS driver or Profile
+  const cartNeedsDriverOrProfile = useMemo(() => {
+    const hasStripOrTrack = cartItemsList.some(
+      (i) =>
+        i.materialId.includes("strip") ||
+        i.materialId.includes("magnetic-track") ||
+        (i.name || "").toLowerCase().includes("profile strip"),
+    );
+    const hasDriver = cartItemsList.some(
+      (i) => i.materialId.includes("smps-driver") || (i.name || "").toLowerCase().includes("smps driver"),
+    );
+    const hasProfile = cartItemsList.some(
+      (i) => i.materialId.includes("alu-profile") || (i.name || "").toLowerCase().includes("aluminium profile"),
+    );
+    return {
+      show: (hasStripOrTrack && (!hasDriver || !hasProfile)) || Boolean(companionTriggerTitle),
+      hasDriver,
+      hasProfile,
+    };
+  }, [cartItemsList, companionTriggerTitle]);
+
+  const getCct = (product: LightingProduct): CctKelvin =>
+    cctByProduct[product.id] || product.defaultCct || "4000K";
+
+  const handleSelectCct = (productId: string, cct: CctKelvin) => {
+    setCctByProduct((prev) => ({ ...prev, [productId]: cct }));
+  };
+
+  const getQtyInCart = (productId: string): number =>
+    cartItemsList
+      .filter((it) => it.materialId === productId || it.materialId.startsWith(`${productId}::`))
+      .reduce((s, it) => s + it.quantity, 0);
+
+  const findPrimaryCartItem = (productId: string) =>
+    cartItemsList.find((it) => it.materialId === productId || it.materialId.startsWith(`${productId}::`));
+
+  const handleAddSingle = (
+    product: LightingProduct,
+    overridePrice?: number,
+    overrideLabel?: string,
+    overrideQty = 1,
+    overrideUnit?: string,
+  ) => {
+    const activeCct = getCct(product);
+    const cctLabel = KELVIN_META[activeCct]?.short || activeCct;
+    const itemName = overrideLabel
+      ? `${product.title} — ${overrideLabel} (${cctLabel})`
+      : `${product.title} (${cctLabel})`;
+    const unitPrice = overridePrice ?? product.price;
+
+    try {
+      localStorage.setItem(
+        LAST_LIGHTING_ORDER_KEY,
+        JSON.stringify([{ materialId: product.id, name: itemName, price: unitPrice, unit: overrideUnit || product.unit, brand: product.brand, quantity: overrideQty }]),
+      );
+    } catch {}
+
+    addToCart.mutate(
+      {
+        data: {
+          materialId: product.id,
+          name: itemName,
+          category: "Lighting",
+          price: unitPrice,
+          unit: overrideUnit || product.unit,
+          vendor: product.brand,
+          quantity: overrideQty,
+        },
+      },
+      {
+        onSuccess: () => {
+          invalidateCart();
+          if (product.companionNeed === "smps-driver") {
+            setCompanionTriggerTitle(product.title);
+            setCompanionDismissed(false);
+            toast.success(`Added ${itemName}`, {
+              description: "Need a 12V SMPS Driver & 2m Profile? Add them in 1 click below!",
+            });
+          } else {
+            toast.success(`Added ${itemName} to Site Cart`);
+          }
+        },
+        onError: () => toast.error("Could not add to cart"),
+      },
+    );
+  };
+
+  const handleUpdateQty = (product: LightingProduct, nextQty: number) => {
+    const match = findPrimaryCartItem(product.id);
+    if (!match) return;
+    if (nextQty <= 0) {
+      removeFromCart.mutate({ itemId: match.id }, { onSuccess: invalidateCart });
     } else {
-      updateCartItem.mutate({ itemId: cartItemId, data: { quantity: newQty } });
+      updateCartItem.mutate({ itemId: match.id, data: { quantity: nextQty } }, { onSuccess: invalidateCart });
     }
   };
 
-  const subcategories = [
-    {
-      id: "ceiling-panel-lights",
-      label: "Ceiling Panel Lights",
-      icon: "/images/subcategories/ceiling-panel-lights-icon.webp",
-    },
-    {
-      id: "cob-spot-lights",
-      label: "COB & Spot Lights",
-      icon: "/images/subcategories/cob-spot-lights-icon.webp",
-    },
-    {
-      id: "strip-lights-profiles",
-      label: "Strip Lights & Profiles",
-      icon: "/images/subcategories/strip-lights-profiles-icon.webp",
-    },
-    {
-      id: "light-battens",
-      label: "Light Battens",
-      icon: "/images/subcategories/light-battens-icon.webp",
-    },
-    {
-      id: "furniture-cabinetry-lighting",
-      label: "Furniture & Cabinetry Lighting",
-      icon: "/images/subcategories/furniture-cabinetry-lighting-icon.webp",
-    },
-    {
-      id: "outdoor-lights",
-      label: "Outdoor Lights",
-      icon: "/images/subcategories/outdoor-lights-icon.webp",
-    },
-    {
-      id: "bulbs",
-      label: "Bulbs",
-      icon: "/images/subcategories/bulbs-icon.webp",
-    },
-  ];
+  const handleAddCompanionSku = (skuId: string) => {
+    const comp = liveProducts.find((p) => p.id === skuId);
+    if (comp) handleAddSingle(comp);
+  };
+
+  const handleAddFullRoomKit = (lines: CalculatedKitLine[], kitDiscountPct: number) => {
+    for (const line of lines) {
+      const discountedUnit = Math.round(line.product.price * (1 - kitDiscountPct / 100));
+      addToCart.mutate({
+        data: {
+          materialId: line.product.id,
+          name: `${line.product.title} [Room Kit -${kitDiscountPct}%]`,
+          category: "Lighting",
+          price: discountedUnit,
+          unit: line.product.unit,
+          vendor: line.product.brand,
+          quantity: line.qty,
+        },
+      });
+    }
+    try {
+      localStorage.setItem(
+        LAST_LIGHTING_ORDER_KEY,
+        JSON.stringify(
+          lines.map((l) => ({
+            materialId: l.product.id,
+            name: `${l.product.title} [Room Kit]`,
+            price: Math.round(l.product.price * (1 - kitDiscountPct / 100)),
+            unit: l.product.unit,
+            brand: l.product.brand,
+            quantity: l.qty,
+          })),
+        ),
+      );
+    } catch {}
+    toast.success(`Full Room Lighting Kit (${lines.length} items) added at 5% extra off!`);
+  };
+
+  const handleReorderLast = () => {
+    try {
+      const raw = localStorage.getItem(LAST_LIGHTING_ORDER_KEY);
+      if (raw) {
+        const items = JSON.parse(raw) as Array<{
+          materialId: string;
+          name: string;
+          price: number;
+          unit: string;
+          brand: string;
+          quantity: number;
+        }>;
+        if (Array.isArray(items) && items.length > 0) {
+          for (const it of items) {
+            addToCart.mutate({
+              data: {
+                materialId: it.materialId,
+                name: it.name,
+                category: "Lighting",
+                price: it.price,
+                unit: it.unit,
+                vendor: it.brand,
+                quantity: it.quantity || 1,
+              },
+            });
+          }
+          toast.success(`Reordered ${items.length} Lighting SKU(s) to Cart`);
+          return;
+        }
+      }
+    } catch {}
+    // Default fast-reorder starter if no history yet
+    const starter = liveProducts[0];
+    if (starter) handleAddSingle(starter);
+  };
 
   const filteredProducts = useMemo(() => {
-    return LIGHTING_PRODUCTS.map((p) => resolveProduct(p)).filter((p) => {
-      if (activeSubcategory && p.subcategory !== activeSubcategory)
-        return false;
-      if (selectedBrand !== "All" && p.brand !== selectedBrand) return false;
-      return true;
-    });
-  }, [activeSubcategory, selectedBrand, resolveProduct]);
+    let list = liveProducts.filter((p) => p.subcategory === activeSubcat);
+    if (mountFilter !== "all") list = list.filter((p) => p.mountType === mountFilter);
+    if (surgeOnly) list = list.filter((p) => p.surgeProtectionKv >= 3.5);
+    if (cct3in1Only) list = list.filter((p) => Boolean(p.is3in1Cct));
+    if (brandFilter !== "all") list = list.filter((p) => p.brand.toLowerCase() === brandFilter.toLowerCase());
 
-  const openModal = (p: LightingProduct) => {
-    const mapped: Product = {
-      id: p.id,
-      title: p.title,
-      price: p.price,
-      mrp: p.mrp,
-      unit: "Piece",
-      image: p.image,
-      materialTag: "Lighting",
-      brand: p.brand,
-      description: `${p.title} - ${p.spec || "High efficiency LED lighting solution"}. Genuine manufacturer warranty with 60-minute doorstep delivery.`,
-      rating: 4.8,
-      reviews: 168,
-      deliveryEta: "Today, in 60 Mins",
-    };
-    if (onOpenDetail) {
-      onOpenDetail(mapped);
-    } else {
-      setQuickDetailProduct(mapped);
+    if (specFilter !== "all") {
+      if (specFilter === "under-8w") list = list.filter((p) => p.wattage > 0 && p.wattage <= 8);
+      else if (specFilter === "10w-18w") list = list.filter((p) => p.wattage >= 10 && p.wattage <= 18);
+      else if (specFilter === "20w-plus") list = list.filter((p) => p.wattage >= 20);
+      else if (specFilter === "3000K" || specFilter === "4000K" || specFilter === "6500K") {
+        list = list.filter((p) => p.supportedCcts.includes(specFilter));
+      }
     }
+
+    if (priceFilter !== "all") {
+      if (priceFilter === "under-300") list = list.filter((p) => p.price < 300);
+      else if (priceFilter === "300-700") list = list.filter((p) => p.price >= 300 && p.price <= 700);
+      else if (priceFilter === "700-1500") list = list.filter((p) => p.price > 700 && p.price <= 1500);
+      else if (priceFilter === "above-1500") list = list.filter((p) => p.price > 1500);
+    }
+
+    const sorted = [...list];
+    if (sortBy === "price-low") sorted.sort((a, b) => a.price - b.price);
+    else if (sortBy === "price-high") sorted.sort((a, b) => b.price - a.price);
+    else if (sortBy === "discount") sorted.sort((a, b) => b.discountPct - a.discountPct);
+    return sorted;
+  }, [
+    liveProducts,
+    activeSubcat,
+    mountFilter,
+    surgeOnly,
+    cct3in1Only,
+    brandFilter,
+    specFilter,
+    priceFilter,
+    sortBy,
+  ]);
+
+  const toGenericProduct = (p: LightingProduct): Product => ({
+    id: p.id,
+    name: p.title,
+    title: p.title,
+    brand: p.brand,
+    unit: p.unit,
+    price: p.price,
+    mrp: p.mrp,
+    image: p.image,
+    materialTag: "Lighting",
+    rating: 4.8,
+    reviews: 96,
+    deliveryEta: "60 Mins",
+    specs: p.spec ? [{ label: "Specs", value: p.spec }] : [],
+    bulkPrice: Math.round(p.packOf10Price / 10),
+    bulkSlabText: `Pack of 10 @ ₹${p.packOf10Price.toLocaleString("en-IN")} (-${p.packOf10DiscountPct}%)`,
+  });
+
+  const activeSubcatMeta =
+    LIGHTING_SUBCATEGORIES.find((s) => s.id === activeSubcat) || LIGHTING_SUBCATEGORIES[0];
+
+  const handleOpenDetail = (p: LightingProduct) => {
+    const gp = toGenericProduct(p);
+    if (onOpenDetail) onOpenDetail(gp);
+    else setQuickDetailProduct(gp);
   };
 
   return (
-    <div className="w-full bg-[#FFFFFF] min-h-screen">
-      {/* Top Breadcrumb & Heading Container */}
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-1.5 text-[12px] text-[#6B7280]">
-          <a href="/home" className="hover:text-[#111827] transition-colors">
-            Home
-          </a>
-          <span className="text-[#9CA3AF]">›</span>
-          <a
-            href="/collections/electrical-wires"
-            className="hover:text-[#111827] transition-colors"
-          >
-            Electrical
-          </a>
-          <span className="text-[#9CA3AF]">›</span>
-          <span className="text-[#111827] font-medium">Ceiling Panel Lights</span>
-        </nav>
+    <div className="w-full bg-[#F4F6F8] dark:bg-slate-950 min-h-screen pb-24">
+      <CategoryHeader
+        title="Lighting & Architectural LED"
+        breadcrumbCategory="Lighting"
+        activeSubCategoryName={activeSubcatMeta.name}
+        hubSubtitle="Latouche Road & Naka Hindola Hubs"
+        icon={<Lightbulb className="w-5 h-5" />}
+        onBack={onBack}
+      />
 
-        {/* Page Title */}
-        <h1 className="text-[26px] sm:text-[30px] font-bold text-[#111827] tracking-tight mt-2.5">
-          Ceiling Panel Lights
-        </h1>
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 pt-4">
+        <SiteCompanionBanner
+          icon={<Sparkles className="w-5 h-5" />}
+          title="Essential Lucknow Lighting & POP False Ceiling Companion"
+          description={'Never stall site wiring. Pair every Zero-Dot LED Strip with a 20%-buffered SMPS Driver, Aluminium Profile, and exact 3"/4"/6" cutout fixtures in 60 mins.'}
+          goldCtaLabel="✨ Room Light & Choke Calculator →"
+          onGoldCtaClick={() => setCalcOpen(true)}
+          blueCtaLabel="Drivers & Profiles"
+          onBlueCtaClick={() => {
+            setActiveSubcat("strip-profiles-drivers");
+            setMountFilter("all");
+          }}
+        />
+
+        {/* Smart Companion Auto-Upsell Banner when LED Strip or Magnetic Track is added */}
+        {cartNeedsDriverOrProfile.show && !companionDismissed && (
+          <div className="mb-4 p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-start gap-2.5">
+              <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs font-extrabold text-amber-950 dark:text-amber-200">
+                  Strip &amp; Magnetic Track Site Companion Check
+                </p>
+                <p className="text-[11px] text-amber-800 dark:text-amber-300">
+                  LED strips &amp; profiles require a 12V SMPS Driver and 2m Recessed Aluminium Channel with Milky Diffuser for spotless POP finish.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0 flex-wrap">
+              {!cartNeedsDriverOrProfile.hasDriver && (
+                <button
+                  type="button"
+                  onClick={() => handleAddCompanionSku("philips-12v-5a-smps-driver")}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#12357A] text-white text-[11px] font-bold hover:bg-[#0B1B3D] cursor-pointer"
+                >
+                  <Plus className="w-3 h-3" />
+                  12V 5A Driver (₹380)
+                </button>
+              )}
+              {!cartNeedsDriverOrProfile.hasProfile && (
+                <button
+                  type="button"
+                  onClick={() => handleAddCompanionSku("alu-profile-2m-recessed-corner")}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-400 text-slate-950 text-[11px] font-black hover:bg-amber-300 cursor-pointer"
+                >
+                  <Plus className="w-3 h-3" />
+                  2m Alu Profile (₹265)
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setCompanionDismissed(true)}
+                aria-label="Dismiss lighting companion tip"
+                className="p-1 rounded-lg text-amber-700 dark:text-amber-300 hover:bg-amber-200/40 cursor-pointer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Horizontal Sub-Category Pill Cards (NO old left sidebar!) */}
+        <HorizontalSubCategoryBar
+          activeId={activeSubcat}
+          onSelect={(id) => {
+            setActiveSubcat(id as LightingSubCategoryId);
+            if (typeof window !== "undefined") {
+              window.history.pushState({}, "", `/collections/${id}`);
+            }
+          }}
+          items={LIGHTING_SUBCATEGORIES.map((s) => ({
+            id: s.id,
+            name: s.name,
+            count: s.count,
+            thumbnail: <LuminaireSvgGraphic kind={s.visualKind} cct="4000K" compact />,
+          }))}
+        />
+
+        {/* Dual-Row Filter Bar */}
+        <DualRowFilterBar
+          row1Label="Fit:"
+          quickFilters={LIGHTING_MOUNT_FILTERS}
+          activeQuickFilter={mountFilter}
+          onQuickFilterChange={setMountFilter}
+          trustHighlights={[
+            {
+              id: "surge",
+              label: "🛡️ 3.5kV+ Surge Proof",
+              active: surgeOnly,
+              tone: "emerald",
+              onToggle: () => setSurgeOnly((v) => !v),
+            },
+            {
+              id: "cct3in1",
+              label: "🌈 3-in-1 CCT Switchable",
+              active: cct3in1Only,
+              tone: "amber",
+              onToggle: () => setCct3in1Only((v) => !v),
+            },
+          ]}
+          brandFilterValue={brandFilter}
+          onBrandFilterChange={setBrandFilter}
+          brandOptions={[
+            { value: "all", label: "All Brands (Lucknow Distributors)" },
+            ...LIGHTING_BRANDS.map((b) => ({ value: b, label: b })),
+          ]}
+          specFilterValue={specFilter}
+          onSpecFilterChange={setSpecFilter}
+          specOptions={[
+            { value: "all", label: "All CCT / Wattages" },
+            { value: "under-8w", label: "3W – 8W (Concealed / Spot)" },
+            { value: "10w-18w", label: "10W – 18W (Panels / COBs)" },
+            { value: "20w-plus", label: "20W – 100W (Battens / Floods)" },
+            { value: "3000K", label: "3000K Warm White" },
+            { value: "4000K", label: "4000K Natural White" },
+            { value: "6500K", label: "6500K Cool Day Light" },
+          ]}
+          priceFilterValue={priceFilter}
+          onPriceFilterChange={setPriceFilter}
+          priceOptions={[
+            { value: "all", label: "Price: All Ranges" },
+            { value: "under-300", label: "Under ₹300" },
+            { value: "300-700", label: "₹300 – ₹700" },
+            { value: "700-1500", label: "₹700 – ₹1,500" },
+            { value: "above-1500", label: "Above ₹1,500" },
+          ]}
+          resultCount={filteredProducts.length}
+          sortByValue={sortBy}
+          onSortByChange={setSortBy}
+        />
+
+        {/* Responsive Product Grid (4-col desktop, 3-col tablet, 2-col mobile) */}
+        {filteredProducts.length === 0 ? (
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-gray-300 dark:border-slate-700 p-10 text-center space-y-2">
+            <Lightbulb className="w-8 h-8 text-amber-500 mx-auto" />
+            <p className="text-sm font-bold text-gray-900 dark:text-white">
+              No fixtures match those active filters in {activeSubcatMeta.name}.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setMountFilter("all");
+                setSurgeOnly(false);
+                setCct3in1Only(false);
+                setBrandFilter("all");
+                setSpecFilter("all");
+                setPriceFilter("all");
+              }}
+              className="px-4 py-1.5 rounded-xl bg-[#12357A] text-white text-xs font-bold cursor-pointer"
+            >
+              Reset Filters
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            {filteredProducts.map((product) => {
+              const selectedCct = getCct(product);
+              const cctMeta = KELVIN_META[selectedCct];
+              const qtyInCart = getQtyInCart(product.id);
+              const topRightBadge = product.is3in1Cct ? (
+                <span className="px-2 py-0.5 rounded-md text-[9.5px] font-black bg-amber-500 text-slate-950 shadow-sm">
+                  3-IN-1 CCT
+                </span>
+              ) : (
+                <span className="px-2 py-0.5 rounded-md text-[9.5px] font-black bg-emerald-600 text-white shadow-sm inline-flex items-center gap-0.5">
+                  <ShieldCheck className="w-2.5 h-2.5" />
+                  {product.surgeProtectionKv}kV
+                </span>
+              );
+
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  discountPct={product.discountPct}
+                  topRightBadge={topRightBadge}
+                  ambientGlowCss={cctMeta.glowCss}
+                  visualNode={<LuminaireSvgGraphic kind={product.luminaireVisual} cct={selectedCct} />}
+                  siteWarningNote={product.inclusionsBadge}
+                  brand={product.brand}
+                  oemModelCode={product.oemModelCode}
+                  title={product.title}
+                  specLine={product.spec}
+                  price={product.price}
+                  mrp={product.mrp}
+                  gstPercent={product.gstPercent}
+                  unit={product.unit}
+                  deliveryTime={product.deliveryTime}
+                  vehicleType={product.vehicleType}
+                  qtyInCart={qtyInCart}
+                  hasVariants={true}
+                  onCardClick={() => handleOpenDetail(product)}
+                  onAdd={() => handleAddSingle(product)}
+                  onDecrement={() => handleUpdateQty(product, qtyInCart - 1)}
+                  onIncrement={() => handleUpdateQty(product, qtyInCart + 1)}
+                  onOpenVariants={() => {
+                    setVariantModalProduct(product);
+                    setDrawerVariantIdx(0);
+                    setDrawerPackMode("SINGLE");
+                  }}
+                  extraControls={
+                    <KelvinPreviewToggle
+                      supportedCcts={product.supportedCcts}
+                      selectedCct={selectedCct}
+                      is3in1Cct={product.is3in1Cct}
+                      onSelectCct={(cct) => handleSelectCct(product.id, cct)}
+                      compact
+                    />
+                  }
+                  extraStrip={
+                    <div className="mt-2 text-[10.5px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50/70 dark:bg-emerald-950/50 border border-emerald-100 dark:border-emerald-800 px-2 py-0.5 rounded-md inline-block">
+                      Mistri 10-Pack: Extra {product.packOf10DiscountPct}% Off
+                    </div>
+                  }
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
 
-      {/* Main Content Layout: Sidebar + Grid */}
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <div className="flex flex-col md:flex-row gap-6 items-start">
-          {/* Left Sidebar Subcategories */}
-          <aside className="w-full md:w-[220px] flex-shrink-0">
-            <div className="bg-white rounded-lg border border-[#E5E7EB] overflow-hidden">
-              {subcategories.map((sc) => {
-                const isActive = activeSubcategory === sc.id;
-                return (
-                  <button
-                    key={sc.id}
-                    type="button"
-                    onClick={() => setActiveSubcategory(sc.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-3 text-left transition-colors relative border-b border-[#F3F4F6] last:border-b-0 ${
-                      isActive
-                        ? "bg-[#EAF7EE] text-[#111827] font-semibold"
-                        : "bg-white text-[#374151] hover:bg-[#F9FAFB]"
-                    }`}
-                  >
-                    {/* Subcategory Icon Container */}
-                    <div className="w-9 h-9 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center p-0.5 flex-shrink-0 shadow-sm overflow-hidden">
-                      <img
-                        src={sc.icon}
-                        alt={sc.label}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <span className="text-[12.5px] leading-snug">{sc.label}</span>
-                    {isActive && (
-                      <div className="absolute right-0 top-0 bottom-0 w-[3px] bg-[#16A34A]" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </aside>
+      {/* Floating Reorder Last Pill */}
+      <FloatingReorderLast onReorderLast={handleReorderLast} />
 
-          {/* Right Product Grid Column */}
-          <main className="flex-1 w-full min-w-0">
-            {/* Filter Toolbar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-[#E5E7EB]">
-              {/* Filter Pills */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[13px] text-[#4B5563] font-medium mr-1">
-                  Filter:
-                </span>
-                <div className="relative inline-block">
-                  <select
-                    value={activeSubcategory}
-                    onChange={(e) => setActiveSubcategory(e.target.value)}
-                    className="text-[12.5px] border border-[#D1D5DB] rounded-md px-2.5 py-1.5 bg-white text-[#374151] font-medium focus:outline-none focus:ring-1 focus:ring-[#16A34A] cursor-pointer"
-                  >
-                    <option value="ceiling-panel-lights">
-                      Category: Ceiling Panel Lights
-                    </option>
-                    <option value="cob-spot-lights">COB & Spot Lights</option>
-                    <option value="strip-lights-profiles">
-                      Strip Lights & Profiles
-                    </option>
-                    <option value="light-battens">Light Battens</option>
-                    <option value="furniture-cabinetry-lighting">
-                      Furniture & Cabinetry
-                    </option>
-                    <option value="outdoor-lights">Outdoor Lights</option>
-                    <option value="bulbs">Bulbs</option>
-                  </select>
-                </div>
+      {/* "Kitni Light Lagegi?" Room & POP Calculator Modal */}
+      <RoomLightingCalculatorModal
+        isOpen={calcOpen}
+        onClose={() => setCalcOpen(false)}
+        onAddFullKit={handleAddFullRoomKit}
+      />
 
-                <div className="relative inline-block">
-                  <select
-                    value={selectedBrand}
-                    onChange={(e) => setSelectedBrand(e.target.value)}
-                    className="text-[12.5px] border border-[#D1D5DB] rounded-md px-2.5 py-1.5 bg-white text-[#374151] font-medium focus:outline-none focus:ring-1 focus:ring-[#16A34A] cursor-pointer"
-                  >
-                    <option value="All">Brand ▾</option>
-                    <option value="Wipro">Wipro</option>
-                    <option value="Philips">Philips</option>
-                    <option value="Sturlite">Sturlite</option>
-                    <option value="Syska">Syska</option>
-                  </select>
-                </div>
+      {/* Variant + Kelvin Preview + Pack-of-10 Mistri Rate Drawer */}
+      {variantModalProduct && (
+        <div
+          className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4"
+          onClick={() => setVariantModalProduct(null)}
+        >
+          <div
+            className="bg-white dark:bg-slate-900 w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-700 p-5 space-y-4 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {(() => {
+              const p = variantModalProduct;
+              const selectedCct = getCct(p);
+              const variants = p.variants && p.variants.length > 0
+                ? p.variants
+                : [{ label: `${p.wattageLabel} Standard`, price: p.price, mrp: p.mrp }];
+              const activeVar = variants[drawerVariantIdx] || variants[0];
+              const pack10UnitTotal = Math.round(activeVar.price * 10 * (1 - p.packOf10DiscountPct / 100));
+              const displayPrice = drawerPackMode === "PACK10" ? pack10UnitTotal : activeVar.price;
+              const displayMrp = drawerPackMode === "PACK10" ? activeVar.mrp * 10 : activeVar.mrp;
 
-                <div className="relative inline-block">
-                  <select className="text-[12.5px] border border-[#D1D5DB] rounded-md px-2.5 py-1.5 bg-white text-[#374151] font-medium focus:outline-none focus:ring-1 focus:ring-[#16A34A] cursor-pointer">
-                    <option value="all">Type ▾</option>
-                    <option value="surface">Surface Mount</option>
-                    <option value="recessed">Recessed / Trimless</option>
-                    <option value="cct">3-in-1 CCT Tunable</option>
-                  </select>
-                </div>
-
-                <div className="relative inline-block">
-                  <select className="text-[12.5px] border border-[#D1D5DB] rounded-md px-2.5 py-1.5 bg-white text-[#374151] font-medium focus:outline-none focus:ring-1 focus:ring-[#16A34A] cursor-pointer">
-                    <option value="all">Size ▾</option>
-                    <option value="round">Round</option>
-                    <option value="square">Square</option>
-                  </select>
-                </div>
-
-                <div className="relative inline-block">
-                  <select className="text-[12.5px] border border-[#D1D5DB] rounded-md px-2.5 py-1.5 bg-white text-[#374151] font-medium focus:outline-none focus:ring-1 focus:ring-[#16A34A] cursor-pointer">
-                    <option value="all">Colors ▾</option>
-                    <option value="cool-white">Cool Day White (6500K)</option>
-                    <option value="warm-white">Warm White (3000K)</option>
-                    <option value="natural-white">Natural White (4000K)</option>
-                  </select>
-                </div>
-
-                <div className="relative inline-block">
-                  <select className="text-[12.5px] border border-[#D1D5DB] rounded-md px-2.5 py-1.5 bg-white text-[#374151] font-medium focus:outline-none focus:ring-1 focus:ring-[#16A34A] cursor-pointer">
-                    <option value="all">Price ▾</option>
-                    <option value="under300">Under ₹300</option>
-                    <option value="300-600">₹300 - ₹600</option>
-                    <option value="above600">Above ₹600</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Product Count & Sort */}
-              <div className="flex items-center gap-4 text-[13px] text-[#4B5563]">
-                <span>
-                  <strong className="text-[#111827] font-semibold">12</strong>{" "}
-                  products
-                </span>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[#6B7280]">Sort by:</span>
-                  <select
-                    value={selectedSort}
-                    onChange={(e) => setSelectedSort(e.target.value)}
-                    className="text-[12.5px] border border-[#D1D5DB] rounded-md px-2 py-1 bg-white text-[#374151] font-medium focus:outline-none focus:ring-1 focus:ring-[#16A34A] cursor-pointer"
-                  >
-                    <option value="relevance">Relevance ▾</option>
-                    <option value="price-asc">Price: Low to High</option>
-                    <option value="price-desc">Price: High to Low</option>
-                    <option value="discount">Highest Discount</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* 4-Column Product Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-              {filteredProducts.map((p) => {
-                const cartQty = getItemQuantity(p.id);
-
-                return (
-                  <div
-                    key={p.id}
-                    className="group relative bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col"
-                  >
-                    {/* Blue Bookmark Ribbon Badge Top-Left with Triangle Notch */}
-                    {p.discountPct > 0 && (
-                      <div className="absolute top-0 left-3 z-10">
-                        <div className="bg-[#2563EB] text-white text-[11px] font-bold px-2 pt-1 pb-1 text-center shadow-sm relative">
-                          <span className="block leading-none">Save</span>
-                          <span className="block leading-tight">
-                            {p.discountPct}%
-                          </span>
-                          {/* Triangle cut-out notch at bottom */}
-                          <div
-                            className="absolute -bottom-1.5 left-0 right-0 h-1.5 bg-[#2563EB]"
-                            style={{
-                              clipPath: "polygon(0% 0%, 100% 0%, 50% 100%)",
-                            }}
-                          />
-                        </div>
+              return (
+                <>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div
+                        className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 relative overflow-hidden"
+                        style={{ boxShadow: `inset 0 0 24px ${KELVIN_META[selectedCct].dotHex}55` }}
+                      >
+                        <LuminaireSvgGraphic kind={p.luminaireVisual} cct={selectedCct} compact />
                       </div>
-                    )}
-
-                    {/* Image Container with Dots Pagination */}
-                    <div
-                      onClick={() => openModal(p)}
-                      className="relative w-full aspect-square bg-[#F9FAFB] p-4 flex items-center justify-center cursor-pointer overflow-hidden"
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-black uppercase text-[#12357A] dark:text-amber-300">
+                          {p.brand} · {p.oemModelCode}
+                        </span>
+                        <h3 className="text-sm font-black text-slate-900 dark:text-white line-clamp-2">
+                          {p.title}
+                        </h3>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setVariantModalProduct(null)}
+                      className="p-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 cursor-pointer"
                     >
-                      <RealProductImage
-                        product={p}
-                        src={p.image}
-                        alt={p.title}
-                        title={p.title}
-                        brand={p.brand}
-                        category="lighting"
-                        className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
-                      />
-                      {/* Dots indicator at bottom right of image */}
-                      <div className="absolute bottom-2 right-2 flex items-center gap-0.5">
-                        {Array.from({ length: p.dotsCount }).map((_, idx) => (
-                          <div
-                            key={idx}
-                            className={`w-1 h-1 rounded-full ${
-                              idx === 0 ? "bg-[#111827]" : "bg-[#D1D5DB]"
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Kelvin Glow Simulator Inside Drawer */}
+                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                    <p className="text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
+                      Live Kelvin Mood Preview ({KELVIN_META[selectedCct].name}):
+                    </p>
+                    <KelvinPreviewToggle
+                      supportedCcts={p.supportedCcts}
+                      selectedCct={selectedCct}
+                      is3in1Cct={p.is3in1Cct}
+                      onSelectCct={(cct) => handleSelectCct(p.id, cct)}
+                    />
+                  </div>
+
+                  {/* Wattage / Cutout Selector */}
+                  {variants.length > 0 && (
+                    <div>
+                      <p className="text-[11px] font-bold uppercase text-slate-500 dark:text-slate-400 mb-1.5">
+                        Select Wattage / Cutout Option
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {variants.map((v, idx) => (
+                          <button
+                            key={v.label}
+                            type="button"
+                            onClick={() => setDrawerVariantIdx(idx)}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer ${
+                              drawerVariantIdx === idx
+                                ? "bg-[#12357A] text-white border-[#12357A]"
+                                : "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700"
                             }`}
-                          />
+                          >
+                            {v.label} — ₹{v.price.toLocaleString("en-IN")}
+                          </button>
                         ))}
                       </div>
                     </div>
+                  )}
 
-                    {/* Product Details */}
-                    <div className="p-3 sm:p-3.5 flex-1 flex flex-col justify-between">
-                      <div>
-                        {/* Price Row */}
-                        <div className="flex items-baseline gap-1.5 flex-wrap">
-                          <span className="text-[17px] font-bold text-[#111827]">
-                            ₹{p.price.toLocaleString("en-IN")}
+                  {/* Retail vs Mistri Pack-of-10 Toggle */}
+                  <div>
+                    <p className="text-[11px] font-bold uppercase text-slate-500 dark:text-slate-400 mb-1.5">
+                      Purchase Mode (Retail vs Contractor Pack)
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setDrawerPackMode("SINGLE")}
+                        className={`p-2.5 rounded-xl border text-left transition cursor-pointer ${
+                          drawerPackMode === "SINGLE"
+                            ? "bg-[#12357A] text-white border-[#12357A]"
+                            : "bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-700"
+                        }`}
+                      >
+                        <p className="text-xs font-black">Single Piece</p>
+                        <p className={`text-[10.5px] ${drawerPackMode === "SINGLE" ? "text-blue-100" : "text-slate-400"}`}>
+                          ₹{activeVar.price.toLocaleString("en-IN")} / {p.unit}
+                        </p>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setDrawerPackMode("PACK10")}
+                        className={`p-2.5 rounded-xl border text-left transition cursor-pointer ${
+                          drawerPackMode === "PACK10"
+                            ? "bg-emerald-600 text-white border-emerald-600"
+                            : "bg-emerald-50/70 dark:bg-emerald-950/50 text-emerald-900 dark:text-emerald-200 border-emerald-200 dark:border-emerald-800"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <p className="text-xs font-black">Pack of 10 (Mistri)</p>
+                          <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-400 text-slate-950">
+                            -{p.packOf10DiscountPct}%
                           </span>
-                          {p.mrp > p.price ? (
-                            <span className="text-[11.5px] text-[#9CA3AF] line-through">
-                              ₹{p.mrp.toLocaleString("en-IN")} (incl GST)
-                            </span>
-                          ) : (
-                            <span className="text-[11px] text-[#9CA3AF]">
-                              (incl GST)
-                            </span>
-                          )}
                         </div>
-
-                        {/* Product Title */}
-                        <h3
-                          onClick={() => openModal(p)}
-                          className="mt-2 text-[12.5px] sm:text-[13px] font-semibold text-[#1F2937] leading-[1.35] line-clamp-2 hover:text-[#2563EB] cursor-pointer"
-                          title={p.title}
-                        >
-                          {p.title}
-                        </h3>
-
-                        {/* Green Assured Cashback & Free Delivery Banner */}
-                        <div className="mt-2 bg-[#EAF7EE] text-[#16A34A] rounded px-1.5 py-0.5 text-[9.5px] font-medium leading-tight flex items-center gap-1">
-                          <span>Assured 1% cashback</span>
-                          <span className="text-[#86EFAC]">|</span>
-                          <span>Free Delivery on ₹1000+</span>
-                        </div>
-
-                        {/* Spec highlight */}
-                        {p.spec && (
-                          <div className="mt-1.5 text-[10.5px] text-[#4B5563] font-medium">
-                            {p.spec}
-                          </div>
-                        )}
-
-                        {/* Delivery Time */}
-                        <div className="mt-1 flex items-center gap-1 text-[10px] text-[#6B7280]">
-                          <Clock className="w-3 h-3 text-[#6B7280]" />
-                          <span>{p.deliveryTime}</span>
-                        </div>
-                      </div>
-
-                      {/* Action Button: Options or Stepper */}
-                      <div className="mt-3 pt-2 border-t border-[#F3F4F6]">
-                        {cartQty === 0 ? (
-                          <button
-                            type="button"
-                            onClick={() => openModal(p)}
-                            className="w-full text-center py-1.5 px-2 rounded-lg border border-[#16A34A] text-[#16A34A] hover:bg-[#EAF7EE] font-bold text-[12.5px] bg-white transition-colors"
-                          >
-                            {p.optionsCount ? `${p.optionsCount} Options` : "Add"}
-                          </button>
-                        ) : (
-                          <div className="w-full flex items-center justify-between bg-[#16A34A] text-white rounded-lg px-2 py-1 text-[12px] font-bold">
-                            <button
-                              type="button"
-                              onClick={() => handleUpdateQty(p, cartQty - 1)}
-                              className="px-2 py-0.5 hover:bg-black/10 rounded"
-                            >
-                              -
-                            </button>
-                            <span>{cartQty}</span>
-                            <button
-                              type="button"
-                              onClick={() => handleUpdateQty(p, cartQty + 1)}
-                              className="px-2 py-0.5 hover:bg-black/10 rounded"
-                            >
-                              +
-                            </button>
-                          </div>
-                        )}
-                      </div>
+                        <p className={`text-[10.5px] ${drawerPackMode === "PACK10" ? "text-emerald-100" : "text-emerald-700 dark:text-emerald-300"}`}>
+                          Latouche Rd Rate: ₹{pack10UnitTotal.toLocaleString("en-IN")}
+                        </p>
+                      </button>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </main>
-        </div>
-      </div>
 
-      {/* Quick Detail Modal Fallback */}
+                  {/* Action Footer */}
+                  <div className="flex items-center justify-between gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+                    <div>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-lg font-black text-slate-900 dark:text-white">
+                          ₹{displayPrice.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-xs text-slate-400 line-through">
+                          ₹{displayMrp.toLocaleString("en-IN")}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-medium">
+                        Incl. 18% GST ({drawerPackMode === "PACK10" ? "Pack of 10" : p.unit})
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setVariantModalProduct(null);
+                          handleOpenDetail(p);
+                        }}
+                        className="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 cursor-pointer"
+                      >
+                        Full Specs
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleAddSingle(
+                            p,
+                            displayPrice,
+                            drawerPackMode === "PACK10"
+                              ? `${activeVar.label} • Mistri Pack of 10`
+                              : activeVar.label,
+                            1,
+                            drawerPackMode === "PACK10" ? "Pack of 10" : p.unit,
+                          );
+                          setVariantModalProduct(null);
+                        }}
+                        className="px-5 py-2.5 rounded-xl bg-[#12357A] hover:bg-[#0B1B3D] text-white text-xs font-black shadow-md cursor-pointer"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
       {quickDetailProduct && (
         <ProductDetailModal
-          product={quickDetailProduct}
           isOpen={true}
+          product={quickDetailProduct}
           onClose={() => setQuickDetailProduct(null)}
-          onAddToCart={(p, qty) => {
-            const count = qty ?? 1;
-            for (let i = 0; i < count; i++) {
-              addToCart.mutate({
-                data: {
-                  materialId: p.id,
-                  quantity: 1,
-                  name: p.title,
-                  price: p.price,
-                  unit: p.unit || "Piece",
-                  vendor: `${p.brand || "Wipro"} Official`,
-                  category: "Lighting",
-                },
-              });
-            }
+          onAddToCart={() => {
+            const lp = liveProducts.find((item) => item.id === quickDetailProduct.id);
+            if (lp) handleAddSingle(lp);
           }}
         />
       )}
     </div>
   );
 }
+
+export default LightingCollectionStorefront;

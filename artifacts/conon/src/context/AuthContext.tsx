@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import { toast } from "sonner";
 import { auth } from "@/firebase";
 import { signOut } from "firebase/auth";
-import { customerLogin, CUSTOMER_JWT_KEY, JWT_STORAGE_KEY, ADMIN_JWT_KEY } from "@/lib/authApi";
+import { adminLogin, customerLogin, verifyOtp, CUSTOMER_JWT_KEY, JWT_STORAGE_KEY, ADMIN_JWT_KEY } from "@/lib/authApi";
 import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 import { apiUrl } from "@/lib/apiBase";
 
@@ -182,39 +182,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       role?: string;
       pinCode?: string;
     }) => {
-      const cleanPhone = payload.phone.replace(/\D/g, "");
+      const cleanPhone = payload.phone.replace(/\D/g, "").slice(-10);
       const cleanOtp = payload.otp.trim();
       const resolvedRole = payload.role || "Builder / Owner";
       const resolvedName =
         payload.name?.trim() ||
         (resolvedRole.includes("Contractor") ? "Lucknow Contractor" : "CONON Builder");
 
-      let token = "demo-customer-jwt";
-      try {
-        const res = await customerLogin({
-          phone: cleanPhone,
-          name: resolvedName,
-        });
-        if (res.ok && res.token) {
-          token = res.token;
-        }
-      } catch (_) {
-        // demo / local fallback
+      const res = await verifyOtp(cleanPhone, cleanOtp, {
+        name: resolvedName,
+        role: "customer",
+      });
+      if (!res.ok || !res.token) {
+        throw new Error(res.error || "Invalid or expired OTP.");
       }
 
       const userData: AuthUser = {
-        id: `usr_${cleanPhone}_${Date.now()}`,
-        name: resolvedName,
-        phone: cleanPhone,
-        role: "customer",
+        id: String(res.user?.id || `usr_${cleanPhone}`),
+        name: res.user?.name || resolvedName,
+        phone: res.user?.phone || cleanPhone,
+        role: res.user?.role || "customer",
         displayRole: resolvedRole,
         pinCode: payload.pinCode || "226030",
-        token,
+        token: res.token,
       };
 
       persistUserSession(userData);
       setIsAuthModalOpen(false);
-      toast.success(`Welcome to CONON-NOW, ${resolvedName}!`);
+      toast.success(`Welcome to CONON-NOW, ${userData.name}!`);
     },
     []
   );
@@ -266,10 +261,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       pin: string;
       permissionRole: "SUPER_ADMIN" | "DISPATCH_MANAGER" | "ACCOUNTS_CONTROL";
     }) => {
-      const cleanPin = payload.pin.trim();
-      // Accepts default testing pin 2026 or admin123
-      if (cleanPin !== "2026" && cleanPin !== "admin123" && cleanPin.length < 4) {
-        throw new Error("Invalid Security PIN. Enter 2026 for Founder Access.");
+      const email = payload.adminId.includes("@") ? payload.adminId.trim() : "admin@conon.in";
+      const result = await adminLogin(email, payload.pin);
+      if (!result.ok || !result.token) {
+        throw new Error(result.error || "Invalid admin credentials.");
       }
 
       const roleLabels: Record<string, string> = {
@@ -284,21 +279,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           : payload.adminId;
 
       const adminUser: AuthUser = {
-        id: `admin_${Date.now()}`,
+        id: "admin",
         name: resolvedName,
-        phone: "9876543210",
+        phone: "",
         role: "ADMIN",
         displayRole: roleLabels[payload.permissionRole] || "Super Admin (Founder)",
         adminPermission: payload.permissionRole,
-        email: payload.adminId.includes("@") ? payload.adminId : "admin@conon.in",
-        token: "demo-admin-jwt",
+        email,
+        token: result.token,
       };
 
       persistUserSession(adminUser);
+      try {
+        localStorage.setItem("conon_admin_role", payload.permissionRole);
+      } catch {}
       setIsAuthModalOpen(false);
-      toast.success(`🔓 Welcome to CONON COMMAND OS, ${resolvedName}!`, {
-        description: `Active role: ${adminUser.displayRole}`,
-      });
+      toast.success(`Unlocked CONON COMMAND OS (${adminUser.displayRole})`);
     },
     []
   );

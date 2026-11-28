@@ -455,12 +455,18 @@ export function initSocket(httpServer: HttpServer): Server {
           allowedOrigins.length === 0 ||
           allowedOrigins.includes(normalized) ||
           (process.env.FRONTEND_URL && normalized === process.env.FRONTEND_URL.trim().replace(/\/+$/, ""));
+        const hostname = (() => {
+          try {
+            return new URL(origin).hostname;
+          } catch {
+            return "";
+          }
+        })();
         const isDev =
           process.env.NODE_ENV !== "production" &&
           (/^https?:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+|[\w-]+\.local)(:\d+)?$/.test(normalized) ||
-            normalized === "http://localhost:5173" ||
-            normalized === "http://localhost:5174");
-        const isVercel = /\.vercel\.app$/.test(new URL(origin).hostname);
+            /\.devtunnels\.ms$/.test(hostname));
+        const isVercel = /\.vercel\.app$/.test(hostname) || /\.netlify\.app$/.test(hostname);
 
         if (isAllowed || isDev || isVercel) {
           return callback(null, true);

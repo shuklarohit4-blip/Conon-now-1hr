@@ -433,7 +433,9 @@ export type { ClientSession };
 export { default as mongoose } from "mongoose";
 export * from "./models/Product";
 export * from "./models/Category";
+export * from "./models/hybrid/index";
 export * from "./catalogData";
 export * from "./schema/livingVault";
 export * from "./postgres";
+export * from "./hybridPostgres";
 

@@ -35,6 +35,13 @@ export const POD_DIR = path.resolve(CONON_IMAGES_DIR, "pod");
 export const ECOSYSTEM_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/ecosystem-store.json");
 export const UPLOADS_DIR = path.resolve(REPO_ROOT, "artifacts/api-server/uploads");
 export const PRODUCTS_UPLOADS_DIR = path.resolve(UPLOADS_DIR, "products");
+export const CATEGORIES_UPLOADS_DIR = path.resolve(UPLOADS_DIR, "categories");
+export const BANNERS_UPLOADS_DIR = path.resolve(UPLOADS_DIR, "banners");
+export const CATEGORIES_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/categories-master.json");
+export const PRODUCTS_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/master-products.json");
+export const STOREFRONT_CONFIG_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/storefront-config.json");
+export const MERCHANDISING_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/home-merchandising.json");
+export const SEARCH_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/search-studio.json");
 export const MEDIA_VAULT_STORE_PATH = path.resolve(REPO_ROOT, "artifacts/api-server/data/media-vault-overrides.json");
 
 // Ensure required runtime directories exist
@@ -43,6 +50,12 @@ if (!fs.existsSync(POD_DIR)) {
 }
 if (!fs.existsSync(PRODUCTS_UPLOADS_DIR)) {
   fs.mkdirSync(PRODUCTS_UPLOADS_DIR, { recursive: true });
+}
+if (!fs.existsSync(CATEGORIES_UPLOADS_DIR)) {
+  fs.mkdirSync(CATEGORIES_UPLOADS_DIR, { recursive: true });
+}
+if (!fs.existsSync(BANNERS_UPLOADS_DIR)) {
+  fs.mkdirSync(BANNERS_UPLOADS_DIR, { recursive: true });
 }
 if (!fs.existsSync(path.dirname(ECOSYSTEM_STORE_PATH))) {
   fs.mkdirSync(path.dirname(ECOSYSTEM_STORE_PATH), { recursive: true });

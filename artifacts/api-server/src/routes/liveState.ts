@@ -4,6 +4,7 @@ import path from "path";
 import { pool } from "@workspace/db";
 import { requireAdmin } from "../middleware/adminAuth";
 import { getIo } from "../socket";
+import { syncBus } from "../services/syncBus";
 import { REPO_ROOT } from "../lib/paths";
 import { logger } from "../lib/logger";
 
@@ -22,6 +23,54 @@ const DEFAULT_STATE = {
     },
     deliverySlaMins: 60,
     emergencyPause: false,
+    paymentPolicy: {
+      podMaxMaterialAmount: 10000,
+      forcePrepaidRmc: true,
+      forcePrepaidServices: true,
+      forcePrepaidRentals: true,
+    },
+    serviceability: {
+      strictPincodeLock: true,
+      activePincodes: [
+        { pincode: "226030", areaName: "Sushant Golf City & Sultanpur Road", slaMins: 60, active: true },
+        { pincode: "226010", areaName: "Gomti Nagar & Gomti Nagar Extension", slaMins: 60, active: true },
+        { pincode: "226028", areaName: "Faizabad Road (Chinhat / Kamta / BBD)", slaMins: 60, active: true },
+        { pincode: "226002", areaName: "Sultanpur Road (Arjunganj / Shaheed Path)", slaMins: 60, active: true },
+      ],
+    },
+    trafficPolicy: {
+      noEntryStartHour: 6,
+      noEntryEndHour: 23,
+      peakMorningStart: "08:00",
+      peakMorningEnd: "11:00",
+      peakEveningStart: "17:00",
+      peakEveningEnd: "20:30",
+      vipDiversionActive: false,
+      vipDiversionNote: "",
+      zonePreferredVehicle: {
+        "226030": "LCV_CHHOTA_HATHI",
+        "226010": "LCV_CHHOTA_HATHI",
+        "226028": "LCV_CHHOTA_HATHI",
+        "226002": "THREE_WHEELER_LOADER",
+      },
+    },
+    powerTrioSpotlight: {
+      enabled: true,
+      builderBadge: "PRO BUILDERS & GHAR CONSTRUCTION",
+      servicesBadge: "60-MIN VISIT • ESCROW SAFE",
+      rentalsBadge: "DIGITAL HMR BILLING • ZERO FRAUD",
+    },
+    turnkeyBuild: {
+      rates: { grey: 1190, silver: 1650, gold: 2100, platinum: 2750, luxury: 3600 },
+      promoBanner: "Free 2D Vastu + LDA/Ansal Map Support on Gold & Platinum Turnkey",
+      offerActive: true,
+    },
+    liveHero: {
+      campaignPill: "CONON INFRABUILT • 7+ Yrs • 150+ Projects",
+      headlineOverride: "",
+      defaultMode: "materials",
+      backdropImageUrl: "",
+    },
   },
   categories: { customCategories: [], hiddenCategorySlugs: [], overrides: {} },
   products: { customProducts: [], hiddenProductIds: [], overrides: {} },
@@ -145,6 +194,7 @@ async function persistLiveState(nextState: Record<string, any>): Promise<boolean
  * PUBLIC READ: Storefront, Vendor OS, Driver Cockpit read live state snapshot
  */
 router.get("/live-state", async (_req: Request, res: Response) => {
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   const state = await readLiveState();
   res.json({
     ok: true,
@@ -155,11 +205,12 @@ router.get("/live-state", async (_req: Request, res: Response) => {
 
 /**
  * ADMIN-GATED PATCH: Updates global controls, products, categories, mandi rates, services/rentals
- * and broadcasts conon:master_state_updated via Socket.io immediately.
+ * and broadcasts conon:master_state_updated via Socket.io + SSE immediately.
  */
 router.patch("/live-state", requireAdmin, async (req: Request, res: Response) => {
   try {
     const patch = isPlainObject(req.body?.patch) ? req.body.patch : isPlainObject(req.body) ? req.body : {};
+    const domain = String(req.body?.domain || "all");
     const current = await readLiveState();
     const merged = deepMerge(current, patch);
     merged.version = Math.max(Date.now(), Number(current.version || 0) + 1);
@@ -169,7 +220,19 @@ router.patch("/live-state", requireAdmin, async (req: Request, res: Response) =>
     getIo()?.emit("conon:master_state_updated", {
       version: merged.version,
       state: merged,
-      domain: req.body?.domain || "all",
+      domain,
+    });
+
+    const sseType =
+      domain === "categories"
+        ? "CATEGORIES_UPDATED"
+        : domain === "products" || domain === "mandi"
+        ? "CATALOG_UPDATED"
+        : "SETTINGS_UPDATED";
+    syncBus.publish({
+      type: sseType,
+      action: "PATCH",
+      summary: `Updated live store state (${domain})`,
     });
 
     res.json({

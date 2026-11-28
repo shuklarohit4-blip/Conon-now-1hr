@@ -34,6 +34,9 @@ export interface Trip {
   distanceKm: number;
   customerOtp?: string;
   requiresEmm11?: boolean;
+  paymentMode?: string;
+  paymentStatus?: string;
+  collectAmount?: number;
 }
 
 export interface PodState {

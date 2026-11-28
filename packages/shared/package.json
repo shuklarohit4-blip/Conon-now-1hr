@@ -1,0 +1,17 @@
+{
+  "name": "@workspace/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./categories": "./src/categories.ts",
+    "./catalog": "./src/catalog.ts",
+    "./calculators": "./src/calculators.ts",
+    "./orders": "./src/orders.ts",
+    "./apiClient": "./src/apiClient.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  }
+}

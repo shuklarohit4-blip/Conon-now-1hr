@@ -31,7 +31,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full bg-slate-900 text-slate-300 pt-10 pb-28 border-t border-slate-800 text-xs">
+    <footer className="w-full bg-slate-900 text-slate-300 pt-10 pb-36 border-t border-slate-800 text-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Trust Value Props Row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pb-8 mb-8 border-b border-slate-800">

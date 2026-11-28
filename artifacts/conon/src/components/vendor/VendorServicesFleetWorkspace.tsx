@@ -340,6 +340,9 @@ export function VendorServicesFleetWorkspace({
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-mono text-xs font-black text-amber-500">#{rb.shortId}</span>
+                        <span className="text-[10px] font-black px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-500">
+                          PREPAID ESCROW ✓
+                        </span>
                         <span className="text-[10px] font-black px-2 py-0.5 rounded bg-blue-500/15 text-blue-400">
                           {rb.status.replace(/_/g, " ")}
                         </span>
@@ -446,6 +449,9 @@ export function VendorServicesFleetWorkspace({
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-mono text-xs font-black text-emerald-500">#{sb.shortId}</span>
+                        <span className="text-[10px] font-black px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-500">
+                          PREPAID ESCROW ✓
+                        </span>
                         <span className="text-[10px] font-black px-2 py-0.5 rounded bg-amber-500/15 text-amber-500">
                           {sb.status.replace(/_/g, " ")}
                         </span>

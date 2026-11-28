@@ -4,6 +4,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "pnpm --parallel --filter @workspace/conon --filter @workspace/api-server dev",
+    "dev:api": "pnpm --filter @workspace/api-server dev",
+    "dev:web": "VITE_PORT=5175 VITE_LOCAL_ADMIN=true pnpm --filter @workspace/conon dev",
+    "dev:mobile": "pnpm --filter @workspace/mobile start",
+    "seed:all": "node artifacts/api-server/seedAll.js",
     "dev:admin": "pnpm --filter @workspace/conon dev:admin",
     "dev:frontend": "pnpm --filter @workspace/conon dev",
     "dev:backend": "pnpm --filter @workspace/api-server dev",

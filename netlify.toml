@@ -7,20 +7,7 @@
   PNPM_VERSION = "10.6.1"
   VITE_LOCAL_ADMIN = "false"
 
-# Strictly block public access to any Admin routes on production CDN
-[[redirects]]
-  from = "/admin"
-  to = "/"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/admin/*"
-  to = "/"
-  status = 302
-  force = true
-
-# SPA Fallback for Storefront, Orders, Driver, Vendor routes
+# SPA Fallback for Storefront, Admin Login Gate, Orders, Driver, Vendor routes
 [[redirects]]
   from = "/*"
   to = "/index.html"

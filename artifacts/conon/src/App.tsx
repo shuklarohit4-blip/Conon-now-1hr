@@ -29,6 +29,8 @@ import { Home }              from "./pages/Home";
 // Secondary & non-critical routes are dynamically loaded on-demand for maximum mobile speed
 const Categories = React.lazy(() => import("./pages/Categories").then(m => ({ default: m.Categories })));
 const Services = React.lazy(() => import("./pages/Services").then(m => ({ default: m.Services })));
+const RmcPlantDirect = React.lazy(() => import("./pages/RmcPlantDirect").then(m => ({ default: m.RmcPlantDirect })));
+const DynamicCategoryPage = React.lazy(() => import("./pages/DynamicCategoryPage").then(m => ({ default: m.DynamicCategoryPage })));
 const Orders = React.lazy(() => import("./pages/Orders"));
 const Profile = React.lazy(() => import("./pages/Profile").then(m => ({ default: m.Profile })));
 const Login = React.lazy(() => import("./pages/Login"));
@@ -36,9 +38,7 @@ const VendorDashboard = React.lazy(() => import("./pages/VendorDashboard").then(
 const VendorRegisterPage = React.lazy(() => import("./pages/VendorRegisterPage"));
 const DriverRegisterPage = React.lazy(() => import("./pages/DriverRegisterPage"));
 
-const AdminDashboard = IS_LOCAL_ADMIN
-  ? React.lazy(() => import("./pages/AdminDashboard"))
-  : null;
+const AdminDashboard = React.lazy(() => import("./pages/AdminDashboard"));
 const ImageQA = IS_LOCAL_ADMIN
   ? React.lazy(() => import("./pages/ImageQA"))
   : null;
@@ -59,6 +59,7 @@ const ArchGenius = React.lazy(() => import("./pages/ArchGenius").then(m => ({ de
 const SmartBuild3D = React.lazy(() => import("./pages/SmartBuild3D"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
+const SearchPage = React.lazy(() => import("./pages/Search"));
 const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = React.lazy(() => import("./pages/Terms"));
 const RefundPolicy = React.lazy(() => import("./pages/RefundPolicy"));
@@ -87,12 +88,21 @@ function Router() {
       <Switch>
       <Route path="/"        component={Splash}          />
       <Route path="/home"    component={Home}            />
+      <Route path="/search"  component={SearchPage}      />
       <Route path="/categories" component={Categories}   />
       <Route path="/collections/power-tools-safety" component={Categories} />
       <Route path="/collections/power-tools" component={Categories} />
       <Route path="/collections/hand-measuring-tools" component={Categories} />
       <Route path="/collections/site-safety-ppe" component={Categories} />
       <Route path="/collections/tools-hardware" component={Categories} />
+      <Route path="/collections/grinders-cutters" component={Categories} />
+      <Route path="/collections/rotary-drills" component={Categories} />
+      <Route path="/collections/blades-discs-bits" component={Categories} />
+      <Route path="/collections/hand-masonry-tools" component={Categories} />
+      <Route path="/collections/measuring-levelling" component={Categories} />
+      <Route path="/collections/fasteners-anchors" component={Categories} />
+      <Route path="/collections/safety-utility" component={Categories} />
+      <Route path="/collections/ladders-tapes-utility" component={Categories} />
       <Route path="/collections/safety-workwear" component={Categories} />
       <Route path="/collections/cement-1" component={Categories} />
       <Route path="/collections/bricks-sand-gitti-aac" component={Categories} />
@@ -165,7 +175,23 @@ function Router() {
       <Route path="/collections/tile-adhesives" component={Categories} />
       <Route path="/collections/tile-stone-installation" component={Categories} />
       <Route path="/collections/ceiling-panel-lights" component={Categories} />
+      <Route path="/collections/concealed-junction-lights" component={Categories} />
+      <Route path="/collections/cob-spot-lights" component={Categories} />
+      <Route path="/collections/strip-profiles-drivers" component={Categories} />
+      <Route path="/collections/led-battens" component={Categories} />
+      <Route path="/collections/bulbs-inverter-emergency" component={Categories} />
+      <Route path="/collections/cabinet-track-commercial" component={Categories} />
+      <Route path="/collections/outdoor-flood-gate-lights" component={Categories} />
       <Route path="/collections/lighting" component={Categories} />
+      <Route path="/collections/solar-rooftop-power" component={Categories} />
+      <Route path="/collections/solar" component={Categories} />
+      <Route path="/collections/solar-panels" component={Categories} />
+      <Route path="/collections/rooftop-solar-kits" component={Categories} />
+      <Route path="/collections/solar-inverters" component={Categories} />
+      <Route path="/collections/solar-batteries" component={Categories} />
+      <Route path="/collections/solar-acdb-dcdb" component={Categories} />
+      <Route path="/collections/solar-cables-earthing" component={Categories} />
+      <Route path="/collections/solar-structures-lights" component={Categories} />
       <Route path="/collections/shoes-gloves" component={Categories} />
       <Route path="/collections/safety-workwear" component={Categories} />
       <Route path="/collections/safety" component={Categories} />
@@ -206,22 +232,20 @@ function Router() {
       <Route path="/login"   component={Login}           />
       <Route path="/vendor"  component={VendorDashboard} />
       <Route path="/vendor/register" component={VendorRegisterPage} />
-      {IS_LOCAL_ADMIN && AdminDashboard && (
-        <Route path="/admin">
-          {() => (
-            <Suspense
-              fallback={
-                <div className="min-h-screen bg-[#070B14] flex flex-col items-center justify-center text-amber-400 font-bold gap-3">
-                  <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
-                  <p className="text-sm uppercase tracking-widest">Loading Admin Command OS…</p>
-                </div>
-              }
-            >
-              <AdminDashboard />
-            </Suspense>
-          )}
-        </Route>
-      )}
+      <Route path="/admin">
+        {() => (
+          <Suspense
+            fallback={
+              <div className="min-h-screen bg-[#070B14] flex flex-col items-center justify-center text-amber-400 font-bold gap-3">
+                <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                <p className="text-sm uppercase tracking-widest">Loading Admin Command OS…</p>
+              </div>
+            }
+          >
+            <AdminDashboard />
+          </Suspense>
+        )}
+      </Route>
       {IS_LOCAL_ADMIN && ImageQA && (
         <Route path="/admin/image-qa">
           {() => <ImageQA />}
@@ -233,6 +257,11 @@ function Router() {
       <Route path="/khata"     component={KhataManager}    />
       <Route path="/build"     component={CononBuild}      />
       <Route path="/rentals"   component={HeavyRentals}    />
+      <Route path="/rmc"       component={RmcPlantDirect}  />
+      <Route path="/rmc-direct" component={RmcPlantDirect} />
+      <Route path="/rmc-plant-direct" component={RmcPlantDirect} />
+      <Route path="/ready-mix-concrete" component={RmcPlantDirect} />
+      <Route path="/category/:categorySlug" component={DynamicCategoryPage} />
       <Route path="/builder-kit" component={BuilderKitPage} />
       <Route path="/kits"      component={BuilderKitPage}  />
       <Route path="/project"   component={ProjectTimeline} />

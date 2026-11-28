@@ -12,6 +12,8 @@ import { useAuthContext } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 import { CustomerDeliveryFeedbackModal } from "@/components/feedback/CustomerDeliveryFeedbackModal";
+import { SmartSearchBar } from "@/components/SmartSearchBar";
+import type { HomeThemeMasthead } from "@/services/liveMerchandisingStore";
 
 interface HomeRunHeaderProps {
   searchTerm: string;
@@ -25,6 +27,7 @@ interface HomeRunHeaderProps {
   onOpenMenu: () => void;
   onOpenCart: () => void;
   onSelectCategory?: (category: string) => void;
+  campaignTheme?: HomeThemeMasthead;
 }
 
 const SEARCH_PLACEHOLDERS = [
@@ -50,6 +53,7 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
   onOpenMenu,
   onOpenCart,
   onSelectCategory,
+  campaignTheme,
 }) => {
   const [placeholderIdx, setPlaceholderIdx] = useState(0);
   const [isFading, setIsFading] = useState(false);
@@ -101,15 +105,38 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
   const resolvedPhone = authUser?.phone || user.phone || "";
   const userFirstName = resolvedName.trim().split(" ")[0] || (resolvedPhone ? `+91 ${resolvedPhone.slice(-4)}` : "Profile");
 
+  const isThemed = Boolean(campaignTheme?.isEnabled);
+
   return (
-    <div className="w-full bg-white select-none">
-      {/* ── 1. Top Announcement Bar (Yellow benchmark) ── */}
-      <div className="bg-[#4280e3] text-slate-900 text-[11.5px] sm:text-xs font-bold py-1.5 px-4 text-center tracking-tight shadow-xs">
+    <div
+      className={`w-full select-none ${isThemed ? "text-white" : "bg-white"}`}
+      style={
+        isThemed
+          ? {
+              background: `linear-gradient(180deg, ${campaignTheme?.bgGradientStart || "#0B292E"} 0%, ${
+                campaignTheme?.bgGradientStart || "#0B292E"
+              } 100%)`,
+            }
+          : undefined
+      }
+    >
+      {/* ── 1. Top Announcement Bar ── */}
+      <div
+        className={`text-[11.5px] sm:text-xs font-bold py-1.5 px-4 text-center tracking-tight shadow-xs ${
+          isThemed ? "bg-black/25 text-white/95" : "bg-[#4280e3] text-slate-900"
+        }`}
+      >
         Open 8 am to 8 pm all days
       </div>
 
-      {/* ── 2. Main White Navigation Header ── */}
-      <header className="px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 bg-white border-b border-slate-100 flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
+      {/* ── 2. Main Navigation Header ── */}
+      <header
+        className={`px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 flex items-center justify-between ${
+          isThemed
+            ? "bg-transparent border-b border-white/10"
+            : "bg-white border-b border-slate-100 shadow-[0_1px_4px_rgba(0,0,0,0.04)]"
+        }`}
+      >
         {/* Left Side: Brand Logo (Top Left Corner) + Hamburger Menu + 60 Mins Badge + Deliver To Dropdown */}
         <div className="flex items-center gap-2 sm:gap-3.5 min-w-0">
           {/* Top Left Corner: CONON-NOW Brand Logo */}
@@ -126,79 +153,86 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
             />
             <div className="flex flex-col leading-none">
               <div className="flex items-center gap-1 leading-none">
-                <span className="text-[15px] sm:text-[17px] font-black text-[#1848a0] tracking-tighter">
+                <span
+                  className={`text-[15px] sm:text-[17px] font-black tracking-tighter ${
+                    isThemed ? "text-white" : "text-[#1848a0]"
+                  }`}
+                >
                   CONON
                 </span>
-                <span className="bg-[#2198ed] text-slate-900 text-[8.5px] sm:text-[9.5px] font-black px-1.5 py-0.2 rounded-xs uppercase tracking-wider shadow-2xs">
+                <span
+                  className="text-slate-950 text-[8.5px] sm:text-[9.5px] font-black px-1.5 py-0.2 rounded-xs uppercase tracking-wider shadow-2xs"
+                  style={{ backgroundColor: isThemed ? campaignTheme?.accentColor || "#FACC15" : "#2198ed" }}
+                >
                   NOW
                 </span>
               </div>
-              <span className="text-[7.5px] sm:text-[8px] font-bold text-slate-400 tracking-wider uppercase mt-0.5">
+              <span
+                className={`text-[7.5px] sm:text-[8px] font-bold tracking-wider uppercase mt-0.5 ${
+                  isThemed ? "text-white/70" : "text-slate-400"
+                }`}
+              >
                 Infrabuilt
               </span>
             </div>
           </Link>
 
           {/* Thin Vertical Divider */}
-          <div className="h-6 w-px bg-slate-200 hidden xs:block shrink-0" />
+          <div className={`h-6 w-px hidden xs:block shrink-0 ${isThemed ? "bg-white/20" : "bg-slate-200"}`} />
 
           {/* Hamburger Menu Toggle */}
           <button
             onClick={onOpenMenu}
             aria-label="Open navigation menu"
-            className="p-1 text-slate-700 hover:text-slate-900 active:scale-90 transition rounded-md shrink-0"
+            className={`p-1 active:scale-90 transition rounded-md shrink-0 ${
+              isThemed ? "text-white hover:text-amber-300" : "text-slate-700 hover:text-slate-900"
+            }`}
           >
             <Menu className="w-5 sm:w-6 h-5 sm:h-6" strokeWidth={2.4} />
           </button>
 
-          {/* ── Delivery Badge (Exact Match to Reference Screenshot) ── */}
+          {/* ── Delivery Badge ── */}
           <button
             onClick={onOpenLocationSheet}
-            className="border border-slate-300 hover:border-slate-400 active:scale-95 transition-all rounded-md px-2.5 py-1 text-left flex flex-col justify-center bg-white cursor-pointer group shadow-2xs leading-tight ml-0.5"
+            className={`active:scale-95 transition-all rounded-md px-2.5 py-1 text-left flex flex-col justify-center cursor-pointer group shadow-2xs leading-tight ml-0.5 border ${
+              isThemed
+                ? "border-white/25 bg-white/10 hover:bg-white/15 text-white"
+                : "border-slate-300 hover:border-slate-400 bg-white"
+            }`}
             aria-label="Check delivery time and pincode"
           >
-            <div className="flex items-center gap-0.5 text-[12px] sm:text-[13px] font-bold text-slate-900 leading-none">
+            <div
+              className={`flex items-center gap-0.5 text-[12px] sm:text-[13px] font-bold leading-none ${
+                isThemed ? "text-white" : "text-slate-900"
+              }`}
+            >
               <span>60 mins</span>
-              <ChevronDown className="w-3 h-3 text-slate-600 group-hover:translate-y-0.5 transition-transform" strokeWidth={2.5} />
+              <ChevronDown
+                className={`w-3 h-3 group-hover:translate-y-0.5 transition-transform ${
+                  isThemed ? "text-white/80" : "text-slate-600"
+                }`}
+                strokeWidth={2.5}
+              />
             </div>
-            <span className="text-[10px] sm:text-[11px] text-slate-500 font-normal leading-none mt-1 tracking-tight">
-              {pincode || "226010"}
+            <span
+              className={`text-[10px] sm:text-[11px] font-normal leading-none mt-1 tracking-tight ${
+                isThemed ? "text-white/75" : "text-slate-500"
+              }`}
+            >
+              {pincode || "226030"}
             </span>
           </button>
 
-          {/* Desktop Search Bar (Exact Match to Reference Screenshot) */}
-          <div className="hidden md:flex flex-1 max-w-xl mx-3">
-            <div className="relative w-full bg-[#F4F6F8] hover:bg-[#EDF1F5] focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 rounded-lg h-9 sm:h-10 flex items-center px-3 border border-slate-200 transition-all">
-              <Search className="w-4 h-4 text-slate-400 shrink-0 mr-2" strokeWidth={2.2} />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => onSearchChange(e.target.value)}
-                placeholder={SEARCH_PLACEHOLDERS[placeholderIdx]}
-                className={`w-full min-w-0 bg-transparent text-xs sm:text-[13px] font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none transition-opacity duration-200 ${
-                  isFading ? "placeholder:opacity-30" : "placeholder:opacity-100"
-                }`}
-              />
-              {searchTerm && (
-                <button
-                  onClick={() => onSearchChange("")}
-                  aria-label="Clear search"
-                  className="p-1 text-slate-400 hover:text-slate-600 transition shrink-0"
-                >
-                  <X className="w-3.5 h-3.5" strokeWidth={2.4} />
-                </button>
-              )}
-            </div>
+          {/* Desktop Search Bar (Blinkit + Flipkart Hybrid) */}
+          <div className="hidden md:flex flex-1 min-w-[230px] lg:min-w-[300px] max-w-md mx-3">
+            <SmartSearchBar
+              value={searchTerm}
+              onChange={onSearchChange}
+              onFocusNavigateToSearch
+              enableGlobalShortcut
+              compact
+            />
           </div>
-
-          {/* Desktop Navigation Links (Widescreen 16:9) */}
-          <nav className="hidden xl:flex items-center gap-5 ml-4 border-l border-slate-200 pl-4">
-            <Link href="/home" className="text-xs font-black text-[#1848a0] hover:underline">Home</Link>
-            <Link href="/categories" className="text-xs font-bold text-slate-700 hover:text-blue-600">Categories</Link>
-            <Link href="/kits" className="text-xs font-bold text-slate-700 hover:text-blue-600">Builder Kits</Link>
-            <Link href="/rentals" className="text-xs font-bold text-slate-700 hover:text-blue-600">Heavy Rentals</Link>
-            <Link href="/services" className="text-xs font-bold text-slate-700 hover:text-blue-600">Services</Link>
-          </nav>
         </div>
 
         {/* Right: Guarantee Pill + Wallet + User Profile (Login with OTP) + Shopping Bag Cart */}
@@ -365,7 +399,9 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
           <button
             onClick={onOpenCart}
             aria-label="Shopping bag"
-            className="p-1 sm:p-1.5 text-slate-700 hover:text-slate-900 active:scale-90 transition relative rounded-md cursor-pointer"
+            className={`p-1 sm:p-1.5 active:scale-90 transition relative rounded-md cursor-pointer ${
+              isThemed ? "text-white hover:text-amber-300" : "text-slate-700 hover:text-slate-900"
+            }`}
           >
             <ShoppingBag className="w-[22px] sm:w-6 h-[22px] sm:h-6" strokeWidth={2.2} />
             {cartCount > 0 && (
@@ -381,43 +417,28 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
       </header>
 
       {/* ── 3. Search Bar Row (Mobile only, desktop uses integrated header search) ── */}
-      <div className="md:hidden px-3.5 sm:px-6 lg:px-8 pt-2.5 pb-2 bg-white flex items-center justify-center border-b border-slate-100">
+      <div
+        className={`md:hidden px-3.5 sm:px-6 lg:px-8 pt-2.5 pb-2 flex items-center justify-center border-b ${
+          isThemed ? "bg-transparent border-white/10" : "bg-white border-slate-100"
+        }`}
+      >
         <div className="w-full max-w-4xl flex items-center gap-2">
-          <div className="relative flex-1 min-w-0 bg-[#F4F6F8] hover:bg-[#EDF1F5] focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 rounded-xl h-10 sm:h-12 flex items-center px-3.5 border border-slate-200 transition-all">
-            <Search className="w-4 sm:w-5 h-4 sm:h-5 text-slate-400 shrink-0 mr-2.5" strokeWidth={2.4} />
-            <input
-              type="text"
+          <div className="flex-1 min-w-0">
+            <SmartSearchBar
               value={searchTerm}
-              onChange={(e) => onSearchChange(e.target.value)}
-              placeholder={SEARCH_PLACEHOLDERS[placeholderIdx]}
-              className={`w-full min-w-0 bg-transparent text-[13px] sm:text-[14px] font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none transition-opacity duration-200 ${
-                isFading ? "placeholder:opacity-30" : "placeholder:opacity-100"
-              }`}
+              onChange={onSearchChange}
+              onFocusNavigateToSearch
             />
-            {searchTerm ? (
-              <button
-                onClick={() => onSearchChange("")}
-                aria-label="Clear search"
-                className="p-1 text-slate-400 hover:text-slate-600 transition shrink-0"
-              >
-                <X className="w-4 h-4" strokeWidth={2.4} />
-              </button>
-            ) : null}
           </div>
 
-          {/* Companion Voice / Quick Estimate button */}
+          {/* Companion Voice AI Estimator button */}
           <button
             onClick={onVoiceClick}
-            aria-label="Voice estimate & search"
-            className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-[#EDF5F6] hover:bg-[#E3EFF1] active:scale-95 transition-all flex items-center justify-center text-[#1848a0] border border-slate-200 shrink-0 shadow-2xs"
-            title="Voice search & AI estimator"
+            aria-label="Voice estimate & order"
+            className="w-10 sm:w-11 h-10 sm:h-11 rounded-xl bg-[#EDF5F6] hover:bg-[#E3EFF1] active:scale-95 transition-all flex items-center justify-center text-[#1848a0] border border-slate-200 shrink-0 shadow-2xs"
+            title="Voice AI Estimator"
           >
-            <div className="flex items-center gap-0.5">
-              <span className="w-[2.5px] h-2.5 sm:h-3 bg-[#1848a0] rounded-full animate-pulse" />
-              <span className="w-[2.5px] h-4 sm:h-5 bg-[#1848a0] rounded-full" />
-              <span className="w-[2.5px] h-3 sm:h-3.5 bg-[#1848a0] rounded-full animate-pulse" />
-              <Mic className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#1848a0] ml-0.5" strokeWidth={2.5} />
-            </div>
+            <Sparkles className="w-4 h-4 text-[#1848a0]" strokeWidth={2.3} />
           </button>
         </div>
       </div>
@@ -436,7 +457,7 @@ export const HomeRunHeader: React.FC<HomeRunHeaderProps> = ({
               </span>
             </div>
             <p className="text-[8px] sm:text-[9.5px] font-medium text-amber-200/90 mt-0.5 leading-none truncate">
-              Pay after you receive & verify
+              Material orders under ₹10,000
             </p>
           </div>
 

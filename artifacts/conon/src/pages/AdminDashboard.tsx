@@ -15,13 +15,11 @@ import { useLocation } from "wouter";
 import { useUser } from "@/context/UserContext";
 import { useAuthContext } from "@/context/AuthContext";
 import { toast } from "sonner";
-import { JWT_STORAGE_KEY, ADMIN_JWT_KEY } from "@/lib/authApi";
-import { apiUrl as resolveApiUrl } from "@/lib/apiBase";
-import { IS_LOCAL_ADMIN, MAC_ADMIN_KEY } from "@/config/adminGuard";
+import { JWT_STORAGE_KEY, ADMIN_JWT_KEY, adminLogin } from "@/lib/authApi";
+import { apiUrl as resolveApiUrl, getAdminHeaders } from "@/lib/apiBase";
+import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 
-const CononCommandOS = IS_LOCAL_ADMIN
-  ? React.lazy(() => import("@/components/admin/CononCommandOS"))
-  : null;
+const CononCommandOS = React.lazy(() => import("@/components/admin/CononCommandOS"));
 
 /* ── Brand tokens ───────────────────────────────────────────── */
 const Y  = "#FBBF24";   // Safety Yellow
@@ -65,7 +63,7 @@ interface AppUser {
 const apiUrl = resolveApiUrl;
 
 async function api<T>(path: string, opts?: RequestInit): Promise<T> {
-  const token = localStorage.getItem(JWT_STORAGE_KEY);
+  const token = localStorage.getItem(ADMIN_JWT_KEY) || localStorage.getItem(JWT_STORAGE_KEY);
   const r = await fetch(apiUrl(path), {
     credentials: "include",
     ...opts,
@@ -1171,29 +1169,167 @@ function SettingsModule() {
 
 export function AdminDashboard() {
   const [, setLocation] = useLocation();
-  const { user, isAdmin, logout: authLogout } = useAuthContext();
+  const { logout: authLogout } = useAuthContext();
   const [showClassic, setShowClassic] = useState(false);
   const [active, setActive] = useState<Module>("overview");
+  const [serverVerified, setServerVerified] = useState<boolean>(IS_LOCAL_ADMIN);
+  const [checkingSession, setCheckingSession] = useState<boolean>(!IS_LOCAL_ADMIN);
+  const [loginEmail, setLoginEmail] = useState("admin@conon.in");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginRole, setLoginRole] = useState<"SUPER_ADMIN" | "DISPATCH_MANAGER" | "ACCOUNTS_CONTROL">(
+    () => (localStorage.getItem("conon_admin_role") as any) || "SUPER_ADMIN"
+  );
+  const [loginBusy, setLoginBusy] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
-  // If not running as local admin, block and return 404
-  if (!IS_LOCAL_ADMIN) {
+  useEffect(() => {
+    if (IS_LOCAL_ADMIN) {
+      setServerVerified(true);
+      setCheckingSession(false);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(resolveApiUrl("/api/auth/admin-session"), {
+          method: "GET",
+          credentials: "include",
+          cache: "no-store",
+          headers: getAdminHeaders(),
+        });
+        if (!cancelled) {
+          setServerVerified(res.ok);
+        }
+      } catch {
+        if (!cancelled) setServerVerified(false);
+      } finally {
+        if (!cancelled) setCheckingSession(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleServerAdminLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError("");
+    setLoginBusy(true);
+    try {
+      const normalizedEmail = loginEmail.includes("@") ? loginEmail.trim() : "admin@conon.in";
+      const res = await adminLogin(normalizedEmail, loginPassword);
+      if (!res.ok || !res.token) {
+        setLoginError(res.error || "Invalid administrator credentials.");
+        return;
+      }
+      localStorage.setItem(ADMIN_JWT_KEY, res.token);
+      localStorage.setItem("conon_admin_role", loginRole);
+      setServerVerified(true);
+      toast.success(`Authenticated into CONON COMMAND OS (${loginRole})`);
+    } catch (err: any) {
+      setLoginError(err?.message || "Authentication failed.");
+    } finally {
+      setLoginBusy(false);
+    }
+  };
+
+  if (checkingSession) {
     return (
-      <div className="min-h-screen bg-[#0B0F17] flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="text-3xl font-black text-white">404</h1>
-        <p className="text-sm text-slate-400 mt-2">Page not found</p>
-        <button
-          type="button"
-          onClick={() => setLocation("/home")}
-          className="mt-6 px-4 py-2 rounded-xl bg-amber-400 text-slate-900 font-bold text-xs uppercase cursor-pointer"
-        >
-          Return to Storefront
-        </button>
+      <div className="min-h-screen bg-[#070B14] flex flex-col items-center justify-center text-amber-400 font-bold gap-3">
+        <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+        <p className="text-xs uppercase tracking-widest text-slate-400">Verifying Admin Session…</p>
       </div>
     );
   }
 
-  // If running locally as admin and not in classic mode, render the modern CONON COMMAND OS
-  if (IS_LOCAL_ADMIN && CononCommandOS && !showClassic) {
+  // Real Server-Authenticated Admin Gate on production deployments
+  if (!serverVerified) {
+    return (
+      <div className="min-h-screen bg-[#070B14] flex items-center justify-center p-4">
+        <div className="w-full max-w-md rounded-3xl bg-[#0D1426] border border-slate-800 shadow-2xl p-6 sm:p-8 text-white">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-11 h-11 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center shadow-lg">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div>
+              <h1 className="text-lg font-black tracking-tight">CONON COMMAND OS</h1>
+              <p className="text-xs text-slate-400">Protected Executive Operations Portal</p>
+            </div>
+          </div>
+
+          <form onSubmit={handleServerAdminLogin} className="space-y-4">
+            <div>
+              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                Admin Email
+              </label>
+              <input
+                type="text"
+                required
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                placeholder="admin or admin@conon.in"
+                className="w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm font-semibold text-white outline-none focus:border-amber-400"
+              />
+            </div>
+
+            <div>
+              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                Admin Security PIN / Password
+              </label>
+              <input
+                type="password"
+                required
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                placeholder="Enter 4-digit Admin PIN"
+                className="w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm font-semibold text-white outline-none focus:border-amber-400"
+              />
+            </div>
+
+            <div>
+              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                Command Role (RBAC)
+              </label>
+              <select
+                value={loginRole}
+                onChange={(e) => setLoginRole(e.target.value as any)}
+                className="w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm font-semibold text-white outline-none focus:border-amber-400"
+              >
+                <option value="SUPER_ADMIN">Super Admin (Founder — Full Access)</option>
+                <option value="DISPATCH_MANAGER">Dispatch Manager (Radar, Orders &amp; Leads)</option>
+                <option value="ACCOUNTS_CONTROL">Accounts &amp; Rate Control (Mandi, Escrow &amp; GST)</option>
+              </select>
+            </div>
+
+            {loginError && (
+              <div className="rounded-xl bg-rose-500/15 border border-rose-500/40 px-3 py-2 text-xs font-bold text-rose-300">
+                {loginError}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loginBusy}
+              className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider cursor-pointer disabled:opacity-60 transition"
+            >
+              {loginBusy ? "Authenticating…" : "Sign In to Command OS"}
+            </button>
+          </form>
+
+          <button
+            type="button"
+            onClick={() => setLocation("/home")}
+            className="mt-4 w-full py-2 text-xs font-bold text-slate-400 hover:text-white cursor-pointer"
+          >
+            ← Back to Storefront
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Render CONON COMMAND OS once authorized
+  if (serverVerified && !showClassic) {
     return (
       <React.Suspense
         fallback={

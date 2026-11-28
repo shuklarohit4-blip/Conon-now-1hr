@@ -1,4 +1,58 @@
 {
-  "orders": [],
-  "drivers": []
+  "orders": [
+    {
+      "id": "CON-400965",
+      "shortId": "CON-4009",
+      "sessionId": "5dbccf9a-8cc9-4f3a-98f9-28affe8c112c",
+      "customerName": "Site Customer (9696727279)",
+      "customerPhone": "9696727279",
+      "deliveryAddress": "gf, Kalasipalyam New Extension, Kalasipalya, Bengaluru, Karnataka 560002",
+      "deliveryArea": "gf",
+      "items": [
+        {
+          "skuId": "sku-5047",
+          "name": "UltraTech Super Cement PPC 50kg",
+          "brand": "Conon Assured",
+          "category": "Cement & Civil Works",
+          "unit": "50kg Bag",
+          "qty": 20,
+          "unitPrice": 385,
+          "totalPrice": 7700,
+          "dealerPayout": 6780
+        }
+      ],
+      "category": "Cement & Civil Works",
+      "subtotal": 7700,
+      "gstAmount": 924,
+      "deliveryFee": 0,
+      "labourFee": 0,
+      "totalAmount": 8624,
+      "dealerPayable": 6780,
+      "driverPayable": 650,
+      "cononNetMargin": 1194,
+      "status": "PLACED",
+      "vehicleClass": "4W_PICKUP",
+      "vehicleLabel": "4W Mini-Truck (1.5 Ton)",
+      "pickupOtp": "3662",
+      "deliveryOtp": "7662",
+      "vendorId": "hub-chinhat",
+      "vendorStore": "Chinhat & Transport Nagar Heavy Yard",
+      "vendorPhone": "+91 98390 33440",
+      "vendorAddress": "Faizabad Road, Chinhat Industrial Depot, Lucknow 226028",
+      "requiresEmm11": false,
+      "placedAt": "2026-11-27T14:32:14.837Z",
+      "estimatedDelivery": "2026-11-27T15:32:14.837Z",
+      "financialsPosted": false,
+      "timeline": [
+        {
+          "status": "PLACED",
+          "timestamp": "2026-11-27T14:32:14.837Z",
+          "actor": "CUSTOMER",
+          "note": "Order confirmed via Storefront"
+        }
+      ]
+    }
+  ],
+  "drivers": [],
+  "savedAt": "2026-11-27T14:32:14.837Z"
 }

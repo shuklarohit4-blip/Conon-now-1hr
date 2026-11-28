@@ -1,4 +1,4 @@
-import { resolveApiUrl } from "@/lib/apiBase";
+import { resolveApiUrl, getAdminHeaders } from "@/lib/apiBase";
 import {
   type ProductMediaOverride,
   type VaultImageEntry,
@@ -15,18 +15,8 @@ const MAX_DIMENSION = 900;
 const TARGET_QUALITY = 0.84;
 const MAX_FALLBACK_DATAURL_BYTES = 180_000;
 
-function getAdminHeaders(): Record<string, string> {
-  const headers: Record<string, string> = {};
-  const macAdminKey = import.meta.env.VITE_MAC_ADMIN_KEY || "conon-mac-admin-2026";
-  if (macAdminKey) headers["x-admin-key"] = macAdminKey;
-  return headers;
-}
-
 async function adminFetch(path: string, init: RequestInit = {}): Promise<Response> {
-  const headers = {
-    ...getAdminHeaders(),
-    ...(init.headers as Record<string, string> | undefined),
-  };
+  const headers = getAdminHeaders(init.headers || {});
   return fetch(resolveApiUrl(path), {
     ...init,
     headers,

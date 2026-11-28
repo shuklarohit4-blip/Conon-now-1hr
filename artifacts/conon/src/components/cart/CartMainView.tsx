@@ -27,6 +27,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { CononProductMedia } from "../CononProductMedia";
+import { useSafeFourPanelRelay } from "@/context/FourPanelRelayContext";
 import {
   SelectLocationModal,
   AddAddressModal,
@@ -37,6 +38,15 @@ import {
   type UserAddress,
 } from "./index";
 import { Confetti } from "../Confetti";
+import { CononEscrowPaymentSheet, type VerifiedEscrowPaymentResult } from "../CononEscrowPaymentSheet";
+import { evaluatePaymentPolicy } from "@/utils/paymentPolicy";
+import { checkPincodeServiceability } from "@/utils/serviceabilityPolicy";
+import { evaluateDispatchCompliance } from "@/utils/lucknowTrafficPolicy";
+import type { DispatchSlotChoice } from "../LucknowFleetComplianceCard";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { useDeliveryLocation } from "@/context/LocationContext";
+import { useWallet } from "@/context/WalletContext";
+import { generateUtr } from "@/services/treasuryEngine";
 
 // Fixed delivery charges matching screenshots (708 total = 410 + 199 + 99)
 const DELIVERY_CHARGE = 199;
@@ -71,6 +81,7 @@ function GstBadgeGraphic() {
 export function CartMainView({ onBack, isStandalonePage = false }: CartMainViewProps) {
   const [, setLocation] = useLocation();
   const qc = useQueryClient();
+  const relay = useSafeFourPanelRelay();
 
   const { data: cart, isLoading } = useGetCart({
     query: { queryKey: getGetCartQueryKey() },
@@ -154,11 +165,20 @@ export function CartMainView({ onBack, isStandalonePage = false }: CartMainViewP
   const [isDeliveringToOpen, setDeliveringToOpen] = useState(false);
   const [isRedirectingOpen, setRedirectingOpen] = useState(false);
   const [isCashfreeOpen, setCashfreeOpen] = useState(false);
+  const [isEscrowSheetOpen, setEscrowSheetOpen] = useState(false);
   const [showOrderSuccessConfetti, setShowOrderSuccessConfetti] = useState(false);
+  const masterSync = useSafeCononMasterSync();
+  const { location: deliveryLoc } = useDeliveryLocation();
+  const wallet = useWallet();
+  const [deliveryPincode, setDeliveryPincode] = useState<string>(
+    () => address?.pincode || deliveryLoc.pincode || "226030"
+  );
+  const [dispatchMode, setDispatchMode] = useState<DispatchSlotChoice>("STANDARD");
 
   // Sync address changes
   const handleSaveAddress = (newAddr: UserAddress) => {
     setAddress(newAddr);
+    if (newAddr.pincode) setDeliveryPincode(newAddr.pincode);
     localStorage.setItem("conon_user_address", JSON.stringify(newAddr));
     setAddAddressModalOpen(false);
   };
@@ -204,6 +224,46 @@ export function CartMainView({ onBack, isStandalonePage = false }: CartMainViewP
   }, [subTotal, couponDiscount, unloadingFee, allCartItems.length]);
 
   const payableAmount = grandTotal;
+
+  const paymentPolicyEval = useMemo(
+    () =>
+      evaluatePaymentPolicy({
+        domain: "MATERIAL",
+        items: allCartItems.map((i: any) => ({
+          category: i.category,
+          materialId: i.materialId,
+          name: i.name,
+        })),
+        grandTotal: payableAmount,
+        rules: masterSync?.state.globalControls?.paymentPolicy,
+      }),
+    [allCartItems, payableAmount, masterSync?.state.globalControls?.paymentPolicy]
+  );
+
+  const pinServiceability = useMemo(
+    () =>
+      checkPincodeServiceability(
+        deliveryPincode,
+        masterSync?.state.globalControls?.serviceability
+      ),
+    [deliveryPincode, masterSync?.state.globalControls?.serviceability]
+  );
+
+  const trafficCompliance = useMemo(
+    () =>
+      evaluateDispatchCompliance({
+        domain: "MATERIAL",
+        items: allCartItems.map((i: any) => ({
+          name: i.name,
+          category: i.category,
+          quantity: i.quantity,
+          weightKg: i.weightKg,
+        })),
+        pincode: deliveryPincode,
+        rules: masterSync?.state.globalControls?.trafficPolicy,
+      }),
+    [allCartItems, deliveryPincode, masterSync?.state.globalControls?.trafficPolicy]
+  );
 
   // Coupon handler
   const handleApplyCoupon = (e?: React.FormEvent) => {
@@ -259,35 +319,124 @@ export function CartMainView({ onBack, isStandalonePage = false }: CartMainViewP
   };
 
   // Order Placement
-  const executeOrderPlacement = (paymentMethod: "CASH_ON_DELIVERY" | "CASHFREE_UPI") => {
+  const executeOrderPlacement = (
+    paymentMethod: "CASH_ON_DELIVERY" | "CASHFREE_UPI" | "PREPAID_ESCROW",
+    verifiedPayment?: VerifiedEscrowPaymentResult
+  ) => {
     if (!address) {
       toast.error("Please add delivery address before ordering");
       return;
     }
+
+    if (!pinServiceability.serviceable) {
+      toast.error(pinServiceability.messageEn);
+      return;
+    }
+
+    if (paymentMethod === "CASH_ON_DELIVERY" && !paymentPolicyEval.allowPod) {
+      toast.error(paymentPolicyEval.explanationEn);
+      return;
+    }
+
+    const paymentMode =
+      paymentMethod === "CASH_ON_DELIVERY"
+        ? "PAY_ON_DELIVERY"
+        : verifiedPayment?.paymentMode || "PREPAID_UPI";
+    const paymentStatus =
+      paymentMethod === "CASH_ON_DELIVERY"
+        ? "PAY_ON_DELIVERY"
+        : verifiedPayment?.paymentStatus || "PREPAID_ESCROW_LOCKED";
+    const paymentRef = verifiedPayment?.paymentRef;
+    const utrNumber = verifiedPayment?.utrNumber;
 
     placeOrder.mutate(
       {
         data: {
           deliveryAddress: address.fullAddress,
           phoneNumber: address.receiverPhone,
-        },
+          deliveryPincode: pinServiceability.pincode,
+          dispatchMode,
+          totalWeightKg: trafficCompliance.totalWeightKg,
+          paymentMode,
+          paymentStatus,
+          paymentRef,
+          utrNumber,
+        } as any,
       },
       {
-        onSuccess: () => {
+        onSuccess: (placed: any) => {
+          const allCartItems = (cart?.categories || []).flatMap((cat) =>
+            (cat.items || []).map((it) => ({
+              name: it.name,
+              quantity: it.quantity,
+              unit: it.unit,
+              category: it.category || cat.category,
+            }))
+          );
+          if (relay?.placeCustomerRelayOrder) {
+            relay.placeCustomerRelayOrder({
+              id: placed?.id,
+              shortId: placed?.shortId,
+              customerName: address.receiverName || "Lucknow Site Buyer",
+              customerPhone: address.receiverPhone || "9876543210",
+              siteName: (address as any).label || address.tag || address.fullAddress.split(",")[0] || "Lucknow Site",
+              siteAddress: address.fullAddress,
+              items: allCartItems,
+              totalAmount: payableAmount,
+              weightKg: Math.max(10, Math.round(trafficCompliance.totalWeightKg || 15)),
+              deliveryOtp: placed?.deliveryOtp,
+              codAmount: paymentMethod === "CASH_ON_DELIVERY" ? payableAmount : 0,
+            });
+          }
+          if (verifiedPayment?.paymentMode === "PREPAID_VAULT") {
+            wallet.spend(payableAmount, `Escrow Order • ${placed?.shortId || placed?.id || "CONON"}`);
+          }
+          if (paymentStatus === "PREPAID_ESCROW_LOCKED" && masterSync) {
+            const accounts = masterSync.state.treasury?.companyAccounts || [];
+            const collectionAcct =
+              accounts.find((a) => (a.role === "COLLECTION" || a.role === "ESCROW_NODAL") && a.isPrimary) ||
+              accounts[0];
+            masterSync
+              .recordTreasuryEntry({
+                id: `tr_mat_${placed?.id || Date.now()}`,
+                orderId: placed?.shortId || placed?.id || `CN-${Date.now().toString(36)}`,
+                entryType: "CUSTOMER_INFLOW",
+                direction: "CREDIT",
+                fromAccountLabel: `Customer (${paymentMode})`,
+                fromAccountRef: address.receiverPhone,
+                toAccountLabel: collectionAcct?.label || "CONON Collection A/c",
+                toAccountRef: collectionAcct
+                  ? `${collectionAcct.bankName} ${collectionAcct.accountNumberMasked}`
+                  : "CONON-COLLECTION",
+                toIfsc: collectionAcct?.ifscCode || "",
+                beneficiaryName: "CONON INFRABUILT PVT LTD",
+                paymentMode,
+                utrNumber: utrNumber || generateUtr("5"),
+                grossAmount: payableAmount,
+                platformMargin: Math.round(payableAmount * 0.08),
+                taxAmount: Math.round(payableAmount * 0.14),
+                netAmount: payableAmount,
+                status: "SETTLED",
+                createdAt: new Date().toISOString(),
+                customerName: address.receiverName || "Lucknow Site Customer",
+              })
+              .catch(() => {});
+          }
           setShowOrderSuccessConfetti(true);
           toast.success(
             paymentMethod === "CASH_ON_DELIVERY"
               ? "Order Placed Successfully! Pay on Delivery enabled."
-              : "Payment Verified & Order Placed Successfully!"
+              : "Escrow Payment Verified & Order Confirmed!"
           );
           setDeliveringToOpen(false);
           setCashfreeOpen(false);
+          setEscrowSheetOpen(false);
           setTimeout(() => {
             setLocation("/orders");
           }, 1800);
         },
-        onError: () => {
-          toast.error("Failed to place order. Please try again.");
+        onError: (err: any) => {
+          toast.error(err?.message || "Failed to place order. Please try again.");
         },
       }
     );
@@ -790,14 +939,36 @@ export function CartMainView({ onBack, isStandalonePage = false }: CartMainViewP
           onClose={() => setDeliveringToOpen(false)}
           address={address}
           totalAmount={payableAmount}
+          policy={paymentPolicyEval}
+          deliveryPincode={deliveryPincode}
+          onChangePincode={setDeliveryPincode}
+          pinServiceable={pinServiceability.serviceable}
+          trafficCompliance={trafficCompliance}
+          dispatchMode={dispatchMode}
+          onSelectDispatchMode={setDispatchMode}
           onPayOnDelivery={() => executeOrderPlacement("CASH_ON_DELIVERY")}
           onPayOnline={() => {
             setDeliveringToOpen(false);
-            setRedirectingOpen(true);
+            setEscrowSheetOpen(true);
           }}
           isPlacingOrder={placeOrder.isPending}
         />
       )}
+
+      {/* ── MODAL 4: CONON Secure Escrow Payment Sheet (Pay First, Book Second) ── */}
+      <CononEscrowPaymentSheet
+        isOpen={isEscrowSheetOpen}
+        onClose={() => setEscrowSheetOpen(false)}
+        amount={payableAmount}
+        title="CONON Material Escrow Checkout"
+        subtitle={`${allCartItems.length} item(s) • ${address?.fullAddress || "Lucknow Site"}`}
+        ctaLabel={`Pay ₹${Math.round(payableAmount).toLocaleString("en-IN")} & Confirm Order`}
+        phoneNumber={address?.receiverPhone}
+        isProcessingExternal={placeOrder.isPending}
+        onPaymentVerified={(verified) => {
+          executeOrderPlacement("PREPAID_ESCROW", verified);
+        }}
+      />
 
       {/* ── MODAL 4: Redirecting Screen (Screenshot 2) ── */}
       <RedirectingModal

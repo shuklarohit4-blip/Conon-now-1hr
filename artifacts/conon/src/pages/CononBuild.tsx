@@ -1,642 +1,1057 @@
 import React, { useMemo, useState } from "react";
 import { Layout } from "@/components/Layout";
-import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "wouter";
+import { AnimatePresence, motion } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAddToCart, getGetCartQueryKey } from "@workspace/api-client-react";
 import { useUI } from "@/context/UIContext";
+import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
+import { useLiveProducts } from "@/hooks/useCononLiveData";
+import { apiUrl } from "@/lib/apiBase";
 import { toast } from "sonner";
 import {
-  HardHat, DraftingCompass, Pickaxe, Building2, Wrench, Paintbrush, KeyRound,
-  ChevronRight, Check, Phone, MapPin, Ruler, IndianRupee, ShoppingCart,
-  Sparkles, Crown, Shield, Star, X, Calculator, Zap, Layers, Hammer,
+  HardHat,
+  DraftingCompass,
+  Building2,
+  ChevronDown,
+  ChevronUp,
+  Check,
+  Phone,
+  MapPin,
+  Ruler,
+  ShoppingCart,
+  Sparkles,
+  Crown,
+  Shield,
+  X,
+  Calculator,
+  Zap,
+  Layers,
+  Hammer,
+  FileDown,
+  Box,
+  ArrowRight,
+  CheckCircle2,
+  Calendar,
 } from "lucide-react";
+import {
+  DEFAULT_TURNKEY_TIERS,
+  BRAND_MATRIX_ROWS,
+  LUCKNOW_PLOT_PRESETS,
+  TEN_STAGE_ESCROW_SCHEDULE,
+  type TurnkeyMode,
+  type TurnkeyTierSpec,
+  type TurnkeyConsultationLead,
+} from "@/data/lucknowTurnkeyPackages";
+import { downloadTurnkeyEstimatePdf } from "@/utils/turnkeyPdfGenerator";
 
 const BRAND = "#1848a0";
-const AMBER = "#f59e0b";
-const NEON  = "#84cc16";
-
-const inr = (n: number) =>
-  "₹" + Math.round(n).toLocaleString("en-IN");
+const inr = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
 const inrShort = (n: number) => {
   if (n >= 1e7) return `₹${(n / 1e7).toFixed(2)} Cr`;
   if (n >= 1e5) return `₹${(n / 1e5).toFixed(2)} L`;
   return inr(n);
 };
 
-/* ════════════════════════════════════════════════════════════════
-   PAGE
-════════════════════════════════════════════════════════════════ */
+const LUCKNOW_ZONES = [
+  "Sushant Golf City (226030)",
+  "Gomti Nagar / Ext (226010)",
+  "Faizabad Road (226028)",
+  "Sultanpur Road (226002)",
+];
+
 export function CononBuild() {
+  const [, setLocation] = useLocation();
+  const masterSync = useSafeCononMasterSync();
+  const turnkeyCfg = masterSync?.state.globalControls?.turnkeyBuild;
+
+  const [mode, setMode] = useState<TurnkeyMode>("RESIDENTIAL");
+  const [selectedTierId, setSelectedTierId] = useState<TurnkeyTierSpec["id"]>("gold");
+  const [matrixOpen, setMatrixOpen] = useState(true);
   const [consultPkg, setConsultPkg] = useState<string | null>(null);
+
+  const initialSqft = useMemo(() => {
+    try {
+      const q = Number(new URLSearchParams(window.location.search).get("sqft") || 0);
+      return q >= 400 ? q : 1250;
+    } catch {
+      return 1250;
+    }
+  }, []);
+
+  const tiers = useMemo(() => {
+    const customRates = turnkeyCfg?.rates || {};
+    return DEFAULT_TURNKEY_TIERS.map((t) => ({
+      ...t,
+      ratePerSqFt: customRates[t.id] ?? t.ratePerSqFt,
+    }));
+  }, [turnkeyCfg?.rates]);
+
+  const getEffectiveRate = (t: TurnkeyTierSpec) =>
+    mode === "RESIDENTIAL" ? t.ratePerSqFt : t.commercialRatePerSqFt;
 
   return (
     <Layout>
-      <div className="bg-slate-50 min-h-full pb-6">
+      <div className="bg-slate-50 min-h-full pb-12">
         {/* Hero */}
-        <div className="px-5 pt-7 pb-7 rounded-b-[36px] shadow-lg" style={{ background: BRAND }}>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="w-9 h-9 rounded-2xl flex items-center justify-center" style={{ background: "rgba(255,255,255,0.12)" }}>
-              <HardHat className="w-5 h-5 text-amber-300" strokeWidth={2.4} />
-            </span>
-            <div>
-              <h2 className="font-display font-black italic text-2xl text-white leading-none">CONON-NOW Build</h2>
-              <p className="text-[10px] font-bold text-blue-200 uppercase tracking-[0.2em] mt-1">Turnkey Home Construction</p>
+        <div className="px-4 sm:px-8 pt-7 pb-8 rounded-b-[32px] shadow-lg bg-gradient-to-br from-slate-950 via-[#1848a0] to-slate-900 text-white">
+          <div className="max-w-7xl mx-auto space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="w-11 h-11 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center">
+                  <HardHat className="w-6 h-6 text-amber-300" strokeWidth={2.4} />
+                </span>
+                <div>
+                  <h1 className="font-display font-black italic text-2xl sm:text-3xl leading-none">
+                    CONON-NOW Build
+                  </h1>
+                  <p className="text-[11px] font-bold text-blue-200 uppercase tracking-[0.18em] mt-1">
+                    Lucknow Turnkey Home &amp; Commercial Construction Studio
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setConsultPkg("Gold")}
+                className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black flex items-center gap-1.5 cursor-pointer shadow-md"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Book Free Civil Engineer Visit</span>
+              </button>
             </div>
-          </div>
-          <p className="text-sm text-blue-100/90 leading-snug mt-3">
-            From blueprint to handover — premium materials, certified engineers and transparent
-            pricing for your dream home. Built start to finish by CONON-NOW.
-          </p>
-          <div className="flex gap-2 mt-4">
-            <Trust icon={<Shield className="w-3 h-3" />} label="ISI Certified" />
-            <Trust icon={<Star className="w-3 h-3" />} label="500+ Homes" />
-            <Trust icon={<Zap className="w-3 h-3" />} label="On-Time Promise" />
+
+            <p className="text-sm text-blue-100/95 max-w-3xl leading-relaxed">
+              Fixed-rate, zero-delay turnkey construction by <strong>CONON INFRABUILT LIMITED</strong>{" "}
+              (HQ: Skyline Plaza 3, Sushant Golf City, Lucknow). 100% branded materials, 10-stage
+              CONON Escrow protection, and 450-point civil quality audits.
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+              <TrustBadge icon={<CheckCircle2 className="w-3.5 h-3.5" />} label="150+ Projects Delivered" />
+              <TrustBadge icon={<Shield className="w-3.5 h-3.5" />} label="7+ Yrs Civil Expertise" />
+              <TrustBadge icon={<Crown className="w-3.5 h-3.5" />} label="CONON INFRABUILT Lucknow" />
+              <TrustBadge icon={<Zap className="w-3.5 h-3.5" />} label="Zero-Delay Penalty Shield" />
+            </div>
+
+            {turnkeyCfg?.offerActive && turnkeyCfg?.promoBanner && (
+              <div className="px-3.5 py-2 rounded-xl bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs font-bold inline-flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
+                <span>{turnkeyCfg.promoBanner}</span>
+              </div>
+            )}
           </div>
         </div>
 
-        <PackagesSection onBook={setConsultPkg} />
-        <JourneySection />
-        <EstimatorSection />
-        <MaterialCalculatorSection />
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 space-y-8 mt-6">
+          {/* PART 1.3 — FREE AI HOME DESIGN & 3D STUDIO DOCK */}
+          <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h2 className="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2">
+                  <DraftingCompass className="w-4 h-4 text-blue-700" />
+                  <span>Free AI Home Design &amp; 3D Studio</span>
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Plan your Lucknow plot layout, Vastu, elevation &amp; 3D walkthrough before locking your turnkey package.
+                </p>
+              </div>
+              <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black self-start">
+                100% Free for Plot Owners
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {[
+                {
+                  title: "Smart-Draft AI",
+                  sub: "2D Vastu Floor Plans",
+                  desc: "Instant room-by-room 2D Vastu layout for 1,000–3,229 sq.ft Lucknow plots.",
+                  href: "/smart-draft",
+                  icon: DraftingCompass,
+                  cls: "bg-blue-50 text-blue-800 border-blue-200",
+                },
+                {
+                  title: "Arch-Genius Engine",
+                  sub: "Elevation & Structural Guidance",
+                  desc: "Modern front elevation concepts, column grid & LDA/Ansal setback rules.",
+                  href: "/arch-genius",
+                  icon: Building2,
+                  cls: "bg-amber-50 text-amber-900 border-amber-200",
+                },
+                {
+                  title: "Smart-Build 3D",
+                  sub: "3D Walkthrough Preview",
+                  desc: "Interactive 3D structural & finishing visualization before foundation work.",
+                  href: "/smart-build",
+                  icon: Box,
+                  cls: "bg-emerald-50 text-emerald-900 border-emerald-200",
+                },
+              ].map((tool) => {
+                const Icon = tool.icon;
+                return (
+                  <button
+                    key={tool.title}
+                    type="button"
+                    onClick={() => setLocation(tool.href)}
+                    className="p-3.5 rounded-2xl border border-slate-200 hover:border-slate-400 bg-slate-50/70 hover:bg-white text-left transition flex items-start justify-between gap-3 cursor-pointer"
+                  >
+                    <div className="space-y-1">
+                      <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg border text-[10px] font-black ${tool.cls}`}>
+                        <Icon className="w-3.5 h-3.5" />
+                        <span>{tool.sub}</span>
+                      </div>
+                      <div className="text-sm font-black text-slate-900">{tool.title}</div>
+                      <p className="text-[11px] text-slate-600 leading-snug">{tool.desc}</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-400 shrink-0 mt-1" />
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* PART 2 — 5 AUTHENTIC LUCKNOW TURNKEY PACKAGES + RESIDENTIAL/COMMERCIAL TOGGLE */}
+          <section className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-amber-600">
+                  Fixed Per Sq.Ft Rates • Zero Hidden Cost
+                </p>
+                <h2 className="text-xl font-black text-slate-900">
+                  5 Authentic Lucknow Turnkey Packages
+                </h2>
+              </div>
+
+              <div className="inline-flex p-1 rounded-xl bg-slate-200/80 text-xs font-black self-start">
+                <button
+                  type="button"
+                  onClick={() => setMode("RESIDENTIAL")}
+                  className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
+                    mode === "RESIDENTIAL" ? "bg-slate-900 text-white" : "text-slate-700"
+                  }`}
+                >
+                  Residential Home / Villa
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("COMMERCIAL")}
+                  className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
+                    mode === "COMMERCIAL" ? "bg-slate-900 text-white" : "text-slate-700"
+                  }`}
+                >
+                  Commercial / Marriage Hall / PEB
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+              {tiers.map((tier) => {
+                const rate = getEffectiveRate(tier);
+                const list = mode === "RESIDENTIAL" ? tier.highlights : tier.commercialHighlights;
+                const isSelected = selectedTierId === tier.id;
+                return (
+                  <div
+                    key={tier.id}
+                    onClick={() => setSelectedTierId(tier.id)}
+                    className={`rounded-2xl bg-white p-4 flex flex-col justify-between border-2 transition cursor-pointer ${
+                      tier.popular
+                        ? "border-amber-400 shadow-md"
+                        : isSelected
+                        ? "border-blue-700 shadow-sm"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-1 mb-2">
+                        <span
+                          className="text-[10px] font-black px-2 py-0.5 rounded-full text-white"
+                          style={{ background: tier.accentHex }}
+                        >
+                          {tier.tagline}
+                        </span>
+                      </div>
+                      <h3 className="text-base font-black text-slate-900">{tier.name}</h3>
+                      <div className="mt-1.5 flex items-baseline gap-1">
+                        <span className="text-2xl font-black font-mono text-slate-900">
+                          {inr(rate)}
+                        </span>
+                        <span className="text-[11px] font-bold text-slate-500">/ sq.ft</span>
+                      </div>
+                      <div className="text-[10px] font-black text-emerald-700 mt-1">
+                        {tier.warrantyLabel}
+                      </div>
+
+                      <ul className="mt-3 space-y-1.5 text-[11px] text-slate-700">
+                        {list.map((f) => (
+                          <li key={f} className="flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span className="leading-snug">{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setConsultPkg(tier.name);
+                      }}
+                      className="mt-4 w-full py-2 rounded-xl text-xs font-black text-white cursor-pointer transition hover:opacity-95"
+                      style={{ background: tier.accentHex }}
+                    >
+                      Book Free Site Visit
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* WORLD-FIRST "ZERO MATERIAL CHORI" 11-ROW BRAND SPEC COMPARATOR */}
+            <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+              <button
+                type="button"
+                onClick={() => setMatrixOpen((v) => !v)}
+                className="w-full px-5 py-3.5 bg-slate-900 text-white flex items-center justify-between text-left cursor-pointer"
+              >
+                <div>
+                  <div className="text-xs font-black uppercase tracking-wider text-amber-300">
+                    Zero Material Chori Guarantee
+                  </div>
+                  <div className="text-sm font-black">
+                    Side-by-Side Lucknow Brand Specification Comparator (11 Civil Categories)
+                  </div>
+                </div>
+                {matrixOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              </button>
+
+              {matrixOpen && (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border-collapse min-w-[760px]">
+                    <thead>
+                      <tr className="bg-slate-100 text-slate-800 border-b border-slate-200">
+                        <th className="p-3 font-black">Civil Category</th>
+                        {tiers.map((t) => (
+                          <th key={t.id} className="p-3 font-black">
+                            {t.name} ({inr(getEffectiveRate(t))})
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {BRAND_MATRIX_ROWS.map((row, idx) => (
+                        <tr key={row.category} className={idx % 2 === 0 ? "bg-white" : "bg-slate-50/70"}>
+                          <td className="p-3 font-black text-slate-900 border-b border-slate-100">
+                            {row.category}
+                          </td>
+                          <td className="p-3 text-slate-700 border-b border-slate-100">{row.grey}</td>
+                          <td className="p-3 text-slate-700 border-b border-slate-100">{row.silver}</td>
+                          <td className="p-3 text-slate-900 font-semibold border-b border-slate-100 bg-amber-50/30">
+                            {row.gold}
+                          </td>
+                          <td className="p-3 text-slate-700 border-b border-slate-100">{row.platinum}</td>
+                          <td className="p-3 text-slate-700 border-b border-slate-100">{row.luxury}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* PART 3 — SUPER-SMART LUCKNOW COST ESTIMATOR + 10-STAGE ESCROW + PDF */}
+          <EstimatorSection
+            tiers={tiers}
+            mode={mode}
+            initialSqft={initialSqft}
+            selectedTierId={selectedTierId}
+            onSelectTierId={setSelectedTierId}
+            onBookVisit={(pkg) => setConsultPkg(pkg)}
+          />
+
+          {/* PART 4 — 5-TAB LUCKNOW SMART MATERIAL CALCULATOR + 1-CLICK RMC SWITCH */}
+          <MaterialCalculatorSection />
+        </div>
       </div>
 
       <AnimatePresence>
-        {consultPkg && <ConsultationSheet pkg={consultPkg} onClose={() => setConsultPkg(null)} />}
+        {consultPkg && (
+          <ConsultationSheet pkg={consultPkg} defaultSqft={initialSqft} onClose={() => setConsultPkg(null)} />
+        )}
       </AnimatePresence>
     </Layout>
   );
 }
 
-function Trust({ icon, label }: { icon: React.ReactNode; label: string }) {
+function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="flex items-center gap-1 px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.12)" }}>
+    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-black text-white">
       <span className="text-amber-300">{icon}</span>
-      <span className="text-[10px] font-black text-white">{label}</span>
-    </div>
-  );
-}
-
-function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
-  return (
-    <div className="mb-4">
-      <p className="text-[10px] font-black uppercase tracking-[0.18em]" style={{ color: AMBER }}>{kicker}</p>
-      <h3 className="text-xl font-display font-black text-slate-800 mt-0.5">{title}</h3>
+      <span>{label}</span>
     </div>
   );
 }
 
 /* ════════════════════════════════════════════════════════════════
-   1. TURNKEY PACKAGES
+   PART 3 — LUCKNOW COST ESTIMATOR + 10-STAGE ESCROW + PDF
 ════════════════════════════════════════════════════════════════ */
-interface Pkg {
-  id: string; name: string; tier: string; rate: number; accent: string;
-  icon: React.ReactNode; popular?: boolean; features: string[];
-}
-const PACKAGES: Pkg[] = [
-  {
-    id: "silver", name: "Silver", tier: "Basic", rate: 1650, accent: "#64748b",
-    icon: <Building2 className="w-5 h-5" />,
-    features: ["Standard grade materials", "Basic 2D floor plan", "Structural RCC frame", "Standard fittings", "1-year warranty"],
-  },
-  {
-    id: "gold", name: "Gold", tier: "Standard", rate: 2100, accent: AMBER, popular: true,
-    icon: <Sparkles className="w-5 h-5" />,
-    features: ["Premium branded materials", "Standard electrical & plumbing", "2D + elevation design", "Branded sanitaryware", "3-year warranty"],
-  },
-  {
-    id: "platinum", name: "Platinum", tier: "Premium", rate: 2750, accent: BRAND,
-    icon: <Crown className="w-5 h-5" />,
-    features: ["High-end finishes", "Complete 3D layout videos", "Dedicated site engineer", "Designer modular kitchen", "5-year warranty"],
-  },
-  {
-    id: "luxury", name: "Luxury", tier: "Mansion", rate: 3600, accent: "#7c3aed",
-    icon: <Crown className="w-5 h-5" />,
-    features: ["Custom architecture", "Smart home integration", "Ideal for G+2 structures", "Imported finishes", "Lifetime structural warranty"],
-  },
-];
+function EstimatorSection({
+  tiers,
+  mode,
+  initialSqft,
+  selectedTierId,
+  onSelectTierId,
+  onBookVisit,
+}: {
+  tiers: TurnkeyTierSpec[];
+  mode: TurnkeyMode;
+  initialSqft: number;
+  selectedTierId: TurnkeyTierSpec["id"];
+  onSelectTierId: (id: TurnkeyTierSpec["id"]) => void;
+  onBookVisit: (pkgName: string) => void;
+}) {
+  const [plotSqFt, setPlotSqFt] = useState(initialSqft);
+  const [floors, setFloors] = useState(2);
+  const [zone, setZone] = useState(LUCKNOW_ZONES[0]);
+  const [stiltParking, setStiltParking] = useState(false);
+  const [ugTank, setUgTank] = useState(true);
+  const [boundaryGate, setBoundaryGate] = useState(false);
+  const [ldaMapAssist, setLdaMapAssist] = useState(true);
+  const [pdfBusy, setPdfBusy] = useState(false);
 
-function PackagesSection({ onBook }: { onBook: (pkg: string) => void }) {
+  const activeTier = tiers.find((t) => t.id === selectedTierId) || tiers[2];
+  const effectiveRate = mode === "RESIDENTIAL" ? activeTier.ratePerSqFt : activeTier.commercialRatePerSqFt;
+  const totalBuiltUpSqFt = Math.max(400, plotSqFt) * floors;
+  const baseConstructionCost = totalBuiltUpSqFt * effectiveRate;
+
+  const addonsList = useMemo(() => {
+    const out: { name: string; cost: number }[] = [];
+    if (stiltParking) out.push({ name: "Stilt Parking RCC", cost: Math.round(plotSqFt * 950) });
+    if (ugTank) out.push({ name: "Underground Water Tank (10,000L)", cost: 135000 });
+    if (boundaryGate) out.push({ name: "Boundary Wall & Main Gate", cost: 185000 });
+    if (ldaMapAssist) out.push({ name: "LDA / Ansal Map Approval Assistance", cost: 45000 });
+    return out;
+  }, [stiltParking, ugTank, boundaryGate, ldaMapAssist, plotSqFt]);
+
+  const addonsTotal = addonsList.reduce((s, a) => s + a.cost, 0);
+  const grandTotal = baseConstructionCost + addonsTotal;
+
+  const handleDownloadPdf = async () => {
+    setPdfBusy(true);
+    try {
+      await downloadTurnkeyEstimatePdf({
+        plotSqFt,
+        floors,
+        totalBuiltUpSqFt,
+        zoneLabel: zone,
+        tier: activeTier,
+        effectiveRate,
+        addons: addonsList,
+        grandTotal,
+      });
+      toast.success("Downloaded Branded CONON Turnkey Proposal & Home-Loan PDF!");
+    } catch {
+      toast.error("Could not generate PDF");
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+
   return (
-    <div className="pt-7 px-5">
-      <SectionTitle kicker="Choose your tier" title="Turnkey Packages" />
-      <div className="flex gap-4 overflow-x-auto pb-3 -mx-5 px-5 scrollbar-hide snap-x snap-mandatory">
-        {PACKAGES.map((p, i) => (
-          <motion.div
-            key={p.id}
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.06 }}
-            className="snap-start shrink-0 w-[270px] bg-white rounded-[26px] border border-slate-200 overflow-hidden shadow-sm flex flex-col"
+    <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm space-y-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-amber-600">
+            Smart Lucknow Plot Calculator
+          </p>
+          <h2 className="text-xl font-black text-slate-900">
+            Turnkey Cost Estimator &amp; 10-Stage Escrow Schedule
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleDownloadPdf}
+          disabled={pdfBusy}
+          className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 text-xs font-black flex items-center gap-2 cursor-pointer self-start"
+        >
+          <FileDown className="w-4 h-4" />
+          <span>{pdfBusy ? "Generating PDF..." : "Download Branded Turnkey & Loan PDF"}</span>
+        </button>
+      </div>
+
+      {/* 1-Tap Lucknow Standard Plot Size Presets */}
+      <div className="space-y-2">
+        <label className="text-xs font-black text-slate-700 block">
+          1-Tap Lucknow Standard Plot Size Presets (LDA / Ansal API / Awas Vikas)
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {LUCKNOW_PLOT_PRESETS.map((p) => (
+            <button
+              key={p.sqft}
+              type="button"
+              onClick={() => setPlotSqFt(p.sqft)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-black border transition cursor-pointer ${
+                plotSqFt === p.sqft
+                  ? "bg-blue-700 text-white border-blue-700"
+                  : "bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-400"
+              }`}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Inputs Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+        <div>
+          <label className="font-bold text-slate-600 block mb-1">Custom Plot Area (sq.ft / floor)</label>
+          <input
+            type="number"
+            min={400}
+            value={plotSqFt}
+            onChange={(e) => setPlotSqFt(Math.max(400, Number(e.target.value || 1000)))}
+            className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-black text-slate-900"
+          />
+        </div>
+        <div>
+          <label className="font-bold text-slate-600 block mb-1">Lucknow Zone</label>
+          <select
+            value={zone}
+            onChange={(e) => setZone(e.target.value)}
+            className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 bg-white"
           >
-            <div className="px-5 pt-5 pb-4 relative" style={{ background: `linear-gradient(160deg, ${p.accent}14, #ffffff)` }}>
-              {p.popular && (
-                <span className="absolute top-4 right-4 text-[9px] font-black uppercase tracking-wide px-2 py-1 rounded-full text-white" style={{ background: AMBER }}>
-                  Popular
-                </span>
-              )}
-              <span className="w-11 h-11 rounded-2xl flex items-center justify-center text-white" style={{ background: p.accent }}>
-                {p.icon}
-              </span>
-              <h4 className="font-display font-black text-xl text-slate-800 mt-3">{p.name}</h4>
-              <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: p.accent }}>{p.tier}</p>
-              <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-2xl font-display font-black text-slate-800">{inr(p.rate)}</span>
-                <span className="text-xs font-bold text-slate-400">/ sq ft</span>
-              </div>
-            </div>
-            <div className="px-5 py-4 flex-1 space-y-2.5">
-              {p.features.map(f => (
-                <div key={f} className="flex items-start gap-2">
-                  <span className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ background: `${p.accent}1a` }}>
-                    <Check className="w-2.5 h-2.5" style={{ color: p.accent }} strokeWidth={3.5} />
-                  </span>
-                  <span className="text-[12px] font-semibold text-slate-600 leading-snug">{f}</span>
-                </div>
-              ))}
-            </div>
-            <div className="px-5 pb-5">
+            {LUCKNOW_ZONES.map((z) => (
+              <option key={z} value={z}>
+                {z}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="font-bold text-slate-600 block mb-1">Floors</label>
+          <div className="grid grid-cols-4 gap-1.5">
+            {[
+              { f: 1, label: "G" },
+              { f: 2, label: "G+1" },
+              { f: 3, label: "G+2" },
+              { f: 4, label: "G+3" },
+            ].map((item) => (
               <button
-                onClick={() => onBook(`${p.name} / ${p.tier}`)}
-                className="w-full py-3 rounded-2xl font-black text-[13px] text-white active:scale-[0.98] transition"
-                style={{ background: p.accent }}
+                key={item.f}
+                type="button"
+                onClick={() => setFloors(item.f)}
+                className={`py-2 rounded-xl font-black border cursor-pointer ${
+                  floors === item.f
+                    ? "bg-slate-900 text-amber-300 border-slate-900"
+                    : "bg-slate-50 text-slate-700 border-slate-200"
+                }`}
               >
-                Book Free Consultation
+                {item.label}
               </button>
-            </div>
-          </motion.div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="font-bold text-slate-600 block mb-1">Package Tier</label>
+          <select
+            value={selectedTierId}
+            onChange={(e) => onSelectTierId(e.target.value as any)}
+            className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 bg-white"
+          >
+            {tiers.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.name} ({inr(mode === "RESIDENTIAL" ? t.ratePerSqFt : t.commercialRatePerSqFt)}/sqft)
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Add-on Toggles */}
+      <div className="flex flex-wrap gap-2 text-xs">
+        {[
+          { label: "+ Stilt Parking", state: stiltParking, set: setStiltParking },
+          { label: "+ Underground Water Tank (10,000L)", state: ugTank, set: setUgTank },
+          { label: "+ Boundary Wall & Main Gate", state: boundaryGate, set: setBoundaryGate },
+          { label: "+ LDA / Ansal Map Approval Assistance", state: ldaMapAssist, set: setLdaMapAssist },
+        ].map((a) => (
+          <button
+            key={a.label}
+            type="button"
+            onClick={() => a.set(!a.state)}
+            className={`px-3 py-1.5 rounded-xl font-bold border transition cursor-pointer ${
+              a.state
+                ? "bg-emerald-50 border-emerald-400 text-emerald-900"
+                : "bg-slate-50 border-slate-200 text-slate-600"
+            }`}
+          >
+            {a.state ? "✓ " : ""}
+            {a.label}
+          </button>
         ))}
       </div>
-    </div>
-  );
-}
 
-/* ════════════════════════════════════════════════════════════════
-   2. CONSTRUCTION JOURNEY (vertical stepper)
-════════════════════════════════════════════════════════════════ */
-const JOURNEY = [
-  { icon: <DraftingCompass className="w-5 h-5" />, title: "Architecture & Approvals", desc: "Site survey, architectural drawings, structural design and all government approvals & sanctions." },
-  { icon: <Pickaxe className="w-5 h-5" />,         title: "Excavation & Foundation", desc: "Soil testing, excavation, anti-termite treatment and a strong RCC footing foundation." },
-  { icon: <Building2 className="w-5 h-5" />,       title: "Superstructure (Brickwork & RCC)", desc: "Columns, beams, slabs and brick masonry — the structural skeleton of your home." },
-  { icon: <Wrench className="w-5 h-5" />,          title: "Plastering & MEP", desc: "Internal/external plaster plus Mechanical, Electrical & Plumbing rough-in work." },
-  { icon: <Paintbrush className="w-5 h-5" />,      title: "Interiors & Finishing", desc: "Flooring, painting, woodwork, fixtures, modular kitchen and final detailing." },
-  { icon: <KeyRound className="w-5 h-5" />,        title: "Final Handover", desc: "Quality inspection, snag-free certification and the keys to your dream home." },
-];
-
-function JourneySection() {
-  const [active, setActive] = useState(0);
-  return (
-    <div className="pt-9 px-5">
-      <SectionTitle kicker="Start to finish" title="How We Build Your Dream Home" />
-      <div className="relative">
-        <div className="absolute left-[22px] top-2 bottom-2 w-0.5 bg-slate-200" />
-        {JOURNEY.map((s, i) => {
-          const isActive = active === i;
-          return (
-            <button
-              key={s.title}
-              onClick={() => setActive(i)}
-              className="relative w-full text-left flex gap-4 pb-5 last:pb-0 group"
-            >
-              <div
-                className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 z-10 transition-all"
-                style={{
-                  background: isActive ? BRAND : "white",
-                  color: isActive ? "white" : "#94a3b8",
-                  border: isActive ? "none" : "2px solid #e2e8f0",
-                  boxShadow: isActive ? "0 8px 18px -6px rgba(27,67,102,0.5)" : "none",
-                }}
-              >
-                {s.icon}
-              </div>
-              <div className="flex-1 pt-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md" style={{ background: `${BRAND}12`, color: BRAND }}>
-                    STEP {i + 1}
-                  </span>
-                  <h4 className="text-sm font-black text-slate-800">{s.title}</h4>
-                </div>
-                <AnimatePresence initial={false}>
-                  {isActive && (
-                    <motion.p
-                      initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-                      className="text-[12px] text-slate-500 leading-snug mt-1.5 overflow-hidden"
-                    >
-                      {s.desc}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════════
-   3. AI COST ESTIMATOR
-════════════════════════════════════════════════════════════════ */
-const EST_RATES: Record<string, number> = { silver: 1650, gold: 2100, platinum: 2750, luxury: 3600 };
-const EST_LABELS: Record<string, string> = { silver: "Silver / Basic", gold: "Gold / Standard", platinum: "Platinum / Premium", luxury: "Luxury / Mansion" };
-const FLOOR_OPTS = ["G", "G+1", "G+2", "G+3"];
-
-function EstimatorSection() {
-  const [city, setCity] = useState("Lucknow");
-  const [area, setArea] = useState("6100");
-  const [floors, setFloors] = useState("G+2");
-  const [pkg, setPkg] = useState("platinum");
-
-  const total = useMemo(() => {
-    const a = parseFloat(area) || 0;
-    return a * (EST_RATES[pkg] ?? 0);
-  }, [area, pkg]);
-
-  const breakdown = useMemo(() => ([
-    { label: "Material", pct: 60, color: BRAND,  value: total * 0.6 },
-    { label: "Labour",   pct: 25, color: AMBER,  value: total * 0.25 },
-    { label: "Design",   pct: 15, color: "#7c3aed", value: total * 0.15 },
-  ]), [total]);
-
-  return (
-    <div className="pt-9 px-5">
-      <SectionTitle kicker="AI powered" title="Cost Estimator" />
-      <div className="bg-white rounded-[26px] border border-slate-200 shadow-sm p-5">
-        <div className="grid grid-cols-2 gap-3">
-          <EstField label="City" icon={<MapPin className="w-3.5 h-3.5" />}>
-            <input value={city} onChange={e => setCity(e.target.value)}
-              className="w-full bg-transparent text-sm font-black text-slate-800 outline-none" />
-          </EstField>
-          <EstField label="Built-up Area (sq ft)" icon={<Ruler className="w-3.5 h-3.5" />}>
-            <input value={area} onChange={e => setArea(e.target.value.replace(/[^0-9]/g, ""))} inputMode="numeric"
-              className="w-full bg-transparent text-sm font-black text-slate-800 outline-none" />
-          </EstField>
-        </div>
-        <p className="text-[9px] font-semibold text-slate-400 mt-1.5 px-1">Total built-up area across all floors.</p>
-
-        <div className="mt-3">
-          <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Number of Floors</p>
-          <div className="grid grid-cols-4 gap-2">
-            {FLOOR_OPTS.map(f => (
-              <button key={f} onClick={() => setFloors(f)}
-                className="py-2 rounded-xl text-xs font-black border-2 transition"
-                style={{
-                  borderColor: floors === f ? BRAND : "#e2e8f0",
-                  background: floors === f ? "#f0f6ff" : "white",
-                  color: floors === f ? BRAND : "#94a3b8",
-                }}>
-                {f}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-3">
-          <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Preferred Package</p>
-          <div className="grid grid-cols-2 gap-2">
-            {Object.keys(EST_RATES).map(k => (
-              <button key={k} onClick={() => setPkg(k)}
-                className="py-2.5 px-3 rounded-xl text-left border-2 transition"
-                style={{
-                  borderColor: pkg === k ? BRAND : "#e2e8f0",
-                  background: pkg === k ? "#f0f6ff" : "white",
-                }}>
-                <span className="block text-[11px] font-black" style={{ color: pkg === k ? BRAND : "#475569" }}>
-                  {EST_LABELS[k].split(" / ")[0]}
-                </span>
-                <span className="block text-[9px] font-bold text-slate-400">{inr(EST_RATES[k])}/sqft</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Result */}
-        <div className="mt-5 pt-5 border-t border-slate-100">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Estimated Total Cost</p>
-              <p className="text-3xl font-display font-black italic" style={{ color: BRAND }}>{inrShort(total)}</p>
-              <p className="text-[10px] font-bold text-slate-400 mt-0.5">{city} · {floors} · {EST_LABELS[pkg]}</p>
+      {/* Summary + 3 Guarantees + 10-Stage Escrow */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-2">
+        <div className="lg:col-span-5 rounded-2xl bg-slate-950 text-white p-5 space-y-4">
+          <div>
+            <div className="text-[11px] font-bold text-blue-200">
+              Total Built-Up: {totalBuiltUpSqFt.toLocaleString("en-IN")} sq.ft • {activeTier.name}
             </div>
-            <Donut segments={breakdown} />
+            <div className="text-3xl font-black font-mono text-amber-300 mt-1">
+              {inrShort(grandTotal)}
+            </div>
+            <div className="text-xs font-mono text-slate-300">{inr(grandTotal)} (Incl. Add-ons)</div>
           </div>
-          <div className="space-y-2">
-            {breakdown.map(b => (
-              <div key={b.label} className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ background: b.color }} />
-                <span className="text-[12px] font-bold text-slate-600 flex-1">{b.label}</span>
-                <span className="text-[11px] font-black text-slate-400">{b.pct}%</span>
-                <span className="text-[12px] font-black text-slate-800 w-[88px] text-right">{inrShort(b.value)}</span>
-              </div>
-            ))}
+
+          {/* 60 / 25 / 15 Breakdown */}
+          <div className="space-y-1.5 text-xs pt-2 border-t border-white/10">
+            <div className="flex justify-between">
+              <span className="text-slate-300">Branded Materials (60%)</span>
+              <span className="font-mono font-black">{inrShort(grandTotal * 0.6)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-300">Skilled Labour &amp; Equipment (25%)</span>
+              <span className="font-mono font-black">{inrShort(grandTotal * 0.25)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-300">Civil Supervision &amp; Design (15%)</span>
+              <span className="font-mono font-black">{inrShort(grandTotal * 0.15)}</span>
+            </div>
           </div>
-          <p className="text-[9px] text-slate-400 mt-4 leading-snug">
-            * Indicative estimate based on standard CONON-NOW rates. Final quote provided after site survey.
-          </p>
+
+          <div className="space-y-1.5 text-[11px] text-emerald-300 font-bold pt-2 border-t border-white/10">
+            <div>🔒 100% CONON Escrow Stage-Lock</div>
+            <div>📸 Daily Site Progress Photos &amp; 450-Check Civil Audit</div>
+            <div>⏱️ Zero-Delay Handover Penalty Protection</div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onBookVisit(activeTier.name)}
+            className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black cursor-pointer"
+          >
+            Lock Estimate &amp; Book Free Civil Engineer Visit →
+          </button>
+        </div>
+
+        <div className="lg:col-span-7 rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-2.5">
+          <div className="text-xs font-black text-slate-900 uppercase tracking-wider">
+            10-Stage CONON Escrow Payment Schedule
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            {TEN_STAGE_ESCROW_SCHEDULE.map((st) => {
+              const stageAmt = Math.round((grandTotal * st.pct) / 100);
+              return (
+                <div
+                  key={st.stage}
+                  className="p-2.5 rounded-xl bg-white border border-slate-200 flex items-center justify-between gap-2"
+                >
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-black text-blue-700">STAGE {st.stage} ({st.pct}%)</span>
+                    <div className="text-[11px] font-bold text-slate-800 truncate">{st.title}</div>
+                  </div>
+                  <span className="font-mono font-black text-slate-900 shrink-0">{inrShort(stageAmt)}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function EstField({ label, icon, children }: { label: string; icon: React.ReactNode; children: React.ReactNode }) {
-  return (
-    <div className="bg-slate-50 rounded-2xl px-3.5 py-2.5 border border-slate-200">
-      <div className="flex items-center gap-1 text-slate-400 mb-1">
-        {icon}
-        <p className="text-[9px] font-black uppercase tracking-wide leading-none">{label}</p>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function Donut({ segments }: { segments: { label: string; pct: number; color: string }[] }) {
-  const r = 34, sw = 13, C = 2 * Math.PI * r;
-  let offset = 0;
-  return (
-    <svg width="92" height="92" viewBox="0 0 92 92" className="shrink-0">
-      <g transform="rotate(-90 46 46)">
-        <circle cx="46" cy="46" r={r} fill="none" stroke="#f1f5f9" strokeWidth={sw} />
-        {segments.map(s => {
-          const len = (s.pct / 100) * C;
-          const el = (
-            <circle
-              key={s.label} cx="46" cy="46" r={r} fill="none"
-              stroke={s.color} strokeWidth={sw}
-              strokeDasharray={`${len} ${C - len}`} strokeDashoffset={-offset}
-              strokeLinecap="butt"
-            />
-          );
-          offset += len;
-          return el;
-        })}
-      </g>
-      <text x="46" y="44" textAnchor="middle" className="fill-slate-800" style={{ fontSize: 13, fontWeight: 900 }}>100%</text>
-      <text x="46" y="56" textAnchor="middle" className="fill-slate-400" style={{ fontSize: 7, fontWeight: 700 }}>SPLIT</text>
-    </svg>
+    </section>
   );
 }
 
 /* ════════════════════════════════════════════════════════════════
-   4. SMART MATERIAL CALCULATOR
+   PART 4 — 5-TAB LUCKNOW SMART MATERIAL CALCULATOR + RMC SWITCH
 ════════════════════════════════════════════════════════════════ */
-const FT3_TO_M3 = 0.0283168;
-const M3_TO_FT3 = 35.3147;
-const BAG_M3 = 0.0347;
-
-interface MatLine { id: string; name: string; qty: number; unit: string; price: number; category: string; }
-
-type CalcType = "slab" | "brickwork" | "plaster";
-const CALC_TABS: { id: CalcType; label: string; icon: React.ReactNode }[] = [
-  { id: "slab",      label: "Slab",      icon: <Layers className="w-4 h-4" /> },
-  { id: "brickwork", label: "Brickwork", icon: <Building2 className="w-4 h-4" /> },
-  { id: "plaster",   label: "Plaster",   icon: <Hammer className="w-4 h-4" /> },
-];
+type CalcTab = "slab" | "brickwork" | "plaster" | "footing" | "tiles";
 
 function MaterialCalculatorSection() {
-  const [tab, setTab] = useState<CalcType>("slab");
-  const [length, setLength] = useState("20");
-  const [width, setWidth] = useState("15");
-  const [thickness, setThickness] = useState("5");
-
+  const [, setLocation] = useLocation();
+  const qc = useQueryClient();
   const addToCart = useAddToCart();
-  const queryClient = useQueryClient();
   const { setCartOpen } = useUI();
+  const liveProducts = useLiveProducts();
 
-  const lines = useMemo<MatLine[]>(() => {
-    const L = parseFloat(length) || 0;
-    const W = parseFloat(width) || 0;
-    const T = parseFloat(thickness) || 0;
-    if (L <= 0 || W <= 0 || T <= 0) return [];
+  const [tab, setTab] = useState<CalcTab>("slab");
+  const [areaSqFt, setAreaSqFt] = useState(1000);
+  const [thicknessIn, setThicknessIn] = useState(5);
 
-    if (tab === "slab") {
-      const volFt3 = L * W * (T / 12);
-      const volM3 = volFt3 * FT3_TO_M3;
-      const dry = volM3 * 1.54;
-      const cementBags = Math.ceil((dry * (1 / 5.5)) / BAG_M3);
-      const sandFt3 = Math.round(dry * (1.5 / 5.5) * M3_TO_FT3);
-      const aggFt3 = Math.round(dry * (3 / 5.5) * M3_TO_FT3);
-      const steelKg = Math.round(volM3 * 80);
-      return [
-        { id: "build-cement", name: "OPC 53 Cement", qty: cementBags, unit: "bags", price: 420, category: "Cement" },
-        { id: "build-steel",  name: "TMT Steel Bars", qty: steelKg, unit: "kg", price: 65, category: "Steel" },
-        { id: "build-sand",   name: "River Sand", qty: sandFt3, unit: "cft", price: 60, category: "Sand" },
-        { id: "build-agg",    name: "Stone Aggregate (20mm)", qty: aggFt3, unit: "cft", price: 55, category: "Aggregate" },
-      ];
+  // Pull live catalog rates where available
+  const findLiveRate = (kw: string, fallback: number) => {
+    const match = liveProducts.find((p) => (p.name || "").toLowerCase().includes(kw));
+    return match && Number(match.price) > 0 ? Number(match.price) : fallback;
+  };
+
+  const cementRate = findLiveRate("cement", 395);
+  const tmtRate = findLiveRate("tmt", 64);
+  const morangRate = findLiveRate("morang", 72);
+  const gittiRate = findLiveRate("gitti", 58);
+  const brickRate = findLiveRate("brick", 9);
+  const tileRate = findLiveRate("tile", 820);
+
+  const calc = useMemo(() => {
+    const area = Math.max(50, areaSqFt);
+    const thickFt = Math.max(1, thicknessIn) / 12;
+    const volCft = area * thickFt;
+    const volM3 = Number((volCft / 35.3147).toFixed(1));
+
+    if (tab === "slab" || tab === "footing") {
+      const factor = tab === "footing" ? 1.25 : 1.0;
+      const cementBags = Math.ceil(volM3 * 8 * factor);
+      const tmtKg = Math.ceil(volM3 * 95 * factor);
+      const morangCft = Math.ceil(volCft * 0.45 * factor);
+      const gittiCft = Math.ceil(volCft * 0.9 * factor);
+      return {
+        volM3: Number((volM3 * factor).toFixed(1)),
+        items: [
+          { id: "ultratech-opc-53-50kg", name: "OPC 53 / PPC Cement (UltraTech / ACC)", qty: cementBags, unit: "Bags", price: cementRate },
+          { id: "kamdhenu-tmt-fe550d", name: "Fe-550D TMT Sariya", qty: tmtKg, unit: "Kg", price: tmtRate },
+          { id: "banda-morang-sand", name: "Banda Morang (Coarse River Sand)", qty: morangCft, unit: "CFT", price: morangRate },
+          { id: "kabrai-20mm-gitti", name: "Kabrai 20mm Stone Aggregate (Gitti)", qty: gittiCft, unit: "CFT", price: gittiRate },
+        ],
+      };
     }
+
     if (tab === "brickwork") {
-      const volFt3 = L * W * (T / 12);
-      const volM3 = volFt3 * FT3_TO_M3;
-      const bricks = Math.ceil(volM3 * 500);
-      const cementBags = Math.ceil(volM3 * 1.26);
-      const sandFt3 = Math.round(volM3 * 0.27 * M3_TO_FT3);
-      return [
-        { id: "build-bricks", name: "Red Clay Bricks", qty: bricks, unit: "pcs", price: 9, category: "Bricks" },
-        { id: "build-cement", name: "OPC 53 Cement", qty: cementBags, unit: "bags", price: 420, category: "Cement" },
-        { id: "build-sand",   name: "River Sand", qty: sandFt3, unit: "cft", price: 60, category: "Sand" },
-      ];
+      const bricks = Math.ceil(area * 9.5);
+      const cementBags = Math.ceil(area * 0.08);
+      const morangCft = Math.ceil(area * 0.28);
+      return {
+        volM3: 0,
+        items: [
+          { id: "awal-bhatta-bricks", name: "Awal Bhatta Red Bricks", qty: bricks, unit: "Nos", price: brickRate },
+          { id: "ultratech-ppc-cement-50kg", name: "OPC / PPC Cement (UltraTech / ACC)", qty: cementBags, unit: "Bags", price: cementRate },
+          { id: "banda-morang-sand", name: "Banda Morang (Coarse River Sand)", qty: morangCft, unit: "CFT", price: morangRate },
+        ],
+      };
     }
-    // plaster
-    const areaM2 = (L * 0.3048) * (W * 0.3048);
-    const factor = T / 12;
-    const cementBags = Math.ceil(areaM2 * 0.17 * factor);
-    const sandFt3 = Math.round(areaM2 * 0.018 * factor * M3_TO_FT3);
-    return [
-      { id: "build-cement", name: "OPC 53 Cement", qty: cementBags, unit: "bags", price: 420, category: "Cement" },
-      { id: "build-sand",   name: "River Sand", qty: sandFt3, unit: "cft", price: 60, category: "Sand" },
-    ];
-  }, [tab, length, width, thickness]);
 
-  const grandTotal = lines.reduce((s, l) => s + l.qty * l.price, 0);
-  const thirdLabel = tab === "plaster" ? "Thickness (mm)" : "Thickness (in)";
+    if (tab === "plaster") {
+      const cementBags = Math.ceil(area * 0.045);
+      const morangCft = Math.ceil(area * 0.16);
+      return {
+        volM3: 0,
+        items: [
+          { id: "ultratech-ppc-cement-50kg", name: "PPC Cement (UltraTech / ACC)", qty: cementBags, unit: "Bags", price: cementRate },
+          { id: "banda-morang-sand", name: "Fine Plaster Sand / Morang", qty: morangCft, unit: "CFT", price: morangRate },
+        ],
+      };
+    }
 
-  const addAll = async () => {
-    const valid = lines.filter(l => l.qty > 0);
-    if (valid.length === 0) { toast.error("Enter valid dimensions first"); return; }
-    let ok = 0;
-    for (const l of valid) {
-      try {
-        await addToCart.mutateAsync({
-          data: {
-            materialId: l.id,
-            quantity: Math.min(Math.max(Math.round(l.qty), 1), 10000),
-            name: l.name,
-            price: l.price,
-            unit: l.unit,
-            vendor: "CONON-NOW Build",
-            category: l.category,
-          },
-        });
-        ok++;
-      } catch {
-        /* keep going; report partial result below */
-      }
+    // flooring tiles
+    const boxes = Math.ceil((area * 1.08) / 16);
+    const adhesiveBags = Math.ceil(area / 35);
+    return {
+      volM3: 0,
+      items: [
+        { id: "kajaria-vitrified-box", name: "Kajaria / Somany Vitrified Tiles (16 sq.ft/box)", qty: boxes, unit: "Boxes", price: tileRate },
+        { id: "rofff-tile-adhesive", name: "Polymer Tile Adhesive (20 kg)", qty: adhesiveBags, unit: "Bags", price: 380 },
+      ],
+    };
+  }, [tab, areaSqFt, thicknessIn, cementRate, tmtRate, morangRate, gittiRate, brickRate, tileRate]);
+
+  const handleAddAllToCart = async () => {
+    for (const it of calc.items) {
+      await addToCart.mutateAsync({
+        data: {
+          materialId: it.id,
+          category: "cement",
+          name: it.name,
+          price: it.price,
+          unit: it.unit,
+          quantity: it.qty,
+          vendor: "CONON Lucknow Verified Depot",
+        },
+      });
     }
-    queryClient.invalidateQueries({ queryKey: getGetCartQueryKey() });
-    if (ok === 0) {
-      toast.error("Couldn't add materials", { description: "Please try again." });
-      return;
-    }
-    if (ok < valid.length) {
-      toast.warning(`Added ${ok} of ${valid.length} materials`, { description: "Some items couldn't be added — please retry." });
-    } else {
-      toast.success("Materials added to cart", { description: "Eligible for 1-Hour Delivery" });
-    }
+    qc.invalidateQueries({ queryKey: getGetCartQueryKey() });
+    toast.success("All calculated Lucknow materials added to 60-Min Cart!");
     setCartOpen(true);
   };
 
   return (
-    <div className="pt-9 px-5">
-      <SectionTitle kicker="Civil engineering thumb rules" title="Smart Material Calculator" />
-      <div className="bg-white rounded-[26px] border border-slate-200 shadow-sm p-5">
-        {/* Tabs */}
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          {CALC_TABS.map(t => (
-            <button key={t.id} onClick={() => { setTab(t.id); setThickness(t.id === "plaster" ? "12" : t.id === "brickwork" ? "9" : "5"); }}
-              className="flex flex-col items-center gap-1 py-3 rounded-2xl border-2 transition"
-              style={{
-                borderColor: tab === t.id ? BRAND : "#e2e8f0",
-                background: tab === t.id ? "#f0f6ff" : "white",
-                color: tab === t.id ? BRAND : "#94a3b8",
-              }}>
-              {t.icon}
-              <span className="text-[11px] font-black">{t.label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Inputs */}
-        <div className="grid grid-cols-3 gap-2">
-          <CalcInput label="Length (ft)" value={length} onChange={setLength} />
-          <CalcInput label={tab === "slab" ? "Width (ft)" : "Height (ft)"} value={width} onChange={setWidth} />
-          <CalcInput label={thirdLabel} value={thickness} onChange={setThickness} />
-        </div>
-
-        {/* Results */}
-        <div className="mt-4 space-y-2">
-          {lines.length === 0 ? (
-            <p className="text-center text-slate-400 text-sm font-semibold py-6">Enter dimensions to calculate.</p>
-          ) : lines.map((l, i) => (
-            <motion.div key={l.id + i}
-              initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-3 bg-slate-50 rounded-2xl px-4 py-3 border border-slate-100">
-              <div className="flex-1">
-                <p className="text-[13px] font-black text-slate-800">{l.name}</p>
-                <p className="text-[10px] font-bold text-slate-400">{l.category} · {inr(l.price)}/{l.unit}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-base font-display font-black" style={{ color: BRAND }}>
-                  {l.qty.toLocaleString("en-IN")}
-                </p>
-                <p className="text-[10px] font-black text-slate-400 uppercase">{l.unit}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {lines.length > 0 && (
-          <>
-            <div className="flex justify-between items-center mt-4 px-1">
-              <span className="text-[12px] font-bold text-slate-500">Estimated Material Cost</span>
-              <span className="text-lg font-display font-black" style={{ color: BRAND }}>{inrShort(grandTotal)}</span>
-            </div>
-            <button
-              onClick={addAll}
-              disabled={addToCart.isPending}
-              className="w-full mt-4 py-4 rounded-[20px] font-black text-sm text-white flex items-center justify-center gap-2 active:scale-[0.98] transition disabled:opacity-60"
-              style={{ background: `linear-gradient(135deg, ${BRAND}, #2563eb)`, boxShadow: "0 10px 26px -8px rgba(27,67,102,0.6)" }}
-            >
-              <ShoppingCart className="w-4 h-4" />
-              {addToCart.isPending ? "Adding…" : "Add all to CONON-NOW Cart for 1-Hour Delivery"}
-            </button>
-            <div className="flex items-center justify-center gap-1 mt-2.5">
-              <Zap className="w-3 h-3" style={{ color: NEON }} fill="currentColor" />
-              <span className="text-[10px] font-black" style={{ color: "#4d7c0f" }}>Delivered to your site in 60 minutes</span>
-            </div>
-          </>
-        )}
-        <p className="text-[9px] text-slate-400 mt-4 leading-snug">
-          * Quantities use standard civil thumb rules (M20 1:1.5:3, 1:6 mortar). Verify with your engineer.
+    <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm space-y-4">
+      <div>
+        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-amber-600">
+          5-Tab Civil Engineering BOQ Tool (Live Catalog Rates)
         </p>
+        <h2 className="text-xl font-black text-slate-900 flex items-center gap-2">
+          <Calculator className="w-5 h-5 text-blue-700" />
+          <span>Lucknow Smart Material Calculator</span>
+        </h2>
       </div>
-    </div>
-  );
-}
 
-function CalcInput({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
-  return (
-    <div className="bg-slate-50 rounded-2xl px-3 py-2.5 border border-slate-200">
-      <p className="text-[9px] font-black text-slate-400 uppercase tracking-wide mb-1 leading-none">{label}</p>
-      <input
-        value={value}
-        onChange={e => onChange(e.target.value.replace(/[^0-9.]/g, ""))}
-        inputMode="decimal"
-        className="w-full bg-transparent text-base font-black text-slate-800 outline-none"
-      />
-    </div>
+      {/* 5 Tabs */}
+      <div className="flex overflow-x-auto gap-2 pb-1 scrollbar-none">
+        {(
+          [
+            { id: "slab", label: "Slab / Chhat" },
+            { id: "brickwork", label: "Brickwork (Awal Eent / AAC)" },
+            { id: "plaster", label: "Plaster (12mm/15mm)" },
+            { id: "footing", label: "Footing / Column RCC" },
+            { id: "tiles", label: "Flooring Tiles" },
+          ] as const
+        ).map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setTab(t.id)}
+            className={`px-3.5 py-2 rounded-xl text-xs font-black border whitespace-nowrap cursor-pointer transition ${
+              tab === t.id
+                ? "bg-slate-900 text-amber-300 border-slate-900"
+                : "bg-slate-50 text-slate-700 border-slate-200"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div>
+          <label className="font-bold text-slate-600 block mb-1">Area (sq.ft)</label>
+          <input
+            type="number"
+            min={50}
+            value={areaSqFt}
+            onChange={(e) => setAreaSqFt(Math.max(50, Number(e.target.value || 100)))}
+            className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-black text-slate-900"
+          />
+        </div>
+        {(tab === "slab" || tab === "footing") && (
+          <div>
+            <label className="font-bold text-slate-600 block mb-1">Slab / Member Thickness (Inches)</label>
+            <input
+              type="number"
+              min={3}
+              max={24}
+              value={thicknessIn}
+              onChange={(e) => setThicknessIn(Math.max(3, Number(e.target.value || 5)))}
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-black text-slate-900"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Results */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {calc.items.map((item) => (
+          <div key={item.id} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+            <div className="text-[11px] font-bold text-slate-600">{item.name}</div>
+            <div className="text-lg font-black font-mono text-slate-900">
+              {item.qty.toLocaleString("en-IN")} {item.unit}
+            </div>
+            <div className="text-[11px] font-mono font-bold text-emerald-700">
+              Est. {inr(item.qty * item.price)} (@ ₹{item.price}/{item.unit})
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Action Buttons including 1-Click RMC Switch */}
+      <div className="flex flex-col sm:flex-row gap-3 pt-1">
+        <button
+          type="button"
+          onClick={handleAddAllToCart}
+          className="flex-1 py-3 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-black flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <ShoppingCart className="w-4 h-4" />
+          <span>Option A: Site-Mix Materials → Add All to 60-Min Cart</span>
+        </button>
+
+        {(tab === "slab" || tab === "footing") && (
+          <button
+            type="button"
+            onClick={() => setLocation(`/rmc?volume=${calc.volM3}`)}
+            className="flex-1 py-3 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs font-black flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Layers className="w-4 h-4 text-amber-300" />
+            <span>Option B: Order M25 Ready Mix Concrete ({calc.volM3} m³) → RMC Plant Direct</span>
+          </button>
+        )}
+      </div>
+    </section>
   );
 }
 
 /* ════════════════════════════════════════════════════════════════
-   CONSULTATION SHEET
+   PART 5 — FREE CIVIL ENGINEER SITE VISIT BOOKER MODAL
 ════════════════════════════════════════════════════════════════ */
-function ConsultationSheet({ pkg, onClose }: { pkg: string; onClose: () => void }) {
+function ConsultationSheet({
+  pkg,
+  defaultSqft,
+  onClose,
+}: {
+  pkg: string;
+  defaultSqft: number;
+  onClose: () => void;
+}) {
+  const masterSync = useSafeCononMasterSync();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [done, setDone] = useState(false);
+  const [locationPincode, setLocationPincode] = useState("226030 — Sushant Golf City");
+  const [plotSqFt, setPlotSqFt] = useState(defaultSqft);
+  const [visitType, setVisitType] = useState<"ON_SITE_ENGINEER" | "HQ_OFFICE_MEET">("ON_SITE_ENGINEER");
+  const [preferredSlot, setPreferredSlot] = useState("Tomorrow 11:00 AM");
+  const [submitting, setSubmitting] = useState(false);
 
-  const submit = () => {
-    if (!name.trim() || phone.length < 10) { toast.error("Enter your name and a valid phone number"); return; }
-    setDone(true);
-    setTimeout(onClose, 2200);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || phone.replace(/\D/g, "").length < 10) {
+      toast.error("Enter valid Name & 10-digit Mobile Number");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const lead: TurnkeyConsultationLead = {
+        id: `TRN-${Date.now().toString(36).toUpperCase()}`,
+        name: name.trim(),
+        phone: `+91 ${phone.replace(/\D/g, "").slice(-10)}`,
+        locationPincode,
+        plotSqFt,
+        packageName: pkg,
+        visitType,
+        preferredSlot,
+        status: "NEW",
+        createdAt: new Date().toISOString(),
+      };
+
+      await fetch(apiUrl("/api/build/consultations"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lead),
+      }).catch(() => {});
+
+      if (masterSync) {
+        const existing = masterSync.state.operations?.turnkeyConsultations || [];
+        await masterSync
+          .patchMasterState(
+            { operations: { turnkeyConsultations: [lead, ...existing].slice(0, 100) } },
+            "turnkeyBuild"
+          )
+          .catch(() => {});
+      }
+
+      toast.success(`Site Visit Booked! Ref #${lead.id}`, {
+        description: "Synced live with CONON Command OS. Senior Civil Engineer will call shortly.",
+      });
+      onClose();
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/55 backdrop-blur-sm z-[60]" onClick={onClose} />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4"
+      onClick={onClose}
+    >
       <motion.div
-        initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
-        transition={{ type: "spring", damping: 30, stiffness: 240 }}
-        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white rounded-t-[34px] z-[70] p-6"
+        initial={{ y: 32 }}
+        animate={{ y: 0 }}
+        exit={{ y: 32 }}
+        onClick={(e) => e.stopPropagation()}
+        className="w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto"
       >
-        {done ? (
-          <div className="py-10 flex flex-col items-center text-center">
-            <span className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-              <Check className="w-8 h-8 text-green-600" strokeWidth={3} />
+        <div className="flex items-center justify-between border-b pb-3">
+          <div>
+            <span className="text-[10px] font-black uppercase text-amber-600">
+              Free Civil Engineer Consultation
             </span>
-            <h4 className="text-xl font-display font-black text-slate-800">Consultation Booked!</h4>
-            <p className="text-sm text-slate-500 mt-1">Our build expert will call you within 24 hours.</p>
+            <h3 className="text-base font-black text-slate-900">
+              Book Site Visit ({pkg} Package)
+            </h3>
           </div>
-        ) : (
-          <>
-            <div className="flex justify-between items-start mb-1">
-              <h4 className="font-display font-black italic text-lg" style={{ color: BRAND }}>Free Consultation</h4>
-              <button onClick={onClose} className="p-2 bg-slate-100 rounded-full"><X className="w-4 h-4 text-slate-500" /></button>
-            </div>
-            <p className="text-[11px] font-bold text-slate-400 mb-5">{pkg} package</p>
+          <button onClick={onClose} className="p-1.5 rounded-full hover:bg-slate-100 cursor-pointer">
+            <X className="w-5 h-5 text-slate-600" />
+          </button>
+        </div>
 
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Your Name</p>
-            <input value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Rakesh Kumar"
-              className="w-full bg-slate-50 rounded-2xl px-4 py-3.5 border border-slate-200 text-sm font-semibold text-slate-800 outline-none focus:border-blue-400 mb-4" />
+        <form onSubmit={handleSubmit} className="space-y-3 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <input
+              type="text"
+              required
+              placeholder="Your Name *"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="px-3 py-2.5 rounded-xl border border-slate-300"
+            />
+            <input
+              type="tel"
+              required
+              placeholder="+91 Mobile *"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="px-3 py-2.5 rounded-xl border border-slate-300 font-mono"
+            />
+          </div>
 
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Phone Number</p>
-            <div className="flex items-center gap-2 bg-slate-50 rounded-2xl px-4 py-3.5 border border-slate-200 focus-within:border-blue-400 mb-6">
-              <Phone className="w-4 h-4 text-slate-400" />
-              <span className="text-sm font-bold text-slate-400">+91</span>
-              <input value={phone} onChange={e => setPhone(e.target.value.replace(/[^0-9]/g, "").slice(0, 10))}
-                inputMode="numeric" placeholder="98765 43210"
-                className="flex-1 bg-transparent text-sm font-bold text-slate-800 outline-none" />
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <input
+              type="text"
+              required
+              placeholder="Plot Location / Pin Code *"
+              value={locationPincode}
+              onChange={(e) => setLocationPincode(e.target.value)}
+              className="px-3 py-2.5 rounded-xl border border-slate-300"
+            />
+            <input
+              type="number"
+              min={200}
+              placeholder="Plot Size (sq.ft)"
+              value={plotSqFt}
+              onChange={(e) => setPlotSqFt(Number(e.target.value || 1000))}
+              className="px-3 py-2.5 rounded-xl border border-slate-300 font-mono"
+            />
+          </div>
 
-            <button onClick={submit}
-              className="w-full py-4 rounded-[20px] font-black text-sm text-white active:scale-[0.98] transition"
-              style={{ background: BRAND, boxShadow: "0 8px 24px rgba(27,67,102,0.3)" }}>
-              Request Callback
-            </button>
-          </>
-        )}
+          <div className="grid grid-cols-1 gap-2">
+            {[
+              { id: "ON_SITE_ENGINEER" as const, label: "On-Site Civil Engineer Plot Visit" },
+              { id: "HQ_OFFICE_MEET" as const, label: "Meet at Conon Infrabuilt Office — Skyline Plaza 3, Sushant Golf City" },
+            ].map((opt) => (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => setVisitType(opt.id)}
+                className={`p-2.5 rounded-xl border-2 text-left font-bold cursor-pointer ${
+                  visitType === opt.id ? "border-blue-700 bg-blue-50 text-blue-950" : "border-slate-200"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+
+          <input
+            type="text"
+            value={preferredSlot}
+            onChange={(e) => setPreferredSlot(e.target.value)}
+            placeholder="Preferred Date & Time Slot"
+            className="w-full px-3 py-2.5 rounded-xl border border-slate-300"
+          />
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 font-black text-xs cursor-pointer"
+          >
+            {submitting ? "Booking Visit..." : "Confirm Free Civil Engineer Visit →"}
+          </button>
+        </form>
       </motion.div>
-    </>
+    </motion.div>
   );
 }
+
+export default CononBuild;

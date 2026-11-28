@@ -51,6 +51,11 @@ export const DEFAULT_LIVE_STATE = {
     companyAccounts: [],
     ledger: [],
   },
+  compliance: {
+    partnerStatuses: {},
+    blacklistRegistry: [],
+    auditLog: [],
+  },
 };
 
 const MAX_BODY_BYTES = 25 * 1024 * 1024;

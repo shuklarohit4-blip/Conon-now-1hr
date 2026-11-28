@@ -1,20 +1,25 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import fs from "fs";
 import path from "path";
-import crypto from "crypto";
 import multer from "multer";
-import sharp from "sharp";
 import { PRODUCTS_UPLOADS_DIR } from "../lib/paths";
 import { requireAdmin } from "../middleware/adminAuth";
 import { mediaVaultEngine } from "../services/mediaVaultEngine";
-import { getIo, adminRoom } from "../socket";
+import { syncBus } from "../services/syncBus";
+import { getIo } from "../socket";
+import {
+  MAX_IMAGE_UPLOAD_BYTES,
+  processAndSaveUploadedImage,
+  stripLocalhostPrefix,
+  validateUploadedImage,
+} from "../utils/uploadSanitizer";
 import { logger } from "../lib/logger";
 
 const router: IRouter = Router();
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 12 * 1024 * 1024 },
+  limits: { fileSize: MAX_IMAGE_UPLOAD_BYTES },
 });
 
 function sanitizeSlug(raw: string): string {
@@ -41,6 +46,7 @@ function decodeDataUrl(dataUrl: string): { buffer: Buffer; mime: string } | null
  */
 router.get("/media-vault/overrides", (_req: Request, res: Response) => {
   try {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
     const overrides = mediaVaultEngine.getAllOverridesMap();
     const list = mediaVaultEngine.getAllOverridesList();
     return res.json({
@@ -69,6 +75,9 @@ router.post(
     try {
       const productId = sanitizeSlug(String(req.body?.productId || "product"));
       let inputBuffer: Buffer | null = req.file?.buffer || null;
+      if (req.file) {
+        validateUploadedImage(req.file);
+      }
 
       if (!inputBuffer && typeof req.body?.dataUrl === "string") {
         const parsed = decodeDataUrl(req.body.dataUrl);
@@ -78,46 +87,28 @@ router.post(
       if (!inputBuffer || inputBuffer.length === 0) {
         return res.status(400).json({ ok: false, error: "No image file or dataUrl provided." });
       }
-
-      if (!fs.existsSync(PRODUCTS_UPLOADS_DIR)) {
-        fs.mkdirSync(PRODUCTS_UPLOADS_DIR, { recursive: true });
+      if (inputBuffer.length > MAX_IMAGE_UPLOAD_BYTES) {
+        return res.status(400).json({ ok: false, error: "Image exceeds 5MB limit." });
       }
 
-      const uniqueSuffix = `${Date.now()}-${crypto.randomBytes(3).toString("hex")}`;
-      let outFilename = `${productId}-${uniqueSuffix}.webp`;
-      let outBuffer: Buffer;
-      let mimeType = "image/webp";
-
-      try {
-        outBuffer = await sharp(inputBuffer)
-          .rotate()
-          .resize(900, 900, { fit: "inside", withoutEnlargement: true })
-          .webp({ quality: 84 })
-          .toBuffer();
-      } catch {
-        // Fallback: save raw JPEG/WebP buffer cleanly if sharp encounters exotic encoding
-        outFilename = `${productId}-${uniqueSuffix}.jpg`;
-        mimeType = "image/jpeg";
-        outBuffer = inputBuffer;
-      }
-
-      const outPath = path.join(PRODUCTS_UPLOADS_DIR, outFilename);
-      fs.writeFileSync(outPath, outBuffer);
-
-      const url = `/uploads/products/${outFilename}`;
-      const apiUrl = `/api/uploads/products/${outFilename}`;
-      const dataUrlFallback = `data:${mimeType};base64,${outBuffer.toString("base64")}`;
+      const saved = await processAndSaveUploadedImage({
+        buffer: inputBuffer,
+        dir: PRODUCTS_UPLOADS_DIR,
+        publicPrefix: "/uploads/products",
+        prefixSlug: `prod-${productId}`,
+        maxWidth: 900,
+        maxHeight: 900,
+      });
 
       return res.json({
         ok: true,
-        url,
-        apiUrl,
-        sizeBytes: outBuffer.length,
-        dataUrlFallback: outBuffer.length <= 250 * 1024 ? dataUrlFallback : undefined,
+        url: saved.url,
+        rawPath: saved.rawPath,
+        sizeBytes: saved.sizeBytes,
       });
     } catch (err: any) {
       logger.error({ err }, "[MediaVault] Image upload failed");
-      return res.status(500).json({ ok: false, error: err?.message || "Image upload failed" });
+      return res.status(400).json({ ok: false, error: err?.message || "Image upload failed" });
     }
   }
 );
@@ -134,17 +125,21 @@ router.put("/media-vault/products/:productId", requireAdmin, async (req: Request
       return res.status(400).json({ ok: false, error: "Missing productId" });
     }
 
-    const saved = await mediaVaultEngine.upsertOverride(productId, req.body || {});
-    const primaryUrl = saved.images[0]?.url;
+    const saved = await mediaVaultEngine.upsertOverride(productId, {
+      ...(req.body || {}),
+      images: Array.isArray(req.body?.images)
+        ? req.body.images.map((im: any) => ({ ...im, url: stripLocalhostPrefix(im?.url) }))
+        : req.body?.images,
+    });
 
-    const io = getIo();
-    if (io) {
-      io.emit("media_vault:product_updated", { productId, override: saved });
-      io.to(adminRoom()).emit("media_vault:product_updated", { productId, override: saved });
-      if (primaryUrl) {
-        io.emit("catalog:image_updated", { productId, imageUrl: primaryUrl, fromAdminVault: true });
-      }
-    }
+    syncBus.publish({
+      type: "CATALOG_UPDATED",
+      entityId: productId,
+      action: "UPDATE",
+      summary: `Updated Media & Specs for ${saved.title || productId}`,
+      socketEvent: "media_vault:product_updated",
+      socketPayload: { productId, override: saved },
+    });
 
     return res.json({ ok: true, override: saved });
   } catch (err: any) {

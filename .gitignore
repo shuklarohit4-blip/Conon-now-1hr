@@ -57,6 +57,7 @@ lerna-debug.log*
 **/.env.*.local
 !.env.example
 !**/.env.example
+!.env.production.example
 
 # System Files
 .DS_Store
@@ -71,3 +72,4 @@ Thumbs.db
 *.tgz
 scratch/
 raw-brand-assets/
+artifacts/api-server/data/admin-activity.json

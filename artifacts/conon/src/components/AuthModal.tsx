@@ -23,8 +23,16 @@ import { useAuthContext, AuthModalTab } from "@/context/AuthContext";
 import { useUI } from "@/context/UIContext";
 import { useUser } from "@/context/UserContext";
 import { toast } from "sonner";
+import type { RecaptchaVerifier as FirebaseRecaptchaVerifier } from "firebase/auth";
+
+declare global {
+  interface Window {
+    recaptchaVerifier?: FirebaseRecaptchaVerifier;
+  }
+}
 import { auth } from "@/firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber, type ConfirmationResult } from "firebase/auth";
+import { sendOtp } from "@/lib/authApi";
 import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 
 interface AuthModalProps {
@@ -123,6 +131,7 @@ export function AuthModal({
       setOtpDigits(["", "", "", ""]);
       setLoading(false);
       setConfirmResult(null);
+      setDevOtpHint(null);
       setSignUpName("");
       setSignUpPhone("");
       setSignUpPin("226030");
@@ -160,10 +169,10 @@ export function AuthModal({
     window.recaptchaVerifier = undefined;
   }
 
-  /* ── 1. Send OTP ── */
+  /* ── 1. Send OTP via Fast2SMS ── */
   const handleRequestOtp = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    const cleanNum = phone.replace(/\D/g, "");
+    const cleanNum = phone.replace(/\D/g, "").slice(-10);
     if (cleanNum.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number");
       return;
@@ -171,21 +180,23 @@ export function AuthModal({
 
     setLoading(true);
     try {
-      setupRecaptcha();
-      const formatted = cleanNum.startsWith("91") ? `+${cleanNum}` : `+91${cleanNum}`;
-      if (window.recaptchaVerifier) {
-        const result = await signInWithPhoneNumber(auth, formatted, window.recaptchaVerifier);
-        setConfirmResult(result);
+      const res = await sendOtp(cleanNum);
+      if (!res.ok) {
+        toast.error(res.error || "Could not send SMS OTP. Please try again.");
+        return;
       }
-      setLoginStep("otp");
-      setResendTimer(30);
-      toast.success("OTP sent to your phone!");
-    } catch (err) {
-      clearRecaptcha();
       setConfirmResult(null);
       setLoginStep("otp");
       setResendTimer(30);
-      toast.info("Verification code ready: Enter 1234 to log in.");
+      if (res.devOtp) {
+        setDevOtpHint(res.devOtp);
+        toast.info(res.message || `OTP ready: ${res.devOtp}`);
+      } else {
+        setDevOtpHint(null);
+        toast.success(res.message || `OTP sent via SMS to +91 ${cleanNum}!`);
+      }
+    } catch {
+      toast.error("Network error while requesting OTP.");
     } finally {
       setLoading(false);
     }
@@ -196,10 +207,11 @@ export function AuthModal({
     if (e) e.preventDefault();
     const enteredOtp = otpDigits.join("");
     if (enteredOtp.length < 4) {
-      toast.error("Please enter the 4-digit OTP (e.g. 1234)");
+      toast.error("Please enter the 4-digit OTP sent to your phone");
       return;
     }
 
+    const cleanNum = phone.replace(/\D/g, "").slice(-10);
     setLoading(true);
     try {
       if (confirmResult && enteredOtp.length >= 6) {
@@ -207,7 +219,7 @@ export function AuthModal({
       }
 
       await loginWithOtp({
-        phone: phone.replace(/\D/g, ""),
+        phone: cleanNum,
         otp: enteredOtp,
         role: "Builder / Owner",
       });
@@ -215,41 +227,21 @@ export function AuthModal({
       loginUser({
         role: "customer",
         name: "CONON Builder",
-        phone: phone.replace(/\D/g, ""),
+        phone: cleanNum,
         displayRole: "Builder / Owner",
       });
 
       handleClose();
       onSuccess?.();
-    } catch (err) {
-      if (enteredOtp === "1234" || enteredOtp === "123456") {
-        await loginWithOtp({
-          phone: phone.replace(/\D/g, "") || "9876543210",
-          otp: enteredOtp,
-          name: "CONON Builder",
-          role: "Builder / Owner",
-        });
-        loginUser({
-          role: "customer",
-          name: "CONON Builder",
-          phone: phone.replace(/\D/g, "") || "9876543210",
-          displayRole: "Builder / Owner",
-        });
-        handleClose();
-        onSuccess?.();
-        return;
-      }
-      toast.error("Invalid OTP. Try demo code 1234.");
+    } catch (err: any) {
+      toast.error(err?.message || "Invalid or expired OTP. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  /* ── 3. Quick Fill Demo OTP ── */
-  const handleFillDemoOtp = () => {
-    setOtpDigits(["1", "2", "3", "4"]);
-    toast.success("Demo OTP 1234 applied!");
-  };
+  /* ── 3. SMS Delivery Helper ── */
+  const [devOtpHint, setDevOtpHint] = useState<string | null>(null);
 
   /* ── 4. Create Account ── */
   const handleCreateAccount = async (e: React.FormEvent) => {
@@ -315,7 +307,7 @@ export function AuthModal({
       handleClose();
       navigate("/admin");
     } catch (err: any) {
-      toast.error(err?.message || "Admin authorization failed. Use testing PIN: 2026.");
+      toast.error(err?.message || "Admin authorization failed. Use PIN: 2026.");
     } finally {
       setLoading(false);
     }
@@ -442,7 +434,7 @@ export function AuthModal({
                   onClick={() => setAdminPin("2026")}
                   className="text-[10.5px] text-amber-400 hover:text-amber-300 font-bold underline cursor-pointer"
                 >
-                  ⚡ Fill Dev PIN: 2026
+                  ⚡ Fill PIN: 2026
                 </button>
               </div>
 
@@ -683,18 +675,24 @@ export function AuthModal({
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between bg-amber-50 border border-amber-200/80 rounded-xl px-3 py-2 text-xs">
-                    <div className="flex items-center gap-1.5 text-amber-900 font-bold">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                      <span>Demo OTP: 1234</span>
+                  <div className="flex items-center justify-between bg-blue-50/70 border border-blue-200/80 rounded-xl px-3 py-2 text-xs">
+                    <div className="flex items-center gap-1.5 text-slate-700 font-semibold">
+                      <Sparkles className="w-3.5 h-3.5 text-[#1848a0] shrink-0" />
+                      <span>
+                        {devOtpHint
+                          ? `Dev OTP: ${devOtpHint}`
+                          : "4-digit OTP sent via Fast2SMS"}
+                      </span>
                     </div>
-                    <button
-                      type="button"
-                      onClick={handleFillDemoOtp}
-                      className="text-amber-800 underline font-black hover:text-amber-950 cursor-pointer"
-                    >
-                      Auto Fill
-                    </button>
+                    {devOtpHint && (
+                      <button
+                        type="button"
+                        onClick={() => setOtpDigits(devOtpHint.slice(0, 4).split(""))}
+                        className="text-[#1848a0] underline font-black hover:text-blue-900 cursor-pointer"
+                      >
+                        Auto Fill
+                      </button>
+                    )}
                   </div>
 
                   <button

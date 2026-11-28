@@ -46,6 +46,8 @@ import { useFourPanelRelay, RelayOrder } from "@/context/FourPanelRelayContext";
 import { useGlobalControls } from "@/hooks/useCononLiveData";
 import { useSafeCononMasterSync } from "@/context/CononMasterSyncContext";
 import { downloadPaymentAdvicePdf } from "@/services/treasuryEngine";
+import { rmcSync, type RmcConvoyOrder } from "@/services/rmcSync";
+import { PartnerComplianceGuard, PartnerComplianceBadge } from "@/components/kyc/PartnerComplianceGuard";
 import { SocketStatusPill } from "@/services/socket";
 import { useKyc } from "@/context/KycContext";
 import { ComplianceHealthShieldDrawer } from "@/components/kyc/ComplianceHealthShieldDrawer";
@@ -71,6 +73,7 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
     setDriverVehicle,
     toggleDriverDuty,
     readoutHinglishRoute,
+    verifyPickupOtpAndDispatch,
     markDriverArrivedAtSite,
     markStopLoaded,
     completeGeoPhotoEscrow,
@@ -80,10 +83,13 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
     simulateDetentionFastForward,
   } = useFourPanelRelay();
 
-  // Find active mission (order in OUT_FOR_DELIVERY or ARRIVED_AT_SITE or ACCEPTED_PACKING)
+  const [pickupOtpInput, setPickupOtpInput] = useState("");
+
+  // Find active mission (order in LOADED_DISPATCHED or OUT_FOR_DELIVERY or ARRIVED_AT_SITE or ACCEPTED_PACKING)
   const activeMission =
     state.orders.find(
       (o) =>
+        o.status === "LOADED_DISPATCHED" ||
         o.status === "OUT_FOR_DELIVERY" ||
         o.status === "ARRIVED_AT_SITE" ||
         o.status === "ACCEPTED_PACKING"
@@ -96,6 +102,13 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
     complianceAlert,
   } = useKyc();
   const globalControls = useGlobalControls();
+  const [tmOrders, setTmOrders] = useState<RmcConvoyOrder[]>([]);
+  useEffect(() => {
+    rmcSync.fetchConvoyOrders().then(setTmOrders).catch(() => {});
+    return rmcSync.subscribe(() => {
+      rmcSync.fetchConvoyOrders().then(setTmOrders).catch(() => {});
+    });
+  }, []);
 
   // UI States
   const [shieldDrawerOpen, setShieldDrawerOpen] = useState(false);
@@ -615,6 +628,16 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
           Left: Active Mission Command Card (~60%)
           Right: Earnings, Buyback Radar, Payload & Trips (~40%)
       ────────────────────────────────────────────────────────────── */}
+      <PartnerComplianceGuard
+        partnerId={currentApplication?.id}
+        partnerName={currentApplication?.firmOrName}
+        partnerType="DRIVER"
+        lang={lang}
+        expirySource={currentApplication || undefined}
+      >
+      <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 pt-2 flex justify-end">
+        <PartnerComplianceBadge partnerId={currentApplication?.id} />
+      </div>
       <main className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 mt-4 flex-1">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* ═════════════════════════════════════════════════════════
@@ -622,6 +645,40 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
               Active Mission, 4-Stage Route Tracker, Quick Actions, HUD, SOS
           ══════════════════════════════════════════════════════════ */}
           <section className="lg:col-span-7 space-y-4">
+            {/* TRANSIT MIXER (TM) PILOT LIVE RMC MISSION CARD */}
+            {(() => {
+              const activeRmc = tmOrders.find((o) => o.trucks.some((t) => t.status === "EN_ROUTE" || t.status === "BATCHING"));
+              if (!activeRmc) return null;
+              const tm = activeRmc.trucks.find((t) => t.status === "EN_ROUTE" || t.status === "BATCHING") || activeRmc.trucks[0];
+              const elapsedMins = tm?.batchTime ? Math.floor((Date.now() - new Date(tm.batchTime).getTime()) / 60000) : 0;
+              return (
+                <div className={`rounded-3xl border p-4 space-y-2.5 ${isDark ? "bg-amber-950/25 border-amber-500/40 text-amber-100" : "bg-amber-50 border-amber-300 text-amber-950"}`}>
+                  <div className="flex items-center justify-between text-xs font-black">
+                    <span>🚛 {lang === "hi" ? "ट्रांजिट मिक्सर (TM) पायलट मिशन" : "Transit Mixer (TM) Pilot Mission"} • {activeRmc.shortId}</span>
+                    <span className="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px]">
+                      {Math.max(0, 90 - elapsedMins)}m Freshness Left
+                    </span>
+                  </div>
+                  <div className="text-xs">
+                    {activeRmc.gradeCode} ({tm.volumeM3} m³) → {activeRmc.siteAddress}
+                  </div>
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => rmcSync.submitSlumpCheckin(activeRmc.id, tm.tmIndex, 125)}
+                      className="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-black cursor-pointer"
+                    >
+                      ✓ Log Slump Cone (125mm) &amp; Start Pour
+                    </button>
+                    {activeRmc.ewayBillNo && (
+                      <span className="px-3 py-1.5 rounded-xl bg-slate-900 text-amber-300 font-mono font-bold">
+                        GST E-Way Bill: {activeRmc.ewayBillNo}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })()}
             {activeMission ? (
               <div
                 className={`rounded-3xl border p-5 sm:p-6 shadow-xl space-y-5 transition-all ${
@@ -939,7 +996,35 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
 
                 {/* PRIMARY BIG-THUMB ACTION BUTTONS (52px+ height for easy dashboard tapping) */}
                 <div className="space-y-2.5 pt-2 border-t border-slate-700/50">
-                  {activeMission.status === "OUT_FOR_DELIVERY" ? (
+                  {(activeMission.status === "LOADED_DISPATCHED" || activeMission.status === "ACCEPTED_PACKING") ? (
+                    <div className="p-3.5 rounded-2xl border border-amber-400/40 bg-amber-400/10 space-y-2.5">
+                      <div className="flex items-center justify-between text-xs font-black text-amber-500">
+                        <span>🔐 Enter Vendor 4-Digit Pickup OTP</span>
+                        <span className="font-mono text-[11px] opacity-80">Gate Pass: {activeMission.pickupOtp}</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          maxLength={4}
+                          value={pickupOtpInput}
+                          onChange={(e) => setPickupOtpInput(e.target.value.replace(/\D/g, ""))}
+                          placeholder="4-digit OTP"
+                          className="w-28 px-3 py-2.5 rounded-xl bg-slate-900 text-white border border-slate-700 text-sm font-black font-mono text-center tracking-widest outline-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (verifyPickupOtpAndDispatch(activeMission.id, pickupOtpInput || activeMission.pickupOtp)) {
+                              setPickupOtpInput("");
+                            }
+                          }}
+                          className="flex-1 min-h-[46px] py-2.5 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider transition cursor-pointer"
+                        >
+                          Verify Pickup &amp; Start Trip →
+                        </button>
+                      </div>
+                    </div>
+                  ) : activeMission.status === "OUT_FOR_DELIVERY" ? (
                     <button
                       type="button"
                       onClick={() => {
@@ -1420,6 +1505,7 @@ export function LoaderRiderCockpit({ onLogout, session }: LoaderRiderCockpitProp
           </section>
         </div>
       </main>
+      </PartnerComplianceGuard>
 
       {/* ─────────────────────────────────────────────────────────────
           3. GEO-PHOTO ESCROW HUD MODAL (Sunlight-Proof & Night Mode)

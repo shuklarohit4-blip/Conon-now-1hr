@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { apiUrl, adminFetch } from "@/lib/apiBase";
 import { IS_LOCAL_ADMIN } from "@/config/adminGuard";
 import { getSocket } from "@/services/socket";
+import { subscribeSseSync } from "@/services/sseSyncClient";
 import {
   saveLocalVaultOverride,
   type ProductMediaOverride,
@@ -21,6 +22,24 @@ import type {
   TreasuryLedgerEntry,
   TreasuryState,
 } from "@/services/treasuryEngine";
+import type {
+  PartnerComplianceOverlay,
+  BlacklistEntry,
+  ComplianceAuditEntry,
+} from "@/utils/complianceEvaluator";
+import {
+  DEFAULT_PAYMENT_POLICY_RULES,
+  type PaymentPolicyRules,
+} from "@/utils/paymentPolicy";
+import {
+  DEFAULT_SERVICEABILITY_CONFIG,
+  type ServiceableZoneConfig,
+  type PincodeWaitlistEntry,
+} from "@/utils/serviceabilityPolicy";
+import {
+  DEFAULT_LUCKNOW_TRAFFIC_RULES,
+  type LucknowTrafficRulesConfig,
+} from "@/utils/lucknowTrafficPolicy";
 
 export interface StorefrontBannerConfig {
   enabled: boolean;
@@ -29,11 +48,39 @@ export interface StorefrontBannerConfig {
   tone: "emerald" | "amber" | "crimson";
 }
 
+import type { TurnkeyConsultationLead } from "@/data/lucknowTurnkeyPackages";
+
+export interface PowerTrioSpotlightConfig {
+  enabled: boolean;
+  builderBadge: string;
+  servicesBadge: string;
+  rentalsBadge: string;
+}
+
+export interface TurnkeyBuildConfig {
+  rates: Record<string, number>;
+  promoBanner: string;
+  offerActive: boolean;
+}
+
+export interface LiveHeroConfig {
+  campaignPill: string;
+  headlineOverride: string;
+  defaultMode: "materials" | "build_rmc" | "crew_fleet";
+  backdropImageUrl: string;
+}
+
 export interface GlobalControlsState {
   rainMode: boolean;
   storefrontBanner: StorefrontBannerConfig;
   deliverySlaMins: number;
   emergencyPause: boolean;
+  paymentPolicy?: PaymentPolicyRules;
+  serviceability?: ServiceableZoneConfig;
+  trafficPolicy?: LucknowTrafficRulesConfig;
+  powerTrioSpotlight?: PowerTrioSpotlightConfig;
+  turnkeyBuild?: TurnkeyBuildConfig;
+  liveHero?: LiveHeroConfig;
 }
 
 export interface MasterProductOverride extends Partial<ProductMediaOverride> {
@@ -72,8 +119,15 @@ export interface CononMasterState {
     disputes: any[];
     feedback: any[];
     siteDna: Record<string, any>;
+    pincodeWaitlist?: PincodeWaitlistEntry[];
+    turnkeyConsultations?: TurnkeyConsultationLead[];
   };
   treasury: TreasuryState;
+  compliance: {
+    partnerStatuses: Record<string, PartnerComplianceOverlay>;
+    blacklistRegistry: BlacklistEntry[];
+    auditLog: ComplianceAuditEntry[];
+  };
 }
 
 export const DEFAULT_CONON_MASTER_STATE: CononMasterState = {
@@ -88,6 +142,26 @@ export const DEFAULT_CONON_MASTER_STATE: CononMasterState = {
     },
     deliverySlaMins: 60,
     emergencyPause: false,
+    paymentPolicy: DEFAULT_PAYMENT_POLICY_RULES,
+    serviceability: DEFAULT_SERVICEABILITY_CONFIG,
+    trafficPolicy: DEFAULT_LUCKNOW_TRAFFIC_RULES,
+    powerTrioSpotlight: {
+      enabled: true,
+      builderBadge: "PRO BUILDERS & GHAR CONSTRUCTION",
+      servicesBadge: "60-MIN VISIT • ESCROW SAFE",
+      rentalsBadge: "DIGITAL HMR BILLING • ZERO FRAUD",
+    },
+    turnkeyBuild: {
+      rates: { grey: 1190, silver: 1650, gold: 2100, platinum: 2750, luxury: 3600 },
+      promoBanner: "Free 2D Vastu + LDA/Ansal Map Support on Gold & Platinum Turnkey",
+      offerActive: true,
+    },
+    liveHero: {
+      campaignPill: "CONON INFRABUILT • 7+ Yrs • 150+ Projects",
+      headlineOverride: "",
+      defaultMode: "materials",
+      backdropImageUrl: "",
+    },
   },
   categories: {
     customCategories: [],
@@ -119,6 +193,11 @@ export const DEFAULT_CONON_MASTER_STATE: CononMasterState = {
   treasury: {
     companyAccounts: [],
     ledger: [],
+  },
+  compliance: {
+    partnerStatuses: {},
+    blacklistRegistry: [],
+    auditLog: [],
   },
 };
 
@@ -197,25 +276,52 @@ export interface CononMasterSyncContextValue {
     gatewayRefId?: string;
     pennyDropVerified: boolean;
   }) => Promise<TreasuryLedgerEntry>;
+  suspendPartnerLive: (params: {
+    partnerId: string;
+    partnerName?: string;
+    partnerType: string;
+    reason: string;
+  }) => Promise<void>;
+  blacklistPartnerLive: (params: {
+    partnerId: string;
+    partnerName?: string;
+    partnerType: string;
+    phone?: string;
+    pan?: string;
+    gstin?: string;
+    vehicleNo?: string;
+    reason: string;
+  }) => Promise<void>;
+  reinstatePartnerLive: (params: {
+    partnerId: string;
+    partnerName?: string;
+    partnerType: string;
+    reason?: string;
+  }) => Promise<void>;
+  awardPhysicalInspectionStamp: (params: {
+    partnerId: string;
+    partnerName?: string;
+    partnerType: string;
+    inspectorName: string;
+    inspectedAt: string;
+    notes?: string;
+    checklist?: Record<string, boolean>;
+    photoUrl?: string;
+  }) => Promise<void>;
+  submitPartnerRenewalExpiry: (params: {
+    partnerId: string;
+    partnerName?: string;
+    partnerType: string;
+    docType: string;
+    newExpiryDate: string;
+  }) => Promise<void>;
   triggerTestPing: () => Promise<{ ok: boolean; tabs: number }>;
 }
 
 const CononMasterSyncContext = createContext<CononMasterSyncContextValue | null>(null);
 
-function readCachedState(): CononMasterState {
-  if (typeof window === "undefined") return DEFAULT_CONON_MASTER_STATE;
-  try {
-    const raw = localStorage.getItem(STATE_CACHE_KEY);
-    if (!raw) return DEFAULT_CONON_MASTER_STATE;
-    const parsed = JSON.parse(raw);
-    return deepMergeMasterState(DEFAULT_CONON_MASTER_STATE, parsed);
-  } catch {
-    return DEFAULT_CONON_MASTER_STATE;
-  }
-}
-
 export function CononMasterSyncProvider({ children }: { children: React.ReactNode }) {
-  const [state, setState] = useState<CononMasterState>(() => readCachedState());
+  const [state, setState] = useState<CononMasterState>(() => DEFAULT_CONON_MASTER_STATE);
   const [syncStatus, setSyncStatus] = useState<MasterSyncStatus>("LIVE");
   const [lastSyncError, setLastSyncError] = useState<string | null>(null);
   const [liveTabsCount, setLiveTabsCount] = useState<number>(1);
@@ -231,34 +337,6 @@ export function CononMasterSyncProvider({ children }: { children: React.ReactNod
 
   const commitStateLocally = useCallback((next: CononMasterState) => {
     setState(next);
-    try {
-      // Cache lightweight master state (strip any oversized inline dataUrls if present)
-      const safeOverrides: Record<string, MasterProductOverride> = {};
-      for (const [k, ov] of Object.entries(next.products?.overrides || {})) {
-        safeOverrides[k] = {
-          ...ov,
-          images: (ov.images || []).map((im) => ({
-            ...im,
-            fallbackDataUrl:
-              im.fallbackDataUrl && im.fallbackDataUrl.length > 40_000
-                ? undefined
-                : im.fallbackDataUrl,
-          })),
-        };
-      }
-      localStorage.setItem(
-        STATE_CACHE_KEY,
-        JSON.stringify({
-          ...next,
-          products: {
-            ...next.products,
-            overrides: safeOverrides,
-          },
-        })
-      );
-    } catch {
-      // ignore storage quota
-    }
   }, []);
 
   const syncOverridesToMediaVault = useCallback(async (nextState: CononMasterState) => {
@@ -426,7 +504,7 @@ export function CononMasterSyncProvider({ children }: { children: React.ReactNod
     };
     window.addEventListener("storage", onStorage);
 
-    const socket = getSocket();
+    const socket = getSocket() as any;
     const onSocketMasterUpdate = (payload: any) => {
       if (payload?.state) {
         const merged = deepMergeMasterState(DEFAULT_CONON_MASTER_STATE, payload.state);
@@ -435,12 +513,30 @@ export function CononMasterSyncProvider({ children }: { children: React.ReactNod
         void refreshFromSources();
       }
     };
-    socket?.on("conon:master_state_updated", onSocketMasterUpdate);
+    socket?.on?.("conon:master_state_updated", onSocketMasterUpdate);
+    socket?.on?.("conon:force_sync", () => void refreshFromSources());
+
+    const unsubscribeSse = subscribeSseSync((msg) => {
+      if (
+        msg.type === "SETTINGS_UPDATED" ||
+        msg.type === "BANNERS_UPDATED" ||
+        msg.type === "CATEGORIES_UPDATED" ||
+        msg.type === "CATALOG_UPDATED" ||
+        msg.type === "FORCE_SYNC"
+      ) {
+        void refreshFromSources();
+      }
+    });
+
+    const onFocus = () => void refreshFromSources();
+    window.addEventListener("focus", onFocus);
 
     return () => {
       window.clearInterval(heartbeat);
       window.removeEventListener("storage", onStorage);
-      socket?.off("conon:master_state_updated", onSocketMasterUpdate);
+      window.removeEventListener("focus", onFocus);
+      unsubscribeSse();
+      socket?.off?.("conon:master_state_updated", onSocketMasterUpdate);
       ch?.close();
       channelRef.current = null;
     };
@@ -779,6 +875,302 @@ export function CononMasterSyncProvider({ children }: { children: React.ReactNod
     [recordTreasuryEntry]
   );
 
+  const suspendPartnerLive = useCallback(
+    async (params: {
+      partnerId: string;
+      partnerName?: string;
+      partnerType: string;
+      reason: string;
+    }) => {
+      const comp = stateRef.current.compliance || {
+        partnerStatuses: {},
+        blacklistRegistry: [],
+        auditLog: [],
+      };
+      const prevOverlay = comp.partnerStatuses[params.partnerId] || {
+        partnerId: params.partnerId,
+        status: "APPROVED",
+        updatedAt: new Date().toISOString(),
+      };
+      const nextOverlay: PartnerComplianceOverlay = {
+        ...prevOverlay,
+        partnerId: params.partnerId,
+        status: "SUSPENDED",
+        suspensionReason: params.reason,
+        updatedAt: new Date().toISOString(),
+      };
+      const audit: ComplianceAuditEntry = {
+        id: `aud_${Date.now()}`,
+        partnerId: params.partnerId,
+        partnerName: params.partnerName,
+        partnerType: params.partnerType,
+        action: "SUSPENDED",
+        reason: params.reason,
+        actor: "CONON HQ",
+        createdAt: new Date().toISOString(),
+      };
+      await patchMasterState(
+        {
+          compliance: {
+            ...comp,
+            partnerStatuses: { ...comp.partnerStatuses, [params.partnerId]: nextOverlay },
+            auditLog: [audit, ...(comp.auditLog || [])].slice(0, 500),
+          },
+        },
+        "compliance"
+      );
+      if (IS_LOCAL_ADMIN) {
+        adminFetch(`/admin/compliance/${encodeURIComponent(params.partnerId)}/suspend`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(params),
+        }).catch(() => {});
+      }
+    },
+    [patchMasterState]
+  );
+
+  const blacklistPartnerLive = useCallback(
+    async (params: {
+      partnerId: string;
+      partnerName?: string;
+      partnerType: string;
+      phone?: string;
+      pan?: string;
+      gstin?: string;
+      vehicleNo?: string;
+      reason: string;
+    }) => {
+      const comp = stateRef.current.compliance || {
+        partnerStatuses: {},
+        blacklistRegistry: [],
+        auditLog: [],
+      };
+      const prevOverlay = comp.partnerStatuses[params.partnerId] || {
+        partnerId: params.partnerId,
+        status: "APPROVED",
+        updatedAt: new Date().toISOString(),
+      };
+      const nextOverlay: PartnerComplianceOverlay = {
+        ...prevOverlay,
+        partnerId: params.partnerId,
+        status: "BLACKLISTED",
+        suspensionReason: params.reason,
+        updatedAt: new Date().toISOString(),
+      };
+      const blk: BlacklistEntry = {
+        id: `blk_${Date.now()}`,
+        partnerId: params.partnerId,
+        phone: params.phone,
+        pan: params.pan,
+        gstin: params.gstin,
+        vehicleNo: params.vehicleNo,
+        reason: params.reason,
+        blacklistedAt: new Date().toISOString(),
+      };
+      const audit: ComplianceAuditEntry = {
+        id: `aud_${Date.now()}`,
+        partnerId: params.partnerId,
+        partnerName: params.partnerName,
+        partnerType: params.partnerType,
+        action: "BLACKLISTED",
+        reason: params.reason,
+        actor: "CONON HQ",
+        createdAt: new Date().toISOString(),
+      };
+      await patchMasterState(
+        {
+          compliance: {
+            ...comp,
+            partnerStatuses: { ...comp.partnerStatuses, [params.partnerId]: nextOverlay },
+            blacklistRegistry: [blk, ...(comp.blacklistRegistry || [])],
+            auditLog: [audit, ...(comp.auditLog || [])].slice(0, 500),
+          },
+        },
+        "compliance"
+      );
+      if (IS_LOCAL_ADMIN) {
+        adminFetch(`/admin/compliance/${encodeURIComponent(params.partnerId)}/blacklist`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(params),
+        }).catch(() => {});
+      }
+    },
+    [patchMasterState]
+  );
+
+  const reinstatePartnerLive = useCallback(
+    async (params: {
+      partnerId: string;
+      partnerName?: string;
+      partnerType: string;
+      reason?: string;
+    }) => {
+      const comp = stateRef.current.compliance || {
+        partnerStatuses: {},
+        blacklistRegistry: [],
+        auditLog: [],
+      };
+      const prevOverlay = comp.partnerStatuses[params.partnerId] || {
+        partnerId: params.partnerId,
+        status: "APPROVED",
+        updatedAt: new Date().toISOString(),
+      };
+      const nextOverlay: PartnerComplianceOverlay = {
+        ...prevOverlay,
+        partnerId: params.partnerId,
+        status: "APPROVED",
+        suspensionReason: undefined,
+        updatedAt: new Date().toISOString(),
+      };
+      const audit: ComplianceAuditEntry = {
+        id: `aud_${Date.now()}`,
+        partnerId: params.partnerId,
+        partnerName: params.partnerName,
+        partnerType: params.partnerType,
+        action: "REINSTATED",
+        reason: params.reason || "Reinstated by CONON HQ",
+        actor: "CONON HQ",
+        createdAt: new Date().toISOString(),
+      };
+      await patchMasterState(
+        {
+          compliance: {
+            ...comp,
+            partnerStatuses: { ...comp.partnerStatuses, [params.partnerId]: nextOverlay },
+            auditLog: [audit, ...(comp.auditLog || [])].slice(0, 500),
+          },
+        },
+        "compliance"
+      );
+      if (IS_LOCAL_ADMIN) {
+        adminFetch(`/admin/compliance/${encodeURIComponent(params.partnerId)}/reinstate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(params),
+        }).catch(() => {});
+      }
+    },
+    [patchMasterState]
+  );
+
+  const awardPhysicalInspectionStamp = useCallback(
+    async (params: {
+      partnerId: string;
+      partnerName?: string;
+      partnerType: string;
+      inspectorName: string;
+      inspectedAt: string;
+      notes?: string;
+      checklist?: Record<string, boolean>;
+      photoUrl?: string;
+    }) => {
+      const comp = stateRef.current.compliance || {
+        partnerStatuses: {},
+        blacklistRegistry: [],
+        auditLog: [],
+      };
+      const prevOverlay = comp.partnerStatuses[params.partnerId] || {
+        partnerId: params.partnerId,
+        status: "APPROVED",
+        updatedAt: new Date().toISOString(),
+      };
+      const nextOverlay: PartnerComplianceOverlay = {
+        ...prevOverlay,
+        partnerId: params.partnerId,
+        physicallyInspected: true,
+        inspectionMeta: {
+          inspectorName: params.inspectorName,
+          inspectedAt: params.inspectedAt,
+          notes: params.notes,
+          checklist: params.checklist,
+          photoUrl: params.photoUrl,
+        },
+        updatedAt: new Date().toISOString(),
+      };
+      const audit: ComplianceAuditEntry = {
+        id: `aud_${Date.now()}`,
+        partnerId: params.partnerId,
+        partnerName: params.partnerName,
+        partnerType: params.partnerType,
+        action: "FIELD_INSPECTED",
+        reason: `CONON Physically Inspected ✓ by ${params.inspectorName}`,
+        actor: params.inspectorName,
+        createdAt: new Date().toISOString(),
+      };
+      await patchMasterState(
+        {
+          compliance: {
+            ...comp,
+            partnerStatuses: { ...comp.partnerStatuses, [params.partnerId]: nextOverlay },
+            auditLog: [audit, ...(comp.auditLog || [])].slice(0, 500),
+          },
+        },
+        "compliance"
+      );
+      if (IS_LOCAL_ADMIN) {
+        adminFetch(`/admin/compliance/${encodeURIComponent(params.partnerId)}/physical-inspection`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(params),
+        }).catch(() => {});
+      }
+    },
+    [patchMasterState]
+  );
+
+  const submitPartnerRenewalExpiry = useCallback(
+    async (params: {
+      partnerId: string;
+      partnerName?: string;
+      partnerType: string;
+      docType: string;
+      newExpiryDate: string;
+    }) => {
+      const comp = stateRef.current.compliance || {
+        partnerStatuses: {},
+        blacklistRegistry: [],
+        auditLog: [],
+      };
+      const prevOverlay = comp.partnerStatuses[params.partnerId] || {
+        partnerId: params.partnerId,
+        status: "APPROVED",
+        updatedAt: new Date().toISOString(),
+      };
+      const nextOverlay: PartnerComplianceOverlay = {
+        ...prevOverlay,
+        partnerId: params.partnerId,
+        expiryDates: {
+          ...(prevOverlay.expiryDates || {}),
+          [params.docType]: params.newExpiryDate,
+        },
+        updatedAt: new Date().toISOString(),
+      };
+      const audit: ComplianceAuditEntry = {
+        id: `aud_${Date.now()}`,
+        partnerId: params.partnerId,
+        partnerName: params.partnerName,
+        partnerType: params.partnerType,
+        action: "RENEWAL_APPROVED",
+        reason: `Renewed ${params.docType} -> ${params.newExpiryDate}`,
+        actor: "Partner Renewal",
+        createdAt: new Date().toISOString(),
+      };
+      await patchMasterState(
+        {
+          compliance: {
+            ...comp,
+            partnerStatuses: { ...comp.partnerStatuses, [params.partnerId]: nextOverlay },
+            auditLog: [audit, ...(comp.auditLog || [])].slice(0, 500),
+          },
+        },
+        "compliance"
+      );
+    },
+    [patchMasterState]
+  );
+
   const value = useMemo<CononMasterSyncContextValue>(
     () => ({
       state,
@@ -799,6 +1191,11 @@ export function CononMasterSyncProvider({ children }: { children: React.ReactNod
       setPrimaryCompanyBankAccount,
       recordTreasuryEntry,
       executeEscrowPayout,
+      suspendPartnerLive,
+      blacklistPartnerLive,
+      reinstatePartnerLive,
+      awardPhysicalInspectionStamp,
+      submitPartnerRenewalExpiry,
       triggerTestPing,
     }),
     [
@@ -819,6 +1216,11 @@ export function CononMasterSyncProvider({ children }: { children: React.ReactNod
       setPrimaryCompanyBankAccount,
       recordTreasuryEntry,
       executeEscrowPayout,
+      suspendPartnerLive,
+      blacklistPartnerLive,
+      reinstatePartnerLive,
+      awardPhysicalInspectionStamp,
+      submitPartnerRenewalExpiry,
       triggerTestPing,
     ]
   );

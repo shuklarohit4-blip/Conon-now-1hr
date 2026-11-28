@@ -376,8 +376,17 @@ CREATE TABLE IF NOT EXISTS catalog_categories (
     name_hi VARCHAR(120),
     slug VARCHAR(120) NOT NULL UNIQUE,
     image_url TEXT NOT NULL,
+    badge VARCHAR(80),
+    badge_color VARCHAR(32),
+    department VARCHAR(120),
+    db_category VARCHAR(80),
+    route VARCHAR(240),
+    category_type VARCHAR(40) DEFAULT 'MATERIAL',
+    default_hsn VARCHAR(30) DEFAULT '38245010',
     default_gst_rate INT NOT NULL DEFAULT 18,
     vehicle_type VARCHAR(40) NOT NULL DEFAULT 'LOADER',
+    vehicle_class VARCHAR(120),
+    subcategories JSONB NOT NULL DEFAULT '[]'::jsonb,
     is_active BOOLEAN NOT NULL DEFAULT true,
     sort_order INT NOT NULL DEFAULT 0,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -502,6 +511,13 @@ CREATE TABLE IF NOT EXISTS service_bookings (
     selfie_haziri_url TEXT,
     haziri_gps_verified BOOLEAN NOT NULL DEFAULT false,
     work_done_photo_url TEXT,
+    service_trade_slug VARCHAR(120),
+    booking_mode VARCHAR(30) NOT NULL DEFAULT 'SHIFT' CHECK (booking_mode IN ('SHIFT', 'CONTRACT', 'QUICK_VISIT')),
+    measured_units NUMERIC(10, 2) NOT NULL DEFAULT 1,
+    unit_label VARCHAR(40) NOT NULL DEFAULT 'shift',
+    milestone_stage VARCHAR(40) NOT NULL DEFAULT 'START_HAZIRI',
+    toolkit_verified BOOLEAN NOT NULL DEFAULT false,
+    material_combo_order_id VARCHAR(80),
     status VARCHAR(40) NOT NULL DEFAULT 'BOOKED',
     assigned_vendor_id VARCHAR(80),
     assigned_vendor_name VARCHAR(160),
@@ -630,6 +646,314 @@ CREATE TABLE IF NOT EXISTS treasury_ledger_entries (
 CREATE INDEX IF NOT EXISTS idx_treasury_ledger_order ON treasury_ledger_entries(order_id);
 CREATE INDEX IF NOT EXISTS idx_treasury_ledger_utr ON treasury_ledger_entries(utr_number);
 CREATE INDEX IF NOT EXISTS idx_treasury_ledger_type ON treasury_ledger_entries(entry_type, direction);
+
+-- 24. CONON RMC Plant Direct (Zero-Dummy Operational Tables)
+CREATE TABLE IF NOT EXISTS rmc_plant_listings (
+    id VARCHAR(80) PRIMARY KEY,
+    vendor_hub_id VARCHAR(80) NOT NULL,
+    plant_name VARCHAR(160) NOT NULL,
+    capacity_m3_hr INT NOT NULL DEFAULT 60,
+    tm_fleet_count INT NOT NULL DEFAULT 4,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS rmc_convoy_orders (
+    id VARCHAR(80) PRIMARY KEY,
+    short_id VARCHAR(40) NOT NULL UNIQUE,
+    grade_slug VARCHAR(80) NOT NULL,
+    volume_m3 NUMERIC(10, 2) NOT NULL,
+    pump_type VARCHAR(80) NOT NULL,
+    admixture_slug VARCHAR(80),
+    tm_count INT NOT NULL DEFAULT 1,
+    eway_bill_no VARCHAR(80),
+    total_amount NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    escrow_status VARCHAR(30) NOT NULL DEFAULT 'LOCKED',
+    payload_json JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS rmc_transit_trucks (
+    id VARCHAR(80) PRIMARY KEY,
+    order_id VARCHAR(80) NOT NULL,
+    tm_index INT NOT NULL,
+    batch_time TIMESTAMPTZ,
+    wc_ratio VARCHAR(20),
+    plant_temp_c NUMERIC(5, 2),
+    batch_slip_url TEXT,
+    slump_mm INT,
+    slump_photo_url TEXT,
+    status VARCHAR(30) NOT NULL DEFAULT 'QUEUED'
+);
+
+CREATE TABLE IF NOT EXISTS rmc_cube_lab_tests (
+    id VARCHAR(80) PRIMARY KEY,
+    order_id VARCHAR(80) NOT NULL,
+    day7_mpa NUMERIC(6, 2),
+    day7_report_url TEXT,
+    day28_mpa NUMERIC(6, 2),
+    day28_report_url TEXT,
+    passed BOOLEAN
+);
+
+-- 25. Admin Compliance Shield, Blacklist & Physical Inspection Stamp (Zero-Dummy)
+CREATE TABLE IF NOT EXISTS partner_compliance_records (
+    partner_id VARCHAR(80) PRIMARY KEY,
+    compliance_status VARCHAR(30) NOT NULL DEFAULT 'APPROVED' CHECK (compliance_status IN ('APPROVED', 'SUSPENDED', 'BLACKLISTED')),
+    suspension_reason TEXT,
+    physically_inspected BOOLEAN NOT NULL DEFAULT false,
+    inspection_meta JSONB NOT NULL DEFAULT '{}'::jsonb,
+    expiry_dates JSONB NOT NULL DEFAULT '{}'::jsonb,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS partner_blacklist (
+    id VARCHAR(80) PRIMARY KEY,
+    phone VARCHAR(30),
+    pan VARCHAR(30),
+    gstin VARCHAR(30),
+    vehicle_no VARCHAR(40),
+    reason TEXT NOT NULL,
+    blacklisted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS compliance_audit_log (
+    id VARCHAR(80) PRIMARY KEY,
+    partner_id VARCHAR(80) NOT NULL,
+    partner_type VARCHAR(40) NOT NULL,
+    action VARCHAR(40) NOT NULL,
+    reason TEXT NOT NULL,
+    actor VARCHAR(120) NOT NULL DEFAULT 'CONON HQ',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_blacklist_phone ON partner_blacklist(phone);
+CREATE INDEX IF NOT EXISTS idx_blacklist_gstin ON partner_blacklist(gstin);
+CREATE INDEX IF NOT EXISTS idx_compliance_audit_partner ON compliance_audit_log(partner_id);
+
+-- 26. Dynamic Custom Categories Registry (Zero-Dummy Clean Slate)
+CREATE TABLE IF NOT EXISTS custom_categories (
+    slug VARCHAR(120) PRIMARY KEY,
+    name_en VARCHAR(160) NOT NULL,
+    name_hi VARCHAR(160),
+    category_type VARCHAR(40) NOT NULL DEFAULT 'MATERIAL',
+    cover_image_url TEXT,
+    badge VARCHAR(60),
+    default_hsn VARCHAR(30) DEFAULT '38245010',
+    default_gst INT NOT NULL DEFAULT 18,
+    vehicle_class VARCHAR(80) DEFAULT 'Chhota Hathi Loader',
+    display_order INT NOT NULL DEFAULT 50,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- 27. Payment-First Booking Gate & POD Policy Columns (Idempotent)
+ALTER TABLE IF EXISTS rmc_convoy_orders ADD COLUMN IF NOT EXISTS payment_mode VARCHAR(40) DEFAULT 'PREPAID_UPI';
+ALTER TABLE IF EXISTS rmc_convoy_orders ADD COLUMN IF NOT EXISTS payment_status VARCHAR(40) DEFAULT 'PREPAID_ESCROW_LOCKED';
+ALTER TABLE IF EXISTS rmc_convoy_orders ADD COLUMN IF NOT EXISTS payment_ref VARCHAR(120);
+ALTER TABLE IF EXISTS rmc_convoy_orders ADD COLUMN IF NOT EXISTS pod_collected_method VARCHAR(40);
+
+ALTER TABLE IF EXISTS service_bookings ADD COLUMN IF NOT EXISTS payment_mode VARCHAR(40) DEFAULT 'PREPAID_UPI';
+ALTER TABLE IF EXISTS service_bookings ADD COLUMN IF NOT EXISTS payment_status VARCHAR(40) DEFAULT 'PREPAID_ESCROW_LOCKED';
+ALTER TABLE IF EXISTS service_bookings ADD COLUMN IF NOT EXISTS payment_ref VARCHAR(120);
+ALTER TABLE IF EXISTS service_bookings ADD COLUMN IF NOT EXISTS pod_collected_method VARCHAR(40);
+
+ALTER TABLE IF EXISTS machine_rental_bookings ADD COLUMN IF NOT EXISTS payment_mode VARCHAR(40) DEFAULT 'PREPAID_UPI';
+ALTER TABLE IF EXISTS machine_rental_bookings ADD COLUMN IF NOT EXISTS payment_status VARCHAR(40) DEFAULT 'PREPAID_ESCROW_LOCKED';
+ALTER TABLE IF EXISTS machine_rental_bookings ADD COLUMN IF NOT EXISTS payment_ref VARCHAR(120);
+ALTER TABLE IF EXISTS machine_rental_bookings ADD COLUMN IF NOT EXISTS pod_collected_method VARCHAR(40);
+
+-- 28. Hyperlocal Serviceable Pin Codes & Expansion Waitlist (4 Launch Zones Only)
+CREATE TABLE IF NOT EXISTS serviceable_pincodes (
+    pincode VARCHAR(10) PRIMARY KEY,
+    area_name VARCHAR(160) NOT NULL,
+    sla_mins INT NOT NULL DEFAULT 60,
+    active BOOLEAN NOT NULL DEFAULT true,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+INSERT INTO serviceable_pincodes (pincode, area_name, sla_mins, active) VALUES
+    ('226030', 'Sushant Golf City & Sultanpur Road', 60, true),
+    ('226010', 'Gomti Nagar & Gomti Nagar Extension', 60, true),
+    ('226028', 'Faizabad Road (Chinhat / Kamta / BBD)', 60, true),
+    ('226002', 'Sultanpur Road (Arjunganj / Shaheed Path)', 60, true)
+ON CONFLICT (pincode) DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS pincode_waitlist_requests (
+    id VARCHAR(80) PRIMARY KEY,
+    pincode VARCHAR(10) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    area_hint VARCHAR(160),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_pincode_waitlist_pin ON pincode_waitlist_requests(pincode);
+
+-- 29. CONON-NOW Build Turnkey Site Visit Leads (Zero-Dummy Clean Slate)
+CREATE TABLE IF NOT EXISTS turnkey_consultations (
+    id VARCHAR(80) PRIMARY KEY,
+    name VARCHAR(160) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    location_pincode VARCHAR(80) NOT NULL,
+    plot_sqft INT NOT NULL DEFAULT 1000,
+    package_name VARCHAR(80) NOT NULL,
+    visit_type VARCHAR(40) NOT NULL DEFAULT 'ON_SITE_ENGINEER',
+    preferred_slot VARCHAR(80),
+    status VARCHAR(30) NOT NULL DEFAULT 'NEW',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- =============================================================================
+-- HOME MERCHANDISING & DYNAMIC BANNER SYSTEM (Blinkit + Flipkart Minutes)
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS home_theme_masthead (
+    id VARCHAR(64) PRIMARY KEY,
+    is_enabled BOOLEAN NOT NULL DEFAULT TRUE,
+    theme_preset VARCHAR(40) NOT NULL DEFAULT 'dark-teal',
+    bg_gradient_start VARCHAR(32) NOT NULL DEFAULT '#0F2A38',
+    bg_gradient_end VARCHAR(32) NOT NULL DEFAULT '#164E63',
+    bg_pattern_image_url TEXT NOT NULL DEFAULT '',
+    accent_color VARCHAR(32) NOT NULL DEFAULT '#F59E0B',
+    text_color VARCHAR(32) NOT NULL DEFAULT '#FFFFFF',
+    campaign_title VARCHAR(180) NOT NULL DEFAULT 'Builder Super Sale',
+    campaign_subtitle VARCHAR(260) NOT NULL DEFAULT 'Lowest Bulk Rates in Lucknow • 60-Min Site Delivery',
+    bottom_edge_style VARCHAR(24) NOT NULL DEFAULT 'dotted',
+    active_from TIMESTAMPTZ,
+    active_until TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS bento_deal_cards (
+    id VARCHAR(64) PRIMARY KEY,
+    slot_position VARCHAR(32) NOT NULL DEFAULT 'GRID_TILE',
+    title VARCHAR(180) NOT NULL,
+    subtitle VARCHAR(200) NOT NULL DEFAULT '',
+    badge_text VARCHAR(80) NOT NULL DEFAULT '',
+    badge_bg_color VARCHAR(32) NOT NULL DEFAULT '#E11D48',
+    badge_text_color VARCHAR(32) NOT NULL DEFAULT '#FFFFFF',
+    price_highlight VARCHAR(60) NOT NULL DEFAULT '',
+    original_price VARCHAR(60) NOT NULL DEFAULT '',
+    image_url TEXT NOT NULL DEFAULT '',
+    card_bg_color VARCHAR(32) NOT NULL DEFAULT '#FFF7ED',
+    link_type VARCHAR(24) NOT NULL DEFAULT 'category',
+    link_target TEXT NOT NULL DEFAULT '',
+    sort_order INTEGER NOT NULL DEFAULT 1,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS offer_carousel_strips (
+    id VARCHAR(64) PRIMARY KEY,
+    title VARCHAR(180) NOT NULL,
+    subtitle VARCHAR(220) NOT NULL DEFAULT '',
+    badge_text VARCHAR(80) NOT NULL DEFAULT '',
+    icon_or_image_url TEXT NOT NULL DEFAULT '',
+    bg_color VARCHAR(32) NOT NULL DEFAULT '#0F2A38',
+    text_color VARCHAR(32) NOT NULL DEFAULT '#FFFFFF',
+    accent_color VARCHAR(32) NOT NULL DEFAULT '#F59E0B',
+    link_type VARCHAR(24) NOT NULL DEFAULT 'search',
+    link_target TEXT NOT NULL DEFAULT '',
+    sort_order INTEGER NOT NULL DEFAULT 1,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS hero_brand_banners (
+    id VARCHAR(64) PRIMARY KEY,
+    placement VARCHAR(32) NOT NULL DEFAULT 'TOP_HERO',
+    title VARCHAR(180) NOT NULL,
+    subtitle VARCHAR(240) NOT NULL DEFAULT '',
+    cta_label VARCHAR(80) NOT NULL DEFAULT 'Order Now',
+    cta_bg_color VARCHAR(32) NOT NULL DEFAULT '#F59E0B',
+    cta_text_color VARCHAR(32) NOT NULL DEFAULT '#0F172A',
+    overlay_gradient VARCHAR(180) NOT NULL DEFAULT 'linear-gradient(90deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.35) 60%, rgba(15,23,42,0.10) 100%)',
+    banner_image_url TEXT NOT NULL DEFAULT '',
+    brand_logo_url TEXT NOT NULL DEFAULT '',
+    badge_text VARCHAR(80) NOT NULL DEFAULT '',
+    link_type VARCHAR(24) NOT NULL DEFAULT 'category',
+    link_target TEXT NOT NULL DEFAULT '',
+    sort_order INTEGER NOT NULL DEFAULT 1,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS promo_announcement_strips (
+    id VARCHAR(64) PRIMARY KEY,
+    strip_type VARCHAR(32) NOT NULL DEFAULT 'OFFER_BAR',
+    left_badge_text VARCHAR(100) NOT NULL DEFAULT '',
+    left_logo_url TEXT NOT NULL DEFAULT '',
+    main_text VARCHAR(240) NOT NULL,
+    terms_text VARCHAR(160) NOT NULL DEFAULT '',
+    bg_color VARCHAR(32) NOT NULL DEFAULT '#ECFDF5',
+    border_color VARCHAR(32) NOT NULL DEFAULT '#10B981',
+    text_color VARCHAR(32) NOT NULL DEFAULT '#064E3B',
+    link_type VARCHAR(24) NOT NULL DEFAULT 'url',
+    link_target TEXT NOT NULL DEFAULT '',
+    sort_order INTEGER NOT NULL DEFAULT 1,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS home_section_layout (
+    id VARCHAR(64) PRIMARY KEY,
+    section_key VARCHAR(48) NOT NULL,
+    label VARCHAR(140) NOT NULL,
+    is_visible BOOLEAN NOT NULL DEFAULT TRUE,
+    sort_order INTEGER NOT NULL DEFAULT 1,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- =============================================================================
+-- PERSISTENT UPLOADED MEDIA ASSETS (Prevents image loss on container restarts)
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS uploaded_assets (
+    path_key TEXT PRIMARY KEY,
+    content_type VARCHAR(80) NOT NULL DEFAULT 'image/webp',
+    data BYTEA NOT NULL,
+    size_bytes INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- =============================================================================
+-- SMART SEARCH STUDIO, HINGLISH SYNONYMS, TELEMETRY & SOURCING REQUESTS
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS search_config (
+    id VARCHAR(32) PRIMARY KEY DEFAULT 'default',
+    config_json JSONB NOT NULL DEFAULT '{}'::jsonb,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS search_synonyms (
+    id VARCHAR(64) PRIMARY KEY,
+    keywords_json JSONB NOT NULL DEFAULT '[]'::jsonb,
+    maps_to VARCHAR(160) NOT NULL,
+    category_slug VARCHAR(120) DEFAULT '',
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS search_logs (
+    id VARCHAR(64) PRIMARY KEY,
+    query TEXT NOT NULL,
+    normalized_query TEXT NOT NULL,
+    result_count INTEGER NOT NULL DEFAULT 0,
+    matched_synonym VARCHAR(160),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_search_logs_created ON search_logs (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_search_logs_norm ON search_logs (normalized_query);
+
+CREATE TABLE IF NOT EXISTS search_requests (
+    id VARCHAR(64) PRIMARY KEY,
+    item_name VARCHAR(200) NOT NULL,
+    quantity_text VARCHAR(80) NOT NULL DEFAULT '1',
+    phone VARCHAR(30) NOT NULL DEFAULT '',
+    pincode VARCHAR(12) NOT NULL DEFAULT '',
+    status VARCHAR(32) NOT NULL DEFAULT 'NEW',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 
 
 

@@ -11,7 +11,8 @@ export default defineConfig(({ command, mode }) => {
   const effectiveLocalAdmin = process.env.VITE_LOCAL_ADMIN ?? fileEnv.VITE_LOCAL_ADMIN ?? "false";
   const effectiveMacAdminKey = process.env.VITE_MAC_ADMIN_KEY ?? fileEnv.VITE_MAC_ADMIN_KEY ?? "";
   const effectivePort = process.env.VITE_PORT ?? fileEnv.VITE_PORT;
-  const effectiveApiUrl = process.env.VITE_API_URL ?? fileEnv.VITE_API_URL;
+  const effectiveApiUrl = process.env.VITE_BACKEND_TARGET ?? process.env.VITE_API_URL ?? fileEnv.VITE_BACKEND_TARGET ?? fileEnv.VITE_API_URL;
+  const proxyTarget = (effectiveApiUrl || `http://localhost:${process.env.PORT || fileEnv.PORT || 5001}`).replace(/\/api\/?$/, "");
 
   const isProd = mode === "production" || effectiveLocalAdmin === "false";
   const isLocalAdmin = command === "serve" && !isProd && effectiveLocalAdmin === "true";
@@ -75,7 +76,8 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       port,
-      host: "0.0.0.0",
+      host: true,
+      strictPort: false,
       allowedHosts: true,
       fs: {
         strict: true,
@@ -84,19 +86,19 @@ export default defineConfig(({ command, mode }) => {
       },
       proxy: {
         "/api": {
-          target: (effectiveApiUrl || `http://localhost:${process.env.PORT || 5001}`).replace(/\/api\/?$/, ""),
+          target: proxyTarget,
           changeOrigin: true,
           ws: true,
         },
         "/uploads": {
-          target: (process.env.VITE_API_URL || `http://localhost:${process.env.PORT || 5001}`).replace(/\/api\/?$/, ""),
+          target: proxyTarget,
           changeOrigin: true,
         },
       },
     },
     preview: {
       port,
-      host: "0.0.0.0",
+      host: true,
       allowedHosts: true,
     },
   };

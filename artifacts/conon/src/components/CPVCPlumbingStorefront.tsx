@@ -2512,6 +2512,16 @@ export function CPVCPlumbingStorefront({
           }}
         />
       )}
+      {/* Slim Architectural Contextual Cross-Link */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 pb-4">
+        <a
+          href="/services?trade=plumber"
+          className="flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-emerald-800 text-white text-xs font-black hover:bg-emerald-900 transition"
+        >
+          <span>Need a verified Plumber (₹249 quick visit)? Book in Skilled Services</span>
+          <span>Book Plumber →</span>
+        </a>
+      </div>
     </div>
   );
 }

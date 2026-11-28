@@ -278,6 +278,106 @@ export function AdminTreasuryControlCenter({
         </div>
       </div>
 
+      {/* 0. PAYMENT & POD POLICY CONTROLS (Synced < 500ms to Storefront & Backend) */}
+      <div className={`p-5 rounded-2xl border space-y-4 ${cardCls}`}>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-500" />
+              <h2 className="text-sm font-black uppercase tracking-wider">
+                Payment &amp; POD Policy Controls
+              </h2>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-500">
+                Live &lt; 500ms Sync
+              </span>
+            </div>
+            <p className={`text-[11px] mt-0.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+              Enforces Pay-First Escrow across Storefront, RMC Plant, Skilled Services, Heavy Rentals &amp; Backend APIs.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-[11px] font-bold">POD Limit (Materials ₹):</label>
+            <input
+              type="number"
+              min={0}
+              step={500}
+              value={masterSync.state.globalControls?.paymentPolicy?.podMaxMaterialAmount ?? 10000}
+              onChange={(e) => {
+                const val = Math.max(0, Number(e.target.value || 0));
+                masterSync.patchMasterState(
+                  {
+                    globalControls: {
+                      paymentPolicy: {
+                        podMaxMaterialAmount: val,
+                        forcePrepaidRmc: masterSync.state.globalControls?.paymentPolicy?.forcePrepaidRmc ?? true,
+                        forcePrepaidServices: masterSync.state.globalControls?.paymentPolicy?.forcePrepaidServices ?? true,
+                        forcePrepaidRentals: masterSync.state.globalControls?.paymentPolicy?.forcePrepaidRentals ?? true,
+                      },
+                    },
+                  },
+                  "globalControls"
+                );
+              }}
+              className={`w-28 px-2.5 py-1.5 rounded-lg border text-xs font-mono font-black ${
+                isDark
+                  ? "bg-slate-900 border-slate-700 text-amber-300"
+                  : "bg-slate-50 border-slate-300 text-slate-900"
+              }`}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          {(
+            [
+              { key: "forcePrepaidRmc", label: "RMC Prepaid Only" },
+              { key: "forcePrepaidServices", label: "Skilled Services Prepaid Only" },
+              { key: "forcePrepaidRentals", label: "Machine Rentals Prepaid Only" },
+            ] as const
+          ).map((item) => {
+            const pp = masterSync.state.globalControls?.paymentPolicy || {
+              podMaxMaterialAmount: 10000,
+              forcePrepaidRmc: true,
+              forcePrepaidServices: true,
+              forcePrepaidRentals: true,
+            };
+            const active = pp[item.key] ?? true;
+            return (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => {
+                  masterSync.patchMasterState(
+                    {
+                      globalControls: {
+                        paymentPolicy: {
+                          ...pp,
+                          [item.key]: !active,
+                        },
+                      },
+                    },
+                    "globalControls"
+                  );
+                  toast.success(`${item.label}: ${!active ? "ON (100% Prepaid)" : "OFF"}`);
+                }}
+                className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition ${
+                  active
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-500"
+                    : isDark
+                    ? "border-slate-700 bg-slate-900 text-slate-400"
+                    : "border-slate-200 bg-slate-50 text-slate-500"
+                }`}
+              >
+                <span className="font-bold">{item.label}</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-black/20">
+                  {active ? "LOCKED ON" : "OFF"}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* 1. WORLD-FIRST "3-JAR LIQUIDITY SHIELD" KPI STRIP */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <div className={`p-4 rounded-2xl border ${cardCls}`}>

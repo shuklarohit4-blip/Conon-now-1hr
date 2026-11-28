@@ -22,6 +22,7 @@ type Feature = {
 const FEATURES: Feature[] = [
   { href: "/build",       icon: HardHat,       label: "Builder",      tint: "#1848a0" },
   { href: "/rentals",     icon: Tractor,       label: "Machine Rent", tint: "#b45309", badge: "HOT" },
+  { href: "/rmc",         icon: Boxes,         label: "RMC Plant",    tint: "#1d4ed8", badge: "NEW" },
   { href: "/smart-build", icon: Boxes,         label: "Smart-Build",  tint: "#7c3aed", badge: "NEW" },
   { href: "/estimator",   icon: Calculator,    label: "AI Estimator", tint: "#0e7490" },
   { href: "/smart-draft", icon: PencilRuler,   label: "Smart-Draft",  tint: "#be123c" },

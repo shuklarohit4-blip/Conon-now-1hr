@@ -23,6 +23,10 @@ const connectionString =
 
 const needsSsl = isRemoteHost(connectionString);
 
+export function hasPostgresConfigured(): boolean {
+  return Boolean(connectionString);
+}
+
 export const pool = new Pool({
   connectionString: connectionString || undefined,
   ssl: needsSsl ? { rejectUnauthorized: false } : undefined,
